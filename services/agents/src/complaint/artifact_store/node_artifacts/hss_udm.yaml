@@ -1,0 +1,5 @@
+description: Central subscriber registry for VoLTE, LTE (EPS), and 5GSA definition
+  flags.
+id: hss_udm
+label: UDM / Home Subscriber Server (HSS)
+type: Component

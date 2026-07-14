@@ -1,0 +1,62 @@
+{
+  "__inputs": [],
+  "__requires": [],
+  "title": "ISO Compliance Oversight",
+  "uid": "iso-compliance",
+  "panels": [
+    {
+      "title": "9001: Quality KPIs — Current Period",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "kpi_answer_accuracy"
+        },
+        {
+          "expr": "kpi_classification_accuracy"
+        },
+        {
+          "expr": "kpi_retrieval_precision"
+        },
+        {
+          "expr": "kpi_user_satisfaction"
+        }
+      ]
+    },
+    {
+      "title": "27001: Security Incidents (Last 30d)",
+      "type": "graph",
+      "targets": [
+        {
+          "expr": "rate(security_incidents_total[30d])"
+        }
+      ]
+    },
+    {
+      "title": "Risk Register — Open Items",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "risk_open_items"
+        }
+      ]
+    },
+    {
+      "title": "Network Policies — Compliance",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "count(kube_networkpolicy_labels) > 0"
+        }
+      ]
+    },
+    {
+      "title": "Secret Rotation — Days Since Last Rotation",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "time() - last_secret_rotation_timestamp"
+        }
+      ]
+    }
+  ]
+}

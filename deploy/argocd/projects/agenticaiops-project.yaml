@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: agenticaiops
+  namespace: argocd
+spec:
+  description: "AgenticAIOPs — multi-tier microservices platform"
+  sourceRepos:
+    - "https://github.com/adeelarshad/kagent"
+    - "https://charts.bitnami.com/bitnami"
+  destinations:
+    - namespace: agents-prod
+      server: "https://kubernetes.default.svc"
+    - namespace: kagent
+      server: "https://kubernetes.default.svc"
+    - namespace: argocd
+      server: "https://kubernetes.default.svc"
+    - namespace: monitoring
+      server: "https://kubernetes.default.svc"
+  clusterResourceWhitelist:
+    - group: ""
+      kind: Namespace
+    - group: "rbac.authorization.k8s.io"
+      kind: "ClusterRole"
+    - group: "rbac.authorization.k8s.io"
+      kind: "ClusterRoleBinding"
+  orphanedResources:
+    warn: true

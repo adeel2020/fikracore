@@ -1,0 +1,21 @@
+depends_on:
+- data_bundles
+- Speed_CAP
+- APN_settings
+description: High packet latency, low bandwidth throughput, speed capping, buffering,
+  FUP throttling.
+escalation_target: core_packet
+fallback_domain: Network
+id: intent_slow_5g
+keywords:
+- slow internet
+- data speed
+- throttled speed
+- latency
+- buffering
+- slow
+label: 5G Cellular Data Slowness
+mandatory_prechecks:
+- chk_pcf_fup_quota
+- chk_pcf_srv_profile
+service_id: 5g_data

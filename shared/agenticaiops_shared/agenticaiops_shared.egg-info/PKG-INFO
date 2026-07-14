@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: agenticaiops-shared
+Version: 0.1.0
+Summary: AgenticAIOPs shared library
+Requires-Python: >=3.11
+Requires-Dist: pydantic>=2
+Requires-Dist: pydantic-settings>=2
+Requires-Dist: sqlalchemy>=2
+Requires-Dist: litellm>=1.0
+Requires-Dist: crewai>=0.100

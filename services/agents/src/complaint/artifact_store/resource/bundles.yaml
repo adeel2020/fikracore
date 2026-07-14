@@ -1,0 +1,16 @@
+cug_minutes_bucket:
+  description: CUG package voice minutes balance.
+  label: Closed User Group Minutes Bucket
+  type: Resource
+data_bundles:
+  description: Subscriber real-time data quota remaining on OCS.
+  label: Data Allowance Bucket
+  type: Resource
+flexible_minutes_wallet:
+  description: Voice call minute buckets for local and international calls.
+  label: Flexible Minutes Wallet
+  type: Resource
+national_idd_minutes:
+  description: International Direct Dialing minutes allowance.
+  label: National/IDD Minutes Bucket
+  type: Resource

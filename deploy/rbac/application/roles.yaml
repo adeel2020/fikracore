@@ -1,0 +1,24 @@
+roles:
+  admin:
+    permissions:
+      - "qna:*"
+      - "complaint:*"
+      - "storyteller:*"
+      - "rag:*"
+      - "jarvis:*"
+      - "admin:*"
+      - "audit:*"
+  agent:
+    permissions:
+      - "qna:*"
+      - "complaint:*"
+      - "rag:*"
+  user:
+    permissions:
+      - "qna:ask"
+      - "storyteller:ask"
+      - "rag:search"
+  secops:
+    permissions:
+      - "audit:*"
+      - "admin:health"

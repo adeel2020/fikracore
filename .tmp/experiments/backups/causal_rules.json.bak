@@ -1,0 +1,213 @@
+{
+  "faqs": [
+    {
+      "id": "faq_amazon_prime_cancel",
+      "keywords": ["cancel amazon prime", "unsubscribe prime", "cancel prime", "cancel my amazon prime", "cancel my prime", "cancel amazon", "amazon prime cancel"],
+      "label": "Cancel Amazon Prime Subscription",
+      "mandatory_prechecks": [
+        "Check BSS profile status",
+        "Verify subscription is postpaid"
+      ],
+      "escalation_target": "Billing & Accounts L2",
+      "prohibited_routes": ["Network L2 Core", "RAN Engineering"],
+      "fallback_domain": "Billing",
+      "action": "Log in to du My Account app/portal, navigate to active Add-ons, and toggle off Amazon Prime.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-52779&lang=en-GB&version=6.0&tagname=dutopic_amazonprime&userType=consumer"
+    },
+    {
+      "id": "faq_amazon_prime_activate",
+      "keywords": ["activate amazon prime", "get prime", "free prime offer", "activate my amazon prime", "activate prime", "activate amazon", "amazon prime activate"],
+      "label": "Activate 12 Months Free Amazon Prime",
+      "mandatory_prechecks": [
+        "Check BSS profile status",
+        "Verify plan eligibility"
+      ],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["RAN Engineering", "Billing L2"],
+      "fallback_domain": "Provisioning",
+      "action": "Send SMS keyword Prime to 9511 from an eligible postpaid or home plan line, then register via the SMS link.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-52779&lang=en-GB&version=6.0&tagname=dutopic_amazonprime&userType=consumer"
+    },
+    {
+      "id": "faq_call_barring",
+      "keywords": ["barring", "bar calls", "call bar"],
+      "label": "Call Barring Management",
+      "mandatory_prechecks": [
+        "Verify HLR subscriber voice status",
+        "Check BSS profile status"
+      ],
+      "escalation_target": "Network L2 Core Support",
+      "prohibited_routes": ["Billing & Accounts L2"],
+      "fallback_domain": "Network",
+      "action": "Access device settings and enter default PIN 0000 to toggle barring, or check profile status in BSS.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-12490&lang=en-GB&version=4.0&tagname=dutopic_callbarring&userType=consumer"
+    },
+    {
+      "id": "faq_call_forwarding",
+      "keywords": ["forwarding", "forward calls", "call forward"],
+      "label": "Call Forwarding Activation",
+      "mandatory_prechecks": [
+        "Verify HLR subscriber voice status"
+      ],
+      "escalation_target": "Network L2 Core Support",
+      "prohibited_routes": ["eSIM & Provisioning Support"],
+      "fallback_domain": "Network",
+      "action": "Dial short codes: *21*Destination_Number# (Always), *61*Number# (No Reply), *62*Number# (Unreachable). Dial ##21# to cancel.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-12489&lang=en-GB&version=4.0&tagname=dutopic_callforwarding&userType=consumer"
+    },
+    {
+      "id": "faq_caller_id",
+      "keywords": ["caller id", "cnap", "presentation", "show number"],
+      "label": "Caller Number Presentation (CNAP)",
+      "mandatory_prechecks": [
+        "Check BSS profile status",
+        "Check VoLTE handset settings"
+      ],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["RAN Engineering"],
+      "fallback_domain": "Provisioning",
+      "action": "Enable the CNAP add-on via My Account portal or du App under service settings.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-12491&lang=en-GB&version=4.0&tagname=dutopic_callerid&userType=consumer"
+    },
+    {
+      "id": "faq_caller_tune",
+      "keywords": ["caller tune", "ringback", "music tune"],
+      "label": "Caller Tune Activation & Cancellation",
+      "mandatory_prechecks": [
+        "Check BSS profile status"
+      ],
+      "escalation_target": "VAS & Charging Ops",
+      "prohibited_routes": ["Network L2 Core"],
+      "fallback_domain": "Billing",
+      "action": "Manage tunes in the du App. To unsubscribe entirely, send SMS CT UNSUB to 1560.",
+      "url": "https://www.du.ae/support-articledetail?artid=PROD-12492&lang=en-GB&version=4.0&tagname=dutopic_callertunes&userType=consumer"
+    },
+    {
+      "id": "faq_dncr",
+      "keywords": ["dncr", "do not call", "spam block", "telemarketing"],
+      "label": "Do Not Call Registry (DNCR)",
+      "mandatory_prechecks": [
+        "Check BSS profile status"
+      ],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["RAN Engineering"],
+      "fallback_domain": "Provisioning",
+      "action": "Send SMS keyword DNCR to 1012 to block spam calls. Send WDNCR to 1012 to withdraw.",
+      "url": "https://www.du.ae/do-not-call-registry"
+    },
+    {
+      "id": "faq_esim_replacement",
+      "keywords": ["replace sim", "esim swap", "watch esim", "multi-device"],
+      "label": "eSIM Replacement & Multi-device Watch",
+      "mandatory_prechecks": [
+        "Check SM-DP+ Server status for EID profile",
+        "Verify device WiFi connectivity"
+      ],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["Network L2 Core", "Billing L2"],
+      "fallback_domain": "Provisioning",
+      "action": "Order eSIM QR code via du App, connect device to WiFi, and scan the QR code.",
+      "url": "https://www.du.ae/personal/esim"
+    }
+  ],
+  "intents": {
+    "intent_slow_5g": {
+      "label": "5G Speed Degradation",
+      "mandatory_prechecks": [
+        "Check 5G Provisioning status in CRM",
+        "Check Sector signal quality in Home 5G Router Status Portal",
+        "Verify bundle speed cap status in BSS",
+        "Verify speedtest throughput vs agreed speed",
+        "Check coverage at customer location"
+      ],
+      "DependsOn": ["data_bundles"],
+      "escalation_target": "RAN Engineering Team",
+      "prohibited_routes": ["Billing & Accounts L2", "Core Team L2"],
+      "fallback_domain": "Network"
+    },
+    "intent_esim_fail": {
+      "label": "eSIM Activation Failure",
+      "mandatory_prechecks": [
+        "Check SM-DP+ Server status for EID profile",
+        "Verify device WiFi connectivity"
+      ],
+      "DependsOn": ["prepaid_wallet_balance"],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["Network L2 Core", "Billing L2"],
+      "fallback_domain": "Provisioning"
+    },
+    "intent_voice_drops": {
+      "label": "Voice Call Drops",
+      "mandatory_prechecks": [
+        "Check VoLTE handset settings",
+        "Verify HLR subscriber voice status"
+      ],
+      "DependsOn": ["flexible_minutes_wallet", "national_idd_minutes", "cug_minutes_bucket"],
+      "escalation_target": "Core Switching & IMS Team",
+      "prohibited_routes": ["Provisioning Support", "Billing L2"],
+      "fallback_domain": "Network"
+    },
+    "intent_roaming_fail": {
+      "label": "Roaming Connection Fail",
+      "mandatory_prechecks": [
+        "Check BSS profile status",
+        "Verify connection to preferred roaming partner",
+        "Verify VoLTE roaming agreement with current preferred partner",
+        "Verify 3G network shutdown status in destination country",
+        "Check handset VoLTE roaming settings"
+      ],
+      "DependsOn": ["roaming_data_bundle", "prepaid_wallet_balance"],
+      "escalation_target": "Carrier Inter-Roaming Support",
+      "prohibited_routes": ["RAN Engineering"],
+      "fallback_domain": "Network"
+    }
+  },
+  "fallbacks": {
+    "Network": {
+      "mandatory_prechecks": ["Check HLR voice provisioning flag status", "Verify local tower outage status"],
+      "escalation_target": "Network L2 Core Support",
+      "prohibited_routes": ["Billing L2", "Provisioning Support"]
+    },
+    "Billing": {
+      "mandatory_prechecks": ["Check BSS profile status", "Verify subscriber payment logs"],
+      "escalation_target": "Billing & Accounts L2",
+      "prohibited_routes": ["Network L2 Core", "RAN Engineering"]
+    },
+    "Provisioning": {
+      "mandatory_prechecks": ["Check BSS profile status", "Verify HLR subscriber provisioning status"],
+      "escalation_target": "eSIM & Provisioning Support",
+      "prohibited_routes": ["Network L2 Core", "RAN Engineering"]
+    }
+  },
+  "resource_rules": {
+    "data_bundles": ["data bundle", "data package", "allowance", "quota", "gigabytes", "gb", "mb", "internet balance"],
+    "roaming_data_bundle": ["roaming data", "roaming bundle", "roaming internet", "roaming gb", "roaming package"],
+    "prepaid_wallet_balance": ["credit", "balance", "wallet", "insufficient funds", "recharge", "prepaid balance"],
+    "flexible_minutes_wallet": ["flexi", "flexible mins", "flexible minutes", "minutes balance"],
+    "cug_minutes_bucket": ["cug", "closed user group", "group calls", "cug minutes"],
+    "national_idd_minutes": ["national calls", "international calls", "idd calls", "idd minutes", "calling credit"],
+    "sms_benefits": ["sms bucket", "sms benefits", "texts balance", "message quota"]
+  },
+  "precheck_rules": {
+    "Check BSS profile status": ["bss", "billing", "profile"],
+    "Verify subscription is postpaid": ["postpaid", "post-paid", "subscription postpaid"],
+    "Verify plan eligibility": ["eligible", "eligibility", "plan eligible"],
+    "Verify HLR subscriber voice status": ["hlr", "voice status", "hlr subscriber"],
+    "Check VoLTE handset settings": ["handset", "settings", "phone", "volte handset"],
+    "Check SM-DP+ Server status for EID profile": ["sm-dp", "eid", "smdp", "server status"],
+    "Verify device WiFi connectivity": ["wifi", "wi-fi", "connectivity", "wi fi"],
+    "Check 5G Provisioning status in CRM": ["crm", "provisioning", "5g provisioning"],
+    "Check Sector signal quality in Home 5G Router Status Portal": ["portal", "sector", "signal", "tower"],
+    "Check HLR voice provisioning flag status": ["flag status", "voice provisioning"],
+    "Verify local tower outage status": ["outage", "tower status", "local tower"],
+    "Verify subscriber payment logs": ["payment", "payment logs"],
+    "Verify HLR subscriber provisioning status": ["hlr subscriber", "provisioning status"],
+    "Verify connection to preferred roaming partner": ["preferred partner", "preferred network", "preferred roaming partner", "preferred carrier", "preferred operator"],
+    "Verify VoLTE roaming agreement with current preferred partner": ["volte agreement", "volte partner", "volte roaming", "carrier agreement", "volte preferred"],
+    "Verify 3G network shutdown status in destination country": ["3g shutdown", "3g retired", "no 3g", "3g off", "3g decommissioned"],
+    "Check handset VoLTE roaming settings": ["handset volte", "enable volte roaming", "volte settings", "device volte"],
+    "Verify bundle speed cap status in BSS": ["speed cap", "throttled", "cap limit", "capped speed", "fup status"],
+    "Verify speedtest throughput vs agreed speed": ["speedtest", "throughput", "kbps", "mbps", "50% less", "less than 50%", "slow speed", "measurement"],
+    "Check coverage at customer location": ["coverage", "customer location", "signal bars", "cell coverage", "signal strength", "rscp", "rsrp"]
+  }
+}

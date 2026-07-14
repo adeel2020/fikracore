@@ -1,0 +1,9 @@
+  {"matched_node_id": "intent_roaming_fail", "matched_label": "Roaming Connection Fail", "match_type": "Intent", "match_score": 0.6368241340480693,           │
+│  "mandatory_prechecks": ["Check BSS profile status", "Verify inter-carrier Roaming Agreement status"], "escalation_target": "Carrier Inter-Roaming           │
+│  Support", "prohibited_routes": ["RAN Engineering"], "fallback_domain": "Network", "faq_action": "", "faq_url": "", "triplets": ["(USSD Code Dial            │
+│  [Channel]) --[TRIGGERS]--> (Roaming Connection Fail [Intent])", "(Roaming Connection Fail [Intent]) --[TRIGGERS]--> (VLR Roaming Gateway [Service])",       │
+│  "(VLR Roaming Gateway [Service]) --[EXECUTES_VIA]--> (Carrier Inter-Roaming Support [Platform])", "(Carrier Inter-Roaming Support [Platform])               │
+│  --[SYNC_STATUS]--> (Unified CRM System [Platform])", "(Prepaid Subscriber [CustomerProfile]) --[ASSOCIATED_WITH]--> (Roaming Connection Fail [Intent])",    │
+│  "(Roaming Connection Fail [Intent]) --[CAN_FAIL_WITH]--> (PLMN Forbidden Error [Error])", "(Roaming Connection Fail [Intent]) --[CAN_FAIL_WITH]-->          │
+│  (Insufficient balance code [Error])", "(PLMN Forbidden Error [Error]) --[EXECUTES_VIA]--> (Carrier Inter-Roaming Support [Platform])", "(Roaming            │
+│  Connection Fail [Intent]) --[REQUIRES_PREREQUISITE]--> (Roaming Agreement [Precondition])"]} 

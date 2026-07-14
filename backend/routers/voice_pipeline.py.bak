@@ -1,0 +1,268 @@
+import asyncio
+import json
+import base64
+import logging
+import numpy as np
+import io
+from PIL import Image
+import time
+from datetime import datetime
+from pathlib import Path
+from typing import Optional
+from threading import Thread
+
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi.responses import HTMLResponse
+
+from backend.config import settings
+
+logger = logging.getLogger(__name__)
+
+router = APIRouter(prefix="/voice", tags=["voice"])
+
+
+class AudioConnection:
+    def __init__(self):
+        self.active: dict[str, WebSocket] = {}
+        self.tasks: dict[str, dict] = {}
+        self.history: dict[str, list[dict]] = {}
+
+    async def connect(self, ws: WebSocket, client_id: str):
+        await ws.accept()
+        self.active[client_id] = ws
+        self.tasks[client_id] = {"processing": None, "tts": None}
+        self.history[client_id] = []
+        logger.info("Voice client %s connected", client_id)
+
+    def disconnect(self, client_id: str):
+        self.active.pop(client_id, None)
+        self.tasks.pop(client_id, None)
+        self.history.pop(client_id, None)
+        logger.info("Voice client %s disconnected", client_id)
+
+
+manager = AudioConnection()
+
+_whisper = None
+_kokoro = None
+_smolvlm = None
+
+
+_whisper_lock = asyncio.Lock()
+_kokoro_lock = asyncio.Lock()
+
+
+async def get_whisper():
+    global _whisper
+    if _whisper is not None:
+        return _whisper
+    async with _whisper_lock:
+        if _whisper is not None:
+            return _whisper
+        loop = asyncio.get_event_loop()
+
+        def _load():
+            from transformers import AutoModelForSpeechSeq2Seq, AutoProcessor, pipeline
+            import torch
+            device = "cuda:0" if torch.cuda.is_available() else "cpu"
+            dtype = torch.float16 if torch.cuda.is_available() else torch.float32
+            logger.info("Loading Whisper tiny on %s...", device)
+            model = AutoModelForSpeechSeq2Seq.from_pretrained(
+                "openai/whisper-tiny", dtype=dtype
+            ).to(device)
+            processor = AutoProcessor.from_pretrained("openai/whisper-tiny")
+            pipe = pipeline(
+                "automatic-speech-recognition",
+                model=model, tokenizer=processor.tokenizer,
+                feature_extractor=processor.feature_extractor,
+                dtype=dtype, device=device,
+            )
+            logger.info("Whisper ready")
+            return pipe
+
+        _whisper = await loop.run_in_executor(None, _load)
+        return _whisper
+
+
+async def get_kokoro():
+    global _kokoro
+    if _kokoro is not None:
+        return _kokoro
+    async with _kokoro_lock:
+        if _kokoro is not None:
+            return _kokoro
+        loop = asyncio.get_event_loop()
+
+        def _load():
+            global _kokoro
+            from kokoro import KPipeline
+            logger.info("Loading Kokoro TTS...")
+            pipe = KPipeline(lang_code="a")
+            _kokoro = pipe  # set inside thread so cancellation doesn't lose it
+            logger.info("Kokoro TTS ready")
+            return pipe
+
+        return await loop.run_in_executor(None, _load)
+
+
+MAX_AUDIO_SAMPLES = 480000  # 30 seconds at 16kHz
+
+async def transcribe_audio(audio_bytes: bytes) -> Optional[str]:
+    loop = asyncio.get_event_loop()
+    whisper = await get_whisper()
+    audio_array = np.frombuffer(audio_bytes, dtype=np.int16).astype(np.float32) / 32768.0
+    if len(audio_array) > MAX_AUDIO_SAMPLES:
+        audio_array = audio_array[:MAX_AUDIO_SAMPLES]
+    result = await loop.run_in_executor(None, lambda: whisper(audio_array, return_timestamps=True))
+    text = result["text"].strip() if result else ""
+    if not text or len(text) < 3:
+        return None
+    return text
+
+
+async def synthesize_speech(text: str) -> tuple[Optional[np.ndarray], list]:
+    kokoro = await get_kokoro()
+    loop = asyncio.get_event_loop()
+
+    def _synthesize():
+        audio_segments = []
+        word_timings = []
+        time_offset = 0.0
+        gen = kokoro(text, voice="af_sarah", speed=1, split_pattern=None)
+        for result in gen:
+            audio = result.audio.cpu().numpy()
+            tokens = result.tokens
+            for token in tokens:
+                if token.start_ts is not None and token.end_ts is not None:
+                    word_timings.append({
+                        "word": token.text,
+                        "start_time": (token.start_ts + time_offset) * 1000,
+                        "end_time": (token.end_ts + time_offset) * 1000,
+                    })
+            audio_segments.append(audio)
+            if len(audio):
+                time_offset += len(audio) / 24000
+        if not audio_segments:
+            return None, []
+        combined = np.concatenate(audio_segments)
+        return combined, word_timings
+
+    return await loop.run_in_executor(None, _synthesize)
+
+
+@router.websocket("/ws/{client_id}")
+async def voice_websocket(ws: WebSocket, client_id: str):
+    await manager.connect(ws, client_id)
+    await ws.send_text(json.dumps({"type": "connected", "client_id": client_id}))
+
+    async def keepalive():
+        while True:
+            try:
+                await ws.send_text(json.dumps({"type": "ping", "timestamp": time.time()}))
+                await asyncio.sleep(10)
+            except Exception:
+                break
+
+    async def get_ai_response(client_id: str, user_text: str) -> str:
+        if not settings.openai_api_key:
+            return user_text
+        loop = asyncio.get_event_loop()
+        def _call():
+            from backend.datastory.crewai_storyteller import run_storyteller
+            return run_storyteller(user_text, history=manager.history.get(client_id))
+        try:
+            response = await loop.run_in_executor(None, _call)
+            history = manager.history.setdefault(client_id, [])
+            history.append({"q": user_text, "a": response})
+            if len(history) > 10:
+                history[:] = history[-10:]
+            return response
+        except Exception as e:
+            logger.warning("Storyteller failed: %s", e)
+            return user_text
+
+    async def process_audio(audio_data: bytes, image_data: Optional[bytes] = None):
+        try:
+            await ws.send_text(json.dumps({"type": "interrupt"}))
+
+            text = await transcribe_audio(audio_data)
+            if not text:
+                logger.warning("process_audio: no transcription, skipping response")
+                return
+
+            response_text = await get_ai_response(client_id, text)
+
+            audio, timings = await synthesize_speech(response_text)
+            if audio is not None and len(audio):
+                audio_bytes = (audio * 32767).astype(np.int16).tobytes()
+                b64 = base64.b64encode(audio_bytes).decode()
+                await ws.send_text(json.dumps({
+                    "type": "audio",
+                    "audio": b64,
+                    "word_timings": timings,
+                    "sample_rate": 24000,
+                    "method": "kokoro",
+                    "transcript": text,
+                    "response": response_text,
+                }))
+
+            await ws.send_text(json.dumps({"type": "audio_complete"}))
+        except asyncio.CancelledError:
+            raise
+        except Exception as e:
+            logger.exception("Audio processing error")
+            await ws.send_text(json.dumps({"type": "error", "detail": str(e)}))
+
+    current_task: Optional[asyncio.Task] = None
+
+    async def receiver():
+        nonlocal current_task
+        while True:
+            data = await ws.receive_text()
+            msg = json.loads(data)
+
+            if "audio" in msg:
+                audio_data = base64.b64decode(msg["audio"])
+                image_data = None
+                if "image" in msg:
+                    image_data = base64.b64decode(msg["image"])
+                # Cancel previous processing task if still running
+                if current_task and not current_task.done():
+                    current_task.cancel()
+                    try:
+                        await current_task
+                    except (asyncio.CancelledError, Exception):
+                        pass
+                current_task = asyncio.create_task(process_audio(audio_data, image_data))
+                manager.tasks[client_id] = {"processing": current_task, "tts": None}
+
+            elif "image" in msg:
+                pass  # Image-only
+
+    keepalive_task = asyncio.create_task(keepalive())
+    receive_task = asyncio.create_task(receiver())
+
+    try:
+        done, pending = await asyncio.wait(
+            [receive_task, keepalive_task],
+            return_when=asyncio.FIRST_COMPLETED,
+        )
+        for t in pending:
+            t.cancel()
+            try:
+                await t
+            except (asyncio.CancelledError, Exception):
+                pass
+    except WebSocketDisconnect:
+        pass
+    finally:
+        keepalive_task.cancel()
+        receive_task.cancel()
+        # Cancel any in-flight audio processing
+        if current_task and not current_task.done():
+            current_task.cancel()
+            try:
+                await current_task
+            except (asyncio.CancelledError, Exception):
+                pass
+        manager.disconnect(client_id)

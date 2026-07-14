@@ -1,0 +1,265 @@
+{
+  "nodes": [
+    {
+      "id": "intent_volte_call_drop",
+      "label": "VoLTE Call Drops & SIP Signaling Failure",
+      "type": "Intent",
+      "description": "Voice calls disconnecting, failure to register to IMS, dropped VoLTE calls, VoLTE settings."
+    },
+    {
+      "id": "intent_esim_fail",
+      "label": "eSIM Activation Failure",
+      "type": "Intent",
+      "description": "eSIM activation fails, SM-DP+ server mismatch errors, QR code scanning errors, profile download failed."
+    },
+    {
+      "id": "intent_slow_5g",
+      "label": "5G Cellular Data Slowness",
+      "type": "Intent",
+      "description": "High packet latency, low bandwidth throughput, speed capping, buffering, FUP throttling."
+    },
+    {
+      "id": "intent_roaming_fail",
+      "label": "International Roaming Failures",
+      "type": "Intent",
+      "description": "Partner carrier registration failure while roaming, PLMN forbidden, no service abroad."
+    },
+    {
+      "id": "faq_amazon_prime_cancel",
+      "label": "Cancel Amazon Prime Subscription",
+      "type": "FAQ",
+      "description": "Log in to du My Account app/portal, navigate to active Add-ons, and cancel Amazon Prime."
+    },
+    {
+      "id": "faq_amazon_prime_activate",
+      "label": "Activate 12 Months Free Amazon Prime",
+      "type": "FAQ",
+      "description": "Send SMS keyword Prime to 9511 and register via the link."
+    },
+    {
+      "id": "faq_dncr",
+      "label": "Do Not Call Registry (DNCR)",
+      "type": "FAQ",
+      "description": "Send SMS keyword DNCR to 1012 to block spam telemarketing calls."
+    },
+    {
+      "id": "faq_esim_replacement",
+      "label": "eSIM Replacement & Multi-device Watch",
+      "type": "FAQ",
+      "description": "Order eSIM swap via du App, connect watch via Apple eSIM pairing flow."
+    },
+    {
+      "id": "pcf",
+      "label": "Policy Control Function (PCF)",
+      "type": "Component",
+      "description": "Manages subscriber policy data profiles (DCS, ICP Botim, 5GSA) and FUP throttling limits (192kbps/72kbps)."
+    },
+    {
+      "id": "ugw",
+      "label": "Unified Gateway (UGW)",
+      "type": "Component",
+      "description": "Handles 3G PDP contexts and 4G packet bearers."
+    },
+    {
+      "id": "usn",
+      "label": "Unified Serving Node (USN)",
+      "type": "Component",
+      "description": "Tracks mobility management (MM) and session management (SM) contexts."
+    },
+    {
+      "id": "udg",
+      "label": "Unified Data Gateway (UDG)",
+      "type": "Component",
+      "description": "Monitors real-time subscriber usage information and bearer sessions."
+    },
+    {
+      "id": "ntas",
+      "label": "Nokia Telephony Application Server (nTAS)",
+      "type": "Component",
+      "description": "Manages VoLTE/IMS Core profiles via SIP Registration."
+    },
+    {
+      "id": "hss_udm",
+      "label": "UDM / Home Subscriber Server (HSS)",
+      "type": "Component",
+      "description": "Central subscriber registry for VoLTE, LTE (EPS), and 5GSA definition flags."
+    },
+    {
+      "id": "nokia_cdp",
+      "label": "Nokia Connected Device Platform (CDP/AES)",
+      "type": "Component",
+      "description": "Controls secondary device profile generation for Apple Watch eSIM pairing."
+    },
+    {
+      "id": "gnd_portal",
+      "label": "G&D SM-DP+ Subscription Portal",
+      "type": "Component",
+      "description": "Manages eSIM and Apple Watch multi-device registration states (RELEASED, INSTALLED)."
+    },
+    {
+      "id": "data_bundles",
+      "label": "Data Allowance Bucket",
+      "type": "Resource",
+      "description": "Subscriber real-time data quota remaining on OCS."
+    },
+    {
+      "id": "flexible_minutes_wallet",
+      "label": "Flexible Minutes Wallet",
+      "type": "Resource",
+      "description": "Voice call minute buckets for local and international calls."
+    },
+    {
+      "id": "national_idd_minutes",
+      "label": "National/IDD Minutes Bucket",
+      "type": "Resource",
+      "description": "International Direct Dialing minutes allowance."
+    },
+    {
+      "id": "cug_minutes_bucket",
+      "label": "Closed User Group Minutes Bucket",
+      "type": "Resource",
+      "description": "CUG package voice minutes balance."
+    },
+    {
+      "id": "Speed_CAP",
+      "label": "OCS Speed Cap Status",
+      "type": "Constraint",
+      "description": "State of speed limiting/throttling flags on the Charging system."
+    },
+    {
+      "id": "APN_settings",
+      "label": "APN Handset Settings",
+      "type": "Constraint",
+      "description": "Access Point Name profile configuration on the mobile device."
+    },
+    {
+      "id": "fallback_network",
+      "label": "Network Fallback",
+      "type": "Fallback",
+      "description": "Domain fallback node"
+    },
+    {
+      "id": "fallback_billing",
+      "label": "Billing Fallback",
+      "type": "Fallback",
+      "description": "Domain fallback node"
+    },
+    {
+      "id": "fallback_provisioning",
+      "label": "Provisioning Fallback",
+      "type": "Fallback",
+      "description": "Domain fallback node"
+    },
+    {
+      "id": "core_ims",
+      "label": "IMS Core Operations",
+      "type": "Team",
+      "description": "Escalation queue: L2_IMS_CORE. Hotline: 800-IMS"
+    },
+    {
+      "id": "core_packet",
+      "label": "Packet Core Operations (EPC/5GC)",
+      "type": "Team",
+      "description": "Escalation queue: L2_PACKET_CORE. Hotline: 800-PACKET"
+    },
+    {
+      "id": "core_udm",
+      "label": "UDM & Subscriber Registry Ops",
+      "type": "Team",
+      "description": "Escalation queue: L2_UDM_HLR. Hotline: 800-UDM"
+    },
+    {
+      "id": "core_smcs",
+      "label": "SOC Mobile Core Support",
+      "type": "Team",
+      "description": "Escalation queue: L1 - SOC. Hotline: 800-SMCS"
+    },
+    {
+      "id": "it_bscs",
+      "label": "IT BSCS Billing Operations",
+      "type": "Team",
+      "description": "Escalation queue: L2_BILLING_BSCS. Hotline: 800-BSCS"
+    },
+    {
+      "id": "it_prov",
+      "label": "IT Provisioning Support",
+      "type": "Team",
+      "description": "Escalation queue: L2_PROVISIONING. Hotline: 800-PROV"
+    },
+    {
+      "id": "sa_fan",
+      "label": "ENT - FSA",
+      "type": "Team",
+      "description": "Escalation queue: L2 - FSA. Hotline: 800-FSA"
+    },
+    {
+      "id": "cops_bo",
+      "label": "Customer Operations BackOffice",
+      "type": "Team",
+      "description": "Escalation queue: L2 - COPS. Hotline: 800-COPS"
+    },
+    {
+      "id": "platform_ran_team",
+      "label": "Radio Access Network (RAN) Team",
+      "type": "Team",
+      "description": "Escalation queue: L2 - RAN. Hotline: 800-RAN"
+    }
+  ],
+  "links": [
+    {
+      "source": "intent_volte_call_drop",
+      "target": "ntas",
+      "label": "affects"
+    },
+    {
+      "source": "ntas",
+      "target": "hss_udm",
+      "label": "depends_on"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "gnd_portal",
+      "label": "initiates_via"
+    },
+    {
+      "source": "gnd_portal",
+      "target": "nokia_cdp",
+      "label": "triggers"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "pcf",
+      "label": "limits"
+    },
+    {
+      "source": "pcf",
+      "target": "ugw",
+      "label": "provisions"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "hss_udm",
+      "label": "registers_on"
+    },
+    {
+      "source": "hss_udm",
+      "target": "ntas",
+      "label": "configures"
+    },
+    {
+      "source": "fallback_network",
+      "target": "core_smcs",
+      "label": "fallback_owner"
+    },
+    {
+      "source": "fallback_billing",
+      "target": "it_bscs",
+      "label": "fallback_owner"
+    },
+    {
+      "source": "fallback_provisioning",
+      "target": "it_prov",
+      "label": "fallback_owner"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+# ISO 9001:2025 KPI Metrics — AgenticAIOPs
+
+metrics:
+  - name: answer_accuracy
+    description: "Percentage of QnA responses with correct grounding"
+    target: ">= 90%"
+    measurement: "Automated validation against test set"
+    frequency: "Per deployment / daily"
+    owner: "qna_agent_team"
+
+  - name: classification_accuracy
+    description: "Complaint classification precision"
+    target: ">= 85%"
+    measurement: "Sampled manual review (n=100/week)"
+    frequency: "Weekly"
+    owner: "complaint_agent_team"
+
+  - name: retrieval_precision_at_3
+    description: "Precision of top-3 RAG retrieved chunks"
+    target: ">= 0.8"
+    measurement: "Automated relevance scoring"
+    frequency: "Per query / daily aggregate"
+    owner: "rag_pipeline_team"
+
+  - name: user_satisfaction
+    description: "Storyteller user satisfaction score (1-5)"
+    target: ">= 4.0"
+    measurement: "Post-interaction survey"
+    frequency: "Continuous"
+    owner: "storyteller_agent_team"
+
+  - name: generation_latency
+    description: "JARVIS summarization p95 latency"
+    target: "< 5s"
+    measurement: "Prometheus latency metrics"
+    frequency: "Continuous"
+    owner: "jarvis_agent_team"
+
+review:
+  frequency: "Monthly"
+  template: |
+    ## Monthly KPI Review — {{date}}
+    - answer_accuracy: {{value}} (target: 90%)
+    - classification_accuracy: {{value}} (target: 85%)
+    - retrieval_precision@3: {{value}} (target: 0.8)
+    - user_satisfaction: {{value}} (target: 4.0)
+    - generation_latency: {{value}} (target: 5s)
+    Action items:
+      1.
+      2.

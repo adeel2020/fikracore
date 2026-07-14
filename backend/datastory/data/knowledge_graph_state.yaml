@@ -1,0 +1,772 @@
+columns:
+- field: issue_category
+  label: Issue Category
+  values:
+  - value: VoLTE
+    count: 1367
+  - value: Roaming
+    count: 722
+  - value: Data Bundle
+    count: 683
+  - value: MNP
+    count: 514
+  - value: eSIM
+    count: 311
+  x: 654.8540058739155
+  y: 139.4612304487399
+- field: reassignment_reason
+  label: Reassignment Reason
+  values:
+  - value: MNP definition mismatch
+    count: 167
+  - value: VoLTE Tag issue
+    count: 113
+  - value: IR Not Active
+    count: 111
+  - value: eSIM not active
+    count: 104
+  - value: PCF mismatch
+    count: 57
+  - value: VoLTE not active
+    count: 47
+  - value: Roaming bundle not active
+    count: 45
+  - value: 5GSA not aligned
+    count: 25
+  - value: Bundle not active
+    count: 22
+  - value: data bundle not active
+    count: 22
+  - value: Bundle throttling
+    count: 19
+  - value: No Data allocation
+    count: 16
+  x: 1049.6712528174303
+  y: 72.29117717369037
+- field: rejection_reason
+  label: Rejection Reason
+  values:
+  - value: Missing Info
+    count: 125
+  - value: Device
+    count: 86
+  - value: Coverage
+    count: 50
+  - value: Knowledge Gap (PP)
+    count: 43
+  - value: BO Tool
+    count: 16
+  x: 252.01949101734317
+  y: 159.5980594766366
+- field: reassigned_to
+  label: Reassigned To
+  values:
+  - value: IT
+    count: 350
+  - value: SRO
+    count: 159
+  - value: BSCS
+    count: 121
+  - value: BLUE BSS
+    count: 62
+  - value: IN
+    count: 56
+  x: 1450.4544045830198
+  y: 212.9492008742574
+edges:
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: Multi SIM not allowed
+  weight: 76
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: MNP definition mismatch
+  weight: 32
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: PCF mismatch
+  weight: 13
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: 5GSA not aligned
+  weight: 4
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: Bundle not active
+  weight: 5
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: VoLTE Tag issue
+  weight: 18
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: IR Not Active
+  weight: 26
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: Bundle throttling
+  weight: 3
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: No Data allocation
+  weight: 1
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: Device APN issue
+  weight: 127
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: eSIM not active
+  weight: 20
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: Roaming bundle not active
+  weight: 4
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: data bundle not active
+  weight: 2
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassignment_reason
+  target_val: VoLTE not active
+  weight: 5
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: Roaming bundle not active
+  weight: 11
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: Multi SIM not allowed
+  weight: 139
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: Bundle throttling
+  weight: 4
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: MNP definition mismatch
+  weight: 51
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: VoLTE not active
+  weight: 16
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: VoLTE Tag issue
+  weight: 33
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: IR Not Active
+  weight: 26
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: eSIM not active
+  weight: 2
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: PCF mismatch
+  weight: 11
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: Bundle not active
+  weight: 6
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: No Data allocation
+  weight: 6
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: 5GSA not aligned
+  weight: 7
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: Device APN issue
+  weight: 387
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassignment_reason
+  target_val: data bundle not active
+  weight: 2
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: eSIM not active
+  weight: 49
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: Multi SIM not allowed
+  weight: 93
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: Roaming bundle not active
+  weight: 5
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: MNP definition mismatch
+  weight: 34
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: VoLTE Tag issue
+  weight: 23
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: No Data allocation
+  weight: 3
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: PCF mismatch
+  weight: 10
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: VoLTE not active
+  weight: 9
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: IR Not Active
+  weight: 24
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: Bundle not active
+  weight: 2
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: Bundle throttling
+  weight: 4
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: data bundle not active
+  weight: 4
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassignment_reason
+  target_val: 5GSA not aligned
+  weight: 1
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: Multi SIM not allowed
+  weight: 77
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: 5GSA not aligned
+  weight: 8
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: VoLTE Tag issue
+  weight: 22
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: Roaming bundle not active
+  weight: 12
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: MNP definition mismatch
+  weight: 20
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: IR Not Active
+  weight: 23
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: VoLTE not active
+  weight: 10
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: No Data allocation
+  weight: 4
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: Bundle throttling
+  weight: 3
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: Bundle not active
+  weight: 6
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: eSIM not active
+  weight: 15
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: Device APN issue
+  weight: 124
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: data bundle not active
+  weight: 9
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassignment_reason
+  target_val: PCF mismatch
+  weight: 12
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: Multi SIM not allowed
+  weight: 50
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: MNP definition mismatch
+  weight: 30
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: VoLTE not active
+  weight: 7
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: eSIM not active
+  weight: 18
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: Bundle not active
+  weight: 3
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: VoLTE Tag issue
+  weight: 17
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: 5GSA not aligned
+  weight: 5
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: data bundle not active
+  weight: 5
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: Roaming bundle not active
+  weight: 13
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: IR Not Active
+  weight: 12
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: Bundle throttling
+  weight: 5
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: PCF mismatch
+  weight: 11
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassignment_reason
+  target_val: No Data allocation
+  weight: 2
+- source_col: issue_category
+  source_val: MNP
+  target_col: rejection_reason
+  target_val: Knowledge Gap (PP)
+  weight: 8
+- source_col: issue_category
+  source_val: MNP
+  target_col: rejection_reason
+  target_val: Missing Info
+  weight: 20
+- source_col: issue_category
+  source_val: MNP
+  target_col: rejection_reason
+  target_val: Coverage
+  weight: 8
+- source_col: issue_category
+  source_val: MNP
+  target_col: rejection_reason
+  target_val: Device
+  weight: 14
+- source_col: issue_category
+  source_val: MNP
+  target_col: rejection_reason
+  target_val: BO Tool
+  weight: 6
+- source_col: issue_category
+  source_val: eSIM
+  target_col: rejection_reason
+  target_val: Missing Info
+  weight: 23
+- source_col: issue_category
+  source_val: eSIM
+  target_col: rejection_reason
+  target_val: Knowledge Gap (PP)
+  weight: 8
+- source_col: issue_category
+  source_val: eSIM
+  target_col: rejection_reason
+  target_val: Device
+  weight: 12
+- source_col: issue_category
+  source_val: eSIM
+  target_col: rejection_reason
+  target_val: Coverage
+  weight: 6
+- source_col: issue_category
+  source_val: eSIM
+  target_col: rejection_reason
+  target_val: BO Tool
+  weight: 1
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: rejection_reason
+  target_val: Missing Info
+  weight: 18
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: rejection_reason
+  target_val: Device
+  weight: 20
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: rejection_reason
+  target_val: Coverage
+  weight: 10
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: rejection_reason
+  target_val: Knowledge Gap (PP)
+  weight: 12
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: rejection_reason
+  target_val: BO Tool
+  weight: 2
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: rejection_reason
+  target_val: BO Tool
+  weight: 4
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: rejection_reason
+  target_val: Missing Info
+  weight: 41
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: rejection_reason
+  target_val: Device
+  weight: 19
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: rejection_reason
+  target_val: Knowledge Gap (PP)
+  weight: 11
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: rejection_reason
+  target_val: Coverage
+  weight: 13
+- source_col: issue_category
+  source_val: Roaming
+  target_col: rejection_reason
+  target_val: Device
+  weight: 21
+- source_col: issue_category
+  source_val: Roaming
+  target_col: rejection_reason
+  target_val: Missing Info
+  weight: 23
+- source_col: issue_category
+  source_val: Roaming
+  target_col: rejection_reason
+  target_val: Coverage
+  weight: 13
+- source_col: issue_category
+  source_val: Roaming
+  target_col: rejection_reason
+  target_val: BO Tool
+  weight: 3
+- source_col: issue_category
+  source_val: Roaming
+  target_col: rejection_reason
+  target_val: Knowledge Gap (PP)
+  weight: 4
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 14
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassigned_to
+  target_val: IN
+  weight: 18
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassigned_to
+  target_val: IT
+  weight: 77
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 33
+- source_col: issue_category
+  source_val: VoLTE
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 33
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassigned_to
+  target_val: IT
+  weight: 87
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 11
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 19
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassigned_to
+  target_val: IN
+  weight: 9
+- source_col: issue_category
+  source_val: eSIM
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 42
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 30
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassigned_to
+  target_val: IT
+  weight: 61
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 26
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 15
+- source_col: issue_category
+  source_val: Roaming
+  target_col: reassigned_to
+  target_val: IN
+  weight: 12
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 15
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassigned_to
+  target_val: IT
+  weight: 70
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 29
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassigned_to
+  target_val: IN
+  weight: 10
+- source_col: issue_category
+  source_val: Data Bundle
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 9
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 25
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 28
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassigned_to
+  target_val: IT
+  weight: 55
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassigned_to
+  target_val: IN
+  weight: 7
+- source_col: issue_category
+  source_val: MNP
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 13
+- source_col: reassignment_reason
+  source_val: Roaming bundle not active
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 15
+- source_col: reassignment_reason
+  source_val: Roaming bundle not active
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 30
+- source_col: reassignment_reason
+  source_val: eSIM not active
+  target_col: reassigned_to
+  target_val: IT
+  weight: 71
+- source_col: reassignment_reason
+  source_val: eSIM not active
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 33
+- source_col: reassignment_reason
+  source_val: Bundle throttling
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 19
+- source_col: reassignment_reason
+  source_val: MNP definition mismatch
+  target_col: reassigned_to
+  target_val: IN
+  weight: 18
+- source_col: reassignment_reason
+  source_val: MNP definition mismatch
+  target_col: reassigned_to
+  target_val: IT
+  weight: 65
+- source_col: reassignment_reason
+  source_val: MNP definition mismatch
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 35
+- source_col: reassignment_reason
+  source_val: MNP definition mismatch
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 34
+- source_col: reassignment_reason
+  source_val: MNP definition mismatch
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 15
+- source_col: reassignment_reason
+  source_val: VoLTE not active
+  target_col: reassigned_to
+  target_val: BLUE BSS
+  weight: 13
+- source_col: reassignment_reason
+  source_val: VoLTE not active
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 34
+- source_col: reassignment_reason
+  source_val: 5GSA not aligned
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 25
+- source_col: reassignment_reason
+  source_val: VoLTE Tag issue
+  target_col: reassigned_to
+  target_val: IT
+  weight: 86
+- source_col: reassignment_reason
+  source_val: VoLTE Tag issue
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 27
+- source_col: reassignment_reason
+  source_val: IR Not Active
+  target_col: reassigned_to
+  target_val: IT
+  weight: 71
+- source_col: reassignment_reason
+  source_val: IR Not Active
+  target_col: reassigned_to
+  target_val: SRO
+  weight: 40
+- source_col: reassignment_reason
+  source_val: PCF mismatch
+  target_col: reassigned_to
+  target_val: IT
+  weight: 57
+- source_col: reassignment_reason
+  source_val: No Data allocation
+  target_col: reassigned_to
+  target_val: IN
+  weight: 16
+- source_col: reassignment_reason
+  source_val: Bundle not active
+  target_col: reassigned_to
+  target_val: IN
+  weight: 22
+- source_col: reassignment_reason
+  source_val: data bundle not active
+  target_col: reassigned_to
+  target_val: BSCS
+  weight: 22
+updated_at: '2026-07-09T10:50:47.876490+00:00'

@@ -1,0 +1,9 @@
+command: LST HDYNINFO / LST HREPDATA
+id: chk_ims_reg_status
+keywords:
+- userflag
+- ims registration
+- volte registration status
+- sset
+label: IMS registration status (USERFLAG)
+target_node: ntas

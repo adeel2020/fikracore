@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: agenticaiops-agents
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/part-of: agenticaiops
+    release: kube-prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: agent-services
+  namespaceSelector:
+    matchNames:
+      - agents-prod
+  endpoints:
+    - port: http
+      interval: 15s
+      path: /metrics
+  targetLabels:
+    - app.kubernetes.io/name

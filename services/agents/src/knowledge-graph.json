@@ -1,0 +1,4699 @@
+{
+  "version": "1.0.0",
+  "project": {
+    "name": "sa4dst",
+    "languages": [
+      "css",
+      "javascript",
+      "json",
+      "markdown",
+      "python",
+      "toml",
+      "typescript"
+    ],
+    "frameworks": [
+      "FastAPI",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "Alembic",
+      "CrewAI",
+      "SQLAlchemy",
+      "Uvicorn"
+    ],
+    "description": "An agentic data engineering and machine learning workflow orchestration platform featuring a Next.js frontend to visualize real-time agent execution progress, backed by a Python FastAPI backend.",
+    "analyzedAt": "2026-05-28T07:58:17.229Z",
+    "gitCommitHash": "8ad9035bff4f2081a98b7540f8e9811d910547a8"
+  },
+  "nodes": [
+    {
+      "id": "file:frontend/src/app/agentic-qna/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/agentic-qna/page.tsx",
+      "summary": "Entry page for the agentic question-and-answering interface in the application, rendering the specialized AgenticQnaView component.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "qna",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 5
+    },
+    {
+      "id": "file:frontend/src/app/controls/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/controls/page.tsx",
+      "summary": "Entry page for the system control dashboard, rendering the ControlsView component to manage orchestrator settings and backend flags.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "system-controls",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 5
+    },
+    {
+      "id": "file:frontend/src/app/data-description/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/data-description/page.tsx",
+      "summary": "Next.js entry page for data description management, displaying the DataDescriptionView component to view and generate descriptions for loaded datasets.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "data-description",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 5
+    },
+    {
+      "id": "file:frontend/src/app/domain-adaptation/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/domain-adaptation/page.tsx",
+      "summary": "Entry page for the domain adaptation interface, rendering the DomainAdaptationView component to manage prompt preprocessing, chunking, and embedding.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "domain-adaptation",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 5
+    },
+    {
+      "id": "file:frontend/src/app/multi-agent-system/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/multi-agent-system/page.tsx",
+      "summary": "Entry page for the multi-agent system view, rendering the MultiAgentSystemView component to visualize and run CrewAI agent teams.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "multi-agent-system",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 9
+    },
+    {
+      "id": "file:frontend/src/app/templates/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "filePath": "frontend/src/app/templates/page.tsx",
+      "summary": "Entry page for LLM system prompt templates, rendering the TemplatesView component to view, edit, and create system prompts.",
+      "complexity": "simple",
+      "tags": [
+        "entry-point",
+        "nextjs-page",
+        "llm-templates",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 5
+    },
+    {
+      "id": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "type": "file",
+      "name": "agentic-qna-view.tsx",
+      "filePath": "frontend/src/components/features/agentic-qna-view.tsx",
+      "summary": "Core dashboard feature that manages streaming QnA chats, displays telemetry status (cost, throughput, latency), and handles suggested user prompts.",
+      "complexity": "complex",
+      "tags": [
+        "chat-dashboard",
+        "telemetry-view",
+        "sse-streaming",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 1347
+    },
+    {
+      "id": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "type": "file",
+      "name": "chat-history-panel.tsx",
+      "filePath": "frontend/src/components/features/chat-history-panel.tsx",
+      "summary": "Sidebar panel displaying a list of active and pinned chat sessions with message counts, allowing session loading, deletion, and previewing.",
+      "complexity": "moderate",
+      "tags": [
+        "chat-history",
+        "session-management",
+        "sidebar-panel",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 284
+    },
+    {
+      "id": "file:frontend/src/components/features/controls-view.tsx",
+      "type": "file",
+      "name": "controls-view.tsx",
+      "filePath": "frontend/src/components/features/controls-view.tsx",
+      "summary": "Feature component to toggle system settings such as streaming, response caching, strict JSON execution, and anomaly alerts.",
+      "complexity": "simple",
+      "tags": [
+        "system-settings",
+        "feature-view",
+        "control-panel",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 74
+    },
+    {
+      "id": "file:frontend/src/components/features/data-description-view.tsx",
+      "type": "file",
+      "name": "data-description-view.tsx",
+      "filePath": "frontend/src/components/features/data-description-view.tsx",
+      "summary": "Feature component allowing users to view column details for active datasets, manually update descriptions, or auto-generate descriptions via LLM.",
+      "complexity": "moderate",
+      "tags": [
+        "dataset-metadata",
+        "feature-view",
+        "column-editor",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 163
+    },
+    {
+      "id": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "type": "file",
+      "name": "domain-adaptation-view.tsx",
+      "filePath": "frontend/src/components/features/domain-adaptation-view.tsx",
+      "summary": "Interactive pipeline dashboard showing stages of data preprocessing, chunk embedding, and selection of domain adaptation methods like fine-tuning or RAG.",
+      "complexity": "complex",
+      "tags": [
+        "domain-adaptation",
+        "data-pipeline",
+        "llm-preprocessing",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 401
+    },
+    {
+      "id": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "type": "file",
+      "name": "multi-agent-system-view.tsx",
+      "filePath": "frontend/src/components/features/multi-agent-system-view.tsx",
+      "summary": "Feature view to simulate and inspect the execution workflow of multi-agent crews, displaying active status and role logs.",
+      "complexity": "moderate",
+      "tags": [
+        "crewai-simulation",
+        "multi-agent-view",
+        "workflow-tracker",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 289
+    },
+    {
+      "id": "file:frontend/src/components/features/templates-view.tsx",
+      "type": "file",
+      "name": "templates-view.tsx",
+      "filePath": "frontend/src/components/features/templates-view.tsx",
+      "summary": "System prompt template editor featuring live markdown preview, sample variable inputs, and template categorization by provider and model.",
+      "complexity": "moderate",
+      "tags": [
+        "prompt-editor",
+        "template-preview",
+        "system-prompts",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 285
+    },
+    {
+      "id": "file:frontend/src/components/ui/badge.tsx",
+      "type": "file",
+      "name": "badge.tsx",
+      "filePath": "frontend/src/components/ui/badge.tsx",
+      "summary": "Simple reusable UI component to display stylized labels and status indicators using Tailwind classes.",
+      "complexity": "simple",
+      "tags": [
+        "design-system",
+        "reusable-ui",
+        "badge-component",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 29
+    },
+    {
+      "id": "file:frontend/src/components/ui/button.tsx",
+      "type": "file",
+      "name": "button.tsx",
+      "filePath": "frontend/src/components/ui/button.tsx",
+      "summary": "Reusable UI button component constructed with class variance authority for different styles like primary, destructive, and outline.",
+      "complexity": "simple",
+      "tags": [
+        "design-system",
+        "reusable-ui",
+        "button-component",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 54
+    },
+    {
+      "id": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "type": "file",
+      "name": "multi-agent-system.tsx",
+      "filePath": "frontend/src/components/ui/multi-agent-system.tsx",
+      "summary": "UI visualization representing active agents in the system and showing status indicators, role details, and dependency connections between them.",
+      "complexity": "moderate",
+      "tags": [
+        "agent-visualization",
+        "design-system",
+        "reusable-ui",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 276
+    },
+    {
+      "id": "file:frontend/src/components/ui/slider.tsx",
+      "type": "file",
+      "name": "slider.tsx",
+      "filePath": "frontend/src/components/ui/slider.tsx",
+      "summary": "Reusable interactive slider component wrapping Radix Slider primitives for system parameter tuning in controls.",
+      "complexity": "simple",
+      "tags": [
+        "design-system",
+        "reusable-ui",
+        "slider-component",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 21
+    },
+    {
+      "id": "file:frontend/src/components/ui/switch.tsx",
+      "type": "file",
+      "name": "switch.tsx",
+      "filePath": "frontend/src/components/ui/switch.tsx",
+      "summary": "Reusable toggle switch UI component wrapping Radix Switch primitives to toggle boolean control flags.",
+      "complexity": "simple",
+      "tags": [
+        "design-system",
+        "reusable-ui",
+        "switch-component",
+        "react-component"
+      ],
+      "language": "typescript",
+      "sizeLines": 25
+    },
+    {
+      "id": "file:frontend/src/lib/api/qna.ts",
+      "type": "file",
+      "name": "qna.ts",
+      "filePath": "frontend/src/lib/api/qna.ts",
+      "summary": "API client providing functions to query orchestrator health, fetch real-time session telemetry, and stream SSE token events.",
+      "complexity": "moderate",
+      "tags": [
+        "api-client",
+        "sse-streaming",
+        "telemetry-api",
+        "network-requests"
+      ],
+      "language": "typescript",
+      "sizeLines": 115
+    },
+    {
+      "id": "file:frontend/src/lib/llm-templates.ts",
+      "type": "file",
+      "name": "llm-templates.ts",
+      "filePath": "frontend/src/lib/llm-templates.ts",
+      "summary": "Utility module defining default LLM prompt templates and providing helper functions to render templates, build preprocess variables, and estimate token counts.",
+      "complexity": "moderate",
+      "tags": [
+        "prompt-utilities",
+        "token-estimator",
+        "llm-config",
+        "helper-functions"
+      ],
+      "language": "typescript",
+      "sizeLines": 332
+    },
+    {
+      "id": "file:frontend/src/lib/mock-datasets.ts",
+      "type": "file",
+      "name": "mock-datasets.ts",
+      "filePath": "frontend/src/lib/mock-datasets.ts",
+      "summary": "Module containing pre-defined mock datasets (e.g. Sales Data, Customer Churn) and utility to generate mock column metadata descriptions.",
+      "complexity": "simple",
+      "tags": [
+        "mock-data",
+        "datasets",
+        "metadata",
+        "helper-functions"
+      ],
+      "language": "typescript",
+      "sizeLines": 69
+    },
+    {
+      "id": "file:frontend/src/lib/utils.ts",
+      "type": "file",
+      "name": "utils.ts",
+      "filePath": "frontend/src/lib/utils.ts",
+      "summary": "Core Tailwind CSS helper utility providing functions to merge classnames dynamically (using clsx and tailwind-merge) and defining reusable glassmorphism styles.",
+      "complexity": "simple",
+      "tags": [
+        "utility-functions",
+        "tailwind-merge",
+        "classnames-utility",
+        "design-tokens"
+      ],
+      "language": "typescript",
+      "sizeLines": 12
+    },
+    {
+      "id": "function:frontend/src/app/agentic-qna/page.tsx:AgenticQnaPage",
+      "type": "function",
+      "name": "AgenticQnaPage",
+      "summary": "Default export page component for the QnA interface, rendering the main interactive QnA view.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "qna-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/controls/page.tsx:ControlsPage",
+      "type": "function",
+      "name": "ControlsPage",
+      "summary": "Default export page component for the controls tab, rendering the system setting toggles.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "settings-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/data-description/page.tsx:DataDescriptionPage",
+      "type": "function",
+      "name": "DataDescriptionPage",
+      "summary": "Default export page component that initializes the dataset schema description feature.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "schema-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/domain-adaptation/page.tsx:DomainAdaptationPage",
+      "type": "function",
+      "name": "DomainAdaptationPage",
+      "summary": "Default export page component that initializes the embedding and domain adaptation pipeline dashboard.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "pipeline-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/multi-agent-system/page.tsx:MultiAgentSystemPage",
+      "type": "function",
+      "name": "MultiAgentSystemPage",
+      "summary": "Default export page component that sets up the interactive crew system simulation dashboard.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "multi-agent-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/templates/page.tsx:TemplatesPage",
+      "type": "function",
+      "name": "TemplatesPage",
+      "summary": "Default export page component that mounts the LLM system prompt template customization view.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "templates-routing",
+        "component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:AnimatedNumber",
+      "type": "function",
+      "name": "AnimatedNumber",
+      "summary": "React component to smoothly animate count increases, such as tokens consumed or running execution costs.",
+      "complexity": "simple",
+      "tags": [
+        "utility-component",
+        "animation",
+        "react-hook"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:TelemetryRing",
+      "type": "function",
+      "name": "TelemetryRing",
+      "summary": "circular progress indicator rendering relative usage percentages (like memory or cache hit rate).",
+      "complexity": "simple",
+      "tags": [
+        "visualization-ui",
+        "circular-gauge",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:LinearProgressMeter",
+      "type": "function",
+      "name": "LinearProgressMeter",
+      "summary": "Horizontal progress bar to visualize token limits or process completion.",
+      "complexity": "simple",
+      "tags": [
+        "visualization-ui",
+        "progress-bar",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:SpeedometerGauge",
+      "type": "function",
+      "name": "SpeedometerGauge",
+      "summary": "Gauged speedometer UI displaying performance throughput (like tokens per second) in real-time.",
+      "complexity": "simple",
+      "tags": [
+        "visualization-ui",
+        "gauge-chart",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:classifyQuery",
+      "type": "function",
+      "name": "classifyQuery",
+      "summary": "Function that determines if a query is interrogative based on common question starters and question marks.",
+      "complexity": "simple",
+      "tags": [
+        "utility-function",
+        "query-parser",
+        "regex-helper"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "type": "function",
+      "name": "AgenticQnaView",
+      "summary": "Main feature component managing chat streaming states, active sessions, backend online health, and metrics dashboard.",
+      "complexity": "complex",
+      "tags": [
+        "chat-dashboard",
+        "sse-handling",
+        "telemetry-aggregator",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/chat-history-panel.tsx:ChatHistoryPanel",
+      "type": "function",
+      "name": "ChatHistoryPanel",
+      "summary": "Component to render past conversations, pinned items, list search, and let the user click to load, pin, or delete chats.",
+      "complexity": "moderate",
+      "tags": [
+        "sidebar-history",
+        "session-manager",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/controls-view.tsx:ControlsView",
+      "type": "function",
+      "name": "ControlsView",
+      "summary": "Component rendering grouped system settings to enable response streaming, caching, or alerts.",
+      "complexity": "simple",
+      "tags": [
+        "settings-editor",
+        "control-panel",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/data-description-view.tsx:DataDescriptionView",
+      "type": "function",
+      "name": "DataDescriptionView",
+      "summary": "Component presenting dynamic dataset columns and their editable schemas/descriptions.",
+      "complexity": "moderate",
+      "tags": [
+        "metadata-editor",
+        "schema-viewer",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "type": "function",
+      "name": "DomainAdaptationView",
+      "summary": "Interactive workflow dashboard displaying prompt preprocessing, embeddings computation, and deployment strategies.",
+      "complexity": "complex",
+      "tags": [
+        "pipeline-view",
+        "embedding-flow",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/multi-agent-system-view.tsx:MultiAgentSystemView",
+      "type": "function",
+      "name": "MultiAgentSystemView",
+      "summary": "Component that houses simulation logs and triggers real-time progress callbacks across agent crews.",
+      "complexity": "moderate",
+      "tags": [
+        "simulation-tracker",
+        "crewai-viewer",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/templates-view.tsx:TemplateAccordion",
+      "type": "function",
+      "name": "TemplateAccordion",
+      "summary": "Accordion unit showing system prompt text areas, sample variable list fields, and preview buttons.",
+      "complexity": "moderate",
+      "tags": [
+        "accordion-ui",
+        "prompt-editor",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/templates-view.tsx:TemplatesView",
+      "type": "function",
+      "name": "TemplatesView",
+      "summary": "Component providing LLM system prompt customization, default template loaders, and preview variable managers.",
+      "complexity": "moderate",
+      "tags": [
+        "templates-manager",
+        "live-previewer",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/badge.tsx:Badge",
+      "type": "function",
+      "name": "Badge",
+      "summary": "Atomic UI component producing Tailwind classes to mark small status messages.",
+      "complexity": "simple",
+      "tags": [
+        "atomic-design",
+        "design-system",
+        "badge-ui"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/multi-agent-system.tsx:MultiAgentSystem",
+      "type": "function",
+      "name": "MultiAgentSystem",
+      "summary": "Graphic pipeline view showing active roles (Data Storyteller, QnA Assistant, etc.) and visual connector lines between dependencies.",
+      "complexity": "moderate",
+      "tags": [
+        "dag-graph",
+        "agent-orchestrator",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/multi-agent-system.tsx:AgentCard",
+      "type": "function",
+      "name": "AgentCard",
+      "summary": "Subcomponent modeling a singular agent instance with status indicators (idle, active, complete), role details, and log records.",
+      "complexity": "simple",
+      "tags": [
+        "agent-card",
+        "design-system",
+        "react-component"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/slider.tsx:Slider",
+      "type": "function",
+      "name": "Slider",
+      "summary": "Styled numeric range selector wrapper.",
+      "complexity": "simple",
+      "tags": [
+        "atomic-design",
+        "radix-slider",
+        "design-system"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/switch.tsx:Switch",
+      "type": "function",
+      "name": "Switch",
+      "summary": "Styled toggle button slider wrapper.",
+      "complexity": "simple",
+      "tags": [
+        "atomic-design",
+        "radix-switch",
+        "design-system"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/api/qna.ts:parseError",
+      "type": "function",
+      "name": "parseError",
+      "summary": "Helper parsing fetch response errors into structured messages.",
+      "complexity": "simple",
+      "tags": [
+        "api-utils",
+        "error-handling"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/api/qna.ts:fetchQnaHealth",
+      "type": "function",
+      "name": "fetchQnaHealth",
+      "summary": "Connects to health endpoints to establish backend connectivity and agent mode properties.",
+      "complexity": "simple",
+      "tags": [
+        "health-check",
+        "network-request"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/api/qna.ts:fetchQnaTelemetry",
+      "type": "function",
+      "name": "fetchQnaTelemetry",
+      "summary": "Connects to telemetry endpoints to retrieve running session metrics.",
+      "complexity": "simple",
+      "tags": [
+        "telemetry-api",
+        "network-request"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/api/qna.ts:sendOrchestrateMessage",
+      "type": "function",
+      "name": "sendOrchestrateMessage",
+      "summary": "Direct endpoint poster to trigger non-streaming chatbot responses.",
+      "complexity": "simple",
+      "tags": [
+        "http-post",
+        "network-request"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/api/qna.ts:streamOrchestrateMessage",
+      "type": "function",
+      "name": "streamOrchestrateMessage",
+      "summary": "Main SSE poster that fetches readable stream reader chunks and reports them to UI progress handlers.",
+      "complexity": "moderate",
+      "tags": [
+        "http-stream",
+        "sse-connection",
+        "network-request"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/llm-templates.ts:renderTemplatePreview",
+      "type": "function",
+      "name": "renderTemplatePreview",
+      "summary": "Replaces double brace parameters (e.g. {{var}}) in system prompts with filled user strings.",
+      "complexity": "simple",
+      "tags": [
+        "prompt-helper",
+        "regex-replacer"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/llm-templates.ts:buildPreprocessVariables",
+      "type": "function",
+      "name": "buildPreprocessVariables",
+      "summary": "Collects details from schemas, dataset column mappings, and configs to prefill template structures.",
+      "complexity": "moderate",
+      "tags": [
+        "prompt-helper",
+        "context-builder"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/llm-templates.ts:estimateTokens",
+      "type": "function",
+      "name": "estimateTokens",
+      "summary": "Lightweight local estimator calculating approximate token count using text length calculations.",
+      "complexity": "simple",
+      "tags": [
+        "prompt-helper",
+        "token-estimator"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/mock-datasets.ts:generateColumnDescription",
+      "type": "function",
+      "name": "generateColumnDescription",
+      "summary": "Generates sensible documentation text based on basic types and field names.",
+      "complexity": "simple",
+      "tags": [
+        "mock-utils",
+        "schema-generator"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/utils.ts:cn",
+      "type": "function",
+      "name": "cn",
+      "summary": "Combines utility patterns from clsx and tailwind-merge to clean custom class conflicts.",
+      "complexity": "simple",
+      "tags": [
+        "classnames-helper",
+        "design-system"
+      ]
+    },
+    {
+      "id": "file:backend/agent/data_storyteller_agent.py",
+      "type": "file",
+      "name": "data_storyteller_agent.py",
+      "summary": "Implements the Data Storyteller Crew containing specialized agents (Business, Technical, Visualization, Storyteller) to generate narrative insights from data queries.",
+      "complexity": "complex",
+      "tags": [
+        "multi-agent",
+        "storytelling",
+        "crewai",
+        "openai"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_create_business_agent",
+      "type": "function",
+      "name": "_create_business_agent",
+      "summary": "Creates a Business Analyst agent specializing in translating complex data into business narratives.",
+      "complexity": "simple",
+      "tags": [
+        "agent-creation",
+        "business-analyst"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_create_technical_agent",
+      "type": "function",
+      "name": "_create_technical_agent",
+      "summary": "Creates a Technical Data Analyst agent to analyze datasets, formulate queries, and write Python code.",
+      "complexity": "simple",
+      "tags": [
+        "agent-creation",
+        "technical-analyst"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_create_visualization_agent",
+      "type": "function",
+      "name": "_create_visualization_agent",
+      "summary": "Creates a Data Visualization specialist agent to design engaging visual representations of insights.",
+      "complexity": "simple",
+      "tags": [
+        "agent-creation",
+        "data-visualization"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_create_storyteller_agent",
+      "type": "function",
+      "name": "_create_storyteller_agent",
+      "summary": "Creates a Chief Storyteller agent to compile individual insights into a cohesive narrative.",
+      "complexity": "simple",
+      "tags": [
+        "agent-creation",
+        "narrative-storyteller"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "type": "function",
+      "name": "_build_storyteller_crew",
+      "summary": "Assembles the multi-agent Crew and defines sequential tasks for technical, visualization, business, and storytelling workflows.",
+      "complexity": "complex",
+      "tags": [
+        "crew-assembly",
+        "orchestration",
+        "multi-agent-task"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_run_multi_agent_crew",
+      "type": "function",
+      "name": "_run_multi_agent_crew",
+      "summary": "Triggers async execution of the storyteller crew with standard prompt variables.",
+      "complexity": "moderate",
+      "tags": [
+        "async-execution",
+        "multi-agent-execution"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:stream_storyteller_reply",
+      "type": "function",
+      "name": "stream_storyteller_reply",
+      "summary": "Streams storyteller agent reply token-by-token or chunk-by-chunk for UI rendering.",
+      "complexity": "complex",
+      "tags": [
+        "streaming",
+        "async-generator",
+        "token-streaming"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:_openai_reply",
+      "type": "function",
+      "name": "_openai_reply",
+      "summary": "Fallback routine to generate structured replies directly from OpenAI model.",
+      "complexity": "moderate",
+      "tags": [
+        "fallback-llm",
+        "direct-openai"
+      ]
+    },
+    {
+      "id": "function:backend/agent/data_storyteller_agent.py:generate_reply",
+      "type": "function",
+      "name": "generate_reply",
+      "summary": "Decides whether to run the full storyteller crew or directly generate an OpenAI reply based on session history.",
+      "complexity": "moderate",
+      "tags": [
+        "agent-routing",
+        "reply-generation"
+      ]
+    },
+    {
+      "id": "file:backend/agent/memory.py",
+      "type": "file",
+      "name": "memory.py",
+      "summary": "Provides utilities for estimation of token usage and classes to manage database-backed chat session memories.",
+      "complexity": "moderate",
+      "tags": [
+        "memory-store",
+        "token-estimation",
+        "chat-session",
+        "sqlalchemy"
+      ]
+    },
+    {
+      "id": "class:backend/agent/memory.py:SessionMemory",
+      "type": "class",
+      "name": "SessionMemory",
+      "summary": "Wraps database session details, message lists, and prompt cache hashes to manage active session state.",
+      "complexity": "moderate",
+      "tags": [
+        "session-state",
+        "message-cache"
+      ]
+    },
+    {
+      "id": "class:backend/agent/memory.py:MemoryStore",
+      "type": "class",
+      "name": "MemoryStore",
+      "summary": "Provides high-level memory operations to retrieve, create, and initialize session memories backed by the database.",
+      "complexity": "moderate",
+      "tags": [
+        "memory-retrieval",
+        "db-access"
+      ]
+    },
+    {
+      "id": "file:backend/agent/qna_agent.py",
+      "type": "file",
+      "name": "qna_agent.py",
+      "summary": "Implements the Agentic QnA search agent which utilizes CrewAI tools to query database session history and storyteller reports.",
+      "complexity": "complex",
+      "tags": [
+        "agentic-qna",
+        "crewai",
+        "session-history",
+        "rag"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:query_session_history",
+      "type": "function",
+      "name": "query_session_history",
+      "summary": "Retrieves and formats the last 20 messages for the specified chat session from the database.",
+      "complexity": "moderate",
+      "tags": [
+        "session-history",
+        "database-query"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:query_storyteller_reports",
+      "type": "function",
+      "name": "query_storyteller_reports",
+      "summary": "Performs search queries across generated storyteller reports.",
+      "complexity": "moderate",
+      "tags": [
+        "report-search",
+        "text-query"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:_create_qna_agent",
+      "type": "function",
+      "name": "_create_qna_agent",
+      "summary": "Configures the QnA crew agent with memory-retrieval tools.",
+      "complexity": "moderate",
+      "tags": [
+        "agent-creation",
+        "qna-specialist"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:execute_qna",
+      "type": "function",
+      "name": "execute_qna",
+      "summary": "Runs the QnA crew asynchronously for immediate response.",
+      "complexity": "moderate",
+      "tags": [
+        "async-execution",
+        "qna-crew"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:stream_qna",
+      "type": "function",
+      "name": "stream_qna",
+      "summary": "Streams structural events and chunks generated during QnA agent execution.",
+      "complexity": "complex",
+      "tags": [
+        "streaming",
+        "event-streaming"
+      ]
+    },
+    {
+      "id": "function:backend/agent/qna_agent.py:execute_storyteller",
+      "type": "function",
+      "name": "execute_storyteller",
+      "summary": "Standard mock/placeholder runner for execution tasks.",
+      "complexity": "simple",
+      "tags": [
+        "runner-mock"
+      ]
+    },
+    {
+      "id": "file:backend/config.py",
+      "type": "file",
+      "name": "config.py",
+      "summary": "Defines global configuration settings for the backend application, loading parameters from environment variables via Pydantic.",
+      "complexity": "simple",
+      "tags": [
+        "configuration",
+        "settings",
+        "pydantic"
+      ]
+    },
+    {
+      "id": "class:backend/config.py:Settings",
+      "type": "class",
+      "name": "Settings",
+      "summary": "Configures API server settings, CORS origins, database URL, and OpenAI parameters.",
+      "complexity": "simple",
+      "tags": [
+        "settings-model",
+        "env-variables"
+      ]
+    },
+    {
+      "id": "file:backend/core/orchestrator.py",
+      "type": "file",
+      "name": "orchestrator.py",
+      "summary": "Handles routing and supervision of incoming user queries to determine whether they require storyteller analysis or standard QnA.",
+      "complexity": "moderate",
+      "tags": [
+        "orchestrator",
+        "routing",
+        "llm-supervision",
+        "intent-classifier"
+      ]
+    },
+    {
+      "id": "function:backend/core/orchestrator.py:_llm_supervise",
+      "type": "function",
+      "name": "_llm_supervise",
+      "summary": "Uses LLM reasoning to classify user intent and assign appropriate handler route.",
+      "complexity": "moderate",
+      "tags": [
+        "intent-classification",
+        "llm-reasoning"
+      ]
+    },
+    {
+      "id": "function:backend/core/orchestrator.py:_is_interrogative_query",
+      "type": "function",
+      "name": "_is_interrogative_query",
+      "summary": "Checks query keywords and suffixes to determine if it is a question.",
+      "complexity": "simple",
+      "tags": [
+        "heuristics",
+        "query-parsing"
+      ]
+    },
+    {
+      "id": "function:backend/core/orchestrator.py:get_route",
+      "type": "function",
+      "name": "get_route",
+      "summary": "Public API that routes queries based on heuristics and fallback LLM intent classification.",
+      "complexity": "moderate",
+      "tags": [
+        "query-routing",
+        "intent-handling"
+      ]
+    },
+    {
+      "id": "file:backend/database/db.py",
+      "type": "file",
+      "name": "db.py",
+      "summary": "Sets up SQLAlchemy engine, session maker, and standard initialization helpers for database connections.",
+      "complexity": "simple",
+      "tags": [
+        "database-connection",
+        "sqlalchemy",
+        "db-session"
+      ]
+    },
+    {
+      "id": "file:backend/database/models copy.py",
+      "type": "file",
+      "name": "models copy.py",
+      "summary": "Redundant duplicate schema copy of DB tables defining MessageRole, ChatSession, and ChatMessage models.",
+      "complexity": "simple",
+      "tags": [
+        "database-models",
+        "redundant-code",
+        "legacy"
+      ]
+    },
+    {
+      "id": "file:backend/database/models.py",
+      "type": "file",
+      "name": "models.py",
+      "summary": "Defines core SQLAlchemy database models for chat sessions, chat messages, and session telemetry events.",
+      "complexity": "moderate",
+      "tags": [
+        "database-models",
+        "orm-schema",
+        "telemetry-schema"
+      ]
+    },
+    {
+      "id": "class:backend/database/models.py:ChatSession",
+      "type": "class",
+      "name": "ChatSession",
+      "summary": "DB model representing an active chat session with timestamps and relationships to messages.",
+      "complexity": "simple",
+      "tags": [
+        "orm-model",
+        "session-table"
+      ]
+    },
+    {
+      "id": "class:backend/database/models.py:ChatMessage",
+      "type": "class",
+      "name": "ChatMessage",
+      "summary": "DB model for individual chat messages specifying sender role, content, and parent session.",
+      "complexity": "simple",
+      "tags": [
+        "orm-model",
+        "message-table"
+      ]
+    },
+    {
+      "id": "class:backend/database/models.py:SessionTelemetry",
+      "type": "class",
+      "name": "SessionTelemetry",
+      "summary": "DB model tracking session token count, token cost, performance metrics, and latency records.",
+      "complexity": "moderate",
+      "tags": [
+        "orm-model",
+        "telemetry-table"
+      ]
+    },
+    {
+      "id": "file:backend/main.py",
+      "type": "file",
+      "name": "main.py",
+      "summary": "Entry point of the FastAPI application, initializing CORS middleware and mounting routers for analytics, api, and history endpoints.",
+      "complexity": "simple",
+      "tags": [
+        "fastapi-app",
+        "middleware",
+        "entry-point"
+      ]
+    },
+    {
+      "id": "file:backend/routers/__init__.py",
+      "type": "file",
+      "name": "__init__.py",
+      "summary": "Module initializer for backend api routers.",
+      "complexity": "simple",
+      "tags": [
+        "router-init",
+        "python-package"
+      ]
+    },
+    {
+      "id": "file:backend/routers/analytics.py",
+      "type": "file",
+      "name": "analytics.py",
+      "summary": "Router for analytical computations, generating correlation matrices and descriptive metrics from dataset features.",
+      "complexity": "moderate",
+      "tags": [
+        "analytics-endpoint",
+        "correlation-matrix",
+        "pandas-processing"
+      ]
+    },
+    {
+      "id": "function:backend/routers/analytics.py:get_correlation_matrix",
+      "type": "function",
+      "name": "get_correlation_matrix",
+      "summary": "Computes Pearson correlation matrix from available dataset attributes and returns clean coordinate mappings.",
+      "complexity": "moderate",
+      "tags": [
+        "statistics",
+        "matrix-calculation"
+      ]
+    },
+    {
+      "id": "file:backend/routers/api_router.py",
+      "type": "file",
+      "name": "api_router.py",
+      "summary": "Primary API router of the application handling health status, direct chats, and Server-Sent Events (SSE) streaming sessions.",
+      "complexity": "complex",
+      "tags": [
+        "fastapi-router",
+        "sse-streaming",
+        "chat-endpoints",
+        "telemetry-logging"
+      ]
+    },
+    {
+      "id": "function:backend/routers/api_router.py:_build_telemetry",
+      "type": "function",
+      "name": "_build_telemetry",
+      "summary": "Compiles telemetry metadata from memory session records and transaction latencies.",
+      "complexity": "moderate",
+      "tags": [
+        "telemetry",
+        "metric-compilation"
+      ]
+    },
+    {
+      "id": "function:backend/routers/api_router.py:get_telemetry",
+      "type": "function",
+      "name": "get_telemetry",
+      "summary": "Retrieves database telemetry reports for a specific session.",
+      "complexity": "moderate",
+      "tags": [
+        "telemetry-api",
+        "db-retrieval"
+      ]
+    },
+    {
+      "id": "function:backend/routers/api_router.py:chat",
+      "type": "function",
+      "name": "chat",
+      "summary": "Synchronous chat endpoint that orchestrates query classification and responds via direct agent execution.",
+      "complexity": "complex",
+      "tags": [
+        "sync-chat",
+        "orchestration-api"
+      ]
+    },
+    {
+      "id": "function:backend/routers/api_router.py:chat_stream",
+      "type": "function",
+      "name": "chat_stream",
+      "summary": "Asynchronous streaming chat endpoint providing real-time Server-Sent Events (SSE) feedback.",
+      "complexity": "complex",
+      "tags": [
+        "sse-stream",
+        "async-chat"
+      ]
+    },
+    {
+      "id": "file:backend/routers/history.py",
+      "type": "file",
+      "name": "history.py",
+      "summary": "API router enabling history retrieval, detailed session lists, and safe deletion operations for chat histories.",
+      "complexity": "moderate",
+      "tags": [
+        "history-router",
+        "crud-operations",
+        "session-management"
+      ]
+    },
+    {
+      "id": "function:backend/routers/history.py:list_sessions",
+      "type": "function",
+      "name": "list_sessions",
+      "summary": "Fetches a sorted list of most recently accessed chat sessions with telemetry statistics.",
+      "complexity": "moderate",
+      "tags": [
+        "crud-read",
+        "session-list"
+      ]
+    },
+    {
+      "id": "function:backend/routers/history.py:get_session_messages",
+      "type": "function",
+      "name": "get_session_messages",
+      "summary": "Retrieves full message logs for a specific chat session.",
+      "complexity": "moderate",
+      "tags": [
+        "crud-read",
+        "message-list"
+      ]
+    },
+    {
+      "id": "function:backend/routers/history.py:delete_session",
+      "type": "function",
+      "name": "delete_session",
+      "summary": "Deletes all messages, telemetry entries, and metadata records linked to a chat session.",
+      "complexity": "moderate",
+      "tags": [
+        "crud-delete",
+        "db-cascade"
+      ]
+    },
+    {
+      "id": "file:backend/run.py",
+      "type": "file",
+      "name": "run.py",
+      "summary": "Script helper to run the FastAPI app locally using Uvicorn with clean defaults.",
+      "complexity": "simple",
+      "tags": [
+        "startup-script",
+        "uvicorn-runner"
+      ]
+    },
+    {
+      "id": "file:backend/schemas.py",
+      "type": "file",
+      "name": "schemas.py",
+      "summary": "Houses strict Pydantic schemas and serialization definitions for API request bodies, responses, and SSE stream chunks.",
+      "complexity": "moderate",
+      "tags": [
+        "pydantic-schemas",
+        "dto-models",
+        "api-validation"
+      ]
+    },
+    {
+      "id": "file:tests/test_orchestrate.py",
+      "type": "file",
+      "name": "test_orchestrate.py",
+      "summary": "Contains integration tests verifying orchestration routing logic, direct responses, and validation error cases.",
+      "complexity": "complex",
+      "tags": [
+        "integration-testing",
+        "pytest",
+        "api-tests"
+      ]
+    },
+    {
+      "id": "class:tests/test_orchestrate.py:TestStorytellerRoute",
+      "type": "class",
+      "name": "TestStorytellerRoute",
+      "summary": "Tests that storyteller prompts are routed properly and return appropriate conversational replies.",
+      "complexity": "moderate",
+      "tags": [
+        "test-suite",
+        "storyteller-testing"
+      ]
+    },
+    {
+      "id": "class:tests/test_orchestrate.py:TestQnARoute",
+      "type": "class",
+      "name": "TestQnARoute",
+      "summary": "Validates that factual dataset questions execute standard QnA pipelines with high fidelity.",
+      "complexity": "moderate",
+      "tags": [
+        "test-suite",
+        "qna-testing"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/analysis/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "summary": "Next.js page component rendering the dataset analysis view, displaying distribution and correlation heatmaps.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "analysis",
+        "data-visualization"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/context/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "summary": "Next.js page component rendering the context view, which includes a visual knowledge graph and document/embedding stores.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "knowledge-graph",
+        "context-store"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/dashboard/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "summary": "Next.js page component that renders the main system dashboard, which shows key performance indicators and narrative throughput.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "dashboard",
+        "kpi-display"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/data-loader/page.tsx",
+      "type": "file",
+      "name": "page.tsx",
+      "summary": "Next.js page component that displays the interactive dataset loader, supporting CSV, Parquet, and JSON previews.",
+      "complexity": "simple",
+      "tags": [
+        "nextjs-page",
+        "data-loader",
+        "preview-ui"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/features/analysis-view.tsx",
+      "type": "file",
+      "name": "analysis-view.tsx",
+      "summary": "React feature component that visualizes dataset characteristics, featuring a distribution area chart, a scatter plot, and a dynamic correlation heatmap fetched from a backend API.",
+      "complexity": "moderate",
+      "tags": [
+        "data-visualization",
+        "react-component",
+        "recharts",
+        "heatmap",
+        "correlation"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/features/context-view.tsx",
+      "type": "file",
+      "name": "context-view.tsx",
+      "summary": "React component visualizing the semantic knowledge graph of datasets using custom SVG nodes and edges, along with document and vector store tabs.",
+      "complexity": "moderate",
+      "tags": [
+        "knowledge-graph",
+        "svg-visualization",
+        "tabs",
+        "context-management"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/features/dashboard-view.tsx",
+      "type": "file",
+      "name": "dashboard-view.tsx",
+      "summary": "React feature component rendering a grid of high-level KPI cards, narrative throughput charts, and an AI voice command input widget.",
+      "complexity": "moderate",
+      "tags": [
+        "dashboard",
+        "kpi-cards",
+        "voice-input",
+        "recharts-throughput"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/features/data-loader-view.tsx",
+      "type": "file",
+      "name": "data-loader-view.tsx",
+      "summary": "React component offering a drag-and-drop file uploader zone and interactive mock previews for CSV, Parquet, and JSON datasets.",
+      "complexity": "moderate",
+      "tags": [
+        "file-uploader",
+        "data-preview",
+        "table-renderer",
+        "mock-datasets"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "file",
+      "name": "glass-card.tsx",
+      "summary": "Reusable UI container component providing a frosted-glass styling effect with optional hover transitions and custom tailwind styles.",
+      "complexity": "simple",
+      "tags": [
+        "ui-component",
+        "glassmorphism",
+        "styling-utility"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/ui/tabs.tsx",
+      "type": "file",
+      "name": "tabs.tsx",
+      "summary": "Custom tab navigation primitive components built on top of Radix UI Tabs, featuring interactive bottom border slide animations.",
+      "complexity": "simple",
+      "tags": [
+        "ui-primitive",
+        "radix-ui",
+        "tab-navigation"
+      ]
+    },
+    {
+      "id": "file:frontend/src/lib/chart-colors.ts",
+      "type": "file",
+      "name": "chart-colors.ts",
+      "summary": "Utility configuration defining standard neon color codes for various UI charts and semantic data layers.",
+      "complexity": "simple",
+      "tags": [
+        "chart-colors",
+        "styling-config",
+        "constants"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/analysis/page.tsx:AnalysisPage",
+      "type": "function",
+      "name": "AnalysisPage",
+      "summary": "Exported React functional component representing the analysis page view.",
+      "complexity": "simple",
+      "tags": [
+        "component-render",
+        "page-entry"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/context/page.tsx:ContextPage",
+      "type": "function",
+      "name": "ContextPage",
+      "summary": "Exported React functional component representing the context metadata page.",
+      "complexity": "simple",
+      "tags": [
+        "component-render",
+        "page-entry"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/dashboard/page.tsx:DashboardPage",
+      "type": "function",
+      "name": "DashboardPage",
+      "summary": "Exported React functional component representing the home or dashboard page view.",
+      "complexity": "simple",
+      "tags": [
+        "component-render",
+        "page-entry"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/data-loader/page.tsx:DataLoaderPage",
+      "type": "function",
+      "name": "DataLoaderPage",
+      "summary": "Exported React functional component representing the dataset loading and onboarding page.",
+      "complexity": "simple",
+      "tags": [
+        "component-render",
+        "page-entry"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/analysis-view.tsx:AnalysisView",
+      "type": "function",
+      "name": "AnalysisView",
+      "summary": "Renders the UI elements for data analysis, fetching correlation statistics from backend API endpoints and plotting them with Recharts.",
+      "complexity": "moderate",
+      "tags": [
+        "correlation-heatmap",
+        "area-chart",
+        "scatter-plot",
+        "async-fetch"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "type": "function",
+      "name": "ContextView",
+      "summary": "Renders the tabbed context views: SVG-based knowledge graph nodes, document list, and vector embedding schema.",
+      "complexity": "moderate",
+      "tags": [
+        "knowledge-graph-renderer",
+        "svg-layout",
+        "tab-contents"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/dashboard-view.tsx:DashboardView",
+      "type": "function",
+      "name": "DashboardView",
+      "summary": "Renders system telemetry metrics, throughput charts, and the interactive chatbot query console.",
+      "complexity": "moderate",
+      "tags": [
+        "telemetry-ui",
+        "interactive-chat-prompt",
+        "kpi-cards"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/features/data-loader-view.tsx:DataLoaderView",
+      "type": "function",
+      "name": "DataLoaderView",
+      "summary": "Renders file uploader drop zones and detailed dataset preview tables containing metadata like rows, columns, and previews.",
+      "complexity": "moderate",
+      "tags": [
+        "dataset-preview-table",
+        "upload-control",
+        "file-selection"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "function",
+      "name": "GlassCard",
+      "summary": "Wraps HTML div container with glassmorphic styles and custom hover transitions.",
+      "complexity": "simple",
+      "tags": [
+        "reusable-wrapper",
+        "tailwind-css"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/tabs.tsx:TabsList",
+      "type": "function",
+      "name": "TabsList",
+      "summary": "Custom Radix UI Tab list trigger container with horizontal alignment.",
+      "complexity": "simple",
+      "tags": [
+        "tab-list",
+        "styled-primitive"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/tabs.tsx:TabsTrigger",
+      "type": "function",
+      "name": "TabsTrigger",
+      "summary": "Custom Radix UI Tab click trigger styled with active/inactive indicators.",
+      "complexity": "simple",
+      "tags": [
+        "tab-trigger",
+        "interactive-control"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/ui/tabs.tsx:TabsContent",
+      "type": "function",
+      "name": "TabsContent",
+      "summary": "Tab content card panel matching Radix UI active tab states.",
+      "complexity": "simple",
+      "tags": [
+        "tab-content-panel",
+        "styled-primitive"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/layout.tsx",
+      "type": "file",
+      "properties": {
+        "name": "layout.tsx",
+        "path": "frontend/src/app/layout.tsx",
+        "fileCategory": "code",
+        "summary": "The main root layout of the frontend application that sets up global HTML structure, dark mode, fonts, metadata, and wraps child components in the AppShell.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs-layout",
+          "root-template",
+          "font-setup",
+          "app-shell"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/app/layout.tsx",
+      "summary": "Workspace resource representing frontend/src/app/layout.tsx.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/layout.tsx:RootLayout",
+      "type": "function",
+      "properties": {
+        "name": "RootLayout",
+        "summary": "Main layout component for the application, initializing fonts, styles, and rendering the global layout shell.",
+        "complexity": "simple",
+        "tags": [
+          "root-layout",
+          "ui-component",
+          "react-functional-component"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "RootLayout",
+      "summary": "Core function facilitating the RootLayout flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/layout/app-shell.tsx",
+      "type": "file",
+      "properties": {
+        "name": "app-shell.tsx",
+        "path": "frontend/src/components/layout/app-shell.tsx",
+        "fileCategory": "code",
+        "summary": "The master application shell layout component that establishes a sidebar navigation layout and top navigation bar wrapping main children.",
+        "complexity": "simple",
+        "tags": [
+          "app-shell",
+          "layout-component",
+          "sidebar-container",
+          "topbar-container"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/components/layout/app-shell.tsx",
+      "summary": "Workspace resource representing frontend/src/components/layout/app-shell.tsx.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/layout/app-shell.tsx:AppShell",
+      "type": "function",
+      "properties": {
+        "name": "AppShell",
+        "summary": "React component representing the application container layout, containing Sidebar and Topbar along with main content view area.",
+        "complexity": "simple",
+        "tags": [
+          "app-shell-ui",
+          "layout-wrapper",
+          "sidebar-topbar-combo"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "AppShell",
+      "summary": "Core function facilitating the AppShell flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/layout/sidebar.tsx",
+      "type": "file",
+      "properties": {
+        "name": "sidebar.tsx",
+        "path": "frontend/src/components/layout/sidebar.tsx",
+        "fileCategory": "code",
+        "summary": "A sidebar navigation component that renders navigation items, application branding/logos, and system status indicators.",
+        "complexity": "moderate",
+        "tags": [
+          "navigation-sidebar",
+          "sidebar-links",
+          "ui-component",
+          "system-status"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/components/layout/sidebar.tsx",
+      "summary": "Workspace resource representing frontend/src/components/layout/sidebar.tsx.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/layout/sidebar.tsx:Sidebar",
+      "type": "function",
+      "properties": {
+        "name": "Sidebar",
+        "summary": "Renders the navigation links sidebar panel, highlighting current active route, brand name, and system online indicator.",
+        "complexity": "moderate",
+        "tags": [
+          "sidebar-render",
+          "navigation-links",
+          "active-route-highlight"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "Sidebar",
+      "summary": "Core function facilitating the Sidebar flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:frontend/src/components/layout/topbar.tsx",
+      "type": "file",
+      "properties": {
+        "name": "topbar.tsx",
+        "path": "frontend/src/components/layout/topbar.tsx",
+        "fileCategory": "code",
+        "summary": "A header navigation component displaying current route details, search input, and profile/notification control buttons.",
+        "complexity": "simple",
+        "tags": [
+          "topbar-header",
+          "navigation-header",
+          "search-controls",
+          "profile-menu"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/components/layout/topbar.tsx",
+      "summary": "Workspace resource representing frontend/src/components/layout/topbar.tsx.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/components/layout/topbar.tsx:Topbar",
+      "type": "function",
+      "properties": {
+        "name": "Topbar",
+        "summary": "Renders the top navigation header dynamic label representing the current route and various action utility icons.",
+        "complexity": "simple",
+        "tags": [
+          "topbar-render",
+          "header-bar",
+          "route-description-viewer"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "Topbar",
+      "summary": "Core function facilitating the Topbar flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:frontend/src/lib/navigation.ts",
+      "type": "file",
+      "properties": {
+        "name": "navigation.ts",
+        "path": "frontend/src/lib/navigation.ts",
+        "fileCategory": "code",
+        "summary": "Configuration and utility file defining the navigation architecture, item metadata, icons, labels, descriptions, and a helper to look up items by path.",
+        "complexity": "simple",
+        "tags": [
+          "navigation-config",
+          "navigation-items",
+          "route-utils",
+          "menu-config"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/lib/navigation.ts",
+      "summary": "Workspace resource representing frontend/src/lib/navigation.ts.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/lib/navigation.ts:getNavItem",
+      "type": "function",
+      "properties": {
+        "name": "getNavItem",
+        "summary": "Helper function that returns details of a navigation item corresponding to a given URL path.",
+        "complexity": "simple",
+        "tags": [
+          "navigation-lookup",
+          "route-finder",
+          "url-to-navitem"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "getNavItem",
+      "summary": "Core function facilitating the getNavItem flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "document:DATABASE_SETUP.md",
+      "type": "document",
+      "label": "DATABASE_SETUP.md",
+      "path": "DATABASE_SETUP.md",
+      "summary": "A guide to setting up the PostgreSQL database persistence layer, covering prerequisites, local user creation, environment variable configuration, schema definition, running backend, and troubleshooting.",
+      "complexity": "simple",
+      "tags": [
+        "database",
+        "postgres",
+        "setup-guide",
+        "documentation",
+        "configuration"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs"
+      },
+      "name": "DATABASE_SETUP.md"
+    },
+    {
+      "id": "document:README.md",
+      "type": "document",
+      "label": "README.md",
+      "path": "README.md",
+      "summary": "Root readme file outlining the requirement to visually display the agentic workflow progress in real-time on the Next.js frontend using the workflow coded in mas_app.py.",
+      "complexity": "simple",
+      "tags": [
+        "onboarding",
+        "instructions",
+        "workflow-progress",
+        "documentation"
+      ],
+      "metadata": {
+        "language": "markdown",
+        "fileCategory": "docs"
+      },
+      "name": "README.md"
+    },
+    {
+      "id": "config:pyproject.toml",
+      "type": "config",
+      "label": "pyproject.toml",
+      "path": "pyproject.toml",
+      "summary": "Package configuration file defining project metadata, python version compatibility, python dependency packages, and dev dependencies using standard PEP-518 layout.",
+      "complexity": "simple",
+      "tags": [
+        "dependencies",
+        "packaging",
+        "python",
+        "configuration",
+        "toml"
+      ],
+      "metadata": {
+        "language": "toml",
+        "fileCategory": "config"
+      },
+      "name": "pyproject.toml"
+    },
+    {
+      "id": "document:frontend/AGENTS.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "AGENTS.md",
+        "path": "frontend/AGENTS.md",
+        "fileCategory": "docs",
+        "summary": "Special guidelines and rule considerations for agent operations within the Next.js frontend code.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs",
+          "agent-rules",
+          "documentation"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "frontend/AGENTS.md",
+      "summary": "Workspace resource representing frontend/AGENTS.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:frontend/CLAUDE.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "CLAUDE.md",
+        "path": "frontend/CLAUDE.md",
+        "fileCategory": "docs",
+        "summary": "A simple pointer file referring to AGENTS.md for instructions.",
+        "complexity": "simple",
+        "tags": [
+          "claude-config",
+          "pointer",
+          "documentation"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "frontend/CLAUDE.md",
+      "summary": "Workspace resource representing frontend/CLAUDE.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:frontend/README.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "README.md",
+        "path": "frontend/README.md",
+        "fileCategory": "docs",
+        "summary": "The main documentation README for the frontend React/Next.js application, including getting started and deployment details.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs",
+          "readme",
+          "getting-started",
+          "vercel"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "frontend/README.md",
+      "summary": "Workspace resource representing frontend/README.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "config:frontend/package.json",
+      "type": "config",
+      "properties": {
+        "simpleName": "package.json",
+        "path": "frontend/package.json",
+        "fileCategory": "config",
+        "summary": "Package configuration file for the Next.js frontend, listing development/production dependencies and package scripts.",
+        "complexity": "simple",
+        "tags": [
+          "dependencies",
+          "scripts",
+          "npm",
+          "nextjs"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "frontend/package.json",
+      "summary": "Workspace resource representing frontend/package.json.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "config:frontend/tsconfig.json",
+      "type": "config",
+      "properties": {
+        "simpleName": "tsconfig.json",
+        "path": "frontend/tsconfig.json",
+        "fileCategory": "config",
+        "summary": "TypeScript compiler options and path configurations for compiling the Next.js frontend code.",
+        "complexity": "simple",
+        "tags": [
+          "typescript",
+          "tsconfig",
+          "compiler-options"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "frontend/tsconfig.json",
+      "summary": "Workspace resource representing frontend/tsconfig.json.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/CLAUDE.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "CLAUDE.md",
+        "path": "wiki/CLAUDE.md",
+        "fileCategory": "docs",
+        "summary": "Defines standard terminology and schemas for the wiki supporting real-time agentic workflows.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "development-schema",
+          "terminology",
+          "claude"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/CLAUDE.md",
+      "summary": "Workspace resource representing wiki/CLAUDE.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/data_storytelling.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "data_storytelling.md",
+        "path": "wiki/data_storytelling.md",
+        "fileCategory": "docs",
+        "summary": "Details the process of turning compiled insights into interactive visual reports via custom storytelling agents.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "data-storytelling",
+          "storyteller-agent",
+          "insights"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/data_storytelling.md",
+      "summary": "Workspace resource representing wiki/data_storytelling.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/index.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "index.md",
+        "path": "wiki/index.md",
+        "fileCategory": "docs",
+        "summary": "The master index page of the real-time agentic workflow wiki, dividing articles into core architecture and telemetry categories.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "index",
+          "core-architecture",
+          "telemetry"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/index.md",
+      "summary": "Workspace resource representing wiki/index.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/log.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "log.md",
+        "path": "wiki/log.md",
+        "fileCategory": "docs",
+        "summary": "Tracks historical initialization and operational log details of the real-time agentic research wiki.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "operation-log",
+          "history",
+          "changelog"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/log.md",
+      "summary": "Workspace resource representing wiki/log.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/realtime_telemetry.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "realtime_telemetry.md",
+        "path": "wiki/realtime_telemetry.md",
+        "fileCategory": "docs",
+        "summary": "Details the visual Next.js rendering progress system that shows step-by-step agentic execution paths.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "realtime-telemetry",
+          "nextjs",
+          "agentic-path"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/realtime_telemetry.md",
+      "summary": "Workspace resource representing wiki/realtime_telemetry.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "document:wiki/research_agent.md",
+      "type": "document",
+      "properties": {
+        "simpleName": "research_agent.md",
+        "path": "wiki/research_agent.md",
+        "fileCategory": "docs",
+        "summary": "Explains autonomous research capabilities utilizing the CrewAI agentic framework, including scraping, API calls, and local workspace analysis.",
+        "complexity": "simple",
+        "tags": [
+          "wiki",
+          "research-agent",
+          "crewai",
+          "scraping"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "wiki/research_agent.md",
+      "summary": "Workspace resource representing wiki/research_agent.md.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:backend/__init__.py",
+      "type": "file",
+      "properties": {
+        "summary": "Initialization file for the backend package, marking it as a Python module.",
+        "complexity": "simple",
+        "tags": [
+          "backend",
+          "initialization",
+          "package-marker"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "backend/__init__.py",
+      "summary": "Workspace resource representing backend/__init__.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "config:backend/.env",
+      "type": "config",
+      "properties": {
+        "summary": "Configuration file for storing environment variables like the OpenAI API key.",
+        "complexity": "simple",
+        "tags": [
+          "config",
+          "environment",
+          "secrets",
+          "credentials"
+        ],
+        "language": "config"
+      },
+      "complexity": "moderate",
+      "name": "backend/.env",
+      "summary": "Workspace resource representing backend/.env.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:backend/agent/__init__.py",
+      "type": "file",
+      "properties": {
+        "summary": "Initialization file for the agent sub-package, marking it as a Python module.",
+        "complexity": "simple",
+        "tags": [
+          "agent",
+          "initialization",
+          "package-marker"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "backend/agent/__init__.py",
+      "summary": "Workspace resource representing backend/agent/__init__.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:backend/agent/StreamingChunkTest.py",
+      "type": "file",
+      "properties": {
+        "summary": "FastAPI application demonstrating real-time response streaming using CrewAI's LLM stream API.",
+        "complexity": "moderate",
+        "tags": [
+          "fastapi",
+          "crewai",
+          "streaming",
+          "server-sent-events",
+          "llm"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "backend/agent/StreamingChunkTest.py",
+      "summary": "Workspace resource representing backend/agent/StreamingChunkTest.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:backend/agent/StreamingChunkTest.py:stream",
+      "type": "function",
+      "properties": {
+        "summary": "Asynchronously processes and yields LLM stream chunks using FastAPI's StreamingResponse.",
+        "complexity": "moderate",
+        "tags": [
+          "fastapi",
+          "streaming",
+          "generator"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "stream",
+      "summary": "Core function facilitating the stream flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:backend/agent/StreamingTest.py",
+      "type": "file",
+      "properties": {
+        "summary": "FastAPI application that demonstrates crew-based asynchronous streaming of agent tokens via an event listener.",
+        "complexity": "complex",
+        "tags": [
+          "fastapi",
+          "crewai",
+          "streaming",
+          "asynchronous",
+          "event-listener"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "backend/agent/StreamingTest.py",
+      "summary": "Workspace resource representing backend/agent/StreamingTest.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:backend/agent/StreamingTest.py:stream",
+      "type": "function",
+      "properties": {
+        "summary": "Sets up async queue listeners to stream token events from a running CrewAI execution in real-time.",
+        "complexity": "complex",
+        "tags": [
+          "asynchronous",
+          "crewai",
+          "event-driven",
+          "fastapi"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "stream",
+      "summary": "Core function facilitating the stream flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:backend/core/__init__.py",
+      "type": "file",
+      "properties": {
+        "summary": "Initialization file for the core sub-package, marking it as a Python module.",
+        "complexity": "simple",
+        "tags": [
+          "core",
+          "initialization",
+          "package-marker"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "backend/core/__init__.py",
+      "summary": "Workspace resource representing backend/core/__init__.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:frontend/eslint.config.mjs",
+      "type": "file",
+      "properties": {
+        "summary": "ESLint configuration file specifying static code analysis and linting rules for the Next.js frontend.",
+        "complexity": "simple",
+        "tags": [
+          "eslint",
+          "linter",
+          "config",
+          "javascript",
+          "code-quality"
+        ],
+        "language": "javascript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/eslint.config.mjs",
+      "summary": "Workspace resource representing frontend/eslint.config.mjs.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:frontend/next.config.ts",
+      "type": "file",
+      "properties": {
+        "summary": "Configuration file for Next.js, defining framework options and build settings.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs",
+          "config",
+          "typescript",
+          "framework"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/next.config.ts",
+      "summary": "Workspace resource representing frontend/next.config.ts.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:frontend/postcss.config.mjs",
+      "type": "file",
+      "properties": {
+        "summary": "PostCSS configuration file containing Tailwind CSS and Autoprefixer plugins for style compilation.",
+        "complexity": "simple",
+        "tags": [
+          "postcss",
+          "tailwind",
+          "styles",
+          "css-compilation"
+        ],
+        "language": "javascript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/postcss.config.mjs",
+      "summary": "Workspace resource representing frontend/postcss.config.mjs.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/globals.css",
+      "type": "file",
+      "properties": {
+        "summary": "Global stylesheet for the frontend, loading Tailwind directives and global visual theme declarations.",
+        "complexity": "simple",
+        "tags": [
+          "css",
+          "tailwind",
+          "global-styles",
+          "theme"
+        ],
+        "language": "css"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/app/globals.css",
+      "summary": "Workspace resource representing frontend/src/app/globals.css.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:frontend/src/app/page.tsx",
+      "type": "file",
+      "properties": {
+        "summary": "Next.js homepage routing file which redirects incoming requests to the default landing page.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs",
+          "router",
+          "homepage",
+          "redirect"
+        ],
+        "language": "typescript"
+      },
+      "complexity": "moderate",
+      "name": "frontend/src/app/page.tsx",
+      "summary": "Workspace resource representing frontend/src/app/page.tsx.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:frontend/src/app/page.tsx:HomePage",
+      "type": "function",
+      "properties": {
+        "summary": "Default functional component that handles redirection to the main app dashboard.",
+        "complexity": "simple",
+        "tags": [
+          "nextjs",
+          "homepage",
+          "routing"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "HomePage",
+      "summary": "Core function facilitating the HomePage flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:main.py",
+      "type": "file",
+      "properties": {
+        "summary": "Streamlit dashboard application for generic statistical analysis including histograms, regression scatter plots, heatmaps, and PCA.",
+        "complexity": "moderate",
+        "tags": [
+          "streamlit",
+          "statistics",
+          "data-visualization",
+          "pca",
+          "data-analysis"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "main.py",
+      "summary": "Workspace resource representing main.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:main.py:generate_mock_data",
+      "type": "function",
+      "properties": {
+        "summary": "Generates synthetic correlated and noisy numerical features for statistical analysis using NumPy and Pandas.",
+        "complexity": "simple",
+        "tags": [
+          "numpy",
+          "pandas",
+          "data-generator",
+          "mock-data"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "generate_mock_data",
+      "summary": "Core function facilitating the generate_mock_data flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "function:main.py:main",
+      "type": "function",
+      "properties": {
+        "summary": "Simple print entry point for the sa4dst package main execution.",
+        "complexity": "simple",
+        "tags": [
+          "boilerplate",
+          "entry-point"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "main",
+      "summary": "Core function facilitating the main flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "file:mas_app.py",
+      "type": "file",
+      "properties": {
+        "summary": "Multi-agent system CLI application utilizing CrewAI for automated, concurrent business and technical data storytelling.",
+        "complexity": "complex",
+        "tags": [
+          "crewai",
+          "multi-agent",
+          "asynchronous-tasks",
+          "data-storytelling",
+          "matplotlib"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "mas_app.py",
+      "summary": "Workspace resource representing mas_app.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "function:mas_app.py:interactive_data_loader",
+      "type": "function",
+      "properties": {
+        "summary": "Guides the user via CLI prompt to enter a dataset file path, column descriptions, and business context.",
+        "complexity": "moderate",
+        "tags": [
+          "cli",
+          "human-in-the-loop",
+          "data-dictionary",
+          "pandas"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "interactive_data_loader",
+      "summary": "Core function facilitating the interactive_data_loader flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "function:mas_app.py:generate_chart_tool",
+      "type": "function",
+      "properties": {
+        "summary": "A CrewAI-registered tool to load data and generate a styled bar chart saved to disk.",
+        "complexity": "moderate",
+        "tags": [
+          "crewai-tool",
+          "matplotlib",
+          "pandas",
+          "data-visualization"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "generate_chart_tool",
+      "summary": "Core function facilitating the generate_chart_tool flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "function:mas_app.py:main",
+      "type": "function",
+      "properties": {
+        "summary": "Main execution coordinator assembling the agents, tasks, and launching the sequential/asynchronous CrewAI kickoff.",
+        "complexity": "complex",
+        "tags": [
+          "crewai",
+          "orchestrator",
+          "task-setup",
+          "multi-agent"
+        ]
+      },
+      "complexity": "moderate",
+      "name": "main",
+      "summary": "Core function facilitating the main flow within the application.",
+      "tags": [
+        "utility",
+        "code",
+        "internal"
+      ]
+    },
+    {
+      "id": "document:raw/agentic_workflow_spec.txt",
+      "type": "document",
+      "properties": {
+        "summary": "Documentation detailing the specifications for the agentic workflow real-time telemetry streaming to the frontend.",
+        "complexity": "simple",
+        "tags": [
+          "documentation",
+          "specifications",
+          "telemetry",
+          "sse-streaming"
+        ],
+        "language": "txt"
+      },
+      "complexity": "moderate",
+      "name": "raw/agentic_workflow_spec.txt",
+      "summary": "Workspace resource representing raw/agentic_workflow_spec.txt.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    },
+    {
+      "id": "file:tests/__init__.py",
+      "type": "file",
+      "properties": {
+        "summary": "Initialization file for the tests package, marking it as a Python test suite module.",
+        "complexity": "simple",
+        "tags": [
+          "testing",
+          "initialization",
+          "package-marker"
+        ],
+        "language": "python"
+      },
+      "complexity": "moderate",
+      "name": "tests/__init__.py",
+      "summary": "Workspace resource representing tests/__init__.py.",
+      "tags": [
+        "configuration",
+        "setup"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frontend/src/app/agentic-qna/page.tsx",
+      "target": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/controls/page.tsx",
+      "target": "file:frontend/src/components/features/controls-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/data-description/page.tsx",
+      "target": "file:frontend/src/components/features/data-description-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/domain-adaptation/page.tsx",
+      "target": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/multi-agent-system/page.tsx",
+      "target": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/templates/page.tsx",
+      "target": "file:frontend/src/components/features/templates-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "file:frontend/src/lib/api/qna.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/controls-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/controls-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/controls-view.tsx",
+      "target": "file:frontend/src/components/ui/slider.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/controls-view.tsx",
+      "target": "file:frontend/src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "file:frontend/src/lib/mock-datasets.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/components/ui/switch.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/lib/llm-templates.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/lib/mock-datasets.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "target": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "file:frontend/src/lib/llm-templates.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/badge.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/button.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/slider.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/switch.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/agentic-qna/page.tsx",
+      "target": "function:frontend/src/app/agentic-qna/page.tsx:AgenticQnaPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/controls/page.tsx",
+      "target": "function:frontend/src/app/controls/page.tsx:ControlsPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/data-description/page.tsx",
+      "target": "function:frontend/src/app/data-description/page.tsx:DataDescriptionPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/domain-adaptation/page.tsx",
+      "target": "function:frontend/src/app/domain-adaptation/page.tsx:DomainAdaptationPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/multi-agent-system/page.tsx",
+      "target": "function:frontend/src/app/multi-agent-system/page.tsx:MultiAgentSystemPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/templates/page.tsx",
+      "target": "function:frontend/src/app/templates/page.tsx:TemplatesPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:AnimatedNumber",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:TelemetryRing",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:LinearProgressMeter",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:SpeedometerGauge",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:classifyQuery",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/agentic-qna-view.tsx",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/chat-history-panel.tsx",
+      "target": "function:frontend/src/components/features/chat-history-panel.tsx:ChatHistoryPanel",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/controls-view.tsx",
+      "target": "function:frontend/src/components/features/controls-view.tsx:ControlsView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-description-view.tsx",
+      "target": "function:frontend/src/components/features/data-description-view.tsx:DataDescriptionView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/domain-adaptation-view.tsx",
+      "target": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/multi-agent-system-view.tsx",
+      "target": "function:frontend/src/components/features/multi-agent-system-view.tsx:MultiAgentSystemView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "function:frontend/src/components/features/templates-view.tsx:TemplateAccordion",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/templates-view.tsx",
+      "target": "function:frontend/src/components/features/templates-view.tsx:TemplatesView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/badge.tsx",
+      "target": "function:frontend/src/components/ui/badge.tsx:Badge",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "target": "function:frontend/src/components/ui/multi-agent-system.tsx:MultiAgentSystem",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/multi-agent-system.tsx",
+      "target": "function:frontend/src/components/ui/multi-agent-system.tsx:AgentCard",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/slider.tsx",
+      "target": "function:frontend/src/components/ui/slider.tsx:Slider",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/switch.tsx",
+      "target": "function:frontend/src/components/ui/switch.tsx:Switch",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/api/qna.ts",
+      "target": "function:frontend/src/lib/api/qna.ts:parseError",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/api/qna.ts",
+      "target": "function:frontend/src/lib/api/qna.ts:fetchQnaHealth",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/api/qna.ts",
+      "target": "function:frontend/src/lib/api/qna.ts:fetchQnaTelemetry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/api/qna.ts",
+      "target": "function:frontend/src/lib/api/qna.ts:sendOrchestrateMessage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/api/qna.ts",
+      "target": "function:frontend/src/lib/api/qna.ts:streamOrchestrateMessage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/llm-templates.ts",
+      "target": "function:frontend/src/lib/llm-templates.ts:renderTemplatePreview",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/llm-templates.ts",
+      "target": "function:frontend/src/lib/llm-templates.ts:buildPreprocessVariables",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/llm-templates.ts",
+      "target": "function:frontend/src/lib/llm-templates.ts:estimateTokens",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/mock-datasets.ts",
+      "target": "function:frontend/src/lib/mock-datasets.ts:generateColumnDescription",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/utils.ts",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/agentic-qna/page.tsx:AgenticQnaPage",
+      "target": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/controls/page.tsx:ControlsPage",
+      "target": "function:frontend/src/components/features/controls-view.tsx:ControlsView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/data-description/page.tsx:DataDescriptionPage",
+      "target": "function:frontend/src/components/features/data-description-view.tsx:DataDescriptionView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/domain-adaptation/page.tsx:DomainAdaptationPage",
+      "target": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/multi-agent-system/page.tsx:MultiAgentSystemPage",
+      "target": "function:frontend/src/components/features/multi-agent-system-view.tsx:MultiAgentSystemView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/templates/page.tsx:TemplatesPage",
+      "target": "function:frontend/src/components/features/templates-view.tsx:TemplatesView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "target": "function:frontend/src/lib/api/qna.ts:fetchQnaHealth",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "target": "function:frontend/src/lib/api/qna.ts:fetchQnaTelemetry",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "target": "function:frontend/src/lib/api/qna.ts:streamOrchestrateMessage",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/agentic-qna-view.tsx:AgenticQnaView",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/chat-history-panel.tsx:ChatHistoryPanel",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/controls-view.tsx:ControlsView",
+      "target": "function:frontend/src/components/ui/slider.tsx:Slider",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/controls-view.tsx:ControlsView",
+      "target": "function:frontend/src/components/ui/switch.tsx:Switch",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/data-description-view.tsx:DataDescriptionView",
+      "target": "function:frontend/src/lib/mock-datasets.ts:generateColumnDescription",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/data-description-view.tsx:DataDescriptionView",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "target": "function:frontend/src/lib/llm-templates.ts:buildPreprocessVariables",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "target": "function:frontend/src/lib/llm-templates.ts:renderTemplatePreview",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "target": "function:frontend/src/lib/llm-templates.ts:estimateTokens",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "target": "function:frontend/src/components/ui/switch.tsx:Switch",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/domain-adaptation-view.tsx:DomainAdaptationView",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/multi-agent-system-view.tsx:MultiAgentSystemView",
+      "target": "function:frontend/src/components/ui/multi-agent-system.tsx:MultiAgentSystem",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/templates-view.tsx:TemplatesView",
+      "target": "function:frontend/src/lib/llm-templates.ts:renderTemplatePreview",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/templates-view.tsx:TemplatesView",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/ui/multi-agent-system.tsx:MultiAgentSystem",
+      "target": "function:frontend/src/components/ui/multi-agent-system.tsx:AgentCard",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/ui/multi-agent-system.tsx:MultiAgentSystem",
+      "target": "function:frontend/src/lib/utils.ts:cn",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "file:backend/agent/memory.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/memory.py",
+      "target": "file:backend/database/models.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/memory.py",
+      "target": "file:backend/schemas.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "file:backend/database/db.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "file:backend/database/models.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/core/orchestrator.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/db.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/models copy.py",
+      "target": "file:backend/database/db.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/models.py",
+      "target": "file:backend/database/db.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/main.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/main.py",
+      "target": "file:backend/routers/__init__.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/main.py",
+      "target": "file:backend/routers/analytics.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/main.py",
+      "target": "file:backend/routers/api_router.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/main.py",
+      "target": "file:backend/routers/history.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/agent/data_storyteller_agent.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/agent/memory.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/agent/qna_agent.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/core/orchestrator.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/database/db.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "file:backend/schemas.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "file:backend/database/db.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "file:backend/database/models.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "file:backend/schemas.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/run.py",
+      "target": "file:backend/config.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tests/test_orchestrate.py",
+      "target": "file:backend/main.py",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_business_agent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_technical_agent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_visualization_agent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_storyteller_agent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_run_multi_agent_crew",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:stream_storyteller_reply",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:_openai_reply",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/data_storyteller_agent.py",
+      "target": "function:backend/agent/data_storyteller_agent.py:generate_reply",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/memory.py",
+      "target": "class:backend/agent/memory.py:SessionMemory",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/memory.py",
+      "target": "class:backend/agent/memory.py:MemoryStore",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:query_session_history",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:query_storyteller_reports",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:_create_qna_agent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:execute_qna",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:stream_qna",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/qna_agent.py",
+      "target": "function:backend/agent/qna_agent.py:execute_storyteller",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/config.py",
+      "target": "class:backend/config.py:Settings",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/core/orchestrator.py",
+      "target": "function:backend/core/orchestrator.py:_llm_supervise",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/core/orchestrator.py",
+      "target": "function:backend/core/orchestrator.py:_is_interrogative_query",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/core/orchestrator.py",
+      "target": "function:backend/core/orchestrator.py:get_route",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/models.py",
+      "target": "class:backend/database/models.py:ChatSession",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/models.py",
+      "target": "class:backend/database/models.py:ChatMessage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/database/models.py",
+      "target": "class:backend/database/models.py:SessionTelemetry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/analytics.py",
+      "target": "function:backend/routers/analytics.py:get_correlation_matrix",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "function:backend/routers/api_router.py:_build_telemetry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "function:backend/routers/api_router.py:get_telemetry",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "function:backend/routers/api_router.py:chat",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/api_router.py",
+      "target": "function:backend/routers/api_router.py:chat_stream",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "function:backend/routers/history.py:list_sessions",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "function:backend/routers/history.py:get_session_messages",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/routers/history.py",
+      "target": "function:backend/routers/history.py:delete_session",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tests/test_orchestrate.py",
+      "target": "class:tests/test_orchestrate.py:TestStorytellerRoute",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:tests/test_orchestrate.py",
+      "target": "class:tests/test_orchestrate.py:TestQnARoute",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_business_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_technical_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_visualization_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "target": "function:backend/agent/data_storyteller_agent.py:_create_storyteller_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:_run_multi_agent_crew",
+      "target": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:stream_storyteller_reply",
+      "target": "function:backend/agent/data_storyteller_agent.py:_build_storyteller_crew",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:generate_reply",
+      "target": "function:backend/agent/data_storyteller_agent.py:_run_multi_agent_crew",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/data_storyteller_agent.py:generate_reply",
+      "target": "function:backend/agent/data_storyteller_agent.py:_openai_reply",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/qna_agent.py:execute_qna",
+      "target": "function:backend/agent/qna_agent.py:_create_qna_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/agent/qna_agent.py:stream_qna",
+      "target": "function:backend/agent/qna_agent.py:_create_qna_agent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/core/orchestrator.py:get_route",
+      "target": "function:backend/core/orchestrator.py:_llm_supervise",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/core/orchestrator.py:get_route",
+      "target": "function:backend/core/orchestrator.py:_is_interrogative_query",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat",
+      "target": "function:backend/core/orchestrator.py:get_route",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat",
+      "target": "function:backend/agent/data_storyteller_agent.py:generate_reply",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat",
+      "target": "function:backend/agent/qna_agent.py:execute_qna",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat_stream",
+      "target": "function:backend/core/orchestrator.py:get_route",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat_stream",
+      "target": "function:backend/agent/data_storyteller_agent.py:stream_storyteller_reply",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:backend/routers/api_router.py:chat_stream",
+      "target": "function:backend/agent/qna_agent.py:stream_qna",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "class:tests/test_orchestrate.py:TestStorytellerRoute",
+      "target": "file:backend/main.py",
+      "type": "tests",
+      "direction": "forward"
+    },
+    {
+      "source": "class:tests/test_orchestrate.py:TestQnARoute",
+      "target": "file:backend/main.py",
+      "type": "tests",
+      "direction": "forward"
+    },
+    {
+      "source": "class:backend/config.py:Settings",
+      "target": "file:backend/main.py",
+      "type": "configures",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/analysis/page.tsx",
+      "target": "file:frontend/src/components/features/analysis-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/context/page.tsx",
+      "target": "file:frontend/src/components/features/context-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/dashboard/page.tsx",
+      "target": "file:frontend/src/components/features/dashboard-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/data-loader/page.tsx",
+      "target": "file:frontend/src/components/features/data-loader-view.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/analysis-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/analysis-view.tsx",
+      "target": "file:frontend/src/lib/chart-colors.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/context-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/context-view.tsx",
+      "target": "file:frontend/src/components/ui/tabs.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/context-view.tsx",
+      "target": "file:frontend/src/lib/chart-colors.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/dashboard-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/dashboard-view.tsx",
+      "target": "file:frontend/src/lib/chart-colors.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/dashboard-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-loader-view.tsx",
+      "target": "file:frontend/src/components/ui/badge.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-loader-view.tsx",
+      "target": "file:frontend/src/components/ui/glass-card.tsx",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-loader-view.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/glass-card.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/analysis/page.tsx",
+      "target": "function:frontend/src/app/analysis/page.tsx:AnalysisPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/context/page.tsx",
+      "target": "function:frontend/src/app/context/page.tsx:ContextPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/dashboard/page.tsx",
+      "target": "function:frontend/src/app/dashboard/page.tsx:DashboardPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/data-loader/page.tsx",
+      "target": "function:frontend/src/app/data-loader/page.tsx:DataLoaderPage",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/analysis-view.tsx",
+      "target": "function:frontend/src/components/features/analysis-view.tsx:AnalysisView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/context-view.tsx",
+      "target": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/dashboard-view.tsx",
+      "target": "function:frontend/src/components/features/dashboard-view.tsx:DashboardView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-loader-view.tsx",
+      "target": "function:frontend/src/components/features/data-loader-view.tsx:DataLoaderView",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/glass-card.tsx",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsList",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsTrigger",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsContent",
+      "type": "contains",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/analysis/page.tsx",
+      "target": "function:frontend/src/app/analysis/page.tsx:AnalysisPage",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/context/page.tsx",
+      "target": "function:frontend/src/app/context/page.tsx:ContextPage",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/dashboard/page.tsx",
+      "target": "function:frontend/src/app/dashboard/page.tsx:DashboardPage",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/data-loader/page.tsx",
+      "target": "function:frontend/src/app/data-loader/page.tsx:DataLoaderPage",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/analysis-view.tsx",
+      "target": "function:frontend/src/components/features/analysis-view.tsx:AnalysisView",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/context-view.tsx",
+      "target": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/dashboard-view.tsx",
+      "target": "function:frontend/src/components/features/dashboard-view.tsx:DashboardView",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/features/data-loader-view.tsx",
+      "target": "function:frontend/src/components/features/data-loader-view.tsx:DataLoaderView",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/glass-card.tsx",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsList",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsTrigger",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/ui/tabs.tsx",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsContent",
+      "type": "exports",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/analysis/page.tsx:AnalysisPage",
+      "target": "function:frontend/src/components/features/analysis-view.tsx:AnalysisView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/context/page.tsx:ContextPage",
+      "target": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/dashboard/page.tsx:DashboardPage",
+      "target": "function:frontend/src/components/features/dashboard-view.tsx:DashboardView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/app/data-loader/page.tsx:DataLoaderPage",
+      "target": "function:frontend/src/components/features/data-loader-view.tsx:DataLoaderView",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/analysis-view.tsx:AnalysisView",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsList",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsTrigger",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/context-view.tsx:ContextView",
+      "target": "function:frontend/src/components/ui/tabs.tsx:TabsContent",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/dashboard-view.tsx:DashboardView",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/features/data-loader-view.tsx:DataLoaderView",
+      "target": "function:frontend/src/components/ui/glass-card.tsx:GlassCard",
+      "type": "calls",
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/layout.tsx",
+      "target": "file:frontend/src/app/globals.css",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/layout.tsx",
+      "target": "file:frontend/src/components/layout/app-shell.tsx",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/app-shell.tsx",
+      "target": "file:frontend/src/components/layout/sidebar.tsx",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/app-shell.tsx",
+      "target": "file:frontend/src/components/layout/topbar.tsx",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/sidebar.tsx",
+      "target": "file:frontend/src/lib/navigation.ts",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/sidebar.tsx",
+      "target": "file:frontend/src/lib/utils.ts",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/topbar.tsx",
+      "target": "file:frontend/src/components/ui/button.tsx",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/topbar.tsx",
+      "target": "file:frontend/src/lib/navigation.ts",
+      "type": "imports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/layout.tsx",
+      "target": "function:frontend/src/app/layout.tsx:RootLayout",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/app-shell.tsx",
+      "target": "function:frontend/src/components/layout/app-shell.tsx:AppShell",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/sidebar.tsx",
+      "target": "function:frontend/src/components/layout/sidebar.tsx:Sidebar",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/topbar.tsx",
+      "target": "function:frontend/src/components/layout/topbar.tsx:Topbar",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/navigation.ts",
+      "target": "function:frontend/src/lib/navigation.ts:getNavItem",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/layout.tsx",
+      "target": "function:frontend/src/app/layout.tsx:RootLayout",
+      "type": "exports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/app-shell.tsx",
+      "target": "function:frontend/src/components/layout/app-shell.tsx:AppShell",
+      "type": "exports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/sidebar.tsx",
+      "target": "function:frontend/src/components/layout/sidebar.tsx:Sidebar",
+      "type": "exports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/components/layout/topbar.tsx",
+      "target": "function:frontend/src/components/layout/topbar.tsx:Topbar",
+      "type": "exports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/lib/navigation.ts",
+      "target": "function:frontend/src/lib/navigation.ts:getNavItem",
+      "type": "exports",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "function:frontend/src/components/layout/topbar.tsx:Topbar",
+      "target": "function:frontend/src/lib/navigation.ts:getNavItem",
+      "type": "calls",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "document:DATABASE_SETUP.md",
+      "target": "config:backend/.env",
+      "type": "configures",
+      "description": "Explains how to configure the DATABASE_URL environment variable in .env.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:DATABASE_SETUP.md",
+      "target": "file:backend/database/db.py",
+      "type": "documents",
+      "description": "Details how to invoke database initialization from the db module.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:DATABASE_SETUP.md",
+      "target": "file:backend/main.py",
+      "type": "documents",
+      "description": "Provides the commands to run the FastAPI app server defined in main.py.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:DATABASE_SETUP.md",
+      "target": "file:backend/database/models.py",
+      "type": "documents",
+      "description": "Documents the persistent chat sessions and chat messages schemas.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:DATABASE_SETUP.md",
+      "target": "config:pyproject.toml",
+      "type": "related",
+      "description": "References uv sync installation of dependencies specified in pyproject.toml.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:README.md",
+      "target": "file:mas_app.py",
+      "type": "documents",
+      "description": "Directs development to use the workflow coded in mas_app.py.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:README.md",
+      "target": "document:DATABASE_SETUP.md",
+      "type": "related",
+      "description": "Provides auxiliary project guides, including database and backend running setup.",
+      "direction": "forward"
+    },
+    {
+      "source": "config:pyproject.toml",
+      "target": "document:README.md",
+      "type": "configures",
+      "description": "Specifies README.md as the package readme documentation source.",
+      "direction": "forward"
+    },
+    {
+      "source": "document:frontend/CLAUDE.md",
+      "target": "document:frontend/AGENTS.md",
+      "type": "related",
+      "properties": {
+        "description": "CLAUDE.md points directly to AGENTS.md for rules."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "config:frontend/package.json",
+      "target": "config:frontend/tsconfig.json",
+      "type": "configures",
+      "properties": {
+        "description": "Package specifies compilation dependencies managed via tsconfig."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/data_storytelling.md",
+      "target": "document:wiki/realtime_telemetry.md",
+      "type": "related",
+      "properties": {
+        "description": "Explains correlation between data storytelling reports and real-time telemetry rendering."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/index.md",
+      "target": "document:wiki/research_agent.md",
+      "type": "contains",
+      "properties": {
+        "description": "Index includes core architecture entry for the Research Agent documentation."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/index.md",
+      "target": "document:wiki/data_storytelling.md",
+      "type": "contains",
+      "properties": {
+        "description": "Index includes core architecture entry for the Data Storytelling documentation."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/index.md",
+      "target": "document:wiki/realtime_telemetry.md",
+      "type": "contains",
+      "properties": {
+        "description": "Index includes telemetry and UI entry for the Real-Time Telemetry documentation."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/research_agent.md",
+      "target": "document:wiki/data_storytelling.md",
+      "type": "related",
+      "properties": {
+        "description": "Specifies data storytelling as a linked concept following autonomous research analysis."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/data_storytelling.md",
+      "target": "file:backend/agent/data_storyteller_agent.py",
+      "type": "documents",
+      "properties": {
+        "description": "Documents the storytelling multi-agent crew designed to turn insights into reports."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/research_agent.md",
+      "target": "file:backend/agent/qna_agent.py",
+      "type": "documents",
+      "properties": {
+        "description": "Documents the research and query answering system utilizing the QnA agent."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "document:wiki/realtime_telemetry.md",
+      "target": "file:backend/routers/api_router.py",
+      "type": "documents",
+      "properties": {
+        "description": "Documents real-time telemetry events emitted via the backend API routes."
+      },
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/StreamingChunkTest.py",
+      "target": "function:backend/agent/StreamingChunkTest.py:stream",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:backend/agent/StreamingTest.py",
+      "target": "function:backend/agent/StreamingTest.py:stream",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:frontend/src/app/page.tsx",
+      "target": "function:frontend/src/app/page.tsx:HomePage",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "function:main.py:generate_mock_data",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:main.py",
+      "target": "function:main.py:main",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:mas_app.py",
+      "target": "function:mas_app.py:interactive_data_loader",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:mas_app.py",
+      "target": "function:mas_app.py:generate_chart_tool",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "file:mas_app.py",
+      "target": "function:mas_app.py:main",
+      "type": "contains",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "function:mas_app.py:main",
+      "target": "function:mas_app.py:interactive_data_loader",
+      "type": "calls",
+      "properties": {},
+      "direction": "forward"
+    },
+    {
+      "source": "function:mas_app.py:main",
+      "target": "function:mas_app.py:generate_chart_tool",
+      "type": "calls",
+      "properties": {
+        "notes": "Indirectly references via tool mapping for visualization task"
+      },
+      "direction": "forward"
+    }
+  ],
+  "layers": [
+    {
+      "id": "layer:ai-agentic",
+      "name": "AI Agentic & Orchestration Layer",
+      "description": "Contains CrewAI agent definitions, storytelling memory modules, tool setups, and execution controllers.",
+      "nodeIds": [
+        "file:backend/agent/data_storyteller_agent.py",
+        "file:backend/agent/memory.py",
+        "file:backend/agent/qna_agent.py",
+        "file:backend/core/orchestrator.py",
+        "file:backend/agent/__init__.py",
+        "file:backend/agent/StreamingChunkTest.py",
+        "file:backend/agent/StreamingTest.py",
+        "file:mas_app.py"
+      ]
+    },
+    {
+      "id": "layer:database",
+      "name": "Database & Data Storage Layer",
+      "description": "Contains PostgreSQL database models, table schema mappings, connection pools, and database initialization setups.",
+      "nodeIds": [
+        "file:backend/database/db.py",
+        "file:backend/database/models copy.py",
+        "file:backend/database/models.py",
+        "document:DATABASE_SETUP.md"
+      ]
+    },
+    {
+      "id": "layer:backend-api",
+      "name": "Backend API & Router Layer",
+      "description": "FastAPI routing modules, REST endpoints, Pydantic schemas, and backend bootstrap configs.",
+      "nodeIds": [
+        "file:backend/config.py",
+        "file:backend/main.py",
+        "file:backend/routers/__init__.py",
+        "file:backend/routers/analytics.py",
+        "file:backend/routers/api_router.py",
+        "file:backend/routers/history.py",
+        "file:backend/run.py",
+        "file:backend/schemas.py"
+      ]
+    },
+    {
+      "id": "layer:frontend-shell",
+      "name": "Frontend Core & Shell Layouts",
+      "description": "Next.js App Router pages, global layouts, sidebars, top navigation bars, and top-level page components.",
+      "nodeIds": [
+        "file:frontend/src/app/agentic-qna/page.tsx",
+        "file:frontend/src/app/controls/page.tsx",
+        "file:frontend/src/app/data-description/page.tsx",
+        "file:frontend/src/app/domain-adaptation/page.tsx",
+        "file:frontend/src/app/multi-agent-system/page.tsx",
+        "file:frontend/src/app/templates/page.tsx",
+        "file:frontend/src/app/analysis/page.tsx",
+        "file:frontend/src/app/context/page.tsx",
+        "file:frontend/src/app/dashboard/page.tsx",
+        "file:frontend/src/app/data-loader/page.tsx",
+        "file:frontend/src/app/layout.tsx",
+        "file:frontend/src/components/layout/app-shell.tsx",
+        "file:frontend/src/components/layout/sidebar.tsx",
+        "file:frontend/src/components/layout/topbar.tsx",
+        "file:frontend/src/app/globals.css",
+        "file:frontend/src/app/page.tsx"
+      ]
+    },
+    {
+      "id": "layer:frontend-features",
+      "name": "Frontend Feature Views",
+      "description": "Stateful React components managing features like Q&A panels, real-time telemetry visualizations, system logs, and templates.",
+      "nodeIds": [
+        "file:frontend/src/components/features/agentic-qna-view.tsx",
+        "file:frontend/src/components/features/chat-history-panel.tsx",
+        "file:frontend/src/components/features/controls-view.tsx",
+        "file:frontend/src/components/features/data-description-view.tsx",
+        "file:frontend/src/components/features/domain-adaptation-view.tsx",
+        "file:frontend/src/components/features/multi-agent-system-view.tsx",
+        "file:frontend/src/components/features/templates-view.tsx",
+        "file:frontend/src/lib/api/qna.ts",
+        "file:frontend/src/components/features/analysis-view.tsx",
+        "file:frontend/src/components/features/context-view.tsx",
+        "file:frontend/src/components/features/dashboard-view.tsx",
+        "file:frontend/src/components/features/data-loader-view.tsx"
+      ]
+    },
+    {
+      "id": "layer:frontend-ui-utilities",
+      "name": "Frontend UI Components & Utilities",
+      "description": "Stateless custom UI widgets (buttons, sliders, switches, badges), Radix wrappers, and global design utility systems.",
+      "nodeIds": [
+        "file:frontend/src/components/ui/badge.tsx",
+        "file:frontend/src/components/ui/button.tsx",
+        "file:frontend/src/components/ui/multi-agent-system.tsx",
+        "file:frontend/src/components/ui/slider.tsx",
+        "file:frontend/src/components/ui/switch.tsx",
+        "file:frontend/src/lib/llm-templates.ts",
+        "file:frontend/src/lib/mock-datasets.ts",
+        "file:frontend/src/lib/utils.ts",
+        "file:frontend/src/components/ui/glass-card.tsx",
+        "file:frontend/src/components/ui/tabs.tsx",
+        "file:frontend/src/lib/chart-colors.ts",
+        "file:frontend/src/lib/navigation.ts"
+      ]
+    },
+    {
+      "id": "layer:testing",
+      "name": "Testing & Verification Suite",
+      "description": "Integration tests, unit tests, QnA telemetry mocks, and automated test runners.",
+      "nodeIds": [
+        "file:tests/test_orchestrate.py",
+        "file:tests/__init__.py"
+      ]
+    },
+    {
+      "id": "layer:global-configuration",
+      "name": "Global Config & Infrastructure Layer",
+      "description": "Top-level configurations, lockfiles, dependency declarations, docker files, styles setups, and environment secrets.",
+      "nodeIds": [
+        "document:README.md",
+        "config:pyproject.toml",
+        "document:frontend/AGENTS.md",
+        "document:frontend/CLAUDE.md",
+        "document:frontend/README.md",
+        "config:frontend/package.json",
+        "config:frontend/tsconfig.json",
+        "document:wiki/CLAUDE.md",
+        "document:wiki/data_storytelling.md",
+        "document:wiki/index.md",
+        "document:wiki/log.md",
+        "document:wiki/realtime_telemetry.md",
+        "document:wiki/research_agent.md",
+        "file:backend/__init__.py",
+        "config:backend/.env",
+        "file:backend/core/__init__.py",
+        "file:frontend/eslint.config.mjs",
+        "file:frontend/next.config.ts",
+        "file:frontend/postcss.config.mjs",
+        "file:main.py",
+        "document:raw/agentic_workflow_spec.txt"
+      ]
+    }
+  ],
+  "tour": [
+    {
+      "order": 1,
+      "title": "Project Initiation & Entry Points",
+      "description": "Start with the project README and top-level orchestrators to understand the primary goals: building a real-time visualization of agentic workflows.",
+      "nodeIds": [
+        "document:README.md",
+        "file:mas_app.py",
+        "file:main.py"
+      ]
+    },
+    {
+      "order": 2,
+      "title": "PostgreSQL Database & Storage Models",
+      "description": "Explore the database models and connection configurations that handle user chat history, Q&A sessions, and real-time execution telemetry.",
+      "nodeIds": [
+        "document:DATABASE_SETUP.md",
+        "file:backend/database/db.py",
+        "file:backend/database/models.py"
+      ]
+    },
+    {
+      "order": 3,
+      "title": "Multi-Agent Intelligence & Memory Orchestration",
+      "description": "Examine the CrewAI storyteller agent, session memory manager, and system orchestrator that process complex analytical tasks.",
+      "nodeIds": [
+        "file:backend/agent/data_storyteller_agent.py",
+        "file:backend/agent/memory.py",
+        "file:backend/agent/qna_agent.py",
+        "file:backend/core/orchestrator.py"
+      ]
+    },
+    {
+      "order": 4,
+      "title": "FastAPI Backend API Routes",
+      "description": "Look at the API router layer that serves health checks, active chat streams, and telemetry updates to the frontend.",
+      "nodeIds": [
+        "file:backend/routers/api_router.py",
+        "file:backend/routers/history.py",
+        "file:backend/schemas.py"
+      ]
+    },
+    {
+      "order": 5,
+      "title": "Frontend Shell & Core Layout",
+      "description": "Inspect the Next.js shell layout containing the app's global styling, sidebar navigation, and page wrapper.",
+      "nodeIds": [
+        "file:frontend/src/app/layout.tsx",
+        "file:frontend/src/components/layout/app-shell.tsx",
+        "file:frontend/src/components/layout/sidebar.tsx"
+      ]
+    },
+    {
+      "order": 6,
+      "title": "Real-Time Agentic Q&A View",
+      "description": "Review the primary interface and custom API integration that enables users to query agents and monitor execution telemetry in real time.",
+      "nodeIds": [
+        "file:frontend/src/app/agentic-qna/page.tsx",
+        "file:frontend/src/components/features/agentic-qna-view.tsx",
+        "file:frontend/src/lib/api/qna.ts"
+      ]
+    },
+    {
+      "order": 7,
+      "title": "Analytical Dashboard & Multi-Agent UI",
+      "description": "Explore feature views that power data loading, domain adaptation, prompt templates, and the custom multi-agent system execution view.",
+      "nodeIds": [
+        "file:frontend/src/components/features/dashboard-view.tsx",
+        "file:frontend/src/components/features/multi-agent-system-view.tsx",
+        "file:frontend/src/components/ui/multi-agent-system.tsx"
+      ]
+    },
+    {
+      "order": 8,
+      "title": "Backend Test Runner",
+      "description": "Review integration test scripts that exercise backend routers, orchestrators, and schemas to guarantee code correctness.",
+      "nodeIds": [
+        "file:tests/test_orchestrate.py"
+      ]
+    }
+  ]
+}

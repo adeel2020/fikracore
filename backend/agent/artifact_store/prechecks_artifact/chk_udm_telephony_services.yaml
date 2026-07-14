@@ -1,0 +1,10 @@
+command: LST SUB / LST ODBDAT
+id: chk_udm_telephony_services
+keywords:
+- odb
+- barring
+- telephony services
+- restrict calls
+- ts
+label: UDM Telephony Services & ODB Barring
+target_node: hss_udm

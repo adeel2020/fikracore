@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: agents-prod
+  labels:
+    app.kubernetes.io/part-of: agenticaiops
+data:
+  default.conf: |
+    # Sourced from services/gateway/nginx.conf
+    # Injected into /etc/nginx/conf.d/default.conf
+    include /etc/nginx/conf.d/*.conf;

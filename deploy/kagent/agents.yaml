@@ -1,0 +1,65 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: agent-services
+  namespace: agents-prod
+  labels:
+    app.kubernetes.io/part-of: agenticaiops
+    iso.9001/component: core-service
+    iso.27001/data-classification: confidential
+spec:
+  type: BYO
+  serviceAccountName: agent-operator
+  byo:
+    deployment:
+      image: agenticaiops/agents:latest
+      replicas: 2
+      strategy:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+        limits:
+          cpu: "2"
+          memory: "2Gi"
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: url
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-secret
+              key: api-key
+        - name: QDRANT_URL
+          valueFrom:
+            secretKeyRef:
+              name: qdrant-secret
+              key: url
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: url
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 8001
+        initialDelaySeconds: 30
+        periodSeconds: 15
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8001
+        initialDelaySeconds: 5
+        periodSeconds: 10

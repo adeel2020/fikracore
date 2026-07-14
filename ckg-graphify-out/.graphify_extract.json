@@ -1,0 +1,755 @@
+{
+  "nodes": [
+    {
+      "id": "intent_slow_5g",
+      "label": "5G Speed Degradation",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "5G Speed Degradation. User experiencing slow internet speed, cellular data throughput degradation, high packet latency, low bandwidth, data slowness, speed cap, throttled, buffering, cannot browse, FUP, pages won't load, capped speed, NOT related to roaming or international travel.\n"
+    },
+    {
+      "id": "intent_esim_fail",
+      "label": "eSIM Activation Failure",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "eSIM Activation Failure. User unable to download eSIM profile, eSIM registration failed, activation failure on sm-dp+ server mismatch error, QR code not working, profile download failed, cannot activate SIM, EID mismatch.\n"
+    },
+    {
+      "id": "intent_voice_drops",
+      "label": "Voice Call Drops",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Voice Call Drops. User experiencing constant dropped calls, phone call disconnects, poor Volte signaling connection, audio drops, signal drops when initiating calls, call disconnects, one-way audio, cannot hear, call fails after ringing, no ring.\n"
+    },
+    {
+      "id": "intent_roaming_fail",
+      "label": "Roaming Connection Fail",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Roaming Connection Fail. International roaming connection fails, partner carrier registration failure while roaming, forbidden land mobile network code, no service abroad, foreign network, travelling, cannot connect overseas, data works but calls don't.\n"
+    },
+    {
+      "id": "faq_amazon_prime_cancel",
+      "label": "Cancel Amazon Prime Subscription",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Log in to du My Account app/portal, navigate to active Add-ons, and toggle off Amazon Prime.\n"
+    },
+    {
+      "id": "faq_amazon_prime_activate",
+      "label": "Activate 12 Months Free Amazon Prime",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Send SMS keyword Prime to 9511 from an eligible postpaid or home plan line, then register via the SMS link.\n"
+    },
+    {
+      "id": "faq_call_barring",
+      "label": "Call Barring Management",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Access device settings and enter default PIN 0000 to toggle barring, or check profile status in BSS.\n"
+    },
+    {
+      "id": "faq_call_forwarding",
+      "label": "Call Forwarding Activation",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Dial short codes:\n  - *21*Destination_Number#  → Always Forward\n  - *61*Number#              → No Reply\n  - *62*Number#              → Unreachable\nTo cancel: Dial ##21#\n"
+    },
+    {
+      "id": "faq_caller_id",
+      "label": "Caller Number Presentation (CNAP)",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Enable the CNAP add-on via My Account portal or du App under service settings.\n"
+    },
+    {
+      "id": "faq_caller_tune",
+      "label": "Caller Tune Activation & Cancellation",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Manage tunes in the du App. To unsubscribe entirely, send SMS CT UNSUB to 1560.\n"
+    },
+    {
+      "id": "faq_dncr",
+      "label": "Do Not Call Registry (DNCR)",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Send SMS keyword DNCR to 1012 to block spam calls. Send WDNCR to 1012 to withdraw.\n"
+    },
+    {
+      "id": "faq_esim_replacement",
+      "label": "eSIM Replacement & Multi-device Watch",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Order eSIM QR code via du App, connect device to WiFi, and scan the QR code.\n"
+    },
+    {
+      "id": "service_ims_volte",
+      "label": "IMS VoLTE Signaling Core",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "IMS VoLTE Signaling Core network. Handles voice calls drops, SIP signaling registration, and call initiation drops."
+    },
+    {
+      "id": "service_5g_upf",
+      "label": "5G Packet Router (UPF)",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "5G Packet Router (UPF). Coordinates 5G user plane function, managing cellular data speeds and bandwidth routing."
+    },
+    {
+      "id": "service_esim_sm_dp",
+      "label": "SM-DP+ eSIM Server",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "SM-DP+ eSIM Server. Generates and validates profile mismatch credentials for eSIM activation and downloads."
+    },
+    {
+      "id": "service_roaming_vlr",
+      "label": "VLR Roaming Gateway",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "VLR Roaming Gateway. Visitor Location Register for international roaming partner connection and PLMN checks."
+    },
+    {
+      "id": "platform_ran_team",
+      "label": "Radio Access Network (RAN) Team",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Radio Access Network (RAN) Team. Engineering support resolving low SINR radio noise, tower interference, and signal drops."
+    },
+    {
+      "id": "platform_core_team",
+      "label": "Core Switching & IMS Team",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Core Switching & IMS Team. Resolves IMS VoLTE core network signalling failures and voice call drops."
+    },
+    {
+      "id": "platform_provisioning_team",
+      "label": "eSIM & Provisioning Support",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "eSIM & Provisioning Support. Troubleshoots eSIM profile mismatch and activation failures on sm-dp+ servers."
+    },
+    {
+      "id": "platform_roaming_desk",
+      "label": "Carrier Inter-Roaming Support",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Carrier Inter-Roaming Support. Handles forbidden land mobile network PLMN codes and roaming partner connection issues."
+    },
+    {
+      "id": "platform_crm",
+      "label": "Unified CRM System",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Unified CRM System. Customer database querying profile status and prepaid subscriber insufficient balance codes."
+    },
+    {
+      "id": "precondition_device_volte",
+      "label": "VoLTE Device Support",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "VoLTE Device Support. Verifies voice capability and handset configuration for VoLTE core network signaling."
+    },
+    {
+      "id": "precondition_5g_sim",
+      "label": "5G Provisioned SIM",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "5G Provisioned SIM. Verifies that the SIM card is provisioned with 5G data plan speed access."
+    },
+    {
+      "id": "precondition_sim_status",
+      "label": "SIM Active Registry",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "SIM Active Registry. Confirms registered status for eSIM activation and subscriber database connectivity."
+    },
+    {
+      "id": "precondition_partner_sla",
+      "label": "Roaming Agreement",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Roaming Agreement. Tracks roaming agreements and partner carrier network SLAs for international connection."
+    },
+    {
+      "id": "error_low_sinr",
+      "label": "Low SINR (RF Noise)",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Low SINR (RF Noise) radio error. Causes poor coverage, cell interference, and signal drops."
+    },
+    {
+      "id": "error_profile_mismatch",
+      "label": "eSIM Profile Mismatch",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "eSIM Profile Mismatch error. The device credentials do not match the registered eSIM activation profile."
+    },
+    {
+      "id": "error_insufficient_funds",
+      "label": "Insufficient balance code",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Insufficient balance code error. Prepaid subscriber does not have enough funds to initiate a connection."
+    },
+    {
+      "id": "error_plmn_forbidden",
+      "label": "PLMN Forbidden Error",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "PLMN Forbidden Error. Roaming network code is forbidden, blocking roaming connection to partner carriers."
+    },
+    {
+      "id": "channel_mobile_app",
+      "label": "Subscriber Mobile App",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Subscriber Mobile App. Self-service portal application for submitting eSIM activation and download requests."
+    },
+    {
+      "id": "channel_ussd",
+      "label": "USSD Code Dial",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "USSD Code Dial. Interactive shortcode system used to initiate balance inquiries and lookup prepaid status."
+    },
+    {
+      "id": "profile_prepaid_subscriber",
+      "label": "Prepaid Subscriber",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Prepaid Subscriber. Customer with prepaid plan, highly prone to insufficient balance code errors."
+    },
+    {
+      "id": "profile_postpaid_subscriber",
+      "label": "Postpaid Corporate",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Postpaid Corporate. Corporate monthly client with active 5G speed plan privileges."
+    },
+    {
+      "id": "apptype_ios_native",
+      "label": "iOS App Client",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "iOS App Client. iPhone client application for profile download and eSIM activation tasks."
+    },
+    {
+      "id": "apptype_android_native",
+      "label": "Android App Client",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Android App Client. Android client application for profile download and eSIM activation tasks."
+    },
+    {
+      "id": "fallback_network",
+      "label": "Network Fallback",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Domain fallback node"
+    },
+    {
+      "id": "fallback_billing",
+      "label": "Billing Fallback",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Domain fallback node"
+    },
+    {
+      "id": "fallback_provisioning",
+      "label": "Provisioning Fallback",
+      "file_type": "concept",
+      "source_file": "backend/agent/causal_rules.yaml",
+      "description": "Domain fallback node"
+    }
+  ],
+  "edges": [
+    {
+      "source": "intent_voice_drops",
+      "target": "error_low_sinr",
+      "relation": "indicates",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_voice_drops",
+      "target": "service_ims_volte",
+      "relation": "affects",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_voice_drops",
+      "target": "platform_core_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_voice_drops",
+      "target": "precondition_device_volte",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_voice_drops",
+      "target": "profile_prepaid_subscriber",
+      "relation": "common_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "service_5g_upf",
+      "relation": "affects",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "precondition_5g_sim",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "platform_ran_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "apptype_ios_native",
+      "relation": "observed_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_slow_5g",
+      "target": "apptype_android_native",
+      "relation": "observed_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "service_esim_sm_dp",
+      "relation": "causes",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "precondition_sim_status",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "platform_provisioning_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "channel_mobile_app",
+      "relation": "initiated_via",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_esim_fail",
+      "target": "error_profile_mismatch",
+      "relation": "may_result_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "service_roaming_vlr",
+      "relation": "uses",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "precondition_partner_sla",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "error_plmn_forbidden",
+      "relation": "may_result_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "platform_roaming_desk",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "intent_roaming_fail",
+      "target": "channel_ussd",
+      "relation": "observed_via",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_call_barring",
+      "target": "precondition_device_volte",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_call_barring",
+      "target": "platform_core_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_call_forwarding",
+      "target": "precondition_device_volte",
+      "relation": "requires",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_caller_id",
+      "target": "platform_provisioning_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_caller_tune",
+      "target": "platform_crm",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "service_ims_volte",
+      "target": "platform_core_team",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "service_5g_upf",
+      "target": "platform_ran_team",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "service_esim_sm_dp",
+      "target": "platform_provisioning_team",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "service_roaming_vlr",
+      "target": "platform_roaming_desk",
+      "relation": "supported_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_crm",
+      "target": "profile_prepaid_subscriber",
+      "relation": "manages",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_low_sinr",
+      "target": "platform_ran_team",
+      "relation": "report_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_profile_mismatch",
+      "target": "platform_provisioning_team",
+      "relation": "report_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_insufficient_funds",
+      "target": "platform_crm",
+      "relation": "report_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_plmn_forbidden",
+      "target": "platform_roaming_desk",
+      "relation": "report_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "profile_prepaid_subscriber",
+      "target": "error_insufficient_funds",
+      "relation": "susceptible_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "channel_mobile_app",
+      "target": "apptype_ios_native",
+      "relation": "used_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "channel_mobile_app",
+      "target": "apptype_android_native",
+      "relation": "used_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "channel_ussd",
+      "target": "profile_prepaid_subscriber",
+      "relation": "commonly_used_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "precondition_5g_sim",
+      "target": "service_5g_upf",
+      "relation": "provisions",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "precondition_sim_status",
+      "target": "service_esim_sm_dp",
+      "relation": "verifies",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "precondition_partner_sla",
+      "target": "platform_roaming_desk",
+      "relation": "associated_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "precondition_device_volte",
+      "target": "precondition_sim_status",
+      "relation": "depends_on",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "fallback_network",
+      "target": "platform_ran_team",
+      "relation": "fallback_owner",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "fallback_billing",
+      "target": "platform_crm",
+      "relation": "fallback_owner",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "fallback_provisioning",
+      "target": "platform_provisioning_team",
+      "relation": "fallback_owner",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_amazon_prime_cancel",
+      "target": "platform_crm",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_amazon_prime_activate",
+      "target": "platform_provisioning_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_dncr",
+      "target": "platform_provisioning_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_esim_replacement",
+      "target": "platform_provisioning_team",
+      "relation": "owned_by",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "faq_caller_tune",
+      "target": "channel_mobile_app",
+      "relation": "manageable_via",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "apptype_ios_native",
+      "target": "service_esim_sm_dp",
+      "relation": "interacts_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "apptype_android_native",
+      "target": "service_esim_sm_dp",
+      "relation": "interacts_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_core_team",
+      "target": "service_ims_volte",
+      "relation": "maintains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_ran_team",
+      "target": "service_5g_upf",
+      "relation": "maintains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_provisioning_team",
+      "target": "service_esim_sm_dp",
+      "relation": "maintains",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "service_ims_volte",
+      "target": "error_insufficient_funds",
+      "relation": "indirect_relation",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_crm",
+      "target": "platform_provisioning_team",
+      "relation": "coordinates_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "platform_roaming_desk",
+      "target": "platform_core_team",
+      "relation": "escalates_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_low_sinr",
+      "target": "service_5g_upf",
+      "relation": "may_affect",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    },
+    {
+      "source": "error_profile_mismatch",
+      "target": "channel_mobile_app",
+      "relation": "surfaces_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "backend/agent/causal_rules.yaml"
+    }
+  ],
+  "hyperedges": [],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

@@ -1,0 +1,6 @@
+domain: Network
+email: ims_ops@xyz.com
+hotline: 800-IMS
+id: core_ims
+name: IMS Core Operations
+queue: L2_IMS_CORE

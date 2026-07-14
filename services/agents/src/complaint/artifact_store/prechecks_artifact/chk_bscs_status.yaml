@@ -1,0 +1,9 @@
+command: CSRD/Duverse Account Check
+id: chk_bscs_status
+keywords:
+- bscs profile
+- activation status
+- billing cycle
+- csr status
+label: BSCS Billing & Subscription Status
+target_node: it_bscs

@@ -1,0 +1,500 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: agentplatforms.platform.agenticaiops.io
+  annotations:
+    kubernetes.io/description: >
+      AgentPlatform defines a deployment of AI agent services, a gateway,
+      and a frontend. The kopf controller reconciles this CR into per-agent
+      Deployments, Services, HPAs, PDBs, ConfigMaps, plus an NGINX gateway
+      and frontend Deployment.
+spec:
+  group: platform.agenticaiops.io
+  names:
+    kind: AgentPlatform
+    plural: agentplatforms
+    singular: agentplatform
+    shortNames:
+      - ap
+    categories:
+      - all
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      subresources:
+        status: {}
+      schema:
+        openAPIV3Schema:
+          type: object
+          description: Schema for AgentPlatform custom resources.
+          required:
+            - spec
+          properties:
+            spec:
+              type: object
+              description: Desired state of the AgentPlatform.
+              required:
+                - agents
+              properties:
+                image:
+                  type: string
+                  description: Container image for all agent containers.
+                  default: localhost:5000/agenticaiops-backend:v1
+                imagePullPolicy:
+                  type: string
+                  description: Kubernetes image pull policy.
+                  default: IfNotPresent
+                  enum:
+                    - Always
+                    - Never
+                    - IfNotPresent
+                imagePullSecrets:
+                  type: array
+                  description: Optional list of image pull secret references.
+                  items:
+                    type: object
+                    required:
+                      - name
+                    properties:
+                      name:
+                        type: string
+                        description: Name of the Secret in the same namespace.
+                ingressType:
+                  type: string
+                  description: Ingress controller type for the platform.
+                  default: ingress
+                  enum:
+                    - ingress
+                    - route
+                agents:
+                  type: object
+                  description: Map of agent name to agent configuration.
+                  minProperties: 1
+                  additionalProperties:
+                    type: object
+                    description: Configuration for a single agent service.
+                    required:
+                      - entrypoint
+                    properties:
+                      enabled:
+                        type: boolean
+                        description: Whether this agent is deployed.
+                        default: true
+                      entrypoint:
+                        type: string
+                        description: >
+                          Uvicorn-style entrypoint, e.g.
+                          "backend.agents.qna.main:app".
+                        pattern: '^[a-zA-Z0-9._]+:[a-zA-Z0-9_]+$'
+                      replicas:
+                        type: object
+                        description: Scaling configuration.
+                        properties:
+                          min:
+                            type: integer
+                            description: Minimum number of replicas (also the HPA min).
+                            minimum: 1
+                            default: 1
+                          max:
+                            type: integer
+                            description: Maximum number of replicas for HPA.
+                            minimum: 1
+                          targetCPU:
+                            type: integer
+                            description: Target CPU utilization percentage for HPA.
+                            minimum: 1
+                            maximum: 100
+                            default: 75
+                      resources:
+                        type: object
+                        description: Container resource requests and limits.
+                        properties:
+                          requests:
+                            type: object
+                            description: Guaranteed minimum resources.
+                            properties:
+                              cpu:
+                                type: string
+                                description: CPU request (e.g. "100m", "1").
+                                pattern: '^[0-9]+(m)?$'
+                              memory:
+                                type: string
+                                description: Memory request (e.g. "256Mi", "1Gi").
+                                pattern: '^[0-9]+(Mi|Gi|Ki)?$'
+                          limits:
+                            type: object
+                            description: Maximum allowed resources.
+                            properties:
+                              cpu:
+                                type: string
+                                description: CPU limit (e.g. "2", "500m").
+                                pattern: '^[0-9]+(m)?$'
+                              memory:
+                                type: string
+                                description: Memory limit (e.g. "4Gi", "512Mi").
+                                pattern: '^[0-9]+(Mi|Gi|Ki)?$'
+                      pdb:
+                        type: object
+                        description: PodDisruptionBudget configuration.
+                        properties:
+                          minAvailable:
+                            type: integer
+                            description: Minimum number of pods that must be available.
+                            minimum: 1
+                            default: 1
+                          maxUnavailable:
+                            type: integer
+                            description: Maximum number of pods that can be unavailable.
+                            minimum: 1
+                      env:
+                        type: array
+                        description: >
+                          Environment variables for the agent container.
+                          Supports plain key-value pairs and valueFrom
+                          (SecretRef / ConfigMapRef).
+                        items:
+                          type: object
+                          required:
+                            - name
+                          properties:
+                            name:
+                              type: string
+                              description: Environment variable name.
+                              pattern: '^[A-Z_][A-Z0-9_]*$'
+                            value:
+                              type: string
+                              description: Literal environment variable value.
+                            valueFrom:
+                              type: object
+                              description: Source for the variable value.
+                              properties:
+                                configMapKeyRef:
+                                  type: object
+                                  description: Selects a key from a ConfigMap.
+                                  required:
+                                    - name
+                                    - key
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: ConfigMap name.
+                                    key:
+                                      type: string
+                                      description: ConfigMap key.
+                                    optional:
+                                      type: boolean
+                                      description: Whether the key must exist.
+                                secretKeyRef:
+                                  type: object
+                                  description: Selects a key from a Secret.
+                                  required:
+                                    - name
+                                    - key
+                                  properties:
+                                    name:
+                                      type: string
+                                      description: Secret name.
+                                    key:
+                                      type: string
+                                      description: Secret key.
+                                    optional:
+                                      type: boolean
+                                      description: Whether the key must exist.
+                      extraVolumes:
+                        type: array
+                        description: Additional volumes to mount in the agent pod.
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Volume name.
+                            mountPath:
+                              type: string
+                              description: Mount path inside the container.
+                            subPath:
+                              type: string
+                              description: Sub-path within the volume.
+                            readOnly:
+                              type: boolean
+                              default: true
+                            persistentVolumeClaim:
+                              type: object
+                              properties:
+                                claimName:
+                                  type: string
+                              required:
+                                - claimName
+                            configMap:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                items:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      key:
+                                        type: string
+                                      path:
+                                        type: string
+                              required:
+                                - name
+                            secret:
+                              type: object
+                              properties:
+                                secretName:
+                                  type: string
+                                items:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      key:
+                                        type: string
+                                      path:
+                                        type: string
+                              required:
+                                - secretName
+                      probePath:
+                        type: string
+                        description: HTTP path for liveness and readiness probes.
+                        default: /health
+                      terminationGracePeriodSeconds:
+                        type: integer
+                        description: Grace period for pod shutdown.
+                        default: 30
+                        minimum: 1
+                      servicePort:
+                        type: integer
+                        description: Port exposed by the agent Service.
+                        default: 8000
+                        minimum: 1
+                        maximum: 65535
+                gateway:
+                  type: object
+                  description: NGINX reverse-proxy gateway configuration.
+                  properties:
+                    enabled:
+                      type: boolean
+                      description: Whether the gateway is deployed.
+                      default: true
+                    replicas:
+                      type: integer
+                      description: Number of gateway replicas.
+                      minimum: 1
+                      default: 2
+                    image:
+                      type: string
+                      description: NGINX container image.
+                      default: nginx:1.27-alpine
+                    resources:
+                      type: object
+                      description: Gateway container resources.
+                      properties:
+                        requests:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                        limits:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                    config:
+                      type: object
+                      description: NGINX configuration overrides.
+                      properties:
+                        clientMaxBodySize:
+                          type: string
+                          description: NGINX client_max_body_size directive.
+                          default: 50M
+                        proxyReadTimeout:
+                          type: string
+                          description: NGINX proxy_read_timeout directive.
+                          default: 300s
+                        proxyBuffering:
+                          type: string
+                          description: NGINX proxy_buffering directive.
+                          default: "off"
+                    ingress:
+                      type: object
+                      description: Ingress/Route for the gateway.
+                      properties:
+                        enabled:
+                          type: boolean
+                          default: true
+                        type:
+                          type: string
+                          enum:
+                            - ingress
+                            - route
+                          description: Override the top-level ingressType.
+                        host:
+                          type: string
+                          description: DNS hostname for the gateway.
+                          pattern: '^[a-zA-Z0-9.-]+$'
+                        className:
+                          type: string
+                          description: IngressClass name (e.g. "traefik", "nginx").
+                frontend:
+                  type: object
+                  description: Frontend application configuration.
+                  properties:
+                    enabled:
+                      type: boolean
+                      default: true
+                    image:
+                      type: string
+                      description: Frontend container image.
+                      required:
+                        - image
+                    replicas:
+                      type: integer
+                      minimum: 1
+                      default: 2
+                    resources:
+                      type: object
+                      properties:
+                        requests:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                        limits:
+                          type: object
+                          properties:
+                            cpu:
+                              type: string
+                            memory:
+                              type: string
+                    env:
+                      type: array
+                      description: Environment variables for the frontend.
+                      items:
+                        type: object
+                        required:
+                          - name
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                          valueFrom:
+                            type: object
+                            properties:
+                              configMapKeyRef:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  key:
+                                    type: string
+                                  optional:
+                                    type: boolean
+                              secretKeyRef:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  key:
+                                    type: string
+                                  optional:
+                                    type: boolean
+                    ingress:
+                      type: object
+                      properties:
+                        enabled:
+                          type: boolean
+                          default: true
+                        type:
+                          type: string
+                          enum:
+                            - ingress
+                            - route
+                        host:
+                          type: string
+                          pattern: '^[a-zA-Z0-9.-]+$'
+                        className:
+                          type: string
+            status:
+              type: object
+              description: Observed state of the AgentPlatform.
+              properties:
+                observedGeneration:
+                  type: integer
+                  description: Last generation of the spec that was reconciled.
+                conditions:
+                  type: array
+                  description: Current service state of the platform.
+                  items:
+                    type: object
+                    required:
+                      - type
+                      - status
+                    properties:
+                      type:
+                        type: string
+                        description: Condition type (Ready, Degraded, Error).
+                        enum:
+                          - Ready
+                          - Degraded
+                          - Error
+                      status:
+                        type: string
+                        description: Status of the condition.
+                        enum:
+                          - "True"
+                          - "False"
+                          - Unknown
+                      reason:
+                        type: string
+                        description: Machine-readable reason for the condition.
+                      message:
+                        type: string
+                        description: Human-readable message for the condition.
+                      lastTransitionTime:
+                        type: string
+                        format: date-time
+                        description: Timestamp when the condition last changed.
+                agentStatuses:
+                  type: object
+                  description: Per-agent status.
+                  additionalProperties:
+                    type: object
+                    properties:
+                      ready:
+                        type: integer
+                        description: Number of ready replicas.
+                      desired:
+                        type: integer
+                        description: Desired number of replicas.
+                      reason:
+                        type: string
+                        description: Reason if the agent is unhealthy.
+                gatewayStatus:
+                  type: object
+                  description: Gateway deployment status.
+                  properties:
+                    ready:
+                      type: integer
+                    desired:
+                      type: integer
+                frontendStatus:
+                  type: object
+                  description: Frontend deployment status.
+                  properties:
+                    ready:
+                      type: integer
+                    desired:
+                      type: integer

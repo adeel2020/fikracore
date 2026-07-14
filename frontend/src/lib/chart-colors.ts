@@ -1,0 +1,17 @@
+export const CHART_COLORS = {
+  primary: "#00E5FF",
+  secondary: "#FF00FF",
+  alert: "#CCFF00",
+  neonCyan: "#00E5FF",
+  neonMagenta: "#FF00FF",
+  neonLime: "#CCFF00",
+  neonGreen: "#00FF87",
+  neonOrange: "#FF6B35",
+  neonBlue: "#4A90FF",
+  neonPurple: "#A855F7",
+  neonPink: "#FF1493",
+  neonYellow: "#FFE500",
+  neonTeal: "#00FFAB",
+  chartreuse: "#CCFF00",
+  electricBlue: "#4A90FF",
+} as const;

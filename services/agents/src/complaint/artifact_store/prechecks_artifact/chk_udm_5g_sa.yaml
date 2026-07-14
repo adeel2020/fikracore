@@ -1,0 +1,8 @@
+command: LST NGS
+id: chk_udm_5g_sa
+keywords:
+- 5gsa subscription
+- ngs flag
+- 5g standalone
+label: 5GSA Subscription Flag
+target_node: hss_udm

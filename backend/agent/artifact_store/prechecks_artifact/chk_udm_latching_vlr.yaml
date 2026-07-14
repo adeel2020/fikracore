@@ -1,0 +1,14 @@
+command: LST MPTY / LST VLRNUM
+id: chk_udm_latching_vlr
+keywords:
+- vlr num
+- latching status
+- msc gt
+- mnrf
+- mpty
+- clip
+- cw
+- cbar
+- dynsub
+label: VLR Latching & Mobile Core Status
+target_node: hss_udm

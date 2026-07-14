@@ -1,0 +1,29 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: compliance-auditor
+  namespace: agents-prod
+  labels:
+    app.kubernetes.io/name: compliance-auditor
+    app.kubernetes.io/part-of: agenticaiops
+    iso.27001/control: A.18.1
+    iso.9001/control: 9.2
+spec:
+  type: BYO
+  serviceAccountName: security-auditor
+  byo:
+    deployment:
+      image: agenticaiops/agents:latest
+      command: ["python", "-m", "secops.runner"]
+      env:
+        - name: AGENT_ROLE
+          value: compliance-auditor
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
+      schedule: "0 6 1 * *"
+      ttlSecondsAfterFinished: 3600

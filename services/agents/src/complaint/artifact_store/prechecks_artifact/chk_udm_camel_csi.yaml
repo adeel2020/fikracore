@@ -1,0 +1,10 @@
+command: LST CSI
+id: chk_udm_camel_csi
+keywords:
+- ocsi
+- tcsi
+- smscsi
+- uscsi
+- camel flags
+label: UDM CAMEL Subscription Information (CSI)
+target_node: hss_udm

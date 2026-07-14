@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Animation Lab</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #0b0f19; /* Deep space black */
+            font-family: 'Inter', sans-serif;
+            color: white;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* Glassmorphism UI Panel */
+        #ui-panel {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            background: rgba(20, 25, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 900px;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+        }
+
+        label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        select, input[type="range"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        select:focus {
+            border-color: #00f2fe;
+        }
+
+        /* Custom Range Slider Styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 6px;
+            background: #1e293b;
+            border-radius: 5px;
+            padding: 0;
+            border: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #00f2fe;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        .hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(20, 25, 40, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hud span {
+            color: #00f2fe;
+            font-weight: 700;
+        }
+
+        button {
+            background: linear-gradient(135deg, #a855f7, #00f2fe);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            #ui-panel {
+                flex-direction: column;
+                bottom: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="canvas-container"></div>
+
+    <div class="hud" id="hud">
+        <div>FPS: <span id="fps-display">60</span></div>
+        <div>Active Preset: <span id="mode-display">Logo Particle Swarm</span></div>
+    </div>
+
+    <div id="ui-panel">
+        <div class="control-group">
+            <label for="preset">Prompt Mode</label>
+            <select id="preset">
+                <optgroup label="Particle Systems">
+                    <option value="Logo Particle Swarm" selected>Logo Particle Swarm</option>
+                    <option value="Quantum Particle Swarm">Quantum Particle Swarm</option>
+                </optgroup>
+                <optgroup label="Kinetic Geometry">
+                    <option value="Cybernetic Mesh Grid">Cybernetic Mesh Grid</option>
+                    <option value="Organic Wave Terrain">Organic Wave Terrain</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="speed">Animation Speed</label>
+            <input type="range" id="speed" min="0" max="5" step="0.1" value="1.0">
+        </div>
+
+        <div class="control-group">
+            <label for="complexity">Complexity (Requires Rebuild)</label>
+            <input type="range" id="complexity" min="10" max="150" step="1" value="80">
+        </div>
+
+        <div class="control-group">
+            <label for="frequency">Noise Frequency</label>
+            <input type="range" id="frequency" min="0.01" max="2.0" step="0.05" value="0.5">
+        </div>
+        
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script>
+        const state = {
+            preset: "Logo Particle Swarm",
+            speed: 1.0,
+            complexity: 80,
+            frequency: 0.5,
+            play: true,
+            timeElapsed: 0
+        };
+
+        // UI Elements
+        const presetSelect = document.getElementById('preset');
+        const speedInput = document.getElementById('speed');
+        const complexityInput = document.getElementById('complexity');
+        const frequencyInput = document.getElementById('frequency');
+        const resetBtn = document.getElementById('reset-btn');
+        const fpsDisplay = document.getElementById('fps-display');
+        const modeDisplay = document.getElementById('mode-display');
+
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        
+        // Deep space background
+        scene.background = new THREE.Color(0x0b0f19);
+        scene.fog = new THREE.FogExp2(0x0b0f19, 0.005);
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.set(0, 30, 100);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Optimize for high DPI displays
+        container.appendChild(renderer.domElement);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        directionalLight.position.set(50, 100, 50);
+        scene.add(directionalLight);
+
+        let currentGroup = new THREE.Group();
+        scene.add(currentGroup);
+
+        function rebuildScene() {
+            // Clear existing objects
+            while(currentGroup.children.length > 0){ 
+                const child = currentGroup.children[0];
+                currentGroup.remove(child); 
+                if(child.geometry) child.geometry.dispose();
+                if(child.material) {
+                    if(Array.isArray(child.material)) child.material.forEach(m => m.dispose());
+                    else child.material.dispose();
+                }
+            }
+
+            const mode = state.preset;
+            const res = Math.floor(state.complexity);
+            modeDisplay.textContent = mode;
+
+            // 1. Cybernetic Mesh Grid
+            if (mode === "Cybernetic Mesh Grid") {
+                const geo = new THREE.PlaneGeometry(150, 150, res, res);
+                geo.rotateX(-Math.PI / 2);
+                const mat = new THREE.MeshStandardMaterial({
+                    color: 0x00f2fe,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.6
+                });
+                currentGroup.add(new THREE.Mesh(geo, mat));
+            } 
+            // 2. Quantum Particle Swarm
+            else if (mode === "Quantum Particle Swarm") {
+                const geo = new THREE.BufferGeometry();
+                const count = res * 100;
+                const pos = new Float32Array(count * 3);
+                const colors = new Float32Array(count * 3);
+                
+                const color1 = new THREE.Color(0xa855f7); // Purple
+                const color2 = new THREE.Color(0x00f2fe); // Cyan
+
+                for (let i = 0; i < count * 3; i+=3) {
+                    pos[i] = (Math.random() - 0.5) * 100;
+                    pos[i+1] = (Math.random() - 0.5) * 100;
+                    pos[i+2] = (Math.random() - 0.5) * 100;
+
+                    const mixedColor = color1.clone().lerp(color2, Math.random());
+                    colors[i] = mixedColor.r;
+                    colors[i+1] = mixedColor.g;
+                    colors[i+2] = mixedColor.b;
+                }
+                geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+                geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                
+                const mat = new THREE.PointsMaterial({
+                    size: 0.5,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.8,
+                    blending: THREE.AdditiveBlending
+                });
+                currentGroup.add(new THREE.Points(geo, mat));
+            }
+            // 3. Organic Wave Terrain
+            else if (mode === "Organic Wave Terrain") {
+                const geo = new THREE.PlaneGeometry(150, 150, res, res);
+                geo.rotateX(-Math.PI / 2);
+                const mat = new THREE.MeshStandardMaterial({
+                    color: 0xa855f7,
+                    flatShading: true,
+                    side: THREE.DoubleSide
+                });
+                currentGroup.add(new THREE.Mesh(geo, mat));
+            }
+            // 4. Logo Particle Swarm (The New Feature)
+            else if (mode === "Logo Particle Swarm") {
+                const geo = new THREE.BufferGeometry();
+                
+                // Create an offscreen canvas to sample text pixels
+                const canvas = document.createElement('canvas');
+                canvas.width = 400;
+                canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                // Draw "du" with gradient
+                const gradient = ctx.createLinearGradient(50, 100, 350, 200);
+                gradient.addColorStop(0, "#1e1b4b");   // Deep dark blue
+                gradient.addColorStop(0.5, "#a855f7"); // Purple
+                gradient.addColorStop(1, "#00f2fe");   // Cyan
+                
+                ctx.fillStyle = gradient;
+                ctx.font = "bold 160px 'Inter', sans-serif";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText("du", 200, 160);
+                
+                // Draw "Tech"
+                ctx.fillStyle = "#0284c7"; // Blue
+                ctx.font = "bold 80px 'Inter', sans-serif";
+                ctx.fillText("Tech", 200, 260);
+                
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imgData.data;
+                
+                const positions = [];
+                const colorsArr = [];
+                
+                // Density of particles based on the complexity slider
+                // We inverse it so higher complexity slider = lower step = more particles
+                // Ensure step is never 0
+                const maxComplexity = 150;
+                const normalizedComplexity = Math.min(Math.max(res, 10), maxComplexity);
+                // Step ranges from ~10 (sparse) down to 1 (dense)
+                const step = Math.max(1, Math.floor((maxComplexity - normalizedComplexity + 10) / 10));
+                
+                for(let y = 0; y < canvas.height; y += step) {
+                    for(let x = 0; x < canvas.width; x += step) {
+                        const index = (y * canvas.width + x) * 4;
+                        if(data[index + 3] > 50) { // If pixel has alpha (is visible)
+                            // Map 2D canvas coordinates to 3D space, center it
+                            const pX = (x - canvas.width / 2) * 0.3;
+                            const pY = -(y - canvas.height / 2) * 0.3;
+                            // Add slight random depth
+                            const pZ = (Math.random() - 0.5) * 5;
+                            
+                            positions.push(pX, pY, pZ);
+                            // Normalize colors 0-1 for WebGL
+                            colorsArr.push(data[index]/255, data[index+1]/255, data[index+2]/255);
+                        }
+                    }
+                }
+                
+                geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                geo.setAttribute('color', new THREE.Float32BufferAttribute(colorsArr, 3));
+                
+                const mat = new THREE.PointsMaterial({
+                    size: 0.8,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.9,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                const points = new THREE.Points(geo, mat);
+                
+                // CRITICAL: Store original positions so particles can return to form the logo
+                // We store it as a Float32Array in userData
+                points.userData.originalPos = new Float32Array(positions);
+                currentGroup.add(points);
+            }
+        }
+
+        presetSelect.addEventListener('change', (e) => {
+            state.preset = e.target.value;
+            rebuildScene();
+        });
+
+        speedInput.addEventListener('input', (e) => state.speed = parseFloat(e.target.value));
+        
+        complexityInput.addEventListener('change', (e) => {
+            state.complexity = parseFloat(e.target.value);
+            rebuildScene(); // Rebuild required when geometry density changes
+        });
+        
+        frequencyInput.addEventListener('input', (e) => state.frequency = parseFloat(e.target.value));
+
+        resetBtn.addEventListener('click', () => {
+            state.preset = "Logo Particle Swarm";
+            state.speed = 1.0;
+            state.complexity = 80;
+            state.frequency = 0.5;
+            
+            presetSelect.value = state.preset;
+            speedInput.value = state.speed;
+            complexityInput.value = state.complexity;
+            frequencyInput.value = state.frequency;
+            
+            rebuildScene();
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize first scene
+        rebuildScene();
+
+        const clock = new THREE.Clock();
+        let frames = 0;
+        let prevTime = performance.now();
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (!state.play) {
+                controls.update();
+                renderer.render(scene, camera);
+                return;
+            }
+
+            const delta = clock.getDelta();
+            state.timeElapsed += delta * state.speed;
+            const t = state.timeElapsed;
+            const freq = state.frequency;
+
+            if (currentGroup.children.length > 0) {
+                const mesh = currentGroup.children[0];
+                const positions = mesh.geometry.attributes.position;
+                
+                // Animation logic per mode
+                if (state.preset === "Cybernetic Mesh Grid" || state.preset === "Organic Wave Terrain") {
+                    for (let i = 0; i < positions.count; i++) {
+                        const x = positions.getX(i);
+                        const z = positions.getZ(i);
+                        // Math noise pattern
+                        const y = (Math.sin(x * freq * 0.1 + t) + Math.cos(z * freq * 0.1 + t)) * 5;
+                        positions.setY(i, y);
+                    }
+                    positions.needsUpdate = true;
+                } 
+                else if (state.preset === "Quantum Particle Swarm") {
+                    for (let i = 0; i < positions.count; i++) {
+                        let x = positions.getX(i);
+                        let y = positions.getY(i);
+                        let z = positions.getZ(i);
+                        
+                        x += Math.sin(y * freq * 0.05 + t) * 0.2;
+                        y += Math.cos(z * freq * 0.05 + t) * 0.2;
+                        z += Math.sin(x * freq * 0.05 + t) * 0.2;
+                        
+                        // Boundary bounce
+                        if (Math.abs(x) > 60) x *= -0.9;
+                        if (Math.abs(y) > 60) y *= -0.9;
+                        if (Math.abs(z) > 60) z *= -0.9;
+                        
+                        positions.setXYZ(i, x, y, z);
+                    }
+                    positions.needsUpdate = true;
+                }
+                else if (state.preset === "Logo Particle Swarm") {
+                    // Get original positions stored during rebuild
+                    const orig = mesh.userData.originalPos;
+                    
+                    if (orig && positions.count * 3 === orig.length) {
+                        for (let i = 0; i < positions.count; i++) {
+                            const idx = i * 3;
+                            const ox = orig[idx];
+                            const oy = orig[idx+1];
+                            const oz = orig[idx+2];
+                            
+                            // Calculate a drift offset based on math noise
+                            const driftX = Math.sin(t * 2 + oy * freq * 0.2) * 4;
+                            const driftY = Math.cos(t * 2 + ox * freq * 0.2) * 4;
+                            const driftZ = Math.sin(t * 2 + oz * freq * 0.2) * 10;
+
+                            // Pulse controls whether particles are tight in the logo shape or swarming out
+                            // Adding 'i * 0.001' creates a wave-like dispersion across the text
+                            const pulse = Math.sin(t * state.speed * 0.5 + i * 0.001);
+                            
+                            positions.setXYZ(
+                                i, 
+                                ox + driftX * pulse, 
+                                oy + driftY * pulse, 
+                                oz + driftZ * pulse
+                            );
+                        }
+                        positions.needsUpdate = true;
+                        
+                        // Gentle floating animation for the whole logo group
+                        mesh.rotation.y = Math.sin(t * 0.5) * 0.2;
+                        mesh.rotation.x = Math.sin(t * 0.3) * 0.1;
+                    }
+                }
+            }
+
+            controls.update();
+            renderer.render(scene, camera);
+
+            // FPS Calculation
+            frames++;
+            const time = performance.now();
+            if (time >= prevTime + 1000) {
+                fpsDisplay.textContent = Math.round((frames * 1000) / (time - prevTime));
+                frames = 0;
+                prevTime = time;
+            }
+        }
+
+        // Start animation loop
+        animate();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# Hollywood-Style 3D JARVIS Tasks
+
+- [x] Load Three.js, OrbitControls, and setup Web Audio API
+- [x] Create the Hollywood-style 3D Mainframe Core
+    - [x] Inner core sphere composed of hundreds of glowing particles
+    - [x] Multiple rotating 3D concentric cyber-rings on different axes (X, Y, Z) with wireframes and coordinate labels
+    - [x] Orbital particle streams moving along circular pathways
+    - [x] 3D grid helper platform at the base
+- [x] Implement Speech-to-Text (Voice Command Recording)
+    - [x] Glowing microphone button next to the input box
+    - [x] Capture microphone stream using browser `webkitSpeechRecognition` or `MediaRecorder`
+    - [x] Show a pulsating audio wave overlay when listening
+    - [x] Transcribe and automatically execute command queries
+- [x] Implement Audio-Reactive Speech Output (Text-to-Speech)
+    - [x] Synthesize speech from backend or local browser `speechSynthesis` API
+    - [x] Create a Web Audio `AudioContext` and `AnalyserNode` to read audio frequencies
+    - [x] Connect frequency analyser output to the 3D hologram WebGL loop
+    - [x] Modulate particle size, coordinates, and color glow of the 3D core in sync with voice frequency data
+- [x] Design Hollywood-Style Telemetry Overlays
+    - [x] Sleek audio spectral visualizers in the diagnostic panels
+    - [x] Log feed terminal showing mock system diagnostics and logs
+- [x] Verify functionality and responsiveness in the browser
+- [x] Implement 3D Frosted Glassmorphism Design
+    - [x] Add high blur filters and beveled borders to panels
+    - [x] Adjust styling to a professional desaturated slate palette
+- [x] Rebuild Design in ReactJS
+    - [x] Create `/jarvis` route component in frontend Next.js app
+    - [x] Add floating background color gradient bubbles matching mockup
+    - [x] Build 2x4 skeuomorphic/claymorphic rounded card icons with colored glowing shadows
+    - [x] Link local TTS/STT and Three.js voice-reactive loops inside React lifecycle hooks

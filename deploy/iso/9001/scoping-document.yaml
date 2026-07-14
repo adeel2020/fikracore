@@ -1,0 +1,42 @@
+# ISO 9001:2025 Scoping Document — AgenticAIOPs
+
+scope:
+  title: "AI-Powered Intelligent Agent Platform"
+  description: |
+    Design, development, and delivery of AI-powered agent services
+    including QnA, Complaint Analytics, Storytelling, RAG-based
+    enterprise search, and JARVIS summarization capabilities.
+
+applicability:
+  - services/agents/src/qna/          # QnA agent
+  - services/agents/src/complaint/    # Complaint analytics
+  - services/agents/src/storyteller/  # Data storytelling
+  - services/agents/src/rag/          # RAG pipeline
+  - services/agents/src/jarvis/       # JARVIS summarization
+  - services/gateway/src/middleware/  # Gateway middleware
+
+exclusions:
+  - "Clause 8.3 — Design and Development (not applicable: no physical product)"
+  - "Clause 7.1.4 — Environment for the operation of processes (cloud infra managed by provider)"
+
+processes:
+  - qna_processing:
+      inputs: user_query, knowledge_graph
+      outputs: grounded_answer, confidence_score
+      kpi: "answer_accuracy >= 90%"
+  - complaint_analysis:
+      inputs: complaint_text
+      outputs: category, severity, recommendation
+      kpi: "classification_accuracy >= 85%"
+  - rag_pipeline:
+      inputs: user_query, documents
+      outputs: retrieved_chunks, generated_response
+      kpi: "retrieval_precision@3 >= 0.8"
+  - storytelling:
+      inputs: data_frame, user_prompt
+      outputs: narrative_insight
+      kpi: "user_satisfaction >= 4.0/5.0"
+  - jarvis_summarization:
+      inputs: raw_messages, templates
+      outputs: summarization_json
+      kpi: "generation_latency < 5s"

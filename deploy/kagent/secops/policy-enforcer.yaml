@@ -1,0 +1,29 @@
+apiVersion: kagent.dev/v1alpha2
+kind: Agent
+metadata:
+  name: policy-enforcer
+  namespace: agents-prod
+  labels:
+    app.kubernetes.io/name: policy-enforcer
+    app.kubernetes.io/part-of: agenticaiops
+    iso.27001/control: A.5.1
+    iso.9001/control: 8.4
+spec:
+  type: BYO
+  serviceAccountName: security-auditor
+  byo:
+    deployment:
+      image: agenticaiops/agents:latest
+      command: ["python", "-m", "secops.runner"]
+      env:
+        - name: AGENT_ROLE
+          value: policy-enforcer
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "500m"
+          memory: "256Mi"
+      schedule: "0 */12 * * *"
+      ttlSecondsAfterFinished: 3600

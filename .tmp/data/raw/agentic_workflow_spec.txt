@@ -1,0 +1,2 @@
+Agentic Workflow real-time telemetry specification document.
+This specifies how the SSE streams the storyteller events to frontend.

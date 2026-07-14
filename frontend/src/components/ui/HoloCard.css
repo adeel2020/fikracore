@@ -1,0 +1,257 @@
+/* HoloCard.css */
+
+/* BASE CARD LAYOUT */
+.holo-container {
+  position: relative;
+  padding: 16px; /* Reduced from 24px for a clean, minimalistic, compact feel */
+  color: #ffffff;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* THEME 1: HOLOGRAPHIC PLANE (Original Sleek/Cyberpunk) */
+.theme-holographic {
+  background: rgba(10, 25, 40, 0.4); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 255, 255, 0.05), 
+    0 8px 32px rgba(0, 0, 0, 0.5);
+}
+.theme-holographic:hover {
+  border-color: rgba(0, 255, 255, 0.5);
+  box-shadow: 
+    inset 0 0 30px rgba(0, 255, 255, 0.1), 
+    0 8px 32px rgba(0, 255, 255, 0.15);
+}
+.theme-holographic .holo-title {
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+/* THEME 2: AQUAMARINE GLASSMORPHIC (Volumetric frosted teal-aquamarine) */
+.theme-aquamarine {
+  background: linear-gradient(
+    135deg, 
+    rgba(10, 42, 54, 0.45) 0%, 
+    rgba(5, 26, 36, 0.7) 100%
+  ); 
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(127, 255, 212, 0.3);
+  border-radius: 16px;
+  box-shadow: 
+    inset 0 0 30px rgba(127, 255, 212, 0.15), 
+    inset 0 4px 8px rgba(255, 255, 255, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.6);
+}
+.theme-aquamarine:hover {
+  border-color: rgba(127, 255, 212, 0.6);
+  background: linear-gradient(
+    135deg, 
+    rgba(15, 55, 70, 0.5) 0%, 
+    rgba(8, 35, 48, 0.75) 100%
+  );
+  box-shadow: 
+    inset 0 0 40px rgba(127, 255, 212, 0.25), 
+    inset 0 4px 12px rgba(255, 255, 255, 0.25),
+    0 20px 48px rgba(0, 0, 0, 0.7);
+  transform: translateY(-2px);
+}
+.theme-aquamarine .holo-title {
+  color: #7fffd4;
+  text-shadow: 0 0 10px rgba(127, 255, 212, 0.8);
+  border-bottom: 1px solid rgba(127, 255, 212, 0.25);
+}
+
+/* THEME 3: EMERALD-CUT SHINEY GEMSTONE (Chamfered octagonal gemstone shape) */
+.theme-emerald-cut {
+  clip-path: polygon(
+    12px 0%, 
+    calc(100% - 12px) 0%, 
+    100% 12px, 
+    100% calc(100% - 12px), 
+    calc(100% - 12px) 100%, 
+    12px 100%, 
+    0% calc(100% - 12px), 
+    0% 12px
+  );
+  background: radial-gradient(
+    circle at 50% 45%, 
+    rgba(127, 255, 212, 0.35) 0%, 
+    rgba(8, 38, 48, 0.75) 75%,
+    rgba(3, 16, 22, 0.9) 100%
+  ); 
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(127, 255, 212, 0.45);
+  box-shadow: 
+    inset 0 0 35px rgba(0, 255, 255, 0.25), 
+    inset 0 0 15px rgba(255, 255, 255, 0.2),
+    0 15px 40px rgba(0, 0, 0, 0.6);
+}
+.theme-emerald-cut::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(127, 255, 212, 0.25);
+  pointer-events: none;
+  z-index: 1;
+  clip-path: polygon(
+    10px 0%, 
+    calc(100% - 10px) 0%, 
+    100% 10px, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    10px 100%, 
+    0% calc(100% - 10px), 
+    0% 10px
+  );
+}
+.theme-emerald-cut:hover {
+  background: radial-gradient(
+    circle at 50% 45%, 
+    rgba(127, 255, 212, 0.42) 0%, 
+    rgba(10, 48, 60, 0.8) 75%,
+    rgba(5, 22, 30, 0.95) 100%
+  );
+  box-shadow: 
+    inset 0 0 50px rgba(0, 255, 255, 0.35), 
+    inset 0 0 25px rgba(255, 255, 255, 0.3),
+    0 25px 50px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(127, 255, 212, 0.25);
+  transform: translateY(-2px) scale(1.01);
+}
+.theme-emerald-cut .holo-title {
+  color: #7fffd4;
+  text-shadow: 0 0 10px rgba(127, 255, 212, 0.8);
+  border-bottom: 1px solid rgba(127, 255, 212, 0.25);
+}
+
+/* THEME 4: FROSTED GLASS (Sleek Minimalistic White dock bar) */
+.theme-frosted {
+  background: rgba(255, 255, 255, 0.07); 
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px; /* Scaled down slightly from 24px to match compact container */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.theme-frosted:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+.theme-frosted .holo-title {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* THEME 5: SLATE MATTE CLAY (Calpex Warm Gray/Charcoal style as in image) */
+.theme-matte-clay {
+  background: rgba(38, 35, 34, 0.55); 
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 
+    inset 0 1.5px 0px rgba(255, 255, 255, 0.15), 
+    0 20px 45px rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+}
+.theme-matte-clay:hover {
+  background: rgba(43, 40, 39, 0.65);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    inset 0 1.5px 0px rgba(255, 255, 255, 0.22), 
+    0 30px 60px rgba(0, 0, 0, 0.65);
+  transform: translateY(-2px);
+}
+.theme-matte-clay .holo-title {
+  color: #ffffff;
+  text-shadow: none;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* HIGH QUALITY PASTEL CHART OVERRIDES FOR SLATE MATTE CLAY THEME */
+.theme-matte-clay [fill="#00E5FF"] {
+  fill: #a855f7 !important; /* Calpex Violet/Purple */
+}
+.theme-matte-clay [stroke="#00E5FF"] {
+  stroke: #a855f7 !important; /* Calpex Violet/Purple */
+}
+.theme-matte-clay [fill="#ff007f"] {
+  fill: #f59e0b !important; /* Calpex Orange/Yellow */
+}
+.theme-matte-clay [stroke="#ff007f"] {
+  stroke: #f59e0b !important; /* Calpex Orange/Yellow */
+}
+.theme-matte-clay [fill="#FFB300"] {
+  fill: #3b82f6 !important; /* Calpex Blue */
+}
+.theme-matte-clay [stroke="#FFB300"] {
+  stroke: #3b82f6 !important; /* Calpex Blue */
+}
+.theme-matte-clay [fill="#ADFF2F"] {
+  fill: #10b981 !important; /* Calpex Green */
+}
+.theme-matte-clay [stroke="#ADFF2F"] {
+  stroke: #10b981 !important; /* Calpex Green */
+}
+
+/* Text & Tailwind Color overrides inside Matte Clay */
+.theme-matte-clay .text-cyan-400 {
+  color: #a855f7 !important;
+}
+.theme-matte-clay .text-emerald-400 {
+  color: #10b981 !important;
+}
+.theme-matte-clay .text-amber-400 {
+  color: #f59e0b !important;
+}
+.theme-matte-clay .bg-cyan-500\/10 {
+  background-color: rgba(168, 85, 247, 0.1) !important;
+}
+.theme-matte-clay .border-cyan-500\/30 {
+  border-color: rgba(168, 85, 247, 0.3) !important;
+}
+.theme-matte-clay table,
+.theme-matte-clay tr,
+.theme-matte-clay td,
+.theme-matte-clay th {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* COMMON TITLE AND CONTENT */
+.holo-title {
+  position: relative;
+  z-index: 3;
+  margin-bottom: 12px; /* Reduced from 18px */
+  padding-bottom: 6px;  /* Reduced from 10px */
+  font-size: 0.85rem;    /* Reduced from 0.95rem */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.holo-content {
+  position: relative;
+  z-index: 3;
+}

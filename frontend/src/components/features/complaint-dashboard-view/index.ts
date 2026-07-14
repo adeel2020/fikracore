@@ -1,0 +1,1 @@
+export { ComplaintDashboardView } from "./ComplaintDashboardView";

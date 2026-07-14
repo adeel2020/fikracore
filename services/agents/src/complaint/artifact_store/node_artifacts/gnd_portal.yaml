@@ -1,0 +1,5 @@
+description: Manages eSIM and Apple Watch multi-device registration states (RELEASED,
+  INSTALLED).
+id: gnd_portal
+label: G&D SM-DP+ Subscription Portal
+type: Component

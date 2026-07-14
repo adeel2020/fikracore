@@ -1,0 +1,73 @@
+{
+  "camel_opcodes": {
+    "0": "InitialDP",
+    "2": "UpdateLocation",
+    "3": "CancelLocation",
+    "7": "InsertSubscriberData",
+    "8": "DeleteSubscriberData",
+    "20": "Connect",
+    "22": "ReleaseCall",
+    "23": "RequestReportBCSMEvent",
+    "24": "EventReportBCSM",
+    "31": "Continue",
+    "32": "SMSDeliveryPointToPoint",
+    "33": "SMSRequest",
+    "34": "SMSNotification",
+    "35": "ApplyCharging",
+    "36": "ApplyChargingReport",
+    "44": "SendRoutingInfoForSM",
+    "45": "ForwardSM",
+    "46": "ReportSM-DeliveryStatus",
+    "56": "SendRoutingInfo"
+  },
+  "tcap_msg_types": {
+    "98": "Begin",
+    "100": "End",
+    "101": "Continue",
+    "103": "Abort",
+    "226": "QueryWithPerm",
+    "227": "QueryWithoutPerm",
+    "228": "Response",
+    "229": "ConversationWithPerm",
+    "230": "ConversationWithoutPerm",
+    "231": "Abort",
+    "232": "UniDirectional"
+  },
+  "sctp_ppid_mappings": {
+    "1": "IUA",
+    "2": "M2UA",
+    "3": "M3UA",
+    "4": "SUA",
+    "5": "M2G"
+  },
+  "port_mappings": {
+    "tcp": {
+      "3868": "DIAMETER",
+      "5060": "SIP",
+      "5061": "SIP-TLS"
+    },
+    "udp": {
+      "2123": "GTP-C",
+      "2152": "GTP-U",
+      "3386": "GTPv0",
+      "3868": "DIAMETER",
+      "5060": "SIP"
+    }
+  },
+  "sip_methods": [
+    "INVITE",
+    "ACK",
+    "BYE",
+    "CANCEL",
+    "REGISTER",
+    "OPTIONS",
+    "PRACK",
+    "SUBSCRIBE",
+    "NOTIFY",
+    "PUBLISH",
+    "INFO",
+    "REFER",
+    "MESSAGE",
+    "UPDATE"
+  ]
+}

@@ -1,0 +1,217 @@
+import {
+  Activity,
+  BarChart3,
+  Brain,
+  Bot,
+  FileCode2,
+  FolderTree,
+  Gauge,
+  LayoutDashboard,
+  MessageSquare,
+  Network,
+  Orbit,
+  Settings2,
+  SlidersHorizontal,
+  Sparkles,
+  Table2,
+  Upload,
+  Zap,
+  type LucideIcon,
+} from "lucide-react";
+
+export type NavItem = {
+  label: string;
+  href: string;
+  icon: LucideIcon;
+  description: string;
+  /** Primary brand color (hex). Used for the icon gradient start. */
+  color: string;
+  /** Accent / end color (hex). Used for the icon gradient end. */
+  accentColor: string;
+  /** Tailwind gradient class, e.g. for cards / buttons. */
+  gradient: string;
+  /** Tailwind text-color class used for the icon when idle / active */
+  colorClass: string;
+  /** Tailwind text-color class used on hover */
+  hoverClass: string;
+  /** Optional: a secondary accent for gradient strokes on the icon */
+  accentClass: string;
+};
+
+export const NAV_ITEMS: NavItem[] = [
+  {
+    label: "AgentOps",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+    description: "Smart StoryTeller overview",
+    color: "#22D3EE",
+    accentColor: "#3B82F6",
+    gradient: "from-cyan-400 to-blue-500",
+    colorClass: "text-cyan-400",
+    hoverClass: "group-hover:text-cyan-300",
+    accentClass: "text-blue-500",
+  },
+  {
+    label: "Data Loader",
+    href: "/data-loader",
+    icon: Upload,
+    description: "Smart Data Loader",
+    color: "#34D399",
+    accentColor: "#06B6D4",
+    gradient: "from-emerald-400 to-cyan-500",
+    colorClass: "text-emerald-400",
+    hoverClass: "group-hover:text-emerald-300",
+    accentClass: "text-cyan-500",
+  },
+  {
+    label: "Data Description",
+    href: "/data-description",
+    icon: Table2,
+    description: "Smart Data Description",
+    color: "#60A5FA",
+    accentColor: "#22D3EE",
+    gradient: "from-blue-400 to-cyan-500",
+    colorClass: "text-blue-400",
+    hoverClass: "group-hover:text-blue-300",
+    accentClass: "text-cyan-500",
+  },
+  {
+    label: "Analysis",
+    href: "/analysis",
+    icon: BarChart3,
+    description: "Smart Statistical Analysis",
+    color: "#C084FC",
+    accentColor: "#EC4899",
+    gradient: "from-purple-400 to-pink-500",
+    colorClass: "text-purple-400",
+    hoverClass: "group-hover:text-purple-300",
+    accentClass: "text-pink-500",
+  },
+  {
+    label: "Cognitive Operations",
+    href: "/agentic-qna",
+    icon: MessageSquare,
+    description: "Conversational intelligence",
+    color: "#A3E635",
+    accentColor: "#10B981",
+    gradient: "from-lime-400 to-emerald-500",
+    colorClass: "text-lime-400",
+    hoverClass: "group-hover:text-lime-300",
+    accentClass: "text-emerald-500",
+  },
+  {
+    label: "Ticket Analyst",
+    href: "/complaint-dashboard",
+    icon: Activity,
+    description: "TT analytics dashboard",
+    color: "#00F2FE",
+    accentColor: "#4FACFE",
+    gradient: "from-cyan-400 to-blue-500",
+    colorClass: "text-cyan-400",
+    hoverClass: "group-hover:text-cyan-300",
+    accentClass: "text-blue-500",
+  },
+  {
+    label: "Narrative Notebook",
+    href: "/narrative-notebook",
+    icon: Orbit,
+    description: "Semantic cloud topology & operational storytelling",
+    color: "#8B5CF6",
+    accentColor: "#6D28D9",
+    gradient: "from-violet-400 to-purple-600",
+    colorClass: "text-violet-400",
+    hoverClass: "group-hover:text-violet-300",
+    accentClass: "text-purple-500",
+  },
+  {
+    label: "Multi-Agent System",
+    href: "/multi-agent-system",
+    icon: Zap,
+    description: "Agent orchestration & execution",
+    color: "#FACC15",
+    accentColor: "#FB923C",
+    gradient: "from-yellow-400 to-orange-500",
+    colorClass: "text-yellow-400",
+    hoverClass: "group-hover:text-yellow-300",
+    accentClass: "text-orange-500",
+  },
+  {
+    label: "Context",
+    href: "/context",
+    icon: Network,
+    description: "Smart Context Management",
+    color: "#F472B6",
+    accentColor: "#D946EF",
+    gradient: "from-pink-400 to-fuchsia-500",
+    colorClass: "text-pink-400",
+    hoverClass: "group-hover:text-pink-300",
+    accentClass: "text-fuchsia-500",
+  },
+  {
+    label: "Domain Adaptation",
+    href: "/domain-adaptation",
+    icon: Brain,
+    description: "Smart Domain Adaptation",
+    color: "#FB923C",
+    accentColor: "#F43F5E",
+    gradient: "from-orange-400 to-rose-500",
+    colorClass: "text-orange-400",
+    hoverClass: "group-hover:text-orange-300",
+    accentClass: "text-rose-500",
+  },
+  {
+    label: "Telemetry",
+    href: "/performance",
+    icon: Gauge,
+    description: "Real-time model telemetry",
+    color: "#A855F7",
+    accentColor: "#22D3EE",
+    gradient: "from-purple-400 to-cyan-500",
+    colorClass: "text-purple-400",
+    hoverClass: "group-hover:text-purple-300",
+    accentClass: "text-cyan-500",
+  },
+  {
+    label: "Templates",
+    href: "/templates",
+    icon: FileCode2,
+    description: "Smart LLM Templates",
+    color: "#2DD4BF",
+    accentColor: "#10B981",
+    gradient: "from-teal-400 to-emerald-500",
+    colorClass: "text-teal-400",
+    hoverClass: "group-hover:text-teal-300",
+    accentClass: "text-emerald-500",
+  },
+  {
+    label: "Controls",
+    href: "/controls",
+    icon: SlidersHorizontal,
+    description: "Smart Controls",
+    color: "#F43F5E",
+    accentColor: "#EC4899",
+    gradient: "from-rose-500 to-pink-500",
+    colorClass: "text-rose-400",
+    hoverClass: "group-hover:text-rose-300",
+    accentClass: "text-pink-500",
+  },
+  {
+    label: "J.A.R.V.I.S.",
+    href: "/jarvis",
+    icon: Bot,
+    description: "Hollywood 3D Command Center",
+    color: "#8ab4f8",
+    accentColor: "#e0a96d",
+    gradient: "from-blue-400 to-amber-500",
+    colorClass: "text-[#8ab4f8]",
+    hoverClass: "group-hover:text-blue-300",
+    accentClass: "text-[#e0a96d]",
+  },
+];
+
+/** Re-exported for convenience (icons that are not used in nav) */
+export { Activity, Bot, FolderTree, Settings2, Sparkles };
+
+export function getNavItem(href: string): NavItem | undefined {
+  return NAV_ITEMS.find((item) => item.href === href);
+}

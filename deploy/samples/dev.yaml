@@ -1,0 +1,146 @@
+apiVersion: platform.agenticaiops.io/v1
+kind: AgentPlatform
+metadata:
+  name: dev
+  namespace: agenticaiops
+spec:
+  image: localhost:5000/agenticaiops-backend:v1
+  imagePullPolicy: IfNotPresent
+  ingressType: ingress
+
+  agents:
+    qna:
+      enabled: true
+      entrypoint: backend.agents.qna.main:app
+      servicePort: 8000
+      probePath: /health
+      replicas:
+        min: 2
+        max: 10
+        targetCPU: 70
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+        limits:
+          cpu: "2"
+          memory: 4Gi
+      pdb:
+        minAvailable: 1
+      env:
+        - name: OPENAI_MODEL
+          value: gpt-4o
+        - name: LOG_LEVEL
+          value: info
+
+    cognitive:
+      enabled: true
+      entrypoint: backend.agents.cognitive.main:app
+      servicePort: 8000
+      replicas:
+        min: 1
+        max: 5
+        targetCPU: 80
+      resources:
+        requests:
+          cpu: "1"
+          memory: 2Gi
+        limits:
+          cpu: "4"
+          memory: 8Gi
+      pdb:
+        minAvailable: 1
+      env:
+        - name: OPENAI_MODEL
+          value: gpt-4o
+        - name: LOG_LEVEL
+          value: info
+
+    complaint:
+      enabled: true
+      entrypoint: backend.agents.complaint.main:app
+      replicas:
+        min: 2
+        max: 8
+        targetCPU: 75
+      resources:
+        requests:
+          cpu: 500m
+          memory: 1Gi
+        limits:
+          cpu: "2"
+          memory: 4Gi
+      pdb:
+        minAvailable: 1
+      env:
+        - name: OPENAI_MODEL
+          value: gpt-4o
+        - name: LOG_LEVEL
+          value: info
+
+    storyteller:
+      enabled: false
+      entrypoint: backend.agents.storyteller.main:app
+
+    jarvis:
+      enabled: true
+      entrypoint: backend.agents.jarvis.main:app
+      replicas:
+        min: 1
+        max: 3
+        targetCPU: 80
+      resources:
+        requests:
+          cpu: "2"
+          memory: 4Gi
+        limits:
+          cpu: "4"
+          memory: 16Gi
+      pdb:
+        minAvailable: 1
+      env:
+        - name: OPENAI_MODEL
+          value: gpt-4o
+        - name: WHISPER_MODEL
+          value: large-v3
+        - name: LOG_LEVEL
+          value: info
+
+  gateway:
+    enabled: true
+    image: nginx:1.27-alpine
+    replicas: 2
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: "1"
+        memory: 2Gi
+    config:
+      clientMaxBodySize: 50M
+      proxyReadTimeout: 300s
+      proxyBuffering: "off"
+    ingress:
+      enabled: true
+      host: api.localdev.me
+      className: traefik
+
+  frontend:
+    image: localhost:5000/agenticaiops-frontend:v1
+    enabled: true
+    replicas: 2
+    resources:
+      requests:
+        cpu: 250m
+        memory: 512Mi
+      limits:
+        cpu: "1"
+        memory: 2Gi
+    env:
+      - name: NEXT_PUBLIC_API_URL
+        value: http://api.localdev.me
+    ingress:
+      enabled: true
+      host: app.localdev.me
+      className: traefik

@@ -1,0 +1,59 @@
+# ISO 27001:2022 Risk Assessment — AgenticAIOPs
+
+assessment_date: "2026-07-14"
+assessor: "adeel@agenticaiops.dev"
+framework: "NIST SP 800-30 Rev 2"
+
+risks:
+  - id: RISK-001
+    title: "AI Model Poisoning"
+    likelihood: "Low"
+    impact: "High"
+    controls:
+      - "Input validation on all agent endpoints"
+      - "RAG retrieval restricted to trusted document sources"
+      - "Output verification layer for QnA agent"
+    residual_risk: "Medium"
+
+  - id: RISK-002
+    title: "API Key / Secret Exposure"
+    likelihood: "Medium"
+    impact: "Critical"
+    controls:
+      - "Secrets stored as Kubernetes Secrets, never in code"
+      - "SealedSecrets for encrypted Git storage"
+      - "Secret scanner runs every 6 hours"
+      - "Access to vault restricted via RBAC"
+    residual_risk: "Low"
+
+  - id: RISK-003
+    title: "Data Breach — Customer Data Leakage"
+    likelihood: "Low"
+    impact: "Critical"
+    controls:
+      - "Network policies enforce least-privilege pod-to-pod access"
+      - "All inter-service traffic uses mTLS"
+      - "Database access restricted to agent-services SA"
+      - "Audit logging enabled for all data access"
+    residual_risk: "Low"
+
+  - id: RISK-004
+    title: "Unauthorized Access to Agent Endpoints"
+    likelihood: "Medium"
+    impact: "High"
+    controls:
+      - "JWT authentication at NGINX gateway"
+      - "Role-based access control for QnA, Complaint, RAG"
+      - "Ingress restricted to TLS"
+      - "Rate limiting on /qna/ask, /rag/search endpoints"
+    residual_risk: "Low"
+
+  - id: RISK-005
+    title: "Supply Chain — Dependency Vulnerability"
+    likelihood: "Medium"
+    impact: "Medium"
+    controls:
+      - "Dependency scanning in CI pipeline"
+      - "SBOM generation via `pip-audit`"
+      - "Regular updates via Dependabot"
+    residual_risk: "Medium"

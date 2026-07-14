@@ -1,0 +1,10 @@
+command: LST OPTGPRS / LST EPS
+id: chk_udm_apn_provision
+keywords:
+- du apn
+- ims apn
+- apn profile
+- eps definition
+- lte definition
+label: UDM APN Definitions
+target_node: hss_udm

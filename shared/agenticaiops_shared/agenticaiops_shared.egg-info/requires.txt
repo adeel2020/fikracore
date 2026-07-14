@@ -1,0 +1,5 @@
+pydantic>=2
+pydantic-settings>=2
+sqlalchemy>=2
+litellm>=1.0
+crewai>=0.100

@@ -1,0 +1,20 @@
+# ISO 9001:2025 Quality Policy — AgenticAIOPs
+
+policy: |
+  AgenticAIOPs is committed to delivering AI-powered agent services
+  that meet or exceed customer expectations through:
+    - Continuous improvement of AI model accuracy and response quality
+    - Rigorous testing and validation of all agent outputs
+    - Transparent monitoring and measurement of system performance
+    - Customer feedback integration into product iteration cycles
+
+objectives:
+  - "Maintain answer accuracy >= 90% for QnA agent"
+  - "Achieve complaint classification accuracy >= 85%"
+  - "Maintain RAG pipeline retrieval precision@3 >= 0.8"
+  - "Storyteller user satisfaction score >= 4.0/5.0"
+  - "JARVIS summarization generation latency < 5 seconds"
+  - "Zero P0/P1 security incidents"
+
+review_interval: "Quarterly"
+owner: "adeel@agenticaiops.dev"

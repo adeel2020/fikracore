@@ -1,0 +1,53 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: agenticaiops-rules
+  namespace: monitoring
+  labels:
+    app.kubernetes.io/part-of: agenticaiops
+spec:
+  groups:
+    - name: agenticaiops-alerts
+      rules:
+        - alert: HighErrorRate
+          expr: rate(http_errors_total[5m]) > 0.05
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Error rate > 5% over 5m"
+        - alert: HighLatency
+          expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 5
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "p95 latency > 5s"
+        - alert: HighMemoryUsage
+          expr: container_memory_working_set_bytes > 1.5e9
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "Container memory > 1.5GB"
+        - alert: PodRestartLoop
+          expr: rate(kube_pod_container_status_restarts_total[15m]) > 3
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Pod restarting frequently"
+        - alert: DatabaseConnectionFailure
+          expr: pg_up == 0
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "PostgreSQL connection lost"
+        - alert: HighCPUUsage
+          expr: rate(process_cpu_seconds_total[5m]) > 1.5
+          for: 5m
+          labels:
+            severity: warning
+          annotations:
+            summary: "CPU usage > 150% of 1 core"

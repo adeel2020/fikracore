@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --neon-cyan: #00e5ff;
+  --neon-magenta: #ff00ff;
+  --neon-chartreuse: #ccff00;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --animate-ghost-unveil: ghost-unveil 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+body {
+  background: radial-gradient(
+    ellipse at top,
+    #171717 0%,
+    #0a0a0a 45%,
+    #000000 100%
+  );
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(0, 229, 255, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2.5s ease-in-out infinite;
+}
+
+@keyframes ghost-unveil {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(2px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-ghost-unveil {
+  animation: ghost-unveil 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Global: hide native scrollbar on html/body ─────────────────────────── */
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Global minimal scrollbar — applied to every scrollable element ──────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.18) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.15);
+  border-radius: 9999px;
+  transition: background 0.25s ease;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.38);
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── .custom-scrollbar — explicit opt-in (same as above, for legacy usage) ── */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 211, 238, 0.18) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(34, 211, 238, 0.15);
+  border-radius: 9999px;
+  transition: background 0.25s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.38);
+}
+
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* ── .scrollbar-none — opt-out (hide completely) ─────────────────────────── */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Glow splitter page 0 animations */
+@keyframes flowLight {
+  0% {
+    top: -60%;
+  }
+  100% {
+    top: 160%;
+  }
+}
+
+.glow-splitter {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.01),
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.01)
+  );
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .glow-splitter {
+    display: block;
+  }
+}
+
+.glow-light {
+  position: absolute;
+  width: 1px;
+  height: 90px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #ec4899,
+    #06b6d4,
+    transparent
+  );
+  animation: flowLight 4.5s infinite linear;
+}
+
+.glow-light-delayed {
+  position: absolute;
+  width: 1px;
+  height: 90px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    #06b6d4,
+    #10b981,
+    transparent
+  );
+  animation: flowLight 4.5s infinite linear;
+}
+
+/* Simple crisp opacity fade in animation */
+@keyframes qnaFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-qna-fade-in {
+  animation: qnaFadeIn 0.2s ease-out forwards;
+}
+
+

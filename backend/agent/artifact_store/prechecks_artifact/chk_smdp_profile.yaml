@@ -1,0 +1,10 @@
+command: G&D Portal Query
+id: chk_smdp_profile
+keywords:
+- smdp
+- sm-dp+
+- eid mismatch
+- profile generation
+- qr code
+label: SM-DP+ Server eSIM Profile Generation
+target_node: gnd_portal

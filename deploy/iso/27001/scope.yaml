@@ -1,0 +1,34 @@
+# ISO 27001:2022 Scope — AgenticAIOPs ISMS
+
+scope: |
+  Information Security Management System covering the design,
+  development, deployment, and operation of AI-powered intelligent
+  agent services including QnA, Complaint Analytics, Storytelling,
+  RAG-based enterprise search, and JARVIS summarization.
+
+asset_groups:
+  - "Source code and intellectual property"
+  - "Customer data processed by agent services"
+  - "AI/ML models and training data"
+  - "API keys and authentication secrets"
+  - "Infrastructure configuration and logs"
+  - "Knowledge graphs and vector databases"
+
+risk_assessment_framework: "NIST SP 800-30 Rev 2"
+
+applicable_controls:
+  - "A.5.1 — Information security policy"
+  - "A.5.15 — Access control"
+  - "A.5.23 — Information security for use of cloud services"
+  - "A.8.2 — Information classification"
+  - "A.8.8 — Management of technical vulnerabilities"
+  - "A.8.10 — Information deletion"
+  - "A.8.12 — Data leakage prevention"
+  - "A.8.15 — Logging"
+  - "A.8.16 — Monitoring"
+  - "A.8.24 — Use of cryptography"
+  - "A.8.29 — Security in development and acceptance"
+  - "A.8.31 — Separation of development, test and production"
+  - "A.12.1 — Vulnerability management"
+  - "A.14.1 — Secure communications"
+  - "A.18.1 — Compliance with legal and contractual requirements"

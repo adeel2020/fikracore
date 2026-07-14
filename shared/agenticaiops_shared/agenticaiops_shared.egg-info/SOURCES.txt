@@ -1,0 +1,6 @@
+pyproject.toml
+agenticaiops_shared.egg-info/PKG-INFO
+agenticaiops_shared.egg-info/SOURCES.txt
+agenticaiops_shared.egg-info/dependency_links.txt
+agenticaiops_shared.egg-info/requires.txt
+agenticaiops_shared.egg-info/top_level.txt

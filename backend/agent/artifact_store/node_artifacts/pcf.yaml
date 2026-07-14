@@ -1,0 +1,5 @@
+description: Manages subscriber policy data profiles (DCS, ICP Botim, 5GSA) and FUP
+  throttling limits (192kbps/72kbps).
+id: pcf
+label: Policy Control Function (PCF)
+type: Component

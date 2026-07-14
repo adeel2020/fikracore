@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Agent Harness: 9-Layer Specification</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    background-color: #0B132B;
+    color: #FFFFFF;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  .chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+    max-height: 400px;
+  }
+  .layer-card {
+    background-color: #1C2541;
+    border-left: 4px solid #45F0DF;
+    transition: transform 0.2s ease-in-out;
+  }
+  .layer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(69, 240, 223, 0.2);
+  }
+</style>
+</head>
+<body class="antialiased pb-20">
+
+<div style="display:none;" data-info="palette: vibrant cyber, no-svg: confirmed, no-mermaid: confirmed, plan: intro->9-layers->context-chart->guardrail-chart->skills-chart->overhead-chart"></div>
+
+<header class="pt-16 pb-12 px-6 text-center border-b border-[#1C2541] mb-12">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-[#45F0DF] text-sm font-bold tracking-widest uppercase mb-4">&#9679; Architectural Blueprint</div>
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Enterprise Agent Harness</h1>
+    <p class="text-xl text-[#9CA3AF] mb-8 leading-relaxed">An LLM on its own is just a stateless text generator. The harness is the traditional, deterministic software body that converts raw prediction into reliable, production-ready action.</p>
+    <div class="inline-flex items-center space-x-2 bg-[#1C2541] px-4 py-2 rounded-full text-sm font-semibold text-[#9D4EDD]">
+      <span>Stateless Predictor</span>
+      <span class="text-[#F77F00] font-bold">&#8594;</span>
+      <span>Deterministic Engine</span>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6">
+
+  <section class="mb-20">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold mb-4 text-[#45F0DF]">The Complete 9-Layer Specification</h2>
+      <p class="text-[#9CA3AF] max-w-2xl mx-auto">A robust operational wrapper must account for execution logic, context gating, deterministic looping, and synchronous safety policies.</p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="layer-card p-6 rounded-lg shadow-lg">
+        <div class="text-[#45F0DF] font-bold text-xl mb-2">01. State & Persistence</div>
+        <p class="text-sm text-[#9CA3AF]">Manages append-only transaction logging and durable checkpoints. Allows execution to resume mid-task after timeouts or human-in-the-loop authorization without budget waste.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#9D4EDD]">
+        <div class="text-[#9D4EDD] font-bold text-xl mb-2">02. Context Compaction Engine</div>
+        <p class="text-sm text-[#9CA3AF]">Monitors capacity and executes semantic token pruning. Summarizes older intermediate logs while preserving critical user intents and recent working memory.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#F77F00]">
+        <div class="text-[#F77F00] font-bold text-xl mb-2">03. Orchestration & Routing</div>
+        <p class="text-sm text-[#9CA3AF]">Acts as the corporate router. Governs sub-agent spawning, worker context distribution, and safe data handoffs between domain-specific models.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#F77F00]">
+        <div class="text-[#F77F00] font-bold text-xl mb-2">04. Infrastructure Sandbox</div>
+        <p class="text-sm text-[#9CA3AF]">Spins up ephemeral, secure workspaces. Provides isolated filesystems, restricted Bash terminals, or WASM environments for autonomous code execution.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg">
+        <div class="text-[#45F0DF] font-bold text-xl mb-2">05. Execution Loop Controller</div>
+        <p class="text-sm text-[#9CA3AF]">Enforces boundaries on probabilistic behaviors. Applies strict iteration ceilings (e.g., max 12 loops) and trips emergency hatches against infinite hallucination cycles.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#9D4EDD]">
+        <div class="text-[#9D4EDD] font-bold text-xl mb-2">06. MCP Gateway</div>
+        <p class="text-sm text-[#9CA3AF]">Standardized Model Context Protocol layer. Dynamically connects to enterprise data sources (GitHub, databases) using standard JSON-RPC 2.0 primitives.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#9D4EDD]">
+        <div class="text-[#9D4EDD] font-bold text-xl mb-2">07. Dynamic Skills Registry</div>
+        <p class="text-sm text-[#9CA3AF]">Catalog of allowed behaviors. Injects functional code snippets and semantic schemas into the context window only when deemed necessary by the planner.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg border-l-[#F77F00]">
+        <div class="text-[#F77F00] font-bold text-xl mb-2">08. Synchronous Guardrails</div>
+        <p class="text-sm text-[#9CA3AF]">Real-time safety and fiscal policy enforcement. Intercepts payloads, blocks unauthorized actions, tracks dollar limits, and scores confidence levels.</p>
+      </div>
+      <div class="layer-card p-6 rounded-lg shadow-lg">
+        <div class="text-[#45F0DF] font-bold text-xl mb-2">09. Lifecycle Hooks</div>
+        <p class="text-sm text-[#9CA3AF]">Extensible middleware. Executes deterministic pre-flight validation on user inputs and post-action security linting before sandbox execution.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-20 bg-[#1C2541] rounded-2xl p-8 shadow-2xl border border-[#0B132B]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <h3 class="text-2xl font-bold text-[#9D4EDD] mb-4">Layer 2: Solving Context Bloat</h3>
+        <p class="text-[#9CA3AF] mb-6 leading-relaxed">
+          As an agent executes multiple tools sequentially, prompt history expands exponentially. Without Layer 2, models drift, lose focus, or crash upon hitting token ceilings. The Context Compaction Engine triggers at an 85% threshold, compressing intermediate tool observations into dense semantic summaries while keeping root instructions intact.
+        </p>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center text-[#45F0DF]">
+            <span class="mr-2">&#10003;</span> Sliding-window summary retention
+          </li>
+          <li class="flex items-center text-[#45F0DF]">
+            <span class="mr-2">&#10003;</span> Zero loss of absolute root intent
+          </li>
+          <li class="flex items-center text-[#45F0DF]">
+            <span class="mr-2">&#10003;</span> Prevention of Out-Of-Memory failures
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="bg-[#0B132B] p-4 rounded-xl border border-[#45F0DF] border-opacity-30">
+          <h4 class="text-center text-sm font-semibold mb-4 text-[#FFFFFF]">Context Window Utilization Trajectory</h4>
+          <div class="chart-container h-[300px]">
+            <canvas id="contextChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+    <section class="bg-[#1C2541] rounded-2xl p-8 shadow-2xl border border-[#0B132B]">
+      <h3 class="text-2xl font-bold text-[#F77F00] mb-4">Layer 8: Synchronous Guardrails</h3>
+      <p class="text-[#9CA3AF] mb-6 text-sm leading-relaxed">
+        Autonomous agents are hazardous without deterministic bounds. Layer 8 operates as a strict interceptor, halting execution loops synchronously before state mutation occurs. It evaluates JSON schemas, prevents PII leaks, limits API costs, and catches repetitive hallucination cycles.
+      </p>
+      <div class="bg-[#0B132B] p-4 rounded-xl">
+        <h4 class="text-center text-sm font-semibold mb-4 text-[#FFFFFF]">Intercepted Execution Violations (Per 10k Runs)</h4>
+        <div class="chart-container h-[280px]">
+          <canvas id="guardrailChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[#1C2541] rounded-2xl p-8 shadow-2xl border border-[#0B132B]">
+      <h3 class="text-2xl font-bold text-[#45F0DF] mb-4">Layer 7: Dynamic Skills Registry</h3>
+      <p class="text-[#9CA3AF] mb-6 text-sm leading-relaxed">
+        Hardcoding hundreds of tools into a system prompt destroys inference quality. The Dynamic Skills Registry uses semantic signature injections, only providing the agent with the specific API endpoints, bash capabilities, or database schemas required for the immediate subset of the plan.
+      </p>
+      <div class="bg-[#0B132B] p-4 rounded-xl">
+        <h4 class="text-center text-sm font-semibold mb-4 text-[#FFFFFF]">Skill Signature Injection Frequency</h4>
+        <div class="chart-container h-[280px]">
+          <canvas id="skillsChart"></canvas>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="mb-20 bg-[#1C2541] rounded-2xl p-8 shadow-2xl border border-[#0B132B]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="order-2 lg:order-1">
+        <div class="bg-[#0B132B] p-4 rounded-xl border border-[#9D4EDD] border-opacity-30">
+           <h4 class="text-center text-sm font-semibold mb-4 text-[#FFFFFF]">Harness Compute Overhead Distribution</h4>
+          <div class="chart-container h-[350px]">
+            <canvas id="overheadChart"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="order-1 lg:order-2">
+        <h3 class="text-2xl font-bold text-[#FFFFFF] mb-4">Orchestration & Infrastructure Overhead</h3>
+        <p class="text-[#9CA3AF] mb-6 leading-relaxed">
+          Running a resilient enterprise agent requires significant processing outside of raw LLM inference. The harness continuously manages durable state persistence (Layer 1), provisions isolated execution sandboxes (Layer 4), and routes deterministic logic constraints (Layer 5) to guarantee reliability. 
+        </p>
+        <div class="flex flex-col space-y-4">
+          <div class="bg-[#0B132B] p-4 rounded-lg border-l-4 border-[#F77F00]">
+            <div class="text-[#F77F00] font-bold text-sm">Deterministic While-Loop</div>
+            <div class="text-xs text-[#9CA3AF] mt-1">System Prompt &#8594; Thought &#8594; Action &#8594; Sandbox Observation &#8594; Guardrail Reflection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const splitLabel = (label) => {
+    if (label.length <= 16) return label;
+    const words = label.split(' ');
+    const lines = [];
+    let currentLine = '';
+    for (let word of words) {
+      if ((currentLine + word).length > 16) {
+        if (currentLine) lines.push(currentLine.trim());
+        currentLine = word + ' ';
+      } else {
+        currentLine += word + ' ';
+      }
+    }
+    if (currentLine) lines.push(currentLine.trim());
+    return lines;
+  };
+
+  const universalTooltipConfig = {
+    tooltip: {
+      callbacks: {
+        title: function(tooltipItems) {
+          const item = tooltipItems[0];
+          let label = item.chart.data.labels[item.dataIndex];
+          if (Array.isArray(label)) {
+            return label.join(' ');
+          } else {
+            return label;
+          }
+        }
+      },
+      backgroundColor: 'rgba(11, 19, 43, 0.9)',
+      titleColor: '#FFFFFF',
+      bodyColor: '#45F0DF',
+      borderColor: '#1C2541',
+      borderWidth: 1
+    }
+  };
+
+  Chart.defaults.color = '#9CA3AF';
+  Chart.defaults.font.family = "'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+  const ctxContext = document.getElementById('contextChart').getContext('2d');
+  new Chart(ctxContext, {
+    type: 'line',
+    data: {
+      labels: ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5', 'Step 6', 'Step 7', 'Step 8', 'Step 9', 'Step 10'],
+      datasets: [
+        {
+          label: 'Unharnessed LLM (Memory Bloat)',
+          data: [10, 25, 45, 70, 95, 100, 100, 100, 100, 100],
+          borderColor: '#F77F00',
+          backgroundColor: 'rgba(247, 127, 0, 0.1)',
+          fill: true,
+          tension: 0.4,
+          borderDash: [5, 5]
+        },
+        {
+          label: 'Agent with Layer 2 Compaction',
+          data: [10, 25, 45, 70, 85, 40, 60, 80, 50, 65],
+          borderColor: '#45F0DF',
+          backgroundColor: 'rgba(69, 240, 223, 0.2)',
+          fill: true,
+          tension: 0.4
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        legend: { position: 'top', labels: { color: '#FFFFFF', boxWidth: 12 } },
+        ...universalTooltipConfig
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 110,
+          grid: { color: 'rgba(255, 255, 255, 0.05)' },
+          title: { display: true, text: 'Context Token Capacity (%)', color: '#FFFFFF' }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const rawGuardrailLabels = ['Cost Limit Exceeded', 'PII Data Leak Prevented', 'Invalid JSON Schema Detection', 'High Hallucination Score'];
+  const formattedGuardrailLabels = rawGuardrailLabels.map(splitLabel);
+  const ctxGuardrail = document.getElementById('guardrailChart').getContext('2d');
+  new Chart(ctxGuardrail, {
+    type: 'bar',
+    data: {
+      labels: formattedGuardrailLabels,
+      datasets: [{
+        label: 'Intercepted Violations',
+        data: [142, 56, 318, 89],
+        backgroundColor: ['#45F0DF', '#9D4EDD', '#F77F00', '#FFFFFF'],
+        borderRadius: 4
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        ...universalTooltipConfig
+      },
+      scales: {
+        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+      }
+    }
+  });
+
+  const rawSkillsLabels = ['PostgreSQL Database Query Execution', 'Isolated Bash Terminal Operations', 'External API Gateway Interaction', 'Semantic Web Search Processing', 'Sandboxed File System Operations'];
+  const formattedSkillsLabels = rawSkillsLabels.map(splitLabel);
+  const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+  new Chart(ctxSkills, {
+    type: 'polarArea',
+    data: {
+      labels: formattedSkillsLabels,
+      datasets: [{
+        data: [85, 60, 95, 40, 70],
+        backgroundColor: [
+          'rgba(69, 240, 223, 0.7)',
+          'rgba(157, 78, 221, 0.7)',
+          'rgba(247, 127, 0, 0.7)',
+          'rgba(255, 255, 255, 0.7)',
+          'rgba(28, 37, 65, 0.7)'
+        ],
+        borderColor: '#0B132B',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      plugins: {
+        legend: { position: 'right', labels: { color: '#FFFFFF', font: { size: 10 } } },
+        ...universalTooltipConfig
+      },
+      scales: {
+        r: {
+          ticks: { display: false },
+          grid: { color: 'rgba(255, 255, 255, 0.1)' },
+          angleLines: { color: 'rgba(255, 255, 255, 0.1)' }
+        }
+      }
+    }
+  });
+
+  const rawOverheadLabels = ['State Persistence Checkpoints', 'Context Compaction Pruning', 'Sub-Agent Network Routing', 'Sandbox I/O Isolation', 'Execution Loop Controller Logic', 'Synchronous Guardrail Checks'];
+  const formattedOverheadLabels = rawOverheadLabels.map(splitLabel);
+  const ctxOverhead = document.getElementById('overheadChart').getContext('2d');
+  new Chart(ctxOverhead, {
+    type: 'doughnut',
+    data: {
+      labels: formattedOverheadLabels,
+      datasets: [{
+        data: [15, 20, 10, 30, 5, 20],
+        backgroundColor: [
+          '#45F0DF', '#1C2541', '#9D4EDD', '#F77F00', '#FFFFFF', '#6B7280'
+        ],
+        borderColor: '#0B132B',
+        borderWidth: 3,
+        hoverOffset: 4
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      cutout: '65%',
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#FFFFFF', font: { size: 10 }, padding: 15 } },
+        ...universalTooltipConfig
+      }
+    }
+  });
+</script>
+</body>
+</html>

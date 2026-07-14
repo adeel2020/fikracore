@@ -1,0 +1,4 @@
+description: Monitors real-time subscriber usage information and bearer sessions.
+id: udg
+label: Unified Data Gateway (UDG)
+type: Component
