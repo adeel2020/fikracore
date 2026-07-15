@@ -1,0 +1,43 @@
+# AgenticAIOPs umbrella chart values
+# Usage:
+#   helm dependency update deploy/charts/agenticaiops/
+#   helm install agenticaiops deploy/charts/agenticaiops/
+
+# ── Git repo for ArgoCD to sync from ────────────────────────────────
+repoUrl: "git://host.docker.internal/kagent"
+targetRevision: master
+
+# ── ArgoCD (dependency) ─────────────────────────────────────────────
+argocd:
+  fullnameOverride: argocd
+  server:
+    replicas: 1
+    ingress:
+      enabled: true
+      ingressClassName: traefik
+      hosts: [argocd.localdev.me]
+      paths: [/]
+  configs:
+    cm:
+      repositories: |
+        - url: git://host.docker.internal
+          type: git
+        - url: https://charts.bitnami.com/bitnami
+          type: helm
+          name: bitnami
+
+# ── Controller (kagent operator) ───────────────────────────────────
+controller:
+  namespace: agents-prod
+  serviceAccountName: kagent-controller
+  replicas: 1
+  image:
+    repository: localhost/kagent-controller
+    tag: v1
+    pullPolicy: IfNotPresent
+
+# ── Sealed Secrets (dependency) ─────────────────────────────────────
+sealed-secrets:
+  fullnameOverride: sealed-secrets
+  namespaceOverride: sealed-secrets
+  existingSecret: sealed-secrets-key

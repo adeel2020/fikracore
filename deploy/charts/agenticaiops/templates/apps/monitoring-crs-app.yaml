@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: agenticaiops-monitoring-crs
+  namespace: {{ .Release.Namespace }}
+spec:
+  project: agenticaiops
+  source:
+    repoURL: "{{ .Values.repoUrl }}"
+    targetRevision: {{ .Values.targetRevision }}
+    path: deploy/monitoring
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true

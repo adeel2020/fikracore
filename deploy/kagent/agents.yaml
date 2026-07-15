@@ -12,7 +12,7 @@ spec:
   serviceAccountName: agent-operator
   byo:
     deployment:
-      image: agenticaiops/agents:latest
+      image: localhost/agenticaiops-backend:v1
       replicas: 2
       strategy:
         type: RollingUpdate
@@ -51,6 +51,13 @@ spec:
             secretKeyRef:
               name: redis-secret
               key: url
+      volumes:
+        - name: rag-sqlite
+          persistentVolumeClaim:
+            claimName: rag-sqlite-data
+      volumeMounts:
+        - name: rag-sqlite
+          mountPath: /app/src/rag/data
       livenessProbe:
         httpGet:
           path: /health

@@ -1,0 +1,12 @@
+apiVersion: v2
+name: agenticaiops
+description: AgenticAIOPs — complete platform via Helm
+version: 0.1.0
+dependencies:
+  - name: argo-cd
+    version: "7.*"
+    repository: https://argoproj.github.io/argo-helm
+    alias: argocd
+  - name: sealed-secrets
+    version: "2.*"
+    repository: https://charts.bitnami.com/bitnami

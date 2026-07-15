@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: agenticaiops-rbac
+  namespace: {{ .Release.Namespace }}
+spec:
+  project: agenticaiops
+  source:
+    repoURL: "{{ .Values.repoUrl }}"
+    targetRevision: {{ .Values.targetRevision }}
+    path: deploy/rbac
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: agents-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
