@@ -24,7 +24,8 @@ spec:
         runAsUser: 101
       containers:
         - name: nginx
-          image: agenticaiops/gateway:latest
+          image: localhost/gateway:v1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
               name: http
