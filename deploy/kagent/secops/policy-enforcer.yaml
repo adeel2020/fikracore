@@ -7,13 +7,13 @@ metadata:
     app.kubernetes.io/name: policy-enforcer
     app.kubernetes.io/part-of: agenticaiops
     iso.27001/control: A.5.1
-    iso.9001/control: 8.4
+    iso.9001/control: "8.4"
 spec:
   type: BYO
   serviceAccountName: security-auditor
   byo:
     deployment:
-      image: agenticaiops/agents:latest
+      image: localhost/agenticaiops-backend:v1
       command: ["python", "-m", "secops.runner"]
       env:
         - name: AGENT_ROLE
