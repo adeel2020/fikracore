@@ -1,4 +1,4 @@
-FROM nginx:1.27-alpine
+FROM nginx:1.31-alpine
 RUN addgroup -S gateway && adduser -S gateway -G gateway
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /var/cache/nginx /tmp/nginx && chown -R gateway:gateway /etc/nginx /var/cache/nginx /var/log/nginx /tmp/nginx
