@@ -21,3 +21,14 @@ build/
 *.log
 uv.lock
 .*/
+
+.idea/
+.venv/ 
+.cache/ 
+.pytest_cache/ 
+.backend/ 
+.scratch/ 
+.venv/ 
+.feature_store/ 
+.python-version/ 
+.tmp/
