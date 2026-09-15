@@ -1,4 +1,4 @@
-FROM python:3.11-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /build
 
@@ -11,7 +11,7 @@ RUN uv sync --frozen --no-dev --no-editable --no-install-package onnxruntime
 RUN uv pip install --no-deps --no-cache-dir ./shared/
 
 
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 

@@ -1,4 +1,4 @@
-FROM python:3.11-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /build
 
@@ -23,7 +23,7 @@ RUN find /build/.venv -type d -name "__pycache__" -prune -exec rm -rf {} + && \
     find /build/.venv -type d -name "*.egg-info" -prune -exec rm -rf {} + && \
     rm -rf /root/.cache
 
-FROM python:3.11-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
