@@ -1,0 +1,19 @@
+what_if_id: H4-WI-023
+title: Database Secondary Replica Lag Under Failover
+description: Simulates promotion of replica that is behind on transactional commit
+  log.
+cohort: failover_capacity
+trigger:
+  canonical_id: IP:PE:RTR-23
+  entity_display_name: Transport Router-23
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: LIMITED
+  duration_minutes: 30
+  traffic_load_profile: PEAK
+failure_domain_tags:
+- capacity
+- database
+- failover

@@ -1,0 +1,19 @@
+view_id: TOPO-SCN-022-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-022
+visible_entities:
+- EPC:DRA:001
+- CHG:OCS:001
+- SA5G:PCF:001
+- SA5G:SMF:001
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-OCS-DRA
+- REL-PCF-OCS
+- REL-SMF-PCF
+- REL-SMF-UPF
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

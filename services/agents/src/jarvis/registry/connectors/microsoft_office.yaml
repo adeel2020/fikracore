@@ -1,0 +1,38 @@
+id: microsoft_office
+name: Microsoft Office Connector
+kind: document_suite
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: knowledge_base
+description: Discovers, summarizes, and prepares Office documents such as Word, Excel, and PowerPoint through an MCP-managed integration.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: MICROSOFT_OFFICE_MCP_PROTOCOL
+  url_env: MICROSOFT_OFFICE_MCP_URL
+  token_env: MICROSOFT_OFFICE_MCP_TOKEN
+  command_env: MICROSOFT_OFFICE_MCP_COMMAND
+  args: []
+env:
+  - MICROSOFT_OFFICE_MCP_PROTOCOL
+  - MICROSOFT_OFFICE_MCP_URL
+  - MICROSOFT_OFFICE_MCP_TOKEN
+  - MICROSOFT_OFFICE_MCP_COMMAND
+  - MICROSOFT_TENANT_ID
+  - MICROSOFT_CLIENT_ID
+  - MICROSOFT_CLIENT_SECRET
+  - MICROSOFT_REFRESH_TOKEN
+capabilities:
+  - list_office_documents
+  - read_word_document
+  - read_excel_workbook
+  - read_powerpoint_deck
+  - draft_office_document
+  - export_document_summary
+permissions:
+  - read_enterprise_knowledge
+  - document_write_requires_approval
+fallback_transports:
+  - stdio
+  - http
+  - microsoft_graph_api

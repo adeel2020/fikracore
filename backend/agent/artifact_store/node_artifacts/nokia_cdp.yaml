@@ -1,4 +1,0 @@
-description: Controls secondary device profile generation for Apple Watch eSIM pairing.
-id: nokia_cdp
-label: Nokia Connected Device Platform (CDP/AES)
-type: Component

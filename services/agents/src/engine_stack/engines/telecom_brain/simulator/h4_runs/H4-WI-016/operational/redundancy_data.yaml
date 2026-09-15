@@ -1,0 +1,9 @@
+failover_pairs:
+  EPC:DRA:001:
+    backup_entity: EPC:DRA:002
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Redundant DRAs sync from single upstream PTP clock.
+backup_node: EPC:DRA:002
+backup_health: HEALTHY

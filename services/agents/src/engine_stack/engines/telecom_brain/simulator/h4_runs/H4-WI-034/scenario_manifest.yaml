@@ -1,0 +1,19 @@
+what_if_id: H4-WI-034
+title: Security Group Rule Push Blocking Signaling
+description: Simulates automated ACL deployment dropping critical Diameter control
+  traffic.
+cohort: change_risk
+trigger:
+  canonical_id: INFRA:SW:CORE-04
+  entity_display_name: Core Switch-04
+  event_type: REBOOT
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- change_risk
+- security
+- config_change

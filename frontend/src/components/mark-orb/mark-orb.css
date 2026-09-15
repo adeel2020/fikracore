@@ -1,0 +1,241 @@
+/* Mark orb animations adapted from APEX-UI's original SVG/CSS orb system. */
+
+[data-mark-stage] canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@keyframes markWaveBar {
+  0%, 100% { transform: scaleY(0.28); opacity: 0.45; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+.mark-wavebar {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: markWaveBar 0.8s ease-in-out infinite;
+}
+
+.mark-wavebar-0 { animation-delay: 0s; }
+.mark-wavebar-1 { animation-delay: 0.11s; }
+.mark-wavebar-2 { animation-delay: 0.22s; }
+.mark-wavebar-3 { animation-delay: 0.33s; }
+.mark-wavebar-4 { animation-delay: 0.44s; }
+.mark-wavebar-5 { animation-delay: 0.55s; }
+.mark-wavebar-6 { animation-delay: 0.66s; }
+
+@keyframes markDotBlink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.mark-dot-blink {
+  animation: markDotBlink 1.2s ease-in-out infinite;
+}
+
+.mark-blink-0 { animation-delay: 0s; }
+.mark-blink-1 { animation-delay: 0.4s; }
+.mark-blink-2 { animation-delay: 0.8s; }
+
+@keyframes markSoundWave {
+  0% { r: 155; opacity: 0.18; stroke-width: 0.8; }
+  60% { opacity: 0.06; }
+  100% { r: 230; opacity: 0; stroke-width: 0.3; }
+}
+
+@keyframes markSoundWaveActive {
+  0% { r: 155; opacity: 0.56; stroke-width: 1.5; }
+  60% { opacity: 0.22; }
+  100% { r: 250; opacity: 0; stroke-width: 0.5; }
+}
+
+@keyframes markSoundWaveApproval {
+  0% { r: 155; opacity: 0.62; stroke-width: 1.5; }
+  58% { opacity: 0.28; }
+  100% { r: 238; opacity: 0; stroke-width: 0.6; }
+}
+
+.mark-sound-wave {
+  animation: markSoundWave 3.5s ease-out infinite;
+}
+
+.mark-wave-0 { animation-delay: 0s; }
+.mark-wave-1 { animation-delay: 0.9s; }
+.mark-wave-2 { animation-delay: 1.8s; }
+.mark-wave-3 { animation-delay: 2.7s; }
+
+.mark-orb-wrap[data-state="listening"] .mark-sound-wave,
+.mark-orb-wrap[data-state="processing"] .mark-sound-wave,
+.mark-orb-wrap[data-state="speaking"] .mark-sound-wave,
+.mark-orb-wrap[data-state="investigating"] .mark-sound-wave,
+.mark-orb-wrap[data-state="learning"] .mark-sound-wave {
+  animation-name: markSoundWaveActive;
+  animation-duration: 2s;
+}
+
+.mark-orb-wrap[data-state="waiting_for_approval"] .mark-sound-wave {
+  animation-name: markSoundWaveApproval;
+  animation-duration: 1.65s;
+}
+
+@keyframes markRingBreathe {
+  0%, 100% { opacity: 0.88; }
+  50% { opacity: 1; }
+}
+
+.mark-ring-breathe,
+.mark-ring-glow,
+.mark-ring-bright {
+  animation: markRingBreathe 2.4s ease-in-out infinite;
+}
+
+@keyframes markRotateCW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes markRotateCCW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+.mark-orbit-cw {
+  animation: markRotateCW 5s linear infinite;
+}
+
+.mark-orbit-ccw {
+  animation: markRotateCCW 3s linear infinite;
+}
+
+.mark-orb-wrap[data-state="processing"] .mark-orbit-cw,
+.mark-orb-wrap[data-state="investigating"] .mark-orbit-cw {
+  animation-duration: 3.2s;
+}
+
+.mark-orb-wrap[data-state="speaking"] .mark-ring-glow,
+.mark-orb-wrap[data-state="learning"] .mark-ring-glow {
+  animation-duration: 1s;
+}
+
+@keyframes markAmbient {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.28; transform: scale(1.05); }
+}
+
+.mark-ambient {
+  animation: markAmbient 4s ease-in-out infinite;
+}
+
+@keyframes markStatusBar {
+  from { transform: scaleY(0.35); }
+  to { transform: scaleY(1.15); }
+}
+
+@keyframes markNodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.78;
+  }
+  50% {
+    transform: scale(1.16);
+    opacity: 1;
+  }
+}
+
+.mark-node-hot {
+  animation: markNodePulse 1.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes markDustTwinkle0 {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 0.96;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes markDustTwinkle1 {
+  0%, 100% {
+    opacity: 0.16;
+    transform: scale(0.55);
+  }
+  42% {
+    opacity: 0.9;
+    transform: scale(1.25);
+  }
+  70% {
+    opacity: 0.35;
+    transform: scale(0.75);
+  }
+}
+
+@keyframes markDustTwinkle2 {
+  0%, 100% {
+    opacity: 0.22;
+    transform: scale(0.65);
+  }
+  30% {
+    opacity: 0.45;
+    transform: scale(0.8);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes markDustTwinkle3 {
+  0%, 100% {
+    opacity: 0.15;
+    transform: scale(0.5);
+  }
+  55% {
+    opacity: 0.92;
+    transform: scale(1.28);
+  }
+}
+
+.mark-cyan-dust {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  filter: drop-shadow(0 0 3px #00f0ff);
+}
+
+.mark-dust-twinkle-0 {
+  animation-name: markDustTwinkle0;
+}
+
+.mark-dust-twinkle-1 {
+  animation-name: markDustTwinkle1;
+}
+
+.mark-dust-twinkle-2 {
+  animation-name: markDustTwinkle2;
+}
+
+.mark-dust-twinkle-3 {
+  animation-name: markDustTwinkle3;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mark-wavebar,
+  .mark-dot-blink,
+  .mark-sound-wave,
+  .mark-ring-breathe,
+  .mark-ring-glow,
+  .mark-ring-bright,
+  .mark-orbit-cw,
+  .mark-orbit-ccw,
+  .mark-ambient,
+  .mark-node-hot,
+  .mark-cyan-dust {
+    animation: none !important;
+  }
+}

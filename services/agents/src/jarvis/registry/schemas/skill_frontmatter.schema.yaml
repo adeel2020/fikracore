@@ -1,0 +1,27 @@
+type: object
+required: [id, title, engine]
+properties:
+  id:
+    type: string
+  title:
+    type: string
+  engine:
+    type: string
+  services:
+    type: array
+    items:
+      type: string
+  connectors:
+    type: array
+    items:
+      type: string
+  fcaps_lens:
+    type: array
+    items:
+      enum: [fault, change_request, accounting, performance, security]
+  output_modes:
+    type: array
+    items:
+      type: string
+  requires_approval:
+    type: boolean

@@ -1,0 +1,6 @@
+view_id: TOPO-H4-WI-002
+scenario_id: H4-WI-002
+visible_entities:
+- INFRA:DCGW:001
+relationships: []
+known_gaps: []

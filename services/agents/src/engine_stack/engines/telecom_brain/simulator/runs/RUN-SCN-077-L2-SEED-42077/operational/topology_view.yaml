@@ -1,0 +1,19 @@
+view_id: TOPO-SCN-077-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-077
+visible_entities:
+- IMSM:PCSCF:001
+- RAN:GNB:501
+- SA5G:AMF:001
+- INFRA:K8S:CORE-A
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-VONR-PCSCF
+- REL-AMF-GNB
+- REL-AMF-HOSTED
+- REL-UPF-HOSTED
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

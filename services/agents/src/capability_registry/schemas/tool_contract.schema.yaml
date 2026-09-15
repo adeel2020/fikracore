@@ -1,0 +1,15 @@
+type: object
+required: [id, service, connector]
+properties:
+  id:
+    type: string
+  service:
+    type: string
+  connector:
+    type: string
+  input_schema:
+    type: object
+  output_schema:
+    type: object
+  approval_required:
+    type: boolean

@@ -1,0 +1,8 @@
+difficulty_profile: K5
+gap_type: MISSING_ROAMING_INTERCONNECT
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-050-K5-SEED-52051
+scenario_id: H2-SCN-050
+seed: 52051
+variant: noisy

@@ -1,0 +1,31 @@
+run_id: RUN-SCN-084-L4-SEED-42084
+incident_id: INC-SYN-00084
+scenario_id: SCN-084
+scenario_file: ../../scenarios/SCN-084.yaml
+reference_network:
+  network_id: REF-MDO-001
+  file: ../operator_model/reference_synthetic_network.yaml
+difficulty_profile:
+  level: L4
+random_seed: 42084
+compile_status: VALID
+vendor_profiles_enabled: true
+runtime_overrides: {}
+generated_outputs:
+  operational:
+  - operational/alarms.jsonl
+  - operational/logs.jsonl
+  - operational/metrics.jsonl
+  - operational/kpis.jsonl
+  - operational/traces.jsonl
+  - operational/changes.jsonl
+  - operational/tickets.jsonl
+  - operational/recovery.jsonl
+  - operational/topology_view.yaml
+  hidden:
+  - hidden/ground_truth.yaml
+  - hidden/causal_graph.yaml
+  - hidden/noise_manifest.yaml
+  - hidden/evaluator_expectations.yaml
+separation_rule: operational outputs contain observable evidence only; evaluator-only
+  truth is under hidden/

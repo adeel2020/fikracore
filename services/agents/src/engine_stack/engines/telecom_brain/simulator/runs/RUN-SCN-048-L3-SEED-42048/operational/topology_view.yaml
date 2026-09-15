@@ -1,0 +1,18 @@
+view_id: TOPO-SCN-048-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-048
+visible_entities:
+- INFRA:NTP:CORE
+- SA5G:AMF:001
+- INFRA:K8S:CORE-A
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-CORE-NTP
+- REL-AMF-HOSTED
+- REL-UPF-HOSTED
+- REL-CRM-TICKETS-IMPACT
+known_gaps:
+- operational graph may omit or stale-mark one material path relationship
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

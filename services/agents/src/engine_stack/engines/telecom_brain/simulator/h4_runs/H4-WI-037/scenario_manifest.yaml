@@ -1,0 +1,19 @@
+what_if_id: H4-WI-037
+title: Site Power Grid Loss Combined With Gen-Set Delay
+description: Simulates grid blackout coupled with transfer switch delay triggering
+  DC shutdown.
+cohort: multi_failure
+trigger:
+  canonical_id: IP:CORE:RTR-02
+  entity_display_name: Core Transport Router-02
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: LIMITED
+  duration_minutes: 30
+  traffic_load_profile: PEAK
+failure_domain_tags:
+- multi_failure
+- power
+- cascade

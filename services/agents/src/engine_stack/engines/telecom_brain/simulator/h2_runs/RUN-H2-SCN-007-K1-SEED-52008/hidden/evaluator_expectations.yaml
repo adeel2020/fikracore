@@ -1,0 +1,6 @@
+expected_evidence_type: SERVICE_MAPPING
+expected_gap_boundary: SA5G:AMF:001
+expected_gap_type: MISSING_SHARED_DEPENDENCY
+expected_terminal_state: MODEL_INSUFFICIENT
+must_abstain_from_root_fact: true
+scenario_id: H2-SCN-007

@@ -5,6 +5,7 @@ import TeleportEffect from "./TeleportEffect";
 import { VoiceActivityDetector } from "@/components/voice/VoiceActivityDetector";
 import { useAvatar } from "./AvatarContext";
 import { useWebSocket, WebSocketProvider } from "@/contexts/WebSocketContext";
+import { API_BASE } from "@/lib/api/config";
 
 /**
  * TalkingAvatar — Loads @met4citizen/talkinghead via ES module <script> from CDN
@@ -148,9 +149,7 @@ interface TalkingAvatarProps {
   onListeningChange?: (listening: boolean) => void;
 }
 
-const TTS_ENDPOINT = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api/tts`
-  : "http://localhost:8000/api/tts";
+const TTS_ENDPOINT = `${API_BASE}/api/tts`;
 
 let _teleportAudio: HTMLAudioElement | null = null;
 

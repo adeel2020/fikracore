@@ -1,0 +1,20 @@
+graph_id: CAUSAL-SCN-086-SEED-42086
+nodes:
+- entity_id: IP:VRF:N3-01
+  role: ROOT
+  domain: IP_TRANSPORT
+- entity_id: SA5G:UPF:003
+  role: PROPAGATION_MECHANISM
+  domain: SA_5G_CORE
+- entity_id: CRM:TICKET:001
+  role: SYMPTOM
+  domain: CRM
+edges:
+- relationship_id: REL-N3-UPF
+  source_entity: SA5G:UPF:003
+  target_entity: IP:VRF:N3-01
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-CRM-TICKETS-IMPACT
+  source_entity: CRM:TICKET:001
+  target_entity: SA5G:UPF:003
+  causal_effect: degraded_state_propagation

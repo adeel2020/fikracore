@@ -1,0 +1,8 @@
+difficulty_profile: K4
+gap_type: MISSING_MONITORING_DEPENDENCY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-042-K4-SEED-52043
+scenario_id: H2-SCN-042
+seed: 52043
+variant: cross_domain

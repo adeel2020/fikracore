@@ -1,0 +1,11 @@
+scenario_id: H4-WI-035
+cohort: change_risk
+trigger_entity: INFRA:SW:CORE-05
+true_affected_services:
+- 5G SA Mobile Data
+- VoNR High Definition Voice
+true_cfs_risk: UNSAFE_MAINTENANCE
+true_common_cause_detected: false
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

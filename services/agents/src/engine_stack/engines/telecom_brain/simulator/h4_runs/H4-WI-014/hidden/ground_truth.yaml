@@ -1,0 +1,11 @@
+scenario_id: H4-WI-014
+cohort: shared_common_cause
+trigger_entity: INFRA:FW:PERIM-01
+true_affected_services:
+- 5G Roaming Interconnect
+- 5G SA Mobile Data
+true_cfs_risk: SHARED_DEPENDENCY
+true_common_cause_detected: true
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

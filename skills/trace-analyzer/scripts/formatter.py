@@ -158,8 +158,10 @@ def format_output(arguments: list[str], stdout: str, stderr: str) -> str:
         # Dynamically discover any available traces in current directory or target workspace
         possible_dirs = [
             os.path.join(workspace_root, "traces"),
+            os.path.join(workspace_root, ".tmp", "data", "traces"),
             workspace_root,
             os.path.join(os.getcwd(), "traces"),
+            os.path.join(os.getcwd(), ".tmp", "data", "traces"),
             os.getcwd()
         ]
         pcap_files = []

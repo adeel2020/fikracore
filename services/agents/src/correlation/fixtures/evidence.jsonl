@@ -1,0 +1,2 @@
+{"id":"kpi-registration-001","kind":"kpi","timestamp":"2026-08-28T10:05:00Z","service_id":"ue-registration","breached":true,"value":82.0,"threshold":99.5}
+{"id":"ticket-registration-001","kind":"ticket","timestamp":"2026-08-28T10:06:00Z","service_id":"ue-registration","breached":false,"summary":"Registration failures reported from site-42"}

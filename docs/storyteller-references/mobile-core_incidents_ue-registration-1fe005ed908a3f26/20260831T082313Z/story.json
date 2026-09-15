@@ -1,0 +1,360 @@
+{
+  "causal_chain": {
+    "steps": [
+      {
+        "claim_type": "CORRELATION",
+        "fact": {
+          "confidence": null,
+          "event_type": "breach",
+          "observed_at": "2026-08-28T10:05:00+00:00",
+          "relationship": "detected-by",
+          "slug": "mobile-core/kpi-events/kpi-registration-001",
+          "source": "kpi-registration-001",
+          "threshold": "breached",
+          "timestamp": "2026-08-28T10:05:00+00:00",
+          "value": "service KPI breached for ue-registration."
+        },
+        "label": "KPI degradation"
+      },
+      {
+        "claim_type": "HYPOTHESIS",
+        "fact": {
+          "confidence": 0.95,
+          "explains": [],
+          "relationship": "has-hypothesis",
+          "slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "source": "mcp:put_page",
+          "status": "plausible",
+          "timestamp": "2026-08-28T20:23:53.449Z",
+          "value": "Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport"
+        },
+        "label": "Hypothesis"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
+          "source": "ran-nms",
+          "timestamp": "2026-08-28T10:00:00+00:00",
+          "value": "Alarm LINK_DOWN observed on ran-gnodeb-17."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
+          "source": "transport-nms",
+          "timestamp": "2026-08-28T10:02:00+00:00",
+          "value": "Alarm INTERFACE_ERRORS observed on transport-agg-sw-03."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
+          "source": "core-nms",
+          "timestamp": "2026-08-28T10:04:00+00:00",
+          "value": "Alarm CPU_HIGH observed on core-amf-01."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+          "source": "kpi-registration-001",
+          "timestamp": "2026-08-28T10:05:00+00:00",
+          "value": "KPI breach for ue-registration"
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
+          "source": "ticket-registration-001",
+          "timestamp": "2026-08-28T10:06:00+00:00",
+          "value": "TICKET observation for ue-registration"
+        },
+        "label": "Evidence"
+      }
+    ]
+  },
+  "correlation_metadata": {
+    "contributing_domains": [
+      "mobile-core",
+      "ran",
+      "transport"
+    ],
+    "correlation_key": "1fe005ed908a3f26",
+    "correlation_reasons": [
+      "multiple alarms in the correlation window",
+      "shared affected service",
+      "KPI breach supports service impact",
+      "independent operational evidence",
+      "service intent is violated",
+      "critical source alarm",
+      "novel alarm signature retained for review"
+    ],
+    "correlation_scope": "inter-domain",
+    "correlation_score": 95,
+    "intent_status": "violated"
+  },
+  "generated_by": "deterministic",
+  "hypotheses": [
+    {
+      "evidence": [
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
+          "source": "ran-nms",
+          "timestamp": "2026-08-28T10:00:00+00:00",
+          "value": "Alarm LINK_DOWN observed on ran-gnodeb-17."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
+          "source": "transport-nms",
+          "timestamp": "2026-08-28T10:02:00+00:00",
+          "value": "Alarm INTERFACE_ERRORS observed on transport-agg-sw-03."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
+          "source": "core-nms",
+          "timestamp": "2026-08-28T10:04:00+00:00",
+          "value": "Alarm CPU_HIGH observed on core-amf-01."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+          "source": "kpi-registration-001",
+          "timestamp": "2026-08-28T10:05:00+00:00",
+          "value": "KPI breach for ue-registration"
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+          "relationship": "supported-by",
+          "slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
+          "source": "ticket-registration-001",
+          "timestamp": "2026-08-28T10:06:00+00:00",
+          "value": "TICKET observation for ue-registration"
+        }
+      ],
+      "explains": [],
+      "explanation": "score = base confidence 0.95, 5 supporting evidence item(s)",
+      "hypothesis": {
+        "confidence": 0.95,
+        "explains": [],
+        "relationship": "has-hypothesis",
+        "slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "source": "mcp:put_page",
+        "status": "plausible",
+        "timestamp": "2026-08-28T20:23:53.449Z",
+        "value": "Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport"
+      },
+      "score": 1.0,
+      "status": "plausible"
+    }
+  ],
+  "impact": [
+    {
+      "confidence": null,
+      "relationship": "affects",
+      "slug": "mobile-core/services/ue-registration",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-28T20:23:53.570Z",
+      "value": "UE Registration"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/mobile-core-core-amf-01",
+      "source": "core-nms",
+      "timestamp": "2026-08-28T20:21:49.066Z",
+      "value": "core-amf-01 (amf, mobile-core)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/ran-ran-gnodeb-17",
+      "source": "ran-nms",
+      "timestamp": "2026-08-28T20:21:48.681Z",
+      "value": "ran-gnodeb-17 (gnodeb, ran)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/transport-transport-agg-sw-03",
+      "source": "transport-nms",
+      "timestamp": "2026-08-28T20:21:48.881Z",
+      "value": "transport-agg-sw-03 (aggregation-switch, transport)"
+    }
+  ],
+  "incident_id": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+  "kpi_events": [
+    {
+      "confidence": null,
+      "event_type": "breach",
+      "observed_at": "2026-08-28T10:05:00+00:00",
+      "relationship": "detected-by",
+      "slug": "mobile-core/kpi-events/kpi-registration-001",
+      "source": "kpi-registration-001",
+      "threshold": "breached",
+      "timestamp": "2026-08-28T10:05:00+00:00",
+      "value": "service KPI breached for ue-registration."
+    }
+  ],
+  "kpis": [
+    {
+      "confidence": null,
+      "relationship": "measures",
+      "slug": "mobile-core/kpis/service-kpi",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-28T20:23:53.927Z",
+      "value": "Service KPI"
+    }
+  ],
+  "network_functions": [
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/mobile-core-core-amf-01",
+      "source": "core-nms",
+      "timestamp": "2026-08-28T20:21:49.066Z",
+      "value": "core-amf-01 (amf, mobile-core)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/ran-ran-gnodeb-17",
+      "source": "ran-nms",
+      "timestamp": "2026-08-28T20:21:48.681Z",
+      "value": "ran-gnodeb-17 (gnodeb, ran)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/transport-transport-agg-sw-03",
+      "source": "transport-nms",
+      "timestamp": "2026-08-28T20:21:48.881Z",
+      "value": "transport-agg-sw-03 (aggregation-switch, transport)"
+    }
+  ],
+  "recovery_events": [],
+  "remediations": [],
+  "root_cause": null,
+  "services": [
+    {
+      "confidence": null,
+      "relationship": "affects",
+      "slug": "mobile-core/services/ue-registration",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-28T20:23:53.570Z",
+      "value": "UE Registration"
+    }
+  ],
+  "severity": "SEV-1",
+  "similar_incidents": [
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-28T20:20:36.127Z",
+      "value": "Intra-Domain incident candidate for Unmapped Service"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-28T20:20:35.276Z",
+      "value": "Intra-Domain incident candidate for Site Power"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/amf-overload-2026-08-09",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-08T23:13:09.400Z",
+      "value": "AMF-01 overload causes mass registration failures"
+    }
+  ],
+  "status": "open",
+  "summary": "incident mobile-core/incidents/ue-registration-1fe005ed908a3f26 \u2014 SEV-1 open inter-domain correlation impacting UE Registration across mobile-core, ran, transport; score 95; intent violated; leading hypothesis: Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport",
+  "symptoms": [],
+  "timeline": [
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-28T10:00:00+00:00** - Critical ran alarm LINK_DOWN on ran-gnodeb-17"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-28T10:02:00+00:00** - Major transport alarm INTERFACE_ERRORS on transport-agg-sw-03"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-28T10:04:00+00:00** - Major mobile-core alarm CPU_HIGH on core-amf-01"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-28T10:05:00+00:00** - KPI breach for ue-registration"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-28T10:06:00+00:00** - TICKET observation for ue-registration"
+    }
+  ],
+  "unresolved_questions": [
+    "root cause is not confirmed",
+    "no remediation recorded",
+    "no recovery observed"
+  ]
+}

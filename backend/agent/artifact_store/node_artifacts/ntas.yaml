@@ -1,4 +1,0 @@
-description: Manages VoLTE/IMS Core profiles via SIP Registration.
-id: ntas
-label: Nokia Telephony Application Server (nTAS)
-type: Component

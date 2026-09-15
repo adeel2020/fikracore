@@ -1,0 +1,19 @@
+what_if_id: H4-WI-024
+title: Signaling Storm During AMF Failover
+description: Simulates massive registration retry surge exhausting backup control
+  plane.
+cohort: failover_capacity
+trigger:
+  canonical_id: IP:PE:RTR-24
+  entity_display_name: Transport Router-24
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: LIMITED
+  duration_minutes: 30
+  traffic_load_profile: PEAK
+failure_domain_tags:
+- capacity
+- signaling
+- failover

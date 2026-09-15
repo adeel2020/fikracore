@@ -1,0 +1,31 @@
+id: mark
+name: MARK
+version: 1.0.0
+description: Enterprise telecom assistant with on-demand cognition, collaboration, knowledge access, calendar support, and controlled coding execution.
+runtime:
+  inbound_mcp_server:
+    id: mark_mcp_server
+    purpose: Single enterprise front door exposing typed Mark tools to external clients.
+  outbound_mcp_client_hub:
+    id: mcp_client_hub
+    purpose: Shared outbound MCP client used by every connector manifest.
+    rule: Do not create one-off MCP clients inside individual engines or services.
+engines:
+  - telecom_brain
+  - knowledge_base
+  - collaboration
+  - calendar
+  - codex_engineering
+  - automation
+principles:
+  - Mark is one assistant with multiple specialist engines.
+  - Engines represent capability areas, not data stores.
+  - Services are internal capability boundaries.
+  - Connectors are external system boundaries.
+  - One outbound MCP client hub manages all downstream MCP connections.
+  - Connector manifests define identity, ownership, tools, environment, and permission policy.
+  - Skills are human-readable operating procedures with machine-readable frontmatter.
+  - gbrain is the semantic telecom brain, not the raw source-of-truth store.
+  - Raw incidents, telemetry, documents, and messages stay in their source systems.
+  - Voice responses are curated for speech and never read raw Markdown as-is.
+  - FCAPS is used as a learning and enrichment lens across telecom operations.

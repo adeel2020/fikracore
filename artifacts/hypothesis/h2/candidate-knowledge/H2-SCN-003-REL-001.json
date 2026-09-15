@@ -1,0 +1,11 @@
+{
+  "candidate_id": "REL-001",
+  "source": "IP:PE:RTR-21",
+  "target": "SA5G:UPF:003",
+  "proposed_type": "connected-to",
+  "state": "CANDIDATE",
+  "supporting_evidence": [
+    "EV-LOG-H2-SCN-003-001"
+  ],
+  "reason": "Observed path adjacency is absent from operational knowledge; requires independent validation"
+}

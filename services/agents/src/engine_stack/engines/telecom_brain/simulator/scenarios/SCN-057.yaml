@@ -1,0 +1,152 @@
+scenario_id: SCN-057
+scenario_name: IMS Recovery Triggers Registration Surge
+reference_network:
+  network_id: REF-MDO-001
+  file: ../operator_model/reference_synthetic_network.yaml
+scenario_explanation:
+  problem_statement: Large numbers of users re-register when IMS becomes available
+    again.
+  what_will_occur: Mobile P-CSCF-01 experiences the root condition; effects propagate
+    through modeled dependencies into Mobile IMS Voice and mapped customer/service
+    signals.
+classification:
+  primary_engineering_effect: RECOVERY_SURGE_MASS_RECONNECTION
+  secondary_effects:
+  - AMPLIFICATION_CONTROL_PLANE_CHURN
+  friendly_effect_label: Thundering-Herd-like Recovery
+  fcaps_primary: FAULT
+  fcaps_secondary:
+  - PERFORMANCE
+  domains:
+  - CRM
+  - MOBILE_IMS
+  - RAN
+  affected_services:
+  - mobile_ims_voice
+  effect_families:
+    primary: RECOVERY_SURGE_MASS_RECONNECTION
+    secondary:
+    - AMPLIFICATION_CONTROL_PLANE_CHURN
+  friendly_effect_labels:
+  - Thundering-Herd-like Recovery
+  difficulty_profile: L2
+preconditions:
+  normal_state:
+  - reference synthetic network validates before scenario compilation
+  - Mobile IMS Voice is healthy before trigger
+  - operational graph may be incomplete according to scenario difficulty profile
+  required_entities:
+  - IMSM:PCSCF:001
+  - RAN:GNB:501
+  - SA5G:AMF:001
+  - INFRA:K8S:CORE-A
+  - SA5G:UPF:003
+  - CRM:TICKET:001
+  required_entity_types:
+  - amf
+  - customer_ticket_service
+  - gnodeb
+  - kubernetes_cluster
+  - p_cscf
+  - upf
+  required_relationships:
+  - REL-VONR-PCSCF
+  - REL-AMF-GNB
+  - REL-AMF-HOSTED
+  - REL-UPF-HOSTED
+  - REL-CRM-TICKETS-IMPACT
+  required_service_chain: mobile_ims_voice
+  required_failure_domains:
+  - FD-RAN-101
+  - FD-K8S-A
+hidden_reality:
+  root_condition: 'IMS Recovery Triggers Registration Surge: root condition at Mobile
+    P-CSCF-01'
+  trigger: synthetic deterministic scenario trigger with seeded timing and difficulty-specific
+    imperfections
+  origin_domain: MOBILE_IMS
+  origin_entity: IMSM:PCSCF:001
+  causal_propagation_chain:
+  - IMSM:PCSCF:001
+  - RAN:GNB:501
+  - SA5G:AMF:001
+  - INFRA:K8S:CORE-A
+  - SA5G:UPF:003
+  - CRM:TICKET:001
+  hidden_dependencies: []
+  actual_blast_radius:
+    services:
+    - mobile_ims_voice
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    entity_count: 6
+evidence_to_generate:
+  alarms:
+  - Mobile P-CSCF-01 reports p_cscf degradation
+  - Mobile IMS Voice dependent symptom alarm
+  logs:
+  - source-native logs show retries/timeouts near Mobile P-CSCF-01
+  metrics:
+  - latency_ms increases on the affected dependency path
+  - packet_loss_pct, timeout_rate, queue_depth, or resource_saturation rises according
+    to failure mechanism
+  kpis:
+  - Mobile IMS Voice success rate decreases
+  - customer-visible service quality falls below normal baseline
+  traces_protocol_evidence:
+  - protocol traces show retries, retransmissions, or failed handshakes along the
+    causal path
+  changes: []
+  tickets_customer_signals:
+  - customer tickets increase only for mapped service, region, and customer segment
+  healthy_negative_evidence:
+  - unaffected adjacent domain remains healthy as negative evidence
+  - non-causal recent changes remain tracked as unrelated metadata
+noise_and_uncertainty:
+  unrelated_events:
+  - seeded unrelated event in a non-causal domain
+  - optional non-causal recent change for bias testing
+  delayed_events:
+  - root-domain evidence may arrive after downstream symptoms according to difficulty
+    profile
+  missing_evidence:
+  - one expected signal may be absent only when source coverage permits it
+  contradictory_evidence:
+  - conflicting interpretation may appear only as operational evidence, never as hidden-world
+    inconsistency
+  topology_gaps: []
+timing:
+  propagation_constraints:
+  - causal state changes must follow dependency path order before jitter is applied
+  event_time_rules:
+  - event_time follows hidden propagation with seeded jitter
+  ingestion_delay_rules:
+  - ingestion_time follows observability source profile delay and clock-skew behavior
+recovery:
+  recovery_sequence:
+  - remove or mitigate root condition
+  - observe dependent KPI recovery in reverse or service-specific order
+  - verify no unsupported RCA certainty remains
+  recovery_side_effects:
+  - recovery surge, backlog flush, or transient reroute may be generated when matching
+    effect family
+reasoning_test:
+  plausible_wrong_hypotheses:
+  - first visible downstream alarm is the root cause
+  - highest-severity domain is the root cause
+  - recent unrelated change is causal without supporting evidence
+  - Mobile IMS Voice application fault without upstream dependency evidence
+  expected_root_domain: MOBILE_IMS
+  expected_root_entity: IMSM:PCSCF:001
+  expected_terminal_state: EXPLAINED
+  expected_discovery_findings: []
+evaluation_assertions:
+- all required entities must exist in the reference synthetic network
+- every causal hop must resolve through a modeled relationship or valid service-chain
+  dependency
+- operational evidence must not contain root-cause labels
+- customer impact must follow affected service, region, and customer segment mapping
+- healthy evidence must not contradict hidden reality
+- unrelated noise must remain evaluator metadata and must not become causal truth

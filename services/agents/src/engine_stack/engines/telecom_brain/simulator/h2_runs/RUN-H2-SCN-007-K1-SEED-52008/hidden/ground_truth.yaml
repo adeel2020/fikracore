@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: SA5G:AMF:001
+  gap_type: MISSING_SHARED_DEPENDENCY
+  relationship_id: REL-AMF-SMF
+root_entity: SA5G:AMF:001
+scenario_id: H2-SCN-007
+true_terminal_state: MODEL_INSUFFICIENT

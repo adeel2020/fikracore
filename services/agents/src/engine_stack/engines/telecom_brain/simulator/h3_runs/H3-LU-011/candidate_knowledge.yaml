@@ -1,0 +1,12 @@
+candidate_id: KG-H3-011
+discovery_incident: H2-SCN-011
+gap_type: MISSING_SERVICE_TO_FUNCTION
+source: SA5G:AMF:001
+target: SA5G:UPF:003
+proposed_type: routes-through
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-011-001
+reason: Operational discovery in H2-SCN-011 indicates traffic forwarding from SA5G:AMF:001
+  to SA5G:UPF:003

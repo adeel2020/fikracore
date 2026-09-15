@@ -1,0 +1,8 @@
+difficulty_profile: K1
+gap_type: MISSING_SERVICE_TO_FUNCTION
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-012-K1-SEED-52013
+scenario_id: H2-SCN-012
+seed: 52013
+variant: cross_domain

@@ -1,0 +1,57 @@
+{
+  "L1": {
+    "total": 20,
+    "method_b_strict_correct": 15,
+    "rank_1": 20,
+    "rank_top3": 20,
+    "model_insufficient": 0,
+    "partially_explained": 0,
+    "avg_coverage": 0.91,
+    "avg_evidence_requests": 0.0,
+    "strict_accuracy": 0.75
+  },
+  "L2": {
+    "total": 20,
+    "method_b_strict_correct": 15,
+    "rank_1": 20,
+    "rank_top3": 20,
+    "model_insufficient": 0,
+    "partially_explained": 0,
+    "avg_coverage": 0.797,
+    "avg_evidence_requests": 0.0,
+    "strict_accuracy": 0.75
+  },
+  "L3": {
+    "total": 20,
+    "method_b_strict_correct": 15,
+    "rank_1": 20,
+    "rank_top3": 20,
+    "model_insufficient": 0,
+    "partially_explained": 0,
+    "avg_coverage": 0.853,
+    "avg_evidence_requests": 0.0,
+    "strict_accuracy": 0.75
+  },
+  "L4": {
+    "total": 20,
+    "method_b_strict_correct": 15,
+    "rank_1": 20,
+    "rank_top3": 20,
+    "model_insufficient": 0,
+    "partially_explained": 0,
+    "avg_coverage": 0.97,
+    "avg_evidence_requests": 0.0,
+    "strict_accuracy": 0.75
+  },
+  "L5": {
+    "total": 20,
+    "method_b_strict_correct": 15,
+    "rank_1": 20,
+    "rank_top3": 20,
+    "model_insufficient": 0,
+    "partially_explained": 0,
+    "avg_coverage": 0.98,
+    "avg_evidence_requests": 0.0,
+    "strict_accuracy": 0.75
+  }
+}

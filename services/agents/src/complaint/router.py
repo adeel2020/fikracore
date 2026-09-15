@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 from agenticaiops_shared.guardrails import check_guardrail_standalone
 
-from .complaint.analyst import complaint_analyst
+from complaint.complaint.analyst import complaint_analyst
 
 logger = logging.getLogger("complaint.router")
 router = APIRouter(prefix="/api/complaint", tags=["complaint"])

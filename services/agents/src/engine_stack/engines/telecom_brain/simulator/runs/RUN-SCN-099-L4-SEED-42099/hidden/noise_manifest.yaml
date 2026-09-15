@@ -1,0 +1,19 @@
+scenario_id: SCN-099
+seed: 42099
+difficulty_profile: L4
+noise_events:
+- event_id: ALM-SCN-099-DUP1
+  noise_type: duplicate_alarm
+  reason: source emitted repeated presentation of same underlying symptom
+- event_id: CHG-SCN-099-0001
+  noise_type: unrelated_recent_change
+  reason: bias-test change context, not hidden cause
+delay_events:
+- event_id: ALM-SCN-099-0001
+  distortion_type: delayed_root_domain_evidence
+  reason: difficulty profile delays initiating-domain visibility
+missing_evidence:
+- one expected signal may be absent only when source coverage permits it
+contradictory_evidence:
+- conflicting interpretation may appear only as operational evidence, never as hidden-world
+  inconsistency

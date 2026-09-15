@@ -1,0 +1,21 @@
+id: communication
+name: Communication Service
+engine: collaboration
+description: Drafts and, with approval, sends operational messages through configured collaboration connectors.
+status: planned
+connectors:
+  - gmail
+  - whatsapp
+  - microsoft_teams
+consumes:
+  - incident_story
+  - stakeholder_context
+  - message_request
+produces:
+  - email_draft
+  - whatsapp_draft
+  - teams_message_draft
+  - sent_message_receipt
+permissions:
+  - draft_external_message
+  - send_requires_approval

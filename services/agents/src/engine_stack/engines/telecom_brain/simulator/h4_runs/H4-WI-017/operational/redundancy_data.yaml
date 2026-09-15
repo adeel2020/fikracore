@@ -1,0 +1,9 @@
+failover_pairs:
+  TRANS:LEASED:CARRIER-A:
+    backup_entity: TRANS:LEASED:CARRIER-B
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Both transit providers share common physical dark fiber span.
+backup_node: TRANS:LEASED:CARRIER-B
+backup_health: HEALTHY

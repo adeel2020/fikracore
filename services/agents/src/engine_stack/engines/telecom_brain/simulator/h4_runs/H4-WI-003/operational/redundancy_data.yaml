@@ -1,0 +1,4 @@
+failover_pairs: {}
+shared_failure_domains: []
+backup_node: null
+backup_health: NONE

@@ -1,0 +1,34 @@
+id: whatsapp
+name: WhatsApp Connector
+kind: api
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: collaboration
+description: Drafts and sends approved WhatsApp operational updates to configured recipients and groups.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: WHATSAPP_MCP_PROTOCOL
+  url_env: WHATSAPP_MCP_URL
+  token_env: WHATSAPP_MCP_TOKEN
+  command_env: WHATSAPP_MCP_COMMAND
+  args: []
+env:
+  - WHATSAPP_MCP_PROTOCOL
+  - WHATSAPP_MCP_URL
+  - WHATSAPP_MCP_TOKEN
+  - WHATSAPP_MCP_COMMAND
+  - WHATSAPP_API_URL
+  - WHATSAPP_API_TOKEN
+capabilities:
+  - draft_whatsapp
+  - send_whatsapp
+  - read_group_context
+permissions:
+  - draft_external_message
+  - send_requires_approval
+fallback_transports:
+  - stdio
+  - http
+  - meta_whatsapp_cloud_api
+  - twilio_api

@@ -1,0 +1,35 @@
+id: google_calendar
+name: Google Calendar Connector
+kind: api
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: calendar
+description: Reads schedules and creates approved calendar events for operational coordination.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: GOOGLE_CALENDAR_MCP_PROTOCOL
+  url_env: GOOGLE_CALENDAR_MCP_URL
+  token_env: GOOGLE_CALENDAR_MCP_TOKEN
+  command_env: GOOGLE_CALENDAR_MCP_COMMAND
+  args: []
+env:
+  - GOOGLE_CALENDAR_MCP_PROTOCOL
+  - GOOGLE_CALENDAR_MCP_URL
+  - GOOGLE_CALENDAR_MCP_TOKEN
+  - GOOGLE_CALENDAR_MCP_COMMAND
+  - GOOGLE_CLIENT_ID
+  - GOOGLE_CLIENT_SECRET
+  - GOOGLE_REFRESH_TOKEN
+capabilities:
+  - read_events
+  - find_free_time
+  - draft_event
+  - create_event
+permissions:
+  - calendar_read
+  - calendar_write_requires_approval
+fallback_transports:
+  - stdio
+  - http
+  - google_api

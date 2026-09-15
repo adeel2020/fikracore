@@ -1,0 +1,1 @@
+{"event_id":"KPI-SCN-063-0001","source_system":"METRICS_PLATFORM","kpi_name":"Vas Short Code Service Success Rate","service":"vas_short_code_service","entity_id":"EXT:VAS:001","canonical_entity_id":"EXT:VAS:001","value":76.46,"unit":"percent","baseline_value":98.5,"event_time":"2026-09-10T09:04:35Z","ingestion_time":"2026-09-10T09:05:02Z","domain":"EXTERNAL","confidence":0.86}

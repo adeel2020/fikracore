@@ -1,0 +1,15 @@
+id: automation_execution
+name: Automation Execution Service
+engine: automation
+description: Runs approved operational diagnostics, pre-checks, and remediation proposals with strict approval policy.
+status: planned
+connectors: []
+consumes:
+  - automation_request
+  - operational_context
+produces:
+  - automation_result
+  - remediation_proposal
+permissions:
+  - execute_safe_readonly_automation
+  - remediation_requires_approval

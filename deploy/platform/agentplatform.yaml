@@ -1,0 +1,57 @@
+apiVersion: platform.agenticaiops.io/v1
+kind: AgentPlatform
+metadata:
+  name: agenticaiops
+  namespace: agents-prod
+spec:
+  image: localhost/agenticaiops-backend:v1
+  imagePullPolicy: IfNotPresent
+  agents:
+    agent-services:
+      enabled: true
+      entrypoint: src.main:app
+      servicePort: 8001
+      replicas:
+        min: 2
+        max: 4
+        targetCPU: 75
+      resources:
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+        limits:
+          cpu: "2"
+          memory: "2Gi"
+      env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: url
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: openai-secret
+              key: api-key
+        - name: QDRANT_URL
+          valueFrom:
+            secretKeyRef:
+              name: qdrant-secret
+              key: url
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: redis-secret
+              key: url
+        - name: OPENAI_API_BASE
+          value: "http://host.docker.internal:11434"
+      extraVolumes:
+        - name: rag-sqlite
+          persistentVolumeClaim:
+            claimName: rag-sqlite-data
+          mountPath: /app/src/rag/data
+          readOnly: false
+      probePath: /health
+      terminationGracePeriodSeconds: 30
+  gateway:
+    enabled: false

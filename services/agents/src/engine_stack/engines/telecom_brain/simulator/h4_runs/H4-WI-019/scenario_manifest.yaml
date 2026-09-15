@@ -1,0 +1,19 @@
+what_if_id: H4-WI-019
+title: Redundant Ingress Load Balancers Shared Border Route
+description: Simulates upstream edge gateway withdrawal dropping traffic to both load
+  balancers.
+cohort: shared_common_cause
+trigger:
+  canonical_id: INFRA:LB:INGRESS-01
+  entity_display_name: Ingress Load Balancer-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- common_cause
+- routing
+- shared_dependency

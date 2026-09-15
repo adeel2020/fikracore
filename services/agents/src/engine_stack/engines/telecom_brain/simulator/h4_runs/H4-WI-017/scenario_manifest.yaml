@@ -1,0 +1,19 @@
+what_if_id: H4-WI-017
+title: Cross-DC Backhaul Common Carrier Outage
+description: Simulates backhaul leased lines traversing the same third-party transport
+  provider.
+cohort: shared_common_cause
+trigger:
+  canonical_id: TRANS:LEASED:CARRIER-A
+  entity_display_name: Carrier A Transit Gateway
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- common_cause
+- carrier
+- shared_dependency

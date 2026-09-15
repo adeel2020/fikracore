@@ -1,0 +1,19 @@
+what_if_id: H4-WI-035
+title: Database Schema Migration Lock Contention
+description: Simulates alter table statement taking exclusive lock during active call
+  window.
+cohort: change_risk
+trigger:
+  canonical_id: INFRA:SW:CORE-05
+  entity_display_name: Core Switch-05
+  event_type: CONFIG_CHANGE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- change_risk
+- database
+- maintenance

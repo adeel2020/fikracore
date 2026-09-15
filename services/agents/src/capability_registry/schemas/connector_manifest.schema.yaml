@@ -1,0 +1,35 @@
+type: object
+required: [id, name, kind]
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  kind:
+    type: string
+  transport:
+    type: string
+  managed_by:
+    type: string
+  owner_engine:
+    type: string
+  description:
+    type: string
+  env:
+    type: array
+    items:
+      type: string
+  capabilities:
+    type: array
+    items:
+      type: string
+  permissions:
+    type: array
+    items:
+      type: string
+  fallback_transports:
+    type: array
+    items:
+      type: string
+  status:
+    type: string

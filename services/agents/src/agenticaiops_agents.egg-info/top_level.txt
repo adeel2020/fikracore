@@ -1,7 +1,15 @@
+assistant
+capability_registry
+chroma_db
 complaint
+connectors
 core
+correlation
+engine_stack
 jarvis
+mcp_hub
 qna
 rag
 secops
+sft
 storyteller

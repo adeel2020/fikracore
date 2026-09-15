@@ -75,6 +75,47 @@ body {
   }
 }
 
+@keyframes stage-orbit {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes stage-orbit-dot {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(15px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(15px);
+  }
+}
+
+.stage-orbit {
+  animation: stage-orbit 2.2s linear infinite;
+}
+
+.stage-orbit-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(125, 211, 252, 1), rgba(34, 211, 238, 0.9));
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.9);
+  transform-origin: center center;
+  animation: stage-orbit-dot 1.8s linear infinite;
+}
+
 .animate-ghost-unveil {
   animation: ghost-unveil 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -229,4 +270,99 @@ body::-webkit-scrollbar {
   animation: qnaFadeIn 0.2s ease-out forwards;
 }
 
+/* ─── Light Mode Overrides for FikraCore Simulator Cockpit ─── */
+.light-theme,
+html.light .light-theme {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
 
+.light-theme header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: #e2e8f0 !important;
+}
+
+.light-theme [class*="bg-[#050b18]"],
+.light-theme [class*="bg-[#061327]"],
+.light-theme [class*="bg-[#070f22]"],
+.light-theme [class*="bg-[#07172f]"],
+.light-theme [class*="bg-[#08152c]"],
+.light-theme [class*="bg-[#081b36]"],
+.light-theme [class*="bg-[#0a152d]"],
+.light-theme [class*="bg-[#0b273b]"],
+.light-theme [class*="bg-[#0d2a4a]"] {
+  background-color: #ffffff !important;
+  border-color: #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.light-theme .bg-slate-900,
+.light-theme .bg-slate-950 {
+  background-color: #f1f5f9 !important;
+}
+
+.light-theme [class*="border-cyan-500/"],
+.light-theme [class*="border-cyan-400/"],
+.light-theme [class*="border-blue-500/"],
+.light-theme [class*="border-slate-800"],
+.light-theme [class*="border-slate-700"] {
+  border-color: #e2e8f0 !important;
+}
+
+.light-theme input,
+.light-theme select {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: #cbd5e1 !important;
+}
+
+.light-theme input::placeholder {
+  color: #94a3b8 !important;
+}
+
+.light-theme .text-white {
+  color: #0f172a;
+}
+
+.light-theme .text-slate-100,
+.light-theme .text-slate-200 {
+  color: #1e293b;
+}
+
+.light-theme .text-slate-300 {
+  color: #334155;
+}
+
+.light-theme .text-slate-400 {
+  color: #64748b;
+}
+
+.light-theme .text-cyan-300,
+.light-theme .text-sky-300 {
+  color: #0284c7 !important;
+}
+
+.light-theme .text-cyan-400 {
+  color: #0369a1 !important;
+}
+
+.light-theme button {
+  color: inherit;
+}
+
+/* Light mode for reasoning canvas */
+.light-theme .relative.w-full.h-full.min-h-\[360px\] {
+  background: radial-gradient(circle at center, #ffffff 0%, #f1f5f9 100%) !important;
+}
+
+.light-theme button[type="button"].rounded-full {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+}
+
+.light-theme button[type="button"].rounded-full:hover {
+  background-color: #f0f9ff !important;
+  border-color: #38bdf8 !important;
+}

@@ -1,0 +1,6 @@
+scenario_id: H3-FUT-004
+root_entity: IP:PE:RTR-21
+impacted_service: enterprise_l3_vpn
+requires_promoted_relation: true
+is_stale_relation: false
+is_poisoned_relation: false

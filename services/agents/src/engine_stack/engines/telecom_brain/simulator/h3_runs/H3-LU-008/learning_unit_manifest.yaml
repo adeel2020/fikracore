@@ -1,0 +1,12 @@
+learning_unit_id: H3-LU-008
+cohort: positive_transfer
+discovery_incident: H2-SCN-008
+candidate_id: KG-H3-008
+validation_decision: ACCEPT
+future_incident_id: H3-FUT-008
+expected_learning_value: Improved causal path reconstruction and root cause accuracy
+validated_relation:
+  source: SA5G:UPF:003
+  target: SA5G:AMF:001
+  relation: routes-through
+  relationship_id: REL-PROM-H3-008

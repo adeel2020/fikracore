@@ -1,0 +1,19 @@
+id: code_execution
+name: Code Execution Service
+engine: codex_engineering
+description: Delegates implementation, debugging, and test runs to a controlled Codex workspace or sandbox.
+status: planned
+connectors:
+  - codex
+consumes:
+  - engineering_request
+  - repository_context
+  - test_request
+produces:
+  - codex_task
+  - patch_summary
+  - test_result
+permissions:
+  - sandbox_code_execution
+  - write_code_requires_context
+  - deploy_requires_approval

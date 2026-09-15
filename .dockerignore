@@ -1,3 +1,4 @@
+.backend/
 .git
 .gitignore
 .venv
@@ -20,3 +21,4 @@ build/
 *.log
 .env
 .env.local
+**/.models

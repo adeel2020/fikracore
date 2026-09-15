@@ -1,0 +1,12 @@
+candidate_id: KG-H3-023
+discovery_incident: H2-SCN-023
+gap_type: MISSING_EXTERNAL_DEPENDENCY
+source: SA5G:AMF:001
+target: SA5G:UPF:003
+proposed_type: routes-through
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-023-001
+reason: Operational discovery in H2-SCN-023 indicates traffic forwarding from SA5G:AMF:001
+  to SA5G:UPF:003

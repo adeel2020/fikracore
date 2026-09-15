@@ -1,0 +1,18 @@
+demo:
+  enabled: true
+  title: 'Learning Transfer: User Plane Function-03 -> INFRA Cool A'
+  cohort: poisoned_validation
+  audience: leadership
+  duration_minutes: 5
+  learning_objective: Demonstrate that validated operational knowledge (User Plane
+    Function-03 depends-on INFRA Cool A) improves reasoning on a different future
+    incident (corporate_internet_access).
+  steps:
+  - Incident H2-SCN-027 exposes missing dependency
+  - FikraCore proposes safe candidate relationship
+  - Domain SME validates relationship with operational evidence
+  - Knowledge is promoted under 8 governance guardrails
+  - Different future incident H3-FUT-027 occurs on corporate_internet_access
+  - FikraCore reuses validated knowledge to reconstruct causal chain
+  - Root cause identified with higher accuracy and zero hallucination
+  final_message: Validated experience becomes reusable operational knowledge.

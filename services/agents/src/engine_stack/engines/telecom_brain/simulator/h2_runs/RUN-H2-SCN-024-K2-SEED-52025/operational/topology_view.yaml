@@ -1,0 +1,16 @@
+known_gaps: []
+scenario_id: H2-SCN-024
+source: operational_telecombrain
+source_warnings:
+- operational view may have unmodeled topology gaps according to difficulty
+view_id: TOPO-H2-SCN-024-OPERATIONAL
+visible_entities:
+- IP:PE:RTR-21
+- IP:VRF:N3-01
+- SA5G:UPF:003
+- CRM:TICKET:001
+- EXT:ROAMING:001
+visible_relationships:
+- REL-N3-PE21
+- REL-N3-UPF
+- REL-CRM-IMPACT

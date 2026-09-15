@@ -1,0 +1,78 @@
+{
+  "alias_cycles": [],
+  "canonical_collisions": {
+    "incidents/mobile-core/sgi-data-a154bb7a3997859c": [
+      "incidents/mobile-core/sgi-throughput-drop",
+      "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "mobile-core/incidents/sgi-throughput-drop"
+    ]
+  },
+  "correlation_pages_continue_to_resolve": true,
+  "destructive_operations": 0,
+  "generated_at": "2026-09-10T13:45:49.263488+00:00",
+  "live_mcp_probe_status": "ok",
+  "missing_required_regression_anchors": [
+    "customer_ticket_journey_ticket",
+    "customer_ticket_journey_procedure"
+  ],
+  "missing_targets_blocking": [],
+  "mode": "dry-run",
+  "mutation_block_reason": "Dry run only. Invoke a separately reviewed --apply flow before live alias/link/page mutations.",
+  "mutation_blocked": true,
+  "page_count": 100,
+  "planned_operations": 5,
+  "required_regression_anchors": {
+    "customer_ticket_journey_procedure": {
+      "expected_any": [
+        "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey"
+      ],
+      "resolved": false
+    },
+    "customer_ticket_journey_ticket": {
+      "expected_any": [
+        "tickets/mobile-core/tt-984210"
+      ],
+      "resolved": false
+    },
+    "incident_storyteller_amf_legacy": {
+      "expected_any": [
+        "mobile-core/incidents/amf-overload-2026-08-09"
+      ],
+      "resolved": true
+    },
+    "lte_attach_functions": {
+      "expected_any": [
+        "domains/mobile-core/networks/lte/functions/mme-01",
+        "domains/mobile-core/networks/lte/functions/hss-01",
+        "domains/ran/functions/enodeb-17"
+      ],
+      "resolved": true
+    },
+    "lte_attach_incident": {
+      "expected_any": [
+        "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "mobile-core/incidents/lte-attach-54db6ef325fbf758"
+      ],
+      "resolved": true
+    },
+    "sgi_case_functions": {
+      "expected_any": [
+        "domains/mobile-core/networks/ps/functions/pgw-01",
+        "domains/mobile-core/networks/ps/functions/nat-fw-01",
+        "domains/transport/functions/sgi-edge-01"
+      ],
+      "resolved": true
+    },
+    "sgi_case_incident": {
+      "expected_any": [
+        "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "mobile-core/incidents/sgi-data-a154bb7a3997859c"
+      ],
+      "resolved": true
+    }
+  },
+  "status": "BLOCK_MUTATION",
+  "story_pages_continue_to_resolve": true,
+  "ticket_journey_pages_continue_to_resolve": false,
+  "unreachable_current_slugs": []
+}

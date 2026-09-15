@@ -1,0 +1,27 @@
+type: object
+required: [selected_engine, services_used, connectors_used]
+properties:
+  selected_engine:
+    type: string
+  selected_skill:
+    type: string
+  services_used:
+    type: array
+    items:
+      type: string
+  connectors_used:
+    type: array
+    items:
+      type: string
+  gbrain_used:
+    type: boolean
+  vector_chunks_used:
+    type: boolean
+  approval_required:
+    type: boolean
+  latency_ms:
+    type: number
+  source_refs:
+    type: array
+    items:
+      type: string

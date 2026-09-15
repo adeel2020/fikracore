@@ -1,0 +1,12 @@
+candidate_id: KG-H3-027
+discovery_incident: H2-SCN-027
+gap_type: STALE_TOPOLOGY_RELATIONSHIP
+source: SA5G:UPF:003
+target: INFRA:COOL:A
+proposed_type: depends-on
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-027-001
+reason: Operational discovery in H2-SCN-027 indicates traffic forwarding from SA5G:UPF:003
+  to INFRA:COOL:A

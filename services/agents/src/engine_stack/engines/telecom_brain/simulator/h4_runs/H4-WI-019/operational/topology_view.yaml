@@ -1,0 +1,7 @@
+view_id: TOPO-H4-WI-019
+scenario_id: H4-WI-019
+visible_entities:
+- INFRA:LB:INGRESS-01
+- INFRA:LB:INGRESS-02
+relationships: []
+known_gaps: []

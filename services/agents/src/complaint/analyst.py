@@ -1,10 +1,10 @@
 # Facade for complaint analyst modules
-from .complaint.analyst import complaint_analyst, MobileCustomerComplaintAnalyst
-from .utils import (
+from complaint.complaint.analyst import complaint_analyst, MobileCustomerComplaintAnalyst
+from complaint.complaint.utils import (
     _get_causal_rules,
     _resolve_team,
 )
-from .tools import (
+from complaint.complaint.tools import (
     query_causal_knowledge_graph,
     trace_causal_chain,
     evaluate_prechecks,

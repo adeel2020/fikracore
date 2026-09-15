@@ -1,0 +1,8 @@
+difficulty_profile: K2
+gap_type: MISSING_EXTERNAL_DEPENDENCY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-023-K2-SEED-52024
+scenario_id: H2-SCN-023
+seed: 52024
+variant: noisy

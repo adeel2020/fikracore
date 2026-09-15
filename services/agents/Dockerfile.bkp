@@ -1,0 +1,36 @@
+FROM python:3.11-slim AS builder
+
+WORKDIR /build
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+COPY pyproject.toml uv.lock ./
+COPY shared ./shared
+
+RUN uv sync --frozen --no-dev --no-editable --no-install-package onnxruntime
+RUN uv pip install --no-deps --no-cache-dir ./shared/
+
+
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY --from=builder /build/.venv /app/.venv
+COPY services/agents/src ./src
+
+ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH=/app
+ENV PORT=8001
+ENV HOME=/app/home
+ENV XDG_DATA_HOME=/app/home/.local/share
+
+RUN groupadd -r agent && \
+    useradd -r -g agent -d /app -s /usr/sbin/nologin agent && \
+    mkdir -p /app/home/.local/share && \
+    chown -R agent:agent /app
+
+USER agent
+
+EXPOSE 8001
+
+CMD ["python", "-m", "uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "8001"]

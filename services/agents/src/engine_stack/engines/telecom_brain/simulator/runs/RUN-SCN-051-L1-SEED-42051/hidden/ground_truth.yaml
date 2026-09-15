@@ -1,0 +1,36 @@
+incident_id: INC-SYN-00051
+scenario_id: SCN-051
+seed: 42051
+difficulty_profile: L1
+hidden_truth:
+  root_domain: IP_TRANSPORT
+  root_entity: IP:PE:RTR-21
+  root_entity_name: PE-RTR-21
+  trigger: TRANSPORT_LOSS_PLUS_HIGH_UPF_LOAD_CREATES_OUTAGE
+  root_condition: 'Transport Loss Plus High UPF Load Creates Outage: root condition
+    at PE-RTR-21'
+  causal_chain:
+  - entity: IP:PE:RTR-21
+    role: ROOT
+    state_change: PE-RTR-21 participates in hidden causal propagation
+  - entity: IP:VRF:N3-01
+    role: PROPAGATION_MECHANISM
+    state_change: N3-VRF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - oss_network_management_connectivity
+    regions:
+    - REGION-NORTH
+    - REGION-CENTRAL
+    customer_segments:
+    - internal_noc
+    entity_count: 4
+  non_causal_context: []
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

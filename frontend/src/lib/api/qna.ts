@@ -1,9 +1,14 @@
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:8000";
+import { API_BASE } from "./config";
 
 export type ChartOptionItem = {
   name: string;
   dom_id: string;
+};
+
+export type SkillItem = {
+  name: string;
+  description: string;
+  role?: string;
 };
 
 export type ChatMessage = {
@@ -26,6 +31,7 @@ export type ChatMessage = {
   };
   chartOptions?: ChartOptionItem[];
   preSelectedDomId?: string | null;
+  storyteller?: StorytellerPayload;
 };
 
 export type QnaTelemetry = {
@@ -45,6 +51,18 @@ export type HealthResponse = {
   agent_mode: string;
 };
 
+export type IncidentQueueItem = {
+  incident_id: string;
+  tenant_id: string;
+  status: string;
+  scope: "intra-domain" | "inter-domain";
+  score: number;
+  domains: string[];
+  services: string[];
+  owner?: string | null;
+  updated_at: string;
+};
+
 async function parseError(res: Response): Promise<string> {
   try {
     const body = await res.json();
@@ -58,7 +76,7 @@ async function parseError(res: Response): Promise<string> {
 }
 
 export async function fetchQnaHealth(): Promise<HealthResponse> {
-  const res = await fetch(`${API_BASE}/api/qna/health`);
+  const res = await fetch(`${API_BASE}/health`);
   if (!res.ok) throw new Error(await parseError(res));
   return res.json();
 }
@@ -68,6 +86,12 @@ export async function fetchQnaTelemetry(sessionId: string): Promise<QnaTelemetry
   if (!res.ok) throw new Error(await parseError(res));
   const data = await res.json();
   return data.telemetry;
+}
+
+export async function fetchIncidentQueue(): Promise<IncidentQueueItem[]> {
+  const res = await fetch(`${API_BASE}/api/incidents?limit=50`);
+  if (!res.ok) throw new Error(await parseError(res));
+  return res.json();
 }
 
 /* ------------------------------------------------------------------ */
@@ -83,15 +107,13 @@ export type QnaChatResponse = {
 
 export async function sendOrchestrateMessage(
   query: string,
-  sessionId: string
+  sessionId: string,
+  agent?: string
 ): Promise<QnaChatResponse> {
   const res = await fetch(`${API_BASE}/api/qna/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      session_id: sessionId,
-      message: query,
-    }),
+    body: JSON.stringify({ session_id: sessionId, message: query, agent }),
   });
   if (!res.ok) throw new Error(await parseError(res));
   return res.json();
@@ -99,15 +121,13 @@ export async function sendOrchestrateMessage(
 
 export async function sendMobileCoreAnalystMessage(
   query: string,
-  sessionId: string
+  sessionId: string,
+  agent?: string
 ): Promise<QnaChatResponse> {
   const res = await fetch(`${API_BASE}/api/qna/mobile-core-analyst`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      session_id: sessionId,
-      message: query,
-    }),
+    body: JSON.stringify({ session_id: sessionId, message: query, agent }),
   });
   if (!res.ok) throw new Error(await parseError(res));
   return res.json();
@@ -117,16 +137,13 @@ export async function streamMobileCoreAnalystMessage(
   query: string,
   sessionId: string,
   userRole: string,
-  onChunk: (chunk: string) => void
+  onChunk: (chunk: string) => void,
+  agent?: string
 ): Promise<void> {
   const res = await fetch(`${API_BASE}/api/qna/mobile-core-analyst/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      session_id: sessionId,
-      message: query,
-      user_role: userRole,
-    }),
+    body: JSON.stringify({ session_id: sessionId, message: query, user_role: userRole, agent }),
   });
 
   if (!res.ok) throw new Error(await parseError(res));
@@ -148,20 +165,112 @@ export async function streamMobileCoreAnalystMessage(
   } finally {
     reader.releaseLock();
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Data Storyteller API                                                */
+/* ------------------------------------------------------------------ */
+
+const INCIDENT_SLUG_PATTERN = /((?:incidents\/[A-Za-z0-9_-]+|[A-Za-z0-9_-]+\/incidents)\/[A-Za-z0-9._-]+)/;
+
+function extractIncidentSlug(query: string): string | null {
+  return query.match(INCIDENT_SLUG_PATTERN)?.[1].replace(/[.,;:!?]+$/, "") ?? null;
+}
+
+export type StorytellerPayload = {
+  incident_id: string;
+  intent: string;
+  answer: string;
+  spoken_answer?: string | null;
+  story?: unknown;
+  narrative?: {
+    incident_id?: string;
+    audience?: string;
+    lifecycle_state?: string;
+    title?: string;
+    executive_summary?: string;
+    impact_summary?: string;
+    rca_status?: string;
+    domains?: string[];
+    services?: string[];
+    components?: string[];
+    claims?: Array<{
+      id: string;
+      statement: string;
+      grade: string;
+      confidence: number;
+      fcaps?: string[];
+      domain?: string | null;
+      service_procedure?: string | null;
+      object_ref?: string | null;
+    }>;
+    next_actions?: Array<{
+      id: string;
+      label: string;
+      action_type: string;
+      priority: number;
+      requires_approval?: boolean;
+      rationale?: string | null;
+      supports_claim_ids?: string[];
+    }>;
+    open_questions?: string[];
+  } | null;
+  visual_explanation?: {
+    incident_id?: string;
+    audience?: string;
+    primary_widget?: string | null;
+    widgets?: Array<{
+      id: string;
+      title: string;
+      type: string;
+      data?: Record<string, unknown>;
+      confidence?: number;
+      supports_claim_ids?: string[];
+      provenance?: Array<string | Record<string, unknown>>;
+    }>;
+  } | null;
+};
+
+export async function streamStorytellerMessage(
+  query: string,
+  sessionId: string,
+  onChunk: (chunk: string) => void,
+  onStatus?: (status: string) => void,
+  onPayload?: (payload: StorytellerPayload) => void
+): Promise<string> {
+  const incidentId = extractIncidentSlug(query);
+  const pathIncidentId = incidentId ?? "";
+
+  onStatus?.("[Data Storyteller] generating narrative");
+  const res = await fetch(`${API_BASE}/api/incidents/${pathIncidentId}/ask`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ session_id: sessionId, message: query }),
+  });
+
+  if (!res.ok) throw new Error(await parseError(res));
+  const data = (await res.json()) as StorytellerPayload;
+  if (typeof data.answer !== "string") {
+    throw new Error("Incident storyteller response did not include an answer");
+  }
+  onChunk(data.answer);
+  onPayload?.(data);
+  if (typeof data.incident_id !== "string") {
+    throw new Error("Incident storyteller response did not include an incident id");
+  }
+  return data.incident_id;
 }
 
 export async function streamOrchestrateMessage(
   query: string,
   sessionId: string,
-  onChunk: (chunk: string) => void
+  onChunk: (chunk: string) => void,
+  agent?: string
 ): Promise<void> {
   const res = await fetch(`${API_BASE}/api/qna/chat/stream`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      session_id: sessionId,
-      message: query,
-    }),
+    body: JSON.stringify({ session_id: sessionId, message: query, agent }),
   });
 
   if (!res.ok) throw new Error(await parseError(res));
@@ -183,18 +292,6 @@ export async function streamOrchestrateMessage(
   } finally {
     reader.releaseLock();
   }
-}
-
-export type SkillItem = {
-  name: string;
-  description: string;
-  role?: string;
-};
-
-export async function fetchSkills(): Promise<SkillItem[]> {
-  const res = await fetch(`${API_BASE}/api/qna/skills`);
-  if (!res.ok) throw new Error(await parseError(res));
-  return res.json();
 }
 
 export type ComplaintTelemetry = {

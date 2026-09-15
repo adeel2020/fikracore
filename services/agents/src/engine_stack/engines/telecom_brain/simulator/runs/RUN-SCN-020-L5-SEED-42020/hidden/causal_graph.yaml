@@ -1,0 +1,34 @@
+graph_id: CAUSAL-SCN-020-SEED-42020
+nodes:
+- entity_id: INFRA:CGNAT:001
+  role: ROOT
+  domain: IT_CLOUD_INFRA
+- entity_id: INFRA:FW:SGI
+  role: PROPAGATION_MECHANISM
+  domain: IT_CLOUD_INFRA
+- entity_id: IP:VRF:SGI-01
+  role: PROPAGATION_MECHANISM
+  domain: IP_TRANSPORT
+- entity_id: SA5G:UPF:003
+  role: PROPAGATION_MECHANISM
+  domain: SA_5G_CORE
+- entity_id: CRM:TICKET:001
+  role: SYMPTOM
+  domain: CRM
+edges:
+- relationship_id: REL-FW-CGNAT
+  source_entity: INFRA:FW:SGI
+  target_entity: INFRA:CGNAT:001
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-SGI-FW
+  source_entity: IP:VRF:SGI-01
+  target_entity: INFRA:FW:SGI
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-UPF-SGI
+  source_entity: SA5G:UPF:003
+  target_entity: IP:VRF:SGI-01
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-CRM-TICKETS-IMPACT
+  source_entity: CRM:TICKET:001
+  target_entity: SA5G:UPF:003
+  causal_effect: degraded_state_propagation

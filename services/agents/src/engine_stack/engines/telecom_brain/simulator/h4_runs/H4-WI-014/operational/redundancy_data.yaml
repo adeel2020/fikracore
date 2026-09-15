@@ -1,0 +1,9 @@
+failover_pairs:
+  INFRA:FW:PERIM-01:
+    backup_entity: INFRA:FW:PERIM-02
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Redundant firewalls connected to single top-of-rack management switch.
+backup_node: INFRA:FW:PERIM-02
+backup_health: HEALTHY

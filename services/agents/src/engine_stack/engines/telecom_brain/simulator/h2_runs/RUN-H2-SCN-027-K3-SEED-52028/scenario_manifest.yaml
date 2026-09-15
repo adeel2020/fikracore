@@ -1,0 +1,8 @@
+difficulty_profile: K3
+gap_type: STALE_TOPOLOGY_RELATIONSHIP
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-027-K3-SEED-52028
+scenario_id: H2-SCN-027
+seed: 52028
+variant: cross_domain

@@ -1,0 +1,7 @@
+view_id: TOPO-H4-WI-035
+scenario_id: H4-WI-035
+visible_entities:
+- INFRA:SW:CORE-05
+- INFRA:SW:CORE-010
+relationships: []
+known_gaps: []

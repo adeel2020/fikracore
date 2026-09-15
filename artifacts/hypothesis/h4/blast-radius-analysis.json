@@ -1,0 +1,246 @@
+{
+  "average_precision": 0.9458,
+  "average_recall": 0.9875,
+  "per_scenario": [
+    {
+      "scenario_id": "H4-WI-001",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-002",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-003",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-004",
+      "blast_level": "MULTI_DOMAIN",
+      "precision": 0.6667,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-005",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-006",
+      "blast_level": "MULTI_DOMAIN",
+      "precision": 0.6667,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-007",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-008",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-009",
+      "blast_level": "MULTI_DOMAIN",
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-010",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-011",
+      "blast_level": "MULTI_DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-012",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-013",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-014",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-015",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-016",
+      "blast_level": "MULTI_DOMAIN",
+      "precision": 0.5,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-017",
+      "blast_level": "DOMAIN",
+      "precision": 0.5,
+      "recall": 0.5
+    },
+    {
+      "scenario_id": "H4-WI-018",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-019",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-020",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-021",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-022",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-023",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-024",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-025",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-026",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-027",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-028",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-029",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-030",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-031",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-032",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-033",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-034",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-035",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-036",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-037",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-038",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-039",
+      "blast_level": "DOMAIN",
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    {
+      "scenario_id": "H4-WI-040",
+      "blast_level": "LOCAL",
+      "precision": 1.0,
+      "recall": 1.0
+    }
+  ]
+}

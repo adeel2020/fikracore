@@ -1,0 +1,29 @@
+type: object
+required: [id, name, engine]
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  engine:
+    type: string
+  description:
+    type: string
+  connectors:
+    type: array
+    items:
+      type: string
+  consumes:
+    type: array
+    items:
+      type: string
+  produces:
+    type: array
+    items:
+      type: string
+  permissions:
+    type: array
+    items:
+      type: string
+  status:
+    type: string

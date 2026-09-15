@@ -1,0 +1,23 @@
+{
+  "audience": "executive",
+  "claim_grades": {
+    "confirmed_fact": 3,
+    "inferred_relation": 2,
+    "missing_evidence": 0
+  },
+  "incident_id": "mobile-core/incidents/amf-overload-2026-08-09",
+  "presentation_modes": [
+    "inline",
+    "hud_highlight",
+    "drawer",
+    "investigation"
+  ],
+  "primary_widget": "domain_impact_map",
+  "required_widget_types": [
+    "domain_impact_map",
+    "evidence_confidence_matrix",
+    "timeline",
+    "causal_chain",
+    "next_action_tree"
+  ]
+}

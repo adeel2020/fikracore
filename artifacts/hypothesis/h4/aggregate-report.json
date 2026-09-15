@@ -1,0 +1,41 @@
+{
+  "gate_status": "H4_SUPPORTED",
+  "summary": {
+    "gate_status": "H4_SUPPORTED",
+    "total_scenarios": 40,
+    "blast_radius_precision": 0.9458,
+    "blast_radius_recall": 0.9875,
+    "affected_service_accuracy": 0.975,
+    "critical_failure_surface_accuracy": 0.95,
+    "shared_dependency_detection_rate": 1.0,
+    "failover_risk_detection_rate": 1.0,
+    "capacity_risk_detection_rate": 1.0,
+    "change_risk_detection_rate": 1.0,
+    "model_insufficient_correctness": 1.0,
+    "hallucinated_paths_count": 0,
+    "mitigation_usefulness": 1.0
+  },
+  "baseline_comparison": {
+    "method_b_fikracore": {
+      "blast_radius_precision": 0.9458,
+      "blast_radius_recall": 0.9875,
+      "affected_service_accuracy": 0.975,
+      "cfs_accuracy": 0.95,
+      "hallucination_rate": 0.0
+    },
+    "baseline_a_static_degree": {
+      "blast_radius_precision": 0.45,
+      "blast_radius_recall": 0.38,
+      "affected_service_accuracy": 0.025,
+      "cfs_accuracy": 0.25,
+      "hallucination_rate": 0.0
+    },
+    "baseline_b_simple_reachability": {
+      "blast_radius_precision": 0.52,
+      "blast_radius_recall": 0.65,
+      "affected_service_accuracy": 0.425,
+      "cfs_accuracy": 0.3,
+      "hallucination_rate": 0.15
+    }
+  }
+}

@@ -1,0 +1,10 @@
+scenario_id: SCN-096
+seed: 42096
+difficulty_profile: L1
+noise_events: []
+delay_events: []
+missing_evidence:
+- one expected signal may be absent only when source coverage permits it
+contradictory_evidence:
+- conflicting interpretation may appear only as operational evidence, never as hidden-world
+  inconsistency

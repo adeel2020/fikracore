@@ -1,0 +1,9 @@
+{
+  "topology_version": "synthetic-2026-08-28",
+  "components": [
+    {"source_system": "ran-nms", "source_object_id": "gnodeb-17", "component_id": "ran-gnodeb-17", "component_kind": "gnodeb", "location": "site-42", "service_ids": ["ue-registration"]},
+    {"source_system": "transport-nms", "source_object_id": "agg-sw-03", "component_id": "transport-agg-sw-03", "component_kind": "aggregation-switch", "location": "site-42", "service_ids": ["ue-registration"]},
+    {"source_system": "core-nms", "source_object_id": "amf-01", "component_id": "core-amf-01", "component_kind": "amf", "location": "dc-1", "service_ids": ["ue-registration"]},
+    {"source_system": "power-nms", "source_object_id": "ups-77", "component_id": "power-ups-77", "component_kind": "ups", "location": "site-77", "service_ids": ["site-power"]}
+  ]
+}

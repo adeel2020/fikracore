@@ -1,0 +1,9 @@
+scenario_id: H4-WI-040
+cohort: unknown_knowledge
+trigger_entity: EXT:UNMAPPED:RTR-99
+true_affected_services: []
+true_cfs_risk: MODEL_INSUFFICIENT
+true_common_cause_detected: false
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: true

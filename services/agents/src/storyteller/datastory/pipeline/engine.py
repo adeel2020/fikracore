@@ -18,7 +18,7 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from .pipeline.tokenizer import build_lifecycle_aware_text
+from storyteller.datastory.pipeline.tokenizer import build_lifecycle_aware_text
 
 # ---------------------------------------------------------------------------
 # Paths (relative to this file's parent = backend/datastory/)

@@ -1,0 +1,57 @@
+role: mobile_rtr
+topology_type: queue_routing_matrix
+description: "Allowed operational queues, hop transitions, and bouncing loop rules."
+
+queues:
+  - id: RTR_Mobile_Core
+    category: RTR
+    ola_target_hours: 2.0
+    description: "Mobile Core Real-Time Resolution queue."
+  - id: CRM_Frontline
+    category: Frontline
+    description: "Customer Operations & Contact Center frontline intake."
+  - id: HPSA
+    category: IT_Provisioning
+    ola_target_hours: 6.0
+    description: "High Performance Subscriber Activation order sync queue."
+  - id: Billing
+    category: Commercial
+    ola_target_hours: 6.0
+    description: "Billing and payment dispute resolution."
+  - id: OCS
+    category: Commercial
+    ola_target_hours: 6.0
+    description: "Online Charging System rating & prepaid balance."
+  - id: CS
+    category: NOC_Internal
+    ola_target_hours: 6.0
+    description: "Circuit Switched Core Network Operations."
+  - id: PS
+    category: NOC_Internal
+    ola_target_hours: 6.0
+    description: "Packet Switched Core Network Operations."
+  - id: CS_L2
+    category: Engineering_L2
+    ola_target_hours: 12.0
+    description: "CS Core Tier-2 Advanced Engineering."
+  - id: PS_L2
+    category: Engineering_L2
+    ola_target_hours: 12.0
+    description: "PS Core Tier-2 Advanced Engineering."
+
+routing_transitions:
+  CRM_Frontline:
+    allowed_next_queues: ["RTR_Mobile_Core"]
+  RTR_Mobile_Core:
+    allowed_next_queues: ["HPSA", "Billing", "OCS", "CS", "PS", "CS_L2", "PS_L2", "CRM_Frontline"]
+  HPSA:
+    allowed_next_queues: ["RTR_Mobile_Core", "Billing"]
+  CS:
+    allowed_next_queues: ["RTR_Mobile_Core", "CS_L2"]
+  PS:
+    allowed_next_queues: ["RTR_Mobile_Core", "PS_L2"]
+
+bouncing_rules:
+  max_allowed_bounces: 1
+  alert_threshold: 2
+  reassignment_requires_reason: true

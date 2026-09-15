@@ -200,8 +200,15 @@ def get_route(query: str, session_id: str | None = None, db = None) -> str:
         Either ``"storyteller_workflow"``, ``"qna_workflow"``, or ``"signaling_workflow"``.
         Uses LLM supervision when available.
     """
-    if query.strip().startswith("/"):
-        print(f"[Orchestrator] Slash command detected: {query[:60]}... → skill_workflow")
+    lower_query = query.strip().lower()
+    if (
+        query.strip().startswith("/")
+        or "trace-analyzer" in lower_query
+        or "trace analyzer" in lower_query
+        or ".pcap" in lower_query
+        or ".pcapng" in lower_query
+    ):
+        print(f"[Orchestrator] Signaling/Trace command detected: {query[:60]}... → skill_workflow")
         return "skill_workflow"
 
     # Chart/graph intent — always QnA/RAG workflow, never storyteller

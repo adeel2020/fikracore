@@ -1,0 +1,63 @@
+view_id: TOPO-H4-WI-011
+scenario_id: H4-WI-011
+visible_entities:
+- IP:PE:RTR-21
+- IP:PE:RTR-22
+- TX:MW:BACKHAUL-101
+- TX:OTN:TRAIL-22
+- IP:SEC:GW-02
+- IP:VRF:N3-01
+- OSS:PM:001
+- OSS:INV:001
+- MPLS:L3VPN:ENT-001
+relationships:
+- relationship_id: REL-MW-PE21
+  source_entity: TX:MW:BACKHAUL-101
+  relationship_type: CARRIED_BY
+  target_entity: IP:PE:RTR-21
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-MPLS-OTN
+  source_entity: IP:PE:RTR-21
+  relationship_type: CARRIED_BY
+  target_entity: TX:OTN:TRAIL-22
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-PE21-SECGW02
+  source_entity: IP:PE:RTR-21
+  relationship_type: ROUTES_THROUGH
+  target_entity: IP:SEC:GW-02
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-N3-PE21
+  source_entity: IP:VRF:N3-01
+  relationship_type: ROUTES_THROUGH
+  target_entity: IP:PE:RTR-21
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-OSS-PM-MONITORS-PE
+  source_entity: OSS:PM:001
+  relationship_type: MONITORED_BY
+  target_entity: IP:PE:RTR-21
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-OSS-INV-PE
+  source_entity: OSS:INV:001
+  relationship_type: SERVES
+  target_entity: IP:PE:RTR-21
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-L3VPN-PE
+  source_entity: MPLS:L3VPN:ENT-001
+  relationship_type: ROUTES_THROUGH
+  target_entity: IP:PE:RTR-21
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

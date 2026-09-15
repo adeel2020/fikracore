@@ -1,0 +1,12 @@
+learning_unit_id: H3-LU-024
+cohort: stale_topology
+discovery_incident: H2-SCN-024
+candidate_id: KG-H3-024
+validation_decision: ACCEPT
+future_incident_id: H3-FUT-024
+expected_learning_value: Detection of stale/reconfigured topology without false confidence
+validated_relation:
+  source: SA5G:AMF:001
+  target: SA5G:UPF:003
+  relation: routes-through
+  relationship_id: REL-PROM-H3-024

@@ -1,0 +1,6 @@
+scenario_id: H3-FUT-018
+root_entity: INFRA:DC:A
+impacted_service: ims_voice_telephony
+requires_promoted_relation: true
+is_stale_relation: false
+is_poisoned_relation: false

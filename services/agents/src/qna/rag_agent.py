@@ -32,7 +32,7 @@ from sqlalchemy.orm import Session as SASession
 from agenticaiops_shared.database.db import SessionLocal
 from agenticaiops_shared.database.models import ChatSession, ChatMessage
 from agenticaiops_shared.config import settings
-from ..rag.services.qna import RAGQueryEngine
+from rag.services.qna import RAGQueryEngine
 
 logger = logging.getLogger("agent.rag_agent")
 

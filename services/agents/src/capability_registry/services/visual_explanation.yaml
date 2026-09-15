@@ -1,0 +1,21 @@
+id: visual_explanation
+name: Visual Explanation Service
+engine: telecom_brain
+description: Converts incident narratives, evidence, causal chains, timelines, and next actions into structured visual explanation widgets for chat, HUD, drawer, and investigation views.
+status: active
+connectors:
+  - gbrain
+  - grafana
+consumes:
+  - incident_narrative
+  - evidence_trace
+  - causal_chain
+  - telemetry_evidence
+  - next_best_action
+produces:
+  - visual_explanation
+  - inline_story_visual
+  - hud_highlight
+  - investigation_widget
+permissions:
+  - read_operational_context

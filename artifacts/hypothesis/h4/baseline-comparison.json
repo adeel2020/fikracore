@@ -1,0 +1,23 @@
+{
+  "method_b_fikracore": {
+    "blast_radius_precision": 0.9458,
+    "blast_radius_recall": 0.9875,
+    "affected_service_accuracy": 0.975,
+    "cfs_accuracy": 0.95,
+    "hallucination_rate": 0.0
+  },
+  "baseline_a_static_degree": {
+    "blast_radius_precision": 0.45,
+    "blast_radius_recall": 0.38,
+    "affected_service_accuracy": 0.025,
+    "cfs_accuracy": 0.25,
+    "hallucination_rate": 0.0
+  },
+  "baseline_b_simple_reachability": {
+    "blast_radius_precision": 0.52,
+    "blast_radius_recall": 0.65,
+    "affected_service_accuracy": 0.425,
+    "cfs_accuracy": 0.3,
+    "hallucination_rate": 0.15
+  }
+}

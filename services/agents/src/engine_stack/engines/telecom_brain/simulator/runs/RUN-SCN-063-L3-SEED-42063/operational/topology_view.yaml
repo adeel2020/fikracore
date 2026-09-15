@@ -1,0 +1,9 @@
+view_id: TOPO-SCN-063-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-063
+visible_entities:
+- EXT:VAS:001
+visible_relationships: []
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

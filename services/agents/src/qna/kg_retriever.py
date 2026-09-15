@@ -51,7 +51,7 @@ class KnowledgeGraphRetriever:
         # 2. Load dynamic rules/FAQs from causal_rules.yaml and inject them
         faqs = []
         try:
-            from ..complaint.analyst import _get_causal_rules
+            from complaint.analyst import _get_causal_rules
             self.causal_rules = _get_causal_rules()
             faqs = self.causal_rules.get("faqs", [])
         except Exception as e:

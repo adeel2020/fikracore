@@ -5,8 +5,7 @@ import { Bot, User, Send, Square, Loader2, MessageSquare, X } from "lucide-react
 import { Button } from "@/components/ui/button";
 import { cn, glassSurfaceStatic } from "@/lib/utils";
 import { useStorytellerChat } from "./hooks/useStorytellerChat";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 interface ChatMessage {
   id: string;

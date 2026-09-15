@@ -1,0 +1,8 @@
+difficulty_profile: K2
+gap_type: MISSING_TRANSPORT_PATH
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-021-K2-SEED-52022
+scenario_id: H2-SCN-021
+seed: 52022
+variant: cross_domain

@@ -1,0 +1,23 @@
+view_id: TOPO-H4-WI-016
+scenario_id: H4-WI-016
+visible_entities:
+- EPC:DRA:001
+- EPC:DRA:002
+- EPC:PCRF:001
+- CHG:OCS:001
+relationships:
+- relationship_id: REL-PCRF-DRA
+  source_entity: EPC:PCRF:001
+  relationship_type: ROUTES_THROUGH
+  target_entity: EPC:DRA:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-OCS-DRA
+  source_entity: CHG:OCS:001
+  relationship_type: ROUTES_THROUGH
+  target_entity: EPC:DRA:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

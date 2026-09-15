@@ -1,0 +1,18 @@
+what_if_id: H4-WI-005
+title: Signaling Firewall Failure
+description: Simulates perimeter signaling firewall drop isolating 5G roaming traffic.
+cohort: single_point_failure
+trigger:
+  canonical_id: INFRA:FW:PERIM-01
+  entity_display_name: Signaling Perimeter Firewall-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- security
+- signaling
+- spof

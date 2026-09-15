@@ -1,0 +1,746 @@
+network_id: REF-MDO-001
+name: Reference Multi-Domain Synthetic Telecom Operator
+version: "1.0"
+purpose: >
+  Coherent hidden synthetic telecom operator network for simulator scenarios.
+  This file is synthetic only and contains no live production data.
+
+regions:
+  - region_id: REGION-NORTH
+    name: North Region
+  - region_id: REGION-CENTRAL
+    name: Central Region
+  - region_id: REGION-SOUTH
+    name: South Region
+
+sites:
+  - site_id: SITE-DC-A
+    name: DC-A
+    region: REGION-NORTH
+    site_type: data_center
+  - site_id: SITE-DC-B
+    name: DC-B
+    region: REGION-CENTRAL
+    site_type: data_center
+  - site_id: SITE-POP-21
+    name: POP-21
+    region: REGION-NORTH
+    site_type: transport_pop
+  - site_id: SITE-POP-07
+    name: POP-07
+    region: REGION-CENTRAL
+    site_type: transport_pop
+  - site_id: SITE-RAN-101
+    name: RAN Site 101
+    region: REGION-NORTH
+    site_type: radio_site
+  - site_id: SITE-GPON-15
+    name: GPON Hub 15
+    region: REGION-SOUTH
+    site_type: fixed_access_hub
+
+domains:
+  RAN: {name: Radio Access Network}
+  CS_CORE: {name: Circuit Switched Core}
+  MOBILE_IMS: {name: Mobile IMS}
+  FIXED_IMS: {name: Fixed IMS}
+  PS_3G: {name: 3G Packet Switched Core}
+  EPC_4G: {name: 4G EPC}
+  NSA_5G: {name: 5G NSA}
+  SA_5G_CORE: {name: 5G SA Core}
+  VAS: {name: Value Added Services}
+  CHARGING: {name: Charging and OCS}
+  IN_VENDOR_A: {name: IN Vendor A Stack}
+  IN_VENDOR_B: {name: IN Vendor B Stack}
+  IN_VENDOR_C: {name: IN Vendor C Stack}
+  CRM: {name: Customer Relationship Management}
+  BSS: {name: Business Support Systems}
+  PROVISIONING: {name: Provisioning}
+  OSS: {name: Operations Support Systems}
+  IP_TRANSPORT: {name: IP/MPLS Transport}
+  TRANSMISSION: {name: Transmission and Optical}
+  GPON_FIXED_ACCESS: {name: GPON and Fixed Access}
+  MPLS_CLOUD: {name: Enterprise MPLS Cloud}
+  IT_CLOUD_INFRA: {name: IT, Cloud, NFVI}
+  EXTERNAL: {name: External Dependencies}
+
+entities:
+  - {entity_id: EXT:INTERNET:001, canonical_name: External Internet, entity_type: internet, domain: EXTERNAL, site: external, region: global}
+  - {entity_id: EXT:ROAMING:001, canonical_name: Roaming Partner 01, entity_type: roaming_partner, domain: EXTERNAL, site: external, region: global}
+  - {entity_id: EXT:VAS:001, canonical_name: Third Party VAS Gateway, entity_type: third_party_gateway, domain: EXTERNAL, site: external, region: global}
+
+  - {entity_id: INFRA:DC:A, canonical_name: DC-A Facility, entity_type: data_center, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-DC-A]}
+  - {entity_id: INFRA:DC:B, canonical_name: DC-B Facility, entity_type: data_center, domain: IT_CLOUD_INFRA, site: SITE-DC-B, region: REGION-CENTRAL, failure_domains: [FD-DC-B]}
+  - {entity_id: INFRA:POWER:A, canonical_name: DC-A Power Feed A, entity_type: power_feed, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-POWER-A]}
+  - {entity_id: INFRA:COOL:A, canonical_name: DC-A Cooling Plant, entity_type: cooling, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-DC-A]}
+  - {entity_id: INFRA:K8S:CORE-A, canonical_name: Core Kubernetes Cluster A, entity_type: kubernetes_cluster, domain: IT_CLOUD_INFRA, vendor_profile: VENDOR_CLOUD_A, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-K8S-A]}
+  - {entity_id: INFRA:NFVI:A, canonical_name: NFVI Cluster A, entity_type: nfvi_cluster, domain: IT_CLOUD_INFRA, vendor_profile: VENDOR_CLOUD_A, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-NFVI-A]}
+  - {entity_id: INFRA:DB:SUBS-A, canonical_name: Subscriber DB Cluster A, entity_type: database_cluster, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH, failure_domains: [FD-DB-A]}
+  - {entity_id: INFRA:DNS:CORE, canonical_name: Core DNS Cluster, entity_type: dns_cluster, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: INFRA:NTP:CORE, canonical_name: Core Timing Cluster, entity_type: ntp_ptp_cluster, domain: IT_CLOUD_INFRA, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: INFRA:FW:SGI, canonical_name: SGi Firewall Pair, entity_type: firewall_pair, domain: IT_CLOUD_INFRA, vendor_profile: VENDOR_NET_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: INFRA:CGNAT:001, canonical_name: CGNAT-01, entity_type: cgnat, domain: IT_CLOUD_INFRA, vendor_profile: VENDOR_NET_B, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: TX:FIBER:FR-07, canonical_name: Fiber Route FR-07, entity_type: fiber_route, domain: TRANSMISSION, vendor_profile: VENDOR_TRANS_A, site: SITE-POP-21, region: REGION-NORTH, failure_domains: [FD-FIBER-FR-07]}
+  - {entity_id: TX:DWDM:LAMBDA-22, canonical_name: DWDM Lambda 22, entity_type: dwdm_lambda, domain: TRANSMISSION, vendor_profile: VENDOR_TRANS_A, site: SITE-POP-21, region: REGION-NORTH, failure_domains: [FD-FIBER-FR-07]}
+  - {entity_id: TX:OTN:TRAIL-22, canonical_name: OTN Trail 22, entity_type: otn_trail, domain: TRANSMISSION, vendor_profile: VENDOR_TRANS_A, site: SITE-POP-21, region: REGION-NORTH, failure_domains: [FD-OTN-22]}
+  - {entity_id: TX:MW:BACKHAUL-101, canonical_name: Microwave Backhaul 101, entity_type: microwave_link, domain: TRANSMISSION, vendor_profile: VENDOR_TRANS_B, site: SITE-RAN-101, region: REGION-NORTH}
+
+  - {entity_id: IP:P:RTR-07, canonical_name: P-RTR-07, entity_type: p_router, domain: IP_TRANSPORT, vendor_profile: VENDOR_NET_A, site: SITE-POP-07, region: REGION-CENTRAL, failure_domains: [FD-MPLS-CORE]}
+  - {entity_id: IP:PE:RTR-21, canonical_name: PE-RTR-21, entity_type: pe_router, domain: IP_TRANSPORT, vendor_profile: VENDOR_NET_A, site: SITE-POP-21, region: REGION-NORTH, failure_domains: [FD-PE-21]}
+  - {entity_id: IP:SEC:GW-02, canonical_name: SEC-GW-02, entity_type: security_gateway, domain: IP_TRANSPORT, vendor_profile: VENDOR_NET_B, site: SITE-POP-21, region: REGION-NORTH, failure_domains: [FD-SEC-GW-02]}
+  - {entity_id: IP:VRF:N3-01, canonical_name: N3-VRF-01, entity_type: vrf, domain: IP_TRANSPORT, site: SITE-POP-21, region: REGION-NORTH}
+  - {entity_id: IP:VRF:SGI-01, canonical_name: SGi-VRF-01, entity_type: vrf, domain: IP_TRANSPORT, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: IP:RR:001, canonical_name: Route Reflector 01, entity_type: route_reflector, domain: IP_TRANSPORT, vendor_profile: VENDOR_NET_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: MPLS:L3VPN:ENT-001, canonical_name: Enterprise L3VPN 001, entity_type: l3vpn, domain: MPLS_CLOUD, site: SITE-POP-21, region: REGION-NORTH}
+  - {entity_id: MPLS:CE:CUST-001, canonical_name: Enterprise CE 001, entity_type: ce_router, domain: MPLS_CLOUD, site: customer_site, region: REGION-NORTH}
+
+  - {entity_id: RAN:SITE:101, canonical_name: RAN Site 101, entity_type: ran_site, domain: RAN, vendor_profile: VENDOR_RAN_A, site: SITE-RAN-101, region: REGION-NORTH, failure_domains: [FD-RAN-101]}
+  - {entity_id: RAN:ENB:101, canonical_name: eNodeB-101, entity_type: enodeb, domain: RAN, vendor_profile: VENDOR_RAN_A, site: SITE-RAN-101, region: REGION-NORTH, failure_domains: [FD-RAN-101]}
+  - {entity_id: RAN:GNB:501, canonical_name: gNodeB-501, entity_type: gnodeb, domain: RAN, vendor_profile: VENDOR_RAN_B, site: SITE-RAN-101, region: REGION-NORTH, failure_domains: [FD-RAN-101]}
+  - {entity_id: RAN:RNC:031, canonical_name: RNC-031, entity_type: rnc, domain: RAN, vendor_profile: VENDOR_RAN_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: RAN:NODEB:03101, canonical_name: NodeB-03101, entity_type: nodeb, domain: RAN, vendor_profile: VENDOR_RAN_A, site: SITE-RAN-101, region: REGION-NORTH}
+
+  - {entity_id: CS:MSC-S:001, canonical_name: MSC-S-01, entity_type: msc_server, domain: CS_CORE, vendor_profile: VENDOR_CORE_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: CS:MGW:001, canonical_name: MGW-01, entity_type: media_gateway, domain: CS_CORE, vendor_profile: VENDOR_CORE_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: CS:HLR:001, canonical_name: HLR-01, entity_type: hlr, domain: CS_CORE, vendor_profile: VENDOR_CORE_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: CS:STP:001, canonical_name: STP-01, entity_type: stp, domain: CS_CORE, vendor_profile: VENDOR_CORE_B, site: SITE-DC-B, region: REGION-CENTRAL}
+
+  - {entity_id: PS3G:SGSN:001, canonical_name: SGSN-01, entity_type: sgsn, domain: PS_3G, vendor_profile: VENDOR_CORE_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: PS3G:GGSN:001, canonical_name: GGSN-01, entity_type: ggsn, domain: PS_3G, vendor_profile: VENDOR_CORE_A, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: EPC:MME:001, canonical_name: MME-01, entity_type: mme, domain: EPC_4G, vendor_profile: VENDOR_CORE_B, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: EPC:SGW:001, canonical_name: SGW-01, entity_type: sgw, domain: EPC_4G, vendor_profile: VENDOR_CORE_B, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: EPC:PGW:001, canonical_name: PGW-01, entity_type: pgw, domain: EPC_4G, vendor_profile: VENDOR_CORE_B, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: EPC:HSS:001, canonical_name: HSS-01, entity_type: hss, domain: EPC_4G, vendor_profile: VENDOR_CORE_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: EPC:PCRF:001, canonical_name: PCRF-01, entity_type: pcrf, domain: EPC_4G, vendor_profile: VENDOR_CORE_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: EPC:DRA:001, canonical_name: DRA-01, entity_type: diameter_router, domain: EPC_4G, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: NSA:ANCHOR:LTE-001, canonical_name: NSA LTE Anchor 001, entity_type: lte_anchor, domain: NSA_5G, vendor_profile: VENDOR_RAN_A, site: SITE-RAN-101, region: REGION-NORTH}
+  - {entity_id: NSA:ENDC:001, canonical_name: EN-DC Controller 001, entity_type: endc_controller, domain: NSA_5G, vendor_profile: VENDOR_RAN_B, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: SA5G:AMF:001, canonical_name: AMF-01, entity_type: amf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:SMF:001, canonical_name: SMF-01, entity_type: smf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:UPF:003, canonical_name: UPF-03, entity_type: upf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_B, site: SITE-DC-A, region: REGION-NORTH, service_cluster: MOBILE_DATA_5G}
+  - {entity_id: SA5G:UDM:001, canonical_name: UDM-01, entity_type: udm, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:AUSF:001, canonical_name: AUSF-01, entity_type: ausf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:PCF:001, canonical_name: PCF-01, entity_type: pcf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:NRF:001, canonical_name: NRF-01, entity_type: nrf, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: SA5G:SCP:001, canonical_name: SCP-01, entity_type: scp, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_C, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: IMSM:PCSCF:001, canonical_name: Mobile P-CSCF-01, entity_type: p_cscf, domain: MOBILE_IMS, vendor_profile: VENDOR_IMS_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: IMSM:SCSCF:001, canonical_name: Mobile S-CSCF-01, entity_type: s_cscf, domain: MOBILE_IMS, vendor_profile: VENDOR_IMS_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: IMSM:TAS:001, canonical_name: Mobile TAS-01, entity_type: tas, domain: MOBILE_IMS, vendor_profile: VENDOR_IMS_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: IMSM:SBC:001, canonical_name: Mobile SBC-01, entity_type: sbc, domain: MOBILE_IMS, vendor_profile: VENDOR_IMS_B, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: IMSF:PCSCF:001, canonical_name: Fixed P-CSCF-01, entity_type: p_cscf, domain: FIXED_IMS, vendor_profile: VENDOR_IMS_B, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: IMSF:SCSCF:001, canonical_name: Fixed S-CSCF-01, entity_type: s_cscf, domain: FIXED_IMS, vendor_profile: VENDOR_IMS_B, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: IMSF:TAS:001, canonical_name: Fixed TAS-01, entity_type: tas, domain: FIXED_IMS, vendor_profile: VENDOR_IMS_B, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: IMSF:SBC:001, canonical_name: Fixed SBC-01, entity_type: sbc, domain: FIXED_IMS, vendor_profile: VENDOR_IMS_B, site: SITE-DC-B, region: REGION-CENTRAL}
+
+  - {entity_id: VAS:SMSC:001, canonical_name: SMSC-01, entity_type: smsc, domain: VAS, vendor_profile: VENDOR_VAS_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: VAS:SMSR:001, canonical_name: SMS Router-01, entity_type: sms_router, domain: VAS, vendor_profile: VENDOR_VAS_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: VAS:USSD:001, canonical_name: USSD GW-01, entity_type: ussd_gateway, domain: VAS, vendor_profile: VENDOR_VAS_B, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: VAS:ESME:001, canonical_name: Enterprise ESME-01, entity_type: esme, domain: VAS, vendor_profile: VENDOR_VAS_A, site: SITE-DC-A, region: REGION-NORTH}
+
+  - {entity_id: CHG:OCS:001, canonical_name: OCS-01, entity_type: ocs, domain: CHARGING, vendor_profile: VENDOR_CHG_A, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: CHG:CHF:001, canonical_name: Charging Function-01, entity_type: charging_function, domain: CHARGING, vendor_profile: VENDOR_CHG_B, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: IN:A:SCP:001, canonical_name: IN-A SCP-01, entity_type: in_scp, domain: IN_VENDOR_A, vendor_profile: IN_VENDOR_A, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: IN:B:SCP:001, canonical_name: IN-B SCP-01, entity_type: in_scp, domain: IN_VENDOR_B, vendor_profile: IN_VENDOR_B, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: IN:C:SCP:001, canonical_name: IN-C SCP-01, entity_type: in_scp, domain: IN_VENDOR_C, vendor_profile: IN_VENDOR_C, site: SITE-DC-B, region: REGION-CENTRAL}
+
+  - {entity_id: CRM:PROFILE:001, canonical_name: Customer Profile Service, entity_type: customer_profile, domain: CRM, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: CRM:TICKET:001, canonical_name: Customer Ticket Service, entity_type: customer_ticket_service, domain: CRM, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: BSS:BILLING:001, canonical_name: Billing System 01, entity_type: billing, domain: BSS, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: BSS:CATALOG:001, canonical_name: Product Catalog 01, entity_type: product_catalog, domain: BSS, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: PROV:ORDER:001, canonical_name: Order Management 01, entity_type: order_management, domain: PROVISIONING, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: PROV:ENGINE:001, canonical_name: Provisioning Engine 01, entity_type: provisioning_engine, domain: PROVISIONING, site: SITE-DC-B, region: REGION-CENTRAL}
+  - {entity_id: OSS:FM:001, canonical_name: Fault Manager 01, entity_type: fault_management, domain: OSS, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: OSS:PM:001, canonical_name: Performance Manager 01, entity_type: performance_management, domain: OSS, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: OSS:INV:001, canonical_name: Inventory System 01, entity_type: inventory, domain: OSS, site: SITE-DC-A, region: REGION-NORTH}
+  - {entity_id: OSS:ITSM:001, canonical_name: ITSM 01, entity_type: itsm, domain: OSS, site: SITE-DC-B, region: REGION-CENTRAL}
+
+  - {entity_id: GPON:OLT:015, canonical_name: OLT-015, entity_type: olt, domain: GPON_FIXED_ACCESS, vendor_profile: VENDOR_ACCESS_A, site: SITE-GPON-15, region: REGION-SOUTH}
+  - {entity_id: GPON:ONT:015001, canonical_name: ONT-015001, entity_type: ont, domain: GPON_FIXED_ACCESS, vendor_profile: VENDOR_ACCESS_A, site: customer_premise, region: REGION-SOUTH}
+  - {entity_id: GPON:BNG:001, canonical_name: BNG-01, entity_type: bng, domain: GPON_FIXED_ACCESS, vendor_profile: VENDOR_NET_B, site: SITE-DC-B, region: REGION-CENTRAL}
+
+aliases:
+  - {entity_id: SA5G:UPF:003, source: EMS_VENDOR_B, name: UPF_003, confidence: 0.98}
+  - {entity_id: SA5G:UPF:003, source: KUBERNETES, name: upf-prod-03, confidence: 0.95}
+  - {entity_id: SA5G:UPF:003, source: OSS_INVENTORY, name: DC-A-UPF03, confidence: 0.9}
+  - {entity_id: SA5G:UPF:003, source: LOGGING, name: upf03.svc.cluster.local, confidence: 0.92}
+  - {entity_id: SA5G:UPF:003, source: ITSM, name: UPF3, confidence: 0.86}
+  - {entity_id: IP:PE:RTR-21, source: IP_NMS, name: PE21, confidence: 0.98}
+  - {entity_id: IP:SEC:GW-02, source: SECURITY_NMS, name: SGW02-SEC, confidence: 0.9}
+  - {entity_id: TX:FIBER:FR-07, source: TRANSMISSION_NMS, name: FR07-NORTH-CENTRAL, confidence: 0.96}
+
+relationships:
+  - {relationship_id: REL-RAN-GNB-BH, source_entity: RAN:GNB:501, relationship_type: BACKHAULED_BY, target_entity: TX:MW:BACKHAUL-101, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-RAN-ENB-BH, source_entity: RAN:ENB:101, relationship_type: BACKHAULED_BY, target_entity: TX:MW:BACKHAUL-101, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MW-PE21, source_entity: TX:MW:BACKHAUL-101, relationship_type: CARRIED_BY, target_entity: IP:PE:RTR-21, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIBER-DWDM, source_entity: TX:DWDM:LAMBDA-22, relationship_type: CARRIED_BY, target_entity: TX:FIBER:FR-07, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-OTN-DWDM, source_entity: TX:OTN:TRAIL-22, relationship_type: CARRIED_BY, target_entity: TX:DWDM:LAMBDA-22, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MPLS-OTN, source_entity: IP:PE:RTR-21, relationship_type: CARRIED_BY, target_entity: TX:OTN:TRAIL-22, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PE21-SECGW02, source_entity: IP:PE:RTR-21, relationship_type: ROUTES_THROUGH, target_entity: IP:SEC:GW-02, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-TX-SEC-GW-02-P07, source_entity: IP:SEC:GW-02, relationship_type: ROUTES_THROUGH, target_entity: IP:P:RTR-07, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-N3-PE21, source_entity: IP:VRF:N3-01, relationship_type: ROUTES_THROUGH, target_entity: IP:PE:RTR-21, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-N3-UPF, source_entity: SA5G:UPF:003, relationship_type: CONNECTED_TO, target_entity: IP:VRF:N3-01, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-UPF-SGI, source_entity: SA5G:UPF:003, relationship_type: ROUTES_THROUGH, target_entity: IP:VRF:SGI-01, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SGI-FW, source_entity: IP:VRF:SGI-01, relationship_type: PROTECTED_BY, target_entity: INFRA:FW:SGI, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FW-CGNAT, source_entity: INFRA:FW:SGI, relationship_type: ROUTES_THROUGH, target_entity: INFRA:CGNAT:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CGNAT-INET, source_entity: INFRA:CGNAT:001, relationship_type: PEERS_WITH, target_entity: EXT:INTERNET:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-AMF-GNB, source_entity: SA5G:AMF:001, relationship_type: CONNECTED_TO, target_entity: RAN:GNB:501, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SMF-UPF, source_entity: SA5G:SMF:001, relationship_type: CONNECTED_TO, target_entity: SA5G:UPF:003, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-AMF-UDM, source_entity: SA5G:AMF:001, relationship_type: AUTHENTICATES_VIA, target_entity: SA5G:UDM:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-AMF-AUSF, source_entity: SA5G:AMF:001, relationship_type: AUTHENTICATES_VIA, target_entity: SA5G:AUSF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SMF-PCF, source_entity: SA5G:SMF:001, relationship_type: DEPENDS_ON, target_entity: SA5G:PCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SBI-NRF, source_entity: SA5G:SCP:001, relationship_type: RESOLVES_VIA, target_entity: SA5G:NRF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-UPF-HOSTED, source_entity: SA5G:UPF:003, relationship_type: HOSTED_ON, target_entity: INFRA:K8S:CORE-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-AMF-HOSTED, source_entity: SA5G:AMF:001, relationship_type: HOSTED_ON, target_entity: INFRA:K8S:CORE-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-K8S-RUNS-NFVI, source_entity: INFRA:K8S:CORE-A, relationship_type: RUNS_ON, target_entity: INFRA:NFVI:A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-NFVI-POWER, source_entity: INFRA:NFVI:A, relationship_type: POWERED_BY, target_entity: INFRA:POWER:A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-NFVI-COOLING, source_entity: INFRA:NFVI:A, relationship_type: COOLED_BY, target_entity: INFRA:COOL:A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-UDM-DB, source_entity: SA5G:UDM:001, relationship_type: USES_DATABASE, target_entity: INFRA:DB:SUBS-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-AMF-DNS, source_entity: SA5G:AMF:001, relationship_type: RESOLVES_VIA, target_entity: INFRA:DNS:CORE, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CORE-NTP, source_entity: SA5G:AMF:001, relationship_type: TIMED_BY, target_entity: INFRA:NTP:CORE, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-LTE-ENB-MME, source_entity: RAN:ENB:101, relationship_type: CONNECTED_TO, target_entity: EPC:MME:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-LTE-ENB-SGW, source_entity: RAN:ENB:101, relationship_type: CONNECTED_TO, target_entity: EPC:SGW:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SGW-PGW, source_entity: EPC:SGW:001, relationship_type: CONNECTED_TO, target_entity: EPC:PGW:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MME-HSS, source_entity: EPC:MME:001, relationship_type: AUTHENTICATES_VIA, target_entity: EPC:HSS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PGW-PCRF, source_entity: EPC:PGW:001, relationship_type: DEPENDS_ON, target_entity: EPC:PCRF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PCRF-DRA, source_entity: EPC:PCRF:001, relationship_type: ROUTES_THROUGH, target_entity: EPC:DRA:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PGW-FW, source_entity: EPC:PGW:001, relationship_type: ROUTES_THROUGH, target_entity: INFRA:FW:SGI, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-NSA-GNB-ENDC, source_entity: RAN:GNB:501, relationship_type: DEPENDS_ON, target_entity: NSA:ENDC:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-NSA-ENDC-ANCHOR, source_entity: NSA:ENDC:001, relationship_type: DEPENDS_ON, target_entity: NSA:ANCHOR:LTE-001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-NSA-ANCHOR-EPC, source_entity: NSA:ANCHOR:LTE-001, relationship_type: CONNECTED_TO, target_entity: EPC:SGW:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-3G-NODEB-RNC, source_entity: RAN:NODEB:03101, relationship_type: CONNECTED_TO, target_entity: RAN:RNC:031, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-RNC-SGSN, source_entity: RAN:RNC:031, relationship_type: CONNECTED_TO, target_entity: PS3G:SGSN:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SGSN-GGSN, source_entity: PS3G:SGSN:001, relationship_type: CONNECTED_TO, target_entity: PS3G:GGSN:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SGSN-HLR, source_entity: PS3G:SGSN:001, relationship_type: AUTHENTICATES_VIA, target_entity: CS:HLR:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-GGSN-FW, source_entity: PS3G:GGSN:001, relationship_type: ROUTES_THROUGH, target_entity: INFRA:FW:SGI, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-RNC-MSC, source_entity: RAN:RNC:031, relationship_type: CONNECTED_TO, target_entity: CS:MSC-S:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MSC-MGW, source_entity: CS:MSC-S:001, relationship_type: CONNECTED_TO, target_entity: CS:MGW:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MSC-HLR, source_entity: CS:MSC-S:001, relationship_type: AUTHENTICATES_VIA, target_entity: CS:HLR:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-MSC-STP, source_entity: CS:MSC-S:001, relationship_type: ROUTES_THROUGH, target_entity: CS:STP:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-VOLTE-PCSCF, source_entity: RAN:ENB:101, relationship_type: CONNECTED_TO, target_entity: IMSM:PCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-IMS-PCSCF-SCSCF, source_entity: IMSM:PCSCF:001, relationship_type: CONNECTED_TO, target_entity: IMSM:SCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-IMS-SCSCF-TAS, source_entity: IMSM:SCSCF:001, relationship_type: CONNECTED_TO, target_entity: IMSM:TAS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-IMS-TAS-SBC, source_entity: IMSM:TAS:001, relationship_type: CONNECTED_TO, target_entity: IMSM:SBC:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-IMS-HSS, source_entity: IMSM:SCSCF:001, relationship_type: AUTHENTICATES_VIA, target_entity: EPC:HSS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-VONR-PCSCF, source_entity: RAN:GNB:501, relationship_type: CONNECTED_TO, target_entity: IMSM:PCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-FIXED-ONT-OLT, source_entity: GPON:ONT:015001, relationship_type: CONNECTED_TO, target_entity: GPON:OLT:015, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIXED-OLT-BNG, source_entity: GPON:OLT:015, relationship_type: CONNECTED_TO, target_entity: GPON:BNG:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-BNG-PE, source_entity: GPON:BNG:001, relationship_type: ROUTES_THROUGH, target_entity: IP:P:RTR-07, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIXED-IMS-PCSCF, source_entity: GPON:BNG:001, relationship_type: CONNECTED_TO, target_entity: IMSF:PCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIXED-IMS-SCSCF, source_entity: IMSF:PCSCF:001, relationship_type: CONNECTED_TO, target_entity: IMSF:SCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIXED-IMS-TAS, source_entity: IMSF:SCSCF:001, relationship_type: CONNECTED_TO, target_entity: IMSF:TAS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIXED-IMS-SBC, source_entity: IMSF:TAS:001, relationship_type: CONNECTED_TO, target_entity: IMSF:SBC:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-SMS-SMSC-SMSR, source_entity: VAS:SMSC:001, relationship_type: ROUTES_THROUGH, target_entity: VAS:SMSR:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SMSR-STP, source_entity: VAS:SMSR:001, relationship_type: ROUTES_THROUGH, target_entity: CS:STP:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-SMSR-ESME, source_entity: VAS:SMSR:001, relationship_type: CONNECTED_TO, target_entity: VAS:ESME:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-USSD-IN-A, source_entity: VAS:USSD:001, relationship_type: ROUTES_THROUGH, target_entity: IN:A:SCP:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-USSD-IN-B, source_entity: VAS:USSD:001, relationship_type: ROUTES_THROUGH, target_entity: IN:B:SCP:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-USSD-IN-C, source_entity: VAS:USSD:001, relationship_type: ROUTES_THROUGH, target_entity: IN:C:SCP:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-OCS-DRA, source_entity: CHG:OCS:001, relationship_type: ROUTES_THROUGH, target_entity: EPC:DRA:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PCF-OCS, source_entity: SA5G:PCF:001, relationship_type: CHARGES_VIA, target_entity: CHG:OCS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CHF-OCS, source_entity: CHG:CHF:001, relationship_type: CHARGES_VIA, target_entity: CHG:OCS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-CRM-PROFILE-TICKET, source_entity: CRM:TICKET:001, relationship_type: DEPENDS_ON, target_entity: CRM:PROFILE:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-BSS-CRM, source_entity: BSS:BILLING:001, relationship_type: DEPENDS_ON, target_entity: CRM:PROFILE:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CATALOG-BILLING, source_entity: BSS:CATALOG:001, relationship_type: DEPENDS_ON, target_entity: BSS:BILLING:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-ORDER-CATALOG, source_entity: PROV:ORDER:001, relationship_type: DEPENDS_ON, target_entity: BSS:CATALOG:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PROV-ORDER, source_entity: PROV:ENGINE:001, relationship_type: DEPENDS_ON, target_entity: PROV:ORDER:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PROV-HSS, source_entity: PROV:ENGINE:001, relationship_type: PROVISIONED_BY, target_entity: EPC:HSS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PROV-UDM, source_entity: PROV:ENGINE:001, relationship_type: PROVISIONED_BY, target_entity: SA5G:UDM:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PROV-OCS, source_entity: PROV:ENGINE:001, relationship_type: PROVISIONED_BY, target_entity: CHG:OCS:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-PROV-IMS, source_entity: PROV:ENGINE:001, relationship_type: PROVISIONED_BY, target_entity: IMSM:SCSCF:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CRM-TICKETS-IMPACT, source_entity: CRM:TICKET:001, relationship_type: IMPACTS, target_entity: SA5G:UPF:003, status: INFERRED, source_system: SIMULATOR_WORLD, confidence: 0.75}
+
+  - {relationship_id: REL-OSS-FM-MONITORS-UPF, source_entity: OSS:FM:001, relationship_type: MONITORED_BY, target_entity: SA5G:UPF:003, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-OSS-PM-MONITORS-PE, source_entity: OSS:PM:001, relationship_type: MONITORED_BY, target_entity: IP:PE:RTR-21, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-OSS-INV-PE, source_entity: OSS:INV:001, relationship_type: SERVES, target_entity: IP:PE:RTR-21, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-ITSM-TICKETS, source_entity: OSS:ITSM:001, relationship_type: SERVES, target_entity: CRM:TICKET:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-L3VPN-PE, source_entity: MPLS:L3VPN:ENT-001, relationship_type: ROUTES_THROUGH, target_entity: IP:PE:RTR-21, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-CE-L3VPN, source_entity: MPLS:CE:CUST-001, relationship_type: CONNECTED_TO, target_entity: MPLS:L3VPN:ENT-001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+  - {relationship_id: REL-UPF-SERVICE, source_entity: SA5G:UPF:003, relationship_type: SUPPORTS_SERVICE, target_entity: CRM:TICKET:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.8}
+  - {relationship_id: REL-ENTITY-SITE, source_entity: SA5G:UPF:003, relationship_type: BELONGS_TO_SITE, target_entity: INFRA:DC:A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-ENTITY-REGION, source_entity: INFRA:DC:A, relationship_type: BELONGS_TO_REGION, target_entity: INFRA:DC:B, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.7}
+  - {relationship_id: REL-UPF-FD, source_entity: SA5G:UPF:003, relationship_type: PART_OF_FAILURE_DOMAIN, target_entity: INFRA:K8S:CORE-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+  - {relationship_id: REL-FIBER-SUPPLIED-BY, source_entity: TX:FIBER:FR-07, relationship_type: SUPPLIED_BY, target_entity: EXT:ROAMING:001, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.65}
+  - {relationship_id: REL-FW-FAILOVER, source_entity: INFRA:FW:SGI, relationship_type: FAILS_OVER_TO, target_entity: INFRA:DC:B, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.85}
+  - {relationship_id: REL-UPF-STORAGE, source_entity: SA5G:UPF:003, relationship_type: STORED_ON, target_entity: INFRA:DB:SUBS-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.7}
+  - {relationship_id: REL-UPF-CACHE, source_entity: SA5G:UPF:003, relationship_type: USES_CACHE, target_entity: INFRA:DB:SUBS-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.5}
+  - {relationship_id: REL-OSS-MESSAGE-BUS, source_entity: OSS:FM:001, relationship_type: USES_MESSAGE_BUS, target_entity: INFRA:K8S:CORE-A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 0.8}
+  - {relationship_id: REL-IMPACT-MOBILE-DATA, source_entity: SA5G:UPF:003, relationship_type: IMPACTS, target_entity: CRM:TICKET:001, status: INFERRED, source_system: SIMULATOR_WORLD, confidence: 0.8}
+  - {relationship_id: REL-POWER-MEMBER, source_entity: INFRA:POWER:A, relationship_type: MEMBER_OF, target_entity: INFRA:DC:A, status: CONFIRMED, source_system: SIMULATOR_WORLD, confidence: 1.0}
+
+service_chains:
+  - service_id: 3g_mobile_data
+    name: 3G Mobile Data
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [consumer_mobile, roaming]
+    paths:
+      - [RAN:NODEB:03101, RAN:RNC:031, PS3G:SGSN:001, PS3G:GGSN:001, INFRA:FW:SGI, INFRA:CGNAT:001, EXT:INTERNET:001]
+  - service_id: lte_mobile_data
+    name: LTE Mobile Data
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile, enterprise_mobile]
+    paths:
+      - [RAN:ENB:101, EPC:SGW:001, EPC:PGW:001, INFRA:FW:SGI, INFRA:CGNAT:001, EXT:INTERNET:001]
+  - service_id: 5g_nsa_mobile_data
+    name: 5G NSA Mobile Data
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [RAN:GNB:501, NSA:ENDC:001, NSA:ANCHOR:LTE-001, EPC:SGW:001, EPC:PGW:001, INFRA:FW:SGI, INFRA:CGNAT:001, EXT:INTERNET:001]
+  - service_id: 5g_sa_mobile_data
+    name: 5G SA Mobile Data
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile, enterprise_mobile]
+    paths:
+      - [RAN:GNB:501, IP:VRF:N3-01, SA5G:UPF:003, IP:VRF:SGI-01, INFRA:FW:SGI, INFRA:CGNAT:001, EXT:INTERNET:001]
+      - [SA5G:AMF:001, SA5G:AUSF:001, SA5G:UDM:001]
+      - [SA5G:SMF:001, SA5G:PCF:001, CHG:OCS:001]
+  - service_id: 3g_voice
+    name: 3G Voice
+    regions: [REGION-CENTRAL]
+    customer_segments: [consumer_mobile, roaming]
+    paths:
+      - [RAN:NODEB:03101, RAN:RNC:031, CS:MSC-S:001, CS:MGW:001, CS:STP:001]
+  - service_id: volte
+    name: VoLTE
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [RAN:ENB:101, IMSM:PCSCF:001, IMSM:SCSCF:001, IMSM:TAS:001, IMSM:SBC:001]
+      - [IMSM:SCSCF:001, EPC:HSS:001]
+  - service_id: mobile_ims_voice
+    name: Mobile IMS Voice
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [RAN:GNB:501, IMSM:PCSCF:001, IMSM:SCSCF:001, IMSM:TAS:001, IMSM:SBC:001]
+      - [IMSM:SCSCF:001, SA5G:UDM:001]
+  - service_id: fixed_ims_voice
+    name: Fixed IMS Voice
+    regions: [REGION-SOUTH, REGION-CENTRAL]
+    customer_segments: [fixed_consumer]
+    paths:
+      - [GPON:ONT:015001, GPON:OLT:015, GPON:BNG:001, IMSF:PCSCF:001, IMSF:SCSCF:001, IMSF:TAS:001, IMSF:SBC:001]
+  - service_id: mo_sms
+    name: Mobile Originated SMS
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [RAN:ENB:101, CS:STP:001, VAS:SMSC:001, VAS:SMSR:001]
+  - service_id: mt_sms
+    name: Mobile Terminated SMS
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [VAS:SMSR:001, VAS:SMSC:001, CS:STP:001, RAN:ENB:101]
+  - service_id: enterprise_sms_esme
+    name: Enterprise SMS via ESME
+    regions: [REGION-NORTH]
+    customer_segments: [enterprise]
+    paths:
+      - [VAS:ESME:001, VAS:SMSR:001, VAS:SMSC:001, EXT:VAS:001]
+  - service_id: ussd
+    name: USSD
+    regions: [REGION-CENTRAL]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [RAN:ENB:101, VAS:USSD:001, IN:A:SCP:001]
+      - [RAN:ENB:101, VAS:USSD:001, IN:B:SCP:001]
+      - [RAN:ENB:101, VAS:USSD:001, IN:C:SCP:001]
+  - service_id: prepaid_recharge
+    name: Prepaid Recharge
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [prepaid]
+    paths:
+      - [CRM:PROFILE:001, CHG:OCS:001, IN:A:SCP:001]
+  - service_id: prepaid_balance_inquiry
+    name: Prepaid Balance Inquiry
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [prepaid]
+    paths:
+      - [VAS:USSD:001, CHG:OCS:001, IN:B:SCP:001]
+  - service_id: online_charging_data
+    name: Online Charging for Data
+    regions: [REGION-NORTH]
+    customer_segments: [prepaid, consumer_mobile]
+    paths:
+      - [SA5G:UPF:003, SA5G:PCF:001, CHG:CHF:001, CHG:OCS:001]
+  - service_id: roaming_data
+    name: Roaming Data
+    regions: [REGION-NORTH]
+    customer_segments: [roaming]
+    paths:
+      - [EXT:ROAMING:001, EPC:PGW:001, EPC:DRA:001, CHG:OCS:001]
+  - service_id: roaming_voice
+    name: Roaming Voice
+    regions: [REGION-CENTRAL]
+    customer_segments: [roaming]
+    paths:
+      - [EXT:ROAMING:001, CS:STP:001, CS:MSC-S:001, CS:MGW:001]
+  - service_id: subscriber_provisioning
+    name: Subscriber Provisioning
+    regions: [REGION-CENTRAL]
+    customer_segments: [consumer_mobile, fixed_consumer]
+    paths:
+      - [CRM:PROFILE:001, PROV:ORDER:001, PROV:ENGINE:001, EPC:HSS:001, SA5G:UDM:001, CHG:OCS:001, IMSM:SCSCF:001]
+  - service_id: sim_service_activation
+    name: SIM and Service Activation
+    regions: [REGION-CENTRAL]
+    customer_segments: [consumer_mobile]
+    paths:
+      - [BSS:CATALOG:001, PROV:ORDER:001, PROV:ENGINE:001, EPC:HSS:001, SA5G:UDM:001]
+  - service_id: gpon_broadband
+    name: GPON Broadband
+    regions: [REGION-SOUTH]
+    customer_segments: [fixed_consumer]
+    paths:
+      - [GPON:ONT:015001, GPON:OLT:015, GPON:BNG:001, IP:P:RTR-07, EXT:INTERNET:001]
+  - service_id: fixed_broadband_authentication
+    name: Fixed Broadband Authentication
+    regions: [REGION-SOUTH]
+    customer_segments: [fixed_consumer]
+    paths:
+      - [GPON:ONT:015001, GPON:BNG:001, CRM:PROFILE:001, BSS:BILLING:001]
+  - service_id: enterprise_mpls_vpn
+    name: Enterprise MPLS VPN
+    regions: [REGION-NORTH]
+    customer_segments: [enterprise]
+    paths:
+      - [MPLS:CE:CUST-001, MPLS:L3VPN:ENT-001, IP:PE:RTR-21, IP:SEC:GW-02, IP:P:RTR-07]
+  - service_id: internet_peering_service
+    name: Internet Peering Service
+    regions: [REGION-NORTH]
+    customer_segments: [consumer_mobile, enterprise, fixed_consumer]
+    paths:
+      - [IP:P:RTR-07, INFRA:CGNAT:001, EXT:INTERNET:001]
+  - service_id: vas_short_code_service
+    name: VAS Short-Code Service
+    regions: [REGION-CENTRAL]
+    customer_segments: [consumer_mobile, enterprise]
+    paths:
+      - [VAS:USSD:001, VAS:SMSR:001, EXT:VAS:001]
+  - service_id: oss_network_management_connectivity
+    name: OSS to Network Management Connectivity
+    regions: [REGION-NORTH, REGION-CENTRAL]
+    customer_segments: [internal_noc]
+    paths:
+      - [OSS:FM:001, OSS:PM:001, OSS:INV:001, IP:PE:RTR-21]
+
+failure_domains:
+  - {failure_domain_id: FD-DC-A, domain_type: data_center, name: DC-A common facility, members: [INFRA:DC:A, INFRA:COOL:A, INFRA:K8S:CORE-A, INFRA:NFVI:A]}
+  - {failure_domain_id: FD-DC-B, domain_type: data_center, name: DC-B common facility, members: [INFRA:DC:B, CS:MSC-S:001, GPON:BNG:001]}
+  - {failure_domain_id: FD-POWER-A, domain_type: power_feed, name: DC-A power feed, members: [INFRA:POWER:A, INFRA:NFVI:A]}
+  - {failure_domain_id: FD-K8S-A, domain_type: kubernetes_cluster, name: Core Kubernetes A, members: [INFRA:K8S:CORE-A, SA5G:UPF:003, SA5G:AMF:001]}
+  - {failure_domain_id: FD-NFVI-A, domain_type: nfvi_cluster, name: NFVI A, members: [INFRA:NFVI:A, INFRA:K8S:CORE-A]}
+  - {failure_domain_id: FD-DB-A, domain_type: database_cluster, name: Subscriber DB A, members: [INFRA:DB:SUBS-A, SA5G:UDM:001]}
+  - {failure_domain_id: FD-FIBER-FR-07, domain_type: fiber_route, name: Fiber Route FR-07, members: [TX:FIBER:FR-07, TX:DWDM:LAMBDA-22]}
+  - {failure_domain_id: FD-OTN-22, domain_type: otn_path, name: OTN Trail 22, members: [TX:OTN:TRAIL-22]}
+  - {failure_domain_id: FD-MPLS-CORE, domain_type: mpls_core, name: MPLS Core Shared, members: [IP:P:RTR-07, IP:PE:RTR-21]}
+  - {failure_domain_id: FD-PE-21, domain_type: router, name: PE-RTR-21, members: [IP:PE:RTR-21, IP:VRF:N3-01, MPLS:L3VPN:ENT-001]}
+  - {failure_domain_id: FD-SEC-GW-02, domain_type: firewall_security_path, name: Security Gateway 02, members: [IP:SEC:GW-02]}
+  - {failure_domain_id: FD-RAN-101, domain_type: ran_site, name: RAN Site 101, members: [RAN:SITE:101, RAN:ENB:101, RAN:GNB:501, RAN:NODEB:03101]}
+
+vendor_profiles:
+  - vendor_profile: VENDOR_NET_A
+    alarm_style: {interface_down: ETH_LINK_FAILURE, packet_loss: PATH_QUALITY_DEGRADED, bfd_flap: BFD_SESSION_UNSTABLE}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: MINOR}
+    timestamp_behavior: {clock_skew_ms: 1200, typical_ingestion_delay_ms: 3000}
+  - vendor_profile: VENDOR_NET_B
+    alarm_style: {interface_down: LINK_LOSS, packet_loss: SERVICE_PATH_LOSS, bfd_flap: KEEPALIVE_DEGRADED}
+    severity_mapping: {critical: MAJOR, major: MINOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: -800, typical_ingestion_delay_ms: 7000}
+  - vendor_profile: VENDOR_CORE_A
+    alarm_style: {cpu_high: PROCESSOR_OVERLOAD, session_fail: SESSION_SETUP_FAILURE}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 0, typical_ingestion_delay_ms: 4000}
+  - vendor_profile: VENDOR_CORE_B
+    alarm_style: {n3_loss: N3_PATH_DEGRADED, pfcp_loss: PFCP_HEARTBEAT_LOSS, upf_warn: USER_PLANE_REACHABILITY_WARNING}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: MINOR}
+    timestamp_behavior: {clock_skew_ms: 500, typical_ingestion_delay_ms: 5500}
+  - vendor_profile: VENDOR_CORE_C
+    alarm_style: {sbi_fail: SBI_SERVICE_UNAVAILABLE, registration_fail: REGISTRATION_REJECT_SPIKE}
+    severity_mapping: {critical: P1, major: P2, warning: P3}
+    timestamp_behavior: {clock_skew_ms: 2200, typical_ingestion_delay_ms: 2500}
+  - vendor_profile: VENDOR_RAN_A
+    alarm_style: {cell_down: CELL_UNAVAILABLE, backhaul_loss: BACKHAUL_DEGRADED}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: MINOR}
+    timestamp_behavior: {clock_skew_ms: -1200, typical_ingestion_delay_ms: 5000}
+  - vendor_profile: VENDOR_RAN_B
+    alarm_style: {cell_down: NR_CELL_OUTAGE, backhaul_loss: XN_NG_BACKHAUL_DEGRADED}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 1800, typical_ingestion_delay_ms: 6500}
+  - vendor_profile: VENDOR_TRANS_A
+    alarm_style: {fiber_loss: LOS_DEGRADED, otn_ber: OTN_BER_DEGRADED}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 3000, typical_ingestion_delay_ms: 9000}
+  - vendor_profile: VENDOR_TRANS_B
+    alarm_style: {microwave_loss: MW_LINK_FADE, capacity_drop: MODULATION_DOWNGRADE}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 2500, typical_ingestion_delay_ms: 8000}
+  - vendor_profile: VENDOR_IMS_A
+    alarm_style: {registration_fail: IMS_REGISTRATION_SPIKE, call_setup_fail: SIP_SETUP_FAILURE}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 100, typical_ingestion_delay_ms: 3500}
+  - vendor_profile: VENDOR_IMS_B
+    alarm_style: {registration_fail: P_CSCF_REG_DEGRADED, call_setup_fail: SBC_CALL_FAILURE}
+    severity_mapping: {critical: P1, major: P2, warning: P3}
+    timestamp_behavior: {clock_skew_ms: -500, typical_ingestion_delay_ms: 4500}
+  - vendor_profile: VENDOR_VAS_A
+    alarm_style: {sms_queue: SMS_QUEUE_DEPTH_HIGH, smpp_loss: SMPP_BIND_UNSTABLE}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: MINOR}
+    timestamp_behavior: {clock_skew_ms: 700, typical_ingestion_delay_ms: 3000}
+  - vendor_profile: VENDOR_VAS_B
+    alarm_style: {ussd_timeout: USSD_DIALOG_TIMEOUT, api_loss: API_GATEWAY_TIMEOUT}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 400, typical_ingestion_delay_ms: 3200}
+  - vendor_profile: VENDOR_CHG_A
+    alarm_style: {diameter_overload: DIAMETER_OVERLOAD, debit_timeout: OCS_DEBIT_TIMEOUT}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 600, typical_ingestion_delay_ms: 4200}
+  - vendor_profile: VENDOR_CHG_B
+    alarm_style: {charging_fail: CHF_REQUEST_FAILURE, quota_fail: QUOTA_RESERVATION_ERROR}
+    severity_mapping: {critical: P1, major: P2, warning: P3}
+    timestamp_behavior: {clock_skew_ms: 1100, typical_ingestion_delay_ms: 3800}
+  - vendor_profile: IN_VENDOR_A
+    alarm_style: {service_logic_fail: SCP_LOGIC_FAIL_A, account_timeout: ACCOUNT_STATE_TIMEOUT_A}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: MINOR}
+    timestamp_behavior: {clock_skew_ms: 200, typical_ingestion_delay_ms: 3000}
+  - vendor_profile: IN_VENDOR_B
+    alarm_style: {service_logic_fail: IN_SERVICE_EXCEPTION_B, account_timeout: SUBSCRIBER_LOOKUP_SLOW_B}
+    severity_mapping: {critical: P1, major: P2, warning: P4}
+    timestamp_behavior: {clock_skew_ms: -900, typical_ingestion_delay_ms: 6000}
+  - vendor_profile: IN_VENDOR_C
+    alarm_style: {service_logic_fail: LOGIC_TREE_ABORT_C, account_timeout: PROFILE_DB_WAIT_C}
+    severity_mapping: {critical: BLOCKER, major: HIGH, warning: MEDIUM}
+    timestamp_behavior: {clock_skew_ms: 1600, typical_ingestion_delay_ms: 5200}
+  - vendor_profile: VENDOR_ACCESS_A
+    alarm_style: {pon_loss: PON_LOS, olt_degrade: OLT_UPLINK_DEGRADED}
+    severity_mapping: {critical: CRITICAL, major: MAJOR, warning: WARNING}
+    timestamp_behavior: {clock_skew_ms: 900, typical_ingestion_delay_ms: 7000}
+  - vendor_profile: VENDOR_CLOUD_A
+    alarm_style: {pod_restart: POD_RESTARTED, node_pressure: NODE_PRESSURE, volume_slow: VOLUME_IO_LATENCY}
+    severity_mapping: {critical: critical, major: warning, warning: info}
+    timestamp_behavior: {clock_skew_ms: 0, typical_ingestion_delay_ms: 1500}
+
+observability_sources:
+  - {source_id: RAN_NMS, source_type: nms, domain: RAN, vendor_profile: VENDOR_RAN_A, freshness: near_real_time, reliability: 0.88, expected_delay: PT5S, coverage: [alarms, kpis, topology], authoritativeness: operational}
+  - {source_id: TRANSMISSION_NMS, source_type: nms, domain: TRANSMISSION, vendor_profile: VENDOR_TRANS_A, freshness: delayed, reliability: 0.9, expected_delay: PT9S, coverage: [alarms, metrics, physical_paths], authoritativeness: authoritative_for_physical_paths}
+  - {source_id: IP_NMS, source_type: nms, domain: IP_TRANSPORT, vendor_profile: VENDOR_NET_A, freshness: near_real_time, reliability: 0.93, expected_delay: PT3S, coverage: [alarms, counters, routing, topology], authoritativeness: authoritative_for_ip_paths}
+  - {source_id: VENDOR_EMS, source_type: ems, domain: SA_5G_CORE, vendor_profile: VENDOR_CORE_B, freshness: near_real_time, reliability: 0.89, expected_delay: PT5S, coverage: [alarms, logs, counters], authoritativeness: operational}
+  - {source_id: KUBERNETES, source_type: platform, domain: IT_CLOUD_INFRA, vendor_profile: VENDOR_CLOUD_A, freshness: real_time, reliability: 0.9, expected_delay: PT1S, coverage: [pods, nodes, logs, events], authoritativeness: authoritative_for_runtime}
+  - {source_id: METRICS_PLATFORM, source_type: metrics, domain: OSS, freshness: near_real_time, reliability: 0.86, expected_delay: PT10S, coverage: [kpis, counters, slo], authoritativeness: derived}
+  - {source_id: LOGGING, source_type: logs, domain: OSS, freshness: near_real_time, reliability: 0.82, expected_delay: PT4S, coverage: [logs, traces], authoritativeness: supporting}
+  - {source_id: ITSM, source_type: ticketing, domain: OSS, freshness: delayed, reliability: 0.8, expected_delay: PT60S, coverage: [incidents, changes, tickets], authoritativeness: operational}
+  - {source_id: CRM, source_type: crm, domain: CRM, freshness: delayed, reliability: 0.85, expected_delay: PT120S, coverage: [complaints, segments, geography], authoritativeness: authoritative_for_customer}
+  - {source_id: BSS, source_type: bss, domain: BSS, freshness: delayed, reliability: 0.84, expected_delay: PT180S, coverage: [billing, rating, products], authoritativeness: authoritative_for_product_state}
+  - {source_id: PROVISIONING, source_type: provisioning, domain: PROVISIONING, freshness: near_real_time, reliability: 0.86, expected_delay: PT30S, coverage: [orders, partial_success, subscriber_state], authoritativeness: authoritative_for_activation}
+  - {source_id: OCS, source_type: charging, domain: CHARGING, freshness: near_real_time, reliability: 0.9, expected_delay: PT5S, coverage: [reservations, debits, balance], authoritativeness: authoritative_for_prepaid}
+  - {source_id: IN, source_type: service_control, domain: IN_VENDOR_A, freshness: near_real_time, reliability: 0.83, expected_delay: PT8S, coverage: [service_logic, account_state], authoritativeness: operational}
+  - {source_id: EXTERNAL_FEEDS, source_type: external_provider, domain: EXTERNAL, freshness: delayed, reliability: 0.75, expected_delay: PT300S, coverage: [carrier_events, roaming_events, internet_peer], authoritativeness: external}
+
+operational_imperfections:
+  - entity_alias_mismatch
+  - clock_skew
+  - delayed_ingestion
+  - dropped_telemetry
+  - duplicate_alarms
+  - alarm_flapping
+  - stale_topology
+  - missing_topology
+  - suppressed_alarms
+  - incomplete_source_coverage
+  - conflicting_inventory
+  - unrelated_changes
+  - overlapping_incidents
+  - partial_monitoring_outage
+  - stale_dashboard_values
+  - vendor_severity_mismatch
+  - contradictory_domain_interpretation
+
+difficulty_profiles:
+  - level: L1
+    name: Clean
+    features: [complete_topology, minimal_noise, aligned_clocks, clear_root_evidence]
+  - level: L2
+    name: Noisy
+    features: [duplicates, unrelated_alarms, delayed_events, small_telemetry_gaps]
+  - level: L3
+    name: Multi-Vendor
+    features: [different_naming, different_severity, alias_mismatch, source_specific_evidence_schemas]
+  - level: L4
+    name: Incomplete Knowledge
+    features: [missing_topology, stale_topology, incomplete_observability, ambiguous_changes, hidden_dependencies]
+  - level: L5
+    name: Complex Operator Reality
+    features: [multiple_incidents, bad_timestamps, conflicting_evidence, transient_topology, human_disagreement, hidden_common_dependency, recovery_side_effects]
+
+customer_impact_model:
+  path: [network_entity, network_function, service_chain, product_service, region, customer_segment, customer_tickets]
+  derived_outputs:
+    - impacted_services
+    - impacted_regions
+    - impacted_subscribers
+    - estimated_affected_sessions
+    - customer_ticket_increase
+    - sla_slo_impact
+  rule: customer impact must follow service dependency graph and must not be generated arbitrarily
+
+fikracore_operational_view:
+  description: >
+    Deliberately incomplete and fragmented operational graph known to TelecomBrainEngine.
+    Hidden simulator-world relationships may be absent, stale, or represented as candidates.
+  known_relationship_ids:
+    - REL-RAN-GNB-BH
+    - REL-RAN-ENB-BH
+    - REL-MW-PE21
+    - REL-FIBER-DWDM
+    - REL-OTN-DWDM
+    - REL-MPLS-OTN
+    - REL-PE21-SECGW02
+    - REL-N3-PE21
+    - REL-N3-UPF
+    - REL-UPF-SGI
+    - REL-SGI-FW
+    - REL-FW-CGNAT
+    - REL-CGNAT-INET
+    - REL-AMF-GNB
+    - REL-SMF-UPF
+    - REL-AMF-UDM
+    - REL-SMF-PCF
+    - REL-UPF-HOSTED
+    - REL-LTE-ENB-MME
+    - REL-LTE-ENB-SGW
+    - REL-SGW-PGW
+    - REL-MME-HSS
+    - REL-PGW-PCRF
+    - REL-PGW-FW
+    - REL-NSA-GNB-ENDC
+    - REL-NSA-ENDC-ANCHOR
+    - REL-NSA-ANCHOR-EPC
+    - REL-3G-NODEB-RNC
+    - REL-RNC-SGSN
+    - REL-SGSN-GGSN
+    - REL-RNC-MSC
+    - REL-MSC-MGW
+    - REL-VOLTE-PCSCF
+    - REL-IMS-PCSCF-SCSCF
+    - REL-IMS-SCSCF-TAS
+    - REL-IMS-TAS-SBC
+    - REL-FIXED-ONT-OLT
+    - REL-FIXED-OLT-BNG
+    - REL-BNG-PE
+    - REL-SMS-SMSC-SMSR
+    - REL-USSD-IN-A
+    - REL-OCS-DRA
+    - REL-PCF-OCS
+    - REL-CRM-PROFILE-TICKET
+    - REL-BSS-CRM
+    - REL-ORDER-CATALOG
+    - REL-PROV-ORDER
+    - REL-PROV-HSS
+    - REL-OSS-FM-MONITORS-UPF
+    - REL-OSS-PM-MONITORS-PE
+    - REL-L3VPN-PE
+  hidden_from_operational_view:
+    - REL-TX-SEC-GW-02-P07
+    - REL-AMF-AUSF
+    - REL-SBI-NRF
+    - REL-NFVI-POWER
+    - REL-NFVI-COOLING
+    - REL-UDM-DB
+    - REL-CORE-NTP
+    - REL-PROV-UDM
+  candidate_relationships:
+    - relationship_id: CAND-REL-SECGW02-P07
+      source_entity: IP:SEC:GW-02
+      relationship_type: ROUTES_THROUGH
+      target_entity: IP:P:RTR-07
+      status: CANDIDATE
+      source_system: discovery_mode
+      confidence: 0.62
+      authoritativeness: non_authoritative
+      network_state: candidate
+      evidence_needed:
+        - independent_path_trace
+        - ip_nms_route_lookup
+        - transmission_circuit_mapping
+
+scenario_catalog_contract:
+  required_fields:
+    - required_entities
+    - required_entity_types
+    - required_relationships
+    - required_service_chain
+    - required_failure_domains
+  impossible_scenario_rule: scenario compilation must fail if the required causal path does not exist in this model
+
+scenario_generator_contract:
+  inputs:
+    - reference_operator_model
+    - scenario_definition
+    - vendor_profiles
+    - difficulty_profile
+    - random_seed
+  outputs:
+    - hidden_world_mutation
+    - causal_propagation
+    - alarms
+    - logs
+    - metrics
+    - kpis
+    - traces
+    - protocol_evidence
+    - changes
+    - tickets
+    - healthy_negative_evidence
+    - recovery_events
+  topology_rule: generator must never invent topology outside the validated operator model
+
+example_hidden_causal_paths:
+  - path_id: PATH-FIBER-TO-5G-DATA
+    root_condition: Fiber Route FR-07 degradation
+    propagation:
+      - TX:FIBER:FR-07
+      - TX:DWDM:LAMBDA-22
+      - TX:OTN:TRAIL-22
+      - IP:PE:RTR-21
+      - IP:SEC:GW-02
+      - IP:P:RTR-07
+      - IP:VRF:N3-01
+      - SA5G:UPF:003
+      - CRM:TICKET:001
+    expected_observable_symptoms:
+      - OTN BER degraded from Transmission NMS
+      - PE-RTR-21 interface errors from IP NMS
+      - N3 packet loss from metrics platform
+      - UPF reachability warning from vendor EMS
+      - PDU session throughput reduction
+      - mobile data complaints increase in CRM
+  - path_id: PATH-UPF-INTERNAL-FAULT
+    root_condition: UPF-03 internal user-plane fault
+    propagation:
+      - SA5G:UPF:003
+      - IP:VRF:SGI-01
+      - INFRA:FW:SGI
+      - CRM:TICKET:001
+    expected_observable_symptoms:
+      - UPF process warning
+      - PDU session failures
+      - normal transport counters as negative evidence
+      - mobile data complaints increase

@@ -1,0 +1,17 @@
+id: playbook_runbook
+name: Playbook Runbook Service
+engine: telecom_brain
+description: Recommends decision playbooks and executable runbooks for incident, intent, and service-procedure context.
+status: active
+connectors:
+  - gbrain
+consumes:
+  - incident_story
+  - rca_hypothesis
+  - service_procedure_context
+produces:
+  - playbook_recommendation
+  - runbook_recommendation
+  - missing_asset_candidate
+permissions:
+  - read_operational_context

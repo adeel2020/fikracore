@@ -1,0 +1,33 @@
+id: metadata_db
+name: Metadata Catalog Connector
+kind: database
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: knowledge_base
+description: Stores document-level metadata so Mark can answer inventory and summary questions without retrieving vector chunks.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: MARK_METADATA_MCP_PROTOCOL
+  url_env: MARK_METADATA_MCP_URL
+  token_env: MARK_METADATA_MCP_TOKEN
+  command_env: MARK_METADATA_MCP_COMMAND
+  args: []
+env:
+  - MARK_METADATA_MCP_PROTOCOL
+  - MARK_METADATA_MCP_URL
+  - MARK_METADATA_MCP_TOKEN
+  - MARK_METADATA_MCP_COMMAND
+  - MARK_METADATA_DB_URL
+capabilities:
+  - count_documents
+  - list_documents
+  - read_document_metadata
+  - track_source_freshness
+permissions:
+  - read_enterprise_knowledge
+fallback_transports:
+  - stdio
+  - http
+  - sql
+  - rest

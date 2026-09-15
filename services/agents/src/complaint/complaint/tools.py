@@ -5,8 +5,8 @@ import asyncio
 import contextvars
 from crewai.tools import tool
 from crewai.utilities.streaming import StreamChunk, StreamChunkType
-from ...qna.kg_retriever import kg_retriever
-from .utils import (
+from qna.kg_retriever import kg_retriever
+from complaint.complaint.utils import (
     _get_causal_rules,
     _resolve_target_team_name,
     _hydrate_rule_from_service,

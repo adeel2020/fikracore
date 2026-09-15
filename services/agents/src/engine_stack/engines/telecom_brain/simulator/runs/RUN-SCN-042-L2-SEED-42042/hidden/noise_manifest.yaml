@@ -1,0 +1,13 @@
+scenario_id: SCN-042
+seed: 42042
+difficulty_profile: L2
+noise_events:
+- event_id: ALM-SCN-042-DUP1
+  noise_type: duplicate_alarm
+  reason: source emitted repeated presentation of same underlying symptom
+delay_events: []
+missing_evidence:
+- one expected signal may be absent only when source coverage permits it
+contradictory_evidence:
+- conflicting interpretation may appear only as operational evidence, never as hidden-world
+  inconsistency

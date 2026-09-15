@@ -1,0 +1,125 @@
+catalog_id: FIKRACORE-100-SCENARIO-CATALOG-V1
+reference_network: ../operator_model/reference_synthetic_network.yaml
+scenario_count: 100
+scenario_files:
+- SCN-001.yaml
+- SCN-002.yaml
+- SCN-003.yaml
+- SCN-004.yaml
+- SCN-005.yaml
+- SCN-006.yaml
+- SCN-007.yaml
+- SCN-008.yaml
+- SCN-009.yaml
+- SCN-010.yaml
+- SCN-011.yaml
+- SCN-012.yaml
+- SCN-013.yaml
+- SCN-014.yaml
+- SCN-015.yaml
+- SCN-016.yaml
+- SCN-017.yaml
+- SCN-018.yaml
+- SCN-019.yaml
+- SCN-020.yaml
+- SCN-021.yaml
+- SCN-022.yaml
+- SCN-023.yaml
+- SCN-024.yaml
+- SCN-025.yaml
+- SCN-026.yaml
+- SCN-027.yaml
+- SCN-028.yaml
+- SCN-029.yaml
+- SCN-030.yaml
+- SCN-031.yaml
+- SCN-032.yaml
+- SCN-033.yaml
+- SCN-034.yaml
+- SCN-035.yaml
+- SCN-036.yaml
+- SCN-037.yaml
+- SCN-038.yaml
+- SCN-039.yaml
+- SCN-040.yaml
+- SCN-041.yaml
+- SCN-042.yaml
+- SCN-043.yaml
+- SCN-044.yaml
+- SCN-045.yaml
+- SCN-046.yaml
+- SCN-047.yaml
+- SCN-048.yaml
+- SCN-049.yaml
+- SCN-050.yaml
+- SCN-051.yaml
+- SCN-052.yaml
+- SCN-053.yaml
+- SCN-054.yaml
+- SCN-055.yaml
+- SCN-056.yaml
+- SCN-057.yaml
+- SCN-058.yaml
+- SCN-059.yaml
+- SCN-060.yaml
+- SCN-061.yaml
+- SCN-062.yaml
+- SCN-063.yaml
+- SCN-064.yaml
+- SCN-065.yaml
+- SCN-066.yaml
+- SCN-067.yaml
+- SCN-068.yaml
+- SCN-069.yaml
+- SCN-070.yaml
+- SCN-071.yaml
+- SCN-072.yaml
+- SCN-073.yaml
+- SCN-074.yaml
+- SCN-075.yaml
+- SCN-076.yaml
+- SCN-077.yaml
+- SCN-078.yaml
+- SCN-079.yaml
+- SCN-080.yaml
+- SCN-081.yaml
+- SCN-082.yaml
+- SCN-083.yaml
+- SCN-084.yaml
+- SCN-085.yaml
+- SCN-086.yaml
+- SCN-087.yaml
+- SCN-088.yaml
+- SCN-089.yaml
+- SCN-090.yaml
+- SCN-091.yaml
+- SCN-092.yaml
+- SCN-093.yaml
+- SCN-094.yaml
+- SCN-095.yaml
+- SCN-096.yaml
+- SCN-097.yaml
+- SCN-098.yaml
+- SCN-099.yaml
+- SCN-100.yaml
+effect_family_distribution:
+  CASCADING_FAILURE: 5
+  CORRELATED_COMMON_CAUSE_FAILURE: 5
+  AMPLIFICATION_CONTROL_PLANE_CHURN: 5
+  SIGNALING_RETRY_STORM: 5
+  GRAY_FAILURE_IMPLICIT_DETERIORATION: 5
+  ROUTING_INSTABILITY_BLACKHOLE_LOOP: 5
+  RESOURCE_EXHAUSTION_CONGESTION_COLLAPSE: 5
+  FAILOVER_OVERLOAD_PROTECTION_INTERACTION: 5
+  CHANGE_INDUCED_LATENT_DEFECT: 5
+  OBSERVABILITY_BLIND_SPOT_DELAYED_VISIBILITY: 5
+  MULTI_CAUSE_CONTRIBUTING_CONDITIONS: 5
+  RECOVERY_SURGE_MASS_RECONNECTION: 5
+  EXTERNAL_DEPENDENCY_FAILURE: 5
+  SPLIT_BRAIN_NETWORK_PARTITION: 5
+  SECURITY_TO_SERVICE_IMPACT: 5
+  ACCEPTANCE_DEPLOYMENT_REGRESSION: 5
+  PERFORMANCE_MICROBURST_ASYMMETRY: 5
+  TRANSIENT_TOPOLOGY_DYNAMIC_REROUTE: 5
+  POWER_SITE_ENVIRONMENTAL_COMMON_CAUSE: 5
+  SHARED_INFRASTRUCTURE_SERVICE_DEPENDENCY: 5

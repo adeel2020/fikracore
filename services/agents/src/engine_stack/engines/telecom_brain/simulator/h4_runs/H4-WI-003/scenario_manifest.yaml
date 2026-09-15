@@ -1,0 +1,19 @@
+what_if_id: H4-WI-003
+title: Packet Gateway User Plane Failure
+description: Simulates user plane packet forwarder collapse affecting mobile internet
+  traffic.
+cohort: single_point_failure
+trigger:
+  canonical_id: SA5G:UPF:001
+  entity_display_name: User Plane Function-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- packet_core
+- 5g
+- spof

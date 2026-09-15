@@ -1,0 +1,7 @@
+view_id: TOPO-H4-WI-017
+scenario_id: H4-WI-017
+visible_entities:
+- TRANS:LEASED:CARRIER-A
+- TRANS:LEASED:CARRIER-B
+relationships: []
+known_gaps: []

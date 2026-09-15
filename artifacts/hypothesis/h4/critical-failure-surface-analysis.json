@@ -1,0 +1,810 @@
+{
+  "accuracy_rate": 0.95,
+  "correct_count": 38,
+  "total_count": 40,
+  "surfaces": [
+    {
+      "scenario_id": "H4-WI-001",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-001",
+          "components": [
+            "MPLS Edge Router-07"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: MPLS Edge Router-07 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-002",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-002",
+          "components": [
+            "Data Center Gateway-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: Data Center Gateway-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-003",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-003",
+          "components": [
+            "User Plane Function-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: User Plane Function-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-004",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-004",
+          "components": [
+            "Subscriber Database Cluster-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Prepaid Data & Voice Charging",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.76,
+          "rationale": "Single point of failure: Subscriber Database Cluster-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-005",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-005",
+          "components": [
+            "Signaling Perimeter Firewall-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G Roaming Interconnect",
+            "5G SA Mobile Data"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: Signaling Perimeter Firewall-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-006",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-006",
+          "components": [
+            "DNS Resolution Server-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoLTE Voice",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.76,
+          "rationale": "Single point of failure: DNS Resolution Server-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-007",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-007",
+          "components": [
+            "Optical Transport Node-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Inter-DC Backhaul Transport"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: Optical Transport Node-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-008",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-008",
+          "components": [
+            "Session Management Function-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: Session Management Function-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-009",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-009",
+          "components": [
+            "Diameter Routing Agent-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "4G LTE Mobile Data",
+            "Prepaid Data & Voice Charging",
+            "Real-Time Balance Check",
+            "VoLTE Voice"
+          ],
+          "criticality_score": 0.85,
+          "rationale": "Single point of failure: Diameter Routing Agent-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-010",
+      "cfs": [
+        {
+          "surface_id": "CFS-SPOF-H4-WI-010",
+          "components": [
+            "BSS Charging Gateway-01"
+          ],
+          "risk_type": "SPOF",
+          "dependent_services": [
+            "Prepaid Data & Voice Charging",
+            "Real-Time Balance Check"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Single point of failure: BSS Charging Gateway-01 has no designated standby peer."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-011",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-011",
+          "components": [
+            "Transport Router-21",
+            "Provider Edge Router-22"
+          ],
+          "risk_type": "COMMON_POWER",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.67,
+          "rationale": "Shared dependency defect: Dual routers share PDU rack Feed-A in Site DC-A."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-012",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-012",
+          "components": [
+            "User Plane Function-01",
+            "User Plane Function-02"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Primary and secondary UPFs hosted on the same hypervisor blade INFRA:NFVI:A."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-013",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-013",
+          "components": [
+            "Optical Transport Node-01",
+            "TRANS Dwdm 02"
+          ],
+          "risk_type": "COMMON_TRANSPORT",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Inter-DC Backhaul Transport"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual diverse transmission routes share the same physical underground conduit."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-014",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-014",
+          "components": [
+            "Signaling Perimeter Firewall-01",
+            "INFRA Fw Perim-02"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G Roaming Interconnect",
+            "5G SA Mobile Data"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Redundant firewalls connected to single top-of-rack management switch."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-015",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-015",
+          "components": [
+            "Access and Mobility Management Function-01",
+            "SA5G Amf 002"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Both regional AMFs depend on non-replicated subscriber DB cluster."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-016",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-016",
+          "components": [
+            "Diameter Routing Agent-01",
+            "EPC Dra 002"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "4G LTE Mobile Data",
+            "Prepaid Data & Voice Charging",
+            "Real-Time Balance Check",
+            "VoLTE Voice"
+          ],
+          "criticality_score": 0.85,
+          "rationale": "Shared dependency defect: Redundant DRAs sync from single upstream PTP clock."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-017",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-017",
+          "components": [
+            "Carrier A Transit Gateway",
+            "TRANS Leased Carrier-B"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Inter-DC Backhaul Transport"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Both transit providers share common physical dark fiber span."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-018",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-018",
+          "components": [
+            "MPLS Edge Router-07",
+            "Provider Edge Router-08"
+          ],
+          "risk_type": "COMMON_POWER",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Primary and backup routers co-located in POP-07 basement subject to flooding."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-019",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-019",
+          "components": [
+            "Ingress Load Balancer-01",
+            "INFRA Lb Ingress-02"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Customer Self-Care Portal"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Both LBs announce BGP prefixes through single edge upstream gateway."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-020",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-020",
+          "components": [
+            "Authentication Server Function-01",
+            "SA5G Ausf 002"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual AUSF instances share single hardware security module appliance."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-021",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-021",
+          "components": [
+            "User Plane Function-01",
+            "User Plane Function-02"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 70% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-022",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-022",
+          "components": [
+            "Transport Router-22",
+            "Provider Edge Router-32"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-023",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-023",
+          "components": [
+            "Transport Router-23",
+            "Provider Edge Router-33"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-024",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-024",
+          "components": [
+            "Transport Router-24",
+            "Provider Edge Router-34"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-025",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-025",
+          "components": [
+            "Transport Router-25",
+            "Provider Edge Router-35"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-026",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-026",
+          "components": [
+            "Transport Router-26",
+            "Provider Edge Router-36"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-027",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-027",
+          "components": [
+            "Transport Router-27",
+            "Provider Edge Router-37"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-028",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-028",
+          "components": [
+            "Transport Router-28",
+            "Provider Edge Router-38"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-029",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-029",
+          "components": [
+            "Transport Router-29",
+            "Provider Edge Router-39"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-030",
+      "cfs": [
+        {
+          "surface_id": "CFS-CAP-H4-WI-030",
+          "components": [
+            "Transport Router-30",
+            "Provider Edge Router-40"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 65% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-031",
+      "cfs": [
+        {
+          "surface_id": "CFS-CR-H4-WI-031",
+          "components": [
+            "MPLS Edge Router-07"
+          ],
+          "risk_type": "UNSAFE_MAINTENANCE",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.44,
+          "rationale": "Unsafe maintenance window: MPLS Edge Router-07 reboot planned while backup IP:PE:RTR-08 is in DEGRADED state."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-032",
+      "cfs": [
+        {
+          "surface_id": "CFS-CR-H4-WI-032",
+          "components": [
+            "Core Switch-02"
+          ],
+          "risk_type": "UNSAFE_MAINTENANCE",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.44,
+          "rationale": "High-risk maintenance window: Planned REBOOT scheduled during peak traffic hours."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-033",
+      "cfs": [
+        {
+          "surface_id": "CFS-RED-H4-WI-033",
+          "components": [
+            "Core Switch-03"
+          ],
+          "risk_type": "FAILOVER_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.44,
+          "rationale": "Failure absorbed by INFRA:SW:CORE-08, creating temporary loss of N+1 redundancy."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-034",
+      "cfs": [
+        {
+          "surface_id": "CFS-CR-H4-WI-034",
+          "components": [
+            "Core Switch-04"
+          ],
+          "risk_type": "UNSAFE_MAINTENANCE",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.44,
+          "rationale": "Unsafe maintenance window: Core Switch-04 reboot planned while backup INFRA:SW:CORE-09 is in DEGRADED state."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-035",
+      "cfs": [
+        {
+          "surface_id": "CFS-RED-H4-WI-035",
+          "components": [
+            "Core Switch-05"
+          ],
+          "risk_type": "FAILOVER_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "VoNR High Definition Voice"
+          ],
+          "criticality_score": 0.44,
+          "rationale": "Failure absorbed by INFRA:SW:CORE-010, creating temporary loss of N+1 redundancy."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-036",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-036",
+          "components": [
+            "Core Transport Router-01",
+            "Transport Router-11"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual core paths severely degraded under simultaneous power and transmission flaps."
+        },
+        {
+          "surface_id": "CFS-CAP-H4-WI-036",
+          "components": [
+            "Core Transport Router-01",
+            "Transport Router-11"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 50% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-037",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-037",
+          "components": [
+            "Core Transport Router-02",
+            "Transport Router-12"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual core paths severely degraded under simultaneous power and transmission flaps."
+        },
+        {
+          "surface_id": "CFS-CAP-H4-WI-037",
+          "components": [
+            "Core Transport Router-02",
+            "Transport Router-12"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 50% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-038",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-038",
+          "components": [
+            "Core Transport Router-03",
+            "Transport Router-13"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual core paths severely degraded under simultaneous power and transmission flaps."
+        },
+        {
+          "surface_id": "CFS-CAP-H4-WI-038",
+          "components": [
+            "Core Transport Router-03",
+            "Transport Router-13"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 50% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-039",
+      "cfs": [
+        {
+          "surface_id": "CFS-CC-H4-WI-039",
+          "components": [
+            "Core Transport Router-04",
+            "Transport Router-14"
+          ],
+          "risk_type": "SHARED_DEPENDENCY",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Shared dependency defect: Dual core paths severely degraded under simultaneous power and transmission flaps."
+        },
+        {
+          "surface_id": "CFS-CAP-H4-WI-039",
+          "components": [
+            "Core Transport Router-04",
+            "Transport Router-14"
+          ],
+          "risk_type": "CAPACITY_EXHAUSTION",
+          "dependent_services": [
+            "5G SA Mobile Data",
+            "Enterprise MPLS VPN"
+          ],
+          "criticality_score": 0.59,
+          "rationale": "Failover capacity bottleneck: backup node supports only 50% of peak load."
+        }
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-040",
+      "cfs": [
+        {
+          "surface_id": "CFS-GAP-H4-WI-040",
+          "components": [
+            "Unmapped Edge Router-99"
+          ],
+          "risk_type": "MODEL_INSUFFICIENT",
+          "dependent_services": [],
+          "criticality_score": 0.5,
+          "rationale": "Knowledge gap: Unmapped Edge Router-99 lacks upstream dependency mapping in operational telecombrain."
+        }
+      ]
+    }
+  ]
+}

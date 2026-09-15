@@ -1,0 +1,19 @@
+what_if_id: H4-WI-032
+title: Core Switch Firmware Upgrade During Traffic Peak
+description: Simulates software upgrade scheduled during busiest evening busy-hour
+  window.
+cohort: change_risk
+trigger:
+  canonical_id: INFRA:SW:CORE-02
+  entity_display_name: Core Switch-02
+  event_type: REBOOT
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: PEAK
+failure_domain_tags:
+- change_risk
+- upgrade
+- maintenance

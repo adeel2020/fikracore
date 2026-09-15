@@ -1,7 +1,7 @@
 import os
 import json
 import time
-from .utils import _get_causal_rules, _resolve_target_team_name
+from complaint.complaint.utils import _get_causal_rules, _resolve_target_team_name
 
 def _route_diagnostics(original_query: str, diagnostics: dict) -> dict:
     signal = diagnostics.get("signal", True)

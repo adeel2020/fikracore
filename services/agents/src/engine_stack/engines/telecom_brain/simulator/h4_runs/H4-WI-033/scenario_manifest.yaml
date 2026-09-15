@@ -1,0 +1,19 @@
+what_if_id: H4-WI-033
+title: BGP Policy Reconfiguration Route Flapping
+description: Simulates prefix list update inadvertently causing routing convergence
+  loops.
+cohort: change_risk
+trigger:
+  canonical_id: INFRA:SW:CORE-03
+  entity_display_name: Core Switch-03
+  event_type: CONFIG_CHANGE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- change_risk
+- routing
+- config_change

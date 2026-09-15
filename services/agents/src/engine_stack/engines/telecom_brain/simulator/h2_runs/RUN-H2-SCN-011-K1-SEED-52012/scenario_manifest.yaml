@@ -1,0 +1,8 @@
+difficulty_profile: K1
+gap_type: MISSING_SERVICE_TO_FUNCTION
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-011-K1-SEED-52012
+scenario_id: H2-SCN-011
+seed: 52012
+variant: noisy

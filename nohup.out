@@ -1,0 +1,24 @@
+[16767] Ready to rumble
+[17663] Connection from 127.0.0.1:51332
+[17663] Extended attribute "host": host.docker.internal:0
+[17663] Request upload-pack for '/kagent'
+[16767] [17663] Disconnected
+[17713] Connection from 127.0.0.1:51333
+[17713] Extended attribute "host": host.docker.internal:0
+[17713] Request upload-pack for '/kagent'
+[16767] [17713] Disconnected
+[17886] Connection from 127.0.0.1:51337
+[17886] Extended attribute "host": host.docker.internal:0
+[17886] Request upload-pack for '/kagent'
+[16767] [17886] Disconnected
+[17888] Connection from 127.0.0.1:51338
+[17888] Extended attribute "host": host.docker.internal:0
+[17888] Request upload-pack for '/kagent'
+[16767] [17888] Disconnected
+[17997] Connection from [::1]:51356
+[17997] Extended attribute "host": localhost
+[17997] Request receive-pack for '/kagent'
+[17997] 'receive-pack': service not enabled for '/tmp/kagent.git'
+[16767] [17997] Disconnected (with error)
+error: git-daemon died of signal 15
+[18163] Ready to rumble

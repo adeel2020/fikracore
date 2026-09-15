@@ -1,0 +1,13 @@
+learning_unit_id: H3-LU-026
+cohort: poisoned_validation
+discovery_incident: H2-SCN-026
+candidate_id: KG-H3-026
+validation_decision: ACCEPT
+future_incident_id: H3-FUT-026
+expected_learning_value: 'Poisoning resistance: detection of model contradiction or
+  negative evidence'
+validated_relation:
+  source: SA5G:UPF:003
+  target: INFRA:COOL:A
+  relation: depends-on
+  relationship_id: REL-PROM-H3-026

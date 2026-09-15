@@ -1,0 +1,15 @@
+view_id: TOPO-H4-WI-020
+scenario_id: H4-WI-020
+visible_entities:
+- SA5G:AUSF:001
+- SA5G:AUSF:002
+- SA5G:AMF:001
+relationships:
+- relationship_id: REL-AMF-AUSF
+  source_entity: SA5G:AMF:001
+  relationship_type: AUTHENTICATES_VIA
+  target_entity: SA5G:AUSF:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

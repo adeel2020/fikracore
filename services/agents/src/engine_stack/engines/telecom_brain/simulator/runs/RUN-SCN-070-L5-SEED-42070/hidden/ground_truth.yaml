@@ -1,0 +1,41 @@
+incident_id: INC-SYN-00070
+scenario_id: SCN-070
+seed: 42070
+difficulty_profile: L5
+hidden_truth:
+  root_domain: CHARGING
+  root_entity: CHG:OCS:001
+  root_entity_name: OCS-01
+  trigger: CHARGING_STATE_PARTITION_PRODUCES_DUPLICATE_OR_M
+  root_condition: 'Charging State Partition Produces Duplicate or Missing Accounting:
+    root condition at OCS-01'
+  causal_chain:
+  - entity: CHG:OCS:001
+    role: ROOT
+    state_change: OCS-01 participates in hidden causal propagation
+  - entity: SA5G:PCF:001
+    role: PROPAGATION_MECHANISM
+    state_change: PCF-01 participates in hidden causal propagation
+  - entity: SA5G:SMF:001
+    role: PROPAGATION_MECHANISM
+    state_change: SMF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - online_charging_data
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - prepaid
+    - consumer_mobile
+    entity_count: 5
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+  - bias-test change context, not hidden cause
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

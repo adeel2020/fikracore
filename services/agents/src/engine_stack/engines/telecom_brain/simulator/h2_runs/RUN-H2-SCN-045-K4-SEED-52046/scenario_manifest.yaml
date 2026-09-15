@@ -1,0 +1,8 @@
+difficulty_profile: K4
+gap_type: MISSING_DB_CACHE_MESSAGE_BUS
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-045-K4-SEED-52046
+scenario_id: H2-SCN-045
+seed: 52046
+variant: cross_domain

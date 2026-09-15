@@ -1,0 +1,8 @@
+difficulty_profile: K1
+gap_type: MISSING_DEPENDENCY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-003-K1-SEED-52004
+scenario_id: H2-SCN-003
+seed: 52004
+variant: cross_domain

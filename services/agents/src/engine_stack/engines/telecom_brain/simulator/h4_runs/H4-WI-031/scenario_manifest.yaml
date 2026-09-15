@@ -1,0 +1,19 @@
+what_if_id: H4-WI-031
+title: Planned Router Reboot While Backup Degraded
+description: Simulates maintenance reload on primary router while secondary line card
+  is errored.
+cohort: change_risk
+trigger:
+  canonical_id: IP:PE:RTR-07
+  entity_display_name: MPLS Edge Router-07
+  event_type: REBOOT
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- change_risk
+- maintenance
+- reboot

@@ -1,0 +1,67 @@
+domain: mobile_core
+ontology_type: protocols
+description: "Core signaling protocols, cause codes, and diagnostic failure mapping across 3G, 4G, and 5G."
+
+protocols:
+  diameter_gx_gy:
+    name: "Diameter Gx / Gy"
+    governing_bodies: ["3GPP TS 29.212", "3GPP TS 32.299"]
+    critical_identifiers:
+      rating_group: 432
+      service_context_id: "data@telecom.operator.ae"
+    result_codes:
+      DIAMETER_USER_UNKNOWN:
+        code: 5001
+        severity: CRITICAL
+        description: "Subscriber not recognized in OCS/PCRF billing database."
+      DIAMETER_RATING_FAILED:
+        code: 5031
+        severity: CRITICAL
+        description: "Gy rating failed on Rating-Group 432. Core unbarred but balance deduction failed."
+      DIAMETER_AUTHORIZATION_REJECTED:
+        code: 5003
+        severity: HIGH
+        description: "Gx authorization failed at PCF/PCRF."
+      DIAMETER_CREDIT_LIMIT_REACHED:
+        code: 4012
+        severity: MEDIUM
+        description: "Commercial Fair Usage Policy (FUP) cap reached; throttled down to 64kbps."
+
+  gtpv2_c:
+    name: "GTPv2-C (Control Plane)"
+    governing_bodies: ["3GPP TS 29.274"]
+    cause_codes:
+      SYSTEM_FAILURE:
+        code: 8
+        severity: CRITICAL
+        description: "Internal core node system failure during Create Session Request."
+      NO_RESOURCES_AVAILABLE:
+        code: 73
+        severity: HIGH
+        description: "UGW / SMF-UPF memory/bearer pool exhaustion."
+      MANDATORY_IE_MISSING:
+        code: 70
+        severity: HIGH
+        description: "MME omitted required Information Element in Session Creation."
+
+  sip_ims:
+    name: "SIP / IMS Signaling"
+    governing_bodies: ["RFC 3261", "3GPP TS 24.229"]
+    response_codes:
+      FORBIDDEN:
+        code: 403
+        description: "VoLTE subscriber barred or unauthorized in IMS HSS/IMSS."
+      NOT_ACCEPTABLE_HERE:
+        code: 488
+        description: "Audio codec mismatch (e.g. AMR-WB vs standard AMR)."
+      SERVICE_UNAVAILABLE:
+        code: 503
+        description: "P-CSCF or S-CSCF transient overload."
+
+  http2_sbi:
+    name: "5G Service Based Interface (SBI) HTTP/2"
+    governing_bodies: ["3GPP TS 29.500"]
+    interfaces:
+      N7: "PCF Policy Association"
+      N10: "UDM Subscription Service"
+      N11: "SMF-AMF Session Management"

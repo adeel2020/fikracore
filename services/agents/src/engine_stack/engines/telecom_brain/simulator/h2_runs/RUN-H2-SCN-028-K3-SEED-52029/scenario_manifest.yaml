@@ -1,0 +1,8 @@
+difficulty_profile: K3
+gap_type: WRONG_TOPOLOGY_DIRECTION
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-028-K3-SEED-52029
+scenario_id: H2-SCN-028
+seed: 52029
+variant: clean

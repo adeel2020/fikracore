@@ -1,8 +1,8 @@
 import logging
 from typing import Dict, Any, List
 from llama_index.llms.openai import OpenAI
-from ..config import rag_settings
-from .retriever import ConcurrentRetriever
+from rag.config import rag_settings
+from rag.services.retriever import ConcurrentRetriever
 
 logger = logging.getLogger("rag.qna")
 
@@ -25,7 +25,7 @@ class RAGQueryEngine:
 
             # 2. Formulate routing logic
             # Extract column names from registered schemas to use as dynamic routing keywords
-            from .pipelines.ingestion import get_docstore
+            from rag.pipelines.ingestion import get_docstore
             import re
             
             docstore = get_docstore()
@@ -135,7 +135,7 @@ class RAGQueryEngine:
                     )
                     
                     logger.info("Generating SQL query using LLM...")
-                    sql_res = await self.llm.acomplete(sql_gen_prompt)
+                    sql_res = await self.llm.acomplete(sql_gen_prompt, max_tokens=1000)
                     sql_output = sql_res.text.strip()
                     
                     # Parse SQL query
@@ -149,7 +149,7 @@ class RAGQueryEngine:
                     rag_retrievals.append(f"• Structured Relational Index Route: Formulated SQL Statement:\n  {sql_query}")
                     
                     # Execute SQL query against SQLite
-                    from .services.sql_executor import execute_sql_query
+                    from rag.services.sql_executor import execute_sql_query
                     db_results = execute_sql_query(sql_query)
                     
                     import json
@@ -220,6 +220,12 @@ class RAGQueryEngine:
             if graph_triples:
                 graph_lines = [f"- ({t['source']}) -> [{t['relation']}] -> ({t['target']})" for t in graph_triples]
                 graph_text = "\n".join(graph_lines)
+
+            # Truncate context to avoid exceeding LLM context window
+            MAX_CONTEXT_CHARS = 60000
+            if len(context_text) > MAX_CONTEXT_CHARS:
+                logger.warning("Truncating context_text from %d to %d chars", len(context_text), MAX_CONTEXT_CHARS)
+                context_text = context_text[:MAX_CONTEXT_CHARS] + "\n...[context truncated]"
                 
             # 4. Construct strict prompt (no history — every query is stateless)
             # Use different prompts depending on whether we have SQL results or document chunks
@@ -260,7 +266,7 @@ class RAGQueryEngine:
             # 5. Call LLM
             logger.info("Executing LLM generation...")
             logger.info(f"CONSTRUCTED PROMPT FOR GENERATOR:\n{system_prompt}")
-            response = await self.llm.acomplete(system_prompt)
+            response = await self.llm.acomplete(system_prompt, max_tokens=5000)
             
             return {
                 "answer": response.text.strip(),

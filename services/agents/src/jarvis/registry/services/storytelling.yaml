@@ -1,0 +1,18 @@
+id: storytelling
+name: Storytelling Service
+engine: telecom_brain
+description: Converts incident context into deterministic written stories and concise professional spoken summaries.
+status: active
+connectors:
+  - gbrain
+consumes:
+  - incident_observation
+  - correlation_candidate
+  - causal_chain
+  - supporting_evidence
+produces:
+  - incident_story
+  - spoken_incident_brief
+  - evidence_trace
+permissions:
+  - read_operational_context

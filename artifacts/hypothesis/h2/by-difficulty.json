@@ -1,0 +1,32 @@
+{
+  "K1": {
+    "total": 12,
+    "method_b_correct": 12,
+    "accuracy": 1.0,
+    "l2_localization": 0.5833
+  },
+  "K2": {
+    "total": 12,
+    "method_b_correct": 12,
+    "accuracy": 1.0,
+    "l2_localization": 0.75
+  },
+  "K3": {
+    "total": 12,
+    "method_b_correct": 12,
+    "accuracy": 1.0,
+    "l2_localization": 1.0
+  },
+  "K4": {
+    "total": 12,
+    "method_b_correct": 12,
+    "accuracy": 1.0,
+    "l2_localization": 1.0
+  },
+  "K5": {
+    "total": 12,
+    "method_b_correct": 12,
+    "accuracy": 1.0,
+    "l2_localization": 1.0
+  }
+}

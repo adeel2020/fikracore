@@ -1,0 +1,8 @@
+difficulty_profile: K4
+gap_type: MISSING_POWER_ENVIRONMENT
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-047-K4-SEED-52048
+scenario_id: H2-SCN-047
+seed: 52048
+variant: noisy

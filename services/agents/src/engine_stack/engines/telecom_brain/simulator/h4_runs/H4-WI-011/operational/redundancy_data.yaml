@@ -1,0 +1,9 @@
+failover_pairs:
+  IP:PE:RTR-21:
+    backup_entity: IP:PE:RTR-22
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: COMMON_POWER
+  description: Dual routers share PDU rack Feed-A in Site DC-A.
+backup_node: IP:PE:RTR-22
+backup_health: HEALTHY

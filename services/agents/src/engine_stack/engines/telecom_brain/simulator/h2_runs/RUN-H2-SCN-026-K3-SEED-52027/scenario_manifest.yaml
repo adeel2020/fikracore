@@ -1,0 +1,8 @@
+difficulty_profile: K3
+gap_type: STALE_TOPOLOGY_RELATIONSHIP
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-026-K3-SEED-52027
+scenario_id: H2-SCN-026
+seed: 52027
+variant: noisy

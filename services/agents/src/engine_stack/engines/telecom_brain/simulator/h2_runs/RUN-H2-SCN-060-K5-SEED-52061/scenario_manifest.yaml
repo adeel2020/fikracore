@@ -1,0 +1,8 @@
+difficulty_profile: K5
+gap_type: MULTIPLE_SIMULTANEOUS_GAPS
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-060-K5-SEED-52061
+scenario_id: H2-SCN-060
+seed: 52061
+variant: cross_domain

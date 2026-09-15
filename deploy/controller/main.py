@@ -81,27 +81,27 @@ def _build_volumes(raw_volumes):
             sub_path=v.get("subPath"),
             read_only=read_only,
         ))
-        vol_src = client.V1Volume()
+        vol = client.V1Volume(name=name)
         if "persistentVolumeClaim" in v:
-            vol_src.persistent_volume_claim = client.V1PersistentVolumeClaimVolumeSource(
+            vol.persistent_volume_claim = client.V1PersistentVolumeClaimVolumeSource(
                 claim_name=v["persistentVolumeClaim"]["claimName"],
                 read_only=read_only,
             )
         elif "configMap" in v:
-            vol_src.config_map = client.V1ConfigMapVolumeSource(
+            vol.config_map = client.V1ConfigMapVolumeSource(
                 name=v["configMap"]["name"],
                 items=[client.V1KeyToPath(key=i["key"], path=i["path"])
                        for i in v["configMap"].get("items", [])],
             )
         elif "secret" in v:
-            vol_src.secret = client.V1SecretVolumeSource(
+            vol.secret = client.V1SecretVolumeSource(
                 secret_name=v["secret"]["secretName"],
                 items=[client.V1KeyToPath(key=i["key"], path=i["path"])
                        for i in v["secret"].get("items", [])],
             )
         else:
             continue
-        vols.append(client.V1Volume(name=name, **{k: v for k, v in vol_src.to_dict().items() if v}))
+        vols.append(vol)
     return vols, mounts
 
 

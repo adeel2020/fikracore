@@ -1,0 +1,6 @@
+expected_evidence_type: ROAMING_INTERFACE
+expected_gap_boundary: CHARGING:DRA:001
+expected_gap_type: MISSING_ROAMING_INTERCONNECT
+expected_terminal_state: MODEL_INSUFFICIENT
+must_abstain_from_root_fact: true
+scenario_id: H2-SCN-051

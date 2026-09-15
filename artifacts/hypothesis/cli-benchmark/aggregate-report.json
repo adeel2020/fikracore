@@ -1,0 +1,111 @@
+{
+  "scope": "Partial benchmark (3 runs)",
+  "total_runs": 3,
+  "metrics": {
+    "root_cause_top_3_accuracy": 1.0,
+    "wrong_hypotheses_correctly_falsified": 0,
+    "avg_evidence_requests_before_terminal": 0.6666666666666666,
+    "avg_steps_to_first_useful_hypothesis": 2.0,
+    "forced_rca_rate": 0.0,
+    "avg_explanation_provenance_quality": 1.0
+  },
+  "baseline_comparison": {
+    "method_a_name": "earliest severe alarm",
+    "method_b_name": "hypothesis reasoning",
+    "method_a_correct": 3,
+    "method_b_correct": 2
+  },
+  "terminal_state_distribution": {
+    "EXPLAINED": 2,
+    "MODEL_INSUFFICIENT": 1
+  },
+  "per_difficulty": {
+    "L1": {
+      "count": 1,
+      "method_b_correct": 1,
+      "method_a_correct": 1,
+      "avg_coverage": 1.0
+    },
+    "L2": {
+      "count": 1,
+      "method_b_correct": 1,
+      "method_a_correct": 1,
+      "avg_coverage": 1.0
+    },
+    "L3": {
+      "count": 1,
+      "method_b_correct": 0,
+      "method_a_correct": 1,
+      "avg_coverage": 0.4
+    }
+  },
+  "per_run": [
+    {
+      "run_id": "RUN-SCN-001-L1-SEED-42001",
+      "scenario_id": "SCN-001",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.006078622012864798,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-002-L2-SEED-42002",
+      "scenario_id": "SCN-002",
+      "difficulty": "L2",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "SA5G:UPF:003"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 1,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0025741390127222985,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-003-L3-SEED-42003",
+      "scenario_id": "SCN-003",
+      "difficulty": "L3",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:DNS:CORE"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 4,
+      "evidence_requests_before_terminal_decision": 2,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.005310390988597646,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "MODEL_INSUFFICIENT",
+      "explanation_coverage": 0.4,
+      "unexplained_residual": 9
+    }
+  ],
+  "caveat": "Synthetic benchmark using in-memory operational fixtures; not a production accuracy claim."
+}

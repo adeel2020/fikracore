@@ -1,0 +1,55 @@
+view_id: TOPO-H4-WI-015
+scenario_id: H4-WI-015
+visible_entities:
+- SA5G:AMF:001
+- SA5G:AMF:002
+- RAN:GNB:501
+- SA5G:UDM:001
+- SA5G:AUSF:001
+- INFRA:K8S:CORE-A
+- INFRA:DNS:CORE
+- INFRA:NTP:CORE
+relationships:
+- relationship_id: REL-AMF-GNB
+  source_entity: SA5G:AMF:001
+  relationship_type: CONNECTED_TO
+  target_entity: RAN:GNB:501
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-AMF-UDM
+  source_entity: SA5G:AMF:001
+  relationship_type: AUTHENTICATES_VIA
+  target_entity: SA5G:UDM:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-AMF-AUSF
+  source_entity: SA5G:AMF:001
+  relationship_type: AUTHENTICATES_VIA
+  target_entity: SA5G:AUSF:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-AMF-HOSTED
+  source_entity: SA5G:AMF:001
+  relationship_type: HOSTED_ON
+  target_entity: INFRA:K8S:CORE-A
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-AMF-DNS
+  source_entity: SA5G:AMF:001
+  relationship_type: RESOLVES_VIA
+  target_entity: INFRA:DNS:CORE
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-CORE-NTP
+  source_entity: SA5G:AMF:001
+  relationship_type: TIMED_BY
+  target_entity: INFRA:NTP:CORE
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

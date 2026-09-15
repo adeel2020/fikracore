@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useRef, useState, useCallback, useEffect } from "react";
+import { API_BASE, WS_BASE } from "@/lib/api/config";
 
 interface WordTiming {
   word: string;
@@ -41,8 +42,7 @@ interface WebSocketContextType {
 
 export const WebSocketContext = createContext<WebSocketContextType | null>(null);
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
-const REALTIME_URL = `${API_BASE.replace(/^http/, "ws")}/v1/realtime`;
+const REALTIME_URL = `${WS_BASE}/v1/realtime`;
 
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);

@@ -1,0 +1,11 @@
+{
+  "candidate_id": "REL-002",
+  "source": "SA5G:AMF:001",
+  "target": "SA5G:SMF:001",
+  "proposed_type": "connected-to",
+  "state": "CANDIDATE",
+  "supporting_evidence": [
+    "EV-ALM-H2-SCN-008-002"
+  ],
+  "reason": "Observed path adjacency is absent from operational knowledge; requires independent validation"
+}

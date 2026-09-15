@@ -1,0 +1,38 @@
+id: telecom_brain
+name: Telecom Brain Engine
+description: Understands telecom incidents, alarms, KPIs, topology projections, service procedures, intents, RCA, and FCAPS learning.
+status: active
+routing_intents:
+  - incident_explanation
+  - alarm_correlation
+  - rca_triage
+  - topology_reasoning
+  - kpi_impact
+  - service_procedure_health
+  - fcaps_learning
+  - customer_ticket_triage
+  - service_concern_investigation
+  - mobile_rtr_shift_reporting
+  - ticket_disposition_analytics
+services:
+  - correlation
+  - storytelling
+  - visual_explanation
+  - telemetry_evidence
+  - topology
+  - incident_registry
+  - intent
+  - fcaps_learning
+  - playbook_runbook
+  - remediation_advisory
+  - network_health
+  - mobile_rtr_troubleshooting
+connectors:
+  - gbrain
+  - grafana
+skills:
+  - incident-storytelling
+  - rca-triage
+  - alarm-correlation
+permissions:
+  - read_operational_context

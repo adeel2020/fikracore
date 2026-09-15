@@ -2,7 +2,7 @@ import logging
 import socket
 from urllib.parse import urlparse
 from typing import List, Dict, Any
-from ..config import rag_settings
+from rag.config import rag_settings
 
 logger = logging.getLogger("rag.graph_builder")
 

@@ -1,0 +1,19 @@
+what_if_id: H4-WI-040
+title: Incomplete Operational Knowledge Model Insufficiency
+description: Simulates what-if trigger on component with missing upstream dependency
+  graph.
+cohort: unknown_knowledge
+trigger:
+  canonical_id: EXT:UNMAPPED:RTR-99
+  entity_display_name: Unmapped Edge Router-99
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- model_insufficient
+- unknown_knowledge
+- boundary

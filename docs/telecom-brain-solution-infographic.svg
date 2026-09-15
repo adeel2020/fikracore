@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">MARK Telecom Brain Solution Infographic</title>
+  <desc id="desc">Infographic showing MARK as the human interface over TelecomBrainEngine, MCP Hub, capability registry, gbrain semantic layer, Grafana evidence, topology twin, and enterprise action connectors.</desc>
+  <defs>
+    <radialGradient id="pageBg" cx="50%" cy="44%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="46%" stop-color="#f3f9ff"/>
+      <stop offset="100%" stop-color="#eaf1fb"/>
+    </radialGradient>
+    <radialGradient id="coreGlow" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#dff5ff"/>
+      <stop offset="68%" stop-color="#8ddfff" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#0969ff" stop-opacity=".14"/>
+    </radialGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00c8ff"/>
+      <stop offset="52%" stop-color="#0969ff"/>
+      <stop offset="100%" stop-color="#6557ff"/>
+    </linearGradient>
+    <linearGradient id="cardFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity=".92"/>
+      <stop offset="100%" stop-color="#eef7ff" stop-opacity=".72"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#2c5eaa" flood-opacity=".12"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="9" flood-color="#00a6ff" flood-opacity=".12"/>
+    </filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="dots" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1.3" cy="1.3" r="1.1" fill="#0969ff" opacity=".16"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10" fill="none" stroke="#0969ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <style>
+      .h1{font:900 42px Inter,Arial,sans-serif;fill:#082863;letter-spacing:0}
+      .h2{font:900 23px Inter,Arial,sans-serif;fill:#102b5c;letter-spacing:0}
+      .h3{font:850 17px Inter,Arial,sans-serif;fill:#102b5c;letter-spacing:0}
+      .body{font:650 14px Inter,Arial,sans-serif;fill:#60749b;letter-spacing:0}
+      .tiny{font:750 12px Inter,Arial,sans-serif;fill:#0969ff;letter-spacing:0}
+      .micro{font:700 11px Inter,Arial,sans-serif;fill:#6b7fa5;letter-spacing:0}
+      .card{fill:url(#cardFill);stroke:rgba(45,112,220,.18);stroke-width:1.4}
+      .chip{fill:rgba(255,255,255,.8);stroke:rgba(45,112,220,.18);stroke-width:1.1}
+      .line{fill:none;stroke:#0969ff;stroke-width:2.1;stroke-linecap:round;stroke-dasharray:7 10;opacity:.55;marker-end:url(#arrow);filter:url(#glow)}
+      .softLine{fill:none;stroke:#00a6ff;stroke-width:1.2;stroke-linecap:round;stroke-dasharray:3 8;opacity:.34}
+      .orbit{fill:none;stroke:#0969ff;stroke-width:1.3;stroke-dasharray:8 14;opacity:.19}
+      .orbitCyan{fill:none;stroke:#00c8ff;stroke-width:1.1;stroke-dasharray:2 11;opacity:.28}
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#pageBg)"/>
+  <rect width="1920" height="1080" fill="url(#dots)" opacity=".65"/>
+
+  <g transform="translate(72 48)">
+    <circle cx="48" cy="48" r="41" fill="#f5fbff" stroke="#a8ddff" stroke-width="2"/>
+    <path d="M34 46 C27 36 35 25 48 30 C58 17 78 27 73 44 C87 48 87 69 71 72 C63 88 42 80 45 64 C31 66 25 53 34 46 Z" fill="none" stroke="#0969ff" stroke-width="3.2" stroke-linejoin="round"/>
+    <text x="112" y="45" class="h1">MARK Telecom Brain</text>
+    <text x="114" y="75" class="body">A real-time voice assistant over a telecom cognition engine, semantic brain, and MCP tool hub</text>
+  </g>
+
+  <g transform="translate(1368 58)" filter="url(#shadow)">
+    <rect width="430" height="76" rx="26" class="card"/>
+    <text x="32" y="32" class="tiny">DESIGN PRINCIPLE</text>
+    <text x="32" y="56" class="h3">Context first. Tools only on demand.</text>
+  </g>
+
+  <g opacity=".75">
+    <circle cx="960" cy="538" r="338" class="orbit"/>
+    <circle cx="960" cy="538" r="282" class="orbitCyan"/>
+    <circle cx="960" cy="538" r="220" class="orbit"/>
+    <circle cx="960" cy="538" r="158" class="orbitCyan"/>
+  </g>
+
+  <path class="line" d="M960 335 C960 270 960 226 960 176"/>
+  <path class="line" d="M775 432 C642 358 520 302 386 252"/>
+  <path class="line" d="M1145 432 C1278 358 1400 302 1534 252"/>
+  <path class="line" d="M742 560 C596 576 478 613 354 682"/>
+  <path class="line" d="M1178 560 C1324 576 1442 613 1566 682"/>
+  <path class="line" d="M835 692 C754 786 677 856 584 920"/>
+  <path class="line" d="M1085 692 C1166 786 1243 856 1336 920"/>
+
+  <g id="center" filter="url(#shadow)">
+    <circle cx="960" cy="538" r="184" fill="url(#coreGlow)" stroke="#0969ff" stroke-opacity=".28" stroke-width="2"/>
+    <circle cx="960" cy="538" r="132" fill="none" stroke="#00c8ff" stroke-opacity=".43" stroke-width="2" stroke-dasharray="13 16"/>
+    <circle cx="960" cy="538" r="92" fill="#ffffff" fill-opacity=".58" stroke="#0969ff" stroke-opacity=".24"/>
+    <path d="M884 504 C877 469 911 441 945 460 C966 428 1017 448 1011 489 C1045 493 1059 532 1036 557 C1058 602 1004 637 970 609 C940 642 889 624 894 581 C860 576 855 525 884 504 Z" fill="#0969ff" fill-opacity=".16" stroke="#0969ff" stroke-width="4"/>
+    <path d="M923 462 C908 501 916 548 951 584 M986 454 C1004 502 997 551 961 594 M881 528 C930 522 990 526 1040 540 M895 581 C934 568 994 574 1022 596" fill="none" stroke="#00c8ff" stroke-width="3" stroke-opacity=".76" stroke-linecap="round"/>
+    <text x="960" y="672" text-anchor="middle" class="h1">TelecomBrainEngine</text>
+    <text x="960" y="704" text-anchor="middle" class="tiny">one engine, specialist services, evidence-backed reasoning</text>
+  </g>
+
+  <g transform="translate(786 144)" filter="url(#shadow)">
+    <rect width="348" height="122" rx="28" class="card"/>
+    <circle cx="62" cy="61" r="40" fill="#f3fbff" stroke="#0969ff" stroke-opacity=".25"/>
+    <path d="M47 60 C61 39 82 41 92 60 C83 80 61 83 47 60 Z M65 60 A8 8 0 1 0 81 60 A8 8 0 1 0 65 60" fill="none" stroke="#0969ff" stroke-width="3"/>
+    <text x="124" y="46" class="h2">Mark Assistant</text>
+    <text x="124" y="74" class="body">voice, chat, interruption</text>
+    <text x="124" y="96" class="tiny">human-facing only</text>
+  </g>
+
+  <g transform="translate(128 178)" filter="url(#shadow)">
+    <rect width="450" height="184" rx="30" class="card"/>
+    <text x="30" y="42" class="tiny">CONTROL PLANE</text>
+    <text x="30" y="74" class="h2">Capability Registry</text>
+    <text x="30" y="104" class="body">Engines, services, skills, connector ownership,</text>
+    <text x="30" y="126" class="body">permissions, schemas, and routing metadata.</text>
+    <g transform="translate(30 144)">
+      <rect width="96" height="28" rx="14" class="chip"/><text x="48" y="19" text-anchor="middle" class="micro">engines</text>
+      <rect x="108" width="96" height="28" rx="14" class="chip"/><text x="156" y="19" text-anchor="middle" class="micro">services</text>
+      <rect x="216" width="96" height="28" rx="14" class="chip"/><text x="264" y="19" text-anchor="middle" class="micro">skills</text>
+      <rect x="324" width="96" height="28" rx="14" class="chip"/><text x="372" y="19" text-anchor="middle" class="micro">policy</text>
+    </g>
+  </g>
+
+  <g transform="translate(1342 178)" filter="url(#shadow)">
+    <rect width="450" height="184" rx="30" class="card"/>
+    <text x="30" y="42" class="tiny">TOOL ACCESS LAYER</text>
+    <text x="30" y="74" class="h2">MCP Hub</text>
+    <text x="30" y="104" class="body">Single client hub for all outbound connectors.</text>
+    <text x="30" y="126" class="body">Handles protocol, auth, tracing, and approval.</text>
+    <g transform="translate(30 144)">
+      <rect width="92" height="28" rx="14" class="chip"/><text x="46" y="19" text-anchor="middle" class="micro">gbrain</text>
+      <rect x="104" width="92" height="28" rx="14" class="chip"/><text x="150" y="19" text-anchor="middle" class="micro">Grafana</text>
+      <rect x="208" width="92" height="28" rx="14" class="chip"/><text x="254" y="19" text-anchor="middle" class="micro">Codex</text>
+      <rect x="312" width="92" height="28" rx="14" class="chip"/><text x="358" y="19" text-anchor="middle" class="micro">Office</text>
+    </g>
+  </g>
+
+  <g transform="translate(86 604)" filter="url(#shadow)">
+    <rect width="474" height="296" rx="30" class="card"/>
+    <text x="32" y="44" class="tiny">TELECOM SERVICES</text>
+    <text x="32" y="76" class="h2">Cognition Layer</text>
+    <g transform="translate(32 104)">
+      <rect width="188" height="46" rx="18" class="chip"/><text x="94" y="29" text-anchor="middle" class="h3">Correlation</text>
+      <rect x="206" width="188" height="46" rx="18" class="chip"/><text x="300" y="29" text-anchor="middle" class="h3">Storytelling</text>
+      <rect y="60" width="188" height="46" rx="18" class="chip"/><text x="94" y="89" text-anchor="middle" class="h3">RCA</text>
+      <rect x="206" y="60" width="188" height="46" rx="18" class="chip"/><text x="300" y="89" text-anchor="middle" class="h3">Intent</text>
+      <rect y="120" width="188" height="46" rx="18" class="chip"/><text x="94" y="149" text-anchor="middle" class="h3">Topology</text>
+      <rect x="206" y="120" width="188" height="46" rx="18" class="chip"/><text x="300" y="149" text-anchor="middle" class="h3">Telemetry</text>
+      <rect y="180" width="188" height="46" rx="18" class="chip"/><text x="94" y="209" text-anchor="middle" class="h3">FCAPS Learn</text>
+      <rect x="206" y="180" width="188" height="46" rx="18" class="chip"/><text x="300" y="209" text-anchor="middle" class="h3">Runbooks</text>
+    </g>
+  </g>
+
+  <g transform="translate(1360 604)" filter="url(#shadow)">
+    <rect width="474" height="296" rx="30" class="card"/>
+    <text x="32" y="44" class="tiny">DATA AND ACTIONS</text>
+    <text x="32" y="76" class="h2">Enterprise Connectors</text>
+    <g transform="translate(32 104)">
+      <rect width="188" height="46" rx="18" class="chip"/><text x="94" y="29" text-anchor="middle" class="h3">gbrain</text>
+      <rect x="206" width="188" height="46" rx="18" class="chip"/><text x="300" y="29" text-anchor="middle" class="h3">Grafana LGTM</text>
+      <rect y="60" width="188" height="46" rx="18" class="chip"/><text x="94" y="89" text-anchor="middle" class="h3">Topology DB</text>
+      <rect x="206" y="60" width="188" height="46" rx="18" class="chip"/><text x="300" y="89" text-anchor="middle" class="h3">Vector DB</text>
+      <rect y="120" width="188" height="46" rx="18" class="chip"/><text x="94" y="149" text-anchor="middle" class="h3">Gmail</text>
+      <rect x="206" y="120" width="188" height="46" rx="18" class="chip"/><text x="300" y="149" text-anchor="middle" class="h3">WhatsApp</text>
+      <rect y="180" width="188" height="46" rx="18" class="chip"/><text x="94" y="209" text-anchor="middle" class="h3">Teams</text>
+      <rect x="206" y="180" width="188" height="46" rx="18" class="chip"/><text x="300" y="209" text-anchor="middle" class="h3">Codex</text>
+    </g>
+  </g>
+
+  <g transform="translate(674 804)" filter="url(#shadow)">
+    <rect width="572" height="172" rx="30" class="card"/>
+    <text x="32" y="44" class="tiny">KNOWLEDGE BOUNDARY</text>
+    <text x="32" y="76" class="h2">Semantic Brain, Not Raw Dump</text>
+    <text x="32" y="108" class="body">gbrain stores knowledge, observations, learnings, semantics,</text>
+    <text x="32" y="130" class="body">incident projections, causal links, and evidence references.</text>
+    <text x="32" y="152" class="body">Raw telemetry remains in Grafana or event stores.</text>
+  </g>
+
+  <g transform="translate(632 304)" filter="url(#shadow)">
+    <rect width="214" height="78" rx="24" class="card"/>
+    <text x="107" y="31" text-anchor="middle" class="h3">On Demand</text>
+    <text x="107" y="54" text-anchor="middle" class="body">no unnecessary calls</text>
+  </g>
+
+  <g transform="translate(1074 304)" filter="url(#shadow)">
+    <rect width="214" height="78" rx="24" class="card"/>
+    <text x="107" y="31" text-anchor="middle" class="h3">Traceable</text>
+    <text x="107" y="54" text-anchor="middle" class="body">evidence-backed</text>
+  </g>
+
+  <g transform="translate(674 58)" opacity=".92">
+    <rect width="572" height="44" rx="22" fill="#ffffff" stroke="rgba(45,112,220,.16)"/>
+    <text x="286" y="29" text-anchor="middle" class="tiny">INTER-DOMAIN AND INTRA-DOMAIN INCIDENT INTELLIGENCE</text>
+  </g>
+
+  <g transform="translate(84 972)">
+    <text class="micro">FCAPS lens: Fault, Change Request / Configuration, Accounting, Performance, Security</text>
+  </g>
+  <g transform="translate(1328 972)">
+    <text class="micro">Approval gates apply to email, WhatsApp, Teams, Codex execution, and remediation actions</text>
+  </g>
+</svg>

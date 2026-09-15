@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_BASE } from "@/lib/api/config";
 
 export interface HistorySession {
   session_id: string;
@@ -41,7 +42,7 @@ export function useChatHistory({
 
   const fetchSessions = async () => {
     try {
-      const res = await fetch("http://localhost:8000/api/history/sessions");
+      const res = await fetch(`${API_BASE}/api/history/sessions`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       setSessions(Array.isArray(data) ? data : []);
@@ -66,7 +67,7 @@ export function useChatHistory({
     setLoadingSession(sessionId);
     try {
       const res = await fetch(
-        `http://localhost:8000/api/history/sessions/${sessionId}/messages`
+        `${API_BASE}/api/history/sessions/${sessionId}/messages`
       );
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = (await res.json()) as SessionData;
@@ -91,7 +92,7 @@ export function useChatHistory({
 
     try {
       const res = await fetch(
-        `http://localhost:8000/api/history/sessions/${sessionId}`,
+        `${API_BASE}/api/history/sessions/${sessionId}`,
         { method: "DELETE" }
       );
       if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -1,0 +1,8 @@
+difficulty_profile: K3
+gap_type: ALIAS_CANONICAL_AMBIGUITY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-034-K3-SEED-52035
+scenario_id: H2-SCN-034
+seed: 52035
+variant: clean

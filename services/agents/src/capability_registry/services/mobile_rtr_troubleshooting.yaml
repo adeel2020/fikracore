@@ -1,0 +1,21 @@
+id: mobile_rtr_troubleshooting
+name: Mobile RTR Troubleshooting Service
+engine: telecom_brain
+description: Orchestrates the multi-stage, multi-domain customer trouble ticket investigation, profile auditing, signaling trace correlation, and two-tier escalation lifecycle for Mobile Core Real-Time Resolution (RTR).
+status: active
+connectors:
+  - gbrain
+consumes:
+  - customer_trouble_ticket
+  - subscriber_msisdn
+  - service_concern
+  - core_dyndata
+  - signaling_trace_evidence
+produces:
+  - multi_stage_investigation_journey
+  - checkpoint_decision
+  - it_provisioning_handoff
+  - huawei_mml_runbook
+  - ticket_disposition_telemetry
+permissions:
+  - read_operational_context

@@ -1,0 +1,12 @@
+{
+  "validation_id": "VAL-H3-020",
+  "candidate_id": "KG-H3-020",
+  "decision": "ACCEPT",
+  "validated_by_role": "Transport Domain SME",
+  "reason": "SME operational assessment confirms dependency path between SA5G:UPF:003 and IP:PE:RTR-21.",
+  "timestamp": "2026-09-11T12:00:00Z",
+  "evidence_refs": [
+    "EV-H2-H2-SCN-020-001"
+  ],
+  "modified_relation": null
+}

@@ -1,0 +1,6 @@
+scenario_id: H3-FUT-006
+expected_root_entity: IP:PE:RTR-21
+cohort: positive_transfer
+expected_terminal_before: MODEL_INSUFFICIENT
+expected_terminal_after: EXPLAINED
+expected_rank_improvement: true

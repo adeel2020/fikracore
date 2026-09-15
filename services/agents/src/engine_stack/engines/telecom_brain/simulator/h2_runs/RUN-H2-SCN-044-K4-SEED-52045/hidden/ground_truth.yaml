@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: SA5G:UPF:003
+  gap_type: MISSING_DB_CACHE_MESSAGE_BUS
+  relationship_id: REL-UPF-DB
+root_entity: SA5G:UPF:003
+scenario_id: H2-SCN-044
+true_terminal_state: MODEL_INSUFFICIENT

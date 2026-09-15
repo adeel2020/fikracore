@@ -1,0 +1,20 @@
+what_if_id: H4-WI-001
+title: MPLS Edge Router Failure
+description: Simulates loss of a shared transport edge and estimates downstream service
+  impact.
+cohort: single_point_failure
+trigger:
+  canonical_id: IP:PE:RTR-07
+  entity_display_name: MPLS Edge Router-07
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- transport
+- routing
+- spof
+- resilience

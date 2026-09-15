@@ -1,0 +1,2015 @@
+{
+  "title": "H1 Full Parity",
+  "timestamp": "2026-09-11T11:28:57.941546+00:00",
+  "total_runs": 100,
+  "decision": "LIVE_MCP_PARITY_SUPPORTED",
+  "parity_rate_pct": 100.0,
+  "exact_parity_count": 100,
+  "semantic_parity_count": 0,
+  "explained_delta_count": 0,
+  "unexplained_delta_count": 0,
+  "integration_failures_count": 0,
+  "hidden_truth_leakage": 0,
+  "records": [
+    {
+      "stage": "H1",
+      "scenario": "SCN-001",
+      "run_id": "RUN-SCN-001-L1-SEED-42001",
+      "display_name": "H1 Scenario SCN-001",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-002",
+      "run_id": "RUN-SCN-002-L2-SEED-42002",
+      "display_name": "H1 Scenario SCN-002",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-003",
+      "run_id": "RUN-SCN-003-L3-SEED-42003",
+      "display_name": "H1 Scenario SCN-003",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-004",
+      "run_id": "RUN-SCN-004-L4-SEED-42004",
+      "display_name": "H1 Scenario SCN-004",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-005",
+      "run_id": "RUN-SCN-005-L5-SEED-42005",
+      "display_name": "H1 Scenario SCN-005",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-006",
+      "run_id": "RUN-SCN-006-L1-SEED-42006",
+      "display_name": "H1 Scenario SCN-006",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:POWER:A",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:POWER:A",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-007",
+      "run_id": "RUN-SCN-007-L2-SEED-42007",
+      "display_name": "H1 Scenario SCN-007",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-008",
+      "run_id": "RUN-SCN-008-L3-SEED-42008",
+      "display_name": "H1 Scenario SCN-008",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-009",
+      "run_id": "RUN-SCN-009-L4-SEED-42009",
+      "display_name": "H1 Scenario SCN-009",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-010",
+      "run_id": "RUN-SCN-010-L5-SEED-42010",
+      "display_name": "H1 Scenario SCN-010",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-011",
+      "run_id": "RUN-SCN-011-L1-SEED-42011",
+      "display_name": "H1 Scenario SCN-011",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-012",
+      "run_id": "RUN-SCN-012-L2-SEED-42012",
+      "display_name": "H1 Scenario SCN-012",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-013",
+      "run_id": "RUN-SCN-013-L3-SEED-42013",
+      "display_name": "H1 Scenario SCN-013",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-014",
+      "run_id": "RUN-SCN-014-L4-SEED-42014",
+      "display_name": "H1 Scenario SCN-014",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-015",
+      "run_id": "RUN-SCN-015-L5-SEED-42015",
+      "display_name": "H1 Scenario SCN-015",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-016",
+      "run_id": "RUN-SCN-016-L1-SEED-42016",
+      "display_name": "H1 Scenario SCN-016",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "RAN:GNB:501",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "RAN:GNB:501",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-017",
+      "run_id": "RUN-SCN-017-L2-SEED-42017",
+      "display_name": "H1 Scenario SCN-017",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-018",
+      "run_id": "RUN-SCN-018-L3-SEED-42018",
+      "display_name": "H1 Scenario SCN-018",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-019",
+      "run_id": "RUN-SCN-019-L4-SEED-42019",
+      "display_name": "H1 Scenario SCN-019",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-020",
+      "run_id": "RUN-SCN-020-L5-SEED-42020",
+      "display_name": "H1 Scenario SCN-020",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-021",
+      "run_id": "RUN-SCN-021-L1-SEED-42021",
+      "display_name": "H1 Scenario SCN-021",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-022",
+      "run_id": "RUN-SCN-022-L2-SEED-42022",
+      "display_name": "H1 Scenario SCN-022",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-023",
+      "run_id": "RUN-SCN-023-L3-SEED-42023",
+      "display_name": "H1 Scenario SCN-023",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-024",
+      "run_id": "RUN-SCN-024-L4-SEED-42024",
+      "display_name": "H1 Scenario SCN-024",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-025",
+      "run_id": "RUN-SCN-025-L5-SEED-42025",
+      "display_name": "H1 Scenario SCN-025",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-026",
+      "run_id": "RUN-SCN-026-L1-SEED-42026",
+      "display_name": "H1 Scenario SCN-026",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-027",
+      "run_id": "RUN-SCN-027-L2-SEED-42027",
+      "display_name": "H1 Scenario SCN-027",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-028",
+      "run_id": "RUN-SCN-028-L3-SEED-42028",
+      "display_name": "H1 Scenario SCN-028",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-029",
+      "run_id": "RUN-SCN-029-L4-SEED-42029",
+      "display_name": "H1 Scenario SCN-029",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-030",
+      "run_id": "RUN-SCN-030-L5-SEED-42030",
+      "display_name": "H1 Scenario SCN-030",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-031",
+      "run_id": "RUN-SCN-031-L1-SEED-42031",
+      "display_name": "H1 Scenario SCN-031",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-032",
+      "run_id": "RUN-SCN-032-L2-SEED-42032",
+      "display_name": "H1 Scenario SCN-032",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-033",
+      "run_id": "RUN-SCN-033-L3-SEED-42033",
+      "display_name": "H1 Scenario SCN-033",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-034",
+      "run_id": "RUN-SCN-034-L4-SEED-42034",
+      "display_name": "H1 Scenario SCN-034",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-035",
+      "run_id": "RUN-SCN-035-L5-SEED-42035",
+      "display_name": "H1 Scenario SCN-035",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-036",
+      "run_id": "RUN-SCN-036-L1-SEED-42036",
+      "display_name": "H1 Scenario SCN-036",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-037",
+      "run_id": "RUN-SCN-037-L2-SEED-42037",
+      "display_name": "H1 Scenario SCN-037",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-038",
+      "run_id": "RUN-SCN-038-L3-SEED-42038",
+      "display_name": "H1 Scenario SCN-038",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-039",
+      "run_id": "RUN-SCN-039-L4-SEED-42039",
+      "display_name": "H1 Scenario SCN-039",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-040",
+      "run_id": "RUN-SCN-040-L5-SEED-42040",
+      "display_name": "H1 Scenario SCN-040",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-041",
+      "run_id": "RUN-SCN-041-L1-SEED-42041",
+      "display_name": "H1 Scenario SCN-041",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-042",
+      "run_id": "RUN-SCN-042-L2-SEED-42042",
+      "display_name": "H1 Scenario SCN-042",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-043",
+      "run_id": "RUN-SCN-043-L3-SEED-42043",
+      "display_name": "H1 Scenario SCN-043",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-044",
+      "run_id": "RUN-SCN-044-L4-SEED-42044",
+      "display_name": "H1 Scenario SCN-044",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-045",
+      "run_id": "RUN-SCN-045-L5-SEED-42045",
+      "display_name": "H1 Scenario SCN-045",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-046",
+      "run_id": "RUN-SCN-046-L1-SEED-42046",
+      "display_name": "H1 Scenario SCN-046",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-047",
+      "run_id": "RUN-SCN-047-L2-SEED-42047",
+      "display_name": "H1 Scenario SCN-047",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-048",
+      "run_id": "RUN-SCN-048-L3-SEED-42048",
+      "display_name": "H1 Scenario SCN-048",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-049",
+      "run_id": "RUN-SCN-049-L4-SEED-42049",
+      "display_name": "H1 Scenario SCN-049",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-050",
+      "run_id": "RUN-SCN-050-L5-SEED-42050",
+      "display_name": "H1 Scenario SCN-050",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-051",
+      "run_id": "RUN-SCN-051-L1-SEED-42051",
+      "display_name": "H1 Scenario SCN-051",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-052",
+      "run_id": "RUN-SCN-052-L2-SEED-42052",
+      "display_name": "H1 Scenario SCN-052",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-053",
+      "run_id": "RUN-SCN-053-L3-SEED-42053",
+      "display_name": "H1 Scenario SCN-053",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-054",
+      "run_id": "RUN-SCN-054-L4-SEED-42054",
+      "display_name": "H1 Scenario SCN-054",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-055",
+      "run_id": "RUN-SCN-055-L5-SEED-42055",
+      "display_name": "H1 Scenario SCN-055",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-056",
+      "run_id": "RUN-SCN-056-L1-SEED-42056",
+      "display_name": "H1 Scenario SCN-056",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "RAN:GNB:501",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "RAN:GNB:501",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-057",
+      "run_id": "RUN-SCN-057-L2-SEED-42057",
+      "display_name": "H1 Scenario SCN-057",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-058",
+      "run_id": "RUN-SCN-058-L3-SEED-42058",
+      "display_name": "H1 Scenario SCN-058",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CHG:OCS:001",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CHG:OCS:001",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-059",
+      "run_id": "RUN-SCN-059-L4-SEED-42059",
+      "display_name": "H1 Scenario SCN-059",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-060",
+      "run_id": "RUN-SCN-060-L5-SEED-42060",
+      "display_name": "H1 Scenario SCN-060",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-061",
+      "run_id": "RUN-SCN-061-L1-SEED-42061",
+      "display_name": "H1 Scenario SCN-061",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:POWER:A",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:POWER:A",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-062",
+      "run_id": "RUN-SCN-062-L2-SEED-42062",
+      "display_name": "H1 Scenario SCN-062",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-063",
+      "run_id": "RUN-SCN-063-L3-SEED-42063",
+      "display_name": "H1 Scenario SCN-063",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "EXT:VAS:001",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "EXT:VAS:001",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-064",
+      "run_id": "RUN-SCN-064-L4-SEED-42064",
+      "display_name": "H1 Scenario SCN-064",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EXT:ROAMING:001",
+        "hypotheses_count": 9
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EXT:ROAMING:001",
+        "hypotheses_count": 9,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-065",
+      "run_id": "RUN-SCN-065-L5-SEED-42065",
+      "display_name": "H1 Scenario SCN-065",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-066",
+      "run_id": "RUN-SCN-066-L1-SEED-42066",
+      "display_name": "H1 Scenario SCN-066",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-067",
+      "run_id": "RUN-SCN-067-L2-SEED-42067",
+      "display_name": "H1 Scenario SCN-067",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "IP:RR:001",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-068",
+      "run_id": "RUN-SCN-068-L3-SEED-42068",
+      "display_name": "H1 Scenario SCN-068",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-069",
+      "run_id": "RUN-SCN-069-L4-SEED-42069",
+      "display_name": "H1 Scenario SCN-069",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-070",
+      "run_id": "RUN-SCN-070-L5-SEED-42070",
+      "display_name": "H1 Scenario SCN-070",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CHG:OCS:001",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CHG:OCS:001",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-071",
+      "run_id": "RUN-SCN-071-L1-SEED-42071",
+      "display_name": "H1 Scenario SCN-071",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-072",
+      "run_id": "RUN-SCN-072-L2-SEED-42072",
+      "display_name": "H1 Scenario SCN-072",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-073",
+      "run_id": "RUN-SCN-073-L3-SEED-42073",
+      "display_name": "H1 Scenario SCN-073",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-074",
+      "run_id": "RUN-SCN-074-L4-SEED-42074",
+      "display_name": "H1 Scenario SCN-074",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "SA5G:SCP:001",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "SA5G:SCP:001",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-075",
+      "run_id": "RUN-SCN-075-L5-SEED-42075",
+      "display_name": "H1 Scenario SCN-075",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-076",
+      "run_id": "RUN-SCN-076-L1-SEED-42076",
+      "display_name": "H1 Scenario SCN-076",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-077",
+      "run_id": "RUN-SCN-077-L2-SEED-42077",
+      "display_name": "H1 Scenario SCN-077",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IMSM:PCSCF:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-078",
+      "run_id": "RUN-SCN-078-L3-SEED-42078",
+      "display_name": "H1 Scenario SCN-078",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-079",
+      "run_id": "RUN-SCN-079-L4-SEED-42079",
+      "display_name": "H1 Scenario SCN-079",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:FW:SGI",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-080",
+      "run_id": "RUN-SCN-080-L5-SEED-42080",
+      "display_name": "H1 Scenario SCN-080",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-081",
+      "run_id": "RUN-SCN-081-L1-SEED-42081",
+      "display_name": "H1 Scenario SCN-081",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-082",
+      "run_id": "RUN-SCN-082-L2-SEED-42082",
+      "display_name": "H1 Scenario SCN-082",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-083",
+      "run_id": "RUN-SCN-083-L3-SEED-42083",
+      "display_name": "H1 Scenario SCN-083",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "EPC:DRA:001",
+        "hypotheses_count": 7,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-084",
+      "run_id": "RUN-SCN-084-L4-SEED-42084",
+      "display_name": "H1 Scenario SCN-084",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-085",
+      "run_id": "RUN-SCN-085-L5-SEED-42085",
+      "display_name": "H1 Scenario SCN-085",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-086",
+      "run_id": "RUN-SCN-086-L1-SEED-42086",
+      "display_name": "H1 Scenario SCN-086",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-087",
+      "run_id": "RUN-SCN-087-L2-SEED-42087",
+      "display_name": "H1 Scenario SCN-087",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-088",
+      "run_id": "RUN-SCN-088-L3-SEED-42088",
+      "display_name": "H1 Scenario SCN-088",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-089",
+      "run_id": "RUN-SCN-089-L4-SEED-42089",
+      "display_name": "H1 Scenario SCN-089",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-090",
+      "run_id": "RUN-SCN-090-L5-SEED-42090",
+      "display_name": "H1 Scenario SCN-090",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "IP:PE:RTR-21",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-091",
+      "run_id": "RUN-SCN-091-L1-SEED-42091",
+      "display_name": "H1 Scenario SCN-091",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:COOL:A",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:COOL:A",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-092",
+      "run_id": "RUN-SCN-092-L2-SEED-42092",
+      "display_name": "H1 Scenario SCN-092",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-093",
+      "run_id": "RUN-SCN-093-L3-SEED-42093",
+      "display_name": "H1 Scenario SCN-093",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "TX:FIBER:FR-07",
+        "hypotheses_count": 8
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "TX:FIBER:FR-07",
+        "hypotheses_count": 8,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-094",
+      "run_id": "RUN-SCN-094-L4-SEED-42094",
+      "display_name": "H1 Scenario SCN-094",
+      "snapshot_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "RAN:SITE:101",
+        "hypotheses_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "EXPLAINED",
+        "top_hypothesis_root": "RAN:SITE:101",
+        "hypotheses_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-095",
+      "run_id": "RUN-SCN-095-L5-SEED-42095",
+      "display_name": "H1 Scenario SCN-095",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 5,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-096",
+      "run_id": "RUN-SCN-096-L1-SEED-42096",
+      "display_name": "H1 Scenario SCN-096",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:NTP:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-097",
+      "run_id": "RUN-SCN-097-L2-SEED-42097",
+      "display_name": "H1 Scenario SCN-097",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DNS:CORE",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-098",
+      "run_id": "RUN-SCN-098-L3-SEED-42098",
+      "display_name": "H1 Scenario SCN-098",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "CRM:TICKET:001",
+        "hypotheses_count": 4,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-099",
+      "run_id": "RUN-SCN-099-L4-SEED-42099",
+      "display_name": "H1 Scenario SCN-099",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:CGNAT:001",
+        "hypotheses_count": 6,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H1",
+      "scenario": "SCN-100",
+      "run_id": "RUN-SCN-100-L5-SEED-42100",
+      "display_name": "H1 Scenario SCN-100",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DB:SUBS-A",
+        "hypotheses_count": 3
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "top_hypothesis_root": "INFRA:DB:SUBS-A",
+        "hypotheses_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    }
+  ]
+}

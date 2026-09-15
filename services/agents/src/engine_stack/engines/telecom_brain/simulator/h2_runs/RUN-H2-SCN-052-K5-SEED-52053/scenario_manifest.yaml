@@ -1,0 +1,8 @@
+difficulty_profile: K5
+gap_type: MISSING_PROVISIONING_BSS
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-052-K5-SEED-52053
+scenario_id: H2-SCN-052
+seed: 52053
+variant: clean

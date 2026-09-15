@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: IP:PE:RTR-21
+  gap_type: MISSING_TRANSPORT_PATH
+  relationship_id: REL-PE-CORE-LSP
+root_entity: IP:PE:RTR-21
+scenario_id: H2-SCN-021
+true_terminal_state: MODEL_INSUFFICIENT

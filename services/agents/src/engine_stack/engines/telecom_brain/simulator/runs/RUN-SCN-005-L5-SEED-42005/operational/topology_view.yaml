@@ -1,0 +1,13 @@
+view_id: TOPO-SCN-005-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-005
+visible_entities:
+- INFRA:DB:SUBS-A
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-UPF-STORAGE
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

@@ -1,0 +1,12 @@
+node_modules/
+.cache/
+*.md
+.DS_Store
+.git/
+public/avatars/
+public/effects/
+public/room.png
+public/three/
+**/*.glb
+**/*.zip
+**/*.wasm

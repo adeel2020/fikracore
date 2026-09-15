@@ -1,0 +1,15 @@
+demo:
+  enabled: false
+  title: Subscriber Database Cluster Outage
+  audience: leadership
+  duration_minutes: 4
+  steps:
+  - Select Failure
+  - Propagate Impact
+  - Show Blast Radius
+  - Reveal Shared Dependency
+  - Compare Mitigations
+  - Recommend Resilience Action
+  - Executive Summary
+  final_message: FikraCore uses validated operational knowledge to identify risk before
+    failure occurs.

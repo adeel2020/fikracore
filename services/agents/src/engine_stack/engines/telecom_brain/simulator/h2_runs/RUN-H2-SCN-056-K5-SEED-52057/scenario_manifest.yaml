@@ -1,0 +1,8 @@
+difficulty_profile: K5
+gap_type: MISSING_SECURITY_CONTROL
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-056-K5-SEED-52057
+scenario_id: H2-SCN-056
+seed: 52057
+variant: noisy

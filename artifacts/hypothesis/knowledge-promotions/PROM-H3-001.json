@@ -1,0 +1,22 @@
+{
+  "promotion_id": "PROM-H3-001",
+  "candidate_id": "KG-H3-030",
+  "validation_id": "VAL-H3-030",
+  "canonical_from": "SA5G:UPF:003",
+  "relation": "depends-on",
+  "canonical_to": "INFRA:COOL:A",
+  "display_from": "User Plane Function-03",
+  "display_relation": "Depends on",
+  "display_to": "INFRA Cool A",
+  "status": "PROMOTED",
+  "provenance": {
+    "candidate_reason": "Operational discovery in H2-SCN-030 indicates traffic forwarding from SA5G:UPF:003 to INFRA:COOL:A",
+    "validator_role": "Transport Domain SME",
+    "validation_reason": "SME operational assessment confirms dependency path between SA5G:UPF:003 and INFRA:COOL:A.",
+    "supporting_evidence": [
+      "EV-H2-H2-SCN-030-001"
+    ],
+    "promoted_at": "2026-09-11T07:48:21.878108+00:00"
+  },
+  "rollback_supported": true
+}

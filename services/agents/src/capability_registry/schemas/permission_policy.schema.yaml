@@ -1,0 +1,11 @@
+type: object
+required: [id, action, approval]
+properties:
+  id:
+    type: string
+  action:
+    type: string
+  approval:
+    enum: [none, explicit_user_approval]
+  audit:
+    type: boolean

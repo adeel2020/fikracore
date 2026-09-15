@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: IP:PE:RTR-21
+  gap_type: MISSING_REDUNDANCY_FAILOVER
+  relationship_id: REL-N3-PE21
+root_entity: IP:PE:RTR-21
+scenario_id: H2-SCN-037
+true_terminal_state: MODEL_INSUFFICIENT

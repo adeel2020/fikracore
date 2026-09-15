@@ -1,0 +1,8 @@
+difficulty_profile: K1
+gap_type: MISSING_DEPENDENCY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-001-K1-SEED-52002
+scenario_id: H2-SCN-001
+seed: 52002
+variant: clean

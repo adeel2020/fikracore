@@ -1,0 +1,12 @@
+candidate_id: KG-H3-008
+discovery_incident: H2-SCN-008
+gap_type: MISSING_SHARED_DEPENDENCY
+source: SA5G:UPF:003
+target: SA5G:AMF:001
+proposed_type: routes-through
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-008-001
+reason: Operational discovery in H2-SCN-008 indicates traffic forwarding from SA5G:UPF:003
+  to SA5G:AMF:001

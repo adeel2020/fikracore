@@ -1,0 +1,615 @@
+{
+  "title": "H3 Full Parity",
+  "timestamp": "2026-09-11T11:29:09.038034+00:00",
+  "total_runs": 30,
+  "decision": "LIVE_MCP_PARITY_SUPPORTED",
+  "parity_rate_pct": 100.0,
+  "exact_parity_count": 30,
+  "semantic_parity_count": 0,
+  "explained_delta_count": 0,
+  "unexplained_delta_count": 0,
+  "integration_failures_count": 0,
+  "hidden_truth_leakage": 0,
+  "records": [
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-001",
+      "run_id": "H3-LU-001",
+      "display_name": "H3 Learning Unit H3-LU-001",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-002",
+      "run_id": "H3-LU-002",
+      "display_name": "H3 Learning Unit H3-LU-002",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-003",
+      "run_id": "H3-LU-003",
+      "display_name": "H3 Learning Unit H3-LU-003",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-004",
+      "run_id": "H3-LU-004",
+      "display_name": "H3 Learning Unit H3-LU-004",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-005",
+      "run_id": "H3-LU-005",
+      "display_name": "H3 Learning Unit H3-LU-005",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-006",
+      "run_id": "H3-LU-006",
+      "display_name": "H3 Learning Unit H3-LU-006",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-007",
+      "run_id": "H3-LU-007",
+      "display_name": "H3 Learning Unit H3-LU-007",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-008",
+      "run_id": "H3-LU-008",
+      "display_name": "H3 Learning Unit H3-LU-008",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-009",
+      "run_id": "H3-LU-009",
+      "display_name": "H3 Learning Unit H3-LU-009",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-010",
+      "run_id": "H3-LU-010",
+      "display_name": "H3 Learning Unit H3-LU-010",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "positive_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-011",
+      "run_id": "H3-LU-011",
+      "display_name": "H3 Learning Unit H3-LU-011",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-012",
+      "run_id": "H3-LU-012",
+      "display_name": "H3 Learning Unit H3-LU-012",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-013",
+      "run_id": "H3-LU-013",
+      "display_name": "H3 Learning Unit H3-LU-013",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-014",
+      "run_id": "H3-LU-014",
+      "display_name": "H3 Learning Unit H3-LU-014",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-015",
+      "run_id": "H3-LU-015",
+      "display_name": "H3 Learning Unit H3-LU-015",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-016",
+      "run_id": "H3-LU-016",
+      "display_name": "H3 Learning Unit H3-LU-016",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-017",
+      "run_id": "H3-LU-017",
+      "display_name": "H3 Learning Unit H3-LU-017",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-018",
+      "run_id": "H3-LU-018",
+      "display_name": "H3 Learning Unit H3-LU-018",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-019",
+      "run_id": "H3-LU-019",
+      "display_name": "H3 Learning Unit H3-LU-019",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-020",
+      "run_id": "H3-LU-020",
+      "display_name": "H3 Learning Unit H3-LU-020",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "cross_domain_transfer",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-021",
+      "run_id": "H3-LU-021",
+      "display_name": "H3 Learning Unit H3-LU-021",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-022",
+      "run_id": "H3-LU-022",
+      "display_name": "H3 Learning Unit H3-LU-022",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-023",
+      "run_id": "H3-LU-023",
+      "display_name": "H3 Learning Unit H3-LU-023",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-024",
+      "run_id": "H3-LU-024",
+      "display_name": "H3 Learning Unit H3-LU-024",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-025",
+      "run_id": "H3-LU-025",
+      "display_name": "H3 Learning Unit H3-LU-025",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "stale_topology",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-026",
+      "run_id": "H3-LU-026",
+      "display_name": "H3 Learning Unit H3-LU-026",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-027",
+      "run_id": "H3-LU-027",
+      "display_name": "H3 Learning Unit H3-LU-027",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-028",
+      "run_id": "H3-LU-028",
+      "display_name": "H3 Learning Unit H3-LU-028",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-029",
+      "run_id": "H3-LU-029",
+      "display_name": "H3 Learning Unit H3-LU-029",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H3",
+      "scenario": "H3-LU-030",
+      "run_id": "H3-LU-030",
+      "display_name": "H3 Learning Unit H3-LU-030",
+      "snapshot_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT"
+      },
+      "live_mcp_result": {
+        "reused": true,
+        "cohort": "poisoned_validation",
+        "decision": "ACCEPT",
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    }
+  ]
+}

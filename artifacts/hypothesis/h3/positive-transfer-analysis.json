@@ -1,0 +1,355 @@
+{
+  "total": 10,
+  "details": [
+    {
+      "learning_unit_id": "H3-LU-001",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-001",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-001",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-002",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-002",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-002",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-003",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-003",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-003",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-004",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-004",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-004",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-005",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-005",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-005",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-006",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-006",
+      "true_root_entity": "IP:PE:RTR-21",
+      "candidate_id": "KG-H3-006",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "IP:PE:RTR-21",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-007",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-007",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-007",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-008",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-008",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-008",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-009",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-009",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-009",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-010",
+      "cohort": "positive_transfer",
+      "future_incident_id": "H3-FUT-010",
+      "true_root_entity": "SA5G:UPF:003",
+      "candidate_id": "KG-H3-010",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 2,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.6666666666666666,
+        "correct": false
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "coverage": 0.6666666666666666,
+        "correct": true,
+        "knowledge_reused": true,
+        "learning_value": 0.0,
+        "stale_detected": false,
+        "contradiction_detected": false,
+        "negative_transfer_detected": false
+      }
+    }
+  ]
+}

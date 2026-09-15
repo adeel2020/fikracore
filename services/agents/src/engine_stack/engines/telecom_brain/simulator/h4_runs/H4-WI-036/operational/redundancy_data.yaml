@@ -1,0 +1,10 @@
+failover_pairs:
+  IP:CORE:RTR-01:
+    backup_entity: IP:CORE:RTR-11
+    backup_health: DEGRADED
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Dual core paths severely degraded under simultaneous power and transmission
+    flaps.
+backup_node: IP:CORE:RTR-11
+backup_health: DEGRADED

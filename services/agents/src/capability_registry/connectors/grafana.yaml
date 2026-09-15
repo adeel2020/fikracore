@@ -1,0 +1,38 @@
+id: grafana
+name: Grafana LGTM Connector
+kind: mcp
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: telecom_brain
+description: Retrieves metrics, logs, traces, alerts, and dashboard evidence from Grafana/LGTM for telemetry-supported correlation.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: GRAFANA_MCP_PROTOCOL
+  url_env: GRAFANA_MCP_URL
+  token_env: GRAFANA_MCP_TOKEN
+  command_env: GRAFANA_MCP_COMMAND
+  session_required: true
+  protocol_version: "2025-03-26"
+  args: []
+env:
+  - GRAFANA_MCP_PROTOCOL
+  - GRAFANA_MCP_URL
+  - GRAFANA_MCP_TOKEN
+  - GRAFANA_MCP_COMMAND
+  - GRAFANA_URL
+  - GRAFANA_SERVICE_ACCOUNT_TOKEN
+  - GRAFANA_SERVICE_ACCOUNT_TOKEN_FILE
+  - GRAFANA_USERNAME
+  - GRAFANA_PASSWORD
+capabilities:
+  - query_prometheus
+  - query_loki
+  - query_tempo
+  - read_alerts
+  - read_dashboards
+permissions:
+  - read_telemetry
+fallback_transports:
+  - stdio
+  - http

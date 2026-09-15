@@ -1,0 +1,13 @@
+{
+  "topology_kind": "logical-mobile-core-poc",
+  "services": {
+    "voice-call-setup": ["ran.enodeb", "transport.backhaul", "mobile-core.ims.pcscf", "mobile-core.ims.scscf"],
+    "sgi-data": ["ran.enodeb", "transport.s1-u", "mobile-core.ps.sgw", "mobile-core.ps.pgw", "mobile-core.ps.firewall-nat", "external.internet"],
+    "lte-attach": ["ran.enodeb", "transport.s1-mme", "mobile-core.lte.mme", "mobile-core.lte.hss", "mobile-core.ps.sgw", "mobile-core.ps.pgw"]
+  },
+  "intents": {
+    "cssr": "voice-call-setup",
+    "sgi_throughput": "sgi-data",
+    "4g_attach_sr": "lte-attach"
+  }
+}

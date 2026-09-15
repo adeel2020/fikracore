@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: INFRA:POWER:A
+  gap_type: MISSING_POWER_ENVIRONMENT
+  relationship_id: REL-POWER-DC
+root_entity: INFRA:POWER:A
+scenario_id: H2-SCN-046
+true_terminal_state: MODEL_INSUFFICIENT

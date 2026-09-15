@@ -1,0 +1,27 @@
+incident_id: INC-SYN-00011
+scenario_id: SCN-011
+seed: 42011
+difficulty_profile: L1
+hidden_truth:
+  root_domain: IP_TRANSPORT
+  root_entity: IP:RR:001
+  root_entity_name: Route Reflector 01
+  trigger: BGP_RESTART_AMPLIFIES_INTO_ROUTE_CHURN_AND_SERVI
+  root_condition: 'BGP Restart Amplifies into Route Churn and Service Loss: root condition
+    at Route Reflector 01'
+  causal_chain:
+  - entity: IP:RR:001
+    role: ROOT
+    state_change: Route Reflector 01 participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - oss_network_management_connectivity
+    regions:
+    - REGION-NORTH
+    - REGION-CENTRAL
+    customer_segments:
+    - internal_noc
+    entity_count: 1
+  non_causal_context: []
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

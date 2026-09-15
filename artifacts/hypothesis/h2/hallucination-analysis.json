@@ -1,0 +1,11 @@
+{
+  "total_scenarios": 60,
+  "passed": 60,
+  "zero_hallucination_rate": 1.0,
+  "target_threshold": 1.0,
+  "status": "PASSED",
+  "hallucinated_entities_count": 0,
+  "hallucinated_relationships_count": 0,
+  "automatic_telecombrain_mutations": 0,
+  "candidate_promotion_gate_enforced": true
+}

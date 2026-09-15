@@ -1,0 +1,20 @@
+{
+  "total_scenarios": 60,
+  "passed": 60,
+  "detection_rate": 1.0,
+  "target_threshold": 0.9,
+  "status": "PASSED",
+  "false_model_gap_rate": 0.0,
+  "confusion_matrix": {
+    "true_insufficient_detected": 60,
+    "true_insufficient_missed": 0,
+    "false_insufficient_on_complete_model": 0
+  },
+  "by_difficulty": {
+    "K1": 1.0,
+    "K2": 1.0,
+    "K3": 1.0,
+    "K4": 1.0,
+    "K5": 1.0
+  }
+}

@@ -1,0 +1,36 @@
+id: microsoft_teams
+name: Microsoft Teams Connector
+kind: api
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: collaboration
+description: Drafts and sends approved Microsoft Teams messages, incident bridge updates, and channel summaries.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: MICROSOFT_TEAMS_MCP_PROTOCOL
+  url_env: MICROSOFT_TEAMS_MCP_URL
+  token_env: MICROSOFT_TEAMS_MCP_TOKEN
+  command_env: MICROSOFT_TEAMS_MCP_COMMAND
+  args: []
+env:
+  - MICROSOFT_TEAMS_MCP_PROTOCOL
+  - MICROSOFT_TEAMS_MCP_URL
+  - MICROSOFT_TEAMS_MCP_TOKEN
+  - MICROSOFT_TEAMS_MCP_COMMAND
+  - MICROSOFT_TENANT_ID
+  - MICROSOFT_CLIENT_ID
+  - MICROSOFT_CLIENT_SECRET
+  - MICROSOFT_REFRESH_TOKEN
+capabilities:
+  - draft_teams_message
+  - send_teams_message
+  - summarize_channel
+  - read_incident_thread
+permissions:
+  - draft_external_message
+  - send_requires_approval
+fallback_transports:
+  - stdio
+  - http
+  - microsoft_graph_api

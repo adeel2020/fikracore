@@ -2240,8 +2240,10 @@ def main():
         pcap_input,
         os.path.join(workspace_root, pcap_input),
         os.path.join(workspace_root, "traces", pcap_input),
+        os.path.join(workspace_root, ".tmp", "data", "traces", pcap_input),
         os.path.join(os.getcwd(), pcap_input),
-        os.path.join(os.getcwd(), "traces", pcap_input)
+        os.path.join(os.getcwd(), "traces", pcap_input),
+        os.path.join(os.getcwd(), ".tmp", "data", "traces", pcap_input),
     ]
     
     for path in possible_paths:

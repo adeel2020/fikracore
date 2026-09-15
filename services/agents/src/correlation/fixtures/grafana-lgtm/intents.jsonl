@@ -1,0 +1,3 @@
+{"service_id":"voice-call-setup","intent_id":"cssr","target_kpi":"CSSR","target_value":98.5,"comparator":">="}
+{"service_id":"sgi-data","intent_id":"sgi_throughput","target_kpi":"SGi Throughput","target_value":5000,"comparator":">="}
+{"service_id":"lte-attach","intent_id":"4g_attach_sr","target_kpi":"4G Attach SR","target_value":98.0,"comparator":">="}

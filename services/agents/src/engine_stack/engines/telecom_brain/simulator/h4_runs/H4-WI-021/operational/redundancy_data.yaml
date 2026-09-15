@@ -1,0 +1,7 @@
+failover_pairs:
+  SA5G:UPF:001:
+    backup_entity: SA5G:UPF:002
+    backup_health: HEALTHY
+shared_failure_domains: []
+backup_node: SA5G:UPF:002
+backup_health: HEALTHY

@@ -1,0 +1,38 @@
+role_id: mobile_rtr
+title: "Mobile Core Real-Time Resolution (RTR) Operational Role"
+domain: mobile_core
+description: "Frontline Tier-2/3 technical operational anchor for customer trouble tickets escalating from Customer Operations."
+
+sla_governance:
+  aola_target_hours: 2.0
+  ola_target_hours: 6.0
+  sla_target_hours: 48.0
+  aola_description: "Time spent strictly inside Mobile Core RTR queue before resolution or reassignment."
+  ola_description: "Internal OLA across core NOC & IT provisioning queues (CS, PS, HPSA, Billing)."
+  sla_description: "End-to-end customer turnaround time from CRM entry to closure."
+
+zero_pii_mandate:
+  enforced: true
+  ticket_identifier: "ticket_token (e.g. TT-984210)"
+  subscriber_identifier: "subscriber_token (e.g. SUB_TOK_7B9A2F)"
+  msisdn_masking: "e.g. 97150xxxxxxx"
+
+gating_rules:
+  gate_0:
+    name: "Ingestion & Frontline Precheck Validation"
+    exit_condition: "Reject back to CRM if mandatory attributes or active commercial profile missing"
+  gate_1:
+    name: "Location Discovery & Core Profile Audit"
+    exit_condition: "Reassign to HPSA if BSS-Core profile mismatch discovered (~70% of tickets)"
+  gate_2:
+    name: "Commercial & BSS Subscription Check"
+    exit_condition: "Reassign to Billing/OCS if FUP cap or non-payment suspension discovered"
+  gate_3:
+    name: "Roaming Checklist & Inter-Carrier Audit"
+    exit_condition: "Reassign to IREG/Carrier Relations if partner roaming agreement missing"
+  gate_4:
+    name: "Active Troubleshooting & Runbook Execution"
+    exit_condition: "Resolve in RTR if transient latch cleared; reassign to Core L2 if hardware fault"
+  gate_5:
+    name: "Deep Signaling Trace Analysis"
+    exit_condition: "Correlate OSIX signaling; escalate to Vendor TAC if protocol defect"

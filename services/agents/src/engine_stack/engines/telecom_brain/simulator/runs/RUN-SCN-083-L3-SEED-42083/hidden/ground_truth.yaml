@@ -1,0 +1,43 @@
+incident_id: INC-SYN-00083
+scenario_id: SCN-083
+seed: 42083
+difficulty_profile: L3
+hidden_truth:
+  root_domain: EPC_4G
+  root_entity: EPC:DRA:001
+  root_entity_name: DRA-01
+  trigger: LATENCY_SPIKES_BREAK_DIAMETER_SLA_WITHOUT_PEER_F
+  root_condition: 'Latency Spikes Break Diameter SLA Without Peer Failure: root condition
+    at DRA-01'
+  causal_chain:
+  - entity: EPC:DRA:001
+    role: ROOT
+    state_change: DRA-01 participates in hidden causal propagation
+  - entity: CHG:OCS:001
+    role: PROPAGATION_MECHANISM
+    state_change: OCS-01 participates in hidden causal propagation
+  - entity: SA5G:PCF:001
+    role: PROPAGATION_MECHANISM
+    state_change: PCF-01 participates in hidden causal propagation
+  - entity: SA5G:SMF:001
+    role: PROPAGATION_MECHANISM
+    state_change: SMF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - online_charging_data
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - prepaid
+    - consumer_mobile
+    entity_count: 6
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Upload, Activity, FileText, Trash2, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const API_BASE = "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 export const DocumentsPanel: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -17,7 +16,7 @@ export const DocumentsPanel: React.FC = () => {
 
   const fetchIngestedFiles = async () => {
     try {
-      const res = await fetch(`${API_BASE}/rag/ingest/list`);
+      const res = await fetch(`${API_BASE}/api/rag/ingest/list`);
       if (!res.ok) throw new Error("Failed to load files.");
       const data = await res.json();
       setIngestedFiles(data);
@@ -35,7 +34,7 @@ export const DocumentsPanel: React.FC = () => {
 
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`${API_BASE}/rag/ingest/status/${ingestTaskId}`);
+        const res = await fetch(`${API_BASE}/api/rag/ingest/status/${ingestTaskId}`);
         if (!res.ok) throw new Error("Failed to fetch task status.");
         const data = await res.json();
         setIngestStatus(data);
@@ -75,7 +74,7 @@ export const DocumentsPanel: React.FC = () => {
     formData.append("file", selectedFile);
 
     try {
-      const res = await fetch(`${API_BASE}/rag/ingest`, {
+      const res = await fetch(`${API_BASE}/api/rag/ingest`, {
         method: "POST",
         body: formData
       });
@@ -95,7 +94,7 @@ export const DocumentsPanel: React.FC = () => {
     if (!window.confirm("Are you sure you want to delete this document and all its indexed vector chunks?")) return;
 
     try {
-      const res = await fetch(`${API_BASE}/rag/ingest/${taskId}`, {
+      const res = await fetch(`${API_BASE}/api/rag/ingest/${taskId}`, {
         method: "DELETE"
       });
       if (!res.ok) {

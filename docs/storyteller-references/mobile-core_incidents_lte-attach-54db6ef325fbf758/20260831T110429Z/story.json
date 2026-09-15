@@ -1,0 +1,376 @@
+{
+  "causal_chain": {
+    "steps": [
+      {
+        "claim_type": "CORRELATION",
+        "fact": {
+          "confidence": null,
+          "event_type": "breach",
+          "observed_at": "2026-08-31T08:25:00+00:00",
+          "relationship": "detected-by",
+          "slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+          "source": "grafana-prom-attach-001",
+          "threshold": "breached",
+          "timestamp": "2026-08-31T08:25:00+00:00",
+          "value": "4G Attach SR breached for lte-attach."
+        },
+        "label": "KPI degradation"
+      },
+      {
+        "claim_type": "HYPOTHESIS",
+        "fact": {
+          "confidence": 0.95,
+          "explains": [],
+          "relationship": "has-hypothesis",
+          "slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "source": "mcp:put_page",
+          "status": "plausible",
+          "timestamp": "2026-08-31T10:57:07.632Z",
+          "value": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling"
+        },
+        "label": "Hypothesis"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-hss-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:21:00+00:00",
+          "value": "Alarm DIAMETER_ULR_TIMEOUTS_HIGH observed on hss-01."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-mme-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:20:00+00:00",
+          "value": "Alarm ATTACH_REJECT_RATE_HIGH observed on mme-01."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-ran-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:23:00+00:00",
+          "value": "Alarm S1AP_INITIAL_UE_MSG_DROP observed on enodeb-17."
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/logs/grafana-loki-attach-001",
+          "source": "grafana-loki-attach-001",
+          "timestamp": "2026-08-31T08:22:00+00:00",
+          "value": "MME attach reject logs increased"
+        },
+        "label": "Evidence"
+      },
+      {
+        "claim_type": "EVIDENCE",
+        "fact": {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/metrics/grafana-prom-attach-001",
+          "source": "grafana-prom-attach-001",
+          "timestamp": "2026-08-31T08:25:00+00:00",
+          "value": "4G Attach SR dropped below intent target"
+        },
+        "label": "Evidence"
+      }
+    ]
+  },
+  "correlation_metadata": {
+    "contributing_domains": [
+      "mobile-core-control-plane",
+      "ran",
+      "signaling"
+    ],
+    "correlation_key": "54db6ef325fbf758",
+    "correlation_reasons": [
+      "multiple alarms in the correlation window",
+      "shared affected service",
+      "KPI breach supports service impact",
+      "independent operational evidence",
+      "service intent is violated",
+      "critical source alarm",
+      "novel alarm signature retained for review"
+    ],
+    "correlation_scope": "inter-domain",
+    "correlation_score": 95,
+    "intent_status": "violated"
+  },
+  "generated_by": "deterministic",
+  "hypotheses": [
+    {
+      "evidence": [
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-hss-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:21:00+00:00",
+          "value": "Alarm DIAMETER_ULR_TIMEOUTS_HIGH observed on hss-01."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-mme-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:20:00+00:00",
+          "value": "Alarm ATTACH_REJECT_RATE_HIGH observed on mme-01."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/alerts/grafana-alert-attach-ran-001",
+          "source": "grafana-alerting",
+          "timestamp": "2026-08-31T08:23:00+00:00",
+          "value": "Alarm S1AP_INITIAL_UE_MSG_DROP observed on enodeb-17."
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/logs/grafana-loki-attach-001",
+          "source": "grafana-loki-attach-001",
+          "timestamp": "2026-08-31T08:22:00+00:00",
+          "value": "MME attach reject logs increased"
+        },
+        {
+          "confidence": null,
+          "hypothesis_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+          "relationship": "supported-by",
+          "slug": "grafana/metrics/grafana-prom-attach-001",
+          "source": "grafana-prom-attach-001",
+          "timestamp": "2026-08-31T08:25:00+00:00",
+          "value": "4G Attach SR dropped below intent target"
+        }
+      ],
+      "explains": [],
+      "explanation": "score = base confidence 0.95, 5 supporting evidence item(s)",
+      "hypothesis": {
+        "confidence": 0.95,
+        "explains": [],
+        "relationship": "has-hypothesis",
+        "slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "source": "mcp:put_page",
+        "status": "plausible",
+        "timestamp": "2026-08-31T10:57:07.632Z",
+        "value": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling"
+      },
+      "score": 1.0,
+      "status": "plausible"
+    }
+  ],
+  "impact": [
+    {
+      "confidence": null,
+      "relationship": "affects",
+      "slug": "mobile-core/services/lte-attach",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-31T10:57:07.804Z",
+      "value": "LTE Attach"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/mobile-core-control-plane-mme-01",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:42.934Z",
+      "value": "mme-01 (mme, mobile-core-control-plane)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/ran-enodeb-17",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:43.902Z",
+      "value": "enodeb-17 (enodeb, ran)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/signaling-hss-01",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:43.387Z",
+      "value": "hss-01 (hss, signaling)"
+    }
+  ],
+  "incident_id": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+  "kpi_events": [
+    {
+      "confidence": null,
+      "event_type": "breach",
+      "observed_at": "2026-08-31T08:25:00+00:00",
+      "relationship": "detected-by",
+      "slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+      "source": "grafana-prom-attach-001",
+      "threshold": "breached",
+      "timestamp": "2026-08-31T08:25:00+00:00",
+      "value": "4G Attach SR breached for lte-attach."
+    }
+  ],
+  "kpis": [
+    {
+      "confidence": null,
+      "relationship": "measures",
+      "slug": "mobile-core/kpis/4g-attach-sr",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-31T10:54:44.530Z",
+      "value": "4G Attach Sr"
+    }
+  ],
+  "network_functions": [
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/mobile-core-control-plane-mme-01",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:42.934Z",
+      "value": "mme-01 (mme, mobile-core-control-plane)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/ran-enodeb-17",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:43.902Z",
+      "value": "enodeb-17 (enodeb, ran)"
+    },
+    {
+      "confidence": null,
+      "relationship": "involves",
+      "slug": "mobile-core/network-functions/signaling-hss-01",
+      "source": "grafana-alerting",
+      "timestamp": "2026-08-31T10:54:43.387Z",
+      "value": "hss-01 (hss, signaling)"
+    }
+  ],
+  "recovery_events": [],
+  "remediations": [],
+  "root_cause": null,
+  "services": [
+    {
+      "confidence": null,
+      "relationship": "affects",
+      "slug": "mobile-core/services/lte-attach",
+      "source": "correlation-worker",
+      "timestamp": "2026-08-31T10:57:07.804Z",
+      "value": "LTE Attach"
+    }
+  ],
+  "severity": "SEV-1",
+  "similar_incidents": [
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-31T10:57:05.990Z",
+      "value": "Inter-Domain incident candidate for SGI Data"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-31T10:54:33.783Z",
+      "value": "Inter-Domain incident candidate for Voice Call Setup"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-28T20:23:53.320Z",
+      "value": "Inter-Domain incident candidate for UE Registration"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-28T20:20:36.127Z",
+      "value": "Intra-Domain incident candidate for Unmapped Service"
+    },
+    {
+      "confidence": null,
+      "relationship": "similar-incident",
+      "slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "source": "gbrain/list_pages",
+      "timestamp": "2026-08-28T20:20:35.276Z",
+      "value": "Intra-Domain incident candidate for Site Power"
+    }
+  ],
+  "status": "open",
+  "summary": "incident mobile-core/incidents/lte-attach-54db6ef325fbf758 \u2014 SEV-1 open inter-domain correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling; score 95; intent violated; leading hypothesis: Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling",
+  "symptoms": [],
+  "timeline": [
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-31T08:20:00+00:00** - Critical mobile-core-control-plane alarm ATTACH_REJECT_RATE_HIGH on mme-01"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-31T08:21:00+00:00** - Major signaling alarm DIAMETER_ULR_TIMEOUTS_HIGH on hss-01"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-31T08:22:00+00:00** - MME attach reject logs increased"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-31T08:23:00+00:00** - Major ran alarm S1AP_INITIAL_UE_MSG_DROP on enodeb-17"
+    },
+    {
+      "confidence": null,
+      "relationship": "timeline-entry",
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "source": "mcp:put_page",
+      "timestamp": null,
+      "value": "- **2026-08-31T08:25:00+00:00** - 4G Attach SR dropped below intent target"
+    }
+  ],
+  "unresolved_questions": [
+    "root cause is not confirmed",
+    "no remediation recorded",
+    "no recovery observed"
+  ]
+}

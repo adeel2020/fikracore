@@ -1,0 +1,7 @@
+failover_pairs:
+  IP:PE:RTR-24:
+    backup_entity: IP:PE:RTR-34
+    backup_health: HEALTHY
+shared_failure_domains: []
+backup_node: IP:PE:RTR-34
+backup_health: HEALTHY

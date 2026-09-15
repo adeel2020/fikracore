@@ -1,0 +1,6 @@
+graph_id: CAUSAL-SCN-067-SEED-42067
+nodes:
+- entity_id: IP:RR:001
+  role: ROOT
+  domain: IP_TRANSPORT
+edges: []

@@ -1,0 +1,17 @@
+id: calendar
+name: Calendar Engine
+description: Coordinates incident bridges, maintenance windows, reminders, and operational schedules.
+status: planned
+routing_intents:
+  - schedule_meeting
+  - find_maintenance_window
+  - create_reminder
+  - check_calendar_context
+services:
+  - calendar_coordination
+connectors:
+  - google_calendar
+skills: []
+permissions:
+  - calendar_read
+  - calendar_write_requires_approval

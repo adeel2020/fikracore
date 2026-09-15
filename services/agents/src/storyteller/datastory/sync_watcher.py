@@ -10,7 +10,7 @@ import logging
 import time
 from pathlib import Path
 
-from .sync_story import sync_story
+from storyteller.datastory.sync_story import sync_story
 
 logger = logging.getLogger(__name__)
 

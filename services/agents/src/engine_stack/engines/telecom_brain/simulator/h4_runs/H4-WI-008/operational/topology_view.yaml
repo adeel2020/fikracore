@@ -1,0 +1,22 @@
+view_id: TOPO-H4-WI-008
+scenario_id: H4-WI-008
+visible_entities:
+- SA5G:SMF:001
+- SA5G:UPF:003
+- SA5G:PCF:001
+relationships:
+- relationship_id: REL-SMF-UPF
+  source_entity: SA5G:SMF:001
+  relationship_type: CONNECTED_TO
+  target_entity: SA5G:UPF:003
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-SMF-PCF
+  source_entity: SA5G:SMF:001
+  relationship_type: DEPENDS_ON
+  target_entity: SA5G:PCF:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

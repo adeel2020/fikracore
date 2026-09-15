@@ -23,7 +23,7 @@ class KnowledgeGraphEngine:
     async def initialize(self) -> None:
         """Initialize knowledge graph connection."""
         try:
-            from ..rag.infrastructure.graph_builder import get_graph_manager
+            from rag.infrastructure.graph_builder import get_graph_manager
             self._graph_manager = get_graph_manager()
             logger.info("[KnowledgeGraphEngine] Graph manager loaded.")
         except ImportError:

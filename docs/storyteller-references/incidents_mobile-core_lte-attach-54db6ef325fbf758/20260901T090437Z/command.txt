@@ -1,0 +1,6 @@
+API_BASE=http://127.0.0.1:8000 SESSION_ID=story-reference OUT_ROOT=docs/storyteller-references \
+scripts/capture_story_reference.sh 'incidents/mobile-core/lte-attach-54db6ef325fbf758' 'Tell the incident story for incidents/mobile-core/lte-attach-54db6ef325fbf758.'
+
+curl -sS -X POST 'http://127.0.0.1:8000/api/incidents/incidents/mobile-core/lte-attach-54db6ef325fbf758/ask' \
+  -H 'Content-Type: application/json' \
+  -d @'docs/storyteller-references/incidents_mobile-core_lte-attach-54db6ef325fbf758/20260901T090437Z/request.json'

@@ -1,0 +1,17 @@
+type: object
+required: [id, kind, source_system]
+properties:
+  id:
+    type: string
+  kind:
+    type: string
+  source_system:
+    type: string
+  semantic_projection:
+    type: string
+  observed_at:
+    type: string
+  fcaps_lens:
+    type: array
+    items:
+      enum: [fault, change_request, accounting, performance, security]

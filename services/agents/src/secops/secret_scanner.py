@@ -5,7 +5,7 @@ import re
 import logging
 from pathlib import Path
 
-from .base import BaseSecOpsAgent, SecOpsFinding
+from secops.base import BaseSecOpsAgent, SecOpsFinding
 
 logger = logging.getLogger("secops.secret_scanner")
 

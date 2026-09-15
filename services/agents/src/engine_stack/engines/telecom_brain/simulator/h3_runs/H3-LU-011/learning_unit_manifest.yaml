@@ -1,0 +1,13 @@
+learning_unit_id: H3-LU-011
+cohort: cross_domain_transfer
+discovery_incident: H2-SCN-011
+candidate_id: KG-H3-011
+validation_decision: ACCEPT
+future_incident_id: H3-FUT-011
+expected_learning_value: Cross-domain fault propagation explainability across network
+  domains
+validated_relation:
+  source: SA5G:AMF:001
+  target: SA5G:UPF:003
+  relation: routes-through
+  relationship_id: REL-PROM-H3-011

@@ -16,21 +16,21 @@ from crewai.types.streaming import CrewStreamingOutput
 from agenticaiops_shared.config import settings
 
 # Modular imports
-from .utils import (
+from complaint.complaint.utils import (
     _get_causal_rules,
     _generate_dynamic_agent_intro,
     _generate_dynamic_agent_outro,
 )
-from .session import (
+from complaint.complaint.session import (
     _reconstruct_session_state,
     _route_diagnostics,
 )
-from .formatter import (
+from complaint.complaint.formatter import (
     AgentResponse,
     _agent_response_to_dict,
     _format_structured_event,
 )
-from .tools import (
+from complaint.complaint.tools import (
     active_queues,
     _TOOL_USAGE_STATE,
     _get_tool_usage_state,

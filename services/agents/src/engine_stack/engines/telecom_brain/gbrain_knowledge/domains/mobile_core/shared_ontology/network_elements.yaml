@@ -1,0 +1,40 @@
+domain: mobile_core
+ontology_type: network_elements
+description: "Core Network Elements (NEs), functions, and vendor topology nodes."
+
+network_elements:
+  udm:
+    name: "Unified Data Management (UDM)"
+    generation: "5G"
+    functions: ["Subscription management", "Authentication credential generation", "Access authorization"]
+    key_mml_commands: ["DSP UDM5GSUB", "CHK 5GSUBALIGN", "MOD UDM5GSUB"]
+  hss:
+    name: "Home Subscriber Server (HSS)"
+    generation: "4G/LTE"
+    functions: ["EPS subscription profiles", "APN allocation", "MME location tracking"]
+    key_mml_commands: ["DSP SUBAPN", "DSP EPSSUB", "MOD SUBAPN"]
+  imss:
+    name: "IP Multimedia Subsystem Server (IMSS)"
+    generation: "4G/5G"
+    functions: ["VoLTE / VoNR subscription entitlement", "SIP registration authority"]
+    key_mml_commands: ["DSP SUBCSI", "MOD SUBCSI"]
+  pcf:
+    name: "Policy Control Function (PCF) / PCRF"
+    generation: "4G/5G"
+    functions: ["QoS profile authorization", "Dynamic AMBR enforcement", "Rating group provisioning"]
+    key_mml_commands: ["DSP PCFPOLICY", "MOD PCFPOLICY"]
+  usn:
+    name: "Unified Service Node (USN / MME)"
+    generation: "4G/LTE"
+    functions: ["Mobility management", "Tracking Area Updates (TAU)", "S1-MME signaling"]
+    key_mml_commands: ["DSP MMEINFO", "DSP TAULIST"]
+  ugw:
+    name: "Unified Gateway (UGW / PGW-SGW / UPF)"
+    generation: "4G/5G"
+    functions: ["User plane packet routing", "GTP-U encapsulation", "Gx/Gy Diameter interface"]
+    key_mml_commands: ["DSP BEARENTITY", "DSP CHGPROFILE"]
+  sps_dra:
+    name: "Signaling Proxy Server (SPS) / Diameter Routing Agent (DRA)"
+    generation: "4G/5G"
+    functions: ["Diameter routing", "MNP route translation", "Cross-operator signaling relay"]
+    key_mml_commands: ["DSP DIAMPTR", "DSP MNPTBL"]

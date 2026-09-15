@@ -7,11 +7,11 @@ from collections import Counter
 from typing import Any, List, Dict, Tuple
 from llama_index.core.schema import NodeWithScore, BaseNode
 
-from ..core.abstractions import BaseRetriever
-from ..config import rag_settings
-from ..infrastructure.vector_factory import get_vector_store
-from ..infrastructure.graph_builder import get_graph_manager
-from ..pipelines.ingestion import get_docstore
+from rag.core.abstractions import BaseRetriever
+from rag.config import rag_settings
+from rag.infrastructure.vector_factory import get_vector_store
+from rag.infrastructure.graph_builder import get_graph_manager
+from rag.pipelines.ingestion import get_docstore
 
 logger = logging.getLogger("rag.retriever")
 
@@ -94,7 +94,7 @@ class ConcurrentRetriever(BaseRetriever):
             return
             
         # Check if local model directory exists
-        from .config import BASE_DIR
+        from rag.config import BASE_DIR
         local_model_path = os.path.join(BASE_DIR, "rag", "models", "ms-marco-MiniLM-L-6-v2")
         
         if os.path.exists(local_model_path) and os.path.isdir(local_model_path):

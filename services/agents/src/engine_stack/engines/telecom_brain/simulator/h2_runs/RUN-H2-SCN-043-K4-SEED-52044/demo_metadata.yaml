@@ -1,0 +1,18 @@
+demo:
+  audience: leadership
+  duration_minutes: 4
+  enabled: true
+  final_message: FikraCore recognizes when it does not know, prevents false certainty,
+    and guides targeted evidence collection.
+  learning_objective: Demonstrate that FikraCore detects missing operational topology
+    downstream of User Plane Function-03 without hallucinating unobserved root causes.
+  steps:
+  - Observe 5G SA mobile data degradation and customer tickets
+  - Inspect known operational network topology
+  - Execute truth-blind causal hypothesis reasoning
+  - Detect model insufficiency at structural boundary
+  - Identify knowledge gap downstream of User Plane Function-03
+  - Recommend utility-ranked DATABASE_METRICS evidence request
+  - Emit candidate relationship for SME/HITL review without modifying live operational
+    brain
+  title: 'Knowledge Gap Discovery: User Plane Function-03'

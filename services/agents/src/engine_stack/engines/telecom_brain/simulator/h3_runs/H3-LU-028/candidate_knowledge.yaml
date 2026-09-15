@@ -1,0 +1,12 @@
+candidate_id: KG-H3-028
+discovery_incident: H2-SCN-028
+gap_type: WRONG_TOPOLOGY_DIRECTION
+source: SA5G:UPF:003
+target: INFRA:COOL:A
+proposed_type: depends-on
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-028-001
+reason: Operational discovery in H2-SCN-028 indicates traffic forwarding from SA5G:UPF:003
+  to INFRA:COOL:A

@@ -1,0 +1,8 @@
+difficulty_profile: K2
+gap_type: MISSING_EXTERNAL_DEPENDENCY
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-024-K2-SEED-52025
+scenario_id: H2-SCN-024
+seed: 52025
+variant: cross_domain

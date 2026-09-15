@@ -4,8 +4,8 @@ from typing import Any, List
 from pydantic import PrivateAttr
 from llama_index.core.schema import BaseNode
 from llama_index.core.embeddings import BaseEmbedding
-from ..core.abstractions import BaseVectorStore
-from ..config import rag_settings
+from rag.core.abstractions import BaseVectorStore
+from rag.config import rag_settings
 
 logger = logging.getLogger("rag.vector_factory")
 

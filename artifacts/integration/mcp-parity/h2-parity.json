@@ -1,0 +1,1215 @@
+{
+  "title": "H2 Full Parity",
+  "timestamp": "2026-09-11T11:29:08.968291+00:00",
+  "total_runs": 60,
+  "decision": "LIVE_MCP_PARITY_SUPPORTED",
+  "parity_rate_pct": 100.0,
+  "exact_parity_count": 60,
+  "semantic_parity_count": 0,
+  "explained_delta_count": 0,
+  "unexplained_delta_count": 0,
+  "integration_failures_count": 0,
+  "hidden_truth_leakage": 0,
+  "records": [
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-001",
+      "run_id": "RUN-H2-SCN-001-K1-SEED-52002",
+      "display_name": "H2 Gap Scenario H2-SCN-001",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-002",
+      "run_id": "RUN-H2-SCN-002-K1-SEED-52003",
+      "display_name": "H2 Gap Scenario H2-SCN-002",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-003",
+      "run_id": "RUN-H2-SCN-003-K1-SEED-52004",
+      "display_name": "H2 Gap Scenario H2-SCN-003",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-004",
+      "run_id": "RUN-H2-SCN-004-K1-SEED-52005",
+      "display_name": "H2 Gap Scenario H2-SCN-004",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-005",
+      "run_id": "RUN-H2-SCN-005-K1-SEED-52006",
+      "display_name": "H2 Gap Scenario H2-SCN-005",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-006",
+      "run_id": "RUN-H2-SCN-006-K1-SEED-52007",
+      "display_name": "H2 Gap Scenario H2-SCN-006",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-007",
+      "run_id": "RUN-H2-SCN-007-K1-SEED-52008",
+      "display_name": "H2 Gap Scenario H2-SCN-007",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-008",
+      "run_id": "RUN-H2-SCN-008-K1-SEED-52009",
+      "display_name": "H2 Gap Scenario H2-SCN-008",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-009",
+      "run_id": "RUN-H2-SCN-009-K1-SEED-52010",
+      "display_name": "H2 Gap Scenario H2-SCN-009",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-010",
+      "run_id": "RUN-H2-SCN-010-K1-SEED-52011",
+      "display_name": "H2 Gap Scenario H2-SCN-010",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-011",
+      "run_id": "RUN-H2-SCN-011-K1-SEED-52012",
+      "display_name": "H2 Gap Scenario H2-SCN-011",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-012",
+      "run_id": "RUN-H2-SCN-012-K1-SEED-52013",
+      "display_name": "H2 Gap Scenario H2-SCN-012",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-013",
+      "run_id": "RUN-H2-SCN-013-K2-SEED-52014",
+      "display_name": "H2 Gap Scenario H2-SCN-013",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-014",
+      "run_id": "RUN-H2-SCN-014-K2-SEED-52015",
+      "display_name": "H2 Gap Scenario H2-SCN-014",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-015",
+      "run_id": "RUN-H2-SCN-015-K2-SEED-52016",
+      "display_name": "H2 Gap Scenario H2-SCN-015",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-016",
+      "run_id": "RUN-H2-SCN-016-K2-SEED-52017",
+      "display_name": "H2 Gap Scenario H2-SCN-016",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-017",
+      "run_id": "RUN-H2-SCN-017-K2-SEED-52018",
+      "display_name": "H2 Gap Scenario H2-SCN-017",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-018",
+      "run_id": "RUN-H2-SCN-018-K2-SEED-52019",
+      "display_name": "H2 Gap Scenario H2-SCN-018",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-019",
+      "run_id": "RUN-H2-SCN-019-K2-SEED-52020",
+      "display_name": "H2 Gap Scenario H2-SCN-019",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-020",
+      "run_id": "RUN-H2-SCN-020-K2-SEED-52021",
+      "display_name": "H2 Gap Scenario H2-SCN-020",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-021",
+      "run_id": "RUN-H2-SCN-021-K2-SEED-52022",
+      "display_name": "H2 Gap Scenario H2-SCN-021",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-022",
+      "run_id": "RUN-H2-SCN-022-K2-SEED-52023",
+      "display_name": "H2 Gap Scenario H2-SCN-022",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-023",
+      "run_id": "RUN-H2-SCN-023-K2-SEED-52024",
+      "display_name": "H2 Gap Scenario H2-SCN-023",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-024",
+      "run_id": "RUN-H2-SCN-024-K2-SEED-52025",
+      "display_name": "H2 Gap Scenario H2-SCN-024",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-025",
+      "run_id": "RUN-H2-SCN-025-K3-SEED-52026",
+      "display_name": "H2 Gap Scenario H2-SCN-025",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-026",
+      "run_id": "RUN-H2-SCN-026-K3-SEED-52027",
+      "display_name": "H2 Gap Scenario H2-SCN-026",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-027",
+      "run_id": "RUN-H2-SCN-027-K3-SEED-52028",
+      "display_name": "H2 Gap Scenario H2-SCN-027",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-028",
+      "run_id": "RUN-H2-SCN-028-K3-SEED-52029",
+      "display_name": "H2 Gap Scenario H2-SCN-028",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-029",
+      "run_id": "RUN-H2-SCN-029-K3-SEED-52030",
+      "display_name": "H2 Gap Scenario H2-SCN-029",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-030",
+      "run_id": "RUN-H2-SCN-030-K3-SEED-52031",
+      "display_name": "H2 Gap Scenario H2-SCN-030",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-031",
+      "run_id": "RUN-H2-SCN-031-K3-SEED-52032",
+      "display_name": "H2 Gap Scenario H2-SCN-031",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-032",
+      "run_id": "RUN-H2-SCN-032-K3-SEED-52033",
+      "display_name": "H2 Gap Scenario H2-SCN-032",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-033",
+      "run_id": "RUN-H2-SCN-033-K3-SEED-52034",
+      "display_name": "H2 Gap Scenario H2-SCN-033",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-034",
+      "run_id": "RUN-H2-SCN-034-K3-SEED-52035",
+      "display_name": "H2 Gap Scenario H2-SCN-034",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-035",
+      "run_id": "RUN-H2-SCN-035-K3-SEED-52036",
+      "display_name": "H2 Gap Scenario H2-SCN-035",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-036",
+      "run_id": "RUN-H2-SCN-036-K3-SEED-52037",
+      "display_name": "H2 Gap Scenario H2-SCN-036",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-037",
+      "run_id": "RUN-H2-SCN-037-K4-SEED-52038",
+      "display_name": "H2 Gap Scenario H2-SCN-037",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-038",
+      "run_id": "RUN-H2-SCN-038-K4-SEED-52039",
+      "display_name": "H2 Gap Scenario H2-SCN-038",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-039",
+      "run_id": "RUN-H2-SCN-039-K4-SEED-52040",
+      "display_name": "H2 Gap Scenario H2-SCN-039",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-040",
+      "run_id": "RUN-H2-SCN-040-K4-SEED-52041",
+      "display_name": "H2 Gap Scenario H2-SCN-040",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-041",
+      "run_id": "RUN-H2-SCN-041-K4-SEED-52042",
+      "display_name": "H2 Gap Scenario H2-SCN-041",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-042",
+      "run_id": "RUN-H2-SCN-042-K4-SEED-52043",
+      "display_name": "H2 Gap Scenario H2-SCN-042",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-043",
+      "run_id": "RUN-H2-SCN-043-K4-SEED-52044",
+      "display_name": "H2 Gap Scenario H2-SCN-043",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-044",
+      "run_id": "RUN-H2-SCN-044-K4-SEED-52045",
+      "display_name": "H2 Gap Scenario H2-SCN-044",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-045",
+      "run_id": "RUN-H2-SCN-045-K4-SEED-52046",
+      "display_name": "H2 Gap Scenario H2-SCN-045",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-046",
+      "run_id": "RUN-H2-SCN-046-K4-SEED-52047",
+      "display_name": "H2 Gap Scenario H2-SCN-046",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-047",
+      "run_id": "RUN-H2-SCN-047-K4-SEED-52048",
+      "display_name": "H2 Gap Scenario H2-SCN-047",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-048",
+      "run_id": "RUN-H2-SCN-048-K4-SEED-52049",
+      "display_name": "H2 Gap Scenario H2-SCN-048",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-049",
+      "run_id": "RUN-H2-SCN-049-K5-SEED-52050",
+      "display_name": "H2 Gap Scenario H2-SCN-049",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-050",
+      "run_id": "RUN-H2-SCN-050-K5-SEED-52051",
+      "display_name": "H2 Gap Scenario H2-SCN-050",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-051",
+      "run_id": "RUN-H2-SCN-051-K5-SEED-52052",
+      "display_name": "H2 Gap Scenario H2-SCN-051",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 2,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-052",
+      "run_id": "RUN-H2-SCN-052-K5-SEED-52053",
+      "display_name": "H2 Gap Scenario H2-SCN-052",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-053",
+      "run_id": "RUN-H2-SCN-053-K5-SEED-52054",
+      "display_name": "H2 Gap Scenario H2-SCN-053",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-054",
+      "run_id": "RUN-H2-SCN-054-K5-SEED-52055",
+      "display_name": "H2 Gap Scenario H2-SCN-054",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-055",
+      "run_id": "RUN-H2-SCN-055-K5-SEED-52056",
+      "display_name": "H2 Gap Scenario H2-SCN-055",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-056",
+      "run_id": "RUN-H2-SCN-056-K5-SEED-52057",
+      "display_name": "H2 Gap Scenario H2-SCN-056",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-057",
+      "run_id": "RUN-H2-SCN-057-K5-SEED-52058",
+      "display_name": "H2 Gap Scenario H2-SCN-057",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-058",
+      "run_id": "RUN-H2-SCN-058-K5-SEED-52059",
+      "display_name": "H2 Gap Scenario H2-SCN-058",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-059",
+      "run_id": "RUN-H2-SCN-059-K5-SEED-52060",
+      "display_name": "H2 Gap Scenario H2-SCN-059",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H2",
+      "scenario": "H2-SCN-060",
+      "run_id": "RUN-H2-SCN-060-K5-SEED-52061",
+      "display_name": "H2 Gap Scenario H2-SCN-060",
+      "snapshot_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1
+      },
+      "live_mcp_result": {
+        "terminal_state": "MODEL_INSUFFICIENT",
+        "discovery_mode": true,
+        "candidates_count": 1,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+view_id: TOPO-SCN-050-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-050
+visible_entities:
+- IP:PE:RTR-21
+- IP:VRF:N3-01
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-N3-PE21
+- REL-N3-UPF
+- REL-CRM-TICKETS-IMPACT
+known_gaps:
+- operational graph may omit or stale-mark one material path relationship
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

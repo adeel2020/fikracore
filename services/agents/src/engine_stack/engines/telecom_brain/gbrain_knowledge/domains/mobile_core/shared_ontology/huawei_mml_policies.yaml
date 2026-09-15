@@ -1,0 +1,22 @@
+domain: mobile_core
+ontology_type: huawei_mml_policies
+description: "Operational authority governance distinguishing Read-Only Inspection from IT Remediation."
+
+operational_authority:
+  rtr_scope:
+    permission_level: "READ_ONLY_AUDIT_AND_TRANSIENT_RESET"
+    allowed_actions:
+      - "Query subscriber subscription profiles"
+      - "Inspect dynamic session and bearer state"
+      - "Purge transient stale registration latches"
+      - "Cancel stuck location registrations"
+      - "Unlock GPRS lock state when transient"
+    prohibited_actions:
+      - "Modifying permanent commercial subscription entitlements"
+      - "Directly changing APN bitrates without BSS Order ID"
+      - "Altering subscriber billing bar status without IT sync"
+
+  it_provisioning_scope:
+    permission_level: "WRITE_REMEDIATION_COMMERCIAL"
+    mandatory_prerequisite: "BSS Activation Order ID (e.g. ORD-YYYYMMDD-XXXXXX)"
+    governance_rule: "All permanent profile modifications must be packaged by RTR and executed by HPSA / IT Provisioning."

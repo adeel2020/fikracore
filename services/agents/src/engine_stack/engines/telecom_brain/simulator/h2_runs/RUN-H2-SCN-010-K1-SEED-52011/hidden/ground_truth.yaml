@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: SA5G:UPF:003
+  gap_type: MISSING_SERVICE_TO_FUNCTION
+  relationship_id: REL-CRM-IMPACT
+root_entity: SA5G:UPF:003
+scenario_id: H2-SCN-010
+true_terminal_state: MODEL_INSUFFICIENT

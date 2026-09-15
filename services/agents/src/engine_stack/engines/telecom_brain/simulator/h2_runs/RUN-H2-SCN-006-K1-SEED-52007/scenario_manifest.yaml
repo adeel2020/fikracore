@@ -1,0 +1,8 @@
+difficulty_profile: K1
+gap_type: MISSING_INTERMEDIATE_NODE
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-006-K1-SEED-52007
+scenario_id: H2-SCN-006
+seed: 52007
+variant: cross_domain

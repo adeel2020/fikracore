@@ -1,0 +1,181 @@
+{
+  "total": 5,
+  "detected": 5,
+  "details": [
+    {
+      "learning_unit_id": "H3-LU-021",
+      "cohort": "stale_topology",
+      "future_incident_id": "H3-FUT-021",
+      "true_root_entity": "SA5G:UPF:003",
+      "candidate_id": "KG-H3-021",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "coverage": 0.5,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "coverage": 0.5,
+        "correct": true,
+        "knowledge_reused": false,
+        "learning_value": 0.0,
+        "stale_detected": true,
+        "contradiction_detected": true,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-022",
+      "cohort": "stale_topology",
+      "future_incident_id": "H3-FUT-022",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-022",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true,
+        "knowledge_reused": false,
+        "learning_value": 0.0,
+        "stale_detected": true,
+        "contradiction_detected": true,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-023",
+      "cohort": "stale_topology",
+      "future_incident_id": "H3-FUT-023",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-023",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true,
+        "knowledge_reused": false,
+        "learning_value": 0.0,
+        "stale_detected": true,
+        "contradiction_detected": true,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-024",
+      "cohort": "stale_topology",
+      "future_incident_id": "H3-FUT-024",
+      "true_root_entity": "SA5G:AMF:001",
+      "candidate_id": "KG-H3-024",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:AMF:001",
+        "coverage": 0.5,
+        "correct": true,
+        "knowledge_reused": false,
+        "learning_value": 0.0,
+        "stale_detected": true,
+        "contradiction_detected": true,
+        "negative_transfer_detected": false
+      }
+    },
+    {
+      "learning_unit_id": "H3-LU-025",
+      "cohort": "stale_topology",
+      "future_incident_id": "H3-FUT-025",
+      "true_root_entity": "SA5G:UPF:003",
+      "candidate_id": "KG-H3-025",
+      "validation_decision": "ACCEPT",
+      "promotion_id": "PROM-H3-001",
+      "promotion_success": true,
+      "baseline_a": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "coverage": 0.5,
+        "correct": true
+      },
+      "baseline_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "correct": true
+      },
+      "method_b": {
+        "terminal_state": "EXPLAINED",
+        "root_rank": 1,
+        "top_root": "SA5G:UPF:003",
+        "coverage": 0.5,
+        "correct": true,
+        "knowledge_reused": false,
+        "learning_value": 0.0,
+        "stale_detected": true,
+        "contradiction_detected": true,
+        "negative_transfer_detected": false
+      }
+    }
+  ]
+}

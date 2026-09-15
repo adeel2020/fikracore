@@ -1,0 +1,290 @@
+{
+  "accuracy_rate": 0.975,
+  "correct_count": 39,
+  "total_count": 40,
+  "per_scenario": [
+    {
+      "scenario_id": "H4-WI-001",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-002",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-003",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-004",
+      "services": [
+        "5G SA Mobile Data",
+        "Prepaid Data & Voice Charging",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-005",
+      "services": [
+        "5G Roaming Interconnect",
+        "5G SA Mobile Data"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-006",
+      "services": [
+        "5G SA Mobile Data",
+        "VoLTE Voice",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-007",
+      "services": [
+        "5G SA Mobile Data",
+        "Inter-DC Backhaul Transport"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-008",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-009",
+      "services": [
+        "4G LTE Mobile Data",
+        "Prepaid Data & Voice Charging",
+        "Real-Time Balance Check",
+        "VoLTE Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-010",
+      "services": [
+        "Prepaid Data & Voice Charging",
+        "Real-Time Balance Check"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-011",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-012",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-013",
+      "services": [
+        "5G SA Mobile Data",
+        "Inter-DC Backhaul Transport"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-014",
+      "services": [
+        "5G Roaming Interconnect",
+        "5G SA Mobile Data"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-015",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-016",
+      "services": [
+        "4G LTE Mobile Data",
+        "Prepaid Data & Voice Charging",
+        "Real-Time Balance Check",
+        "VoLTE Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-017",
+      "services": [
+        "5G SA Mobile Data",
+        "Inter-DC Backhaul Transport"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-018",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-019",
+      "services": [
+        "5G SA Mobile Data",
+        "Customer Self-Care Portal"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-020",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-021",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-022",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-023",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-024",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-025",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-026",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-027",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-028",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-029",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-030",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-031",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-032",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-033",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-034",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-035",
+      "services": [
+        "5G SA Mobile Data",
+        "VoNR High Definition Voice"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-036",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-037",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-038",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-039",
+      "services": [
+        "5G SA Mobile Data",
+        "Enterprise MPLS VPN"
+      ]
+    },
+    {
+      "scenario_id": "H4-WI-040",
+      "services": []
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+view_id: TOPO-H4-WI-010
+scenario_id: H4-WI-010
+visible_entities:
+- CHG:CHF:001
+- CHG:OCS:001
+relationships:
+- relationship_id: REL-CHF-OCS
+  source_entity: CHG:CHF:001
+  relationship_type: CHARGES_VIA
+  target_entity: CHG:OCS:001
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

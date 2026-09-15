@@ -1,0 +1,33 @@
+id: vector_db
+name: Vector Retrieval Connector
+kind: vector_database
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: knowledge_base
+description: Retrieves semantic document chunks only after metadata-first narrowing.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: MARK_VECTOR_MCP_PROTOCOL
+  url_env: MARK_VECTOR_MCP_URL
+  token_env: MARK_VECTOR_MCP_TOKEN
+  command_env: MARK_VECTOR_MCP_COMMAND
+  args: []
+env:
+  - MARK_VECTOR_MCP_PROTOCOL
+  - MARK_VECTOR_MCP_URL
+  - MARK_VECTOR_MCP_TOKEN
+  - MARK_VECTOR_MCP_COMMAND
+  - MARK_VECTOR_DB_URL
+  - MARK_VECTOR_COLLECTION
+capabilities:
+  - semantic_search
+  - retrieve_chunks
+  - return_citations
+permissions:
+  - read_enterprise_knowledge
+fallback_transports:
+  - stdio
+  - http
+  - sdk
+  - rest

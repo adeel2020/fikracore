@@ -1,0 +1,118 @@
+{
+  "scope": "Five deterministic variations of catalog SCN-001; not the full 100-scenario benchmark",
+  "cases": [
+    {
+      "run_id": "MVP-S1-SCN-001",
+      "scenario_id": "SCN-001",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 0,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.003947431017877534,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0,
+      "case": "S1"
+    },
+    {
+      "run_id": "MVP-S2-SCN-001",
+      "scenario_id": "SCN-001",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.003569559019524604,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0,
+      "case": "S2"
+    },
+    {
+      "run_id": "MVP-S3-SCN-001",
+      "scenario_id": "SCN-001",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "test/unrelated-pod"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 4,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.008332922996487468,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 0.8,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0,
+      "case": "S3"
+    },
+    {
+      "run_id": "MVP-S4-SCN-001",
+      "scenario_id": "SCN-001",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 2,
+      "steps_to_first_useful_hypothesis": null,
+      "time_seconds": 0.0033911869977600873,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "MODEL_INSUFFICIENT",
+      "explanation_coverage": 0.75,
+      "unexplained_residual": 5,
+      "case": "S4"
+    },
+    {
+      "run_id": "MVP-S5-SCN-001",
+      "scenario_id": "SCN-001",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 0,
+      "evidence_requests_before_terminal_decision": 2,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.0008073390054050833,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "INSUFFICIENT_EVIDENCE",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0,
+      "case": "S5"
+    }
+  ],
+  "baseline_correct": 2,
+  "method_b_correct": 5,
+  "caveat": "Small authored test set; no statistical or production accuracy claim."
+}

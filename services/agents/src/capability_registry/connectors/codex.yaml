@@ -1,0 +1,32 @@
+id: codex
+name: Codex Engineering Connector
+kind: sandbox_agent
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: codex_engineering
+description: Controlled coding-agent adapter for sandboxed implementation, tests, debugging, and patch summaries.
+status: planned
+mcp_runtime:
+  protocol: stdio
+  protocol_env: CODEX_MCP_PROTOCOL
+  command_env: CODEX_MCP_COMMAND
+  default_command: /usr/local/bin/codex
+  stdio_framing: json_lines
+  args:
+    - mcp-server
+env:
+  - CODEX_WORKSPACE_ROOT
+  - CODEX_MCP_PROTOCOL
+  - CODEX_MCP_COMMAND
+capabilities:
+  - codex
+  - codex-reply
+  - create_coding_session
+  - continue_coding_session
+permissions:
+  - sandbox_code_execution
+  - write_code_requires_context
+  - deploy_requires_approval
+fallback_transports:
+  - local_sandbox
+  - worktree_task

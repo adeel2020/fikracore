@@ -1,0 +1,269 @@
+{
+  "timestamp": "2026-09-11T12:32:18.971965+00:00",
+  "duration_seconds": 1.216,
+  "endpoint": "http://localhost:3131/mcp",
+  "decision": "LIVE_MCP_SMOKE_SUPPORTED",
+  "passed_count": "16/16",
+  "hidden_truth_leakage": 0,
+  "checks": {
+    "connectivity": "PASS",
+    "authentication": "PASS",
+    "session": "PASS",
+    "tool_discovery": "PASS",
+    "schema": "PASS",
+    "page_read": "PASS",
+    "links": "PASS",
+    "traversal": "PASS",
+    "canonical_resolution": "PASS",
+    "knowledge_provider": "PASS",
+    "provider_parity": "PASS",
+    "h1_live_smoke": "PASS",
+    "h2_live_smoke": "PASS",
+    "h4_live_smoke": "PASS",
+    "mark_zaki_grounding": "PASS",
+    "hidden_truth_boundary": "PASS"
+  },
+  "failures": [],
+  "details": {
+    "connectivity": {
+      "status_code": 405,
+      "url": "http://localhost:3131/mcp"
+    },
+    "session": {
+      "handshake": "OK",
+      "provider_type": "GbrainTelecomBrainProvider"
+    },
+    "tool_discovery": {
+      "total_tools_discovered": 96,
+      "discovered_tools": [
+        "add_link",
+        "add_tag",
+        "add_timeline_entry",
+        "advisor",
+        "cancel_job",
+        "chronicle_day",
+        "chronicle_last_seen",
+        "chronicle_on_this_day",
+        "chronicle_since",
+        "code_blast",
+        "code_callees",
+        "code_callers",
+        "code_def",
+        "code_flow",
+        "code_refs",
+        "delete_page",
+        "extract_entities",
+        "extract_facts",
+        "extraction_pending",
+        "find_anomalies",
+        "find_contradictions",
+        "find_experts",
+        "find_orphans",
+        "find_trajectory",
+        "forget_fact",
+        "get_active_schema_pack",
+        "get_backlinks",
+        "get_brain_identity",
+        "get_calibration_profile",
+        "get_chunks",
+        "get_health",
+        "get_ingest_log",
+        "get_job",
+        "get_job_progress",
+        "get_links",
+        "get_page",
+        "get_raw_data",
+        "get_recent_salience",
+        "get_skill",
+        "get_stats",
+        "get_status_snapshot",
+        "get_tags",
+        "get_timeline",
+        "get_versions",
+        "list_brain_skillpack",
+        "list_jobs",
+        "list_link_sources",
+        "list_pages",
+        "list_schema_packs",
+        "list_skills",
+        "log_ingest",
+        "ontology_conflicts",
+        "ontology_dimensions",
+        "ontology_get",
+        "ontology_propose",
+        "pause_job",
+        "put_page",
+        "put_raw_data",
+        "query",
+        "recall",
+        "reload_schema_pack",
+        "remove_link",
+        "remove_tag",
+        "replay_job",
+        "resolve_slugs",
+        "restore_page",
+        "resume_job",
+        "retry_job",
+        "revert_version",
+        "run_doctor",
+        "run_onboard",
+        "run_skillopt",
+        "schema_apply_mutations",
+        "schema_explain_type",
+        "schema_graph",
+        "schema_lint",
+        "schema_review_orphans",
+        "schema_stats",
+        "search",
+        "search_by_image",
+        "send_job_message",
+        "sources_add",
+        "sources_list",
+        "sources_remove",
+        "sources_status",
+        "submit_agent",
+        "submit_job",
+        "takes_calibration",
+        "takes_list",
+        "takes_scorecard",
+        "takes_search",
+        "think",
+        "traverse_graph",
+        "volunteer_chronicle",
+        "volunteer_context",
+        "whoami"
+      ],
+      "required_present": [
+        "get_backlinks",
+        "get_links",
+        "get_page",
+        "query",
+        "search",
+        "traverse_graph"
+      ]
+    },
+    "schema": {
+      "identity": "mobile-core@0.1.0+2eea5e14",
+      "pack_name": "mobile-core",
+      "version": "0.1.0",
+      "page_types_count": 27,
+      "link_types_count": 25,
+      "source_tier": "home-config"
+    },
+    "page_read": {
+      "domains/mobile-core/networks/lte/functions/mme-01": {
+        "exists": true,
+        "type": "domain-function",
+        "title": "mme-01 (mme, mobile-core)"
+      },
+      "domains/mobile-core/networks/ps/functions/pgw-01": {
+        "exists": true,
+        "type": "domain-function",
+        "title": "pgw-01 (pgw, mobile-core)"
+      },
+      "domains/transport/functions/sgi-edge-01": {
+        "exists": true,
+        "type": "domain-function",
+        "title": "sgi-edge-01 (edge-router, transport)"
+      },
+      "tickets/mobile-core/tt-984210": {
+        "exists": true,
+        "type": "ticket-journey",
+        "title": "Trouble Ticket TT-984210 Journey"
+      }
+    },
+    "links": {
+      "target_slug": "domains/transport/functions/sgi-edge-01",
+      "outbound_links_count": 0,
+      "inbound_backlinks_count": 3,
+      "sample_backlink": {
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "from_source_id": "default",
+        "to_slug": "domains/transport/functions/sgi-edge-01",
+        "to_source_id": "default",
+        "link_type": "involves",
+        "context": "",
+        "link_source": "correlation-worker",
+        "origin_slug": null,
+        "origin_source_id": null,
+        "origin_field": null
+      }
+    },
+    "traversal": {
+      "start_node": "domains/mobile-core/networks/lte/functions/mme-01",
+      "traversal_count": 3,
+      "sample_step": {
+        "from_slug": "grafana/alerts/grafana-alert-attach-mme-001",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01",
+        "link_type": "observed-on",
+        "context": "",
+        "depth": 1
+      }
+    },
+    "canonical_resolution": {
+      "direct_canonical_lookup": true,
+      "alias_input": "mobile-core/incidents/sgi-throughput-drop",
+      "alias_resolved_target": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "alias_page_retrieved": true,
+      "mapped_physical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+    },
+    "knowledge_provider": {
+      "metadata": {
+        "knowledge_provider_type": "GbrainTelecomBrainProvider",
+        "brain": "telecombrain",
+        "snapshot_version": null,
+        "consistency": "live; may evolve during investigation",
+        "schema_identity": {
+          "pack_name": "mobile-core",
+          "version": "0.1.0",
+          "sha8": "2eea5e14",
+          "identity": "mobile-core@0.1.0+2eea5e14",
+          "page_types_count": 27,
+          "link_types_count": 25,
+          "primitive_summary": {
+            "entity": 6,
+            "annotation": 7,
+            "media": 5,
+            "temporal": 6,
+            "concept": 3
+          },
+          "source_tier": "home-config"
+        }
+      },
+      "search_results_count": 20
+    },
+    "provider_parity": {
+      "target_slug": "domains/mobile-core/networks/lte/functions/mme-01",
+      "compared_fields": [
+        "slug",
+        "type",
+        "title"
+      ],
+      "discrepancies": [],
+      "explainability": "All compared fields match identically between live MCP and snapshot representation."
+    },
+    "h1_live_smoke": {
+      "terminal_state": "EXPLAINED",
+      "hypotheses_count": 1,
+      "top_root": "domains/transport/functions/sgi-edge-01",
+      "provenance_count": 1
+    },
+    "h2_live_smoke": {
+      "terminal_state": "MODEL_INSUFFICIENT",
+      "discovery_mode": true,
+      "candidates_count": 1
+    },
+    "h4_live_smoke": {
+      "what_if_id": "LIVE-H4-SMOKE-01",
+      "blast_radius_level": "LOCAL",
+      "affected_services": [],
+      "surfaces_count": 1,
+      "mitigations_count": 0
+    },
+    "mark_zaki_grounding": {
+      "query": "Why is this service affected?",
+      "response_preview": "Direct dependency in operational telecombrain: sgi-edge-01 provides critical functional support....",
+      "grounded": true
+    }
+  }
+}

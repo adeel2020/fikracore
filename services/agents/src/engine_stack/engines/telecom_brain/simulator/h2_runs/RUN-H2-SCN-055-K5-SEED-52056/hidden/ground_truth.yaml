@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: SA5G:UPF:003
+  gap_type: MISSING_SECURITY_CONTROL
+  relationship_id: REL-UPF-FW
+root_entity: SA5G:UPF:003
+scenario_id: H2-SCN-055
+true_terminal_state: MODEL_INSUFFICIENT

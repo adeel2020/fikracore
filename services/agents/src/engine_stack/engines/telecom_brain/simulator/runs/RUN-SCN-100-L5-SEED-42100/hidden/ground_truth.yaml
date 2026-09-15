@@ -1,0 +1,35 @@
+incident_id: INC-SYN-00100
+scenario_id: SCN-100
+seed: 42100
+difficulty_profile: L5
+hidden_truth:
+  root_domain: IT_CLOUD_INFRA
+  root_entity: INFRA:DB:SUBS-A
+  root_entity_name: Subscriber DB Cluster A
+  trigger: SHARED_DATABASE_CACHE_INCONSISTENCY_PRODUCES_CRO
+  root_condition: 'Shared Database/Cache Inconsistency Produces Cross-Service Errors:
+    root condition at Subscriber DB Cluster A'
+  causal_chain:
+  - entity: INFRA:DB:SUBS-A
+    role: ROOT
+    state_change: Subscriber DB Cluster A participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - oss_network_management_connectivity
+    regions:
+    - REGION-NORTH
+    - REGION-CENTRAL
+    customer_segments:
+    - internal_noc
+    entity_count: 3
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+  - bias-test change context, not hidden cause
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

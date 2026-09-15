@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: CHARGING:DRA:001
+  gap_type: MISSING_ROAMING_INTERCONNECT
+  relationship_id: REL-DRA-OCS
+root_entity: CHARGING:DRA:001
+scenario_id: H2-SCN-051
+true_terminal_state: MODEL_INSUFFICIENT

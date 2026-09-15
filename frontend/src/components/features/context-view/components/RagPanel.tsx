@@ -22,8 +22,7 @@ import {
   Copy
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const API_BASE = "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 // Predefined validation queries matching the dataset ontology
 const DEFAULT_EVAL_QUERIES = [

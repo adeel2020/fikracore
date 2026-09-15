@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Voice Storyteller — minimal test client</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 720px; }
+  button { margin: 0.25rem; padding: 0.5rem 0.9rem; }
+  #status { font-weight: 600; }
+  #log { white-space: pre-wrap; background: #f5f5f5; border-radius: 6px; padding: 0.75rem; min-height: 6rem; }
+</style>
+</head>
+<body>
+<h1>Voice Storyteller — minimal test client</h1>
+<p><span id="status">disconnected</span></p>
+<p>
+  session_id <input id="session" value="voice-demo" size="24">
+  incident_id <input id="incident" size="36" placeholder="mobile-core/incidents/amf-overload-2026-08-09 (optional)">
+</p>
+<p>
+  <button id="connect">Connect</button>
+  <button id="mic">Start microphone</button>
+  <button id="interrupt">Interrupt</button>
+  <button id="disconnect">Disconnect</button>
+</p>
+<p>
+  Question: <input id="question" size="48" placeholder="why did it happen?">
+  <button id="ask">Ask</button>
+</p>
+<div id="log"></div>
+
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+let ws = null;
+let micContext = null, micSource = null, micNode = null, micStream = null;
+let playContext = null, playing = false;
+let inBuf = new Int16Array(0);       // pending 24 kHz output samples
+const OUT_RATE = 24000, IN_RATE = 16000;
+
+function log(text) { $("log").textContent += text + "\n"; }
+function setStatus(text) { $("status").textContent = text; }
+
+$("connect").onclick = () => {
+  if (ws) ws.close();
+  const session = $("session").value.trim() || "voice-demo";
+  const proto = location.protocol === "https:" ? "wss:" : "ws:";
+  ws = new WebSocket(`${proto}//${location.host}/ws/voice/${session}`);
+  ws.binaryType = "arraybuffer";
+  ws.onopen = () => { setStatus("connected"); log("[ready] connected"); };
+  ws.onclose = () => { setStatus("disconnected"); stopMic(); };
+  ws.onerror = () => { setStatus("error"); log("[error] websocket error"); };
+  ws.onmessage = (ev) => {
+    if (ev.data instanceof ArrayBuffer) {
+      const pcm = new Int16Array(ev.data);
+      inBuf = new Int16Array(inBuf.length + pcm.length);
+      inBuf.set(inBuf, 0);
+      inBuf.set(pcm, inBuf.length - pcm.length);
+      queueNextAudio();
+      return;
+    }
+    const m = JSON.parse(ev.data);
+    if (m.type === "ready") { setStatus("connected"); log(`[ready] formats in ${m.input.sample_rate}Hz / out ${m.output.sample_rate}Hz`); }
+    else if (m.type === "state") { log(`[state] ${m.state}`); }
+    else if (m.type === "transcript_partial") { log(`[partial] ${m.text}`); }
+    else if (m.type === "transcript") { log(`[transcript] ${m.text}`); }
+    else if (m.type === "response") { log(`[response intent=${m.intent} incident=${m.incident_id}]\n${m.answer}`); }
+    else if (m.type === "audio") { /* binary frame follows */ }
+    else if (m.type === "error") { log(`[error ${m.code}] ${m.message}`); }
+    else if (m.type === "done") { log(`[done gen=${m.generation_id} total_ms=${(m.timings && m.timings.total_ms || 0).toFixed(1)}]`); }
+  };
+};
+
+function sendJson(obj) { if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify(obj)); }
+
+$("ask").onclick = () => {
+  const text = $("question").value.trim();
+  if (!text) return;
+  const incident = $("incident").value.trim() || null;
+  sendJson({ type: "text", text, path_incident_id: incident });
+  $("question").value = "";
+};
+
+$("interrupt").onclick = () => { sendJson({ type: "interrupt" }); stopOutput(); log("[interrupt] sent"); };
+
+$("disconnect").onclick = () => { if (ws) ws.close(); stopMic(); stopOutput(); };
+
+$("mic").onclick = async () => {
+  if (micStream) { stopMic(); return; }
+  const incident = $("incident").value.trim() || null;
+  sendJson({ type: "start", path_incident_id: incident });
+  try {
+    micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (e) { log(`[mic] error: ${e}`); return; }
+  micContext = new AudioContext({ sampleRate: 48000 });
+  micSource = micContext.createMediaStreamSource(micStream);
+  micNode = micContext.createScriptProcessor(4096, 1, 1);
+  let downsample = 0;
+  micNode.onaudioprocess = (ev) => {
+    const input = ev.inputBuffer.getChannelData(0);
+    // simple decimation 48k -> 16k with linear-interp-free averaging
+    const step = 48000 / IN_RATE; // 3
+    const out = new Int16Array(Math.floor(input.length / step));
+    for (let i = 0; i < out.length; i++) {
+      const j = Math.floor(i * step);
+      const s = input[j];
+      out[i] = Math.max(-1, Math.min(1, s)) * 32767;
+    }
+    if (ws && ws.readyState === WebSocket.OPEN) ws.send(out.buffer);
+  };
+  micSource.connect(micNode);
+  micNode.connect(micContext.destination);
+  setStatus("listening");
+  log("[mic] streaming 16kHz pcm_s16le");
+};
+
+function stopMic() {
+  if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+  if (micNode) { micNode.disconnect(); micNode = null; }
+  if (micSource) { micSource.disconnect(); micSource = null; }
+  if (micContext) { micContext.close(); micContext = null; }
+}
+
+function stopOutput() { playing = false; }
+
+function queueNextAudio() {
+  if (playing || inBuf.length === 0) return;
+  if (!playContext) playContext = new (window.AudioContext || window.webkitAudioContext)();
+  const buffer = playContext.createBuffer(1, inBuf.length, OUT_RATE);
+  const data = buffer.getChannelData(0);
+  for (let i = 0; i < inBuf.length; i++) data[i] = inBuf[i] / 32768;
+  inBuf = new Int16Array(0);
+  const src = playContext.createBufferSource();
+  src.buffer = buffer;
+  src.connect(playContext.destination);
+  playing = true;
+  src.onended = () => { playing = false; queueNextAudio(); };
+  src.start();
+}
+</script>
+</body>
+</html>

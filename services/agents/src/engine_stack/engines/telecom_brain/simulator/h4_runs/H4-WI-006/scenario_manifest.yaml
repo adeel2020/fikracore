@@ -1,0 +1,18 @@
+what_if_id: H4-WI-006
+title: DNS Resolution Server Outage
+description: Simulates internal core DNS server outage disrupting NF discovery.
+cohort: single_point_failure
+trigger:
+  canonical_id: INFRA:DNS:CORE
+  entity_display_name: DNS Resolution Server-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- dns
+- control_plane
+- spof

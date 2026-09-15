@@ -1,0 +1,7 @@
+failover_pairs:
+  INFRA:SW:CORE-03:
+    backup_entity: INFRA:SW:CORE-08
+    backup_health: HEALTHY
+shared_failure_domains: []
+backup_node: INFRA:SW:CORE-08
+backup_health: HEALTHY

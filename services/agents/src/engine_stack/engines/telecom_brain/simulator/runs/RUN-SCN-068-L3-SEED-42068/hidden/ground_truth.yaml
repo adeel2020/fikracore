@@ -1,0 +1,34 @@
+incident_id: INC-SYN-00068
+scenario_id: SCN-068
+seed: 42068
+difficulty_profile: L3
+hidden_truth:
+  root_domain: IT_CLOUD_INFRA
+  root_entity: INFRA:K8S:CORE-A
+  root_entity_name: Core Kubernetes Cluster A
+  trigger: KUBERNETES_CONTROL_PLANE_PARTITION_CAUSES_DIVERG
+  root_condition: 'Kubernetes Control-Plane Partition Causes Divergent Orchestration:
+    root condition at Core Kubernetes Cluster A'
+  causal_chain:
+  - entity: INFRA:K8S:CORE-A
+    role: ROOT
+    state_change: Core Kubernetes Cluster A participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - 5g_sa_mobile_data
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    - enterprise_mobile
+    entity_count: 3
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

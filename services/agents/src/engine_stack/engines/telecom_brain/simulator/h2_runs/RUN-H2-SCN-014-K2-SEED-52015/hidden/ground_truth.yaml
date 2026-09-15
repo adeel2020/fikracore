@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: INFRA:DC:A
+  gap_type: MISSING_FAILURE_DOMAIN_MEMBERSHIP
+  relationship_id: REL-DC-PE-FD
+root_entity: INFRA:DC:A
+scenario_id: H2-SCN-014
+true_terminal_state: MODEL_INSUFFICIENT

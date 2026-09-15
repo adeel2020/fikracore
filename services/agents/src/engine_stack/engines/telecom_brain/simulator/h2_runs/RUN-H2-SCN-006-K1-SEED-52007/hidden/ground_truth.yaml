@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: IP:PE:RTR-21
+  gap_type: MISSING_INTERMEDIATE_NODE
+  relationship_id: REL-PE-CORE
+root_entity: IP:PE:RTR-21
+scenario_id: H2-SCN-006
+true_terminal_state: MODEL_INSUFFICIENT

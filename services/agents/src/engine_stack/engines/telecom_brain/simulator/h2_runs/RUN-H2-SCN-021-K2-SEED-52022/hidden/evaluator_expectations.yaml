@@ -1,0 +1,6 @@
+expected_evidence_type: ROUTING_TABLE
+expected_gap_boundary: IP:PE:RTR-21
+expected_gap_type: MISSING_TRANSPORT_PATH
+expected_terminal_state: MODEL_INSUFFICIENT
+must_abstain_from_root_fact: true
+scenario_id: H2-SCN-021

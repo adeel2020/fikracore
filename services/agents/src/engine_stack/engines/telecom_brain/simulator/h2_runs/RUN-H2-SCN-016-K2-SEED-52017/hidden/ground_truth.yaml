@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: INFRA:DC:A
+  gap_type: MISSING_HOSTING_CONTAINER
+  relationship_id: REL-DC-UPF
+root_entity: INFRA:DC:A
+scenario_id: H2-SCN-016
+true_terminal_state: MODEL_INSUFFICIENT

@@ -1,0 +1,21 @@
+id: collaboration
+name: Collaboration Engine
+description: Converts Mark's analysis into human-facing communication through email and WhatsApp, with approval before sending.
+status: planned
+routing_intents:
+  - draft_email
+  - draft_whatsapp
+  - stakeholder_update
+  - shift_handover
+  - request_missing_evidence
+services:
+  - communication
+connectors:
+  - gmail
+  - whatsapp
+  - microsoft_teams
+skills:
+  - stakeholder-update
+permissions:
+  - draft_external_message
+  - send_requires_approval

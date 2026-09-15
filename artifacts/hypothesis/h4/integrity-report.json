@@ -1,0 +1,288 @@
+{
+  "all_valid": true,
+  "total_scenarios": 40,
+  "valid_count": 40,
+  "invalid_count": 0,
+  "results": [
+    {
+      "scenario_id": "H4-WI-001",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-002",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-003",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-004",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-005",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-006",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-007",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-008",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-009",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-010",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-011",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-012",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-013",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-014",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-015",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-016",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-017",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-018",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-019",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-020",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-021",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-022",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-023",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-024",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-025",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-026",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-027",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-028",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-029",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-030",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-031",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-032",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-033",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-034",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-035",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-036",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-037",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-038",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-039",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "scenario_id": "H4-WI-040",
+      "scenario_path": "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040",
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  ]
+}

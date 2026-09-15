@@ -1,0 +1,11 @@
+scenario_id: H4-WI-005
+cohort: single_point_failure
+trigger_entity: INFRA:FW:PERIM-01
+true_affected_services:
+- 5G Roaming Interconnect
+- 5G SA Mobile Data
+true_cfs_risk: SPOF
+true_common_cause_detected: false
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

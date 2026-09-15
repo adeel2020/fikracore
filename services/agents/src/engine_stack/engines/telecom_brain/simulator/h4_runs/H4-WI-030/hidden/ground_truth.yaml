@@ -1,0 +1,11 @@
+scenario_id: H4-WI-030
+cohort: failover_capacity
+trigger_entity: IP:PE:RTR-30
+true_affected_services:
+- 5G SA Mobile Data
+- Enterprise MPLS VPN
+true_cfs_risk: CAPACITY_EXHAUSTION
+true_common_cause_detected: false
+true_capacity_bottleneck: true
+true_change_risk: false
+is_model_insufficient: false

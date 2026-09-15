@@ -1,0 +1,17 @@
+view_id: TOPO-SCN-091-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-091
+visible_entities:
+- INFRA:COOL:A
+- INFRA:NFVI:A
+- INFRA:K8S:CORE-A
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-NFVI-COOLING
+- REL-K8S-RUNS-NFVI
+- REL-UPF-HOSTED
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

@@ -1,0 +1,16 @@
+id: automation
+name: Automation Engine
+description: Executes approved operational automations such as health checks, pre-checks, diagnostics, and remediation workflows.
+status: planned
+routing_intents:
+  - run_health_check
+  - run_precheck
+  - run_diagnostics
+  - propose_remediation
+services:
+  - automation_execution
+connectors: []
+skills: []
+permissions:
+  - execute_safe_readonly_automation
+  - remediation_requires_approval

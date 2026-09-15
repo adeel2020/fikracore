@@ -1,0 +1,18 @@
+demo:
+  enabled: true
+  title: 'Learning Transfer: SA5G Amf 001 -> User Plane Function-03'
+  cohort: stale_topology
+  audience: leadership
+  duration_minutes: 5
+  learning_objective: Demonstrate that validated operational knowledge (SA5G Amf 001
+    routes-through User Plane Function-03) improves reasoning on a different future
+    incident (5g_sa_mission_critical).
+  steps:
+  - Incident H2-SCN-023 exposes missing dependency
+  - FikraCore proposes safe candidate relationship
+  - Domain SME validates relationship with operational evidence
+  - Knowledge is promoted under 8 governance guardrails
+  - Different future incident H3-FUT-023 occurs on 5g_sa_mission_critical
+  - FikraCore reuses validated knowledge to reconstruct causal chain
+  - Root cause identified with higher accuracy and zero hallucination
+  final_message: Validated experience becomes reusable operational knowledge.

@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .base import BaseSecOpsAgent, SecOpsFinding
+from secops.base import BaseSecOpsAgent, SecOpsFinding
 
 logger = logging.getLogger("secops.policy_enforcer")
 

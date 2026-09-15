@@ -1,6 +1,0 @@
-domain: Network
-email: packet_ops@xyz.com
-hotline: 800-PACKET
-id: core_packet
-name: Packet Core Operations (EPC/5GC)
-queue: L2_PACKET_CORE

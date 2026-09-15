@@ -1,0 +1,6 @@
+scenario_id: H3-FUT-023
+root_entity: SA5G:AMF:001
+impacted_service: 5g_sa_mission_critical
+requires_promoted_relation: false
+is_stale_relation: true
+is_poisoned_relation: false

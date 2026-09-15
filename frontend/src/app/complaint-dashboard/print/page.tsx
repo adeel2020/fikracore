@@ -28,7 +28,7 @@ export default function ComplaintDashboardPrintPage() {
   useEffect(() => {
     // Instantiate background Web Worker for regex database mappings and aggregation
     workerRef.current = new Worker(
-      new URL("../../../../../../frontend/src/components/features/complaint-dashboard-view/workers/telemetry.worker.ts", import.meta.url)
+      new URL("../../../../src/components/features/complaint-dashboard-view/workers/telemetry.worker.ts", import.meta.url)
     );
 
     workerRef.current.onmessage = (e: MessageEvent) => {

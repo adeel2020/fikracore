@@ -1,0 +1,17 @@
+id: topology
+name: Topology Service
+engine: telecom_brain
+description: Resolves logical and discovered topology into semantic projections that explain service procedure dependency and blast radius.
+status: planned
+connectors:
+  - gbrain
+consumes:
+  - topology_inventory
+  - digital_twin_projection
+  - service_procedure_dependency
+produces:
+  - affected_component_set
+  - service_dependency_path
+  - blast_radius_context
+permissions:
+  - read_topology

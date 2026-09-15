@@ -1,0 +1,20 @@
+id: correlation
+name: Correlation Service
+engine: telecom_brain
+description: Groups alarms, KPIs, changes, telemetry, topology projections, and service impact into intra-domain or inter-domain incident candidates.
+status: active
+connectors:
+  - gbrain
+  - grafana
+consumes:
+  - alarms
+  - kpis
+  - changes
+  - topology_projection
+  - service_procedure_context
+produces:
+  - correlation_candidate
+  - incident_candidate
+  - grouping_explanation
+permissions:
+  - read_operational_context

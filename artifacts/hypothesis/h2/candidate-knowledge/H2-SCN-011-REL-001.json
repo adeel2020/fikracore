@@ -1,0 +1,11 @@
+{
+  "candidate_id": "REL-001",
+  "source": "SA5G:UPF:003",
+  "target": "CRM:TICKET:001",
+  "proposed_type": "connected-to",
+  "state": "CANDIDATE",
+  "supporting_evidence": [
+    "EV-ALM-H2-SCN-011-002"
+  ],
+  "reason": "Observed path adjacency is absent from operational knowledge; requires independent validation"
+}

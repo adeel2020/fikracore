@@ -1,0 +1,43 @@
+services:
+  lgtm:
+    image: grafana/otel-lgtm:latest
+    container_name: kagent-lgtm
+    ports:
+      - "3001:3000"
+      - "4317:4317"
+      - "4318:4318"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+    volumes:
+      - lgtm-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "cat /tmp/ready"]
+      interval: 10s
+      timeout: 10s
+      retries: 18
+      start_period: 60s
+
+  grafana-mcp:
+    image: grafana/mcp-grafana:latest
+    container_name: kagent-grafana-mcp
+    depends_on:
+      lgtm:
+        condition: service_healthy
+    command:
+      - "--transport=streamable-http"
+      - "--address=0.0.0.0:8000"
+      - "--endpoint-path=/mcp"
+      - "--allowed-hosts=localhost:3132,127.0.0.1:3132,localhost:8000,127.0.0.1:8000,kagent-grafana-mcp:8000"
+      - "--disable-write"
+    ports:
+      - "3132:8000"
+    environment:
+      GRAFANA_URL: http://lgtm:3000
+      GRAFANA_SERVICE_ACCOUNT_TOKEN: ${GRAFANA_SERVICE_ACCOUNT_TOKEN:-}
+      GRAFANA_USERNAME: ${GRAFANA_USERNAME:-admin}
+      GRAFANA_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      MCP_GRAFANA_SERVER_TOKEN: ${GRAFANA_MCP_TOKEN:-mark-local-dev-token}
+
+volumes:
+  lgtm-data:

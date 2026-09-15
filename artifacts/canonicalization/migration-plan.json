@@ -1,0 +1,62 @@
+[
+  {
+    "action": "alias",
+    "canonical_can_be_created": true,
+    "canonical_exists": true,
+    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "confidence": 0.97,
+    "entity_class": "incident",
+    "legacy_exists": true,
+    "legacy_slug": "incidents/mobile-core/sgi-throughput-drop",
+    "reason": "descriptive incident slug is cross-linked to the correlation-key canonical incident page",
+    "requires_review": false
+  },
+  {
+    "action": "alias",
+    "canonical_can_be_created": true,
+    "canonical_exists": false,
+    "canonical_slug": "incidents/mobile-core/amf-overload-2026-08-09",
+    "confidence": 0.94,
+    "entity_class": "incident",
+    "legacy_exists": true,
+    "legacy_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+    "reason": "same AMF incident expressed with the legacy mobile-core/incidents prefix",
+    "requires_review": false
+  },
+  {
+    "action": "alias",
+    "canonical_can_be_created": true,
+    "canonical_exists": true,
+    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "confidence": 0.99,
+    "entity_class": "incident",
+    "legacy_exists": true,
+    "legacy_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+    "reason": "same correlation-key incident expressed with the legacy mobile-core/incidents prefix",
+    "requires_review": false
+  },
+  {
+    "action": "alias",
+    "canonical_can_be_created": true,
+    "canonical_exists": true,
+    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "confidence": 0.98,
+    "entity_class": "incident",
+    "legacy_exists": true,
+    "legacy_slug": "mobile-core/incidents/sgi-throughput-drop",
+    "reason": "legacy incident slug and descriptive canonical incident page identify the same SGi data-forwarding incident",
+    "requires_review": false
+  },
+  {
+    "action": "alias",
+    "canonical_can_be_created": true,
+    "canonical_exists": false,
+    "canonical_slug": "incidents/mobile-core/volte-cssr-degradation",
+    "confidence": 0.92,
+    "entity_class": "incident",
+    "legacy_exists": false,
+    "legacy_slug": "mobile-core/incidents/volte-cssr-degradation",
+    "reason": "same VoLTE incident expressed with the legacy mobile-core/incidents prefix",
+    "requires_review": true
+  }
+]

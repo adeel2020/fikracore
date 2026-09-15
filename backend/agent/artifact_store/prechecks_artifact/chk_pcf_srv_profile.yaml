@@ -1,9 +1,0 @@
-command: LST PSRV
-id: chk_pcf_srv_profile
-keywords:
-- 5gsa profile
-- botim profile
-- icp
-- dcs profile
-label: PCF Provisioned Service Profiles
-target_node: pcf

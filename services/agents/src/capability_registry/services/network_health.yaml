@@ -1,0 +1,19 @@
+id: network_health
+name: Network Health Service
+engine: telecom_brain
+description: Summarizes active incidents, risky service procedures, degraded KPIs, intent violations, and alarm pressure.
+status: active
+connectors:
+  - gbrain
+  - grafana
+consumes:
+  - incident_summary
+  - telemetry_evidence
+  - intent_violation
+  - alarm_pressure
+produces:
+  - network_health_brief
+  - risky_service_procedure
+  - degraded_kpi_summary
+permissions:
+  - read_operational_context

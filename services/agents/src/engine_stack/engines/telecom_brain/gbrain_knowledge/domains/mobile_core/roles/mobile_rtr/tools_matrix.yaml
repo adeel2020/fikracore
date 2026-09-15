@@ -1,0 +1,29 @@
+role: mobile_rtr
+catalog_type: diagnostic_tools
+description: "Specialized tools portfolio used during Mobile Core trouble ticket investigation."
+
+tools:
+  - id: osix
+    name: "OSIX Signaling Probe"
+    protocols: ["Diameter Gx/Gy", "GTPv2-C", "SIP", "MAP", "HTTP/2 SBI"]
+    purpose: "Real-time call trace inspection and end-to-end packet decoding."
+  - id: csrd
+    name: "CSRD Call Detail Records"
+    protocols: ["CDR Files", "Usage Dumps"]
+    purpose: "Historical voice call, SMS, and data volume transaction auditing."
+  - id: huawei_lmt
+    name: "Huawei iMaster NCE / LMT"
+    protocols: ["MML Interface", "SSH/Telnet"]
+    purpose: "Read-only MML subscriber audits, bearer display, and transient lock cleanup."
+  - id: sm_dp_plus
+    name: "SM-DP+ eSIM Server"
+    protocols: ["GSMA SGP.22"]
+    purpose: "eSIM profile state auditing (Released, Downloaded, Installed, Enabled)."
+  - id: radius_aaa
+    name: "Radius AAA Server"
+    protocols: ["RADIUS Authentication & Accounting"]
+    purpose: "Corporate Private APN framed-IP and tunnel authentication logging."
+  - id: ocs_care
+    name: "OCS Care Portal"
+    protocols: ["CAMEL / CAP", "Diameter Gy"]
+    purpose: "Rating group 432 tariff balance, reverse charging, and TFN 800 translation."

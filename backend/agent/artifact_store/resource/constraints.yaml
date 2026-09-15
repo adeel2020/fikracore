@@ -1,8 +1,0 @@
-APN_settings:
-  description: Access Point Name profile configuration on the mobile device.
-  label: APN Handset Settings
-  type: Constraint
-Speed_CAP:
-  description: State of speed limiting/throttling flags on the Charging system.
-  label: OCS Speed Cap Status
-  type: Constraint

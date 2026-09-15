@@ -1,0 +1,6 @@
+scenario_id: H3-FUT-030
+expected_root_entity: IP:PE:RTR-21
+cohort: poisoned_validation
+expected_terminal_before: EXPLAINED
+expected_terminal_after: MODEL_INSUFFICIENT
+expected_rank_improvement: false

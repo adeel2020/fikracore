@@ -1,0 +1,6 @@
+graph_id: CAUSAL-SCN-063-SEED-42063
+nodes:
+- entity_id: EXT:VAS:001
+  role: ROOT
+  domain: EXTERNAL
+edges: []

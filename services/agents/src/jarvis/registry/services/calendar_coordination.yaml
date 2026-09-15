@@ -1,0 +1,18 @@
+id: calendar_coordination
+name: Calendar Coordination Service
+engine: calendar
+description: Reads calendar context and drafts schedule changes for incident bridges, reviews, and maintenance windows.
+status: planned
+connectors:
+  - google_calendar
+consumes:
+  - schedule_request
+  - incident_context
+  - maintenance_window
+produces:
+  - meeting_draft
+  - calendar_context
+  - reminder_draft
+permissions:
+  - calendar_read
+  - calendar_write_requires_approval

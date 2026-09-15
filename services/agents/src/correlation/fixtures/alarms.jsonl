@@ -1,0 +1,5 @@
+{"id":"ran-001","timestamp":"2026-08-28T10:00:00Z","severity":"critical","domain":"ran","source_system":"ran-nms","object_id":"gnodeb-17","alarm_code":"LINK_DOWN"}
+{"id":"transport-001","timestamp":"2026-08-28T10:02:00Z","severity":"major","domain":"transport","source_system":"transport-nms","object_id":"agg-sw-03","alarm_code":"INTERFACE_ERRORS"}
+{"id":"core-001","timestamp":"2026-08-28T10:04:00Z","severity":"major","domain":"mobile-core","source_system":"core-nms","object_id":"amf-01","alarm_code":"CPU_HIGH"}
+{"id":"power-001","timestamp":"2026-08-28T10:03:00Z","severity":"critical","domain":"power","source_system":"power-nms","object_id":"ups-77","alarm_code":"BATTERY_LOW"}
+{"id":"warning-001","timestamp":"2026-08-28T11:20:00Z","severity":"warning","domain":"ran","source_system":"ran-nms","object_id":"unknown-cell-9","alarm_code":"TEMP_HIGH"}

@@ -1,0 +1,35 @@
+id: gmail
+name: Gmail Connector
+kind: api
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: collaboration
+description: Drafts and sends approved email communication for incident operations and enterprise assistance.
+status: planned
+mcp_runtime:
+  protocol: http
+  protocol_env: GMAIL_MCP_PROTOCOL
+  url_env: GMAIL_MCP_URL
+  token_env: GMAIL_MCP_TOKEN
+  command_env: GMAIL_MCP_COMMAND
+  args: []
+env:
+  - GMAIL_MCP_PROTOCOL
+  - GMAIL_MCP_URL
+  - GMAIL_MCP_TOKEN
+  - GMAIL_MCP_COMMAND
+  - GOOGLE_CLIENT_ID
+  - GOOGLE_CLIENT_SECRET
+  - GOOGLE_REFRESH_TOKEN
+capabilities:
+  - draft_email
+  - send_email
+  - search_mail
+  - summarize_thread
+permissions:
+  - draft_external_message
+  - send_requires_approval
+fallback_transports:
+  - stdio
+  - http
+  - google_api

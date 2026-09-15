@@ -1,7 +1,9 @@
 pyproject.toml
 agenticaiops_shared/__init__.py
+agenticaiops_shared/audit.py
 agenticaiops_shared/config.py
 agenticaiops_shared/guardrails.py
+agenticaiops_shared/llm_helper.py
 agenticaiops_shared/memory.py
 agenticaiops_shared/schemas.py
 agenticaiops_shared.egg-info/PKG-INFO

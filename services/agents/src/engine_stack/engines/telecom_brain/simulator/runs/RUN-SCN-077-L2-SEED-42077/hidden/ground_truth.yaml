@@ -1,0 +1,42 @@
+incident_id: INC-SYN-00077
+scenario_id: SCN-077
+seed: 42077
+difficulty_profile: L2
+hidden_truth:
+  root_domain: MOBILE_IMS
+  root_entity: IMSM:PCSCF:001
+  root_entity_name: Mobile P-CSCF-01
+  trigger: NEW_IMS_RELEASE_CAUSES_REGISTRATION_REGRESSION_R
+  root_condition: 'New IMS Release Causes Registration Regression: root condition
+    at Mobile P-CSCF-01'
+  causal_chain:
+  - entity: IMSM:PCSCF:001
+    role: ROOT
+    state_change: Mobile P-CSCF-01 participates in hidden causal propagation
+  - entity: RAN:GNB:501
+    role: PROPAGATION_MECHANISM
+    state_change: gNodeB-501 participates in hidden causal propagation
+  - entity: SA5G:AMF:001
+    role: PROPAGATION_MECHANISM
+    state_change: AMF-01 participates in hidden causal propagation
+  - entity: INFRA:K8S:CORE-A
+    role: PROPAGATION_MECHANISM
+    state_change: Core Kubernetes Cluster A participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - mobile_ims_voice
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    entity_count: 6
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

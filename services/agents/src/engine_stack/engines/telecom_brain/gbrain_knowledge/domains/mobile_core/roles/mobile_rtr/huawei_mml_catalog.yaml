@@ -1,0 +1,36 @@
+role: mobile_rtr
+catalog_type: huawei_mml_runbooks
+description: Concrete Huawei MML command dictionary categorized by operational safety.
+read_only_inspection:
+- command: 'DSP SUBAPN: MSISDN="{msisdn}";'
+  description: Display subscribed APNs, default APN, and subscribed QoS.
+- command: 'LST APN: APN="{apn}";'
+  description: List APN configuration on gateway/SMF.
+- command: 'DSP UDM5GSUB: MSISDN="{msisdn}", SNSSAI=1-010203;'
+  description: Display 5G SA slice authorization and subscribed DNNs.
+- command: 'DSP PCFPOLICY: SUBSCRIBERID="{msisdn}";'
+  description: Inspect PCF policy rules and authorized AMBR.
+- command: 'CHK 5GSUBALIGN: MSISDN="{msisdn}";'
+  description: Check synchronization between UDM and PCF subscription data.
+- command: 'DSP SUBCSI: MSISDN="{msisdn}";'
+  description: Display CAMEL subscription info for intelligent network services.
+- command: 'DSP SUBBAR: MSISDN="{msisdn}";'
+  description: Check operator barring and call restriction states.
+- command: 'DSP ROAMPOLICY: MSISDN="{msisdn}", MCC={mcc}, MNC={mnc};'
+  description: Audit roaming policy for visited network partner.
+transient_latch_cleanup:
+- command: 'PURGE MS: MSISDN="{msisdn}", IMSI="{imsi}";'
+  description: Purge stale subscriber context from memory.
+- command: 'CANCEL LOC: MSISDN="{msisdn}", VLRID={vlrid};'
+  description: Cancel stuck location registration in VLR.
+- command: 'SET GPRSLOCK: MSISDN="{msisdn}", STATUS=UNLOCK;'
+  description: Unlock transient core GPRS lock.
+it_provisioning_remediation:
+  governance: Requires Correlated BSS Activation Order ID
+  commands:
+  - command: 'MOD SUBAPN: MSISDN="{msisdn}", APN="{apn}", MAXBITRATEUL=100000, MAXBITRATEDL=300000;'
+    description: Modify subscriber APN QoS bandwidth allocation.
+  - command: 'MOD UDM5GSUB: MSISDN="{msisdn}", SNSSAI=1-010203, DEFAULTDNN="internet";'
+    description: Modify 5G subscriber slice configuration.
+  - command: 'MOD SUBCSI: MSISDN="{msisdn}", CSITYPE=OCSI, DEFCALLHANDLING=CONTINUE;'
+    description: Update CAMEL subscription parameters.

@@ -1,0 +1,21 @@
+id: knowledge_base
+name: Knowledge Base Engine
+description: Answers enterprise document questions through metadata-first discovery and selective vector retrieval.
+status: planned
+routing_intents:
+  - document_count
+  - document_list
+  - document_summary
+  - document_question_answering
+  - knowledge_gap_analysis
+services:
+  - document_catalog
+  - vector_retrieval
+connectors:
+  - metadata_db
+  - vector_db
+  - microsoft_office
+skills:
+  - metadata-first-document-answering
+permissions:
+  - read_enterprise_knowledge

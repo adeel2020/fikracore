@@ -16,9 +16,20 @@ class SkillItem:
 
 class SkillManager:
     def __init__(self):
-        # Resolve skills directory at workspace root
-        self.skills_dir = os.path.join(os.path.dirname(__file__), "..", "..", "skills")
-        self.skills_dir = os.path.abspath(self.skills_dir)
+        # Resolve skills directory dynamically by walking up to find skills/
+        curr = os.path.dirname(os.path.abspath(__file__))
+        skills_dir = None
+        for _ in range(6):
+            candidate = os.path.join(curr, "skills")
+            if os.path.isdir(candidate):
+                skills_dir = candidate
+                break
+            parent = os.path.dirname(curr)
+            if parent == curr:
+                break
+            curr = parent
+
+        self.skills_dir = skills_dir or os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "..", "skills"))
         self._skills_cache: dict[str, SkillItem] = {}
         self.discover_skills()
 
@@ -163,9 +174,9 @@ class SkillManager:
             loop = asyncio.get_event_loop()
             cmd = ["python3", script_path] + arguments
             
-            # Run from DataEngine root so scripts (e.g., analyze_trace.py)
+            # Run from workspace root so scripts (e.g., analyze_trace.py)
             # write their output reports to a consistent location (os.getcwd()).
-            workspace_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+            workspace_root = os.path.dirname(self.skills_dir) if os.path.exists(self.skills_dir) else os.getcwd()
             result = await loop.run_in_executor(
                 None,
                 lambda: subprocess.run(

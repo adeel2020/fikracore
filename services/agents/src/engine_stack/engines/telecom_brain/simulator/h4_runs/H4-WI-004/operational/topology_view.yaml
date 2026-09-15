@@ -1,0 +1,29 @@
+view_id: TOPO-H4-WI-004
+scenario_id: H4-WI-004
+visible_entities:
+- INFRA:DB:SUBS-A
+- SA5G:UDM:001
+- SA5G:UPF:003
+relationships:
+- relationship_id: REL-UDM-DB
+  source_entity: SA5G:UDM:001
+  relationship_type: USES_DATABASE
+  target_entity: INFRA:DB:SUBS-A
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+- relationship_id: REL-UPF-STORAGE
+  source_entity: SA5G:UPF:003
+  relationship_type: STORED_ON
+  target_entity: INFRA:DB:SUBS-A
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 0.7
+- relationship_id: REL-UPF-CACHE
+  source_entity: SA5G:UPF:003
+  relationship_type: USES_CACHE
+  target_entity: INFRA:DB:SUBS-A
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 0.5
+known_gaps: []

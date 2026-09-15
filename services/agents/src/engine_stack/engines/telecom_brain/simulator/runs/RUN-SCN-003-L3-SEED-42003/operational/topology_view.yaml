@@ -1,0 +1,17 @@
+view_id: TOPO-SCN-003-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-003
+visible_entities:
+- INFRA:DNS:CORE
+- SA5G:AMF:001
+- INFRA:K8S:CORE-A
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-AMF-DNS
+- REL-AMF-HOSTED
+- REL-UPF-HOSTED
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

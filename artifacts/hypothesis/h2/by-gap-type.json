@@ -1,0 +1,122 @@
+{
+  "ALIAS_CANONICAL_AMBIGUITY": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "INCORRECTLY_MERGED_ENTITIES": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_DB_CACHE_MESSAGE_BUS": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_DEPENDENCY": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_EXTERNAL_DEPENDENCY": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_FAILURE_DOMAIN_MEMBERSHIP": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_HOSTING_CONTAINER": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_INTERMEDIATE_NODE": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 0.0
+  },
+  "MISSING_MONITORING_DEPENDENCY": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_POWER_ENVIRONMENT": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_PROVISIONING_BSS": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_REDUNDANCY_FAILOVER": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_ROAMING_INTERCONNECT": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_SECURITY_CONTROL": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_SERVICE_TO_FUNCTION": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 0.3333
+  },
+  "MISSING_SHARED_DEPENDENCY": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "MISSING_TRANSPORT_PATH": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 0.0
+  },
+  "MULTIPLE_SIMULTANEOUS_GAPS": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "STALE_TOPOLOGY_RELATIONSHIP": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  },
+  "WRONG_TOPOLOGY_DIRECTION": {
+    "total": 3,
+    "method_b_correct": 3,
+    "accuracy": 1.0,
+    "localization_accuracy": 1.0
+  }
+}

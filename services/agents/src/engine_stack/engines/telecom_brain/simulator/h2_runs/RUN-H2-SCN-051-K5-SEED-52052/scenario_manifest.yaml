@@ -1,0 +1,8 @@
+difficulty_profile: K5
+gap_type: MISSING_ROAMING_INTERCONNECT
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-051-K5-SEED-52052
+scenario_id: H2-SCN-051
+seed: 52052
+variant: cross_domain

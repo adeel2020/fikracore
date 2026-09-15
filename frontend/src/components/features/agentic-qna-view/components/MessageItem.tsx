@@ -527,7 +527,7 @@ interface MessageItemProps {
   message: ChatMessage;
   isLastMessage: boolean;
   loading: boolean;
-  activePersona: string;
+  activePersona?: string;
   statusMessage: string;
   globalStructuredResponse: StructuredAgentResponse | null;
 }
@@ -536,7 +536,7 @@ export function MessageItem({
   message,
   isLastMessage,
   loading,
-  activePersona,
+  activePersona = "General",
   statusMessage,
   globalStructuredResponse,
 }: MessageItemProps) {

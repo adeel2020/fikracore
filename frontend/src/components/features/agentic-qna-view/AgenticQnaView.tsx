@@ -42,8 +42,13 @@ export function AgenticQnaView() {
           backendOnline={state.backendOnline}
           agentMode={state.agentMode}
           activePersona={state.activePersona}
+          setActivePersona={state.setActivePersona}
           statusMessage={state.statusMessage}
           structuredResponse={state.structuredResponse}
+          activeIncidentId={state.activeIncidentId}
+          incidentQueue={state.incidentQueue}
+          setActiveIncidentId={state.setActiveIncidentId}
+          refreshIncidentQueue={state.refreshIncidentQueue}
           activeIndex={state.activeIndex}
           scrollRef={state.scrollRef}
           inputRef={state.inputRef}
@@ -71,4 +76,3 @@ export function AgenticQnaView() {
     </div>
   );
 }
-

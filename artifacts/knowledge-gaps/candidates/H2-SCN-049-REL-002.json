@@ -1,0 +1,11 @@
+{
+  "candidate_id": "REL-002",
+  "source": "CHARGING:DRA:001",
+  "target": "CHARGING:OCS:001",
+  "proposed_type": "connected-to",
+  "state": "CANDIDATE",
+  "supporting_evidence": [
+    "EV-ALM-H2-SCN-049-002"
+  ],
+  "reason": "Observed path adjacency is absent from operational knowledge; requires independent validation"
+}

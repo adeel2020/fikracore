@@ -1,0 +1,11 @@
+scenario_id: H4-WI-019
+cohort: shared_common_cause
+trigger_entity: INFRA:LB:INGRESS-01
+true_affected_services:
+- 5G SA Mobile Data
+- Customer Self-Care Portal
+true_cfs_risk: SHARED_DEPENDENCY
+true_common_cause_detected: true
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

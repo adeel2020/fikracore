@@ -1,0 +1,290 @@
+{
+  "live_probe": {
+    "status": "ok",
+    "tool_count": 96,
+    "tool_names": [
+      "get_page",
+      "put_page",
+      "delete_page",
+      "list_pages",
+      "restore_page",
+      "search",
+      "query",
+      "search_by_image",
+      "add_tag",
+      "remove_tag",
+      "get_tags",
+      "add_link",
+      "remove_link",
+      "get_links",
+      "get_backlinks",
+      "list_link_sources",
+      "traverse_graph",
+      "add_timeline_entry",
+      "get_timeline",
+      "get_stats",
+      "get_health",
+      "run_doctor",
+      "get_versions",
+      "revert_version",
+      "get_brain_identity",
+      "list_skills",
+      "get_skill",
+      "list_brain_skillpack",
+      "advisor",
+      "get_status_snapshot",
+      "put_raw_data",
+      "get_raw_data",
+      "resolve_slugs",
+      "get_chunks",
+      "log_ingest",
+      "get_ingest_log",
+      "submit_job",
+      "get_job",
+      "list_jobs",
+      "cancel_job",
+      "retry_job",
+      "get_job_progress",
+      "pause_job",
+      "resume_job",
+      "replay_job",
+      "send_job_message",
+      "submit_agent",
+      "find_orphans",
+      "get_calibration_profile",
+      "takes_list",
+      "takes_search",
+      "think",
+      "takes_scorecard",
+      "takes_calibration",
+      "whoami",
+      "sources_add",
+      "sources_list",
+      "sources_remove",
+      "sources_status",
+      "get_recent_salience",
+      "find_anomalies",
+      "chronicle_day",
+      "chronicle_on_this_day",
+      "chronicle_since",
+      "chronicle_last_seen",
+      "ontology_get",
+      "ontology_propose",
+      "ontology_dimensions",
+      "ontology_conflicts",
+      "volunteer_chronicle",
+      "volunteer_context",
+      "extract_entities",
+      "extraction_pending",
+      "extract_facts",
+      "recall",
+      "forget_fact",
+      "find_contradictions",
+      "find_experts",
+      "find_trajectory",
+      "code_callers",
+      "code_callees",
+      "code_def",
+      "code_refs",
+      "code_blast",
+      "code_flow",
+      "get_active_schema_pack",
+      "list_schema_packs",
+      "schema_stats",
+      "schema_lint",
+      "schema_graph",
+      "schema_explain_type",
+      "schema_review_orphans",
+      "schema_apply_mutations",
+      "reload_schema_pack",
+      "run_onboard",
+      "run_skillopt"
+    ],
+    "url": "http://localhost:3131/mcp"
+  },
+  "schema_contracts": {
+    "add_link": {
+      "description": "Create link between pages",
+      "properties": [
+        "context",
+        "from",
+        "link_source",
+        "link_type",
+        "to"
+      ],
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "get_active_schema_pack": {
+      "description": "v0.40.6.0: cheap identity packet for the active schema pack. Returns {pack_name, version, sha8, page_types_count, link_types_count, primitive_summary, source_tier}. Useful for agents to know which pack they are operating against without paying full manifest load cost.",
+      "properties": [],
+      "required": []
+    },
+    "get_backlinks": {
+      "description": "List incoming links to a page",
+      "properties": [
+        "slug"
+      ],
+      "required": [
+        "slug"
+      ]
+    },
+    "get_links": {
+      "description": "List outgoing links from a page",
+      "properties": [
+        "slug"
+      ],
+      "required": [
+        "slug"
+      ]
+    },
+    "get_page": {
+      "description": "Read a page by slug (supports optional fuzzy matching). Soft-deleted pages are hidden by default; pass include_deleted: true to surface them with deleted_at populated (see v0.26.5 recovery window).",
+      "properties": [
+        "fuzzy",
+        "include_deleted",
+        "slug"
+      ],
+      "required": [
+        "slug"
+      ]
+    },
+    "get_versions": {
+      "description": "Page version history",
+      "properties": [
+        "slug"
+      ],
+      "required": [
+        "slug"
+      ]
+    },
+    "list_pages": {
+      "description": "List pages with optional filters. For 'what's recent / what did I touch this week' questions, use list_pages with sort=updated_desc instead of semantic search. Default 50 rows; remote callers are capped at 100 (local CLI callers' explicit limits are honored). A result with exactly `limit` rows may be truncated. For exhaustive listing, page with sort=updated_asc + updated_after=<last row's updated_at> until a page returns fewer rows than the limit.",
+      "properties": [
+        "include_deleted",
+        "limit",
+        "offset",
+        "sort",
+        "tag",
+        "type",
+        "updated_after"
+      ],
+      "required": []
+    },
+    "put_page": {
+      "description": "Write/update a page (markdown with frontmatter). Chunks, embeds, reconciles tags, and (when auto_link/auto_timeline are enabled) extracts + reconciles graph links and timeline entries. For large content on Windows (pipe-buffer limit ~45KB) or any file-as-input workflow, use `gbrain capture --file PATH --slug SLUG` \u2014 capture reads the file as a Buffer with a binary-NUL guard and adds provenance write-through (v0.39.3.0).",
+      "properties": [
+        "allow_empty",
+        "content",
+        "ingested_via",
+        "slug",
+        "source_kind",
+        "source_uri"
+      ],
+      "required": [
+        "slug",
+        "content"
+      ]
+    },
+    "query": {
+      "description": "Hybrid search with vector + keyword + multi-query expansion. For personal/emotional questions ('what's going on with me', 'anything notable', 'how am I feeling'), prefer get_recent_salience, find_anomalies, or get_recent_transcripts. Semantic search returns polished pages and misses recent activity bursts. Do NOT assume words like 'crazy', 'notable', or 'big' mean impressive \u2014 they often mean difficult or emotionally charged.",
+      "properties": [
+        "adaptive_return",
+        "autocut",
+        "cross_modal",
+        "detail",
+        "embedding_column",
+        "expand",
+        "image",
+        "image_mime",
+        "lang",
+        "limit",
+        "mode",
+        "near_symbol",
+        "offset",
+        "query",
+        "recency",
+        "relational",
+        "salience",
+        "since",
+        "source_id",
+        "symbol_kind",
+        "until",
+        "walk_depth"
+      ],
+      "required": []
+    },
+    "remove_link": {
+      "description": "Remove link between pages",
+      "properties": [
+        "from",
+        "link_source",
+        "link_type",
+        "to"
+      ],
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "resolve_slugs": {
+      "description": "Fuzzy-resolve a partial slug to matching page slugs",
+      "properties": [
+        "partial"
+      ],
+      "required": [
+        "partial"
+      ]
+    },
+    "schema_graph": {
+      "description": "v0.40.6.0: schema pack graph as JSON edges. Returns {nodes: [{name, primitive}], edges: [{from, verb, to}]} derived from link_types inference + frontmatter_links.",
+      "properties": [],
+      "required": []
+    },
+    "schema_lint": {
+      "description": "v0.40.6.0: lint the active (or named) schema pack. File-plane rules only over MCP \u2014 the with_db option is rejected for remote callers (DB-aware rules require local CLI). Returns {ok, errors, warnings} structured report.",
+      "properties": [
+        "pack"
+      ],
+      "required": []
+    },
+    "schema_review_orphans": {
+      "description": "v0.40.6.0: list pages with no active-pack type match. Returns {orphan_count, orphans: [{slug, source_id}]}.",
+      "properties": [
+        "limit"
+      ],
+      "required": []
+    },
+    "schema_stats": {
+      "description": "v0.40.6.0: per-type page counts + typed-coverage from the DB. Returns {schema_version:1, pack_identity, aggregate, per_source, dead_prefixes}. Multi-source aware via ctx.sourceId/allowedSources.",
+      "properties": [],
+      "required": []
+    },
+    "search": {
+      "description": "Keyword search using full-text search. For personal/emotional questions, prefer get_recent_salience or find_anomalies \u2014 they surface activity bursts without needing a search term. For code-symbol questions (callers, callees, definitions, blast radius), use code_callers / code_callees / code_def / code_refs instead \u2014 those return structural graph data, not text chunks.",
+      "properties": [
+        "limit",
+        "mode",
+        "offset",
+        "query"
+      ],
+      "required": [
+        "query"
+      ]
+    },
+    "traverse_graph": {
+      "description": "Traverse link graph from a page. With link_type/direction, returns edges (GraphPath[]) instead of nodes.",
+      "properties": [
+        "depth",
+        "direction",
+        "link_type",
+        "slug"
+      ],
+      "required": [
+        "slug"
+      ]
+    }
+  }
+}

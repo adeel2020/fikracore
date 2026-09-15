@@ -1,0 +1,148 @@
+scenario_id: SCN-020
+scenario_name: Cloud-Native API Retry Storm Across Network Functions
+reference_network:
+  network_id: REF-MDO-001
+  file: ../operator_model/reference_synthetic_network.yaml
+scenario_explanation:
+  problem_statement: A slow dependency causes aggressive API retries, raising CPU,
+    queue depth and latency across CNFs.
+  what_will_occur: CGNAT-01 experiences the root condition; effects propagate through
+    modeled dependencies into OSS to Network Management Connectivity and mapped customer/service
+    signals.
+classification:
+  primary_engineering_effect: SIGNALING_RETRY_STORM
+  secondary_effects:
+  - RESOURCE_EXHAUSTION_CONGESTION_COLLAPSE
+  friendly_effect_label: Snowball / Storm
+  fcaps_primary: FAULT
+  fcaps_secondary:
+  - PERFORMANCE
+  domains:
+  - CRM
+  - IT_CLOUD_INFRA
+  - SA_5G_CORE
+  affected_services:
+  - oss_network_management_connectivity
+  effect_families:
+    primary: SIGNALING_RETRY_STORM
+    secondary:
+    - RESOURCE_EXHAUSTION_CONGESTION_COLLAPSE
+  friendly_effect_labels:
+  - Snowball
+  difficulty_profile: L5
+preconditions:
+  normal_state:
+  - reference synthetic network validates before scenario compilation
+  - OSS to Network Management Connectivity is healthy before trigger
+  - operational graph may be incomplete according to scenario difficulty profile
+  required_entities:
+  - INFRA:CGNAT:001
+  - INFRA:FW:SGI
+  - IP:VRF:SGI-01
+  - SA5G:UPF:003
+  - CRM:TICKET:001
+  required_entity_types:
+  - cgnat
+  - customer_ticket_service
+  - firewall_pair
+  - upf
+  - vrf
+  required_relationships:
+  - REL-FW-CGNAT
+  - REL-SGI-FW
+  - REL-UPF-SGI
+  - REL-CRM-TICKETS-IMPACT
+  required_service_chain: oss_network_management_connectivity
+  required_failure_domains: []
+hidden_reality:
+  root_condition: 'Cloud-Native API Retry Storm Across Network Functions: root condition
+    at CGNAT-01'
+  trigger: synthetic deterministic scenario trigger with seeded timing and difficulty-specific
+    imperfections
+  origin_domain: IT_CLOUD_INFRA
+  origin_entity: INFRA:CGNAT:001
+  causal_propagation_chain:
+  - INFRA:CGNAT:001
+  - INFRA:FW:SGI
+  - IP:VRF:SGI-01
+  - SA5G:UPF:003
+  - CRM:TICKET:001
+  hidden_dependencies: []
+  actual_blast_radius:
+    services:
+    - oss_network_management_connectivity
+    regions:
+    - REGION-NORTH
+    - REGION-CENTRAL
+    customer_segments:
+    - internal_noc
+    entity_count: 5
+evidence_to_generate:
+  alarms:
+  - CGNAT-01 reports cgnat degradation
+  - OSS to Network Management Connectivity dependent symptom alarm
+  logs:
+  - source-native logs show retries/timeouts near CGNAT-01
+  metrics:
+  - latency_ms increases on the affected dependency path
+  - packet_loss_pct, timeout_rate, queue_depth, or resource_saturation rises according
+    to failure mechanism
+  kpis:
+  - OSS to Network Management Connectivity success rate decreases
+  - customer-visible service quality falls below normal baseline
+  traces_protocol_evidence:
+  - protocol traces show retries, retransmissions, or failed handshakes along the
+    causal path
+  changes: []
+  tickets_customer_signals:
+  - customer tickets increase only for mapped service, region, and customer segment
+  healthy_negative_evidence:
+  - unaffected adjacent domain remains healthy as negative evidence
+  - non-causal recent changes remain tracked as unrelated metadata
+noise_and_uncertainty:
+  unrelated_events:
+  - seeded unrelated event in a non-causal domain
+  - optional non-causal recent change for bias testing
+  delayed_events:
+  - root-domain evidence may arrive after downstream symptoms according to difficulty
+    profile
+  missing_evidence:
+  - one expected signal may be absent only when source coverage permits it
+  contradictory_evidence:
+  - conflicting interpretation may appear only as operational evidence, never as hidden-world
+    inconsistency
+  topology_gaps: []
+timing:
+  propagation_constraints:
+  - causal state changes must follow dependency path order before jitter is applied
+  event_time_rules:
+  - event_time follows hidden propagation with seeded jitter
+  ingestion_delay_rules:
+  - ingestion_time follows observability source profile delay and clock-skew behavior
+recovery:
+  recovery_sequence:
+  - remove or mitigate root condition
+  - observe dependent KPI recovery in reverse or service-specific order
+  - verify no unsupported RCA certainty remains
+  recovery_side_effects:
+  - recovery surge, backlog flush, or transient reroute may be generated when matching
+    effect family
+reasoning_test:
+  plausible_wrong_hypotheses:
+  - first visible downstream alarm is the root cause
+  - highest-severity domain is the root cause
+  - recent unrelated change is causal without supporting evidence
+  - OSS to Network Management Connectivity application fault without upstream dependency
+    evidence
+  expected_root_domain: IT_CLOUD_INFRA
+  expected_root_entity: INFRA:CGNAT:001
+  expected_terminal_state: EXPLAINED
+  expected_discovery_findings: []
+evaluation_assertions:
+- all required entities must exist in the reference synthetic network
+- every causal hop must resolve through a modeled relationship or valid service-chain
+  dependency
+- operational evidence must not contain root-cause labels
+- customer impact must follow affected service, region, and customer segment mapping
+- healthy evidence must not contradict hidden reality
+- unrelated noise must remain evaluator metadata and must not become causal truth

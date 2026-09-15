@@ -1,8 +1,9 @@
 import {
   Activity,
   BarChart3,
-  Brain,
   Bot,
+  Brain,
+  Cpu,
   FileCode2,
   FolderTree,
   Gauge,
@@ -21,20 +22,15 @@ import {
 
 export type NavItem = {
   label: string;
+  badge?: string;
   href: string;
   icon: LucideIcon;
   description: string;
-  /** Primary brand color (hex). Used for the icon gradient start. */
   color: string;
-  /** Accent / end color (hex). Used for the icon gradient end. */
   accentColor: string;
-  /** Tailwind gradient class, e.g. for cards / buttons. */
   gradient: string;
-  /** Tailwind text-color class used for the icon when idle / active */
   colorClass: string;
-  /** Tailwind text-color class used on hover */
   hoverClass: string;
-  /** Optional: a secondary accent for gradient strokes on the icon */
   accentClass: string;
 };
 
@@ -50,6 +46,19 @@ export const NAV_ITEMS: NavItem[] = [
     colorClass: "text-cyan-400",
     hoverClass: "group-hover:text-cyan-300",
     accentClass: "text-blue-500",
+  },
+  {
+    label: "Simulator",
+    badge: "v3",
+    href: "/simulator",
+    icon: Cpu,
+    description: "FikraCore Unified Capability & Simulator Engine",
+    color: "#00E5FF",
+    accentColor: "#8B5CF6",
+    gradient: "from-cyan-400 via-blue-500 to-purple-600",
+    colorClass: "text-cyan-400",
+    hoverClass: "group-hover:text-cyan-300",
+    accentClass: "text-purple-500",
   },
   {
     label: "Data Loader",
@@ -209,7 +218,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-/** Re-exported for convenience (icons that are not used in nav) */
+/** Re-exported for convenience */
 export { Activity, Bot, FolderTree, Settings2, Sparkles };
 
 export function getNavItem(href: string): NavItem | undefined {

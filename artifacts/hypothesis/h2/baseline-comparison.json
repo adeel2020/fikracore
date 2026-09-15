@@ -1,0 +1,7 @@
+{
+  "total_runs": 60,
+  "method_b_correct": 60,
+  "method_b_accuracy": 1.0,
+  "baseline_a_forced_rca_accuracy": 0.0,
+  "baseline_b_simple_residual_accuracy": 0.9667
+}

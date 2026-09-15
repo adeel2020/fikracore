@@ -1,0 +1,10 @@
+failover_pairs:
+  IP:PE:RTR-07:
+    backup_entity: IP:PE:RTR-08
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: COMMON_POWER
+  description: Primary and backup routers co-located in POP-07 basement subject to
+    flooding.
+backup_node: IP:PE:RTR-08
+backup_health: HEALTHY

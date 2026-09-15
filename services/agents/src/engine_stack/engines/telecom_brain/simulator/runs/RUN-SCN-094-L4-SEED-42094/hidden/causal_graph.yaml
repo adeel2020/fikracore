@@ -1,0 +1,6 @@
+graph_id: CAUSAL-SCN-094-SEED-42094
+nodes:
+- entity_id: RAN:SITE:101
+  role: ROOT
+  domain: RAN
+edges: []

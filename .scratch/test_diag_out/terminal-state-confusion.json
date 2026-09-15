@@ -1,0 +1,14 @@
+{
+  "RCA_IDENTIFIABLE": {
+    "EXPLAINED": 75
+  },
+  "RCA_PARTIALLY_IDENTIFIABLE": {
+    "EXPLAINED": 15
+  },
+  "CONFLICTING_EVIDENCE": {
+    "EXPLAINED": 5
+  },
+  "KNOWLEDGE_MISSING": {
+    "EXPLAINED": 5
+  }
+}

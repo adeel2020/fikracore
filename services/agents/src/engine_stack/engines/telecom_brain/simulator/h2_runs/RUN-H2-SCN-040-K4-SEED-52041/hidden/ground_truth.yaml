@@ -1,0 +1,7 @@
+hidden_gap:
+  from_entity: SA5G:UPF:003
+  gap_type: MISSING_MONITORING_DEPENDENCY
+  relationship_id: REL-UPF-NMS
+root_entity: SA5G:UPF:003
+scenario_id: H2-SCN-040
+true_terminal_state: MODEL_INSUFFICIENT

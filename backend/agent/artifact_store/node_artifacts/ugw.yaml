@@ -1,4 +1,0 @@
-description: Handles 3G PDP contexts and 4G packet bearers.
-id: ugw
-label: Unified Gateway (UGW)
-type: Component

@@ -1,0 +1,47 @@
+{
+  "benchmark_timestamp": "2026-09-11T07:48:21.886346+00:00",
+  "total_learning_units": 30,
+  "gate_status": "H3_SUPPORTED",
+  "method_comparison": {
+    "baseline_a_no_learning": {
+      "correct_runs": 27,
+      "accuracy": 0.9
+    },
+    "baseline_b_blind_auto_learning": {
+      "correct_runs": 30,
+      "accuracy": 1.0
+    },
+    "method_b_fikracore_governed_learning": {
+      "correct_runs": 30,
+      "accuracy": 1.0
+    }
+  },
+  "key_metrics": {
+    "positive_transfer_rate": 1.0,
+    "cross_domain_transfer_rate": 1.0,
+    "knowledge_reuse_rate": 1.0,
+    "eligible_cohort_reuse_rate": 1.0,
+    "overall_corpus_adoption_rate": 0.6667,
+    "stale_knowledge_detection_rate": 1.0,
+    "poisoning_resistance_rate": 1.0,
+    "zero_hidden_truth_leakage": true
+  },
+  "cohort_breakdown": {
+    "positive_transfer": {
+      "count": 10,
+      "correct": 10
+    },
+    "cross_domain_transfer": {
+      "count": 10,
+      "correct": 10
+    },
+    "stale_topology": {
+      "count": 5,
+      "detected": 5
+    },
+    "poisoned_validation": {
+      "count": 5,
+      "resisted": 5
+    }
+  }
+}

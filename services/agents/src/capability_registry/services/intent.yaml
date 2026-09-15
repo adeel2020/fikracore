@@ -1,0 +1,18 @@
+id: intent
+name: Intent Service
+engine: telecom_brain
+description: Maps alarms and KPI evidence to service procedure intents so correlation is selective without missing important alarms.
+status: planned
+connectors:
+  - gbrain
+consumes:
+  - service_intent
+  - alarm_signature
+  - kpi_objective
+  - topology_projection
+produces:
+  - intent_violation
+  - candidate_relevance_score
+  - learning_gap
+permissions:
+  - read_operational_context

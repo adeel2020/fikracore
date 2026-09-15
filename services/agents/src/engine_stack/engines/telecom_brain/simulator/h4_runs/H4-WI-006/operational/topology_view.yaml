@@ -1,0 +1,14 @@
+view_id: TOPO-H4-WI-006
+scenario_id: H4-WI-006
+visible_entities:
+- INFRA:DNS:CORE
+- SA5G:AMF:001
+relationships:
+- relationship_id: REL-AMF-DNS
+  source_entity: SA5G:AMF:001
+  relationship_type: RESOLVES_VIA
+  target_entity: INFRA:DNS:CORE
+  status: CONFIRMED
+  source_system: SIMULATOR_WORLD
+  confidence: 1.0
+known_gaps: []

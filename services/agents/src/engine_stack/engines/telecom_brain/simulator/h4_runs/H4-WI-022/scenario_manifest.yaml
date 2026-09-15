@@ -1,0 +1,18 @@
+what_if_id: H4-WI-022
+title: Edge Router Failover Transport Congestion
+description: Simulates traffic reroute onto secondary link lacking sufficient bandwidth.
+cohort: failover_capacity
+trigger:
+  canonical_id: IP:PE:RTR-22
+  entity_display_name: Transport Router-22
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: LIMITED
+  duration_minutes: 30
+  traffic_load_profile: PEAK
+failure_domain_tags:
+- capacity
+- transport
+- failover

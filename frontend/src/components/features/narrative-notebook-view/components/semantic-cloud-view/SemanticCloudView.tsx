@@ -8,8 +8,7 @@ import KnowledgeGraph from "./knowledge-graph/KnowledgeGraph";
 import type { KGActions } from "./knowledge-graph/KnowledgeGraph";
 import StorytellerChat from "./storyteller-chat/StorytellerChat";
 import type { ClusteringDimension, ViewMode } from "./types/semantic-cloud.types";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 const glassSurface: React.CSSProperties = {
   background: "rgba(5, 5, 5, 0.58)",

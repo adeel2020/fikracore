@@ -1,0 +1,11 @@
+scenario_id: H4-WI-036
+cohort: multi_failure
+trigger_entity: IP:CORE:RTR-01
+true_affected_services:
+- 5G SA Mobile Data
+- Enterprise MPLS VPN
+true_cfs_risk: SHARED_DEPENDENCY
+true_common_cause_detected: true
+true_capacity_bottleneck: true
+true_change_risk: false
+is_model_insufficient: false

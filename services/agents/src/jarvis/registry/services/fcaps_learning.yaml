@@ -1,0 +1,20 @@
+id: fcaps_learning
+name: FCAPS Learning Service
+engine: telecom_brain
+description: Uses FCAPS as a lens to review incidents, enrich assets, and capture traceable learning without mixing raw data with durable knowledge.
+status: planned
+connectors:
+  - gbrain
+consumes:
+  - incident_story
+  - evidence_trace
+  - operator_feedback
+  - asset_gap
+produces:
+  - reviewed_learning
+  - playbook_candidate
+  - runbook_candidate
+  - query_candidate
+  - dashboard_candidate
+permissions:
+  - write_learning_requires_review

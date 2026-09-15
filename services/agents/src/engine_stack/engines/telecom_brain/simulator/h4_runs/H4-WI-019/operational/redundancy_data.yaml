@@ -1,0 +1,9 @@
+failover_pairs:
+  INFRA:LB:INGRESS-01:
+    backup_entity: INFRA:LB:INGRESS-02
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Both LBs announce BGP prefixes through single edge upstream gateway.
+backup_node: INFRA:LB:INGRESS-02
+backup_health: HEALTHY

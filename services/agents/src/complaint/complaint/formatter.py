@@ -1,7 +1,7 @@
 import json
 from pydantic import BaseModel
 from typing import List
-from .utils import _get_causal_rules, _get_service_artifact, _map_node_to_service_id
+from complaint.complaint.utils import _get_causal_rules, _get_service_artifact, _map_node_to_service_id
 
 class AgentResponse(BaseModel):
     issue_summary: str

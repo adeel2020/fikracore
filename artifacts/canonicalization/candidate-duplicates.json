@@ -1,0 +1,151 @@
+[
+  {
+    "candidate_id": "DUP-001",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "knowledge/mobile-core/kpis/4g-attach-sr",
+      "mobile-core/kpis/4g-attach-sr"
+    ],
+    "title_key": "4g attach sr"
+  },
+  {
+    "candidate_id": "DUP-002",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "grafana/metrics/grafana-prom-attach-001",
+      "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+      "mobile-core/kpi-events/grafana-prom-attach-001"
+    ],
+    "title_key": "4g attach sr dropped below intent target"
+  },
+  {
+    "candidate_id": "DUP-003",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "knowledge/mobile-core/kpis/cssr",
+      "mobile-core/kpis/cssr"
+    ],
+    "title_key": "cssr"
+  },
+  {
+    "candidate_id": "DUP-004",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "grafana/metrics/grafana-prom-cssr-001",
+      "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+      "mobile-core/kpi-events/grafana-prom-cssr-001"
+    ],
+    "title_key": "cssr dropped below intent target for voice-call-setup"
+  },
+  {
+    "candidate_id": "DUP-005",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "mobile-core/incidents/lte-attach-54db6ef325fbf758"
+    ],
+    "title_key": "inter-domain incident candidate for lte attach"
+  },
+  {
+    "candidate_id": "DUP-006",
+    "confidence": 0.97,
+    "reason": [
+      "same-title",
+      "cross-linked"
+    ],
+    "recommended_action": "alias",
+    "slugs": [
+      "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "mobile-core/incidents/sgi-data-a154bb7a3997859c"
+    ],
+    "title_key": "inter-domain incident candidate for sgi data"
+  },
+  {
+    "candidate_id": "DUP-007",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "mobile-core/incidents/voice-call-setup-05841af2e3f4f430"
+    ],
+    "title_key": "inter-domain incident candidate for voice call setup"
+  },
+  {
+    "candidate_id": "DUP-008",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+      "mobile-core/kpi-events/kpi-registration-001"
+    ],
+    "title_key": "kpi breach for ue-registration"
+  },
+  {
+    "candidate_id": "DUP-009",
+    "confidence": 0.97,
+    "reason": [
+      "same-title",
+      "cross-linked"
+    ],
+    "recommended_action": "alias",
+    "slugs": [
+      "knowledge/mobile-core/kpis/sgi-throughput",
+      "mobile-core/kpis/sgi-throughput"
+    ],
+    "title_key": "sgi throughput"
+  },
+  {
+    "candidate_id": "DUP-010",
+    "confidence": 0.97,
+    "reason": [
+      "same-title",
+      "cross-linked"
+    ],
+    "recommended_action": "alias",
+    "slugs": [
+      "incidents/mobile-core/sgi-throughput-drop",
+      "mobile-core/incidents/sgi-throughput-drop"
+    ],
+    "title_key": "sgi throughput drop"
+  },
+  {
+    "candidate_id": "DUP-011",
+    "confidence": 0.82,
+    "reason": [
+      "same-title"
+    ],
+    "recommended_action": "manual-review",
+    "slugs": [
+      "grafana/metrics/grafana-prom-sgi-001",
+      "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+      "mobile-core/kpi-events/grafana-prom-sgi-001"
+    ],
+    "title_key": "sgi throughput dropped below committed intent"
+  }
+]

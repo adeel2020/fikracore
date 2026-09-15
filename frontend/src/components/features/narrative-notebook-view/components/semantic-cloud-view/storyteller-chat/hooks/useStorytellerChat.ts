@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import type { DashboardFeedResponse } from "../../types/semantic-cloud.types";
 
 import { getDashboardFeed } from "../../hooks/useDashboardFeedCache";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 interface UseStorytellerChatResult {
   loading: boolean;

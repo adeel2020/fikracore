@@ -1,0 +1,7 @@
+failover_pairs:
+  IP:PE:RTR-07:
+    backup_entity: IP:PE:RTR-08
+    backup_health: DEGRADED
+shared_failure_domains: []
+backup_node: IP:PE:RTR-08
+backup_health: DEGRADED

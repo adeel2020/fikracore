@@ -1,0 +1,26 @@
+role: mobile_rtr
+catalog_type: disposition_telemetry
+description: "Shift-level telemetry formulas and historical disposition breakdown."
+
+disposition_breakdown:
+  reassigned_to_it_provisioning:
+    percentage: 70.4
+    reason_code: "PROV_MISMATCH_CORE_BSS"
+    description: "BSS order stuck or CRM activation not pushed to UDM/HSS."
+  resolved_in_rtr:
+    percentage: 16.8
+    reason_code: "RESOLVED_CORE_VERIFIED"
+    description: "Resolved on first touch or after transient latch cleanup."
+  rejected_to_frontline:
+    percentage: 8.3
+    reason_code: "GATE_0_INVALID_PRECHECKS"
+    description: "Missing mandatory fields or commercial billing suspension."
+  escalated_to_core_l2:
+    percentage: 4.5
+    reason_code: "ESCALATED_L2_HARDWARE_DEFECT"
+    description: "Underlying core node card or protocol bug requiring vendor TAC."
+
+compliance_targets:
+  aola_target_hours: 2.0
+  ola_target_hours: 6.0
+  sla_target_hours: 48.0

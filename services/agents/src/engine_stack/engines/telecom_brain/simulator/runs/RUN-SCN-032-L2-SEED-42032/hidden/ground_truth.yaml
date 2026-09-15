@@ -1,0 +1,41 @@
+incident_id: INC-SYN-00032
+scenario_id: SCN-032
+seed: 42032
+difficulty_profile: L2
+hidden_truth:
+  root_domain: IT_CLOUD_INFRA
+  root_entity: INFRA:CGNAT:001
+  root_entity_name: CGNAT-01
+  trigger: NAT_PORT_EXHAUSTION_CAUSES_SELECTIVE_INTERNET_FA
+  root_condition: 'NAT Port Exhaustion Causes Selective Internet Failures: root condition
+    at CGNAT-01'
+  causal_chain:
+  - entity: INFRA:CGNAT:001
+    role: ROOT
+    state_change: CGNAT-01 participates in hidden causal propagation
+  - entity: INFRA:FW:SGI
+    role: PROPAGATION_MECHANISM
+    state_change: SGi Firewall Pair participates in hidden causal propagation
+  - entity: IP:VRF:SGI-01
+    role: PROPAGATION_MECHANISM
+    state_change: SGi-VRF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - internet_peering_service
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    - enterprise
+    - fixed_consumer
+    entity_count: 5
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

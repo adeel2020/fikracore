@@ -1,0 +1,1 @@
+UE Registration Service is currently severity 2 resolved. The confirmed root cause is AMF-01 CPU saturation from registration signaling burst.

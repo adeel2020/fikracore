@@ -1,0 +1,496 @@
+{
+  "scope": "Partial benchmark (20 runs)",
+  "total_runs": 20,
+  "metrics": {
+    "root_cause_top_3_accuracy": 1.0,
+    "wrong_hypotheses_correctly_falsified": 0,
+    "avg_evidence_requests_before_terminal": 0.0,
+    "avg_steps_to_first_useful_hypothesis": 1.85,
+    "forced_rca_rate": 1.0,
+    "avg_explanation_provenance_quality": 0.925
+  },
+  "baseline_comparison": {
+    "method_a_name": "earliest severe alarm",
+    "method_b_name": "hypothesis reasoning",
+    "method_a_correct": 15,
+    "method_b_correct": 15
+  },
+  "terminal_state_distribution": {
+    "EXPLAINED": 20
+  },
+  "per_difficulty": {
+    "L1": {
+      "count": 4,
+      "method_b_correct": 3,
+      "method_a_correct": 3,
+      "avg_coverage": 1.0
+    },
+    "L2": {
+      "count": 4,
+      "method_b_correct": 3,
+      "method_a_correct": 3,
+      "avg_coverage": 0.725
+    },
+    "L3": {
+      "count": 4,
+      "method_b_correct": 3,
+      "method_a_correct": 3,
+      "avg_coverage": 1.0
+    },
+    "L4": {
+      "count": 4,
+      "method_b_correct": 3,
+      "method_a_correct": 3,
+      "avg_coverage": 1.0
+    },
+    "L5": {
+      "count": 4,
+      "method_b_correct": 3,
+      "method_a_correct": 3,
+      "avg_coverage": 0.9
+    }
+  },
+  "per_run": [
+    {
+      "run_id": "RUN-SCN-061-L1-SEED-42061",
+      "scenario_id": "SCN-061",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:POWER:A"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 3,
+      "time_seconds": 0.005713243008358404,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-062-L2-SEED-42062",
+      "scenario_id": "SCN-062",
+      "difficulty": "L2",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:DNS:CORE"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 4,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.005026015976909548,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 0.4,
+      "unexplained_residual": 9
+    },
+    {
+      "run_id": "RUN-SCN-063-L3-SEED-42063",
+      "scenario_id": "SCN-063",
+      "difficulty": "L3",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "EXT:VAS:001"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 1,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.0015504389884881675,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 0.5,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-064-L4-SEED-42064",
+      "scenario_id": "SCN-064",
+      "difficulty": "L4",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "EXT:ROAMING:001"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 7,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.00700547601445578,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-065-L5-SEED-42065",
+      "scenario_id": "SCN-065",
+      "difficulty": "L5",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:DC:A"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 2,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0027457810065243393,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-066-L1-SEED-42066",
+      "scenario_id": "SCN-066",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:DB:SUBS-A"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 2,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.002710337023017928,
+      "forced_rca_when_unknown_correct": 1,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-067-L2-SEED-42067",
+      "scenario_id": "SCN-067",
+      "difficulty": "L2",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:RR:001"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 1,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.001587431994266808,
+      "forced_rca_when_unknown_correct": 1,
+      "explanation_provenance_quality": 0.5,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-068-L3-SEED-42068",
+      "scenario_id": "SCN-068",
+      "difficulty": "L3",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:K8S:CORE-A"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 2,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0026600490091368556,
+      "forced_rca_when_unknown_correct": 1,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-069-L4-SEED-42069",
+      "scenario_id": "SCN-069",
+      "difficulty": "L4",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0038631480128969997,
+      "forced_rca_when_unknown_correct": 1,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-070-L5-SEED-42070",
+      "scenario_id": "SCN-070",
+      "difficulty": "L5",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "CHG:OCS:001"
+      ],
+      "baseline_correct": false,
+      "root_cause_top_3_accuracy": null,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 4,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.004649618989787996,
+      "forced_rca_when_unknown_correct": 1,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 0.6,
+      "unexplained_residual": 7
+    },
+    {
+      "run_id": "RUN-SCN-071-L1-SEED-42071",
+      "scenario_id": "SCN-071",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:FW:SGI"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.003936458000680432,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-072-L2-SEED-42072",
+      "scenario_id": "SCN-072",
+      "difficulty": "L2",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:FW:SGI"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.003489504015306011,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-073-L3-SEED-42073",
+      "scenario_id": "SCN-073",
+      "difficulty": "L3",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.004074408003361896,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-074-L4-SEED-42074",
+      "scenario_id": "SCN-074",
+      "difficulty": "L4",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "SA5G:SCP:001"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 1,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 1,
+      "time_seconds": 0.0018721160013228655,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 0.5,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-075-L5-SEED-42075",
+      "scenario_id": "SCN-075",
+      "difficulty": "L5",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:FW:SGI"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.003492095012916252,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-076-L1-SEED-42076",
+      "scenario_id": "SCN-076",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:VRF:N3-01"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 2,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.006262050999794155,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-077-L2-SEED-42077",
+      "scenario_id": "SCN-077",
+      "difficulty": "L2",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IMSM:PCSCF:001"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 5,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.004987307998817414,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 0.5,
+      "unexplained_residual": 9
+    },
+    {
+      "run_id": "RUN-SCN-078-L3-SEED-42078",
+      "scenario_id": "SCN-078",
+      "difficulty": "L3",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:K8S:CORE-A"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 2,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0035673980019055307,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-079-L4-SEED-42079",
+      "scenario_id": "SCN-079",
+      "difficulty": "L4",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "INFRA:FW:SGI"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.003943795018130913,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    },
+    {
+      "run_id": "RUN-SCN-080-L5-SEED-42080",
+      "scenario_id": "SCN-080",
+      "difficulty": "L5",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": true,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 3,
+      "evidence_requests_before_terminal_decision": 0,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.0036937770200893283,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "EXPLAINED",
+      "explanation_coverage": 1.0,
+      "unexplained_residual": 0
+    }
+  ],
+  "caveat": "Synthetic benchmark using in-memory operational fixtures; not a production accuracy claim."
+}

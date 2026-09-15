@@ -1,0 +1,11 @@
+scenario_id: H4-WI-010
+cohort: single_point_failure
+trigger_entity: CHG:CHF:001
+true_affected_services:
+- Prepaid Data & Voice Charging
+- Real-Time Balance Check
+true_cfs_risk: SPOF
+true_common_cause_detected: false
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

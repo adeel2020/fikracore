@@ -1,0 +1,11 @@
+scenario_id: H4-WI-020
+cohort: shared_common_cause
+trigger_entity: SA5G:AUSF:001
+true_affected_services:
+- 5G SA Mobile Data
+- VoNR High Definition Voice
+true_cfs_risk: SHARED_DEPENDENCY
+true_common_cause_detected: true
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

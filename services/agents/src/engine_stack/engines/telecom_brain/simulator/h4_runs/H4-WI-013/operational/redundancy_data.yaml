@@ -1,0 +1,10 @@
+failover_pairs:
+  TRANS:DWDM:01:
+    backup_entity: TRANS:DWDM:02
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: COMMON_TRANSPORT
+  description: Dual diverse transmission routes share the same physical underground
+    conduit.
+backup_node: TRANS:DWDM:02
+backup_health: HEALTHY

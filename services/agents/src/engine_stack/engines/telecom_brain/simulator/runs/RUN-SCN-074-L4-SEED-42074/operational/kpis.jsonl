@@ -1,0 +1,1 @@
+{"event_id":"KPI-SCN-074-0001","source_system":"METRICS_PLATFORM","kpi_name":"5G Sa Mobile Data Success Rate","service":"5g_sa_mobile_data","entity_id":"SA5G:SCP:001","canonical_entity_id":"SA5G:SCP:001","value":72.41,"unit":"percent","baseline_value":98.5,"event_time":"2026-09-10T09:15:35Z","ingestion_time":"2026-09-10T09:16:02Z","domain":"SA_5G_CORE","confidence":0.86}

@@ -1,0 +1,38 @@
+incident_id: INC-SYN-00069
+scenario_id: SCN-069
+seed: 42069
+difficulty_profile: L4
+hidden_truth:
+  root_domain: IP_TRANSPORT
+  root_entity: IP:PE:RTR-21
+  root_entity_name: PE-RTR-21
+  trigger: GEO_SITE_PARTITION_LEAVES_BOTH_SITES_SERVING_IND
+  root_condition: 'Geo-Site Partition Leaves Both Sites Serving Independently: root
+    condition at PE-RTR-21'
+  causal_chain:
+  - entity: IP:PE:RTR-21
+    role: ROOT
+    state_change: PE-RTR-21 participates in hidden causal propagation
+  - entity: IP:VRF:N3-01
+    role: PROPAGATION_MECHANISM
+    state_change: N3-VRF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - 5g_sa_mobile_data
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    - enterprise_mobile
+    entity_count: 4
+  non_causal_context:
+  - source emitted repeated presentation of same underlying symptom
+  - bias-test change context, not hidden cause
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

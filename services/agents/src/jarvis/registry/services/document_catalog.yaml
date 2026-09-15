@@ -1,0 +1,17 @@
+id: document_catalog
+name: Document Catalog Service
+engine: knowledge_base
+description: Answers document inventory and metadata questions before vector retrieval is used.
+status: planned
+connectors:
+  - metadata_db
+  - microsoft_office
+consumes:
+  - document_metadata
+  - office_document_metadata
+produces:
+  - document_count
+  - document_list
+  - document_metadata_summary
+permissions:
+  - read_enterprise_knowledge

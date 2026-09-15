@@ -1,0 +1,36 @@
+id: gbrain
+name: gbrain MCP Connector
+kind: mcp
+transport: mcp
+managed_by: mcp_client_hub
+owner_engine: telecom_brain
+description: Semantic telecom brain connector for knowledge, observations, learnings, and topology/intention projections.
+status: active
+mcp_runtime:
+  protocol: http
+  protocol_env: GBRAIN_MCP_PROTOCOL
+  url_env: GBRAIN_MCP_URL
+  default_url: http://localhost:3131/mcp
+  token_env: GBRAIN_MCP_TOKEN
+  command_env: GBRAIN_MCP_COMMAND
+  default_command: /Users/adeelarshad/.bun/bin/gbrain
+  args:
+    - serve
+env:
+  - GBRAIN_MCP_PROTOCOL
+  - GBRAIN_MCP_URL
+  - GBRAIN_MCP_TOKEN
+  - GBRAIN_MCP_COMMAND
+capabilities:
+  - read_pages
+  - write_pages
+  - search_semantic_context
+  - link_observations_to_knowledge
+permissions:
+  - read_operational_context
+  - write_semantic_projection
+fallback_transports:
+  - stdio
+  - http
+  - cli
+  - embedded

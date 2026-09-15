@@ -1,0 +1,19 @@
+id: telemetry_evidence
+name: Telemetry Evidence Service
+engine: telecom_brain
+description: Retrieves operational evidence from Grafana/LGTM and projects relevant telemetry facts into gbrain.
+status: planned
+connectors:
+  - grafana
+  - gbrain
+consumes:
+  - metrics
+  - logs
+  - traces
+  - alerts
+produces:
+  - telemetry_evidence
+  - kpi_breach
+  - time_window_observation
+permissions:
+  - read_telemetry

@@ -1,0 +1,20 @@
+id: codex_engineering
+name: Codex Engineering Engine
+description: Delegates coding, debugging, test execution, and sandboxed implementation work to Codex under explicit safety controls.
+status: planned
+routing_intents:
+  - code_fix
+  - code_generation
+  - run_tests
+  - debug_failure
+  - create_patch
+services:
+  - code_execution
+connectors:
+  - codex
+skills:
+  - codex-task-execution
+permissions:
+  - sandbox_code_execution
+  - write_code_requires_context
+  - deploy_requires_approval

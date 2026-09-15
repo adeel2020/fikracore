@@ -11,8 +11,7 @@ import type {
 } from "../../types/semantic-cloud.types";
 import { computeDistribution } from "../../utils/normalizeCloud";
 import { getDashboardFeed } from "../../hooks/useDashboardFeedCache";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 const CLOUD_RADIUS = 8;
 
 interface UseScatterCanvasResult {

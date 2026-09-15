@@ -1,0 +1,7 @@
+view_id: TOPO-H4-WI-037
+scenario_id: H4-WI-037
+visible_entities:
+- IP:CORE:RTR-02
+- IP:CORE:RTR-12
+relationships: []
+known_gaps: []

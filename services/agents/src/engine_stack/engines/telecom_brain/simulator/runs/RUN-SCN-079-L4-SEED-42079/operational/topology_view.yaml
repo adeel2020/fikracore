@@ -1,0 +1,15 @@
+view_id: TOPO-SCN-079-OPERATIONAL
+source: fikracore_operational_view
+scenario_id: SCN-079
+visible_entities:
+- INFRA:FW:SGI
+- IP:VRF:SGI-01
+- SA5G:UPF:003
+- CRM:TICKET:001
+visible_relationships:
+- REL-SGI-FW
+- REL-UPF-SGI
+- REL-CRM-TICKETS-IMPACT
+known_gaps: []
+source_warnings:
+- operational view is intentionally imperfect according to difficulty profile

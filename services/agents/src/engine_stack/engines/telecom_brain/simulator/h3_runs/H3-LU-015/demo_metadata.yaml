@@ -1,0 +1,18 @@
+demo:
+  enabled: true
+  title: 'Learning Transfer: User Plane Function-03 -> Data Center Facility A'
+  cohort: cross_domain_transfer
+  audience: leadership
+  duration_minutes: 5
+  learning_objective: Demonstrate that validated operational knowledge (User Plane
+    Function-03 routes-through Data Center Facility A) improves reasoning on a different
+    future incident (ims_voice_telephony).
+  steps:
+  - Incident H2-SCN-015 exposes missing dependency
+  - FikraCore proposes safe candidate relationship
+  - Domain SME validates relationship with operational evidence
+  - Knowledge is promoted under 8 governance guardrails
+  - Different future incident H3-FUT-015 occurs on ims_voice_telephony
+  - FikraCore reuses validated knowledge to reconstruct causal chain
+  - Root cause identified with higher accuracy and zero hallucination
+  final_message: Validated experience becomes reusable operational knowledge.

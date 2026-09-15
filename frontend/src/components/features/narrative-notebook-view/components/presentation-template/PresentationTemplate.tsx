@@ -26,9 +26,7 @@ import TalkingAvatar, { TalkingAvatarHandle, PERSONAS, Persona, SpeakAudioData }
 import { WebSocketProvider } from "@/contexts/WebSocketContext";
 import { AvatarProvider, useAvatar } from "./AvatarContext";
 import { AvatarControlPanel } from "./AvatarControlPanel";
-
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 import { EarlyWarningDiagnostics } from "../../../complaint-dashboard-view/components/EarlyWarningDiagnostics";
 import { TopReassignmentsQueue, TopRejectionReason, PercentageNocTickets } from "../../../complaint-dashboard-view/components/CoreOperationalMetrics";

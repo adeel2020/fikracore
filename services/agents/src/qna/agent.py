@@ -23,7 +23,7 @@ from crewai.utilities.streaming import (
 from crewai.types.streaming import CrewStreamingOutput
 
 from agenticaiops_shared.config import settings
-from ..qna.skill_manager import SkillManager
+from qna.skill_manager import SkillManager
 from agenticaiops_shared.memory import SessionMemory
 
 # Resolve workspace root dynamically

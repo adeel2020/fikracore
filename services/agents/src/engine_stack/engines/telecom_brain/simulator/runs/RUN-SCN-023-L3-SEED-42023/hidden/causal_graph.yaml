@@ -1,0 +1,41 @@
+graph_id: CAUSAL-SCN-023-SEED-42023
+nodes:
+- entity_id: IMSM:PCSCF:001
+  role: ROOT
+  domain: MOBILE_IMS
+- entity_id: RAN:GNB:501
+  role: PROPAGATION_MECHANISM
+  domain: RAN
+- entity_id: SA5G:AMF:001
+  role: PROPAGATION_MECHANISM
+  domain: SA_5G_CORE
+- entity_id: INFRA:K8S:CORE-A
+  role: PROPAGATION_MECHANISM
+  domain: IT_CLOUD_INFRA
+- entity_id: SA5G:UPF:003
+  role: PROPAGATION_MECHANISM
+  domain: SA_5G_CORE
+- entity_id: CRM:TICKET:001
+  role: SYMPTOM
+  domain: CRM
+edges:
+- relationship_id: REL-VONR-PCSCF
+  source_entity: RAN:GNB:501
+  target_entity: IMSM:PCSCF:001
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-AMF-GNB
+  source_entity: SA5G:AMF:001
+  target_entity: RAN:GNB:501
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-AMF-HOSTED
+  source_entity: SA5G:AMF:001
+  target_entity: INFRA:K8S:CORE-A
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-UPF-HOSTED
+  source_entity: SA5G:UPF:003
+  target_entity: INFRA:K8S:CORE-A
+  causal_effect: degraded_state_propagation
+- relationship_id: REL-CRM-TICKETS-IMPACT
+  source_entity: CRM:TICKET:001
+  target_entity: SA5G:UPF:003
+  causal_effect: degraded_state_propagation

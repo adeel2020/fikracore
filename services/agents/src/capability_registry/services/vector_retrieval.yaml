@@ -1,0 +1,15 @@
+id: vector_retrieval
+name: Vector Retrieval Service
+engine: knowledge_base
+description: Retrieves document chunks only when metadata-level answers are insufficient.
+status: planned
+connectors:
+  - vector_db
+consumes:
+  - document_query
+  - document_scope
+produces:
+  - retrieved_chunks
+  - cited_answer_context
+permissions:
+  - read_enterprise_knowledge

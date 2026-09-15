@@ -1,0 +1,17 @@
+id: remediation_advisory
+name: Remediation Advisory Service
+engine: telecom_brain
+description: Produces safe diagnostic, pre-check, rollback, capacity, and escalation recommendations without executing changes.
+status: active
+connectors:
+  - gbrain
+consumes:
+  - rca_hypothesis
+  - telemetry_evidence
+  - topology_projection
+produces:
+  - remediation_advice
+  - diagnostic_next_step
+  - remediation_requires_approval
+permissions:
+  - read_operational_context

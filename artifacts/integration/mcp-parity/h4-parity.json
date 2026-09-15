@@ -1,0 +1,1141 @@
+{
+  "title": "H4 Full Parity",
+  "timestamp": "2026-09-11T11:31:59.157166+00:00",
+  "total_runs": 40,
+  "decision": "LIVE_MCP_PARITY_SUPPORTED",
+  "parity_rate_pct": 100.0,
+  "exact_parity_count": 40,
+  "semantic_parity_count": 0,
+  "explained_delta_count": 0,
+  "unexplained_delta_count": 0,
+  "integration_failures_count": 0,
+  "hidden_truth_leakage": 0,
+  "records": [
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-001",
+      "run_id": "H4-WI-001",
+      "display_name": "MPLS Edge Router Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-002",
+      "run_id": "H4-WI-002",
+      "display_name": "Data Center Gateway Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-003",
+      "run_id": "H4-WI-003",
+      "display_name": "Packet Gateway User Plane Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-004",
+      "run_id": "H4-WI-004",
+      "display_name": "Subscriber Database Cluster Outage",
+      "snapshot_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-005",
+      "run_id": "H4-WI-005",
+      "display_name": "Signaling Firewall Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G Roaming Interconnect",
+          "5G SA Mobile Data"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G Roaming Interconnect",
+          "5G SA Mobile Data"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-006",
+      "run_id": "H4-WI-006",
+      "display_name": "DNS Resolution Server Outage",
+      "snapshot_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoLTE Voice",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoLTE Voice",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-007",
+      "run_id": "H4-WI-007",
+      "display_name": "Optical Transport Node Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-008",
+      "run_id": "H4-WI-008",
+      "display_name": "Session Management Function Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-009",
+      "run_id": "H4-WI-009",
+      "display_name": "Diameter Routing Agent Failure",
+      "snapshot_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "4G LTE Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check",
+          "VoLTE Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "4G LTE Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check",
+          "VoLTE Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-010",
+      "run_id": "H4-WI-010",
+      "display_name": "BSS Charging Gateway Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-011",
+      "run_id": "H4-WI-011",
+      "display_name": "Dual Router Shared Power Feed Loss",
+      "snapshot_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-012",
+      "run_id": "H4-WI-012",
+      "display_name": "Redundant UPF Shared Host Server Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-013",
+      "run_id": "H4-WI-013",
+      "display_name": "Dual Transport Links Shared Fiber Conduit Cut",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-014",
+      "run_id": "H4-WI-014",
+      "display_name": "Redundant Firewalls Shared Switch Dependency",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G Roaming Interconnect",
+          "5G SA Mobile Data"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G Roaming Interconnect",
+          "5G SA Mobile Data"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-015",
+      "run_id": "H4-WI-015",
+      "display_name": "Regional AMF Pair Shared Database Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-016",
+      "run_id": "H4-WI-016",
+      "display_name": "Redundant DRA Shared NTP Clock Skew",
+      "snapshot_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "4G LTE Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check",
+          "VoLTE Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "MULTI_DOMAIN",
+        "affected_services": [
+          "4G LTE Mobile Data",
+          "Prepaid Data & Voice Charging",
+          "Real-Time Balance Check",
+          "VoLTE Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-017",
+      "run_id": "H4-WI-017",
+      "display_name": "Cross-DC Backhaul Common Carrier Outage",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Inter-DC Backhaul Transport"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-018",
+      "run_id": "H4-WI-018",
+      "display_name": "Primary and Backup Routers Common Site Flood",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-019",
+      "run_id": "H4-WI-019",
+      "display_name": "Redundant Ingress Load Balancers Shared Border Route",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Customer Self-Care Portal"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Customer Self-Care Portal"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-020",
+      "run_id": "H4-WI-020",
+      "display_name": "Redundant Auth Servers Shared HSM Failure",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-021",
+      "run_id": "H4-WI-021",
+      "display_name": "Primary UPF Failure with 70% Backup Capacity",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-022",
+      "run_id": "H4-WI-022",
+      "display_name": "Edge Router Failover Transport Congestion",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-023",
+      "run_id": "H4-WI-023",
+      "display_name": "Database Secondary Replica Lag Under Failover",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-024",
+      "run_id": "H4-WI-024",
+      "display_name": "Signaling Storm During AMF Failover",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-025",
+      "run_id": "H4-WI-025",
+      "display_name": "Backup Gateway CPU Saturation on Peak Traffic",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-026",
+      "run_id": "H4-WI-026",
+      "display_name": "Unsynchronized Session State on Failover",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-027",
+      "run_id": "H4-WI-027",
+      "display_name": "Secondary DNS Resolver Rate-Limit Drop",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-028",
+      "run_id": "H4-WI-028",
+      "display_name": "Inter-DC Link Failover Buffering Exhaustion",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-029",
+      "run_id": "H4-WI-029",
+      "display_name": "Backup Charging Queue Memory Overflow",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-030",
+      "run_id": "H4-WI-030",
+      "display_name": "Firewall Connection Table Exhaustion During Shift",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-031",
+      "run_id": "H4-WI-031",
+      "display_name": "Planned Router Reboot While Backup Degraded",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-032",
+      "run_id": "H4-WI-032",
+      "display_name": "Core Switch Firmware Upgrade During Traffic Peak",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-033",
+      "run_id": "H4-WI-033",
+      "display_name": "BGP Policy Reconfiguration Route Flapping",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-034",
+      "run_id": "H4-WI-034",
+      "display_name": "Security Group Rule Push Blocking Signaling",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-035",
+      "run_id": "H4-WI-035",
+      "display_name": "Database Schema Migration Lock Contention",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "VoNR High Definition Voice"
+        ],
+        "surfaces_count": 1,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-036",
+      "run_id": "H4-WI-036",
+      "display_name": "Primary Router Outage Plus Backup Degradation",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-037",
+      "run_id": "H4-WI-037",
+      "display_name": "Site Power Grid Loss Combined With Gen-Set Delay",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-038",
+      "run_id": "H4-WI-038",
+      "display_name": "Transport Link Cut During Optical Amplifier Flap",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-039",
+      "run_id": "H4-WI-039",
+      "display_name": "Signaling Gateway Crash During Roaming Traffic Surge",
+      "snapshot_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "DOMAIN",
+        "affected_services": [
+          "5G SA Mobile Data",
+          "Enterprise MPLS VPN"
+        ],
+        "surfaces_count": 2,
+        "mitigations_count": 3,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    },
+    {
+      "stage": "H4",
+      "scenario": "H4-WI-040",
+      "run_id": "H4-WI-040",
+      "display_name": "Incomplete Operational Knowledge Model Insufficiency",
+      "snapshot_result": {
+        "blast_radius_level": "LOCAL",
+        "affected_services": [],
+        "surfaces_count": 1,
+        "mitigations_count": 0
+      },
+      "live_mcp_result": {
+        "blast_radius_level": "LOCAL",
+        "affected_services": [],
+        "surfaces_count": 1,
+        "mitigations_count": 0,
+        "has_newer_knowledge": true
+      },
+      "classification": "EXACT_PARITY",
+      "drift_type": "NO_DRIFT",
+      "delta_reason": null
+    }
+  ]
+}

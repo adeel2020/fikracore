@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1120" viewBox="0 0 1800 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Mark Telecom Brain Solution Design Hub Leaf Graph</title>
+  <desc id="desc">A hub and leaf architecture graph showing Mark, MCP Hub, Capability Registry, engine stack, telecom brain capabilities, and enterprise connectors.</desc>
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="48%" r="62%">
+      <stop offset="0%" stop-color="#EAF7FF"/>
+      <stop offset="48%" stop-color="#F7FAFF"/>
+      <stop offset="100%" stop-color="#EEF4FF"/>
+    </radialGradient>
+    <radialGradient id="brainGlow" cx="50%" cy="42%" r="58%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="38%" stop-color="#DDF2FF"/>
+      <stop offset="70%" stop-color="#78CFFF" stop-opacity=".65"/>
+      <stop offset="100%" stop-color="#0969FF" stop-opacity=".08"/>
+    </radialGradient>
+    <linearGradient id="blueStroke" x1="0%" x2="100%">
+      <stop offset="0%" stop-color="#00C8FF"/>
+      <stop offset="48%" stop-color="#0969FF"/>
+      <stop offset="100%" stop-color="#7B61FF"/>
+    </linearGradient>
+    <linearGradient id="hubFill" x1="16%" y1="0%" x2="84%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="58%" stop-color="#EAF5FF"/>
+      <stop offset="100%" stop-color="#D9EAFF"/>
+    </linearGradient>
+    <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#2C5EAA" flood-opacity=".16"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#00C8FF" flood-opacity=".18"/>
+    </filter>
+    <filter id="lineGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="dotGrid" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.25" fill="#0969FF" opacity=".18"/>
+    </pattern>
+    <style>
+      .title { font: 900 34px Inter, Arial, sans-serif; letter-spacing: 0; fill: #082863; }
+      .subtitle { font: 700 16px Inter, Arial, sans-serif; fill: #3672D8; letter-spacing: 0; }
+      .section { font: 900 20px Inter, Arial, sans-serif; fill: #102B5C; letter-spacing: 0; }
+      .label { font: 800 16px Inter, Arial, sans-serif; fill: #102B5C; letter-spacing: 0; }
+      .small { font: 600 12.5px Inter, Arial, sans-serif; fill: #60749B; letter-spacing: 0; }
+      .tiny { font: 700 11.5px Inter, Arial, sans-serif; fill: #0969FF; letter-spacing: 0; }
+      .card { fill: rgba(255,255,255,.76); stroke: rgba(45,112,220,.18); stroke-width: 1.4; }
+      .pill { fill: rgba(255,255,255,.86); stroke: rgba(45,112,220,.18); stroke-width: 1.2; }
+      .link { fill: none; stroke: url(#blueStroke); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 7 11; opacity: .55; filter: url(#lineGlow); }
+      .thinLink { fill: none; stroke: #36B8FF; stroke-width: 1.3; stroke-linecap: round; stroke-dasharray: 4 9; opacity: .38; }
+      .orbit { fill: none; stroke: #0969FF; stroke-width: 1.3; opacity: .20; stroke-dasharray: 8 14; }
+      .orbit2 { fill: none; stroke: #00C8FF; stroke-width: 1.2; opacity: .22; stroke-dasharray: 2 12; }
+      .hubText { font: 950 36px Inter, Arial, sans-serif; fill: #082863; letter-spacing: 0; }
+      .hubSub { font: 800 13px Inter, Arial, sans-serif; fill: #0969FF; letter-spacing: 0; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1120" fill="url(#bgGlow)"/>
+  <rect width="1800" height="1120" fill="url(#dotGrid)" opacity=".7"/>
+
+  <g opacity=".58">
+    <circle cx="900" cy="560" r="412" class="orbit"/>
+    <circle cx="900" cy="560" r="352" class="orbit2"/>
+    <circle cx="900" cy="560" r="290" class="orbit"/>
+    <circle cx="900" cy="560" r="222" class="orbit2"/>
+  </g>
+
+  <g transform="translate(56 44)">
+    <rect x="0" y="0" rx="30" ry="30" width="405" height="110" class="card" filter="url(#softShadow)"/>
+    <circle cx="58" cy="55" r="38" fill="none" stroke="#8EDAFF" stroke-width="2.2"/>
+    <circle cx="58" cy="55" r="29" fill="#EFF8FF" stroke="#0969FF" stroke-opacity=".32"/>
+    <path d="M47 48 C42 42 45 32 54 31 C61 29 66 35 64 43 C72 43 76 50 73 57 C78 64 71 73 62 69 C58 77 46 75 45 66 C37 65 34 55 40 50 C41 49 44 48 47 48 Z" fill="none" stroke="#0969FF" stroke-width="3" stroke-linejoin="round"/>
+    <text x="118" y="47" class="title">MARK</text>
+    <text x="120" y="77" class="subtitle">TELECOM ASSISTANT</text>
+  </g>
+
+  <text x="900" y="92" text-anchor="middle" class="title">Solution Design And Capability Graph</text>
+  <text x="900" y="122" text-anchor="middle" class="subtitle">one assistant, one MCP hub, many specialized engines</text>
+
+  <g id="links">
+    <path class="link" d="M900 560 C900 430 900 342 900 246"/>
+    <path class="link" d="M900 560 C743 450 618 356 474 258"/>
+    <path class="link" d="M900 560 C1057 450 1182 356 1326 258"/>
+    <path class="link" d="M900 560 C727 566 591 586 440 626"/>
+    <path class="link" d="M900 560 C1073 566 1209 586 1360 626"/>
+    <path class="link" d="M900 560 C778 704 678 805 560 924"/>
+    <path class="link" d="M900 560 C1022 704 1122 805 1240 924"/>
+    <path class="link" d="M900 560 C900 696 900 826 900 970"/>
+    <path class="thinLink" d="M900 560 C715 350 600 220 326 175"/>
+    <path class="thinLink" d="M900 560 C1085 350 1200 220 1474 175"/>
+  </g>
+
+  <g id="center" filter="url(#softShadow)">
+    <circle cx="900" cy="560" r="174" fill="url(#brainGlow)" stroke="rgba(9,105,255,.28)" stroke-width="2"/>
+    <circle cx="900" cy="560" r="132" fill="none" stroke="#00C8FF" stroke-opacity=".36" stroke-width="2.2" stroke-dasharray="12 16"/>
+    <circle cx="900" cy="560" r="96" fill="#FFFFFF" fill-opacity=".48" stroke="#0969FF" stroke-opacity=".25"/>
+    <path d="M820 530 C810 492 847 463 883 481 C905 451 954 466 954 504 C986 508 1002 547 979 572 C1003 613 955 653 918 628 C892 656 842 642 844 600 C812 596 797 557 820 530 Z" fill="#0969FF" fill-opacity=".16" stroke="#0969FF" stroke-width="4"/>
+    <path d="M864 486 C850 525 861 563 893 589 M930 478 C945 520 936 571 904 604 M815 549 C864 546 932 548 984 560 M844 600 C878 585 939 588 970 610" fill="none" stroke="#00C8FF" stroke-width="3" stroke-opacity=".72" stroke-linecap="round"/>
+    <text x="900" y="688" text-anchor="middle" class="hubText">MCP HUB</text>
+    <text x="900" y="715" text-anchor="middle" class="hubSub">CONTROL PLANE FOR ALL CONNECTORS</text>
+  </g>
+
+  <g id="mark-orb" transform="translate(760 186)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="280" height="122" rx="28" class="card"/>
+    <circle cx="62" cy="61" r="42" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".25"/>
+    <path d="M50 58 C45 52 49 40 60 40 C70 39 76 47 72 57 C82 57 88 67 82 76 C77 86 62 85 58 75 C47 78 40 66 50 58 Z" fill="none" stroke="#0969FF" stroke-width="3"/>
+    <text x="124" y="52" class="label">Mark Assistant</text>
+    <text x="124" y="76" class="small">voice, chat, intent routing</text>
+    <text x="124" y="96" class="tiny">always human-facing</text>
+  </g>
+
+  <g transform="translate(276 184)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="396" height="148" rx="30" class="card"/>
+    <circle cx="72" cy="72" r="48" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".24"/>
+    <path d="M50 77 L72 48 L96 77 M61 77 V96 H84 V77" fill="none" stroke="#0969FF" stroke-width="3" stroke-linejoin="round"/>
+    <text x="142" y="48" class="section">Capability Registry</text>
+    <text x="142" y="76" class="small">engines, services, skills, policies</text>
+    <text x="142" y="98" class="small">metadata and schema contracts</text>
+    <text x="142" y="122" class="tiny">decides what Mark can use</text>
+  </g>
+
+  <g transform="translate(1128 184)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="396" height="148" rx="30" class="card"/>
+    <circle cx="72" cy="72" r="48" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".24"/>
+    <path d="M49 70 H95 M56 54 H88 M56 86 H88 M66 42 V98 M79 42 V98" fill="none" stroke="#0969FF" stroke-width="3" stroke-linecap="round"/>
+    <text x="142" y="48" class="section">Engine Stack</text>
+    <text x="142" y="76" class="small">specialized reasoning engines</text>
+    <text x="142" y="98" class="small">telecom, knowledge, automation</text>
+    <text x="142" y="122" class="tiny">routes work to the right brain</text>
+  </g>
+
+  <g transform="translate(136 548)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="405" height="178" rx="30" class="card"/>
+    <circle cx="74" cy="78" r="50" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".22"/>
+    <circle cx="74" cy="78" r="25" fill="none" stroke="#0969FF" stroke-width="3"/>
+    <path d="M74 28 V53 M74 103 V128 M24 78 H49 M99 78 H124 M40 44 L58 61 M91 95 L108 112 M108 44 L91 61 M58 95 L40 112" stroke="#00AEEF" stroke-width="2.4" stroke-linecap="round"/>
+    <text x="146" y="48" class="section">Telecom Brain Engine</text>
+    <text x="146" y="78" class="small">inter and intra domain correlation</text>
+    <text x="146" y="101" class="small">storytelling, RCA, intent checks</text>
+    <text x="146" y="124" class="small">FCAPS learning lens</text>
+    <text x="146" y="150" class="tiny">uses gbrain as semantic layer</text>
+  </g>
+
+  <g transform="translate(1258 548)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="405" height="178" rx="30" class="card"/>
+    <circle cx="74" cy="78" r="50" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".22"/>
+    <path d="M48 92 C63 66 82 106 99 72 M48 105 H106 M50 47 H103 V91" fill="none" stroke="#0969FF" stroke-width="3" stroke-linecap="round"/>
+    <text x="146" y="48" class="section">Evidence Connectors</text>
+    <text x="146" y="78" class="small">Grafana LGTM, gbrain, vector DB</text>
+    <text x="146" y="101" class="small">topology DB, tickets, alarms</text>
+    <text x="146" y="124" class="small">MCP adapters where available</text>
+    <text x="146" y="150" class="tiny">called on demand, not every turn</text>
+  </g>
+
+  <g transform="translate(350 858)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="420" height="160" rx="30" class="card"/>
+    <circle cx="72" cy="78" r="48" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".22"/>
+    <path d="M48 64 H96 M48 78 H86 M48 92 H96 M56 50 H88" stroke="#0969FF" stroke-width="3" stroke-linecap="round"/>
+    <text x="142" y="48" class="section">Knowledge Assets</text>
+    <text x="142" y="77" class="small">playbooks, runbooks, SOPs, MOPs</text>
+    <text x="142" y="100" class="small">RCA history, vendor docs, notes</text>
+    <text x="142" y="126" class="tiny">source of context and learning target</text>
+  </g>
+
+  <g transform="translate(1030 858)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="420" height="160" rx="30" class="card"/>
+    <circle cx="72" cy="78" r="48" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".22"/>
+    <path d="M49 61 H95 V93 H49 Z M57 69 L72 82 L94 62" fill="none" stroke="#0969FF" stroke-width="3" stroke-linejoin="round"/>
+    <text x="142" y="48" class="section">Enterprise Actions</text>
+    <text x="142" y="77" class="small">Gmail, WhatsApp, Teams, Office</text>
+    <text x="142" y="100" class="small">Calendar and Codex execution</text>
+    <text x="142" y="126" class="tiny">approval gated for side effects</text>
+  </g>
+
+  <g transform="translate(720 950)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="360" height="98" rx="30" class="card"/>
+    <circle cx="58" cy="49" r="35" fill="url(#hubFill)" stroke="#0969FF" stroke-opacity=".22"/>
+    <path d="M43 48 C60 30 78 66 92 44 M43 64 C59 48 78 81 92 62" fill="none" stroke="#0969FF" stroke-width="3" stroke-linecap="round"/>
+    <text x="112" y="42" class="section">Governance Layer</text>
+    <text x="112" y="68" class="small">policy, auth, audit, traceability</text>
+  </g>
+
+  <g id="capability-leaves">
+    <g transform="translate(84 780)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Correlation</text>
+      <text x="112" y="44" text-anchor="middle" class="small">alarms, KPIs, topology</text>
+    </g>
+    <g transform="translate(84 850)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Storytelling</text>
+      <text x="112" y="44" text-anchor="middle" class="small">curated voice narratives</text>
+    </g>
+    <g transform="translate(84 920)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Intent and FCAPS</text>
+      <text x="112" y="44" text-anchor="middle" class="small">service objective lens</text>
+    </g>
+    <g transform="translate(1492 780)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Grafana LGTM</text>
+      <text x="112" y="44" text-anchor="middle" class="small">metrics, logs, traces</text>
+    </g>
+    <g transform="translate(1492 850)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Topology Twin</text>
+      <text x="112" y="44" text-anchor="middle" class="small">Nautobot plus projection</text>
+    </g>
+    <g transform="translate(1492 920)">
+      <rect width="224" height="58" rx="20" class="pill"/>
+      <text x="112" y="25" text-anchor="middle" class="label">Knowledge Base</text>
+      <text x="112" y="44" text-anchor="middle" class="small">metadata before chunks</text>
+    </g>
+  </g>
+
+  <g opacity=".7">
+    <path class="thinLink" d="M541 640 C390 724 326 782 308 810"/>
+    <path class="thinLink" d="M541 640 C390 778 326 852 308 880"/>
+    <path class="thinLink" d="M541 640 C390 832 326 922 308 950"/>
+    <path class="thinLink" d="M1258 640 C1410 724 1474 782 1492 810"/>
+    <path class="thinLink" d="M1258 640 C1410 778 1474 852 1492 880"/>
+    <path class="thinLink" d="M1258 640 C1410 832 1474 922 1492 950"/>
+  </g>
+
+  <g transform="translate(548 44)">
+    <rect x="0" y="0" rx="28" width="704" height="72" class="card" filter="url(#softShadow)"/>
+    <text x="352" y="32" text-anchor="middle" class="label">On Demand Brain Access</text>
+    <text x="352" y="54" text-anchor="middle" class="small">Mark speaks naturally first, then calls engines and MCP tools only when context is needed.</text>
+  </g>
+</svg>

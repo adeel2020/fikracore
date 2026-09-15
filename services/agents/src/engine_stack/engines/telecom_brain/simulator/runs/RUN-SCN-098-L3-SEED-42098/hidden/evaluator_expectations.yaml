@@ -1,0 +1,22 @@
+scenario_id: SCN-098
+incident_id: INC-SYN-00098
+expected_root_domain: IT_CLOUD_INFRA
+expected_root_entity: INFRA:K8S:CORE-A
+expected_terminal_state: EXPLAINED
+expected_hypotheses:
+  should_strengthen:
+  - IT_CLOUD_INFRA degradation affecting oss_network_management_connectivity
+  should_weaken_or_falsify:
+  - first visible downstream alarm is the root cause
+  - highest-severity domain is the root cause
+  - recent unrelated change is causal without supporting evidence
+  - OSS to Network Management Connectivity application fault without upstream dependency
+    evidence
+required_reasoning_observations:
+- all required entities must exist in the reference synthetic network
+- every causal hop must resolve through a modeled relationship or valid service-chain
+  dependency
+- operational evidence must not contain root-cause labels
+- customer impact must follow affected service, region, and customer segment mapping
+- healthy evidence must not contradict hidden reality
+- unrelated noise must remain evaluator metadata and must not become causal truth

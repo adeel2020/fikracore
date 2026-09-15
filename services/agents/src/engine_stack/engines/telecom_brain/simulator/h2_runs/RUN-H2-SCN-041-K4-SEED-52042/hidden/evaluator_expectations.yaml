@@ -1,0 +1,6 @@
+expected_evidence_type: MONITORING_CONFIGURATION
+expected_gap_boundary: SA5G:UPF:003
+expected_gap_type: MISSING_MONITORING_DEPENDENCY
+expected_terminal_state: MODEL_INSUFFICIENT
+must_abstain_from_root_fact: true
+scenario_id: H2-SCN-041

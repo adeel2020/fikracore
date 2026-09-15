@@ -1,0 +1,14 @@
+{
+  "baseline_a_no_learning": {
+    "correct_runs": 27,
+    "accuracy": 0.9
+  },
+  "baseline_b_blind_auto_learning": {
+    "correct_runs": 30,
+    "accuracy": 1.0
+  },
+  "method_b_fikracore_governed_learning": {
+    "correct_runs": 30,
+    "accuracy": 1.0
+  }
+}

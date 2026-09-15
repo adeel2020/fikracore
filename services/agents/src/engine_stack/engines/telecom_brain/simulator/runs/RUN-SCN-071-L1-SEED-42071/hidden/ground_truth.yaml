@@ -1,0 +1,36 @@
+incident_id: INC-SYN-00071
+scenario_id: SCN-071
+seed: 42071
+difficulty_profile: L1
+hidden_truth:
+  root_domain: IT_CLOUD_INFRA
+  root_entity: INFRA:FW:SGI
+  root_entity_name: SGi Firewall Pair
+  trigger: DDOS_EXHAUSTS_EDGE_OR_CONTROL_PLANE_RESOURCES_RO
+  root_condition: 'DDoS Exhausts Edge or Control-Plane Resources: root condition at
+    SGi Firewall Pair'
+  causal_chain:
+  - entity: INFRA:FW:SGI
+    role: ROOT
+    state_change: SGi Firewall Pair participates in hidden causal propagation
+  - entity: IP:VRF:SGI-01
+    role: PROPAGATION_MECHANISM
+    state_change: SGi-VRF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - 5g_sa_mobile_data
+    regions:
+    - REGION-NORTH
+    customer_segments:
+    - consumer_mobile
+    - enterprise_mobile
+    entity_count: 4
+  non_causal_context: []
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

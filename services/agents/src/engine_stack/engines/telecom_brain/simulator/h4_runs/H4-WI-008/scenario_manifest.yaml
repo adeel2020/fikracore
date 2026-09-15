@@ -1,0 +1,18 @@
+what_if_id: H4-WI-008
+title: Session Management Function Failure
+description: Simulates 5G SMF controller outage blocking PDU session establishment.
+cohort: single_point_failure
+trigger:
+  canonical_id: SA5G:SMF:001
+  entity_display_name: Session Management Function-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: false
+  failover_capacity: NONE
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- 5g
+- control_plane
+- spof

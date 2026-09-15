@@ -1,0 +1,33 @@
+incident_id: INC-SYN-00081
+scenario_id: SCN-081
+seed: 42081
+difficulty_profile: L1
+hidden_truth:
+  root_domain: IP_TRANSPORT
+  root_entity: IP:VRF:N3-01
+  root_entity_name: N3-VRF-01
+  trigger: MICROBURSTS_CAUSE_SHORT_LIVED_PACKET_LOSS_ON_N3_
+  root_condition: 'Microbursts Cause Short-Lived Packet Loss on N3: root condition
+    at N3-VRF-01'
+  causal_chain:
+  - entity: IP:VRF:N3-01
+    role: ROOT
+    state_change: N3-VRF-01 participates in hidden causal propagation
+  - entity: SA5G:UPF:003
+    role: PROPAGATION_MECHANISM
+    state_change: UPF-03 participates in hidden causal propagation
+  - entity: CRM:TICKET:001
+    role: SYMPTOM
+    state_change: Customer Ticket Service participates in hidden causal propagation
+  actual_blast_radius:
+    services:
+    - oss_network_management_connectivity
+    regions:
+    - REGION-NORTH
+    - REGION-CENTRAL
+    customer_segments:
+    - internal_noc
+    entity_count: 3
+  non_causal_context: []
+separation_note: this file is evaluator-only and must never be exposed to operational
+  RCA or correlation inputs

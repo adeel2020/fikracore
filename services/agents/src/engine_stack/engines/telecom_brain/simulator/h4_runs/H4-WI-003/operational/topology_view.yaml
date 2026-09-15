@@ -1,0 +1,6 @@
+view_id: TOPO-H4-WI-003
+scenario_id: H4-WI-003
+visible_entities:
+- SA5G:UPF:001
+relationships: []
+known_gaps: []

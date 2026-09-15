@@ -1,0 +1,6 @@
+graph_id: CAUSAL-SCN-074-SEED-42074
+nodes:
+- entity_id: SA5G:SCP:001
+  role: ROOT
+  domain: SA_5G_CORE
+edges: []

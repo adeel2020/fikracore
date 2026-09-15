@@ -1,0 +1,12 @@
+candidate_id: KG-H3-014
+discovery_incident: H2-SCN-014
+gap_type: MISSING_FAILURE_DOMAIN_MEMBERSHIP
+source: SA5G:UPF:003
+target: INFRA:DC:A
+proposed_type: routes-through
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-014-001
+reason: Operational discovery in H2-SCN-014 indicates traffic forwarding from SA5G:UPF:003
+  to INFRA:DC:A

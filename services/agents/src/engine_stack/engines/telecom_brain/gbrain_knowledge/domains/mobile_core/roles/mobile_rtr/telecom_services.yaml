@@ -1,0 +1,30 @@
+role: mobile_rtr
+catalog_type: telecom_services
+description: "Portfolio of telecom services supported by Mobile Core RTR triage."
+
+services:
+  volte_vonr:
+    name: "VoLTE & VoNR Voice Services"
+    interfaces: ["SIP IMS", "HSS IMSS", "Ud", "Diameter Cx/Dx"]
+    typical_symptom: "Calls drop immediately; call attempt drops to 3G or fails."
+    core_finding: "CORE_PROFILE_APN_SLICE_MISSING"
+  mobile_data:
+    name: "Mobile High-Speed Broadband (4G/5G)"
+    interfaces: ["GTPv2-C", "Diameter Gx/Gy", "N7/N11"]
+    typical_symptom: "Cannot attach to data network; bearer creation rejected."
+    core_finding: "GTPV2_CAUSE_73_NO_RESOURCES"
+  roaming:
+    name: "Outbound / Inbound International Roaming"
+    interfaces: ["S6a", "S8", "S9", "Diameter S6a"]
+    typical_symptom: "No network coverage when abroad; registration rejected."
+    core_finding: "ROAMING_PARTNER_BARRED"
+  corporate_apn:
+    name: "Corporate Private APN & M2M"
+    interfaces: ["Radius AAA", "GTPv1-U GRE", "IPSec"]
+    typical_symptom: "IoT/POS device cannot reach enterprise host."
+    core_finding: "RADIUS_AUTH_FAILED"
+  esim:
+    name: "eSIM Digital Profile Lifecycle"
+    interfaces: ["SM-DP+", "TS.43 Entitlement Server"]
+    typical_symptom: "Profile download failed; smartwatch pairing error."
+    core_finding: "ESIM_PROFILE_STATE_STUCK"

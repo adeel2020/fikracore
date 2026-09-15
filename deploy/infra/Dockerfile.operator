@@ -1,0 +1,6 @@
+FROM quay.io/prometheus-operator/prometheus-config-reloader:v0.74.0 as config-reloader
+FROM quay.io/prometheus-operator/prometheus-operator:v0.74.0
+COPY --from=config-reloader /bin/prometheus-config-reloader /bin/prometheus-config-reloader
+RUN ln -s /bin/operator /bin/prometheus-operator
+USER 1001:1001
+ENTRYPOINT ["/bin/operator"]

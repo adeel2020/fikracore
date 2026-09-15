@@ -11,7 +11,7 @@ from pydantic import BaseModel, Field
 
 from agenticaiops_shared.guardrails import check_guardrail_standalone
 
-from .agent import run_storyteller
+from storyteller.datastory.crewai_storyteller import run_storyteller
 
 logger = logging.getLogger("storyteller.router")
 router = APIRouter(prefix="/api/storyteller", tags=["storyteller"])

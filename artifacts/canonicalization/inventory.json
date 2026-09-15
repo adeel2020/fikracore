@@ -1,0 +1,5608 @@
+[
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/lte-attach-failure-triage"
+      }
+    ],
+    "content_hash": "3a1045d96f6287922b5abc4037190e3f1c6a19ab830efe4c049040d7b54bdaae",
+    "created_at": "2026-09-01T09:04:07.069Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/playbooks/lte-attach-failure-triage",
+    "tags": [],
+    "title": "LTE Attach failure triage",
+    "type": "playbook",
+    "updated_at": "2026-09-01T09:04:07.069Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/sgi-data-failure-triage"
+      }
+    ],
+    "content_hash": "c235c685eb57dc5ea7ace47acaa68d8a53fb89ab8401b94fdc1ffb6e93085cd2",
+    "created_at": "2026-09-01T09:04:02.399Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/playbooks/sgi-data-failure-triage",
+    "tags": [],
+    "title": "SGI Data failure triage",
+    "type": "playbook",
+    "updated_at": "2026-09-01T09:04:02.399Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/voice-call-setup-failure-triage"
+      }
+    ],
+    "content_hash": "6b25a8054f8ab3a108b4b73de70e7b0e976af866aa2eda701704d2ffcee01603",
+    "created_at": "2026-09-01T09:03:56.993Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/playbooks/voice-call-setup-failure-triage",
+    "tags": [],
+    "title": "Voice Call Setup failure triage",
+    "type": "playbook",
+    "updated_at": "2026-09-01T09:03:56.993Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/lte-attach"
+      }
+    ],
+    "content_hash": "7041f01dfba101abac931d502f21dfcac388c2e808d5de81b3e0c70bf734fbca",
+    "created_at": "2026-09-01T09:04:07.186Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/queries/promql/lte-attach",
+    "tags": [],
+    "title": "LTE Attach telemetry query",
+    "type": "query-asset",
+    "updated_at": "2026-09-01T09:04:07.186Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/sgi-data"
+      }
+    ],
+    "content_hash": "0ab7e433abb20f6bb2a46180173e04430ea87b5cc7c9bf2e012fda32cbe7ff1b",
+    "created_at": "2026-09-01T09:04:02.518Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/queries/promql/sgi-data",
+    "tags": [],
+    "title": "SGI Data telemetry query",
+    "type": "query-asset",
+    "updated_at": "2026-09-01T09:04:02.518Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/voice-call-setup"
+      }
+    ],
+    "content_hash": "952f9a5a4feee808a850cfa32f7ed5248b3e1d43e79b5a3a3e86e79c7bdf85af",
+    "created_at": "2026-09-01T09:03:57.116Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "status": "candidate"
+    },
+    "outgoing_links": [],
+    "slug": "assets/mobile-core/queries/promql/voice-call-setup",
+    "tags": [],
+    "title": "Voice Call Setup telemetry query",
+    "type": "query-asset",
+    "updated_at": "2026-09-01T09:03:57.116Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "532dcd5fb9196d20dc654f487d51c03f5b59f0538c9c6be767ab2a4bb8662ca9",
+    "created_at": "2026-09-01T09:03:53.446Z",
+    "frontmatter": {
+      "correlation_key": "05841af2e3f4f430",
+      "domains": [
+        "mobile-core",
+        "ran",
+        "transport"
+      ],
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "scope": "inter-domain",
+      "score": 95,
+      "services": [
+        "voice-call-setup"
+      ]
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+    "tags": [],
+    "title": "Correlation cluster 05841af2e3f4f430",
+    "type": "correlation-cluster",
+    "updated_at": "2026-09-01T09:03:53.446Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "5350a829fd0c32522506d8bd62e5955e1ca7600f6132e113900b7f4dc0b037d1",
+    "created_at": "2026-09-01T09:04:03.952Z",
+    "frontmatter": {
+      "correlation_key": "54db6ef325fbf758",
+      "domains": [
+        "mobile-core",
+        "ran"
+      ],
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "scope": "inter-domain",
+      "score": 95,
+      "services": [
+        "lte-attach"
+      ]
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+    "tags": [],
+    "title": "Correlation cluster 54db6ef325fbf758",
+    "type": "correlation-cluster",
+    "updated_at": "2026-09-01T09:04:03.952Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "2da1b75f8399c5421406d621da2a1bf51d82adc94ec4be0349692285f4aefc92",
+    "created_at": "2026-09-01T09:03:58.666Z",
+    "frontmatter": {
+      "correlation_key": "a154bb7a3997859c",
+      "domains": [
+        "mobile-core",
+        "transport"
+      ],
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "scope": "inter-domain",
+      "score": 95,
+      "services": [
+        "sgi-data"
+      ]
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+    "tags": [],
+    "title": "Correlation cluster a154bb7a3997859c",
+    "type": "correlation-cluster",
+    "updated_at": "2026-09-01T09:03:58.666Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "41b0a6a3a9723c83085c2d0b54c48e20fb986b3de02d37c0042baf64b21cec9c",
+    "created_at": "2026-09-01T09:03:53.603Z",
+    "frontmatter": {
+      "correlation_key": "05841af2e3f4f430",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "promotion_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "score": 95
+    },
+    "outgoing_links": [],
+    "slug": "correlation/mobile-core/decisions/05841af2e3f4f430",
+    "tags": [],
+    "title": "Correlation decision 05841af2e3f4f430",
+    "type": "correlation-decision",
+    "updated_at": "2026-09-01T09:03:53.603Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "cdce7206e4653da3e3fb0ac3cd708bef181733a2797a30b75fd6b5daaba2f650",
+    "created_at": "2026-09-01T09:04:04.071Z",
+    "frontmatter": {
+      "correlation_key": "54db6ef325fbf758",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "promotion_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "score": 95
+    },
+    "outgoing_links": [],
+    "slug": "correlation/mobile-core/decisions/54db6ef325fbf758",
+    "tags": [],
+    "title": "Correlation decision 54db6ef325fbf758",
+    "type": "correlation-decision",
+    "updated_at": "2026-09-01T09:04:04.071Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "has-decision",
+        "to_slug": "correlation/mobile-core/decisions/a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "78471ba5fb5eb1379e18e82ef65debe9a6220aeca45de960bff0b7dc7934f060",
+    "created_at": "2026-09-01T09:03:58.803Z",
+    "frontmatter": {
+      "correlation_key": "a154bb7a3997859c",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "outcome": "incident",
+      "promotion_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "score": 95
+    },
+    "outgoing_links": [],
+    "slug": "correlation/mobile-core/decisions/a154bb7a3997859c",
+    "tags": [],
+    "title": "Correlation decision a154bb7a3997859c",
+    "type": "correlation-decision",
+    "updated_at": "2026-09-01T09:03:58.803Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "24b93033e404ac770ffc086af19e882b832c18991040b5d770d1ab07ed27bebf",
+    "created_at": "2026-09-01T09:03:53.129Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "05841af2e3f4f430",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting Voice Call Setup across mobile-core, ran, transport",
+    "type": "hypothesis",
+    "updated_at": "2026-09-01T09:03:53.129Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "0d78898733bf2514472e5c72906183420428bb622519278a9d2739926881463c",
+    "created_at": "2026-09-01T09:04:03.698Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "54db6ef325fbf758",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core, ran",
+    "type": "hypothesis",
+    "updated_at": "2026-09-01T09:04:03.698Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "bd8e60175729a02f65cb79bccbae1f1ab6072405c4ae64bd45d92458fd1189f4",
+    "created_at": "2026-09-01T09:03:58.387Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "a154bb7a3997859c",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      }
+    ],
+    "slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting SGI Data across mobile-core, transport",
+    "type": "hypothesis",
+    "updated_at": "2026-09-01T09:03:58.387Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      }
+    ],
+    "content_hash": "54cd40aca501166d356e22316ec15732ecab2034e8c7982fb25a47012fdcc5a7",
+    "created_at": "2026-09-01T09:03:54.683Z",
+    "frontmatter": {
+      "component_kind": "pcscf",
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-voice-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/ims/functions/pcscf-01",
+    "tags": [],
+    "title": "pcscf-01 (pcscf, mobile-core)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:54.683Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup"
+      }
+    ],
+    "content_hash": "e8f218c90c804353eb7b42741f41636b567f54323023ae632344fc88430211d0",
+    "created_at": "2026-09-01T09:03:53.916Z",
+    "frontmatter": {
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault",
+          "change"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
+    "tags": [],
+    "title": "Voice Call Setup",
+    "type": "service-procedure",
+    "updated_at": "2026-09-01T09:03:53.916Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-hss-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      }
+    ],
+    "content_hash": "d4e654f1356bcb32fa1f78577cc4933202446e64938aac92b1a5b74cd511e209",
+    "created_at": "2026-09-01T09:04:04.857Z",
+    "frontmatter": {
+      "component_kind": "hss",
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-cp-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/lte/functions/hss-01",
+    "tags": [],
+    "title": "hss-01 (hss, mobile-core)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:04:04.857Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-mme-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      }
+    ],
+    "content_hash": "deef2be4ca4ee0934aac045511d92a0e4dc8d580a4b2706e973c75244a007fa8",
+    "created_at": "2026-09-01T09:04:04.500Z",
+    "frontmatter": {
+      "component_kind": "mme",
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-cp-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/lte/functions/mme-01",
+    "tags": [],
+    "title": "mme-01 (mme, mobile-core)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:04:04.500Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach"
+      }
+    ],
+    "content_hash": "c3c03a88ba4de558eb384939b9016712e41559d02bd32640cbfcb460518be533",
+    "created_at": "2026-09-01T09:04:04.319Z",
+    "frontmatter": {
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault",
+          "change"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
+    "tags": [],
+    "title": "LTE Attach",
+    "type": "service-procedure",
+    "updated_at": "2026-09-01T09:04:04.319Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      }
+    ],
+    "content_hash": "dcca331daafd01abcf4e6fae579476a6e25caf481aed92727b54cf76c78a2358",
+    "created_at": "2026-09-01T09:03:59.612Z",
+    "frontmatter": {
+      "component_kind": "firewall-nat",
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-up-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/ps/functions/nat-fw-01",
+    "tags": [],
+    "title": "nat-fw-01 (firewall-nat, mobile-core)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:59.612Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      }
+    ],
+    "content_hash": "38b2a7189f6bcd3e3ff78bbc146714a86e08a00b79de35d3651347d30124e6c0",
+    "created_at": "2026-09-01T09:03:59.225Z",
+    "frontmatter": {
+      "component_kind": "pgw",
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-up-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/ps/functions/pgw-01",
+    "tags": [],
+    "title": "pgw-01 (pgw, mobile-core)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:59.225Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding"
+      }
+    ],
+    "content_hash": "0556de8765d3c6fb6cab0dffedd88f477b8cc31cbd7ea2e0cf23efaba3a3378a",
+    "created_at": "2026-09-01T09:03:59.059Z",
+    "frontmatter": {
+      "domain": "mobile-core",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault",
+          "change"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
+    "tags": [],
+    "title": "SGI Data",
+    "type": "service-procedure",
+    "updated_at": "2026-09-01T09:03:59.059Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "classifies-with",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix"
+      }
+    ],
+    "content_hash": "5d239ad542a4b9faf98095b3effff755e2cfdc15bc534891ed30664e8ed89bfb",
+    "created_at": "2026-09-07T18:22:40.254Z",
+    "frontmatter": {
+      "domain": "Mobile Core",
+      "network_elements": {
+        "hss": {
+          "functions": [
+            "EPS subscription profiles",
+            "APN allocation",
+            "MME location tracking"
+          ],
+          "generation": "4G/LTE",
+          "key_mml_commands": [
+            "DSP SUBAPN",
+            "DSP EPSSUB",
+            "MOD SUBAPN"
+          ],
+          "name": "Home Subscriber Server (HSS)"
+        },
+        "imss": {
+          "functions": [
+            "VoLTE / VoNR subscription entitlement",
+            "SIP registration authority"
+          ],
+          "generation": "4G/5G",
+          "key_mml_commands": [
+            "DSP SUBCSI",
+            "MOD SUBCSI"
+          ],
+          "name": "IP Multimedia Subsystem Server (IMSS)"
+        },
+        "pcf": {
+          "functions": [
+            "QoS profile authorization",
+            "Dynamic AMBR enforcement",
+            "Rating group provisioning"
+          ],
+          "generation": "4G/5G",
+          "key_mml_commands": [
+            "DSP PCFPOLICY",
+            "MOD PCFPOLICY"
+          ],
+          "name": "Policy Control Function (PCF) / PCRF"
+        },
+        "sps_dra": {
+          "functions": [
+            "Diameter routing",
+            "MNP route translation",
+            "Cross-operator signaling relay"
+          ],
+          "generation": "4G/5G",
+          "key_mml_commands": [
+            "DSP DIAMPTR",
+            "DSP MNPTBL"
+          ],
+          "name": "Signaling Proxy Server (SPS) / Diameter Routing Agent (DRA)"
+        },
+        "udm": {
+          "functions": [
+            "Subscription management",
+            "Authentication credential generation",
+            "Access authorization"
+          ],
+          "generation": "5G",
+          "key_mml_commands": [
+            "DSP UDM5GSUB",
+            "CHK 5GSUBALIGN",
+            "MOD UDM5GSUB"
+          ],
+          "name": "Unified Data Management (UDM)"
+        },
+        "ugw": {
+          "functions": [
+            "User plane packet routing",
+            "GTP-U encapsulation",
+            "Gx/Gy Diameter interface"
+          ],
+          "generation": "4G/5G",
+          "key_mml_commands": [
+            "DSP BEARENTITY",
+            "DSP CHGPROFILE"
+          ],
+          "name": "Unified Gateway (UGW / PGW-SGW / UPF)"
+        },
+        "usn": {
+          "functions": [
+            "Mobility management",
+            "Tracking Area Updates (TAU)",
+            "S1-MME signaling"
+          ],
+          "generation": "4G/LTE",
+          "key_mml_commands": [
+            "DSP MMEINFO",
+            "DSP TAULIST"
+          ],
+          "name": "Unified Service Node (USN / MME)"
+        }
+      },
+      "protocols": {
+        "diameter_gx_gy": {
+          "critical_identifiers": {
+            "rating_group": 432,
+            "service_context_id": "data@telecom.operator.ae"
+          },
+          "governing_bodies": [
+            "3GPP TS 29.212",
+            "3GPP TS 32.299"
+          ],
+          "name": "Diameter Gx / Gy",
+          "result_codes": {
+            "DIAMETER_AUTHORIZATION_REJECTED": {
+              "code": 5003,
+              "description": "Gx authorization failed at PCF/PCRF.",
+              "severity": "HIGH"
+            },
+            "DIAMETER_CREDIT_LIMIT_REACHED": {
+              "code": 4012,
+              "description": "Commercial Fair Usage Policy (FUP) cap reached; throttled down to 64kbps.",
+              "severity": "MEDIUM"
+            },
+            "DIAMETER_RATING_FAILED": {
+              "code": 5031,
+              "description": "Gy rating failed on Rating-Group 432. Core unbarred but balance deduction failed.",
+              "severity": "CRITICAL"
+            },
+            "DIAMETER_USER_UNKNOWN": {
+              "code": 5001,
+              "description": "Subscriber not recognized in OCS/PCRF billing database.",
+              "severity": "CRITICAL"
+            }
+          }
+        },
+        "gtpv2_c": {
+          "cause_codes": {
+            "MANDATORY_IE_MISSING": {
+              "code": 70,
+              "description": "MME omitted required Information Element in Session Creation.",
+              "severity": "HIGH"
+            },
+            "NO_RESOURCES_AVAILABLE": {
+              "code": 73,
+              "description": "UGW / SMF-UPF memory/bearer pool exhaustion.",
+              "severity": "HIGH"
+            },
+            "SYSTEM_FAILURE": {
+              "code": 8,
+              "description": "Internal core node system failure during Create Session Request.",
+              "severity": "CRITICAL"
+            }
+          },
+          "governing_bodies": [
+            "3GPP TS 29.274"
+          ],
+          "name": "GTPv2-C (Control Plane)"
+        },
+        "http2_sbi": {
+          "governing_bodies": [
+            "3GPP TS 29.500"
+          ],
+          "interfaces": {
+            "N10": "UDM Subscription Service",
+            "N11": "SMF-AMF Session Management",
+            "N7": "PCF Policy Association"
+          },
+          "name": "5G Service Based Interface (SBI) HTTP/2"
+        },
+        "sip_ims": {
+          "governing_bodies": [
+            "RFC 3261",
+            "3GPP TS 24.229"
+          ],
+          "name": "SIP / IMS Signaling",
+          "response_codes": {
+            "FORBIDDEN": {
+              "code": 403,
+              "description": "VoLTE subscriber barred or unauthorized in IMS HSS/IMSS."
+            },
+            "NOT_ACCEPTABLE_HERE": {
+              "code": 488,
+              "description": "Audio codec mismatch (e.g. AMR-WB vs standard AMR)."
+            },
+            "SERVICE_UNAVAILABLE": {
+              "code": 503,
+              "description": "P-CSCF or S-CSCF transient overload."
+            }
+          }
+        }
+      },
+      "role": "Mobile RTR"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix",
+    "tags": [],
+    "title": "Protocols & Network Elements Root Cause Findings Matrix",
+    "type": "concept",
+    "updated_at": "2026-09-07T21:15:28.581Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "structures-journey",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey"
+      }
+    ],
+    "content_hash": "4904f6941a5477e6dfe73f21e1b33de475fd4a1f8b05896d25f229272ce0e1eb",
+    "created_at": "2026-09-07T18:22:44.240Z",
+    "frontmatter": {
+      "compliance_targets": {
+        "aola_target_hours": 2,
+        "ola_target_hours": 6,
+        "sla_target_hours": 48
+      },
+      "disposition_breakdown": {
+        "escalated_to_core_l2": {
+          "description": "Underlying core node card or protocol bug requiring vendor TAC.",
+          "percentage": 4.5,
+          "reason_code": "ESCALATED_L2_HARDWARE_DEFECT"
+        },
+        "reassigned_to_it_provisioning": {
+          "description": "BSS order stuck or CRM activation not pushed to UDM/HSS.",
+          "percentage": 70.4,
+          "reason_code": "PROV_MISMATCH_CORE_BSS"
+        },
+        "rejected_to_frontline": {
+          "description": "Missing mandatory fields or commercial billing suspension.",
+          "percentage": 8.3,
+          "reason_code": "GATE_0_INVALID_PRECHECKS"
+        },
+        "resolved_in_rtr": {
+          "description": "Resolved on first touch or after transient latch cleanup.",
+          "percentage": 16.8,
+          "reason_code": "RESOLVED_CORE_VERIFIED"
+        }
+      },
+      "domain": "Mobile Core",
+      "gating_rules": {
+        "gate_0": {
+          "exit_condition": "Reject back to CRM if mandatory attributes or active commercial profile missing",
+          "name": "Ingestion & Frontline Precheck Validation"
+        },
+        "gate_1": {
+          "exit_condition": "Reassign to HPSA if BSS-Core profile mismatch discovered (~70% of tickets)",
+          "name": "Location Discovery & Core Profile Audit"
+        },
+        "gate_2": {
+          "exit_condition": "Reassign to Billing/OCS if FUP cap or non-payment suspension discovered",
+          "name": "Commercial & BSS Subscription Check"
+        },
+        "gate_3": {
+          "exit_condition": "Reassign to IREG/Carrier Relations if partner roaming agreement missing",
+          "name": "Roaming Checklist & Inter-Carrier Audit"
+        },
+        "gate_4": {
+          "exit_condition": "Resolve in RTR if transient latch cleared; reassign to Core L2 if hardware fault",
+          "name": "Active Troubleshooting & Runbook Execution"
+        },
+        "gate_5": {
+          "exit_condition": "Correlate OSIX signaling; escalate to Vendor TAC if protocol defect",
+          "name": "Deep Signaling Trace Analysis"
+        }
+      },
+      "role": "Mobile RTR",
+      "role_id": "mobile_rtr",
+      "sla_governance": {
+        "aola_description": "Time spent strictly inside Mobile Core RTR queue before resolution or reassignment.",
+        "aola_target_hours": 2,
+        "ola_description": "Internal OLA across core NOC & IT provisioning queues (CS, PS, HPSA, Billing).",
+        "ola_target_hours": 6,
+        "sla_description": "End-to-end customer turnaround time from CRM entry to closure.",
+        "sla_target_hours": 48
+      },
+      "zero_pii_mandate": {
+        "enforced": true,
+        "msisdn_masking": "e.g. 97150xxxxxxx",
+        "subscriber_identifier": "subscriber_token (e.g. SUB_TOK_7B9A2F)",
+        "ticket_identifier": "ticket_token (e.g. TT-984210)"
+      }
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+        "link_type": "routes-through",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/queue-topology"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+        "link_type": "aggregated-by",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary"
+      }
+    ],
+    "slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+    "tags": [],
+    "title": "Customer Trouble Ticket Journey: Schema, SLA Hierarchy & Bouncing Rules",
+    "type": "procedure",
+    "updated_at": "2026-09-07T21:15:27.569Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "executes-with",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks"
+      }
+    ],
+    "content_hash": "8410e18f6eb84bc37b43d80198243f943eae37726f708b89f426d0003523adcc",
+    "created_at": "2026-09-07T18:22:42.638Z",
+    "frontmatter": {
+      "catalog_type": "huawei_mml_runbooks",
+      "domain": "Mobile Core",
+      "governance_policies": {},
+      "it_provisioning_remediation": {
+        "commands": [
+          {
+            "command": "MOD SUBAPN: MSISDN=\"{msisdn}\", APN=\"{apn}\", MAXBITRATEUL=100000, MAXBITRATEDL=300000;",
+            "description": "Modify subscriber APN QoS bandwidth allocation."
+          },
+          {
+            "command": "MOD UDM5GSUB: MSISDN=\"{msisdn}\", SNSSAI=1-010203, DEFAULTDNN=\"internet\";",
+            "description": "Modify 5G subscriber slice configuration."
+          },
+          {
+            "command": "MOD SUBCSI: MSISDN=\"{msisdn}\", CSITYPE=OCSI, DEFCALLHANDLING=CONTINUE;",
+            "description": "Update CAMEL subscription parameters."
+          }
+        ],
+        "governance": "Requires Correlated BSS Activation Order ID"
+      },
+      "read_only_inspection": [
+        {
+          "command": "DSP SUBAPN: MSISDN=\"{msisdn}\";",
+          "description": "Display subscribed APNs, default APN, and subscribed QoS."
+        },
+        {
+          "command": "LST APN: APN=\"{apn}\";",
+          "description": "List APN configuration on gateway/SMF."
+        },
+        {
+          "command": "DSP UDM5GSUB: MSISDN=\"{msisdn}\", SNSSAI=1-010203;",
+          "description": "Display 5G SA slice authorization and subscribed DNNs."
+        },
+        {
+          "command": "DSP PCFPOLICY: SUBSCRIBERID=\"{msisdn}\";",
+          "description": "Inspect PCF policy rules and authorized AMBR."
+        },
+        {
+          "command": "CHK 5GSUBALIGN: MSISDN=\"{msisdn}\";",
+          "description": "Check synchronization between UDM and PCF subscription data."
+        },
+        {
+          "command": "DSP SUBCSI: MSISDN=\"{msisdn}\";",
+          "description": "Display CAMEL subscription info for intelligent network services."
+        },
+        {
+          "command": "DSP SUBBAR: MSISDN=\"{msisdn}\";",
+          "description": "Check operator barring and call restriction states."
+        },
+        {
+          "command": "DSP ROAMPOLICY: MSISDN=\"{msisdn}\", MCC={mcc}, MNC={mnc};",
+          "description": "Audit roaming policy for visited network partner."
+        }
+      ],
+      "role": "Mobile RTR",
+      "transient_latch_cleanup": [
+        {
+          "command": "PURGE MS: MSISDN=\"{msisdn}\", IMSI=\"{imsi}\";",
+          "description": "Purge stale subscriber context from memory."
+        },
+        {
+          "command": "CANCEL LOC: MSISDN=\"{msisdn}\", VLRID={vlrid};",
+          "description": "Cancel stuck location registration in VLR."
+        },
+        {
+          "command": "SET GPRSLOCK: MSISDN=\"{msisdn}\", STATUS=UNLOCK;",
+          "description": "Unlock transient core GPRS lock."
+        }
+      ]
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks",
+    "tags": [],
+    "title": "Huawei MML Runbooks",
+    "type": "concept",
+    "updated_at": "2026-09-07T21:15:28.045Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "9b90a152e6a982e57912258be756d2ff2deacd70f0ce712afc794a192c70976f",
+    "created_at": "2026-09-07T18:21:55.865Z",
+    "frontmatter": {},
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "classifies-with",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "structures-journey",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "executes-with",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "diagnoses",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog"
+      }
+    ],
+    "slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+    "tags": [],
+    "title": "Mobile RTR Multi-Stage Investigation & Troubleshooting Pipeline",
+    "type": "concept",
+    "updated_at": "2026-09-07T18:22:38.896Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+        "link_type": "routes-through",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/queue-topology"
+      }
+    ],
+    "content_hash": "db531c9669358738ed922316eb0261074ee000b9e92c14f4ff57edd79ef4c173",
+    "created_at": "2026-09-07T18:22:45.483Z",
+    "frontmatter": {
+      "bouncing_rules": {
+        "alert_threshold": 2,
+        "max_allowed_bounces": 1,
+        "reassignment_requires_reason": true
+      },
+      "description": "Allowed operational queues, hop transitions, and bouncing loop rules.",
+      "queues": [
+        {
+          "category": "RTR",
+          "description": "Mobile Core Real-Time Resolution queue.",
+          "id": "RTR_Mobile_Core",
+          "ola_target_hours": 2
+        },
+        {
+          "category": "Frontline",
+          "description": "Customer Operations & Contact Center frontline intake.",
+          "id": "CRM_Frontline"
+        },
+        {
+          "category": "IT_Provisioning",
+          "description": "High Performance Subscriber Activation order sync queue.",
+          "id": "HPSA",
+          "ola_target_hours": 6
+        },
+        {
+          "category": "Commercial",
+          "description": "Billing and payment dispute resolution.",
+          "id": "Billing",
+          "ola_target_hours": 6
+        },
+        {
+          "category": "Commercial",
+          "description": "Online Charging System rating & prepaid balance.",
+          "id": "OCS",
+          "ola_target_hours": 6
+        },
+        {
+          "category": "NOC_Internal",
+          "description": "Circuit Switched Core Network Operations.",
+          "id": "CS",
+          "ola_target_hours": 6
+        },
+        {
+          "category": "NOC_Internal",
+          "description": "Packet Switched Core Network Operations.",
+          "id": "PS",
+          "ola_target_hours": 6
+        },
+        {
+          "category": "Engineering_L2",
+          "description": "CS Core Tier-2 Advanced Engineering.",
+          "id": "CS_L2",
+          "ola_target_hours": 12
+        },
+        {
+          "category": "Engineering_L2",
+          "description": "PS Core Tier-2 Advanced Engineering.",
+          "id": "PS_L2",
+          "ola_target_hours": 12
+        }
+      ],
+      "role": "mobile_rtr",
+      "routing_transitions": {
+        "CRM_Frontline": {
+          "allowed_next_queues": [
+            "RTR_Mobile_Core"
+          ]
+        },
+        "CS": {
+          "allowed_next_queues": [
+            "RTR_Mobile_Core",
+            "CS_L2"
+          ]
+        },
+        "HPSA": {
+          "allowed_next_queues": [
+            "RTR_Mobile_Core",
+            "Billing"
+          ]
+        },
+        "PS": {
+          "allowed_next_queues": [
+            "RTR_Mobile_Core",
+            "PS_L2"
+          ]
+        },
+        "RTR_Mobile_Core": {
+          "allowed_next_queues": [
+            "HPSA",
+            "Billing",
+            "OCS",
+            "CS",
+            "PS",
+            "CS_L2",
+            "PS_L2",
+            "CRM_Frontline"
+          ]
+        }
+      },
+      "topology_type": "queue_routing_matrix"
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/roles/mobile-rtr/queue-topology",
+    "tags": [],
+    "title": "Mobile Core RTR Queue Topology",
+    "type": "concept",
+    "updated_at": "2026-09-07T21:15:27.814Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+        "link_type": "aggregated-by",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary"
+      }
+    ],
+    "content_hash": "bdbb4d9b0190b7b4bfa567cfbf1c4ca6365d7e15b43c025b2e2bf1692f4dac65",
+    "created_at": "2026-09-07T18:22:46.395Z",
+    "frontmatter": {},
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary",
+    "tags": [],
+    "title": "RTR Shift-Level Curated Ticket Summary",
+    "type": "concept",
+    "updated_at": "2026-09-07T18:22:46.395Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+        "link_type": "diagnoses",
+        "to_slug": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog"
+      }
+    ],
+    "content_hash": "72b936d6b00cd5cf3f594b8c15498c99e3fd9c5eb0a45caa7d2a0eb6f87768b5",
+    "created_at": "2026-09-07T18:22:41.401Z",
+    "frontmatter": {
+      "domain": "Mobile Core",
+      "role": "Mobile RTR",
+      "services": {
+        "corporate_apn": {
+          "core_finding": "RADIUS_AUTH_FAILED",
+          "interfaces": [
+            "Radius AAA",
+            "GTPv1-U GRE",
+            "IPSec"
+          ],
+          "name": "Corporate Private APN & M2M",
+          "typical_symptom": "IoT/POS device cannot reach enterprise host."
+        },
+        "esim": {
+          "core_finding": "ESIM_PROFILE_STATE_STUCK",
+          "interfaces": [
+            "SM-DP+",
+            "TS.43 Entitlement Server"
+          ],
+          "name": "eSIM Digital Profile Lifecycle",
+          "typical_symptom": "Profile download failed; smartwatch pairing error."
+        },
+        "mobile_data": {
+          "core_finding": "GTPV2_CAUSE_73_NO_RESOURCES",
+          "interfaces": [
+            "GTPv2-C",
+            "Diameter Gx/Gy",
+            "N7/N11"
+          ],
+          "name": "Mobile High-Speed Broadband (4G/5G)",
+          "typical_symptom": "Cannot attach to data network; bearer creation rejected."
+        },
+        "roaming": {
+          "core_finding": "ROAMING_PARTNER_BARRED",
+          "interfaces": [
+            "S6a",
+            "S8",
+            "S9",
+            "Diameter S6a"
+          ],
+          "name": "Outbound / Inbound International Roaming",
+          "typical_symptom": "No network coverage when abroad; registration rejected."
+        },
+        "volte_vonr": {
+          "core_finding": "CORE_PROFILE_APN_SLICE_MISSING",
+          "interfaces": [
+            "SIP IMS",
+            "HSS IMSS",
+            "Ud",
+            "Diameter Cx/Dx"
+          ],
+          "name": "VoLTE & VoNR Voice Services",
+          "typical_symptom": "Calls drop immediately; call attempt drops to 3G or fails."
+        }
+      },
+      "tools": [
+        {
+          "id": "osix",
+          "name": "OSIX Signaling Probe",
+          "protocols": [
+            "Diameter Gx/Gy",
+            "GTPv2-C",
+            "SIP",
+            "MAP",
+            "HTTP/2 SBI"
+          ],
+          "purpose": "Real-time call trace inspection and end-to-end packet decoding."
+        },
+        {
+          "id": "csrd",
+          "name": "CSRD Call Detail Records",
+          "protocols": [
+            "CDR Files",
+            "Usage Dumps"
+          ],
+          "purpose": "Historical voice call, SMS, and data volume transaction auditing."
+        },
+        {
+          "id": "huawei_lmt",
+          "name": "Huawei iMaster NCE / LMT",
+          "protocols": [
+            "MML Interface",
+            "SSH/Telnet"
+          ],
+          "purpose": "Read-only MML subscriber audits, bearer display, and transient lock cleanup."
+        },
+        {
+          "id": "sm_dp_plus",
+          "name": "SM-DP+ eSIM Server",
+          "protocols": [
+            "GSMA SGP.22"
+          ],
+          "purpose": "eSIM profile state auditing (Released, Downloaded, Installed, Enabled)."
+        },
+        {
+          "id": "radius_aaa",
+          "name": "Radius AAA Server",
+          "protocols": [
+            "RADIUS Authentication & Accounting"
+          ],
+          "purpose": "Corporate Private APN framed-IP and tunnel authentication logging."
+        },
+        {
+          "id": "ocs_care",
+          "name": "OCS Care Portal",
+          "protocols": [
+            "CAMEL / CAP",
+            "Diameter Gy"
+          ],
+          "purpose": "Rating group 432 tariff balance, reverse charging, and TFN 800 translation."
+        }
+      ]
+    },
+    "outgoing_links": [],
+    "slug": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog",
+    "tags": [],
+    "title": "Specialized Services & Diagnostic Tools Catalog",
+    "type": "concept",
+    "updated_at": "2026-09-07T21:15:28.319Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-ran-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      }
+    ],
+    "content_hash": "980b31e7e2ab447a9fb6b67812056b19c3f6f5297e9ad81b59f096c44dbf92e3",
+    "created_at": "2026-09-01T09:04:05.221Z",
+    "frontmatter": {
+      "component_kind": "enodeb",
+      "domain": "ran",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "site-17",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/ran/functions/enodeb-17",
+    "tags": [],
+    "title": "enodeb-17 (enodeb, ran)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:04:05.221Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      }
+    ],
+    "content_hash": "d78cfe9fa3db377aa5a09996a7ced9acc4b9a45401706d2d58019fd4dc427e71",
+    "created_at": "2026-09-01T09:03:54.094Z",
+    "frontmatter": {
+      "component_kind": "enodeb",
+      "domain": "ran",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "site-22",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/ran/functions/enodeb-22",
+    "tags": [],
+    "title": "enodeb-22 (enodeb, ran)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:54.094Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      }
+    ],
+    "content_hash": "ba98e7d95aad5d2ced4b514b5a17c6459722456731514c45e7de31ef3aaca6ac",
+    "created_at": "2026-09-01T09:03:59.974Z",
+    "frontmatter": {
+      "component_kind": "edge-router",
+      "domain": "transport",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "dc-up-1",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/transport/functions/sgi-edge-01",
+    "tags": [],
+    "title": "sgi-edge-01 (edge-router, transport)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:59.974Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      }
+    ],
+    "content_hash": "253811d0ae39238c451130fbdbc33582f9e7f571e60c87744ab5740007fa39c6",
+    "created_at": "2026-09-01T09:03:55.043Z",
+    "frontmatter": {
+      "component_kind": "backhaul-link",
+      "domain": "transport",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance",
+          "change"
+        ]
+      },
+      "location": "site-22",
+      "source": "grafana-alerting"
+    },
+    "outgoing_links": [],
+    "slug": "domains/transport/functions/voice-backhaul-01",
+    "tags": [],
+    "title": "voice-backhaul-01 (backhaul-link, transport)",
+    "type": "domain-function",
+    "updated_at": "2026-09-01T09:03:55.043Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      }
+    ],
+    "content_hash": "18307eabbc95a180fcebf3706d3753ae474979404f081012133d76065f1e4cc0",
+    "created_at": "2026-08-31T10:54:43.596Z",
+    "frontmatter": {
+      "component_kind": "hss",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "hss-01",
+      "observed_at": "2026-08-31T08:21:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-attach-hss-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-hss-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-attach-hss-001",
+    "tags": [],
+    "title": "Major mobile-core alarm DIAMETER_ULR_TIMEOUTS_HIGH on hss-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:05.038Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      }
+    ],
+    "content_hash": "067d9d05b9be9292f39bf1aee436e553d8c785b7fa98664c474aba76f365e54b",
+    "created_at": "2026-08-31T10:54:43.169Z",
+    "frontmatter": {
+      "component_kind": "mme",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "mme-01",
+      "observed_at": "2026-08-31T08:20:00+00:00",
+      "severity": "critical",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-attach-mme-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-mme-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-attach-mme-001",
+    "tags": [],
+    "title": "Critical mobile-core alarm ATTACH_REJECT_RATE_HIGH on mme-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:04.677Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      }
+    ],
+    "content_hash": "96cd71b9d7a03aacf5b528169d68893ddac136fc523f7913e448e021560da8bb",
+    "created_at": "2026-08-31T10:54:44.161Z",
+    "frontmatter": {
+      "component_kind": "enodeb",
+      "domain": "ran",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "enodeb-17",
+      "observed_at": "2026-08-31T08:23:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-attach-ran-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-attach-ran-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-attach-ran-001",
+    "tags": [],
+    "title": "Major ran alarm S1AP_INITIAL_UE_MSG_DROP on enodeb-17",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:05.386Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      }
+    ],
+    "content_hash": "ccf41ce41266ed4fc8e5764ac25c37b62b4bb7a86b92604ccadf71f15845a04f",
+    "created_at": "2026-08-31T10:54:35.452Z",
+    "frontmatter": {
+      "component_kind": "pcscf",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "pcscf-01",
+      "observed_at": "2026-08-31T06:03:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-cssr-ims-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-cssr-ims-001",
+    "tags": [],
+    "title": "Major mobile-core alarm SIP_INVITE_FAILURE_RATE_HIGH on pcscf-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:54.852Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      }
+    ],
+    "content_hash": "df96a28090988dfdb9b5fc18c2300ad971393218a21435cf9462dd337074c384",
+    "created_at": "2026-08-31T10:54:35.054Z",
+    "frontmatter": {
+      "component_kind": "enodeb",
+      "domain": "ran",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "enodeb-22",
+      "observed_at": "2026-08-31T06:00:00+00:00",
+      "severity": "critical",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-cssr-ran-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-cssr-ran-001",
+    "tags": [],
+    "title": "Critical ran alarm RRC_SETUP_FAILURE_SPIKE on enodeb-22",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:54.459Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      }
+    ],
+    "content_hash": "afaf21539c8b9ad5d5669cbef9136b54372770c4d3078edd79cc5931af99d6a5",
+    "created_at": "2026-08-31T10:54:35.856Z",
+    "frontmatter": {
+      "component_kind": "backhaul-link",
+      "domain": "transport",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "voice-backhaul-01",
+      "observed_at": "2026-08-31T06:04:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-cssr-transport-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-cssr-transport-001",
+    "tags": [],
+    "title": "Major transport alarm PACKET_LOSS_HIGH on voice-backhaul-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:55.202Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      }
+    ],
+    "content_hash": "8df042fae57b2a6c20892bd94b7eb555ceab5876d9933b2c8eba7a15ee9f793c",
+    "created_at": "2026-08-31T10:54:39.250Z",
+    "frontmatter": {
+      "component_kind": "firewall-nat",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "nat-fw-01",
+      "observed_at": "2026-08-31T07:12:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-sgi-gilan-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
+    "tags": [],
+    "title": "Major mobile-core alarm NAT_SESSION_TABLE_HIGH on nat-fw-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:59.782Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      }
+    ],
+    "content_hash": "991fbe6e6ee5bcdd1dc7ca2d5f87ffe2d7b09f61178fbe2bb424bb6679bb0ce4",
+    "created_at": "2026-08-31T10:54:38.856Z",
+    "frontmatter": {
+      "component_kind": "pgw",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "pgw-01",
+      "observed_at": "2026-08-31T07:10:00+00:00",
+      "severity": "critical",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-sgi-pgw-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
+    "tags": [],
+    "title": "Critical mobile-core alarm SGI_THROUGHPUT_DROP on pgw-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:59.415Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      }
+    ],
+    "content_hash": "844266ba4b9216ab1ca4e86fa8dc38eefa4c6bf8de32b5b07f7e117bfcd0992c",
+    "created_at": "2026-08-31T10:54:39.628Z",
+    "frontmatter": {
+      "component_kind": "edge-router",
+      "domain": "transport",
+      "evidence_kind": "alarm",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "object_id": "sgi-edge-01",
+      "observed_at": "2026-08-31T07:14:00+00:00",
+      "severity": "major",
+      "source": "grafana-alerting",
+      "source_event_id": "grafana-alert-sgi-transport-001"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
+        "link_type": "observed-on",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      }
+    ],
+    "slug": "grafana/alerts/grafana-alert-sgi-transport-001",
+    "tags": [],
+    "title": "Major transport alarm INTERFACE_DISCARDS_HIGH on sgi-edge-01",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:00.130Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      }
+    ],
+    "content_hash": "d7720b1ce597784ce469ec03d9de280fa13843544f456819246b06de4cc7e951",
+    "created_at": "2026-08-31T10:54:45.748Z",
+    "frontmatter": {
+      "breached": false,
+      "domain": "mobile-core",
+      "evidence_kind": "log",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/explore?schemaVersion=1&panes=attach-loki",
+      "object_id": "mme-01",
+      "observed_at": "2026-08-31T08:22:00+00:00",
+      "query_hash": "attach-loki-v1",
+      "service_id": "lte-attach",
+      "source": "grafana-loki-attach-001",
+      "source_kind": "loki",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T08:25:00Z",
+      "window_start": "2026-08-31T08:15:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/logs/grafana-loki-attach-001",
+    "tags": [],
+    "title": "MME attach reject logs increased",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:06.565Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      }
+    ],
+    "content_hash": "7c67d8d607d944305831efa36642c360881cb832678d37e901f7d6d49fc0820d",
+    "created_at": "2026-08-31T10:54:37.482Z",
+    "frontmatter": {
+      "breached": false,
+      "domain": "mobile-core",
+      "evidence_kind": "log",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/explore?schemaVersion=1&panes=cssr-loki",
+      "object_id": "pcscf-01",
+      "observed_at": "2026-08-31T06:04:00+00:00",
+      "query_hash": "cssr-loki-v1",
+      "service_id": "voice-call-setup",
+      "source": "grafana-loki-cssr-001",
+      "source_kind": "loki",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T06:05:00Z",
+      "window_start": "2026-08-31T05:55:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/logs/grafana-loki-cssr-001",
+    "tags": [],
+    "title": "SIP INVITE failures increased during CSSR drop",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:56.403Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      }
+    ],
+    "content_hash": "628e01449515a25737be2ee4ee0bd2e448c3e1a1621d1785dc6e7dc0880fff05",
+    "created_at": "2026-08-31T10:54:41.227Z",
+    "frontmatter": {
+      "breached": false,
+      "domain": "mobile-core",
+      "evidence_kind": "log",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/explore?schemaVersion=1&panes=sgi-loki",
+      "object_id": "nat-fw-01",
+      "observed_at": "2026-08-31T07:13:00+00:00",
+      "query_hash": "sgi-loki-v1",
+      "service_id": "sgi-data",
+      "source": "grafana-loki-sgi-001",
+      "source_kind": "loki",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T07:15:00Z",
+      "window_start": "2026-08-31T07:05:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/logs/grafana-loki-sgi-001",
+    "tags": [],
+    "title": "NAT allocation warnings observed during SGi throughput drop",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:01.437Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      }
+    ],
+    "content_hash": "ebec39d0d61447d6d22eeaa78287ca8e65dc683d62c99ec6f1d388ede47012d0",
+    "created_at": "2026-08-31T10:54:45.190Z",
+    "frontmatter": {
+      "breached": true,
+      "domain": "mobile-core",
+      "evidence_kind": "kpi",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/d/mobile-core/attach-sr?from=2026-08-31T08:15:00Z&to=2026-08-31T08:25:00Z",
+      "object_id": "mme-01",
+      "observed_at": "2026-08-31T08:25:00+00:00",
+      "query_hash": "attach-sr-v1",
+      "service_id": "lte-attach",
+      "source": "grafana-prom-attach-001",
+      "source_kind": "prometheus",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T08:25:00Z",
+      "window_start": "2026-08-31T08:15:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/metrics/grafana-prom-attach-001",
+    "tags": [],
+    "title": "4G Attach SR dropped below intent target",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:06.168Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      }
+    ],
+    "content_hash": "1e5f7ed7f118dd5581c9473fbe8c41764e62ad62e343e122bca47220ed3d19ed",
+    "created_at": "2026-08-31T10:54:36.910Z",
+    "frontmatter": {
+      "breached": true,
+      "domain": "mobile-core",
+      "evidence_kind": "kpi",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/d/mobile-core/cssr?from=2026-08-31T05:55:00Z&to=2026-08-31T06:05:00Z",
+      "object_id": "pcscf-01",
+      "observed_at": "2026-08-31T06:05:00+00:00",
+      "query_hash": "cssr-10m-v1",
+      "service_id": "voice-call-setup",
+      "source": "grafana-prom-cssr-001",
+      "source_kind": "prometheus",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T06:05:00Z",
+      "window_start": "2026-08-31T05:55:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/metrics/grafana-prom-cssr-001",
+    "tags": [],
+    "title": "CSSR dropped below intent target for voice-call-setup",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:03:55.987Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      }
+    ],
+    "content_hash": "028730cfab00e54f7c00cf477dc0205fb164f1d38e7a23c4d5f8de843e63b4c4",
+    "created_at": "2026-08-31T10:54:40.692Z",
+    "frontmatter": {
+      "breached": true,
+      "domain": "mobile-core",
+      "evidence_kind": "kpi",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/d/mobile-core/sgi-throughput?from=2026-08-31T07:05:00Z&to=2026-08-31T07:15:00Z",
+      "object_id": "pgw-01",
+      "observed_at": "2026-08-31T07:15:00+00:00",
+      "query_hash": "sgi-throughput-v1",
+      "service_id": "sgi-data",
+      "source": "grafana-prom-sgi-001",
+      "source_kind": "prometheus",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T07:15:00Z",
+      "window_start": "2026-08-31T07:05:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/metrics/grafana-prom-sgi-001",
+    "tags": [],
+    "title": "SGi throughput dropped below committed intent",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:00.932Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+        "link_type": "grouped",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      }
+    ],
+    "content_hash": "c80bd142ec81f296f506d88c6ddcd7a110d329393a6e4900568759e700bb2c1a",
+    "created_at": "2026-08-31T10:54:41.787Z",
+    "frontmatter": {
+      "breached": false,
+      "domain": "mobile-core",
+      "evidence_kind": "trace",
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "performance"
+        ]
+      },
+      "grafana_url": "http://localhost:3000/explore?schemaVersion=1&panes=sgi-tempo",
+      "object_id": "pgw-01",
+      "observed_at": "2026-08-31T07:14:00+00:00",
+      "query_hash": "sgi-tempo-v1",
+      "service_id": "sgi-data",
+      "source": "grafana-tempo-sgi-001",
+      "source_kind": "tempo",
+      "source_namespace": "grafana",
+      "window_end": "2026-08-31T07:15:00Z",
+      "window_start": "2026-08-31T07:05:00Z"
+    },
+    "outgoing_links": [],
+    "slug": "grafana/traces/grafana-tempo-sgi-001",
+    "tags": [],
+    "title": "Packet gateway request path latency increased",
+    "type": "evidence",
+    "updated_at": "2026-09-01T09:04:01.908Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "dea52ad405c8650ed735fcef0fa48e30812948c5e54b7b8a81b7a92527bd0686",
+    "created_at": "2026-08-08T22:08:48.981Z",
+    "frontmatter": {
+      "captured_at": "2026-08-08T22:08:47.552Z",
+      "captured_via": "capture-cli"
+    },
+    "outgoing_links": [],
+    "slug": "inbox/2026-08-08-abb62c33",
+    "tags": [],
+    "title": "remember test results",
+    "type": "note",
+    "updated_at": "2026-08-08T22:08:48.981Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001"
+      }
+    ],
+    "content_hash": "f0bde566177c7563772953074a9f22e56ac79008b6f15548936366a9b6d08102",
+    "created_at": "2026-09-01T09:04:05.574Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "kpi": "4G Attach SR",
+      "observed_at": "2026-08-31T08:25:00+00:00",
+      "service_id": "lte-attach",
+      "source": "grafana-prom-attach-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/4g-attach-sr"
+      }
+    ],
+    "slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+    "tags": [],
+    "title": "4G Attach SR dropped below intent target",
+    "type": "kpi-event",
+    "updated_at": "2026-09-01T09:04:05.574Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001"
+      }
+    ],
+    "content_hash": "e7d46da26dc877ff3b75beebd044a811acb9e48f16c37c34416f4bcda2b775b3",
+    "created_at": "2026-09-01T09:03:55.377Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "kpi": "CSSR",
+      "observed_at": "2026-08-31T06:05:00+00:00",
+      "service_id": "voice-call-setup",
+      "source": "grafana-prom-cssr-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/cssr"
+      }
+    ],
+    "slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+    "tags": [],
+    "title": "CSSR dropped below intent target for voice-call-setup",
+    "type": "kpi-event",
+    "updated_at": "2026-09-01T09:03:55.377Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001"
+      }
+    ],
+    "content_hash": "7d4a34d51368bbaa64295fb1e2733cc6d055f6a9f01c896e9a344e6d3571200e",
+    "created_at": "2026-09-01T09:04:00.300Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "kpi": "SGi Throughput",
+      "observed_at": "2026-08-31T07:15:00+00:00",
+      "service_id": "sgi-data",
+      "source": "grafana-prom-sgi-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/sgi-throughput"
+      }
+    ],
+    "slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+    "tags": [],
+    "title": "SGi throughput dropped below committed intent",
+    "type": "kpi-event",
+    "updated_at": "2026-09-01T09:04:00.300Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
+        "link_type": "narrates",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/story-runs/lte-attach-54db6ef325fbf758-54db6ef325fbf758",
+        "link_type": "builds-story-for",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "ed97aa7d8753129e02eb3cc8acf8b2ad898f153c3edad4e6fde6370682dec156",
+    "created_at": "2026-09-01T09:04:03.204Z",
+    "frontmatter": {
+      "canonical_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "contributing_domains": [
+        "mobile-core",
+        "ran"
+      ],
+      "correlation_key": "54db6ef325fbf758",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/lte-attach-54db6ef325fbf758"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "has-story",
+        "to_slug": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758"
+      }
+    ],
+    "slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for LTE Attach",
+    "type": "incident",
+    "updated_at": "2026-09-01T09:04:03.204Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
+        "link_type": "narrates",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/story-runs/sgi-data-a154bb7a3997859c-a154bb7a3997859c",
+        "link_type": "builds-story-for",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "d889fcdc3801d4c17c66222308b38fda4d1953d13c66ea50678ef4ec1b98e202",
+    "created_at": "2026-09-01T09:03:57.834Z",
+    "frontmatter": {
+      "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "contributing_domains": [
+        "mobile-core",
+        "transport"
+      ],
+      "correlation_key": "a154bb7a3997859c",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/sgi-data-a154bb7a3997859c"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "has-story",
+        "to_slug": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c"
+      }
+    ],
+    "slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for SGI Data",
+    "type": "incident",
+    "updated_at": "2026-09-01T09:03:57.834Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "3835174b6b17dae171b8914a21a9a133bbea58306ba63dd78dbda16712407323",
+    "created_at": "2026-09-08T06:08:51.204Z",
+    "frontmatter": {
+      "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "contributing_domains": [
+        "mobile-core",
+        "transport"
+      ],
+      "correlation_key": "a154bb7a3997859c",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/sgi-throughput-drop",
+        "incidents/mobile-core/sgi-throughput-drop"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [],
+    "slug": "incidents/mobile-core/sgi-throughput-drop",
+    "tags": [],
+    "title": "Sgi Throughput Drop",
+    "type": "concept",
+    "updated_at": "2026-09-08T06:08:51.204Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
+        "link_type": "narrates",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "storytelling/mobile-core/story-runs/voice-call-setup-05841af2e3f4f430-05841af2e3f4f430",
+        "link_type": "builds-story-for",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "93918f757ddb64ae729557337b404600d23e8e3592e2bfd9d5f50f8eb5ec72d8",
+    "created_at": "2026-09-01T09:03:52.321Z",
+    "frontmatter": {
+      "canonical_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "contributing_domains": [
+        "mobile-core",
+        "ran",
+        "transport"
+      ],
+      "correlation_key": "05841af2e3f4f430",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/voice-call-setup-05841af2e3f4f430"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-story",
+        "to_slug": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430"
+      }
+    ],
+    "slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for Voice Call Setup",
+    "type": "incident",
+    "updated_at": "2026-09-01T09:03:52.321Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "3306a2a988d6d1dbee04cf46736d324a0ba0e5a08c100152ff20054fc32c5307",
+    "created_at": "2026-08-08T22:22:48.469Z",
+    "frontmatter": {},
+    "outgoing_links": [],
+    "slug": "install",
+    "tags": [],
+    "title": "Install",
+    "type": "note",
+    "updated_at": "2026-08-08T22:22:48.469Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/4g-attach-sr"
+      }
+    ],
+    "content_hash": "84712ee1cb77696df820605bd71f170a0374fe90d8bfb041032f58a3f95c9526",
+    "created_at": "2026-09-01T09:04:05.693Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "knowledge/mobile-core/kpis/4g-attach-sr",
+    "tags": [],
+    "title": "4G Attach Sr",
+    "type": "kpi",
+    "updated_at": "2026-09-01T09:04:05.693Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/cssr"
+      }
+    ],
+    "content_hash": "7d76a53f4e5d4af7d83e7edd463b823689e8d9ea7174b921f7cdbe4331e11d49",
+    "created_at": "2026-09-01T09:03:55.489Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "knowledge/mobile-core/kpis/cssr",
+    "tags": [],
+    "title": "Cssr",
+    "type": "kpi",
+    "updated_at": "2026-09-01T09:03:55.489Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+        "link_type": "measures",
+        "to_slug": "knowledge/mobile-core/kpis/sgi-throughput"
+      }
+    ],
+    "content_hash": "3b2dcf54e7a5a9c79785f0309b5eec44d7e55e19a2e50770006bd2d01a23d0cd",
+    "created_at": "2026-09-01T09:04:00.412Z",
+    "frontmatter": {
+      "fcaps": {
+        "primary": "performance",
+        "related": [
+          "fault"
+        ]
+      },
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "knowledge/mobile-core/kpis/sgi-throughput",
+    "tags": [],
+    "title": "SGI Throughput",
+    "type": "kpi",
+    "updated_at": "2026-09-01T09:04:00.412Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "3c7618a5b5266015a30da3e21d0e01e56defe2c366758e56bcd3c4259d99e2d0",
+    "created_at": "2026-09-01T09:04:07.441Z",
+    "frontmatter": {
+      "area": "mobile-core",
+      "asset_gap": true,
+      "confidence": 0.95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "fcaps_review": {
+        "accounting": {
+          "findings": [],
+          "gaps": [
+            "No usage or subscriber-volume evidence is linked yet."
+          ]
+        },
+        "change": {
+          "findings": [],
+          "gaps": [
+            "No change request source is linked yet."
+          ]
+        },
+        "fault": {
+          "findings": [
+            "multiple alarms in the correlation window",
+            "shared affected service",
+            "KPI breach supports service impact",
+            "independent operational evidence",
+            "service intent is violated",
+            "critical source alarm",
+            "novel alarm signature retained for review"
+          ]
+        },
+        "performance": {
+          "findings": [
+            "grafana-prom-attach-001"
+          ]
+        },
+        "security": {
+          "findings": [],
+          "gaps": [
+            "No security evidence source is linked yet."
+          ]
+        }
+      },
+      "intent_status": "violated",
+      "problem": "service procedure degraded or at risk",
+      "proposed_assets": [
+        "assets/mobile-core/playbooks/lte-attach-failure-triage",
+        "assets/mobile-core/queries/promql/lte-attach"
+      ],
+      "service_procedure": "lte-attach",
+      "status": "needs_review"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/lte-attach-failure-triage"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/lte-attach"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      }
+    ],
+    "slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+    "tags": [],
+    "title": "Learning note for LTE Attach",
+    "type": "learning-note",
+    "updated_at": "2026-09-01T09:04:07.441Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "ec164f4c04bcdf402532f6c23dec8ca1c847059e325676fd5707f07d94181fbc",
+    "created_at": "2026-09-01T09:04:02.773Z",
+    "frontmatter": {
+      "area": "mobile-core",
+      "asset_gap": true,
+      "confidence": 0.95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "fcaps_review": {
+        "accounting": {
+          "findings": [],
+          "gaps": [
+            "No usage or subscriber-volume evidence is linked yet."
+          ]
+        },
+        "change": {
+          "findings": [],
+          "gaps": [
+            "No change request source is linked yet."
+          ]
+        },
+        "fault": {
+          "findings": [
+            "multiple alarms in the correlation window",
+            "shared affected service",
+            "KPI breach supports service impact",
+            "independent operational evidence",
+            "service intent is violated",
+            "critical source alarm",
+            "novel alarm signature retained for review"
+          ]
+        },
+        "performance": {
+          "findings": [
+            "grafana-prom-sgi-001"
+          ]
+        },
+        "security": {
+          "findings": [],
+          "gaps": [
+            "No security evidence source is linked yet."
+          ]
+        }
+      },
+      "intent_status": "violated",
+      "problem": "service procedure degraded or at risk",
+      "proposed_assets": [
+        "assets/mobile-core/playbooks/sgi-data-failure-triage",
+        "assets/mobile-core/queries/promql/sgi-data"
+      ],
+      "service_procedure": "sgi-data",
+      "status": "needs_review"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/sgi-data-failure-triage"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/sgi-data"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      }
+    ],
+    "slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+    "tags": [],
+    "title": "Learning note for SGI Data",
+    "type": "learning-note",
+    "updated_at": "2026-09-01T09:04:02.773Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-learning-note",
+        "to_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "a58b4fe4e891d1b2a0e3fdd9b13f2e5e530719c48813a9f8c8f5c26b29425957",
+    "created_at": "2026-09-01T09:03:57.350Z",
+    "frontmatter": {
+      "area": "mobile-core",
+      "asset_gap": true,
+      "confidence": 0.95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "fcaps_review": {
+        "accounting": {
+          "findings": [],
+          "gaps": [
+            "No usage or subscriber-volume evidence is linked yet."
+          ]
+        },
+        "change": {
+          "findings": [],
+          "gaps": [
+            "No change request source is linked yet."
+          ]
+        },
+        "fault": {
+          "findings": [
+            "multiple alarms in the correlation window",
+            "shared affected service",
+            "KPI breach supports service impact",
+            "independent operational evidence",
+            "service intent is violated",
+            "critical source alarm",
+            "novel alarm signature retained for review"
+          ]
+        },
+        "performance": {
+          "findings": [
+            "grafana-prom-cssr-001"
+          ]
+        },
+        "security": {
+          "findings": [],
+          "gaps": [
+            "No security evidence source is linked yet."
+          ]
+        }
+      },
+      "intent_status": "violated",
+      "problem": "service procedure degraded or at risk",
+      "proposed_assets": [
+        "assets/mobile-core/playbooks/voice-call-setup-failure-triage",
+        "assets/mobile-core/queries/promql/voice-call-setup"
+      ],
+      "service_procedure": "voice-call-setup",
+      "status": "needs_review"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/playbooks/voice-call-setup-failure-triage"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "proposes-asset",
+        "to_slug": "assets/mobile-core/queries/promql/voice-call-setup"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+        "link_type": "learned-from",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      }
+    ],
+    "slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+    "tags": [],
+    "title": "Learning note for Voice Call Setup",
+    "type": "learning-note",
+    "updated_at": "2026-09-01T09:03:57.350Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0"
+      }
+    ],
+    "content_hash": "56733017204450397570763f3c13c73c2113ad810e1d2dd21caade94fc5b1a4f",
+    "created_at": "2026-08-28T20:00:04.849Z",
+    "frontmatter": {
+      "component_kind": "gnodeb",
+      "domain": "ran",
+      "evidence_kind": "alarm",
+      "object_id": "ran-gnodeb-17",
+      "observed_at": "2026-08-28T10:00:00+00:00",
+      "severity": "critical",
+      "source": "ran-nms",
+      "source_event_id": "ran-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
+    "tags": [],
+    "title": "Critical ran alarm LINK_DOWN on ran-gnodeb-17",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:33.455Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1"
+      }
+    ],
+    "content_hash": "24d9c2bc287d804ad3468f7dbcb18b1a8bff6a41afcf703db7dee43ed7867770",
+    "created_at": "2026-08-28T20:00:05.049Z",
+    "frontmatter": {
+      "component_kind": "aggregation-switch",
+      "domain": "transport",
+      "evidence_kind": "alarm",
+      "object_id": "transport-agg-sw-03",
+      "observed_at": "2026-08-28T10:02:00+00:00",
+      "severity": "major",
+      "source": "transport-nms",
+      "source_event_id": "transport-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
+    "tags": [],
+    "title": "Major transport alarm INTERFACE_ERRORS on transport-agg-sw-03",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:33.753Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2"
+      }
+    ],
+    "content_hash": "3794cafdaab97985037d5a5e7c8019e279ab18b11110e12001d2682a9b0f59bf",
+    "created_at": "2026-08-28T20:00:05.250Z",
+    "frontmatter": {
+      "component_kind": "amf",
+      "domain": "mobile-core",
+      "evidence_kind": "alarm",
+      "object_id": "core-amf-01",
+      "observed_at": "2026-08-28T10:04:00+00:00",
+      "severity": "major",
+      "source": "core-nms",
+      "source_event_id": "core-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
+    "tags": [],
+    "title": "Major mobile-core alarm CPU_HIGH on core-amf-01",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:34.056Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-81cec920e94d3a59-0"
+      }
+    ],
+    "content_hash": "793573da2b017730434ffe9d3ed21d741f00c2de680579c7ea022a20f3672230",
+    "created_at": "2026-08-28T20:00:05.758Z",
+    "frontmatter": {
+      "component_kind": "ups",
+      "domain": "power",
+      "evidence_kind": "alarm",
+      "object_id": "power-ups-77",
+      "observed_at": "2026-08-28T10:03:00+00:00",
+      "severity": "critical",
+      "source": "power-nms",
+      "source_event_id": "power-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/alarm-81cec920e94d3a59-0",
+    "tags": [],
+    "title": "Critical power alarm BATTERY_LOW on power-ups-77",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:35.874Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0"
+      }
+    ],
+    "content_hash": "a4f08e58629e63fab0e2daaa184962e64ac2d62000604986d75a925f334ad832",
+    "created_at": "2026-08-28T20:00:06.248Z",
+    "frontmatter": {
+      "component_kind": "component",
+      "domain": "ran",
+      "evidence_kind": "alarm",
+      "object_id": "unknown-cell-9",
+      "observed_at": "2026-08-28T11:20:00+00:00",
+      "severity": "warning",
+      "source": "ran-nms",
+      "source_event_id": "warning-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0",
+    "tags": [],
+    "title": "Warning ran alarm TEMP_HIGH on unknown-cell-9",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:36.548Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "CPU pegged at 98% supports the CPU saturation hypothesis",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/amf-cpu-metrics"
+      }
+    ],
+    "content_hash": "848e5c676ac6bd3e0941121b803387b9c31bb3298ad5ce85a5486ff1392a63c9",
+    "created_at": "2026-08-08T23:13:20.143Z",
+    "frontmatter": {
+      "collected_at": "2026-08-09T06:22:00Z",
+      "evidence_strength": "strong",
+      "source": "nms/amf-01/cpu",
+      "status": "accepted"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/amf-cpu-metrics",
+    "tags": [],
+    "title": "AMF-01 CPU utilization pegged at 98%",
+    "type": "evidence",
+    "updated_at": "2026-08-08T23:13:20.143Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0"
+      }
+    ],
+    "content_hash": "9eca1895cd838f902338657d6b97422ce7a859d4b534ca719a5cffb65cec1e41",
+    "created_at": "2026-08-28T20:20:34.685Z",
+    "frontmatter": {
+      "breached": true,
+      "evidence_kind": "kpi",
+      "observed_at": "2026-08-28T10:05:00+00:00",
+      "service_id": "ue-registration",
+      "source": "kpi-registration-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+    "tags": [],
+    "title": "KPI breach for ue-registration",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:34.685Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "NAS REJECT congestion codes support the CPU saturation hypothesis",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/nas-reject-logs"
+      }
+    ],
+    "content_hash": "73f1cfaee42cb3c667579e0e4d24b00ce61e2174df99ddce4e0c4d38e8708b56",
+    "created_at": "2026-08-08T23:13:21.595Z",
+    "frontmatter": {
+      "collected_at": "2026-08-09T06:24:00Z",
+      "evidence_strength": "moderate",
+      "source": "amf-01/nas-log",
+      "status": "accepted"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/nas-reject-logs",
+    "tags": [],
+    "title": "NAS REGISTRATION REJECT 'congestion' cause codes",
+    "type": "evidence",
+    "updated_at": "2026-08-08T23:13:21.595Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1"
+      }
+    ],
+    "content_hash": "7420a858d1d321c73f90cf882c5a9f4a3faa6391d549c198a21a76c344ec48b8",
+    "created_at": "2026-08-28T20:20:34.981Z",
+    "frontmatter": {
+      "breached": false,
+      "evidence_kind": "ticket",
+      "observed_at": "2026-08-28T10:06:00+00:00",
+      "service_id": "ue-registration",
+      "source": "ticket-registration-001"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
+    "tags": [],
+    "title": "TICKET observation for ue-registration",
+    "type": "evidence",
+    "updated_at": "2026-08-28T20:20:34.981Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "CPU saturation is the leading hypothesis for the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/amf-cpu-saturation"
+      }
+    ],
+    "content_hash": "354ec614712044ec6437221d9164486f4eaac8ae686964257ea740237eed3b15",
+    "created_at": "2026-08-08T23:13:18.747Z",
+    "frontmatter": {
+      "confidence": 0.92,
+      "proposed_at": "2026-08-09T06:20:00Z",
+      "source": "incident-bridge/engineer-jdoe",
+      "status": "confirmed"
+    },
+    "outgoing_links": [
+      {
+        "context": "CPU pegged at 98% supports the CPU saturation hypothesis",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/amf-cpu-metrics"
+      },
+      {
+        "context": "NAS REJECT congestion codes support the CPU saturation hypothesis",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/nas-reject-logs"
+      },
+      {
+        "context": "CPU saturation explains the registration failure spike",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
+        "link_type": "explains",
+        "to_slug": "mobile-core/symptoms/registration-failure-spike"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/amf-cpu-saturation",
+    "tags": [],
+    "title": "AMF-01 CPU saturation from registration signaling burst",
+    "type": "hypothesis",
+    "updated_at": "2026-08-08T23:13:18.747Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430"
+      }
+    ],
+    "content_hash": "cfa3508cd5e968e58b19e4b41631ff59715b7ba2e0f495cc6081b24d3fa711f4",
+    "created_at": "2026-08-31T10:54:34.314Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "05841af2e3f4f430",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-cssr-001"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting Voice Call Setup across ims, ran, transport",
+    "type": "hypothesis",
+    "updated_at": "2026-08-31T10:54:34.314Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26"
+      }
+    ],
+    "content_hash": "59dad84a241729b42f54961a42f105dc4d17b2f9a81f3ec310b1b404d2f33054",
+    "created_at": "2026-08-28T20:00:04.619Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "1fe005ed908a3f26",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport",
+    "type": "hypothesis",
+    "updated_at": "2026-08-28T20:23:53.449Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758"
+      }
+    ],
+    "content_hash": "c2cb02423d66f9ef4711f983364853e36ed247e87191eea50c784326b947a2c7",
+    "created_at": "2026-08-31T10:54:42.508Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "54db6ef325fbf758",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-hss-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-mme-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-attach-ran-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-attach-001"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling",
+    "type": "hypothesis",
+    "updated_at": "2026-08-31T10:57:07.632Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59"
+      }
+    ],
+    "content_hash": "2148b546214b5bd5669cf4788fea5c7290a420f91fb6f4056aa2a17003e4eaf3",
+    "created_at": "2026-08-28T20:00:05.582Z",
+    "frontmatter": {
+      "confidence": 0.3,
+      "correlation_key": "81cec920e94d3a59",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-81cec920e94d3a59-0"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+    "tags": [],
+    "title": "Intra-Domain alarm correlation impacting Site Power across power",
+    "type": "hypothesis",
+    "updated_at": "2026-08-28T20:21:49.522Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c"
+      }
+    ],
+    "content_hash": "7258be7b477a3be8e8e4e3ba9311859f3faf134b67abf41fe1d0d032ae0116c7",
+    "created_at": "2026-08-31T10:54:38.294Z",
+    "frontmatter": {
+      "confidence": 0.95,
+      "correlation_key": "a154bb7a3997859c",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/logs/grafana-loki-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/metrics/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+        "link_type": "supported-by",
+        "to_slug": "grafana/traces/grafana-tempo-sgi-001"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+    "tags": [],
+    "title": "Inter-Domain alarm correlation impacting SGI Data across gi-lan, mobile-core-user-plane, transport",
+    "type": "hypothesis",
+    "updated_at": "2026-08-31T10:57:06.206Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff"
+      }
+    ],
+    "content_hash": "e394354cfa03cd28199a9f74d62bf48a8d737ffa9ab91ee6a5a5bad765654e8d",
+    "created_at": "2026-08-28T20:00:06.076Z",
+    "frontmatter": {
+      "confidence": 0,
+      "correlation_key": "a5eef0c5e022eeff",
+      "status": "plausible"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+        "link_type": "supported-by",
+        "to_slug": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0"
+      }
+    ],
+    "slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+    "tags": [],
+    "title": "Intra-Domain alarm correlation impacting unmapped service across ran",
+    "type": "hypothesis",
+    "updated_at": "2026-08-28T20:21:50.015Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "Signaling burst observation during the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/observations/amf-01-signaling-burst",
+        "link_type": "relates_to",
+        "to_slug": "mobile-core/incidents/amf-overload-2026-08-09"
+      }
+    ],
+    "content_hash": "aaee01d3b40064554f61c3616183ba987557926182ea0b017c097dd2b18bfe6c",
+    "created_at": "2026-08-08T23:13:09.400Z",
+    "frontmatter": {
+      "reported_by": "nms/alarm-bridge",
+      "resolved_at": "2026-08-09T07:05:00Z",
+      "severity": "SEV-2",
+      "started_at": "2026-08-09T06:14:00Z",
+      "status": "resolved"
+    },
+    "outgoing_links": [
+      {
+        "context": "CPU saturation is the leading hypothesis for the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/amf-cpu-saturation"
+      },
+      {
+        "context": "RSR critical breach triggered the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14"
+      },
+      {
+        "context": "AMF-01 is the overloaded network function",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/amf-01"
+      },
+      {
+        "context": "SMF-01 in the same cluster, monitored as peer",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/smf-01"
+      },
+      {
+        "context": "Scale-out was the remediation applied",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "has-remediation",
+        "to_slug": "mobile-core/remediations/scale-out-amf-01"
+      },
+      {
+        "context": "UE registration service degraded by the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/ue-registration-service"
+      },
+      {
+        "context": "Registration failure spike was the observed symptom",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "has-symptom",
+        "to_slug": "mobile-core/symptoms/registration-failure-spike"
+      }
+    ],
+    "slug": "mobile-core/incidents/amf-overload-2026-08-09",
+    "tags": [],
+    "title": "AMF-01 overload causes mass registration failures",
+    "type": "incident",
+    "updated_at": "2026-08-08T23:13:09.400Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "87668a7f25ad351a93a782654ed4e85920c6f0611de5dc6bb3c0b3cdf0a2a875",
+    "created_at": "2026-08-31T10:54:42.335Z",
+    "frontmatter": {
+      "alias_of": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "canonical_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "contributing_domains": [
+        "mobile-core",
+        "ran"
+      ],
+      "correlation_key": "54db6ef325fbf758",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/lte-attach-54db6ef325fbf758"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/hss-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/lte/functions/mme-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-attach-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/mobile-core-control-plane-mme-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/ran-enodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/signaling-hss-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/lte-attach"
+      }
+    ],
+    "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for LTE Attach",
+    "type": "incident-alias",
+    "updated_at": "2026-09-01T09:04:03.577Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "aaea6d6720fe04f889111cc6e15ae2297cccce0fc605ada32d75601af3a2905a",
+    "created_at": "2026-08-31T10:54:38.112Z",
+    "frontmatter": {
+      "alias_of": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "contributing_domains": [
+        "mobile-core",
+        "transport"
+      ],
+      "correlation_key": "a154bb7a3997859c",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/sgi-data-a154bb7a3997859c"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/sgi-edge-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-sgi-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/gi-lan-nat-fw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/mobile-core-user-plane-pgw-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/transport-sgi-edge-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/sgi-data"
+      }
+    ],
+    "slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for SGI Data",
+    "type": "incident-alias",
+    "updated_at": "2026-09-01T09:03:58.256Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "d1ec70a1b89147132353946b831c9637fcf932010c6d9e7aa8f55f275810031f",
+    "created_at": "2026-09-08T06:08:52.221Z",
+    "frontmatter": {
+      "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "contributing_domains": [
+        "mobile-core",
+        "transport"
+      ],
+      "correlation_key": "a154bb7a3997859c",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/sgi-throughput-drop",
+        "incidents/mobile-core/sgi-throughput-drop"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/incidents/sgi-throughput-drop",
+    "tags": [],
+    "title": "Sgi Throughput Drop",
+    "type": "incident",
+    "updated_at": "2026-09-08T06:08:52.221Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "8c163907132c94b79cc0f3b8e16866f421bdcdc83b7c356b5b611a66aa7ff3f2",
+    "created_at": "2026-08-28T20:00:05.423Z",
+    "frontmatter": {
+      "contributing_domains": [
+        "power"
+      ],
+      "correlation_key": "81cec920e94d3a59",
+      "correlation_reasons": [
+        "shared affected service",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "intra-domain",
+      "correlation_score": 30,
+      "intent_status": "not_matched",
+      "severity": "SEV-1",
+      "status": "candidate"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/power-power-ups-77"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/site-power"
+      }
+    ],
+    "slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+    "tags": [],
+    "title": "Intra-Domain incident candidate for Site Power",
+    "type": "incident",
+    "updated_at": "2026-08-28T20:20:35.276Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "cb8fc26e8b3ce223f95e50a0b78228a433ebfd9df83da5df71ece641a564b883",
+    "created_at": "2026-08-28T20:00:04.296Z",
+    "frontmatter": {
+      "contributing_domains": [
+        "mobile-core",
+        "ran",
+        "transport"
+      ],
+      "correlation_key": "1fe005ed908a3f26",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "intent_status": "violated",
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/kpi-registration-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/mobile-core-core-amf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/ran-ran-gnodeb-17"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/transport-transport-agg-sw-03"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/ue-registration"
+      }
+    ],
+    "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for UE Registration",
+    "type": "incident",
+    "updated_at": "2026-08-28T20:23:53.320Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "222b60f08acb865bde34b918de722147a9f0e60031613154f423d623432c4b0d",
+    "created_at": "2026-08-28T20:00:05.939Z",
+    "frontmatter": {
+      "contributing_domains": [
+        "ran"
+      ],
+      "correlation_key": "a5eef0c5e022eeff",
+      "correlation_reasons": [
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "intra-domain",
+      "correlation_score": 0,
+      "intent_status": "not_matched",
+      "severity": "SEV-3",
+      "status": "candidate"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/ran-unknown-cell-9"
+      }
+    ],
+    "slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+    "tags": [],
+    "title": "Intra-Domain incident candidate for Unmapped Service",
+    "type": "incident",
+    "updated_at": "2026-08-28T20:20:36.127Z"
+  },
+  {
+    "backlinks": [],
+    "content_hash": "c4f1addfaccc506d82eca42ae18586ac5808e66bb07bbbeb9bae9a0b60025923",
+    "created_at": "2026-08-31T10:54:33.783Z",
+    "frontmatter": {
+      "alias_of": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "canonical_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "contributing_domains": [
+        "mobile-core",
+        "ran",
+        "transport"
+      ],
+      "correlation_key": "05841af2e3f4f430",
+      "correlation_reasons": [
+        "multiple alarms in the correlation window",
+        "shared affected service",
+        "KPI breach supports service impact",
+        "independent operational evidence",
+        "service intent is violated",
+        "critical source alarm",
+        "novel alarm signature retained for review"
+      ],
+      "correlation_scope": "inter-domain",
+      "correlation_score": 95,
+      "fcaps": {
+        "primary": "fault",
+        "related": [
+          "change",
+          "performance"
+        ]
+      },
+      "intent_status": "violated",
+      "legacy_aliases": [
+        "mobile-core/incidents/voice-call-setup-05841af2e3f4f430"
+      ],
+      "severity": "SEV-1",
+      "status": "open"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "derived-from",
+        "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "affects",
+        "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/ran/functions/enodeb-22"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "domains/transport/functions/voice-backhaul-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "alias-of",
+        "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "has-hypothesis",
+        "to_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-cssr-001"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/ims-pcscf-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/ran-enodeb-22"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "involves",
+        "to_slug": "mobile-core/network-functions/transport-voice-backhaul-01"
+      },
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "affects",
+        "to_slug": "mobile-core/services/voice-call-setup"
+      }
+    ],
+    "slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+    "tags": [],
+    "title": "Inter-Domain incident candidate for Voice Call Setup",
+    "type": "incident-alias",
+    "updated_at": "2026-09-01T09:03:52.951Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "RSR critical breach triggered the incident",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14"
+      }
+    ],
+    "content_hash": "5b4612c6bf98b835c93354190a8efc15f26ecb8748d64934915534b5eacb89df",
+    "created_at": "2026-08-08T23:13:10.506Z",
+    "frontmatter": {
+      "event_type": "alarm",
+      "observed_at": "2026-08-09T06:14:00Z",
+      "source": "nms/amf-01/rsr",
+      "threshold": "critical",
+      "unit": "percent",
+      "value": 94.7
+    },
+    "outgoing_links": [
+      {
+        "context": "Drop event measured the registration success rate KPI",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/registration-success-rate"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+    "tags": [],
+    "title": "RSR critical breach at 06:14",
+    "type": "kpi-event",
+    "updated_at": "2026-08-08T23:13:10.506Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "RSR recovery at 07:05 verified the scale-out remediation",
+        "depth": 1,
+        "from_slug": "mobile-core/remediations/scale-out-amf-01",
+        "link_type": "verified-by",
+        "to_slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05"
+      }
+    ],
+    "content_hash": "89fa44581261df762407f8032bcc8c22ec5bb56a16b9c27f8d9681a226393336",
+    "created_at": "2026-08-08T23:13:11.770Z",
+    "frontmatter": {
+      "event_type": "recovery",
+      "observed_at": "2026-08-09T07:05:00Z",
+      "source": "nms/amf-01/rsr",
+      "threshold": "ok",
+      "unit": "percent",
+      "value": 99.3
+    },
+    "outgoing_links": [
+      {
+        "context": "Recovery event measured the registration success rate KPI",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/registration-success-rate"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+    "tags": [],
+    "title": "RSR recovery at 07:05",
+    "type": "kpi-event",
+    "updated_at": "2026-08-08T23:13:11.770Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-attach-001"
+      }
+    ],
+    "content_hash": "779ecab0fafbb0ae419fbcc68d2fb05be951ea9a47ba8defcafaf73bbad439bc",
+    "created_at": "2026-08-31T10:54:44.370Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "kpi": "4G Attach SR",
+      "observed_at": "2026-08-31T08:25:00+00:00",
+      "service_id": "lte-attach",
+      "source": "grafana-prom-attach-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/4g-attach-sr"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+    "tags": [],
+    "title": "4G Attach SR dropped below intent target",
+    "type": "kpi-event",
+    "updated_at": "2026-08-31T10:54:44.370Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-cssr-001"
+      }
+    ],
+    "content_hash": "0fafdb694b6564fa32b12c6b323a9dc00ac506596693675a1089b2ad9e076493",
+    "created_at": "2026-08-31T10:54:36.047Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "kpi": "CSSR",
+      "observed_at": "2026-08-31T06:05:00+00:00",
+      "service_id": "voice-call-setup",
+      "source": "grafana-prom-cssr-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/cssr"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
+    "tags": [],
+    "title": "CSSR dropped below intent target for voice-call-setup",
+    "type": "kpi-event",
+    "updated_at": "2026-08-31T10:54:36.047Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/grafana-prom-sgi-001"
+      }
+    ],
+    "content_hash": "1c9167e155a54de5c0748c9e620b28b0ff5310569d7747de428f06d52a6c887d",
+    "created_at": "2026-08-31T10:54:39.819Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "kpi": "SGi Throughput",
+      "observed_at": "2026-08-31T07:15:00+00:00",
+      "service_id": "sgi-data",
+      "source": "grafana-prom-sgi-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/sgi-throughput"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
+    "tags": [],
+    "title": "SGi throughput dropped below committed intent",
+    "type": "kpi-event",
+    "updated_at": "2026-08-31T10:54:39.819Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+        "link_type": "detected-by",
+        "to_slug": "mobile-core/kpi-events/kpi-registration-001"
+      }
+    ],
+    "content_hash": "134686249007dab7dbe1e81c1befb652e2b45444df8dc6a6466028fcc555248f",
+    "created_at": "2026-08-28T20:20:34.200Z",
+    "frontmatter": {
+      "event_type": "breach",
+      "kpi": "service KPI",
+      "observed_at": "2026-08-28T10:05:00+00:00",
+      "service_id": "ue-registration",
+      "source": "kpi-registration-001",
+      "threshold": "breached"
+    },
+    "outgoing_links": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/kpi-registration-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/service-kpi"
+      }
+    ],
+    "slug": "mobile-core/kpi-events/kpi-registration-001",
+    "tags": [],
+    "title": "KPI breach for ue-registration",
+    "type": "kpi-event",
+    "updated_at": "2026-08-28T20:20:34.200Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/4g-attach-sr"
+      }
+    ],
+    "content_hash": "09158e7568b3dc77392797a43c364e42b8e6bb34cb89666dd48033497199e154",
+    "created_at": "2026-08-31T10:54:44.530Z",
+    "frontmatter": {
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/kpis/4g-attach-sr",
+    "tags": [],
+    "title": "4G Attach Sr",
+    "type": "kpi",
+    "updated_at": "2026-08-31T10:54:44.530Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/cssr"
+      }
+    ],
+    "content_hash": "12a8a5e5de9c68a96db99cfbf4f42d16e1fd5209307f13034623a49002a65326",
+    "created_at": "2026-08-31T10:54:36.205Z",
+    "frontmatter": {
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/kpis/cssr",
+    "tags": [],
+    "title": "Cssr",
+    "type": "kpi",
+    "updated_at": "2026-08-31T10:54:36.205Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "Drop event measured the registration success rate KPI",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/registration-success-rate"
+      },
+      {
+        "context": "Recovery event measured the registration success rate KPI",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/registration-success-rate"
+      }
+    ],
+    "content_hash": "8a59dc7b288775ea78f31a2a49e0cb1465edcc889a24f57e2f73fe00969655f4",
+    "created_at": "2026-08-08T23:13:00.517Z",
+    "frontmatter": {
+      "critical_threshold": 95,
+      "target": 99,
+      "unit": "percent",
+      "warning_threshold": 97,
+      "window": "5min"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/kpis/registration-success-rate",
+    "tags": [],
+    "title": "Registration Success Rate (RSR)",
+    "type": "kpi",
+    "updated_at": "2026-08-08T23:13:00.517Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/kpi-registration-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/service-kpi"
+      }
+    ],
+    "content_hash": "f34496b75339e3d896aaab1958cd4cbf7db71185197a8b47a7c8073e479f1731",
+    "created_at": "2026-08-28T20:20:34.340Z",
+    "frontmatter": {
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/kpis/service-kpi",
+    "tags": [],
+    "title": "Service KPI",
+    "type": "kpi",
+    "updated_at": "2026-08-28T20:23:53.927Z"
+  },
+  {
+    "backlinks": [
+      {
+        "context": "",
+        "depth": 1,
+        "from_slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
+        "link_type": "measures",
+        "to_slug": "mobile-core/kpis/sgi-throughput"
+      }
+    ],
+    "content_hash": "63ee768a8d00ac2bf864e64b693c9fbbc436c609d35880d9dca608fc7aad3449",
+    "created_at": "2026-08-31T10:54:39.993Z",
+    "frontmatter": {
+      "source": "correlation-worker"
+    },
+    "outgoing_links": [],
+    "slug": "mobile-core/kpis/sgi-throughput",
+    "tags": [],
+    "title": "SGI Throughput",
+    "type": "kpi",
+    "updated_at": "2026-08-31T10:57:06.804Z"
+  }
+]

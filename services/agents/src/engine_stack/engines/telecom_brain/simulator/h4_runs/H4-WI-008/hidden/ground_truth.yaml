@@ -1,0 +1,11 @@
+scenario_id: H4-WI-008
+cohort: single_point_failure
+trigger_entity: SA5G:SMF:001
+true_affected_services:
+- 5G SA Mobile Data
+- VoNR High Definition Voice
+true_cfs_risk: SPOF
+true_common_cause_detected: false
+true_capacity_bottleneck: false
+true_change_risk: false
+is_model_insufficient: false

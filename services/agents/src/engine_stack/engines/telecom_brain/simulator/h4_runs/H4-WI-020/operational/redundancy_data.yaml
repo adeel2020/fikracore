@@ -1,0 +1,9 @@
+failover_pairs:
+  SA5G:AUSF:001:
+    backup_entity: SA5G:AUSF:002
+    backup_health: HEALTHY
+shared_failure_domains:
+- type: SHARED_DEPENDENCY
+  description: Dual AUSF instances share single hardware security module appliance.
+backup_node: SA5G:AUSF:002
+backup_health: HEALTHY

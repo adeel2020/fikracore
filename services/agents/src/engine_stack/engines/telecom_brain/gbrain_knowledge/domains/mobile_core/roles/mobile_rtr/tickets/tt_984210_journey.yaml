@@ -1,0 +1,72 @@
+ticket_token: "TT-984210"
+subscriber_token: "SUB_TOK_7B9A2F"
+current_status: "RESOLVED"
+creation_timestamp: "2026-09-07T08:00:00Z"
+resolution_timestamp: "2026-09-07T15:12:00Z"
+
+hops:
+  - hop_number: 1
+    assigned_queue: "CRM_Frontline"
+    timestamp_assigned: "2026-09-07T08:00:00Z"
+    timestamp_released: "2026-09-07T08:48:00Z"
+    time_spent_hours: 0.8
+    idle_waiting_hours: 0.5
+    active_triage_hours: 0.3
+    actor_id: "CRM_AGENT_912"
+    action_taken: "Customer reported VoLTE voice drop and data detachment during handovers."
+    finding_code: "CUSTOMER_COMPLAINT_VOLTE_DROP"
+    reassignment_reason: "Initial triage indicates core network profile inconsistency."
+    reassigned_to_queue: "RTR_Mobile_Core"
+    cue_start_offset_ms: 0
+    pause_duration_ms: 1200
+    spoken_cue_text: "Looking at ticket TT-984210... it entered CRM Frontline reporting VoLTE voice drops and handoff failures."
+
+  - hop_number: 2
+    assigned_queue: "RTR_Mobile_Core"
+    timestamp_assigned: "2026-09-07T08:48:00Z"
+    timestamp_released: "2026-09-07T10:00:00Z"
+    time_spent_hours: 1.2
+    idle_waiting_hours: 0.2
+    active_triage_hours: 1.0
+    actor_id: "RTR_ENG_42"
+    action_taken: "Executed Huawei MML runbook LST_SUB_DATA. Identified missing VoLTE/VoNR APN slice in UDM."
+    finding_code: "CORE_PROFILE_APN_SLICE_MISSING"
+    reassignment_reason: "Reassigned to HPSA provisioning queue for automated BSS order resynchronization."
+    reassigned_to_queue: "HPSA"
+    cue_start_offset_ms: 4500
+    pause_duration_ms: 1500
+    spoken_cue_text: "At zero eight forty-eight, RTR Mobile Core initiated Level Two triage. Our engineers completed subscriber analysis in one point two hours, well within our two-hour AOLA target."
+
+  - hop_number: 3
+    assigned_queue: "HPSA"
+    timestamp_assigned: "2026-09-07T10:00:00Z"
+    timestamp_released: "2026-09-07T14:30:00Z"
+    time_spent_hours: 4.5
+    idle_waiting_hours: 3.4
+    active_triage_hours: 1.1
+    actor_id: "HPSA_AUTO_ROUTER"
+    action_taken: "Order queue stalled due to BSS CRM order state mismatch. Manual intervention required."
+    finding_code: "BSS_PROVISIONING_SYNC_DEFECT"
+    reassignment_reason: "Profile successfully pushed to UDM/HSS. Returned to RTR for verification."
+    reassigned_to_queue: "RTR_Mobile_Core"
+    is_bounced_back_to_rtr: true
+    cue_start_offset_ms: 11500
+    pause_duration_ms: 1500
+    spoken_cue_text: "However, at hop three... the ticket stalled in the HPSA provisioning queue for four point five hours, breaching the internal six-hour OLA due to a BSS synchronization drop."
+
+  - hop_number: 4
+    assigned_queue: "RTR_Mobile_Core"
+    timestamp_assigned: "2026-09-07T14:30:00Z"
+    timestamp_released: "2026-09-07T15:12:00Z"
+    time_spent_hours: 0.7
+    idle_waiting_hours: 0.1
+    active_triage_hours: 0.6
+    actor_id: "RTR_ENG_42"
+    action_taken: "Verified GTPv2 session establishment and Diameter Gy rating unbarred. Customer verified restored."
+    finding_code: "RESOLVED_CORE_VERIFIED"
+    reassignment_reason: null
+    reassigned_to_queue: null
+    is_bounced_back_to_rtr: false
+    cue_start_offset_ms: 18500
+    pause_duration_ms: 1200
+    spoken_cue_text: "Returning to RTR Mobile Core for final verification, the subscriber session was validated in zero point seven hours, successfully resolving the ticket."

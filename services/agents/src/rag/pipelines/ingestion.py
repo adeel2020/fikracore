@@ -7,9 +7,9 @@ from llama_index.core.node_parser import HierarchicalNodeParser, get_leaf_nodes
 from llama_index.core.storage.docstore import SimpleDocumentStore
 from llama_index.core.schema import Document
 
-from ..config import rag_settings
-from ..database import update_task
-from ..infrastructure.vector_factory import get_vector_store
+from rag.config import rag_settings
+from rag.database import update_task
+from rag.infrastructure.vector_factory import get_vector_store
 
 logger = logging.getLogger("rag.ingestion")
 
@@ -46,7 +46,7 @@ async def run_ingestion(task_id: str, file_path: str, original_filename: str = "
                 import pandas as pd
                 import sqlite3
                 import re
-                from .services.sql_executor import RELATIONAL_DB_PATH
+                from rag.services.sql_executor import RELATIONAL_DB_PATH
                 
                 if ext == ".xlsx":
                     df = pd.read_excel(file_path)

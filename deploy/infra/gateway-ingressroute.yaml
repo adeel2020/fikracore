@@ -1,0 +1,14 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: gateway
+  namespace: agents-prod
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`api.localdev.me`)
+      kind: Rule
+      services:
+        - name: api-gateway
+          port: 80

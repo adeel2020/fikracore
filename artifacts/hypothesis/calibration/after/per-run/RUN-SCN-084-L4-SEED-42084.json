@@ -1,0 +1,1218 @@
+{
+  "run_id": "RUN-SCN-084-L4-SEED-42084",
+  "scenario_id": "SCN-084",
+  "terminal_state": "EXPLAINED",
+  "ranked_hypotheses": [
+    {
+      "hypothesis_id": "H-002",
+      "statement": "Inferred local impairment at IP:PE:RTR-21",
+      "candidate_root_domain": "IP_TRANSPORT",
+      "candidate_root_entity": "IP:PE:RTR-21",
+      "canonical_root_entity": "IP:PE:RTR-21",
+      "root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "causal_role": "ROOT",
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0001",
+            "LOG-SCN-084-0001",
+            "MET-SCN-084-0001",
+            "MET-SCN-084-0002",
+            "TRC-SCN-084-0001"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0001",
+            "LOG-SCN-084-0001",
+            "ALM-SCN-084-0002",
+            "MET-SCN-084-0001",
+            "LOG-SCN-084-0002",
+            "MET-SCN-084-0002",
+            "TRC-SCN-084-0001",
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ],
+      "expected_observations": [
+        "Local impairment precedes or coincides with dependent symptoms",
+        "Independent local telemetry agrees"
+      ],
+      "supporting_evidence": [
+        "ALM-SCN-084-0001",
+        "LOG-SCN-084-0001",
+        "ALM-SCN-084-0002",
+        "MET-SCN-084-0001",
+        "LOG-SCN-084-0002",
+        "MET-SCN-084-0002",
+        "TRC-SCN-084-0001",
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence": [],
+      "missing_evidence": [],
+      "knowledge_relationships_used": [
+        "REL-CRM-TICKETS-IMPACT",
+        "REL-N3-PE21",
+        "REL-N3-UPF"
+      ],
+      "status": "SUPPORTED",
+      "hypothesis_confidence": 0.9123,
+      "causal_confidence": 0.6842,
+      "explanation_coverage": 1.0,
+      "score_dimensions": {
+        "temporal_precedence": 1.0,
+        "upstream_position": 1.0,
+        "blast_radius_coverage": 1.0,
+        "service_dependency_relevance": 1.0,
+        "change_relevance": 0.0,
+        "independent_telemetry": 1.0,
+        "historical_support": 0.0,
+        "negative_evidence": 0.0,
+        "symptom_likelihood_penalty": 0.0,
+        "knowledge_confidence": 0.75,
+        "evidence_freshness": 0.8036654622010877,
+        "source_reliability": 0.8392857142857142
+      },
+      "failed_assumptions": []
+    },
+    {
+      "hypothesis_id": "H-003",
+      "statement": "Inferred local impairment at IP:VRF:N3-01",
+      "candidate_root_domain": "IP_TRANSPORT",
+      "candidate_root_entity": "IP:VRF:N3-01",
+      "canonical_root_entity": "IP:VRF:N3-01",
+      "root_entities": [
+        "IP:VRF:N3-01"
+      ],
+      "causal_role": "CONTRIBUTING_CONDITION",
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0002",
+            "LOG-SCN-084-0002"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "ALM-SCN-084-0002",
+            "LOG-SCN-084-0002",
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ],
+      "expected_observations": [
+        "Local impairment precedes or coincides with dependent symptoms",
+        "Independent local telemetry agrees"
+      ],
+      "supporting_evidence": [
+        "ALM-SCN-084-0002",
+        "LOG-SCN-084-0002",
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence": [],
+      "missing_evidence": [
+        "Independent source confirmation at IP:VRF:N3-01",
+        "Operational dependency or alternate cause for residual impact"
+      ],
+      "knowledge_relationships_used": [
+        "REL-CRM-TICKETS-IMPACT",
+        "REL-N3-UPF"
+      ],
+      "status": "CANDIDATE",
+      "hypothesis_confidence": 0.6335,
+      "causal_confidence": 0.4751,
+      "explanation_coverage": 0.75,
+      "score_dimensions": {
+        "temporal_precedence": 0.0,
+        "upstream_position": 1.0,
+        "blast_radius_coverage": 0.75,
+        "service_dependency_relevance": 1.0,
+        "change_relevance": 0.0,
+        "independent_telemetry": 0.5,
+        "historical_support": 0.0,
+        "negative_evidence": 0.0,
+        "symptom_likelihood_penalty": 0.0,
+        "knowledge_confidence": 0.75,
+        "evidence_freshness": 0.8099569909499315,
+        "source_reliability": 0.8200000000000001
+      },
+      "failed_assumptions": []
+    },
+    {
+      "hypothesis_id": "H-004",
+      "statement": "Inferred local impairment at SA5G:UPF:003",
+      "candidate_root_domain": "SA_5G_CORE",
+      "candidate_root_entity": "SA5G:UPF:003",
+      "canonical_root_entity": "SA5G:UPF:003",
+      "root_entities": [
+        "SA5G:UPF:003"
+      ],
+      "causal_role": "CONTRIBUTING_CONDITION",
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ],
+      "expected_observations": [
+        "Local impairment precedes or coincides with dependent symptoms",
+        "Independent local telemetry agrees"
+      ],
+      "supporting_evidence": [
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence": [],
+      "missing_evidence": [
+        "Independent source confirmation at SA5G:UPF:003",
+        "Operational dependency or alternate cause for residual impact"
+      ],
+      "knowledge_relationships_used": [
+        "REL-CRM-TICKETS-IMPACT"
+      ],
+      "status": "CANDIDATE",
+      "hypothesis_confidence": 0.5741,
+      "causal_confidence": 0.4306,
+      "explanation_coverage": 0.5,
+      "score_dimensions": {
+        "temporal_precedence": 0.0,
+        "upstream_position": 1.0,
+        "blast_radius_coverage": 0.5,
+        "service_dependency_relevance": 1.0,
+        "change_relevance": 1.0,
+        "independent_telemetry": 0.5,
+        "historical_support": 0.0,
+        "negative_evidence": 0.0,
+        "symptom_likelihood_penalty": 0.0,
+        "knowledge_confidence": 0.75,
+        "evidence_freshness": 0.8145158350157738,
+        "source_reliability": 0.8257142857142857
+      },
+      "failed_assumptions": []
+    },
+    {
+      "hypothesis_id": "H-001",
+      "statement": "Inferred local impairment at CRM:TICKET:001",
+      "candidate_root_domain": "CRM",
+      "candidate_root_entity": "CRM:TICKET:001",
+      "canonical_root_entity": "CRM:TICKET:001",
+      "root_entities": [
+        "CRM:TICKET:001"
+      ],
+      "causal_role": "CONTRIBUTING_CONDITION",
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ],
+      "expected_observations": [
+        "Local impairment precedes or coincides with dependent symptoms",
+        "Independent local telemetry agrees"
+      ],
+      "supporting_evidence": [
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence": [],
+      "missing_evidence": [
+        "Operational dependency or alternate cause for residual impact"
+      ],
+      "knowledge_relationships_used": [],
+      "status": "CANDIDATE",
+      "hypothesis_confidence": 0.4995,
+      "causal_confidence": 0.4995,
+      "explanation_coverage": 0.25,
+      "score_dimensions": {
+        "temporal_precedence": 0.0,
+        "upstream_position": 0.0,
+        "blast_radius_coverage": 0.25,
+        "service_dependency_relevance": 1.0,
+        "change_relevance": 0.0,
+        "independent_telemetry": 1.0,
+        "historical_support": 0.0,
+        "negative_evidence": 0.0,
+        "symptom_likelihood_penalty": 0.0,
+        "knowledge_confidence": 1.0,
+        "evidence_freshness": 0.8200374081344378,
+        "source_reliability": 0.804
+      },
+      "failed_assumptions": []
+    }
+  ],
+  "selected_hypothesis_id": "H-002",
+  "supporting_evidence": [
+    "ALM-SCN-084-0001",
+    "LOG-SCN-084-0001",
+    "ALM-SCN-084-0002",
+    "MET-SCN-084-0001",
+    "LOG-SCN-084-0002",
+    "MET-SCN-084-0002",
+    "TRC-SCN-084-0001",
+    "ALM-SCN-084-0003",
+    "LOG-SCN-084-0003",
+    "KPI-SCN-084-0001",
+    "ALM-SCN-084-0004",
+    "LOG-SCN-084-0004",
+    "KPI-SCN-084-CRM1",
+    "TKT-SCN-084-0001"
+  ],
+  "contradicting_evidence": [],
+  "missing_evidence": [],
+  "explanation_coverage": 1.0,
+  "unexplained_observations": [],
+  "knowledge_gaps": [],
+  "candidate_relationships": [],
+  "canonical_entities_used": [
+    "CRM:TICKET:001",
+    "IP:PE:RTR-21",
+    "IP:VRF:N3-01",
+    "SA5G:UPF:003"
+  ],
+  "reasoning_summary": "EXPLAINED: best operational explanation covers 100% of affected entities; 0 abnormal observations remain unexplained. Confidence is a deterministic heuristic, not a calibrated probability.",
+  "provenance": [
+    {
+      "hypothesis_id": "H-002",
+      "state": "INFERRED",
+      "evidence_ids": [
+        "ALM-SCN-084-0001",
+        "LOG-SCN-084-0001",
+        "ALM-SCN-084-0002",
+        "MET-SCN-084-0001",
+        "LOG-SCN-084-0002",
+        "MET-SCN-084-0002",
+        "TRC-SCN-084-0001",
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence_ids": [],
+      "relationship_ids": [
+        "REL-CRM-TICKETS-IMPACT",
+        "REL-N3-PE21",
+        "REL-N3-UPF"
+      ],
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0001",
+            "LOG-SCN-084-0001",
+            "MET-SCN-084-0001",
+            "MET-SCN-084-0002",
+            "TRC-SCN-084-0001"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0001",
+            "LOG-SCN-084-0001",
+            "ALM-SCN-084-0002",
+            "MET-SCN-084-0001",
+            "LOG-SCN-084-0002",
+            "MET-SCN-084-0002",
+            "TRC-SCN-084-0001",
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "H-003",
+      "state": "INFERRED",
+      "evidence_ids": [
+        "ALM-SCN-084-0002",
+        "LOG-SCN-084-0002",
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence_ids": [],
+      "relationship_ids": [
+        "REL-CRM-TICKETS-IMPACT",
+        "REL-N3-UPF"
+      ],
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0002",
+            "LOG-SCN-084-0002"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "ALM-SCN-084-0002",
+            "LOG-SCN-084-0002",
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "H-004",
+      "state": "INFERRED",
+      "evidence_ids": [
+        "ALM-SCN-084-0003",
+        "LOG-SCN-084-0003",
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence_ids": [],
+      "relationship_ids": [
+        "REL-CRM-TICKETS-IMPACT"
+      ],
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "ALM-SCN-084-0003",
+            "LOG-SCN-084-0003",
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ]
+    },
+    {
+      "hypothesis_id": "H-001",
+      "state": "INFERRED",
+      "evidence_ids": [
+        "KPI-SCN-084-0001",
+        "ALM-SCN-084-0004",
+        "LOG-SCN-084-0004",
+        "KPI-SCN-084-CRM1",
+        "TKT-SCN-084-0001"
+      ],
+      "contradicting_evidence_ids": [],
+      "relationship_ids": [],
+      "assumptions": [
+        {
+          "statement": "A sustained local impairment exists at the proposed root entities",
+          "state": "SUPPORTED",
+          "evidence_ids": [
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        },
+        {
+          "statement": "Known dependencies account for affected services",
+          "state": "UNCERTAIN",
+          "evidence_ids": [
+            "KPI-SCN-084-0001",
+            "ALM-SCN-084-0004",
+            "LOG-SCN-084-0004",
+            "KPI-SCN-084-CRM1",
+            "TKT-SCN-084-0001"
+          ]
+        }
+      ]
+    }
+  ],
+  "next_best_evidence": [],
+  "discovery_mode": false,
+  "causal_event_graph": [
+    {
+      "from_evidence": "ALM-SCN-084-0003",
+      "to_evidence": "KPI-SCN-084-0001",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0003",
+      "to_evidence": "ALM-SCN-084-0004",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0003",
+      "to_evidence": "LOG-SCN-084-0004",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0003",
+      "to_evidence": "KPI-SCN-084-CRM1",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0003",
+      "to_evidence": "TKT-SCN-084-0001",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0003",
+      "to_evidence": "KPI-SCN-084-0001",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0003",
+      "to_evidence": "ALM-SCN-084-0004",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0003",
+      "to_evidence": "LOG-SCN-084-0004",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0003",
+      "to_evidence": "KPI-SCN-084-CRM1",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0003",
+      "to_evidence": "TKT-SCN-084-0001",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0001",
+      "to_evidence": "ALM-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0001",
+      "to_evidence": "LOG-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0001",
+      "to_evidence": "ALM-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0001",
+      "to_evidence": "LOG-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "MET-SCN-084-0001",
+      "to_evidence": "ALM-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": false
+    },
+    {
+      "from_evidence": "MET-SCN-084-0001",
+      "to_evidence": "LOG-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "MET-SCN-084-0002",
+      "to_evidence": "ALM-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": false
+    },
+    {
+      "from_evidence": "MET-SCN-084-0002",
+      "to_evidence": "LOG-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": false
+    },
+    {
+      "from_evidence": "TRC-SCN-084-0001",
+      "to_evidence": "ALM-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": false
+    },
+    {
+      "from_evidence": "TRC-SCN-084-0001",
+      "to_evidence": "LOG-SCN-084-0002",
+      "relationship_id": "REL-N3-PE21",
+      "state": "INFERRED",
+      "temporal_precedence": false
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0002",
+      "to_evidence": "ALM-SCN-084-0003",
+      "relationship_id": "REL-N3-UPF",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "ALM-SCN-084-0002",
+      "to_evidence": "LOG-SCN-084-0003",
+      "relationship_id": "REL-N3-UPF",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0002",
+      "to_evidence": "ALM-SCN-084-0003",
+      "relationship_id": "REL-N3-UPF",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    },
+    {
+      "from_evidence": "LOG-SCN-084-0002",
+      "to_evidence": "LOG-SCN-084-0003",
+      "relationship_id": "REL-N3-UPF",
+      "state": "INFERRED",
+      "temporal_precedence": true
+    }
+  ],
+  "metadata": {
+    "knowledge_provider_type": "InMemoryKnowledgeProvider",
+    "brain": "telecombrain",
+    "snapshot_version": "RUN-SCN-084-L4-SEED-42084-operational-v1",
+    "consistency": "frozen test data",
+    "canonicalization_mapping_version": "8b98b25d53b71f1444f8729c93049ff7847d884c7f2bb52b71823e73f4a8616e",
+    "seed": 42084,
+    "difficulty_profile": "L4",
+    "evidence_inputs": {
+      "alarms": "9768ec6a21478df63c61292dbf1bed50cd4739eb1d7642a62275e4cd3321939f",
+      "logs": "c4d3e1e93966d96a9a8112e2961d7be72e1d7c740b6d9495df4005750e549f03",
+      "metrics": "61df65064f26f82a02593c044a229fdc390a3847ff589595160ddbf70ade3c46",
+      "kpis": "3a55f62396187a3cedd1400b8dc8f858866dba750ed878a3e19ae177a1db36fb",
+      "traces": "35fad410a3a32c63eb52132317ea55352cf07ec8b30e7c5c46158fd76aacc10a",
+      "changes": "a5cd9c337a6f62815c72d5e13669674056c455d8517ad1ccf21f3e79d61b1750",
+      "tickets": "afa6e166d33cc4c7b062974599443eac28800832dacb70aef7f149ed953020e5",
+      "recovery": "a805d4efff2dfca3e67e8da1fa34003637ba53d481c66b5bcb1bfd5aacfb2756"
+    },
+    "knowledge_reads": [
+      {
+        "canonical_slug": "IP:PE:RTR-21",
+        "physical_slug": "IP:PE:RTR-21",
+        "missing_canonical_target": false,
+        "content_sha256": "f9e16f66f324fded1e1e07679d89a396c3959c863c42a3d92cb090b33872d56c"
+      },
+      {
+        "canonical_slug": "IP:VRF:N3-01",
+        "physical_slug": "IP:VRF:N3-01",
+        "missing_canonical_target": false,
+        "content_sha256": "4b9fe73d7723dd8efd0d44d360f0ca1c9be2d8dac30507e058fe74debdd9a5a8"
+      },
+      {
+        "canonical_slug": "SA5G:UPF:003",
+        "physical_slug": "SA5G:UPF:003",
+        "missing_canonical_target": false,
+        "content_sha256": "5327a029c1ca4c7d10ec33967061828f061b40abfdd89d5ddc36fe824422adee"
+      },
+      {
+        "canonical_slug": "CRM:TICKET:001",
+        "physical_slug": "CRM:TICKET:001",
+        "missing_canonical_target": false,
+        "content_sha256": "97dedcd2019efe69f0fee140e314c42fcbda060d48b10e41c73abb9026782425"
+      }
+    ],
+    "relationships": [
+      {
+        "relationship_id": "REL-CRM-TICKETS-IMPACT",
+        "source": "CRM:TICKET:001",
+        "target": "SA5G:UPF:003",
+        "link_type": "impacts",
+        "state": "INFERRED",
+        "confidence": 0.75,
+        "provenance": "benchmark-operational-fixture"
+      },
+      {
+        "relationship_id": "REL-N3-PE21",
+        "source": "IP:VRF:N3-01",
+        "target": "IP:PE:RTR-21",
+        "link_type": "routes-through",
+        "state": "CONFIRMED",
+        "confidence": 1.0,
+        "provenance": "benchmark-operational-fixture"
+      },
+      {
+        "relationship_id": "REL-N3-UPF",
+        "source": "SA5G:UPF:003",
+        "target": "IP:VRF:N3-01",
+        "link_type": "connected-to",
+        "state": "CONFIRMED",
+        "confidence": 1.0,
+        "provenance": "benchmark-operational-fixture"
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "CHG-SCN-084-0001",
+        "event_time": "2026-09-10T09:12:00Z",
+        "ingestion_time": "2026-09-10T09:20:00Z",
+        "domain": "SA_5G_CORE",
+        "entity": "SA5G:UPF:003",
+        "canonical_entity": "SA5G:UPF:003",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "changes",
+        "value": null,
+        "signal": "",
+        "source": "ITSM",
+        "source_vendor": "unknown",
+        "source_native_entity": "UPF3",
+        "source_reliability": 0.74,
+        "freshness": 0.6792452830188679,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "context",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "ALM-SCN-084-0001",
+        "event_time": "2026-09-10T09:24:09Z",
+        "ingestion_time": "2026-09-10T09:25:54Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "alarms",
+        "value": null,
+        "signal": "PE_ROUTER_DEGRADED",
+        "source": "IP_NMS",
+        "source_vendor": "VENDOR_NET_A",
+        "source_native_entity": "PE21",
+        "source_reliability": 0.93,
+        "freshness": 0.7875738350470357,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "MAJOR",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "LOG-SCN-084-0001",
+        "event_time": "2026-09-10T09:24:13Z",
+        "ingestion_time": "2026-09-10T09:25:57Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [],
+        "evidence_type": "logs",
+        "value": null,
+        "signal": "PE-RTR-21 reported retries, latency, loss, or degraded procedure state for affected service context",
+        "source": "IP_NMS",
+        "source_vendor": "unknown",
+        "source_native_entity": "PE21",
+        "source_reliability": 0.87,
+        "freshness": 0.7882636303919421,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "ALM-SCN-084-0002",
+        "event_time": "2026-09-10T09:24:44Z",
+        "ingestion_time": "2026-09-10T09:25:01Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:VRF:N3-01",
+        "canonical_entity": "IP:VRF:N3-01",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "alarms",
+        "value": null,
+        "signal": "VRF_DEGRADED",
+        "source": "IP_NMS",
+        "source_vendor": "VENDOR_NET_A",
+        "source_native_entity": "N3-VRF-01",
+        "source_reliability": 0.81,
+        "freshness": 0.7936507936507936,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "MAJOR",
+        "observed_path": [],
+        "duplicate_ids": [
+          "ALM-SCN-084-DUP1"
+        ]
+      },
+      {
+        "evidence_id": "MET-SCN-084-0001",
+        "event_time": "2026-09-10T09:24:45Z",
+        "ingestion_time": "2026-09-10T09:25:10Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "metrics",
+        "value": 44.9,
+        "signal": "latency_ms",
+        "source": "METRICS_PLATFORM",
+        "source_vendor": "unknown",
+        "source_native_entity": "IP:PE:RTR-21",
+        "source_reliability": 0.88,
+        "freshness": 0.7938257993384785,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "LOG-SCN-084-0002",
+        "event_time": "2026-09-10T09:24:48Z",
+        "ingestion_time": "2026-09-10T09:25:04Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:VRF:N3-01",
+        "canonical_entity": "IP:VRF:N3-01",
+        "entity_type": "unknown",
+        "service": [],
+        "evidence_type": "logs",
+        "value": null,
+        "signal": "N3-VRF-01 reported retries, latency, loss, or degraded procedure state for affected service context",
+        "source": "IP_NMS",
+        "source_vendor": "unknown",
+        "source_native_entity": "N3-VRF-01",
+        "source_reliability": 0.79,
+        "freshness": 0.794351279788173,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "MET-SCN-084-0002",
+        "event_time": "2026-09-10T09:24:55Z",
+        "ingestion_time": "2026-09-10T09:25:16Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "metrics",
+        "value": 5.74,
+        "signal": "timeout_or_loss_rate",
+        "source": "METRICS_PLATFORM",
+        "source_vendor": "unknown",
+        "source_native_entity": "IP:PE:RTR-21",
+        "source_reliability": 0.87,
+        "freshness": 0.7955801104972375,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "TRC-SCN-084-0001",
+        "event_time": "2026-09-10T09:25:00Z",
+        "ingestion_time": "2026-09-10T09:25:22Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "traces",
+        "value": null,
+        "signal": "degraded_along_observed_dependency_path",
+        "source": "METRICS_PLATFORM",
+        "source_vendor": "unknown",
+        "source_native_entity": "IP:PE:RTR-21",
+        "source_reliability": 0.82,
+        "freshness": 0.7964601769911505,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [
+          "IP:PE:RTR-21",
+          "IP:VRF:N3-01",
+          "SA5G:UPF:003",
+          "CRM:TICKET:001"
+        ],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "MET-SCN-084-NEG1",
+        "event_time": "2026-09-10T09:25:05Z",
+        "ingestion_time": "2026-09-10T09:25:09Z",
+        "domain": "IT_CLOUD_INFRA",
+        "entity": "SA5G:UPF:003",
+        "canonical_entity": "SA5G:UPF:003",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "metrics",
+        "value": 41,
+        "signal": "upf_cpu_percent",
+        "source": "KUBERNETES",
+        "source_vendor": "unknown",
+        "source_native_entity": "SA5G:UPF:003",
+        "source_reliability": 0.84,
+        "freshness": 0.7973421926910299,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "healthy",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "ALM-SCN-084-0003",
+        "event_time": "2026-09-10T09:25:22Z",
+        "ingestion_time": "2026-09-10T09:25:55Z",
+        "domain": "SA_5G_CORE",
+        "entity": "SA5G:UPF:003",
+        "canonical_entity": "SA5G:UPF:003",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "alarms",
+        "value": null,
+        "signal": "UPF_DEGRADED",
+        "source": "VENDOR_EMS",
+        "source_vendor": "VENDOR_CORE_B",
+        "source_native_entity": "UPF-03",
+        "source_reliability": 0.87,
+        "freshness": 0.8003557136505114,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "MAJOR",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "LOG-SCN-084-0003",
+        "event_time": "2026-09-10T09:25:26Z",
+        "ingestion_time": "2026-09-10T09:25:58Z",
+        "domain": "SA_5G_CORE",
+        "entity": "SA5G:UPF:003",
+        "canonical_entity": "SA5G:UPF:003",
+        "entity_type": "unknown",
+        "service": [],
+        "evidence_type": "logs",
+        "value": null,
+        "signal": "UPF-03 reported retries, latency, loss, or degraded procedure state for affected service context",
+        "source": "VENDOR_EMS",
+        "source_vendor": "unknown",
+        "source_native_entity": "UPF-03",
+        "source_reliability": 0.89,
+        "freshness": 0.801068090787717,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "KPI-SCN-084-0001",
+        "event_time": "2026-09-10T09:25:35Z",
+        "ingestion_time": "2026-09-10T09:26:02Z",
+        "domain": "CRM",
+        "entity": "CRM:TICKET:001",
+        "canonical_entity": "CRM:TICKET:001",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "kpis",
+        "value": 61.15,
+        "signal": "Mobile Ims Voice Success Rate",
+        "source": "METRICS_PLATFORM",
+        "source_vendor": "unknown",
+        "source_native_entity": "CRM:TICKET:001",
+        "source_reliability": 0.86,
+        "freshness": 0.802675585284281,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "ALM-SCN-084-0004",
+        "event_time": "2026-09-10T09:25:54Z",
+        "ingestion_time": "2026-09-10T09:26:30Z",
+        "domain": "CRM",
+        "entity": "CRM:TICKET:001",
+        "canonical_entity": "CRM:TICKET:001",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "alarms",
+        "value": null,
+        "signal": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+        "source": "CRM",
+        "source_vendor": "DERIVED",
+        "source_native_entity": "Customer Ticket Service",
+        "source_reliability": 0.86,
+        "freshness": 0.806090461262875,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "CRITICAL",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "LOG-SCN-084-0004",
+        "event_time": "2026-09-10T09:25:58Z",
+        "ingestion_time": "2026-09-10T09:26:33Z",
+        "domain": "CRM",
+        "entity": "CRM:TICKET:001",
+        "canonical_entity": "CRM:TICKET:001",
+        "entity_type": "unknown",
+        "service": [],
+        "evidence_type": "logs",
+        "value": null,
+        "signal": "Customer Ticket Service reported retries, latency, loss, or degraded procedure state for affected service context",
+        "source": "CRM",
+        "source_vendor": "unknown",
+        "source_native_entity": "Customer Ticket Service",
+        "source_reliability": 0.73,
+        "freshness": 0.8068130883012102,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "KPI-SCN-084-CRM1",
+        "event_time": "2026-09-10T09:29:00Z",
+        "ingestion_time": "2026-09-10T09:31:00Z",
+        "domain": "CRM",
+        "entity": "CRM:TICKET:001",
+        "canonical_entity": "CRM:TICKET:001",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "kpis",
+        "value": 3.03,
+        "signal": "Customer Complaint Rate",
+        "source": "CRM",
+        "source_vendor": "unknown",
+        "source_native_entity": "CRM:TICKET:001",
+        "source_reliability": 0.79,
+        "freshness": 0.8411214953271028,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "TKT-SCN-084-0001",
+        "event_time": "2026-09-10T09:29:12Z",
+        "ingestion_time": "2026-09-10T09:31:10Z",
+        "domain": "CRM",
+        "entity": "CRM:TICKET:001",
+        "canonical_entity": "CRM:TICKET:001",
+        "entity_type": "unknown",
+        "service": [
+          "mobile_ims_voice"
+        ],
+        "evidence_type": "tickets",
+        "value": null,
+        "signal": "",
+        "source": "CRM",
+        "source_vendor": "unknown",
+        "source_native_entity": "CRM:TICKET:001",
+        "source_reliability": 0.78,
+        "freshness": 0.8434864104967198,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "abnormal",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      },
+      {
+        "evidence_id": "RCV-SCN-084-0001",
+        "event_time": "2026-09-10T09:40:00Z",
+        "ingestion_time": "2026-09-10T09:40:20Z",
+        "domain": "IP_TRANSPORT",
+        "entity": "IP:PE:RTR-21",
+        "canonical_entity": "IP:PE:RTR-21",
+        "entity_type": "unknown",
+        "service": [],
+        "evidence_type": "recovery",
+        "value": null,
+        "signal": "",
+        "source": "IP_NMS",
+        "source_vendor": "unknown",
+        "source_native_entity": "IP:PE:RTR-21",
+        "source_reliability": 0.82,
+        "freshness": 0.994475138121547,
+        "observed_or_inferred": "OBSERVED",
+        "polarity": "context",
+        "severity": "UNKNOWN",
+        "observed_path": [],
+        "duplicate_ids": []
+      }
+    ]
+  },
+  "diagnostics": {
+    "input_evidence_count": 18,
+    "collapsed_evidence_count": 17,
+    "falsified_hypothesis_count": 0,
+    "repeated_falsified_hypothesis_count": 0,
+    "candidate_relationship_count": 0,
+    "canonical_resolution_failures": [],
+    "topology_gap_detection": false,
+    "evidence_requests_before_terminal": 0,
+    "steps_to_first_useful_hypothesis": 2,
+    "investigation_duration_seconds": 0.00343861200963147,
+    "impacted_service": "mobile_ims_voice",
+    "coincidental_evidence": [],
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations"
+  }
+}

@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/part-of: agenticaiops
     tier: frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: frontend
@@ -18,16 +18,25 @@ spec:
         app.kubernetes.io/name: frontend
         tier: frontend
     spec:
+      serviceAccountName: agent-operator
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
       containers:
-        - name: frontend
-          image: agenticaiops/frontend:latest
+        - name: nextjs
+          image: localhost/frontend:v1
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3000
+              name: http
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "http://api-gateway.agents-prod.svc.cluster.local"
           livenessProbe:
             httpGet:
               path: /
               port: 3000
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
             periodSeconds: 15
           resources:
             requests:

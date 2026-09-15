@@ -1,0 +1,6 @@
+API_BASE=http://127.0.0.1:8000 SESSION_ID=story-reference OUT_ROOT=docs/storyteller-references \
+scripts/capture_story_reference.sh 'mobile-core/incidents/site-power-81cec920e94d3a59' 'Tell the incident story for mobile-core/incidents/site-power-81cec920e94d3a59.'
+
+curl -sS -X POST 'http://127.0.0.1:8000/api/incidents/mobile-core/incidents/site-power-81cec920e94d3a59/ask' \
+  -H 'Content-Type: application/json' \
+  -d @'docs/storyteller-references/mobile-core_incidents_site-power-81cec920e94d3a59/20260831T082757Z/request.json'

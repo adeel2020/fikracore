@@ -1,0 +1,16 @@
+id: incident_registry
+name: Incident Registry Service
+engine: telecom_brain
+description: Owns raw incident records and exposes incident metadata without treating raw operational records as permanent knowledge.
+status: active
+connectors: []
+consumes:
+  - incident_candidate
+  - incident_update
+produces:
+  - incident_record
+  - incident_summary
+  - incident_observation_projection
+permissions:
+  - read_incidents
+  - write_incidents

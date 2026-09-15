@@ -1,0 +1,19 @@
+what_if_id: H4-WI-016
+title: Redundant DRA Shared NTP Clock Skew
+description: Simulates time drift cascading across signaling agents sharing one upstream
+  stratum.
+cohort: shared_common_cause
+trigger:
+  canonical_id: EPC:DRA:001
+  entity_display_name: Diameter Routing Agent-01
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- common_cause
+- timing
+- shared_dependency

@@ -1,0 +1,82 @@
+{
+  "A": {
+    "description": "Correct root ranked #2/#3, wrong root selected",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "B": {
+    "description": "Correct root ranked #1, wrong terminal state",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "C": {
+    "description": "False MODEL_INSUFFICIENT",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "D": {
+    "description": "False PARTIALLY_EXPLAINED",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "E": {
+    "description": "Canonical entity/alias mismatch",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "F": {
+    "description": "Causal-role mismatch",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "G": {
+    "description": "Confidence threshold too conservative",
+    "count": 25,
+    "percentage": 25.0
+  },
+  "H": {
+    "description": "Negative-evidence penalty too aggressive",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "I": {
+    "description": "Topology traversal/direction/dependency-scoring problem",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "J": {
+    "description": "Evidence sufficiency logic too conservative",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "K": {
+    "description": "Change correlation over-weighted",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "L": {
+    "description": "Symptom node over-ranked as root",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "M": {
+    "description": "Shared-dependency/common-cause ranking failure",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "N": {
+    "description": "Multi-cause reduction to single root",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "O": {
+    "description": "Evaluator semantic mismatch",
+    "count": 0,
+    "percentage": 0.0
+  },
+  "P": {
+    "description": "Other/uncategorized",
+    "count": 0,
+    "percentage": 0.0
+  }
+}

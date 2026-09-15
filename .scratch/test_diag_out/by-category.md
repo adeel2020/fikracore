@@ -1,0 +1,24 @@
+# Slices by Scenario Category
+
+| Category | Runs | Method B (Hypothesis) | Method A (Baseline) | Advantage |
+| :--- | :--- | :--- | :--- | :--- |
+| **ACCEPTANCE_DEPLOYMENT_REGRESSION** | 5 | 5 | 5 | Tie |
+| **AMPLIFICATION_CONTROL_PLANE_CHURN** | 5 | 5 | 5 | Tie |
+| **CASCADING_FAILURE** | 5 | 5 | 5 | Tie |
+| **CHANGE_INDUCED_LATENT_DEFECT** | 5 | 5 | 5 | Tie |
+| **CORRELATED_COMMON_CAUSE_FAILURE** | 5 | 5 | 5 | Tie |
+| **EXTERNAL_DEPENDENCY_FAILURE** | 5 | 5 | 5 | Tie |
+| **FAILOVER_OVERLOAD_PROTECTION_INTERACTION** | 5 | 5 | 5 | Tie |
+| **GRAY_FAILURE_IMPLICIT_DETERIORATION** | 5 | 0 | 0 | Tie |
+| **MULTI_CAUSE_CONTRIBUTING_CONDITIONS** | 5 | 0 | 0 | Tie |
+| **OBSERVABILITY_BLIND_SPOT_DELAYED_VISIBILITY** | 5 | 0 | 0 | Tie |
+| **PERFORMANCE_MICROBURST_ASYMMETRY** | 5 | 5 | 5 | Tie |
+| **POWER_SITE_ENVIRONMENTAL_COMMON_CAUSE** | 5 | 5 | 5 | Tie |
+| **RECOVERY_SURGE_MASS_RECONNECTION** | 5 | 5 | 5 | Tie |
+| **RESOURCE_EXHAUSTION_CONGESTION_COLLAPSE** | 5 | 5 | 5 | Tie |
+| **ROUTING_INSTABILITY_BLACKHOLE_LOOP** | 5 | 5 | 5 | Tie |
+| **SECURITY_TO_SERVICE_IMPACT** | 5 | 5 | 5 | Tie |
+| **SHARED_INFRASTRUCTURE_SERVICE_DEPENDENCY** | 5 | 5 | 5 | Tie |
+| **SIGNALING_RETRY_STORM** | 5 | 5 | 5 | Tie |
+| **SPLIT_BRAIN_NETWORK_PARTITION** | 5 | 0 | 0 | Tie |
+| **TRANSIENT_TOPOLOGY_DYNAMIC_REROUTE** | 5 | 0 | 0 | Tie |

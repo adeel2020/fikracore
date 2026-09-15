@@ -1,0 +1,8 @@
+difficulty_profile: K4
+gap_type: MISSING_REDUNDANCY_FAILOVER
+hidden_path: hidden
+operational_path: operational
+run_id: RUN-H2-SCN-039-K4-SEED-52040
+scenario_id: H2-SCN-039
+seed: 52040
+variant: cross_domain

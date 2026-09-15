@@ -1,0 +1,19 @@
+what_if_id: H4-WI-018
+title: Primary and Backup Routers Common Site Flood
+description: Simulates facility basement flood taking down both active and standby
+  nodes.
+cohort: shared_common_cause
+trigger:
+  canonical_id: IP:PE:RTR-07
+  entity_display_name: MPLS Edge Router-07
+  event_type: FAILURE
+  severity: CRITICAL
+assumptions:
+  failover_available: true
+  failover_capacity: FULL
+  duration_minutes: 30
+  traffic_load_profile: NORMAL
+failure_domain_tags:
+- common_cause
+- facility
+- shared_dependency

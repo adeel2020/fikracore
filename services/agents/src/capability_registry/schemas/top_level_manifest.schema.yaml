@@ -1,0 +1,21 @@
+type: object
+required: [id, name, version, description, engines]
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  version:
+    type: string
+  description:
+    type: string
+  engines:
+    type: array
+    items:
+      type: string
+  principles:
+    type: array
+    items:
+      type: string
+  runtime:
+    type: object

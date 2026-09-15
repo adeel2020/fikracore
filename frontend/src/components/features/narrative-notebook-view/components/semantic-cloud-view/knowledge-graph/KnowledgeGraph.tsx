@@ -4,8 +4,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo
 import { GripVertical, Pin, Plus, X, Lock, Unlock } from "lucide-react";
 import type { DashboardFeedResponse, SemanticPoint } from "../types/semantic-cloud.types";
 import { getDashboardFeed } from "../hooks/useDashboardFeedCache";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "@/lib/api/config";
 
 export interface KGActions {
   zoomIn: () => void;

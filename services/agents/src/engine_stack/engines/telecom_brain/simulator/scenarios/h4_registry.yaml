@@ -1,0 +1,620 @@
+- id: SCN-001
+  stage: H4
+  display_name: SGi Throughput Degradation & MTU Blackhole
+  description: Simulates an MTU blackhole on SGi transport interface causing TCP degradation while control plane remains healthy.
+  aliases:
+    - SGi MTU Blackhole
+    - MTU Mismatch
+    - SGi Throughput Degradation
+    - tr-01 MTU drop
+  tags:
+    - transport
+    - mobile_core
+    - mtu
+    - tcp
+    - 4g
+  scenario_path: simulator/h2_runs/RUN-H2-SCN-001-K1-SEED-52002/
+  demo_enabled: true
+
+- id: H4-WI-001
+  stage: H4
+  display_name: MPLS Edge Router Failure
+  description: Simulates loss of a shared transport edge and estimates downstream service impact.
+  aliases:
+    - H4-WT-001
+    - MPLS router failure
+    - edge router outage
+    - transport edge failure
+    - transport edge router goes down
+  tags:
+    - transport
+    - routing
+    - spof
+    - resilience
+  scenario_path: simulator/h4_runs/H4-WI-001/
+  demo_enabled: true
+
+- id: H4-WI-002
+  stage: H4
+  display_name: Data Center Gateway Failure
+  description: Simulates complete outage of primary DC gateway interconnecting core services.
+  aliases:
+    - DC gateway outage
+    - DC-GW failure
+    - core dc gateway down
+  tags:
+    - core
+    - dc
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-002/
+  demo_enabled: false
+
+- id: H4-WI-003
+  stage: H4
+  display_name: Packet Gateway User Plane Failure
+  description: Simulates user plane packet forwarder collapse affecting mobile internet traffic.
+  aliases:
+    - PGW-U failure
+    - UPF outage
+    - packet core user plane down
+  tags:
+    - packet_core
+    - 5g
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-003/
+  demo_enabled: false
+
+- id: H4-WI-004
+  stage: H4
+  display_name: Subscriber Database Cluster Outage
+  description: Simulates core unified data repository failure impacting subscriber profiles.
+  aliases:
+    - UDR database failure
+    - HSS DB outage
+    - subscriber DB down
+  tags:
+    - database
+    - subscriber
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-004/
+  demo_enabled: false
+
+- id: H4-WI-005
+  stage: H4
+  display_name: Signaling Firewall Failure
+  description: Simulates perimeter signaling firewall drop isolating 5G roaming traffic.
+  aliases:
+    - Diameter firewall down
+    - security gateway failure
+    - SEPP failure
+  tags:
+    - security
+    - signaling
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-005/
+  demo_enabled: false
+
+- id: H4-WI-006
+  stage: H4
+  display_name: DNS Resolution Server Outage
+  description: Simulates internal core DNS server outage disrupting NF discovery.
+  aliases:
+    - Core DNS failure
+    - DNS resolver outage
+    - telecom DNS down
+  tags:
+    - dns
+    - control_plane
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-006/
+  demo_enabled: false
+
+- id: H4-WI-007
+  stage: H4
+  display_name: Optical Transport Node Failure
+  description: Simulates fiber transponder chassis failure cutting regional transport capacity.
+  aliases:
+    - DWDM transponder outage
+    - optical backhaul down
+    - fiber node failure
+  tags:
+    - transport
+    - optical
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-007/
+  demo_enabled: false
+
+- id: H4-WI-008
+  stage: H4
+  display_name: Session Management Function Failure
+  description: Simulates 5G SMF controller outage blocking PDU session establishment.
+  aliases:
+    - SMF outage
+    - session controller failure
+    - 5G SMF down
+  tags:
+    - 5g
+    - control_plane
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-008/
+  demo_enabled: false
+
+- id: H4-WI-009
+  stage: H4
+  display_name: Diameter Routing Agent Failure
+  description: Simulates signaling router failure disrupting policy and charging routing.
+  aliases:
+    - DRA outage
+    - signaling router failure
+    - DRA cluster down
+  tags:
+    - signaling
+    - diameter
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-009/
+  demo_enabled: false
+
+- id: H4-WI-010
+  stage: H4
+  display_name: BSS Charging Gateway Failure
+  description: Simulates online charging function isolation degrading prepaid calls and data.
+  aliases:
+    - CHF outage
+    - online charging gateway down
+    - billing gateway failure
+  tags:
+    - bss
+    - charging
+    - spof
+  scenario_path: simulator/h4_runs/H4-WI-010/
+  demo_enabled: false
+
+- id: H4-WI-011
+  stage: H4
+  display_name: Dual Router Shared Power Feed Loss
+  description: Simulates utility feed failure affecting two routers sharing the same PDU rack.
+  aliases:
+    - site power feed failure
+    - shared power loss
+    - common feed outage
+  tags:
+    - common_cause
+    - power
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-011/
+  demo_enabled: true
+
+- id: H4-WI-012
+  stage: H4
+  display_name: Redundant UPF Shared Host Server Failure
+  description: Simulates primary and secondary virtual UPFs co-located on the same physical blade.
+  aliases:
+    - shared hypervisor crash
+    - common cloud host down
+    - co-located UPF failure
+  tags:
+    - common_cause
+    - cloud
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-012/
+  demo_enabled: false
+
+- id: H4-WI-013
+  stage: H4
+  display_name: Dual Transport Links Shared Fiber Conduit Cut
+  description: Simulates physical fiber cut severing diverse links routed through a common trench.
+  aliases:
+    - shared conduit cut
+    - common fiber duct cut
+    - dual link fiber sever
+  tags:
+    - common_cause
+    - transport
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-013/
+  demo_enabled: false
+
+- id: H4-WI-014
+  stage: H4
+  display_name: Redundant Firewalls Shared Switch Dependency
+  description: Simulates active-passive firewall pair connected to a single management switch.
+  aliases:
+    - management switch failure
+    - common switch outage
+    - shared firewall switch down
+  tags:
+    - common_cause
+    - switch
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-014/
+  demo_enabled: false
+
+- id: H4-WI-015
+  stage: H4
+  display_name: Regional AMF Pair Shared Database Failure
+  description: Simulates redundant access controllers both depending on an un-replicated DB.
+  aliases:
+    - shared subscriber DB outage
+    - AMF shared UDR crash
+    - common DB failure
+  tags:
+    - common_cause
+    - database
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-015/
+  demo_enabled: false
+
+- id: H4-WI-016
+  stage: H4
+  display_name: Redundant DRA Shared NTP Clock Skew
+  description: Simulates time drift cascading across signaling agents sharing one upstream stratum.
+  aliases:
+    - common timing source loss
+    - shared PTP clock failure
+    - DRA clock desync
+  tags:
+    - common_cause
+    - timing
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-016/
+  demo_enabled: false
+
+- id: H4-WI-017
+  stage: H4
+  display_name: Cross-DC Backhaul Common Carrier Outage
+  description: Simulates backhaul leased lines traversing the same third-party transport provider.
+  aliases:
+    - third-party carrier blackout
+    - shared telco transit down
+    - common transit cut
+  tags:
+    - common_cause
+    - carrier
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-017/
+  demo_enabled: false
+
+- id: H4-WI-018
+  stage: H4
+  display_name: Primary and Backup Routers Common Site Flood
+  description: Simulates facility basement flood taking down both active and standby nodes.
+  aliases:
+    - site facility flood
+    - common site disaster
+    - dual router facility loss
+  tags:
+    - common_cause
+    - facility
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-018/
+  demo_enabled: false
+
+- id: H4-WI-019
+  stage: H4
+  display_name: Redundant Ingress Load Balancers Shared Border Route
+  description: Simulates upstream edge gateway withdrawal dropping traffic to both load balancers.
+  aliases:
+    - shared border route drop
+    - BGP route withdrawal on LB
+    - common border router fail
+  tags:
+    - common_cause
+    - routing
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-019/
+  demo_enabled: false
+
+- id: H4-WI-020
+  stage: H4
+  display_name: Redundant Auth Servers Shared HSM Failure
+  description: Simulates 5G authentication servers sharing a hardware security module appliance.
+  aliases:
+    - shared hardware security module failure
+    - common HSM outage
+    - AUSF crypto failure
+  tags:
+    - common_cause
+    - security
+    - shared_dependency
+  scenario_path: simulator/h4_runs/H4-WI-020/
+  demo_enabled: false
+
+- id: H4-WI-021
+  stage: H4
+  display_name: Primary UPF Failure with 70% Backup Capacity
+  description: Simulates failover to secondary UPF that only supports 70 percent of peak traffic.
+  aliases:
+    - UPF backup capacity limit
+    - failover capacity bottleneck
+    - overloaded backup UPF
+  tags:
+    - capacity
+    - failover
+    - bottleneck
+  scenario_path: simulator/h4_runs/H4-WI-021/
+  demo_enabled: true
+
+- id: H4-WI-022
+  stage: H4
+  display_name: Edge Router Failover Transport Congestion
+  description: Simulates traffic reroute onto secondary link lacking sufficient bandwidth.
+  aliases:
+    - failover link saturation
+    - backup path bandwidth exhaustion
+    - router failover congestion
+  tags:
+    - capacity
+    - transport
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-022/
+  demo_enabled: false
+
+- id: H4-WI-023
+  stage: H4
+  display_name: Database Secondary Replica Lag Under Failover
+  description: Simulates promotion of replica that is behind on transactional commit log.
+  aliases:
+    - read replica failover lag
+    - DB promotion timeout
+    - replication queue overload
+  tags:
+    - capacity
+    - database
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-023/
+  demo_enabled: false
+
+- id: H4-WI-024
+  stage: H4
+  display_name: Signaling Storm During AMF Failover
+  description: Simulates massive registration retry surge exhausting backup control plane.
+  aliases:
+    - registration retry storm
+    - failover signaling storm
+    - AMF capacity surge
+  tags:
+    - capacity
+    - signaling
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-024/
+  demo_enabled: false
+
+- id: H4-WI-025
+  stage: H4
+  display_name: Backup Gateway CPU Saturation on Peak Traffic
+  description: Simulates secondary DC gateway CPU pinning under uncompressed failover load.
+  aliases:
+    - peak traffic backup gateway overload
+    - secondary DC-GW CPU spike
+    - failover CPU exhaustion
+  tags:
+    - capacity
+    - gateway
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-025/
+  demo_enabled: false
+
+- id: H4-WI-026
+  stage: H4
+  display_name: Unsynchronized Session State on Failover
+  description: Simulates user session context loss causing dropped calls during switchover.
+  aliases:
+    - session state desync
+    - stateless failover drop
+    - session loss on switchover
+  tags:
+    - failover
+    - state_sync
+    - resilience_gap
+  scenario_path: simulator/h4_runs/H4-WI-026/
+  demo_enabled: false
+
+- id: H4-WI-027
+  stage: H4
+  display_name: Secondary DNS Resolver Rate-Limit Drop
+  description: Simulates backup DNS engine rejecting queries due to restrictive RPS throttle.
+  aliases:
+    - backup DNS query rate limit
+    - secondary DNS throttling
+    - failover DNS drop
+  tags:
+    - capacity
+    - dns
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-027/
+  demo_enabled: false
+
+- id: H4-WI-028
+  stage: H4
+  display_name: Inter-DC Link Failover Buffering Exhaustion
+  description: Simulates failover packet buffer overflow leading to random tail drops.
+  aliases:
+    - packet buffer exhaustion
+    - failover buffer overflow
+    - cross-DC packet drop
+  tags:
+    - capacity
+    - buffer
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-028/
+  demo_enabled: false
+
+- id: H4-WI-029
+  stage: H4
+  display_name: Backup Charging Queue Memory Overflow
+  description: Simulates in-flight CDR accumulation exhausting memory in standby charging node.
+  aliases:
+    - CHF failover queue overflow
+    - charging buffer memory exhaustion
+    - backup CHF OOM
+  tags:
+    - capacity
+    - charging
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-029/
+  demo_enabled: false
+
+- id: H4-WI-030
+  stage: H4
+  display_name: Firewall Connection Table Exhaustion During Shift
+  description: Simulates backup firewall table filling up when handling aggregated traffic flows.
+  aliases:
+    - state table overflow
+    - firewall conn table limit
+    - failover connection drop
+  tags:
+    - capacity
+    - firewall
+    - failover
+  scenario_path: simulator/h4_runs/H4-WI-030/
+  demo_enabled: false
+
+- id: H4-WI-031
+  stage: H4
+  display_name: Planned Router Reboot While Backup Degraded
+  description: Simulates maintenance reload on primary router while secondary line card is errored.
+  aliases:
+    - router reboot degraded backup
+    - unsafe maintenance reboot
+    - maintenance router restart
+  tags:
+    - change_risk
+    - maintenance
+    - reboot
+  scenario_path: simulator/h4_runs/H4-WI-031/
+  demo_enabled: true
+
+- id: H4-WI-032
+  stage: H4
+  display_name: Core Switch Firmware Upgrade During Traffic Peak
+  description: Simulates software upgrade scheduled during busiest evening busy-hour window.
+  aliases:
+    - peak hours switch upgrade
+    - unsafe firmware deployment
+    - core switch update risk
+  tags:
+    - change_risk
+    - upgrade
+    - maintenance
+  scenario_path: simulator/h4_runs/H4-WI-032/
+  demo_enabled: false
+
+- id: H4-WI-033
+  stage: H4
+  display_name: BGP Policy Reconfiguration Route Flapping
+  description: Simulates prefix list update inadvertently causing routing convergence loops.
+  aliases:
+    - routing change flap
+    - bgp export policy update
+    - maintenance route shift
+  tags:
+    - change_risk
+    - routing
+    - config_change
+  scenario_path: simulator/h4_runs/H4-WI-033/
+  demo_enabled: false
+
+- id: H4-WI-034
+  stage: H4
+  display_name: Security Group Rule Push Blocking Signaling
+  description: Simulates automated ACL deployment dropping critical Diameter control traffic.
+  aliases:
+    - firewall rule change blackout
+    - security rule sync error
+    - signaling port block change
+  tags:
+    - change_risk
+    - security
+    - config_change
+  scenario_path: simulator/h4_runs/H4-WI-034/
+  demo_enabled: false
+
+- id: H4-WI-035
+  stage: H4
+  display_name: Database Schema Migration Lock Contention
+  description: Simulates alter table statement taking exclusive lock during active call window.
+  aliases:
+    - online schema change lock
+    - DB migration lock timeout
+    - subscriber schema update
+  tags:
+    - change_risk
+    - database
+    - maintenance
+  scenario_path: simulator/h4_runs/H4-WI-035/
+  demo_enabled: false
+
+- id: H4-WI-036
+  stage: H4
+  display_name: Primary Router Outage Plus Backup Degradation
+  description: Simulates critical failure set where primary fails while backup is degraded.
+  aliases:
+    - critical failure set dual fault
+    - concurrent transport failure
+    - compound router outage
+  tags:
+    - multi_failure
+    - critical_failure_set
+    - resilience
+  scenario_path: simulator/h4_runs/H4-WI-036/
+  demo_enabled: true
+
+- id: H4-WI-037
+  stage: H4
+  display_name: Site Power Grid Loss Combined With Gen-Set Delay
+  description: Simulates grid blackout coupled with transfer switch delay triggering DC shutdown.
+  aliases:
+    - generator start failure
+    - compound power failure
+    - DC power outage cascading
+  tags:
+    - multi_failure
+    - power
+    - cascade
+  scenario_path: simulator/h4_runs/H4-WI-037/
+  demo_enabled: false
+
+- id: H4-WI-038
+  stage: H4
+  display_name: Transport Link Cut During Optical Amplifier Flap
+  description: Simulates transmission line break coinciding with unstable amplification node.
+  aliases:
+    - optical flap plus fiber cut
+    - compound transmission fault
+    - cascade transport disconnect
+  tags:
+    - multi_failure
+    - transport
+    - cascade
+  scenario_path: simulator/h4_runs/H4-WI-038/
+  demo_enabled: false
+
+- id: H4-WI-039
+  stage: H4
+  display_name: Signaling Gateway Crash During Roaming Traffic Surge
+  description: Simulates edge signaling node crash timed with major international event rush.
+  aliases:
+    - roaming surge plus DRA crash
+    - international interconnect storm
+    - compound signaling collapse
+  tags:
+    - multi_failure
+    - signaling
+    - capacity
+  scenario_path: simulator/h4_runs/H4-WI-039/
+  demo_enabled: false
+
+- id: H4-WI-040
+  stage: H4
+  display_name: Incomplete Operational Knowledge Model Insufficiency
+  description: Simulates what-if trigger on component with missing upstream dependency graph.
+  aliases:
+    - unknown upstream topology what-if
+    - missing dependency prediction
+    - unmapped edge router what-if
+  tags:
+    - model_insufficient
+    - unknown_knowledge
+    - boundary
+  scenario_path: simulator/h4_runs/H4-WI-040/
+  demo_enabled: true

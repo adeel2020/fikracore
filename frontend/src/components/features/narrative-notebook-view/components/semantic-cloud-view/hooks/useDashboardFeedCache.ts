@@ -1,6 +1,5 @@
 import type { DashboardFeedResponse } from "../types/semantic-cloud.types";
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+import { API_BASE } from "../../../../../../lib/api/config";
 const CACHE_KEY = "semantic_cloud_feed_cache";
 
 let globalFeedPromise: Promise<DashboardFeedResponse> | null = null;

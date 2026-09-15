@@ -1,0 +1,12 @@
+candidate_id: KG-H3-004
+discovery_incident: H2-SCN-004
+gap_type: MISSING_INTERMEDIATE_NODE
+source: SA5G:UPF:003
+target: IP:PE:RTR-21
+proposed_type: routes-through
+state: CANDIDATE
+confidence: 0.85
+supporting_evidence:
+- EV-H2-H2-SCN-004-001
+reason: Operational discovery in H2-SCN-004 indicates traffic forwarding from SA5G:UPF:003
+  to IP:PE:RTR-21
