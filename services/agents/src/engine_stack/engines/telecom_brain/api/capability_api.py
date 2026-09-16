@@ -240,13 +240,19 @@ def _build_zaki_storyteller_payload(
 def _scenario_contract(record: Any) -> dict[str, Any]:
     base = record.model_dump(mode="json")
     tags = base.get("tags") or []
+    stage = base.get("stage", "H1")
+    from ..simulator.scenario_catalog import concept_for_stage
+    concept = base.get("concept") or concept_for_stage(stage)
     base.update({
-        "capabilities": _derive_capabilities(base.get("stage", "H1"), tags),
-        "domains": _derive_domains(tags),
-        "services": _derive_services(tags),
-        "difficulty": _derive_difficulty(tags),
+        "stage": stage,
+        "concept": concept,
+        "scenario_type": base.get("scenario_type", "INCIDENT"),
+        "capabilities": _derive_capabilities(stage, tags),
+        "domains": base.get("domains") or _derive_domains(tags),
+        "services": base.get("services") or _derive_services(tags),
+        "difficulty": base.get("difficulty") or _derive_difficulty(tags),
         "status": "READY" if base.get("demo_enabled", True) else "AVAILABLE",
-        "source": "h4-registry",
+        "source": base.get("source", "scenario-catalog"),
     })
     return base
 
@@ -292,10 +298,39 @@ def execute_capability(capability_name: str, req: ExecuteCapabilityRequest) -> d
 
 
 @router.get("/scenarios")
-def list_scenarios() -> dict[str, Any]:
-    """List all registered simulator scenarios across stages."""
-    reg = get_default_h4_registry()
-    scenarios = [_scenario_contract(r) for r in reg.list_all()]
+def list_scenarios(
+    stage: Optional[str] = Query(None, description="Filter by stage: H1, H2, H3, H4"),
+    concept: Optional[str] = Query(None, description="Filter by concept: Understand, Discover, Learn, Anticipate"),
+) -> dict[str, Any]:
+    """List all registered simulator scenarios across stages and conceptual capabilities."""
+    from ..simulator.scenario_catalog import scenario_catalog
+
+    if concept:
+        records = scenario_catalog.filter_by_concept(concept)
+    elif stage:
+        records = scenario_catalog.filter_by_stage(stage)
+    else:
+        records = scenario_catalog.all()
+
+    scenarios = []
+    for r in records:
+        scenarios.append({
+            "id": r.id,
+            "display_name": r.display_name,
+            "stage": r.stage,
+            "concept": r.concept,
+            "scenario_type": r.scenario_type,
+            "description": r.description,
+            "aliases": r.aliases,
+            "tags": r.tags,
+            "domains": r.domains or _derive_domains(r.tags),
+            "services": r.services or _derive_services(r.tags),
+            "difficulty": r.difficulty or _derive_difficulty(r.tags),
+            "status": r.status,
+            "source": r.source,
+            "demo_enabled": r.demo_enabled,
+            "capabilities": _derive_capabilities(r.stage, r.tags),
+        })
     return {"status": "SUCCESS", "total_scenarios": len(scenarios), "scenarios": scenarios}
 
 
@@ -326,6 +361,43 @@ def get_scenario_capabilities(scenario_id: str) -> dict[str, Any]:
         "scenario_id": rec.id,
         "capabilities": contract["capabilities"],
         "available_workspaces": [name for name, enabled in contract["capabilities"].items() if enabled],
+    }
+
+
+class ScenarioYamlUpdateRequest(BaseModel):
+    content: str
+
+
+@router.get("/scenarios/{scenario_id}/yaml")
+def get_scenario_yaml_endpoint(scenario_id: str) -> dict[str, Any]:
+    """Retrieve raw YAML definition and source path for a scenario."""
+    from ..simulator.scenario_catalog import scenario_catalog
+    try:
+        content, filename, is_read_only = scenario_catalog.get_yaml(scenario_id)
+        return {
+            "status": "SUCCESS",
+            "scenario_id": scenario_id,
+            "filename": filename,
+            "content": content,
+            "read_only": is_read_only,
+        }
+    except KeyError:
+        raise HTTPException(status_code=404, detail=f"Scenario '{scenario_id}' not found.")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.put("/scenarios/{scenario_id}/yaml")
+def update_scenario_yaml_endpoint(scenario_id: str, request: ScenarioYamlUpdateRequest) -> dict[str, Any]:
+    """Validate and persist updated YAML definition for a scenario."""
+    from ..simulator.scenario_catalog import scenario_catalog
+    ok, msg = scenario_catalog.save_yaml(scenario_id, request.content)
+    if not ok:
+        raise HTTPException(status_code=400, detail=msg)
+    return {
+        "status": "SUCCESS",
+        "scenario_id": scenario_id,
+        "message": msg,
     }
 
 

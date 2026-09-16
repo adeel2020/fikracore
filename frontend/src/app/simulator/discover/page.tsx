@@ -7,9 +7,9 @@ export default function DiscoverPage() {
         workspace: "discover",
         title: "Discover",
         subtitle: "Knowledge gap and unknown boundary analysis.",
-        capability: "H2 / discover",
+        capability: "Discover",
         emptyTitle: "No discover state available",
-        emptyBody: "This scenario has no knowledge-gap payload yet. Select a scenario with H2 support or run evidence collection from the simulator.",
+        emptyBody: "This scenario has no knowledge-gap payload yet. Select a scenario with Discover support or run evidence collection from the simulator.",
       }}
     />
   );

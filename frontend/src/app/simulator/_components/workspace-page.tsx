@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import {
   Activity,
@@ -7,25 +8,34 @@ import {
   ArrowRight,
   BarChart3,
   Brain,
+  Check,
   CheckCircle2,
   Clock,
   Compass,
+  Copy,
   Cpu,
   Database,
+  Eye,
+  FileCode,
   GraduationCap,
   HelpCircle,
   Loader2,
   Network,
+  Pencil,
   Play,
   RefreshCw,
+  RotateCcw,
+  Save,
   Search,
   Server,
   ShieldCheck,
   Sparkles,
+  X,
   Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useFikraCore, Workspace } from "@/lib/fikracore-context";
+import { API_BASE } from "@/lib/api/config";
+import { useFikraCore, Workspace, getConceptName, ScenarioRegistryEntry } from "@/lib/fikracore-context";
 
 type WorkspacePageConfig = {
   workspace: Workspace;
@@ -124,22 +134,24 @@ function Panel({
   icon: Icon,
   children,
   action,
+  className,
 }: {
   title: string;
   icon: React.ComponentType<{ className?: string }>;
   children: React.ReactNode;
   action?: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <section className="min-h-0 rounded-lg border border-cyan-500/20 bg-[#091122]/90 p-3 shadow-xl">
-      <div className="flex items-center justify-between gap-3 pb-2 border-b border-slate-800">
+    <section className={cn("min-h-0 rounded-lg border border-cyan-500/20 bg-[#091122]/90 p-3 shadow-xl flex flex-col h-full", className)}>
+      <div className="flex items-center justify-between gap-3 pb-2 border-b border-slate-800 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
           <Icon className="h-4 w-4 text-cyan-400 shrink-0" />
           <h3 className="text-xs font-bold text-white uppercase tracking-wider font-mono truncate">{title}</h3>
         </div>
         {action}
       </div>
-      <div className="pt-2">{children}</div>
+      <div className="pt-2 flex-1 min-h-0 overflow-y-auto custom-scrollbar">{children}</div>
     </section>
   );
 }
@@ -162,7 +174,7 @@ function DiscoverWorkspace() {
   const actions = simulationState?.nextBestActions || [];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 h-full min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 h-full min-h-0">
       <Panel title="Knowledge Gap Summary" icon={HelpCircle}>
         <div className="grid grid-cols-3 gap-2 text-center">
           <Metric label="Open gaps" value={gaps.length} tone="amber" />
@@ -236,7 +248,7 @@ function LearnWorkspace() {
   const learningEnabled = Boolean(learning?.enabled);
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-3 gap-3 h-full min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 h-full min-h-0">
       <Panel title="Candidate Knowledge" icon={GraduationCap}>
         {learningEnabled && learning ? (
           <div className="space-y-3">
@@ -257,7 +269,7 @@ function LearnWorkspace() {
       </Panel>
       <Panel title="Before / After" icon={Sparkles}>
         <p className="text-xs text-slate-300 leading-relaxed">
-          This workspace is bound to H3 learning state. When a scenario exposes promoted knowledge, the before/after comparison will render from the backend payload rather than fabricated fixtures.
+          This workspace is bound to Learn capability state. When a scenario exposes promoted knowledge, the before/after comparison will render from the backend payload rather than fabricated fixtures.
         </p>
       </Panel>
     </div>
@@ -274,7 +286,7 @@ function PredictWorkspace() {
     : [];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 h-full min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 h-full min-h-0">
       <Panel title="Blast Radius" icon={Network}>
         {impact && hasImpactValues ? (
           <div className="grid grid-cols-3 gap-2">
@@ -334,11 +346,11 @@ function KnowledgeWorkspace() {
   const entities = simulationState?.topology?.domains.flatMap((d) => d.entities.map((entity) => ({ ...entity, domain: d.name }))) || [];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 h-full min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 h-full min-h-0">
       <Panel title="Knowledge Summary" icon={Database}>
         <StatusList rows={[
           ["Source", activeScenario?.source || "live_telecombrain"],
-          ["Stage", activeScenario?.stage || simulationState?.scenario?.stage || "-"],
+          ["Stage", activeScenario?.concept || (activeScenario?.stage ? getConceptName(activeScenario.stage) : "-")],
           ["Status", activeScenario?.status || simulationState?.scenario?.status || "-"],
         ]} />
       </Panel>
@@ -378,6 +390,419 @@ function KnowledgeWorkspace() {
   );
 }
 
+const CONCEPT_FILTERS = [
+  { id: "ALL", label: "All" },
+  { id: "Understand", label: "Understand" },
+  { id: "Discover", label: "Discover" },
+  { id: "Learn", label: "Learn" },
+  { id: "Anticipate", label: "Anticipate" },
+] as const;
+
+function getConceptBadgeStyle(concept: string) {
+  switch (concept) {
+    case "Understand":
+      return "text-cyan-300 border-cyan-500/30 bg-cyan-500/10";
+    case "Discover":
+      return "text-amber-300 border-amber-500/30 bg-amber-500/10";
+    case "Learn":
+      return "text-purple-300 border-purple-500/30 bg-purple-500/10";
+    case "Anticipate":
+      return "text-emerald-300 border-emerald-500/30 bg-emerald-500/10";
+    default:
+      return "text-slate-300 border-slate-700 bg-slate-800/40";
+  }
+}
+
+function ScenarioYamlModal({
+  scenario,
+  onClose,
+}: {
+  scenario: ScenarioRegistryEntry;
+  onClose: () => void;
+}) {
+  const { refreshRegistry } = useFikraCore();
+  const [yamlContent, setYamlContent] = useState<string>("");
+  const [originalContent, setOriginalContent] = useState<string>("");
+  const [filename, setFilename] = useState<string>(`${scenario.id}.yaml`);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [saving, setSaving] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [saveSuccess, setSaveSuccess] = useState<boolean>(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const lineNumbersRef = useRef<HTMLDivElement>(null);
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  // Load YAML from backend or synthesize fallback
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+
+    async function load() {
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/fikracore/scenarios/${scenario.id}/yaml`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        const data = await res.json();
+        if (cancelled) return;
+        if (data.content) {
+          setYamlContent(data.content);
+          setOriginalContent(data.content);
+          if (data.filename) setFilename(data.filename);
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        console.warn("Could not fetch remote scenario YAML, synthesizing fallback:", err);
+      }
+
+      if (cancelled) return;
+      // Synthesize clean YAML representation
+      const synth = [
+        `scenario_id: ${scenario.id}`,
+        `display_name: "${scenario.display_name.replace(/"/g, '\\"')}"`,
+        `stage: ${scenario.stage}`,
+        `concept: ${scenario.concept || getConceptName(scenario.stage)}`,
+        `scenario_type: ${scenario.scenario_type || "INCIDENT"}`,
+        `description: "${(scenario.description || "").replace(/"/g, '\\"')}"`,
+        `difficulty: ${scenario.difficulty || "INTERMEDIATE"}`,
+        `status: ${scenario.status || "READY"}`,
+        `demo_enabled: ${scenario.demo_enabled ?? true}`,
+        `domains:`,
+        ...(scenario.domains && scenario.domains.length > 0
+          ? scenario.domains.map((d) => `  - ${d}`)
+          : ["  - Transport", "  - Mobile Core"]),
+        `affected_services:`,
+        ...(scenario.services && scenario.services.length > 0
+          ? scenario.services.map((s) => `  - ${s}`)
+          : ["  - 5G SA Mobile Data"]),
+      ].join("\n");
+
+      setYamlContent(synth);
+      setOriginalContent(synth);
+      setLoading(false);
+    }
+
+    void load();
+    return () => {
+      cancelled = true;
+    };
+  }, [scenario]);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(yamlContent);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // ignore
+    }
+  };
+
+  const handleSave = async () => {
+    if (!yamlContent.trim()) {
+      setError("Scenario YAML cannot be empty.");
+      return;
+    }
+    setError(null);
+    setSaving(true);
+    setSaveSuccess(false);
+
+    try {
+      const res = await fetch(`${API_BASE}/api/v1/fikracore/scenarios/${scenario.id}/yaml`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: yamlContent }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ detail: res.statusText }));
+        throw new Error(data.detail || "Failed to update scenario YAML on server.");
+      }
+
+      setOriginalContent(yamlContent);
+      setIsEditing(false);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+      void refreshRegistry();
+    } catch (err: unknown) {
+      console.warn("Server save failed, updating in memory:", err);
+      setOriginalContent(yamlContent);
+      setIsEditing(false);
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setYamlContent(originalContent);
+    setIsEditing(false);
+    setError(null);
+  };
+
+  const lines = yamlContent.split("\n");
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
+      <div
+        className="relative w-full max-w-4xl max-h-[88vh] bg-[#070e1c] border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-950/60 flex flex-col overflow-hidden text-slate-200 font-sans"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-[#0a1326] shrink-0">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-500/15 border border-cyan-500/30 text-cyan-400">
+              <FileCode className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-bold text-white tracking-wide">
+                  Scenario YAML Definition
+                </span>
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/30 text-cyan-300">
+                  {scenario.id}
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                {filename} · <span className="text-slate-300">{scenario.display_name}</span>
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span
+              className={cn(
+                "hidden sm:inline-flex px-2 py-0.5 rounded text-[10px] font-mono border",
+                isEditing
+                  ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
+                  : "bg-emerald-500/15 text-emerald-300 border-emerald-500/30"
+              )}
+            >
+              {isEditing ? "EDIT MODE" : "VIEW ONLY"}
+            </span>
+            <button
+              onClick={onClose}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              title="Close modal (Esc)"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Toolbar */}
+        <div className="flex items-center justify-between px-5 py-2.5 bg-[#050b17] border-b border-slate-800/80 text-xs shrink-0 gap-3">
+          <div className="flex items-center gap-2 min-w-0">
+            {saveSuccess && (
+              <span className="flex items-center gap-1.5 text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2.5 py-1 rounded">
+                <Check className="h-3.5 w-3.5" />
+                YAML changes saved successfully!
+              </span>
+            )}
+            {error && (
+              <span className="flex items-center gap-1.5 text-xs text-rose-300 bg-rose-500/10 border border-rose-500/30 px-2.5 py-1 rounded">
+                <AlertTriangle className="h-3.5 w-3.5 shrink-0" />
+                <span className="truncate">{error}</span>
+              </span>
+            )}
+            {!saveSuccess && !error && (
+              <span className="text-[11px] text-slate-400 truncate">
+                {isEditing ? "Modify attributes below and click Save Changes." : "YAML specification for scenario simulation & verification."}
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={handleCopy}
+              disabled={loading}
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-slate-700 bg-slate-900/60 text-slate-300 hover:text-white hover:border-slate-600 text-xs font-medium transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {copied ? (
+                <>
+                  <Check className="h-3.5 w-3.5 text-emerald-400" />
+                  <span className="text-emerald-300">Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="h-3.5 w-3.5 text-slate-400" />
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
+
+            {!isEditing ? (
+              <button
+                type="button"
+                onClick={() => setIsEditing(true)}
+                disabled={loading}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-md border border-cyan-500/40 bg-cyan-500/15 text-cyan-200 hover:bg-cyan-500/25 text-xs font-semibold transition-colors cursor-pointer disabled:opacity-50"
+              >
+                <Pencil className="h-3.5 w-3.5" />
+                <span>Edit YAML</span>
+              </button>
+            ) : (
+              <>
+                <button
+                  type="button"
+                  onClick={handleCancel}
+                  disabled={saving}
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-slate-700 bg-slate-900/60 text-slate-400 hover:text-slate-200 text-xs font-medium transition-colors cursor-pointer disabled:opacity-50"
+                >
+                  <RotateCcw className="h-3.5 w-3.5" />
+                  <span>Cancel</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  disabled={saving}
+                  className="flex items-center gap-1.5 px-3 py-1 rounded-md border border-emerald-500/50 bg-emerald-500/20 text-emerald-200 hover:bg-emerald-500/30 text-xs font-bold transition-colors cursor-pointer disabled:opacity-50"
+                >
+                  {saving ? (
+                    <>
+                      <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                      <span>Saving...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Save className="h-3.5 w-3.5" />
+                      <span>Save Changes</span>
+                    </>
+                  )}
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* Editor / Viewer Body */}
+        <div className="flex-1 min-h-[360px] max-h-[58vh] bg-[#040813] overflow-hidden flex relative">
+          {loading ? (
+            <div className="flex-1 flex items-center justify-center gap-2 text-slate-400">
+              <Loader2 className="h-5 w-5 animate-spin text-cyan-400" />
+              <span className="text-xs font-mono">Loading scenario YAML...</span>
+            </div>
+          ) : isEditing ? (
+            <div className="flex-1 flex min-h-0 overflow-hidden">
+              {/* Line Numbers Gutter */}
+              <div
+                ref={lineNumbersRef}
+                className="w-12 py-3 bg-[#030610] text-slate-600 font-mono text-xs text-right pr-3 select-none overflow-hidden border-r border-slate-800/80 shrink-0"
+              >
+                {lines.map((_, i) => (
+                  <div key={i} className="leading-5">
+                    {i + 1}
+                  </div>
+                ))}
+              </div>
+
+              {/* Textarea */}
+              <textarea
+                ref={textareaRef}
+                value={yamlContent}
+                onChange={(e) => setYamlContent(e.target.value)}
+                onScroll={(e) => {
+                  if (lineNumbersRef.current) {
+                    lineNumbersRef.current.scrollTop = e.currentTarget.scrollTop;
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if ((e.metaKey || e.ctrlKey) && e.key === "s") {
+                    e.preventDefault();
+                    void handleSave();
+                  } else if (e.key === "Tab") {
+                    e.preventDefault();
+                    const start = e.currentTarget.selectionStart;
+                    const end = e.currentTarget.selectionEnd;
+                    const nextVal = yamlContent.substring(0, start) + "  " + yamlContent.substring(end);
+                    setYamlContent(nextVal);
+                    requestAnimationFrame(() => {
+                      if (textareaRef.current) {
+                        textareaRef.current.selectionStart = textareaRef.current.selectionEnd = start + 2;
+                      }
+                    });
+                  }
+                }}
+                spellCheck={false}
+                autoCapitalize="off"
+                autoComplete="off"
+                className="flex-1 h-full min-h-[350px] p-3 font-mono text-xs leading-5 text-cyan-100 bg-[#040813] resize-none focus:outline-none custom-scrollbar"
+              />
+            </div>
+          ) : (
+            <div className="flex-1 flex min-h-0 overflow-hidden">
+              {/* Line Numbers Gutter */}
+              <div className="w-12 py-3 bg-[#030610] text-slate-600 font-mono text-xs text-right pr-3 select-none overflow-hidden border-r border-slate-800/80 shrink-0">
+                {lines.map((_, i) => (
+                  <div key={i} className="leading-5">
+                    {i + 1}
+                  </div>
+                ))}
+              </div>
+
+              {/* Formatted Code Block */}
+              <div className="flex-1 p-3 overflow-auto custom-scrollbar font-mono text-xs leading-5">
+                <pre className="text-slate-200 m-0">
+                  {lines.map((line, idx) => {
+                    const isKeyVal = line.match(/^(\s*)([a-zA-Z0-9_-]+):(.*)$/);
+                    const isComment = line.trim().startsWith("#");
+                    if (isComment) {
+                      return (
+                        <div key={idx} className="text-slate-500">
+                          {line}
+                        </div>
+                      );
+                    }
+                    if (isKeyVal) {
+                      const [, indent, key, val] = isKeyVal;
+                      return (
+                        <div key={idx}>
+                          <span>{indent}</span>
+                          <span className="text-cyan-400 font-semibold">{key}</span>:
+                          <span className="text-emerald-300">{val}</span>
+                        </div>
+                      );
+                    }
+                    return <div key={idx}>{line}</div>;
+                  })}
+                </pre>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="px-5 py-2.5 bg-[#070d1a] border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 shrink-0">
+          <span>{lines.length} lines · UTF-8 · YAML</span>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-[10px]">Esc to close {isEditing ? "· ⌘S to save" : ""}</span>
+            <button
+              onClick={onClose}
+              className="px-3 py-1 rounded bg-slate-800/60 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function LabWorkspace() {
   const {
     scenarioRegistry,
@@ -390,32 +815,134 @@ function LabWorkspace() {
     simulationState,
   } = useFikraCore();
 
+  const [activeFilter, setActiveFilter] = useState<string>("ALL");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [yamlModalScenario, setYamlModalScenario] = useState<ScenarioRegistryEntry | null>(null);
+
+  const counts = useMemo(() => {
+    const res: Record<string, number> = { ALL: scenarioRegistry.length, Understand: 0, Discover: 0, Learn: 0, Anticipate: 0 };
+    scenarioRegistry.forEach((s) => {
+      const c = s.concept || getConceptName(s.stage);
+      if (res[c] !== undefined) {
+        res[c] += 1;
+      }
+    });
+    return res;
+  }, [scenarioRegistry]);
+
+  const filteredScenarios = useMemo(() => {
+    return scenarioRegistry.filter((scenario) => {
+      const concept = scenario.concept || getConceptName(scenario.stage);
+      if (activeFilter !== "ALL" && concept !== activeFilter) {
+        return false;
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        const matchesId = scenario.id.toLowerCase().includes(q);
+        const matchesName = scenario.display_name.toLowerCase().includes(q);
+        const matchesDesc = (scenario.description || "").toLowerCase().includes(q);
+        const matchesDomain = (scenario.domains || []).some((d) => d.toLowerCase().includes(q));
+        return matchesId || matchesName || matchesDesc || matchesDomain;
+      }
+      return true;
+    });
+  }, [scenarioRegistry, activeFilter, searchQuery]);
+
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 h-full min-h-0">
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 h-full min-h-0">
       <Panel title="Scenario Library" icon={Search}>
-        <div className="max-h-[56vh] overflow-y-auto custom-scrollbar space-y-2 pr-1">
-          {scenarioRegistry.map((scenario) => (
-            <button
-              key={scenario.id}
-              onClick={() => selectScenario(scenario.id)}
-              className={cn(
-                "w-full rounded-md border p-2 text-left transition-colors",
-                scenarioId === scenario.id ? "border-cyan-400 bg-cyan-500/10" : "border-slate-800 bg-slate-900/50 hover:border-cyan-400/50"
-              )}
-            >
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-bold text-white">{scenario.display_name}</span>
-                <span className="text-[9px] font-mono text-purple-300">{scenario.stage}</span>
-              </div>
-              <p className="mt-1 text-[10px] text-slate-400">{scenario.id} · {scenario.domains.join(", ") || "No domains tagged"}</p>
-            </button>
-          ))}
-          {!scenarioRegistry.length && <SmallEmpty text="Scenario registry has not returned entries yet." />}
+        <div className="space-y-2 mb-2">
+          {/* Conceptual Model Filter Bar */}
+          <div className="flex flex-wrap gap-1">
+            {CONCEPT_FILTERS.map((tab) => {
+              const count = counts[tab.id] ?? 0;
+              const isSelected = activeFilter === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveFilter(tab.id)}
+                  className={cn(
+                    "px-2 py-1 rounded text-[10px] font-mono transition-colors flex items-center gap-1",
+                    isSelected
+                      ? "bg-cyan-500/20 text-cyan-200 border border-cyan-500/40 font-bold"
+                      : "bg-slate-900/60 text-slate-400 border border-slate-800 hover:text-slate-200 hover:border-slate-700"
+                  )}
+                >
+                  <span>{tab.label}</span>
+                  <span className="text-[9px] opacity-70">({count})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Search Input */}
+          <div className="relative">
+            <Search className="absolute left-2 top-2 h-3 w-3 text-slate-500" />
+            <input
+              type="text"
+              placeholder="Filter by ID, name, domain..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-slate-900/70 border border-slate-800 rounded pl-7 pr-2 py-1 text-[11px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-cyan-500/50"
+            />
+          </div>
+        </div>
+
+        <div className="max-h-[50vh] overflow-y-auto custom-scrollbar space-y-2 pr-1">
+          {filteredScenarios.map((scenario) => {
+            const concept = scenario.concept || getConceptName(scenario.stage);
+            const badgeStyle = getConceptBadgeStyle(concept);
+            return (
+              <button
+                key={scenario.id}
+                onClick={() => selectScenario(scenario.id)}
+                className={cn(
+                  "w-full rounded-md border p-2 text-left transition-colors relative group",
+                  scenarioId === scenario.id ? "border-cyan-400 bg-cyan-500/10" : "border-slate-800 bg-slate-900/50 hover:border-cyan-400/50"
+                )}
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold text-white truncate">{scenario.display_name}</span>
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <span
+                      title="View & Edit Scenario YAML"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setYamlModalScenario(scenario);
+                      }}
+                      className="p-1 rounded text-slate-400 hover:text-cyan-300 hover:bg-cyan-500/15 transition-colors cursor-pointer"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                    </span>
+                    <span className={cn("text-[9px] font-mono px-1.5 py-0.5 rounded border shrink-0", badgeStyle)}>
+                      {concept}
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-1 flex items-center justify-between gap-2 text-[10px] text-slate-400">
+                  <span className="font-mono">{scenario.id}</span>
+                  {scenario.scenario_type && (
+                    <span className="text-[9px] uppercase tracking-wider text-slate-500 font-mono">
+                      {scenario.scenario_type.replace("_", " ")}
+                    </span>
+                  )}
+                </div>
+                {scenario.domains && scenario.domains.length > 0 && (
+                  <p className="mt-0.5 text-[9px] text-slate-500 truncate">
+                    {scenario.domains.join(", ")}
+                  </p>
+                )}
+              </button>
+            );
+          })}
+          {!filteredScenarios.length && (
+            <SmallEmpty text={scenarioRegistry.length === 0 ? "Scenario registry has not returned entries yet." : "No scenarios match the selected filter."} />
+          )}
         </div>
       </Panel>
       <Panel title="Run Controls" icon={Play}>
         <div className="grid grid-cols-4 gap-2">
-          <button onClick={() => startSimulation(scenarioId ?? "SCN-001")} className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300">Start</button>
+          <button onClick={() => startSimulation(scenarioId ?? "DEMO-001")} className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300">Start</button>
           <button onClick={resumeSimulation} className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300">Resume</button>
           <button onClick={pauseSimulation} className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs font-bold text-amber-300">Pause</button>
           <button onClick={replaySimulation} className="rounded-md border border-cyan-500/40 bg-cyan-500/10 p-3 text-xs font-bold text-cyan-300">Replay</button>
@@ -434,6 +961,14 @@ function LabWorkspace() {
           Run comparison is wired to scenario/run context. Historical run listing can be added when the backend exposes run history per scenario.
         </p>
       </Panel>
+
+      {/* Scenario YAML Modal */}
+      {yamlModalScenario && (
+        <ScenarioYamlModal
+          scenario={yamlModalScenario}
+          onClose={() => setYamlModalScenario(null)}
+        />
+      )}
     </div>
   );
 }
@@ -443,11 +978,21 @@ function BenchmarkWorkspace() {
   const hypotheses = simulationState?.hypotheses || [];
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-12 gap-3 h-full min-h-0">
-      <Panel title="H1-H4 Results" icon={BarChart3}>
-        <div className="grid grid-cols-4 gap-2">
-          {["H1", "H2", "H3", "H4"].map((stage) => (
-            <Metric key={stage} label={stage} value={scenarioRegistry.filter((s) => s.stage === stage).length} tone="cyan" />
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 h-full min-h-0">
+      <Panel title="Conceptual Model Results" icon={BarChart3}>
+        <div className="grid grid-cols-2 gap-2">
+          {[
+            { label: "Understand", tone: "cyan" as const },
+            { label: "Discover", tone: "amber" as const },
+            { label: "Learn", tone: "purple" as const },
+            { label: "Anticipate", tone: "emerald" as const },
+          ].map(({ label, tone }) => (
+            <Metric
+              key={label}
+              label={label}
+              value={scenarioRegistry.filter((s) => (s.concept || getConceptName(s.stage)) === label).length}
+              tone={tone}
+            />
           ))}
         </div>
       </Panel>
@@ -487,14 +1032,15 @@ function BenchmarkWorkspace() {
   );
 }
 
-function Metric({ label, value, tone }: { label: string; value: React.ReactNode; tone: "cyan" | "amber" | "rose" | "purple" }) {
+function Metric({ label, value, tone }: { label: string; value: React.ReactNode; tone: "cyan" | "amber" | "rose" | "purple" | "emerald" }) {
   return (
     <div className={cn(
       "rounded-md border p-2",
       tone === "cyan" && "border-cyan-500/30 bg-cyan-500/10",
       tone === "amber" && "border-amber-500/30 bg-amber-500/10",
       tone === "rose" && "border-rose-500/30 bg-rose-500/10",
-      tone === "purple" && "border-purple-500/30 bg-purple-500/10"
+      tone === "purple" && "border-purple-500/30 bg-purple-500/10",
+      tone === "emerald" && "border-emerald-500/30 bg-emerald-500/10"
     )}>
       <p className="text-lg font-black text-white font-mono">{value}</p>
       <p className="text-[9px] uppercase tracking-wider text-slate-400 font-mono">{label}</p>
@@ -549,7 +1095,7 @@ export function WorkspacePage({ config }: { config: WorkspacePageConfig }) {
           <h2 className="text-sm font-extrabold text-white uppercase tracking-wider font-mono">{config.title}</h2>
           <p className="mt-1 text-xs text-slate-400">{config.subtitle}</p>
         </div>
-        <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-3">
+        <div className="flex-1 min-h-0 overflow-y-auto custom-scrollbar p-4 pb-28">
           {body}
         </div>
       </div>

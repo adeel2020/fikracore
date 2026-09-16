@@ -8,7 +8,7 @@ export default function SimulatorPage({
 }: {
   searchParams?: { scenario?: string; run?: string };
 }) {
-  const scenario = searchParams?.scenario || "H4-WI-001";
+  const scenario = searchParams?.scenario || "DEMO-001";
   const run = searchParams?.run;
   const qs = [scenario && `scenario=${scenario}`, run && `run=${run}`]
     .filter(Boolean)

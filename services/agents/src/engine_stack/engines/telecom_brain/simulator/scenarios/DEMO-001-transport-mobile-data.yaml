@@ -1,0 +1,64 @@
+id: DEMO-001
+display_name: Transport-Induced Mobile Data Degradation
+aliases:
+  - mobile data transport failure
+  - cross-domain outage
+
+stage: H1
+difficulty: L2
+seed: 42
+
+domains:
+  - IP_TRANSPORT
+  - MOBILE_CORE
+  - RAN
+
+objective:
+  demonstrate:
+    - cross_domain_correlation
+    - causal_reasoning
+    - contradiction_handling
+    - blast_radius
+
+root_condition:
+  domain: IP_TRANSPORT
+  entity: MPLS_EDGE_ROUTER_07
+  condition: BGP_INSTABILITY
+
+trigger:
+  type: ROUTING_DEGRADATION
+
+propagation:
+  - MPLS_EDGE_ROUTER_07
+  - N3_TRANSPORT_PATH
+  - UPF_SERVICE_PATH
+  - MOBILE_DATA_SERVICE
+
+affected_services:
+  - 5G_SA_MOBILE_DATA
+
+evidence_profile:
+  alarms: true
+  metrics: true
+  logs: true
+  traces: true
+  changes: true
+  tickets: true
+  healthy_signals: true
+
+noise:
+  unrelated_change: true
+  duplicate_alarms: true
+  delayed_transport_alarm: true
+
+demo_metadata:
+  enabled: true
+  audience: leadership
+  duration_minutes: 5
+  steps:
+    - Customer Impact
+    - Signal Flood
+    - Correlate Evidence
+    - Test Candidates
+    - Reveal Causal Path
+    - Executive Summary

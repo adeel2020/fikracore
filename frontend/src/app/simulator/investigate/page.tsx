@@ -5460,7 +5460,7 @@ export default function InvestigatePage() {
             <div className={cn("pt-1.5 border-t shrink-0", isLight ? "border-slate-200" : "border-slate-800/80")}>
               <button
                 type="button"
-                onClick={() => router.push(`/simulator/investigate?scenario=${scenarioId || "H4-WI-001"}#all-events`)}
+                onClick={() => router.push(`/simulator/investigate?scenario=${scenarioId || "DEMO-001"}#all-events`)}
                 className={cn(
                   "text-[10px] hover:underline flex items-center gap-1 font-semibold cursor-pointer",
                   isLight ? "text-cyan-700 hover:text-cyan-900" : "text-cyan-400"
@@ -5975,7 +5975,7 @@ export default function InvestigatePage() {
             <div className={cn("pt-1.5 border-t shrink-0", isLight ? "border-slate-200" : "border-slate-800/80")}>
               <button
                 type="button"
-                onClick={() => router.push(`/simulator/investigate?scenario=${scenarioId || "H4-WI-001"}#hypotheses`)}
+                onClick={() => router.push(`/simulator/investigate?scenario=${scenarioId || "DEMO-001"}#hypotheses`)}
                 className={cn(
                   "text-[10px] hover:underline flex items-center gap-1 font-semibold cursor-pointer",
                   isLight ? "text-cyan-700 hover:text-cyan-900" : "text-cyan-400"
@@ -6042,7 +6042,7 @@ export default function InvestigatePage() {
             <div className={cn("pt-1.5 border-t shrink-0", isLight ? "border-slate-200" : "border-slate-800/80")}>
               <button
                 type="button"
-                onClick={() => router.push(`/simulator/discover?scenario=${scenarioId || "H4-WI-001"}`)}
+                onClick={() => router.push(`/simulator/discover?scenario=${scenarioId || "DEMO-001"}`)}
                 className={cn(
                   "text-[10px] hover:underline flex items-center gap-1 font-semibold cursor-pointer",
                   isLight ? "text-cyan-700 hover:text-cyan-900" : "text-cyan-400"

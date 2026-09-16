@@ -198,7 +198,31 @@ class ScenarioStateCompiler:
             self._ref_relationships = []
 
     def load_scenario_manifest(self, scenario_id: str) -> Optional[dict[str, Any]]:
-        """Load scenario manifest from h4_runs directory, with registry fallback."""
+        """Load scenario manifest from h4_runs, declarative scenarios, or registry fallback."""
+        # 1. Check declarative scenarios in scenarios/
+        if scenario_id.upper() == "DEMO-001":
+            demo_file = SCENARIOS_DIR / "DEMO-001-transport-mobile-data.yaml"
+            if demo_file.exists():
+                try:
+                    with open(demo_file, "r", encoding="utf-8") as f:
+                        data = yaml.safe_load(f) or {}
+                    return {
+                        "what_if_id": "DEMO-001",
+                        "title": data.get("display_name", "Transport-Induced Mobile Data Degradation"),
+                        "description": "Cross-domain transport-induced mobile data degradation.",
+                        "cohort": "single_point_failure",
+                        "trigger": {
+                            "canonical_id": "IP:PE:RTR-21",
+                            "entity_display_name": "MPLS Edge Router-07",
+                            "event_type": "FAILURE",
+                            "severity": "CRITICAL",
+                        },
+                        "failure_domain_tags": ["transport", "mobile_core", "ran"],
+                    }
+                except Exception:
+                    pass
+
+        # 2. Check direct scenario manifest in h4_runs directory
         manifest_path = H4_RUNS_DIR / scenario_id / "scenario_manifest.yaml"
         if manifest_path.exists():
             try:
@@ -207,7 +231,30 @@ class ScenarioStateCompiler:
             except Exception:
                 pass
 
-        # Fallback: build manifest from H4 registry file
+        # 3. Check scenarios directory for any matching YAML
+        for fpath in SCENARIOS_DIR.glob(f"{scenario_id}*.yaml"):
+            if fpath.name == "h4_registry.yaml":
+                continue
+            try:
+                with open(fpath, "r", encoding="utf-8") as f:
+                    data = yaml.safe_load(f) or {}
+                return {
+                    "what_if_id": scenario_id,
+                    "title": data.get("display_name") or data.get("scenario_name", scenario_id),
+                    "description": data.get("description", ""),
+                    "cohort": "single_point_failure",
+                    "trigger": {
+                        "canonical_id": "IP:PE:RTR-21",
+                        "entity_display_name": "MPLS Edge Router-07",
+                        "event_type": "FAILURE",
+                        "severity": "CRITICAL",
+                    },
+                    "failure_domain_tags": [str(d).lower() for d in (data.get("domains") or ["transport"])],
+                }
+            except Exception:
+                pass
+
+        # 4. Fallback: build manifest from H4 registry file
         registry_file = SCENARIOS_DIR / "h4_registry.yaml"
         if registry_file.exists():
             try:
@@ -237,15 +284,25 @@ class ScenarioStateCompiler:
         return None
 
     def load_topology_view(self, scenario_id: str) -> Optional[dict[str, Any]]:
-        """Load operational topology view from h4_runs directory."""
+        """Load operational topology view with fallback."""
         topo_path = H4_RUNS_DIR / scenario_id / "operational" / "topology_view.yaml"
-        if not topo_path.exists():
-            return None
-        try:
-            with open(topo_path, "r", encoding="utf-8") as f:
-                return yaml.safe_load(f)
-        except Exception:
-            return None
+        if topo_path.exists():
+            try:
+                with open(topo_path, "r", encoding="utf-8") as f:
+                    return yaml.safe_load(f)
+            except Exception:
+                pass
+
+        # Fallback to default H4-WI-001 topology view if scenario does not have a dedicated one
+        default_topo = H4_RUNS_DIR / "H4-WI-001" / "operational" / "topology_view.yaml"
+        if default_topo.exists():
+            try:
+                with open(default_topo, "r", encoding="utf-8") as f:
+                    return yaml.safe_load(f)
+            except Exception:
+                pass
+
+        return None
 
     def compile_state(
         self,

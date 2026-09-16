@@ -21,12 +21,70 @@ from ..investigation.knowledge import (
 from ..presentation.scenario_resolver import get_default_h4_registry, ScenarioResolver
 
 
+def _simulator_dir() -> Path:
+    return Path(__file__).parent.parent / "simulator"
+
+
+def _scenario_match_values(path: Path, manifest: dict[str, Any]) -> set[str]:
+    aliases = manifest.get("aliases") or []
+    if not isinstance(aliases, list):
+        aliases = []
+    values = {
+        path.stem,
+        str(manifest.get("id") or ""),
+        str(manifest.get("display_name") or ""),
+        *(str(alias) for alias in aliases),
+    }
+    return {value.strip().lower() for value in values if value and value.strip()}
+
+
+def _resolve_scenario_definition(scenario_arg: str) -> tuple[Path | None, dict[str, Any]]:
+    """Resolve a scenario definition file without treating it as executed evidence."""
+    scenario_dir = _simulator_dir() / "scenarios"
+    if not scenario_dir.exists():
+        return None, {}
+
+    query = scenario_arg.strip().lower()
+    for path in sorted(scenario_dir.glob("*.yaml")):
+        try:
+            manifest = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        except Exception:
+            continue
+        if query in _scenario_match_values(path, manifest):
+            return path, manifest
+
+    return None, {}
+
+
+def _needs_simulation_response(
+    scenario_arg: str,
+    scenario_file: Path | None,
+    scenario_manifest: dict[str, Any],
+) -> dict[str, Any]:
+    scenario_id = str(scenario_manifest.get("id") or scenario_arg)
+    display_name = str(scenario_manifest.get("display_name") or scenario_id)
+    return {
+        "status": "NEEDS_SIMULATION",
+        "scenario_id": scenario_id,
+        "display_name": display_name,
+        "message": (
+            f"{scenario_id} is a known scenario, but no simulation run evidence is available yet. "
+            "Start the scenario run first, then rerun investigation against the generated run state."
+        ),
+        "next_action": "Start the selected scenario in Simulator Lab, then run investigate again with the active run context.",
+        "scenario_definition": str(scenario_file) if scenario_file else None,
+        "reason": "Investigation requires operational evidence from a simulation run; a scenario definition alone is not enough.",
+    }
+
+
 def investigate_handler(inputs: dict[str, Any], context: ExecutionContext) -> dict[str, Any]:
     """Handler executing operational investigation without truth leakage."""
     run_dir_str = inputs.get("run_directory") or inputs.get("runs_directory")
     scenario_arg = inputs.get("scenario")
 
     run_dir: Path | None = None
+    scenario_file: Path | None = None
+    scenario_manifest: dict[str, Any] = {}
     if run_dir_str:
         run_dir = Path(run_dir_str)
     elif scenario_arg:
@@ -37,9 +95,16 @@ def investigate_handler(inputs: dict[str, Any], context: ExecutionContext) -> di
             if not run_dir.is_absolute():
                 base_dir = Path(__file__).parent.parent
                 run_dir = base_dir / rec.scenario_path
+            if run_dir.is_file():
+                scenario_file = run_dir
+                try:
+                    scenario_manifest = yaml.safe_load(run_dir.read_text(encoding="utf-8")) or {}
+                except Exception:
+                    scenario_manifest = {}
+                run_dir = None
         else:
             # Check default simulator paths
-            base_dir = Path(__file__).parent.parent / "simulator"
+            base_dir = _simulator_dir()
             for candidate_dir in [
                 base_dir / "runs" / str(scenario_arg),
                 base_dir / "h2_runs" / str(scenario_arg),
@@ -48,8 +113,12 @@ def investigate_handler(inputs: dict[str, Any], context: ExecutionContext) -> di
                 if candidate_dir.exists():
                     run_dir = candidate_dir
                     break
+            if not run_dir:
+                scenario_file, scenario_manifest = _resolve_scenario_definition(str(scenario_arg))
 
     if not run_dir or not run_dir.exists():
+        if scenario_arg and scenario_file:
+            return _needs_simulation_response(str(scenario_arg), scenario_file, scenario_manifest)
         raise CapabilityError(
             "SCENARIO_NOT_FOUND",
             f"Unable to locate scenario run directory for inputs: {inputs}",

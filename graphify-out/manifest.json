@@ -615,8 +615,8 @@
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/MessageItem.tsx": {
-    "mtime": 1789449890.8483026,
-    "ast_hash": "bb06f567e313cc07e452d3dbdec760cc",
+    "mtime": 1789452908.9617076,
+    "ast_hash": "3477af1125f3dc6063db8b5ad0d434af",
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/TelemetrySidebar.tsx": {
@@ -3620,7 +3620,7 @@
     "semantic_hash": ""
   },
   "services/agents/trace_graph.json": {
-    "mtime": 1789447120.8012555,
+    "mtime": 1789497782.5956943,
     "ast_hash": "c4bc949acbfbd65927bf61313037fc04",
     "semantic_hash": ""
   },
@@ -18030,8 +18030,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/capabilities/investigate.py": {
-    "mtime": 1789132797.6109982,
-    "ast_hash": "82d302363688e0fd61b6007d1ba3b43a",
+    "mtime": 1789497435.05929,
+    "ast_hash": "69803d6589d001aa11007d1316e40bc4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/capabilities/learn.py": {
@@ -18060,8 +18060,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/capabilities/simulate.py": {
-    "mtime": 1789132823.6656303,
-    "ast_hash": "eda8844f9f7c94bdb9a2afc2591324b9",
+    "mtime": 1789497839.9649057,
+    "ast_hash": "a3f0c3b63009352b62914c2cbf808b16",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/capabilities/validate.py": {
@@ -18100,8 +18100,8 @@
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/_components/workspace-page.tsx": {
-    "mtime": 1789188501.389383,
-    "ast_hash": "a401af457efe0239092986c3c607bc56",
+    "mtime": 1789494673.0904045,
+    "ast_hash": "c6e9f614f37d3ded31ee19318b2a6015",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/benchmarks/page.tsx": {
@@ -18115,8 +18115,8 @@
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/investigate/page.tsx": {
-    "mtime": 1789449147.7033756,
-    "ast_hash": "9166cda6ee2f0d8c5b607d14d4edaaf2",
+    "mtime": 1789452739.1721246,
+    "ast_hash": "33812e476ab9756d9a879079b74e233b",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/knowledge/page.tsx": {
@@ -18382,6 +18382,106 @@
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_zaki_v2_interactions.py": {
     "mtime": 1789380058.470232,
     "ast_hash": "03f97c23ed8f4cb8a8be4cdaf18a9645",
+    "semantic_hash": ""
+  },
+  "docs/presentation.md": {
+    "mtime": 1789453190.3040297,
+    "ast_hash": "b659d0a93a7ac664b32751a22731e444",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/DEMO-001-transport-mobile-data.yaml": {
+    "mtime": 1789495338.0417376,
+    "ast_hash": "cb4be9b5d9da8d95b1b639ed5bc2d4da",
+    "semantic_hash": ""
+  },
+  "docs/image-1.png": {
+    "mtime": 1789452903.619795,
+    "ast_hash": "9f1614ab9399437b9035c7e1855330a0",
+    "semantic_hash": ""
+  },
+  "docs/image-10.png": {
+    "mtime": 1789453065.231888,
+    "ast_hash": "897859034e5c944a4dd50e3afa80815c",
+    "semantic_hash": ""
+  },
+  "docs/image-11.png": {
+    "mtime": 1789453078.3906162,
+    "ast_hash": "44d2a42badabcdb02a4b8bbed5c95c0f",
+    "semantic_hash": ""
+  },
+  "docs/image-12.png": {
+    "mtime": 1789453090.1747887,
+    "ast_hash": "3180e015a28ae30e514e442fe7fab036",
+    "semantic_hash": ""
+  },
+  "docs/image-13.png": {
+    "mtime": 1789453105.7832248,
+    "ast_hash": "37190df5cad8f095323aa25f7da75a0f",
+    "semantic_hash": ""
+  },
+  "docs/image-14.png": {
+    "mtime": 1789453122.6452959,
+    "ast_hash": "619f95157c549517509b6fd74fc1cf9b",
+    "semantic_hash": ""
+  },
+  "docs/image-15.png": {
+    "mtime": 1789453140.3960433,
+    "ast_hash": "19369f44175ceacd618fca9079a4a467",
+    "semantic_hash": ""
+  },
+  "docs/image-16.png": {
+    "mtime": 1789453162.5099735,
+    "ast_hash": "c88effd70cdceb4f6d4a024b7774f396",
+    "semantic_hash": ""
+  },
+  "docs/image-17.png": {
+    "mtime": 1789453175.3312683,
+    "ast_hash": "6da6c0b452f7d04bbe82117baa323830",
+    "semantic_hash": ""
+  },
+  "docs/image-2.png": {
+    "mtime": 1789452915.8021317,
+    "ast_hash": "9fc72d61560302a7c4f948d50c27f4e9",
+    "semantic_hash": ""
+  },
+  "docs/image-3.png": {
+    "mtime": 1789452932.0072117,
+    "ast_hash": "7f79bdc0a94f60f3d7f16b9f3c15ba82",
+    "semantic_hash": ""
+  },
+  "docs/image-4.png": {
+    "mtime": 1789452951.070863,
+    "ast_hash": "1021ccb123c06796e74520ef7b1b674f",
+    "semantic_hash": ""
+  },
+  "docs/image-5.png": {
+    "mtime": 1789452968.1148412,
+    "ast_hash": "486cb66f8cad259c330027ec2e5576b8",
+    "semantic_hash": ""
+  },
+  "docs/image-6.png": {
+    "mtime": 1789452998.886827,
+    "ast_hash": "fb92b3c54299467d7e1e2d8a44b96ac4",
+    "semantic_hash": ""
+  },
+  "docs/image-7.png": {
+    "mtime": 1789453010.1547432,
+    "ast_hash": "983aebf17b1c6baa0dd3b24c62b8c519",
+    "semantic_hash": ""
+  },
+  "docs/image-8.png": {
+    "mtime": 1789453031.6465323,
+    "ast_hash": "bd1fdb6ec925350dc00f4c4c84c2ffe7",
+    "semantic_hash": ""
+  },
+  "docs/image-9.png": {
+    "mtime": 1789453051.0318437,
+    "ast_hash": "28424f831e6732395e42d5563fe3b87f",
+    "semantic_hash": ""
+  },
+  "docs/image.png": {
+    "mtime": 1789452878.825293,
+    "ast_hash": "3694c3ac433ee74a8712e58abf346af0",
     "semantic_hash": ""
   }
 }

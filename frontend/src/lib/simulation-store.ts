@@ -724,8 +724,10 @@ export class SimulationClient {
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
       console.warn("REST load failed while preparing scenario:", err);
-      this.state.connectionState = "DEGRADED";
-      this.state.syncState = "ERROR";
+      this.activeScenarioId = scenarioId;
+      this.state.scenario_id = scenarioId;
+      this.state.connectionState = "DISCONNECTED";
+      this.state.syncState = "IDLE";
       this.notify();
     }
   }

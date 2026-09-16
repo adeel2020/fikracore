@@ -38,11 +38,15 @@ class ResolutionMatchTier(str, Enum):
 
 class ScenarioRecord(BaseModel):
     id: str
-    stage: str = "H4"
+    stage: str = "H1"
+    concept: str = "Understand"
+    scenario_type: str = "INCIDENT"
     display_name: str
     description: str = ""
     aliases: list[str] = Field(default_factory=list)
     tags: list[str] = Field(default_factory=list)
+    domains: list[str] = Field(default_factory=list)
+    services: list[str] = Field(default_factory=list)
     scenario_path: str = ""
     demo_enabled: bool = True
 
@@ -311,11 +315,40 @@ class ScenarioResolver:
         )
 
 
-def get_default_h4_registry() -> ScenarioRegistry:
-    """Build default H4 scenario registry covering all 40 scenarios."""
+def get_unified_registry() -> ScenarioRegistry:
+    """Build unified scenario registry covering Understand, Discover, Learn, Anticipate."""
+    try:
+        from ..simulator.scenario_catalog import scenario_catalog
+        records = []
+        for s in scenario_catalog.all():
+            records.append(
+                ScenarioRecord(
+                    id=s.id,
+                    stage=s.stage,
+                    concept=s.concept,
+                    scenario_type=s.scenario_type,
+                    display_name=s.display_name,
+                    description=s.description,
+                    aliases=s.aliases,
+                    tags=s.tags,
+                    domains=s.domains,
+                    services=s.services,
+                    scenario_path=s.scenario_path,
+                    demo_enabled=s.demo_enabled,
+                )
+            )
+        return ScenarioRegistry(records)
+    except Exception:
+        pass
+
     registry_file = (
         Path(__file__).parent.parent / "simulator" / "scenarios" / "h4_registry.yaml"
     )
     if registry_file.exists():
         return ScenarioRegistry.from_yaml_file(registry_file)
     return ScenarioRegistry([])
+
+
+def get_default_h4_registry() -> ScenarioRegistry:
+    """Return the unified scenario registry (backward-compatible alias)."""
+    return get_unified_registry()

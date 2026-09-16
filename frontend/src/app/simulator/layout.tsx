@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -476,31 +476,49 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, setActiveWorkspace]);
 
+  const lastSyncedScenarioFromUrl = useRef<string | null>(null);
+
+  // Sync from URL only when the URL parameter actually changes (e.g. browser back/forward or initial load)
   useEffect(() => {
     const scenarioFromUrl = searchParams.get("scenario");
-    if (scenarioFromUrl && scenarioFromUrl !== scenarioId) {
+    if (scenarioFromUrl && scenarioFromUrl !== scenarioId && scenarioFromUrl !== lastSyncedScenarioFromUrl.current) {
+      lastSyncedScenarioFromUrl.current = scenarioFromUrl;
       selectScenario(scenarioFromUrl);
     }
   }, [searchParams, scenarioId, selectScenario]);
+
+  // Synchronize URL when scenarioId changes internally (e.g. user clicked a card in library or dropdown)
+  useEffect(() => {
+    if (!scenarioId) return;
+    const currentParam = searchParams.get("scenario");
+    if (currentParam !== scenarioId) {
+      lastSyncedScenarioFromUrl.current = scenarioId;
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("scenario", scenarioId);
+      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    }
+  }, [scenarioId, pathname, searchParams, router]);
 
   const activeWorkspace = (pathname.split("/")[2] || "investigate") as Workspace;
 
   const displayScenarios = mounted ? scenarioRegistry : DEFAULT_SCENARIO_REGISTRY;
 
-  const activeScenarioEntry = displayScenarios.find((s) => s.id === scenarioId) || {
-    id: "H4-WT-001",
-    display_name: "MPLS Edge Router Failure",
-    description: "Enterprise data degradation across multiple services",
-    stage: "H4",
-    domains: ["Transport"],
-    services: ["IP Transport Services"],
+  const activeScenarioEntry = displayScenarios.find((s) => s.id === scenarioId) || displayScenarios[0] || {
+    id: "DEMO-001",
+    display_name: "Transport-Induced Mobile Data Degradation",
+    description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
+    stage: "H1",
+    concept: "Understand",
+    domains: ["Transport", "RAN", "Mobile Core"],
+    services: ["5G SA Mobile Data"],
   };
 
   const handleScenarioChange = (newId: string) => {
+    lastSyncedScenarioFromUrl.current = newId;
     selectScenario(newId);
     const params = new URLSearchParams(searchParams.toString());
     params.set("scenario", newId);
-    router.push(`${pathname}?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
   const isRunning = simulationState?.run?.status === "RUNNING";
@@ -543,7 +561,7 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
             return (
               <Link
                 key={tab.id}
-                href={`${tab.route}?scenario=${scenarioId || "H4-WI-001"}`}
+                href={`${tab.route}?scenario=${scenarioId || "DEMO-001"}`}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap",
@@ -655,7 +673,7 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
               <div className="relative flex items-center">
                 <select
                   suppressHydrationWarning
-                  value={scenarioId || "H4-WI-001"}
+                  value={scenarioId || "DEMO-001"}
                   onChange={(e) => handleScenarioChange(e.target.value)}
                   className={cn(
                     "bg-transparent text-xs font-bold cursor-pointer focus:outline-none pr-4 appearance-none",
@@ -669,12 +687,12 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
                         value={sc.id}
                         className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}
                       >
-                        {sc.id === "H4-WI-001" ? "H4-WT-001 < MPLS Edge Router Failure" : `${sc.id} < ${sc.display_name}`}
+                        {sc.id} &lt; {sc.display_name}
                       </option>
                     ))
                   ) : (
-                    <option value="H4-WI-001" className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                      H4-WT-001 &lt; MPLS Edge Router Failure
+                    <option value="DEMO-001" className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                      DEMO-001 &lt; Transport-Induced Mobile Data Degradation
                     </option>
                   )}
                 </select>

@@ -60,11 +60,37 @@ export interface ScenarioCapabilities {
   benchmarks: boolean;
 }
 
+export const STAGE_TO_CONCEPT: Record<string, string> = {
+  H1: "Understand",
+  H2: "Discover",
+  H3: "Learn",
+  H4: "Anticipate",
+};
+
+export const CONCEPT_TO_STAGE: Record<string, string> = {
+  Understand: "H1",
+  Discover: "H2",
+  Learn: "H3",
+  Anticipate: "H4",
+};
+
+export function getConceptName(stageOrConcept?: string): string {
+  if (!stageOrConcept) return "Understand";
+  const upper = stageOrConcept.toUpperCase();
+  if (upper === "H1" || upper === "UNDERSTAND") return "Understand";
+  if (upper === "H2" || upper === "DISCOVER") return "Discover";
+  if (upper === "H3" || upper === "LEARN") return "Learn";
+  if (upper === "H4" || upper === "ANTICIPATE") return "Anticipate";
+  return stageOrConcept;
+}
+
 export interface ScenarioRegistryEntry {
   id: string;
   display_name: string;
   description: string;
   stage: string;          // H1 / H2 / H3 / H4
+  concept: string;        // Understand / Discover / Learn / Anticipate
+  scenario_type?: string; // INCIDENT / KNOWLEDGE_GAP / LEARNING_UNIT / WHAT_IF
   aliases: string[];
   tags: string[];
   domains: string[];
@@ -172,18 +198,71 @@ function deriveCapabilities(entry: {
 
 export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   {
+    id: "DEMO-001",
+    display_name: "Transport-Induced Mobile Data Degradation",
+    description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["mobile data transport failure", "cross-domain outage", "demo-001"],
+    tags: ["transport", "mobile_core", "ran", "bgp", "5g"],
+    domains: ["Transport", "RAN", "Mobile Core"],
+    services: ["5G SA Mobile Data"],
+    difficulty: "INTERMEDIATE",
+    status: "READY",
+    source: "declarative_scenario",
+    capabilities: { investigate: true, discover: false, learn: false, predict: false, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
     id: "SCN-001",
     display_name: "SGi Throughput Degradation & MTU Blackhole",
     description: "Simulates an MTU blackhole on SGi transport interface causing TCP degradation while control plane remains healthy.",
-    stage: "H4",
-    aliases: ["SGi MTU Blackhole", "MTU Mismatch", "SGi Throughput Degradation", "tr-01 MTU drop"],
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SGi MTU Blackhole", "MTU Mismatch", "SGi Throughput Degradation", "tr-01 MTU drop", "H1-INC-001"],
     tags: ["transport", "mobile_core", "mtu", "tcp", "4g"],
     domains: ["Transport", "Mobile Core"],
     services: ["SGi-LAN", "Data Services"],
     difficulty: "INTERMEDIATE",
     status: "READY",
-    source: "h4-registry",
+    source: "incident_catalog",
     capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "H2-GAP-001",
+    display_name: "Missing OCS Charging Dependency",
+    description: "Exposes an unmodeled billing/charging dependency boundary causing unexplained service dropouts.",
+    stage: "H2",
+    concept: "Discover",
+    scenario_type: "KNOWLEDGE_GAP",
+    aliases: ["missing ocs dependency", "charging gap", "H2-SCN-001"],
+    tags: ["charging", "ocs", "knowledge_gap", "boundary"],
+    domains: ["Mobile Core", "OCS"],
+    services: ["Subscriber Charging", "5G Data Session"],
+    difficulty: "INTERMEDIATE",
+    status: "READY",
+    source: "h2_catalog",
+    capabilities: { investigate: true, discover: true, learn: false, predict: false, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "H3-LRN-001",
+    display_name: "Validated OCS Charging Dependency Promotion",
+    description: "Curated learning unit demonstrating SME validation and promotion of discovered charging path.",
+    stage: "H3",
+    concept: "Learn",
+    scenario_type: "LEARNING_UNIT",
+    aliases: ["validated charging dependency", "h3 learning unit", "H3-LU-001"],
+    tags: ["learning", "promotion", "curated_learning", "fcaps"],
+    domains: ["Mobile Core", "OCS"],
+    services: ["Subscriber Charging"],
+    difficulty: "ADVANCED",
+    status: "READY",
+    source: "h3_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: false, knowledge: true, lab: true, benchmarks: true },
     demo_enabled: true,
   },
   {
@@ -191,6 +270,8 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     display_name: "MPLS Edge Router Failure",
     description: "Simulates loss of a shared transport edge and estimates downstream service impact.",
     stage: "H4",
+    concept: "Anticipate",
+    scenario_type: "WHAT_IF",
     aliases: ["H4-WT-001", "MPLS router failure", "edge router outage", "transport edge failure"],
     tags: ["transport", "routing", "spof", "resilience"],
     domains: ["Transport"],
@@ -206,6 +287,8 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     display_name: "Data Center Gateway Failure",
     description: "Simulates complete outage of primary DC gateway interconnecting core services.",
     stage: "H4",
+    concept: "Anticipate",
+    scenario_type: "WHAT_IF",
     aliases: ["DC gateway outage", "DC-GW failure", "core dc gateway down"],
     tags: ["core", "dc", "spof"],
     domains: ["Cloud / NFVI", "Mobile Core"],
@@ -221,6 +304,8 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     display_name: "Packet Gateway User Plane Failure",
     description: "Simulates user plane packet forwarder collapse affecting mobile internet traffic.",
     stage: "H4",
+    concept: "Anticipate",
+    scenario_type: "WHAT_IF",
     aliases: ["PGW-U failure", "UPF outage", "packet core user plane down"],
     tags: ["packet_core", "5g", "spof"],
     domains: ["Packet Core", "5G Core"],
@@ -236,6 +321,8 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     display_name: "Dual Router Shared Power Feed Loss",
     description: "Simulates utility feed failure affecting two routers sharing the same PDU rack.",
     stage: "H4",
+    concept: "Anticipate",
+    scenario_type: "WHAT_IF",
     aliases: ["site power feed failure", "shared power loss"],
     tags: ["common_cause", "power", "shared_dependency"],
     domains: ["Transport", "Facilities"],
@@ -248,7 +335,7 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   },
 ];
 
-const DEFAULT_SCENARIO_ID = "H4-WI-001";
+const DEFAULT_SCENARIO_ID = "DEMO-001";
 
 export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<FikraCoreAppState>({
@@ -288,6 +375,7 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
       setState((prev) => ({
         ...prev,
         simulationState: newSimState,
+        scenarioId: newSimState.scenario?.id || newSimState.scenario_id || prev.scenarioId,
         runId: newSimState.run ? newSimState.run.run_id : null,
         syncState: newSimState.syncState || "IDLE",
         connectionState: newSimState.connectionState,
@@ -313,25 +401,37 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
           display_name: string;
           description?: string;
           stage?: string;
+          concept?: string;
+          scenario_type?: string;
           aliases?: string[];
           tags?: string[];
+          domains?: string[];
+          services?: string[];
+          difficulty?: string;
           capabilities?: ScenarioCapabilities;
           demo_enabled?: boolean;
-        }) => ({
-          id: sc.id,
-          display_name: sc.display_name,
-          description: sc.description || "",
-          stage: sc.stage || "H4",
-          aliases: sc.aliases || [],
-          tags: sc.tags || [],
-          domains: deriveDomains(sc.tags || []),
-          services: deriveServices(sc.tags || []),
-          difficulty: deriveDifficulty(sc.tags || []),
-          status: sc.demo_enabled ? "READY" : "AVAILABLE",
-          source: "h4-registry",
-          capabilities: sc.capabilities || deriveCapabilities({ stage: sc.stage || "H4", tags: sc.tags || [] }),
-          demo_enabled: sc.demo_enabled ?? true,
-        })
+          source?: string;
+        }) => {
+          const stage = sc.stage || "H1";
+          const concept = sc.concept || getConceptName(stage);
+          return {
+            id: sc.id,
+            display_name: sc.display_name,
+            description: sc.description || "",
+            stage,
+            concept,
+            scenario_type: sc.scenario_type || "INCIDENT",
+            aliases: sc.aliases || [],
+            tags: sc.tags || [],
+            domains: sc.domains && sc.domains.length > 0 ? sc.domains : deriveDomains(sc.tags || []),
+            services: sc.services && sc.services.length > 0 ? sc.services : deriveServices(sc.tags || []),
+            difficulty: sc.difficulty || deriveDifficulty(sc.tags || []),
+            status: sc.demo_enabled ? "READY" : "AVAILABLE",
+            source: sc.source || "scenario-catalog",
+            capabilities: sc.capabilities || deriveCapabilities({ stage, tags: sc.tags || [] }),
+            demo_enabled: sc.demo_enabled ?? true,
+          };
+        }
       );
       setState((prev) => ({
         ...prev,
@@ -339,7 +439,7 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
         scenarioRegistryLoading: false,
       }));
     } catch (err) {
-      console.warn("Registry fetch failed, using empty registry:", err);
+      console.warn("Registry fetch failed, using default registry:", err);
       setState((prev) => ({ ...prev, scenarioRegistryLoading: false }));
     }
   }, []);
@@ -365,6 +465,16 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
       syncState: "SWITCHING_SCENARIO",
       connectionState: "DISCONNECTED",
     }));
+
+    if (typeof window !== "undefined") {
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set("scenario", scenarioId);
+        window.history.replaceState(null, "", url.toString());
+      } catch {
+        // ignore in test / non-browser environments
+      }
+    }
 
     if (simClientRef.current) {
       await simClientRef.current.loadScenario(scenarioId);

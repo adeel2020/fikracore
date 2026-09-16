@@ -7,9 +7,9 @@ export default function LearnPage() {
         workspace: "learn",
         title: "Learn",
         subtitle: "Candidate knowledge, SME validation, promotion, and rollback state.",
-        capability: "H3 / learn",
+        capability: "Learn",
         emptyTitle: "No learning state available",
-        emptyBody: "The active scenario has not exposed candidate or promoted knowledge. Switch to an H3/H4 scenario or continue evidence collection.",
+        emptyBody: "The active scenario has not exposed candidate or promoted knowledge. Switch to a Learn or Anticipate scenario or continue evidence collection.",
       }}
     />
   );
