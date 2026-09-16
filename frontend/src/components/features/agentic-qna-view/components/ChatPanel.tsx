@@ -98,6 +98,12 @@ const PAGE_HEADER_META = [
     icon: <AlertCircle className="h-6 w-6 text-orange-400 animate-float" />,
     iconClass: "bg-orange-500/10 border-orange-500/20",
   },
+  {
+    title: "Telecom Knowledge Graph Specialist",
+    desc: "Inspect live cross-domain topology, causal links & blast radius across 11 network domains.",
+    icon: <Network className="h-6 w-6 text-emerald-400 animate-float" />,
+    iconClass: "bg-emerald-500/10 border-emerald-500/20",
+  },
 ];
 
 const SUGGESTED_PROMPTS_PAGES = [
@@ -179,6 +185,14 @@ const SUGGESTED_PROMPTS_PAGES = [
       route: "Mobile Core Analyst",
       isGuide: true,
       pageTarget: 6,
+    },
+    {
+      icon: <Network className="h-5 w-5 text-emerald-400 animate-pulse" />,
+      title: "Telecom Knowledge Graph",
+      prompt: "/telecom-knowledge-graph",
+      route: "Skill Workflow",
+      isGuide: true,
+      pageTarget: 9,
     },
   ],
   // Page 1: Data Storyteller
@@ -408,6 +422,33 @@ const SUGGESTED_PROMPTS_PAGES = [
       route: "Fast QnA",
     },
   ],
+  // Page 9: Telecom Knowledge Graph
+  [
+    {
+      icon: <Network className="h-4 w-4 text-emerald-400" />,
+      title: "Generate Full Knowledge Graph",
+      prompt: "/telecom-knowledge-graph",
+      route: "Skill Workflow",
+    },
+    {
+      icon: <Zap className="h-4 w-4 text-cyan-400" />,
+      title: "H1 SGi MTU Degradation Chain",
+      prompt: "Inspect the H1 incident causal chain from CRM ticket to UPF-003 and PE router.",
+      route: "Skill Workflow",
+    },
+    {
+      icon: <AlertTriangle className="h-4 w-4 text-amber-400" />,
+      title: "H2 OCS Charging Dependency",
+      prompt: "Inspect the H2 OCS charging discovery flow and policy dependencies.",
+      route: "Skill Workflow",
+    },
+    {
+      icon: <TrendingUp className="h-4 w-4 text-pink-400" />,
+      title: "Optical & DWDM Backhaul Flow",
+      prompt: "Show the physical backhaul trail from IP PE router to OTN and DWDM lambda.",
+      route: "Skill Workflow",
+    },
+  ],
 ];
 
 const AGENT_OPTIONS = [
@@ -417,6 +458,7 @@ const AGENT_OPTIONS = [
   { value: "Mobile Core Analyst", label: "Mobile Core" },
   { value: "Complaint Analyst", label: "Complaints" },
   { value: "Senior Telecom Signaling Analyst", label: "Signaling" },
+  { value: "Telecom Knowledge Graph Specialist", label: "Knowledge Graph" },
 ];
 
 interface ChatPanelProps {

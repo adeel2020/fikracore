@@ -10,3 +10,10 @@ Rules:
 - If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
 - Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
 - After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+
+## telecom-knowledge-graph
+
+When the user asks to generate, refresh, or view the telecom knowledge graph (e.g. `/telecom-knowledge-graph`), run:
+`python3 .agents/skills/telecom-knowledge-graph/scripts/build_graph.py --output artifacts/telecom-knowledge-graph.html`
+This re-scans all FikraCore simulator runs and produces the fresh production-grade interactive topology explorer.
+

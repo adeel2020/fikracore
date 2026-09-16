@@ -1,0 +1,44 @@
+[
+  {
+    "gap_class": "ORPHAN_ENTITY",
+    "severity": "LOW",
+    "entity_or_domain": "mobile-core/incidents/sgi-throughput-drop",
+    "description": "Operational entity 'Sgi Throughput Drop' (incident) has no incoming or outgoing topology relationships.",
+    "recommendation": "Add dependency or service link to connect 'mobile-core/incidents/sgi-throughput-drop' into the operational graph."
+  },
+  {
+    "gap_class": "ORPHAN_ENTITY",
+    "severity": "LOW",
+    "entity_or_domain": "tickets/mobile-core/tt-984210",
+    "description": "Operational entity 'Trouble Ticket TT-984210 Journey' (ticket-journey) has no incoming or outgoing topology relationships.",
+    "recommendation": "Add dependency or service link to connect 'tickets/mobile-core/tt-984210' into the operational graph."
+  },
+  {
+    "gap_class": "SPARSE_DOMAIN",
+    "severity": "MEDIUM",
+    "entity_or_domain": "RAN",
+    "description": "Domain 'RAN' has sparse representation (2 entities).",
+    "recommendation": "Ingest topology and service definitions for domain 'RAN'."
+  },
+  {
+    "gap_class": "SPARSE_DOMAIN",
+    "severity": "MEDIUM",
+    "entity_or_domain": "Transport",
+    "description": "Domain 'Transport' has sparse representation (2 entities).",
+    "recommendation": "Ingest topology and service definitions for domain 'Transport'."
+  },
+  {
+    "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
+    "severity": "HIGH",
+    "entity_or_domain": "Mobile Core \u2194 OCS",
+    "description": "Zero cross-domain dependency links between 'Mobile Core' and 'OCS'.",
+    "recommendation": "Define transport routing and inter-domain links connecting Mobile Core functions to OCS."
+  },
+  {
+    "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
+    "severity": "HIGH",
+    "entity_or_domain": "IMS \u2194 Transport",
+    "description": "Zero cross-domain dependency links between 'IMS' and 'Transport'.",
+    "recommendation": "Define transport routing and inter-domain links connecting IMS functions to Transport."
+  }
+]

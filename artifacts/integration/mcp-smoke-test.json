@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-11T12:32:18.971965+00:00",
-  "duration_seconds": 1.216,
+  "timestamp": "2026-09-16T10:18:43.407820+00:00",
+  "duration_seconds": 0.635,
   "endpoint": "http://localhost:3131/mcp",
   "decision": "LIVE_MCP_SMOKE_SUPPORTED",
   "passed_count": "16/16",
@@ -262,7 +262,7 @@
     },
     "mark_zaki_grounding": {
       "query": "Why is this service affected?",
-      "response_preview": "Direct dependency in operational telecombrain: sgi-edge-01 provides critical functional support....",
+      "response_preview": "Investigation focus: operational explanation and telemetry correlation.\n\nDirect dependency in operational telecombrain: ...",
       "grounded": true
     }
   }

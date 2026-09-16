@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ChevronLeft, Pin, Trash2 } from "lucide-react";
+import { ChevronLeft, Pin, Trash2, Network, ExternalLink } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -64,6 +64,18 @@ export function HistorySidebar({
           >
             + New Chat
           </button>
+          <a
+            href="/artifacts/telecom-knowledge-graph.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full rounded-lg border border-emerald-500/30 bg-emerald-950/20 px-3 py-2 text-left text-xs text-emerald-300 hover:bg-emerald-900/30 transition-colors flex items-center justify-between group"
+          >
+            <span className="flex items-center gap-1.5 font-medium">
+              <Network className="h-3.5 w-3.5 text-emerald-400" />
+              Knowledge Graph
+            </span>
+            <ExternalLink className="h-3 w-3 opacity-60 group-hover:opacity-100" />
+          </a>
           {sortedSessions.map((session) => {
             const preview = sessionPreviews[session.session_id] || "Loading...";
             const isLoading = loadingSessionId === session.session_id;

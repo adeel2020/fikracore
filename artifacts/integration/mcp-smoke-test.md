@@ -1,8 +1,8 @@
 # Live gbrain MCP Integration Smoke Test Report
 
 - **Endpoint**: `http://localhost:3131/mcp`
-- **Timestamp**: `2026-09-11T12:32:18.971965+00:00`
-- **Duration**: `1.216s`
+- **Timestamp**: `2026-09-16T10:18:43.407820+00:00`
+- **Duration**: `0.635s`
 - **Overall Decision**: **`LIVE_MCP_SMOKE_SUPPORTED`**
 - **Checks Passed**: `16/16`
 - **Hidden Truth Leakage**: `0`
@@ -38,4 +38,4 @@
 Zero failures detected across all 15 integration dimensions.
 
 ---
-*Generated automatically by FikraCore Step 4.5 Integration Harness at 2026-09-11T12:32:18.971965+00:00*
+*Generated automatically by FikraCore Step 4.5 Integration Harness at 2026-09-16T10:18:43.407820+00:00*

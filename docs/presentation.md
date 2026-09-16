@@ -55,6 +55,35 @@ FikraCore Ecosystem
 
 ![alt text](image-17.png)
 
+currently in POC i have:
+
+Customer Ticket Dashboard
+
+share the flow diagram  of what has been covered to pitch the idea
+
+POC  covered:
+
+1. **Customer Ticket Dashboard:** Centralized UI for ticket visibility.
+2. **Customer Ticket Journey:** Visual tracking of end-to-end ticket progression.
+3. **Incident StoryTeller:** Automatic generation of narrative context for incidents.
+4. **Customer Trouble Ticket (TT) RAG Agent:** Interactive Q&A agent dedicated to handling trouble tickets.
+5. **Trace Analyzer:** Dedicated component for processing and analyzing **Polystar Traces**.
+6. **Interactive Voice Assistant:** Enables live voice interactions for both the Incident StoryTeller and Customer Ticket Journey.
+
+**Backend Intelligent Agents**
+
+- **StoryTeller Agent:** Directly traverses the **FikraCore TelcoBrain** backend to generate and narrate curated, context-aware incident stories.
+- **Customer TT Q&A Agent:** Utilizes a hybrid data retrieval strategy:
+  - **Chroma DB** serves as the vector database for tabular data ingestion and semantic search.
+  - **PostgreSQL** retains the tabular data schema to enable precise, SQL-based structured data retrieval.
+- **Signaling Analyst (Trace Analyzer Skill):** Visualizes end-to-end call flows, executes deep trace analysis, and extracts actionable troubleshooting insights.
+
+**Voice Assistant Capabilities**
+
+- **Incident Storytelling:** Synchronously displays the incident narrative retrieved from **FikraCore TelcoBrain** while playing the corresponding curated audio commentary.
+- **Live Ticket Tracking:** Visually tracks the active ticket journey while generating real-time audio explanations of the ticket status and progress.
+
+
 ![alt text](image-18.png)
 
 ![alt text](image-19.png)

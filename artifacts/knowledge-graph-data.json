@@ -1,0 +1,438 @@
+{
+  "title": "FikraCore Telecom Knowledge Graph",
+  "timestamp": "2026-09-16T14:30:00Z",
+  "nodes": [
+    {
+      "id": "CHG:OCS:001",
+      "label": "CHG:OCS:001",
+      "domain": "OCS & Charging",
+      "role": "ROOT",
+      "color": "#f59e0b",
+      "description": "Online Charging System rating active subscriber balance, data buckets & tariff plans"
+    },
+    {
+      "id": "CRM:TICKET:001",
+      "label": "CRM:TICKET:001",
+      "domain": "CRM & Customer Experience",
+      "role": "SYMPTOM",
+      "color": "#ef4444",
+      "description": "Customer Service Trouble Ticket queue tracking subscriber throughput degradation complaints"
+    },
+    {
+      "id": "EPC:DRA:001",
+      "label": "EPC:DRA:001",
+      "domain": "4G EPC & Signaling",
+      "role": "ROOT",
+      "color": "#6366f1",
+      "description": "Diameter Routing Agent switching Gy/Gx/Rx charging and policy messages"
+    },
+    {
+      "id": "EXT:ROAMING:001",
+      "label": "EXT:ROAMING:001",
+      "domain": "External Interconnect & Roaming",
+      "role": "ROOT",
+      "color": "#f97316",
+      "description": "International IPX Peering Exchange connecting visiting inbound/outbound roamers"
+    },
+    {
+      "id": "EXT:VAS:001",
+      "label": "EXT:VAS:001",
+      "domain": "External Interconnect & Roaming",
+      "role": "ROOT",
+      "color": "#f97316",
+      "description": "Value-Added Services platform (SMS-C, MMS-C, and rich communication services)"
+    },
+    {
+      "id": "IMSM:PCSCF:001",
+      "label": "IMSM:PCSCF:001",
+      "domain": "IMS & VoNR/VoLTE",
+      "role": "ROOT",
+      "color": "#ec4899",
+      "description": "Proxy-CSCF border session controller handling SIP registration for VoNR/VoLTE calls"
+    },
+    {
+      "id": "INFRA:CGNAT:001",
+      "label": "INFRA:CGNAT:001",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Carrier-Grade NAT cluster performing IPv4 address pooling and port translation"
+    },
+    {
+      "id": "INFRA:COOL:A",
+      "label": "INFRA:COOL:A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Datacenter HVAC and environmental chiller sub-system protecting Core racks"
+    },
+    {
+      "id": "INFRA:DB:SUBS-A",
+      "label": "INFRA:DB:SUBS-A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "High-availability subscriber state store for active UDM/UDR sessions"
+    },
+    {
+      "id": "INFRA:DC:A",
+      "label": "INFRA:DC:A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#8b5cf6",
+      "description": "Primary Regional Datacenter facility housing Tier-3 Core & Edge hardware"
+    },
+    {
+      "id": "INFRA:DNS:CORE",
+      "label": "INFRA:DNS:CORE",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Authoritative Internal DNS resolving SBA FQDNs & 3GPP network function endpoints"
+    },
+    {
+      "id": "INFRA:FW:SGI",
+      "label": "INFRA:FW:SGI",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Next-Gen Firewall filtering inbound DDoS & SGi-LAN egress security policies"
+    },
+    {
+      "id": "INFRA:K8S:CORE-A",
+      "label": "INFRA:K8S:CORE-A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#8b5cf6",
+      "description": "Telco Kubernetes Container Cluster hosting virtualized Core network microservices"
+    },
+    {
+      "id": "INFRA:NFVI:A",
+      "label": "INFRA:NFVI:A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#8b5cf6",
+      "description": "Network Functions Virtualization Infrastructure hypervisors and SR-IOV compute nodes"
+    },
+    {
+      "id": "INFRA:NTP:CORE",
+      "label": "INFRA:NTP:CORE",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Precision Time Protocol (PTP/NTP) stratum-1 GPS synchronized time server"
+    },
+    {
+      "id": "INFRA:POWER:A",
+      "label": "INFRA:POWER:A",
+      "domain": "Cloud NFVI & Facilities",
+      "role": "ROOT",
+      "color": "#8b5cf6",
+      "description": "Uninterruptible Power Supply (UPS) & DC rectifier feed bus A"
+    },
+    {
+      "id": "IP:PE:RTR-21",
+      "label": "IP:PE:RTR-21",
+      "domain": "IP Transport & Routing",
+      "role": "ROOT",
+      "color": "#06b6d4",
+      "description": "Provider Edge Router terminating MPLS L3VPN and SGi peering interfaces"
+    },
+    {
+      "id": "IP:RR:001",
+      "label": "IP:RR:001",
+      "domain": "IP Transport & Routing",
+      "role": "ROOT",
+      "color": "#06b6d4",
+      "description": "BGP Route Reflector distributing internal MP-BGP VPNv4/VPNv6 prefixes"
+    },
+    {
+      "id": "IP:VRF:N3-01",
+      "label": "IP:VRF:N3-01",
+      "domain": "IP Transport & Routing",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#06b6d4",
+      "description": "Virtual Routing and Forwarding table isolating 5G N3 RAN-to-UPF transport traffic"
+    },
+    {
+      "id": "IP:VRF:SGI-01",
+      "label": "IP:VRF:SGI-01",
+      "domain": "IP Transport & Routing",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#06b6d4",
+      "description": "Virtual Routing and Forwarding table segmenting outbound Internet/IMS traffic"
+    },
+    {
+      "id": "OSS:FM:001",
+      "label": "OSS:FM:001",
+      "domain": "OSS & Fault Management",
+      "role": "ROOT",
+      "color": "#84cc16",
+      "description": "Fault Management system aggregating SNMP traps, syslog alarms & root cause telemetry"
+    },
+    {
+      "id": "RAN:GNB:501",
+      "label": "RAN:GNB:501",
+      "domain": "Radio Access Network (RAN)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#10b981",
+      "description": "5G Next Generation NodeB macro cell site providing 3.5GHz NR coverage"
+    },
+    {
+      "id": "RAN:SITE:101",
+      "label": "RAN:SITE:101",
+      "domain": "Radio Access Network (RAN)",
+      "role": "ROOT",
+      "color": "#10b981",
+      "description": "Physical cell tower compound with baseband units, antenna arrays & fiber backhaul"
+    },
+    {
+      "id": "SA5G:AMF:001",
+      "label": "SA5G:AMF:001",
+      "domain": "Mobile Core (5G SA)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#3b82f6",
+      "description": "Access and Mobility Management Function terminating N2 RAN signaling & registration"
+    },
+    {
+      "id": "SA5G:PCF:001",
+      "label": "SA5G:PCF:001",
+      "domain": "Mobile Core (5G SA)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#3b82f6",
+      "description": "Policy Control Function governing subscriber SLA rules & dynamic QoS profiles"
+    },
+    {
+      "id": "SA5G:SCP:001",
+      "label": "SA5G:SCP:001",
+      "domain": "Mobile Core (5G SA)",
+      "role": "ROOT",
+      "color": "#3b82f6",
+      "description": "Service Communication Proxy mediating SBA HTTP/2 JSON-RPC service meshes"
+    },
+    {
+      "id": "SA5G:SMF:001",
+      "label": "SA5G:SMF:001",
+      "domain": "Mobile Core (5G SA)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#3b82f6",
+      "description": "Session Management Function allocating IP pools, UPF selection & charging triggers"
+    },
+    {
+      "id": "SA5G:UPF:003",
+      "label": "SA5G:UPF:003",
+      "domain": "Mobile Core (5G SA)",
+      "role": "ROOT",
+      "color": "#3b82f6",
+      "description": "User Plane Function handling 5G packet routing, QoS enforcement & SGi encapsulation"
+    },
+    {
+      "id": "TX:DWDM:LAMBDA-22",
+      "label": "TX:DWDM:LAMBDA-22",
+      "domain": "Optical & Transport (DWDM/OTN)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#14b8a6",
+      "description": "Dense Wavelength Division Multiplexing optical frequency channel (100G lambda)"
+    },
+    {
+      "id": "TX:FIBER:FR-07",
+      "label": "TX:FIBER:FR-07",
+      "domain": "Optical & Transport (DWDM/OTN)",
+      "role": "ROOT",
+      "color": "#14b8a6",
+      "description": "Underground dark fiber pair along Primary Metro Ring 07"
+    },
+    {
+      "id": "TX:OTN:TRAIL-22",
+      "label": "TX:OTN:TRAIL-22",
+      "domain": "Optical & Transport (DWDM/OTN)",
+      "role": "PROPAGATION_MECHANISM",
+      "color": "#14b8a6",
+      "description": "Optical Transport Network (OTN) client trail carrying backhaul packet payload"
+    }
+  ],
+  "links": [
+    {
+      "source": "CHG:OCS:001",
+      "target": "EPC:DRA:001",
+      "relationship_id": "REL-OCS-DRA",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "CRM:TICKET:001",
+      "target": "SA5G:UPF:003",
+      "relationship_id": "REL-CRM-TICKETS-IMPACT",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "INFRA:FW:SGI",
+      "target": "INFRA:CGNAT:001",
+      "relationship_id": "REL-FW-CGNAT",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "INFRA:K8S:CORE-A",
+      "target": "INFRA:NFVI:A",
+      "relationship_id": "REL-K8S-RUNS-NFVI",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "INFRA:NFVI:A",
+      "target": "INFRA:COOL:A",
+      "relationship_id": "REL-NFVI-COOLING",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "INFRA:POWER:A",
+      "target": "INFRA:DC:A",
+      "relationship_id": "REL-POWER-MEMBER",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "IP:PE:RTR-21",
+      "target": "TX:OTN:TRAIL-22",
+      "relationship_id": "REL-MPLS-OTN",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "IP:VRF:N3-01",
+      "target": "IP:PE:RTR-21",
+      "relationship_id": "REL-N3-PE21",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "IP:VRF:SGI-01",
+      "target": "INFRA:FW:SGI",
+      "relationship_id": "REL-SGI-FW",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "OSS:FM:001",
+      "target": "SA5G:UPF:003",
+      "relationship_id": "REL-OSS-FM-MONITORS-UPF",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "RAN:GNB:501",
+      "target": "IMSM:PCSCF:001",
+      "relationship_id": "REL-VONR-PCSCF",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:AMF:001",
+      "target": "INFRA:DNS:CORE",
+      "relationship_id": "REL-AMF-DNS",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:AMF:001",
+      "target": "INFRA:K8S:CORE-A",
+      "relationship_id": "REL-AMF-HOSTED",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:AMF:001",
+      "target": "INFRA:NTP:CORE",
+      "relationship_id": "REL-CORE-NTP",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:AMF:001",
+      "target": "RAN:GNB:501",
+      "relationship_id": "REL-AMF-GNB",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:PCF:001",
+      "target": "CHG:OCS:001",
+      "relationship_id": "REL-PCF-OCS",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:SMF:001",
+      "target": "SA5G:PCF:001",
+      "relationship_id": "REL-SMF-PCF",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:SMF:001",
+      "target": "SA5G:UPF:003",
+      "relationship_id": "REL-SMF-UPF",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:UPF:003",
+      "target": "INFRA:DB:SUBS-A",
+      "relationship_id": "REL-UPF-STORAGE",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:UPF:003",
+      "target": "INFRA:DC:A",
+      "relationship_id": "REL-ENTITY-SITE",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:UPF:003",
+      "target": "INFRA:K8S:CORE-A",
+      "relationship_id": "REL-UPF-HOSTED",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:UPF:003",
+      "target": "IP:VRF:N3-01",
+      "relationship_id": "REL-N3-UPF",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "SA5G:UPF:003",
+      "target": "IP:VRF:SGI-01",
+      "relationship_id": "REL-UPF-SGI",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "TX:DWDM:LAMBDA-22",
+      "target": "TX:FIBER:FR-07",
+      "relationship_id": "REL-FIBER-DWDM",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "TX:FIBER:FR-07",
+      "target": "EXT:ROAMING:001",
+      "relationship_id": "REL-FIBER-SUPPLIED-BY",
+      "causal_effect": "degraded_state_propagation"
+    },
+    {
+      "source": "TX:OTN:TRAIL-22",
+      "target": "TX:DWDM:LAMBDA-22",
+      "relationship_id": "REL-OTN-DWDM",
+      "causal_effect": "degraded_state_propagation"
+    }
+  ],
+  "domains": [
+    "Mobile Core (5G SA)",
+    "IP Transport & Routing",
+    "Cloud NFVI & Facilities",
+    "OCS & Charging",
+    "4G EPC & Signaling",
+    "IMS & VoNR/VoLTE",
+    "Radio Access Network (RAN)",
+    "Optical & Transport (DWDM/OTN)",
+    "CRM & Customer Experience",
+    "OSS & Fault Management",
+    "External Interconnect & Roaming"
+  ],
+  "domain_colors": {
+    "Mobile Core (5G SA)": "#3b82f6",
+    "IP Transport & Routing": "#06b6d4",
+    "Cloud NFVI & Facilities": "#8b5cf6",
+    "OCS & Charging": "#f59e0b",
+    "4G EPC & Signaling": "#6366f1",
+    "IMS & VoNR/VoLTE": "#ec4899",
+    "Radio Access Network (RAN)": "#10b981",
+    "Optical & Transport (DWDM/OTN)": "#14b8a6",
+    "CRM & Customer Experience": "#ef4444",
+    "OSS & Fault Management": "#84cc16",
+    "External Interconnect & Roaming": "#f97316"
+  }
+}

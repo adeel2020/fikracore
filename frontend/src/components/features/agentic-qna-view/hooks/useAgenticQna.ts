@@ -41,7 +41,7 @@ export const DEFAULT_TELEMETRY = {
   contextWindow: "50K",
 };
 
-export const MAX_PAGE_INDEX = 8;
+export const MAX_PAGE_INDEX = 9;
 
 export function classifyQuery(
   query: string
@@ -261,6 +261,7 @@ export function useAgenticQna() {
   const [pinnedSessionIds, setPinnedSessionIds] = useState<string[]>([]);
   const availableSkills = [
     { name: "trace-analyzer", description: "Analyzes SIGTRAN M2UA/M3UA PCAP network traces and generates a formatted call flow report.", role: "Senior Telecom Signaling Analyst" },
+    { name: "telecom-knowledge-graph", description: "Generates live production-grade telecom knowledge graph from FikraCore simulator runs with 11 domain clusters and causal propagation.", role: "Telecom Knowledge Graph Specialist" },
   ];
   const [activeSkillIndex, setActiveSkillIndex] = useState(0);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
@@ -546,6 +547,14 @@ export function useAgenticQna() {
       lower.includes(".pcapng")
     ) {
       return "Senior Telecom Signaling Analyst";
+    }
+    if (
+      lower.startsWith("telecom-knowledge-graph") ||
+      lower.startsWith("telecom knowledge graph") ||
+      lower.includes("knowledge graph") ||
+      lower.includes("telecom graph")
+    ) {
+      return "Telecom Knowledge Graph Specialist";
     }
     return null;
   };

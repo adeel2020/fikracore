@@ -144,5 +144,6 @@ export function useChatHistory({
     handleDeleteSession,
     formatDate,
     getSessionPreview,
+    fetchSessions,
   };
 }

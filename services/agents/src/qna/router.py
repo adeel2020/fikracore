@@ -51,7 +51,12 @@ def _build_telemetry(session, latency_ms: int) -> Telemetry:
 
 def _route_by_agent(agent: str | None, message: str = "") -> str:
     raw_message = (message or "").strip()
-    if raw_message.startswith("/") or raw_message.lower().startswith("trace-analyzer"):
+    if (
+        raw_message.startswith("/")
+        or raw_message.lower().startswith("trace-analyzer")
+        or "telecom-knowledge-graph" in raw_message.lower()
+        or "knowledge graph" in raw_message.lower()
+    ):
         return "skill_workflow"
 
     if not agent:
@@ -68,6 +73,10 @@ def _route_by_agent(agent: str | None, message: str = "") -> str:
         "Signaling": "skill_workflow",
         "Skill Workflow": "skill_workflow",
         "Signaling Workflow": "skill_workflow",
+        "Telecom Knowledge Graph Specialist": "skill_workflow",
+        "Knowledge Graph Specialist": "skill_workflow",
+        "Knowledge Graph": "skill_workflow",
+        "Graph Specialist": "skill_workflow",
     }
     return mapping.get(agent, "qna_workflow")
 
@@ -76,6 +85,7 @@ async def _stream_agent_chunks(
     query: str,
     session_id: str,
     route: str,
+    agent: str | None = None,
 ) -> AsyncIterator[tuple[str, str]]:
     """Yield (chunk_text, agent_role) tuples for the given route."""
     if route == "storyteller_workflow":
@@ -102,6 +112,14 @@ async def _stream_agent_chunks(
     elif route in ("skill_workflow", "signaling_workflow"):
         manager = SkillManager()
         parts = query.strip().split()
+        skill_name = "trace-analyzer"
+        arguments: list[str] = []
+        is_graph_persona = agent in (
+            "Telecom Knowledge Graph Specialist",
+            "Knowledge Graph Specialist",
+            "Knowledge Graph",
+            "Graph Specialist",
+        )
         if parts:
             first_part = parts[0]
             if first_part.startswith("/"):
@@ -110,12 +128,30 @@ async def _stream_agent_chunks(
             elif first_part.lower() in ("trace-analyzer", "trace_analyzer"):
                 skill_name = "trace-analyzer"
                 arguments = parts[1:]
+            elif (
+                "telecom-knowledge-graph" in query.lower()
+                or "knowledge graph" in query.lower()
+                or "graph" in query.lower()
+                or is_graph_persona
+            ):
+                skill_name = "telecom-knowledge-graph"
+                arguments = parts[1:] if first_part.startswith("/") else []
+            else:
+                pcap_arg = next((p for p in parts if p.endswith((".pcap", ".pcapng"))), None)
+                if pcap_arg:
+                    skill_name = "trace-analyzer"
+                    arguments = [pcap_arg]
+                elif is_graph_persona:
+                    skill_name = "telecom-knowledge-graph"
+                    arguments = []
+                else:
+                    skill_name = "trace-analyzer"
+                    arguments = parts
+        else:
+            if is_graph_persona:
+                skill_name = "telecom-knowledge-graph"
             else:
                 skill_name = "trace-analyzer"
-                pcap_arg = next((p for p in parts if p.endswith((".pcap", ".pcapng"))), None)
-                arguments = [pcap_arg] if pcap_arg else parts
-        else:
-            skill_name = "trace-analyzer"
             arguments = []
         reply, agent_role = await manager.execute_skill(skill_name, arguments)
         yield (f"__AGENT__:{agent_role}\n", agent_role)
@@ -186,7 +222,7 @@ async def chat(req: ChatRequest, db: Session = Depends(get_db)) -> ChatResponse:
     full_reply = ""
     raw_parts: list[str] = []
     agent_role = "Assistant"
-    async for chunk_text, role in _stream_agent_chunks(req.message.strip(), req.session_id or "default", route):
+    async for chunk_text, role in _stream_agent_chunks(req.message.strip(), req.session_id or "default", route, agent=req.agent):
         if not chunk_text.startswith("__AGENT__"):
             raw_parts.append(chunk_text)
         if not chunk_text.startswith("__AGENT__"):
@@ -237,7 +273,7 @@ async def chat_stream(req: ChatRequest) -> StreamingResponse:
             session.add("user", req.message.strip())
 
             last_agent_role = "Assistant"
-            async for chunk_text, role in _stream_agent_chunks(req.message.strip(), req.session_id or "default", route):
+            async for chunk_text, role in _stream_agent_chunks(req.message.strip(), req.session_id or "default", route, agent=req.agent):
                 yield chunk_text
                 if not chunk_text.startswith("__AGENT__"):
                     full_reply_parts.append(chunk_text)
