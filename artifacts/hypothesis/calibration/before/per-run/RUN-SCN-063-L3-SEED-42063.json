@@ -461,9 +461,12 @@
     "topology_gap_detection": false,
     "evidence_requests_before_terminal": 0,
     "steps_to_first_useful_hypothesis": 1,
-    "investigation_duration_seconds": 0.002446136000799015,
+    "investigation_duration_seconds": 0.001956129999598488,
     "impacted_service": "vas_short_code_service",
     "coincidental_evidence": [],
-    "stopping_reason": "Single evidence pass complete; further tests require requested observations"
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [],
+    "unexplained_residuals": [],
+    "model_contradictions": []
   }
 }

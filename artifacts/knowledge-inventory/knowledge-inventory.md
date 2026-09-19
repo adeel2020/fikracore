@@ -2,24 +2,24 @@
 
 - **Brain Identity**: `telecombrain`
 - **Schema Identity**: `mobile-core@0.1.0+2eea5e14`
-- **Retrieved At**: `2026-09-16T17:40:16.714056+00:00`
+- **Retrieved At**: `2026-09-19T19:57:53.537115+00:00`
 - **Total Pages**: `132`
 - **Total Unique Relationships**: `190`
 - **Overall Health Status**: **`Healthy`**
-- **Overall Coverage Score**: **`73.5%` (PARTIALLY_COVERED)**
+- **Overall Coverage Score**: **`68.5%` (PARTIALLY_COVERED)**
 
 ## 1. Executive Summary
 
 Telecombrain currently contains **132 pages** across **5 domains** and **190 unique operational relationships**.
-The dominant operational domain is **Mobile Core** with **110 entities**.
+The dominant operational domain is **Mobile Core** with **102 entities**.
 There are **2 operational orphans**, **0 unresolved aliases**, and **15 stale knowledge records**.
 
 ## 2. Domain Distribution
 
 | Domain | Entities | Services | Network Functions | Incidents | Relationships | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Mobile Core** | 110 | 6 | 21 | 8 | 186 | `WELL_COVERED` |
-| **Observability / Telemetry** | 16 | 0 | 0 | 0 | 57 | `WELL_COVERED` |
+| **Cross-Domain Operations** | 24 | 0 | 0 | 8 | 135 | `WELL_COVERED` |
+| **Mobile Core** | 102 | 6 | 21 | 0 | 158 | `PARTIALLY_COVERED` |
 | **RAN** | 2 | 0 | 2 | 0 | 6 | `PARTIALLY_COVERED` |
 | **Transport** | 2 | 0 | 2 | 0 | 6 | `PARTIALLY_COVERED` |
 | **Other** | 2 | 0 | 0 | 0 | 0 | `SPARSE` |
@@ -73,10 +73,12 @@ There are **2 operational orphans**, **0 unresolved aliases**, and **15 stale kn
    - *Recommendation*: Ingest topology and service definitions for domain 'RAN'.
 4. **[MEDIUM] SPARSE_DOMAIN** (`Transport`): Domain 'Transport' has sparse representation (2 entities).
    - *Recommendation*: Ingest topology and service definitions for domain 'Transport'.
-5. **[HIGH] INCOMPLETE_CROSS_DOMAIN_COVERAGE** (`Mobile Core ↔ OCS`): Zero cross-domain dependency links between 'Mobile Core' and 'OCS'.
-   - *Recommendation*: Define transport routing and inter-domain links connecting Mobile Core functions to OCS.
-6. **[HIGH] INCOMPLETE_CROSS_DOMAIN_COVERAGE** (`IMS ↔ Transport`): Zero cross-domain dependency links between 'IMS' and 'Transport'.
-   - *Recommendation*: Define transport routing and inter-domain links connecting IMS functions to Transport.
+5. **[HIGH] INCOMPLETE_CROSS_DOMAIN_COVERAGE** (`Mobile Core ↔ Transport`): Direct operational transport conduit missing between 'Mobile Core' and 'Transport'.
+   - *Recommendation*: Define direct transport routing and inter-domain links connecting Mobile Core functions to Transport.
+6. **[HIGH] INCOMPLETE_CROSS_DOMAIN_COVERAGE** (`Mobile Core ↔ OCS`): Direct operational transport conduit missing between 'Mobile Core' and 'OCS'.
+   - *Recommendation*: Define direct transport routing and inter-domain links connecting Mobile Core functions to OCS.
+7. **[HIGH] INCOMPLETE_CROSS_DOMAIN_COVERAGE** (`IMS ↔ Transport`): Direct operational transport conduit missing between 'IMS' and 'Transport'.
+   - *Recommendation*: Define direct transport routing and inter-domain links connecting IMS functions to Transport.
 
 ---
 *Generated automatically by FikraCore Step 4.7 Knowledge Inventory Harness.*

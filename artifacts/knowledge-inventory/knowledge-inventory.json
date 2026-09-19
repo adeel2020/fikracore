@@ -1,12 +1,12 @@
 {
   "brain": "telecombrain",
   "schema_identity": "mobile-core@0.1.0+2eea5e14",
-  "retrieved_at": "2026-09-16T17:40:16.714056+00:00",
+  "retrieved_at": "2026-09-19T19:57:53.537115+00:00",
   "provenance": {
     "source": "gbrain-mcp",
     "endpoint": "http://localhost:3131/mcp",
     "provider_type": "GbrainTelecomBrainProvider",
-    "retrieved_at": "2026-09-16T17:40:16.714056+00:00"
+    "retrieved_at": "2026-09-19T19:57:53.537115+00:00"
   },
   "summary": {
     "brain": "telecombrain",
@@ -20,6 +20,8 @@
     "tickets_count": 1,
     "evidence_count": 25,
     "hypotheses_count": 10,
+    "telemetry_entities_count": 46,
+    "telemetry_links_count": 89,
     "orphans_count": 2,
     "unresolved_aliases_count": 0,
     "stale_knowledge_count": 15,
@@ -84,29 +86,29 @@
     "has-remediation": 1
   },
   "domains": {
-    "Mobile Core": {
-      "name": "Mobile Core",
-      "entities_count": 110,
-      "services_count": 6,
-      "network_functions_count": 21,
-      "incidents_count": 8,
-      "evidence_count": 9,
-      "hypotheses_count": 10,
-      "tickets_count": 1,
-      "relationships_count": 186,
-      "coverage_status": "WELL_COVERED"
-    },
-    "Observability / Telemetry": {
-      "name": "Observability / Telemetry",
-      "entities_count": 16,
+    "Cross-Domain Operations": {
+      "name": "Cross-Domain Operations",
+      "entities_count": 24,
       "services_count": 0,
       "network_functions_count": 0,
-      "incidents_count": 0,
-      "evidence_count": 16,
-      "hypotheses_count": 0,
+      "incidents_count": 8,
+      "evidence_count": 3,
+      "hypotheses_count": 3,
       "tickets_count": 0,
-      "relationships_count": 57,
-      "coverage_status": "PARTIALLY_COVERED"
+      "relationships_count": 135,
+      "coverage_status": "WELL_COVERED"
+    },
+    "Mobile Core": {
+      "name": "Mobile Core",
+      "entities_count": 102,
+      "services_count": 6,
+      "network_functions_count": 21,
+      "incidents_count": 0,
+      "evidence_count": 43,
+      "hypotheses_count": 7,
+      "tickets_count": 1,
+      "relationships_count": 158,
+      "coverage_status": "WELL_COVERED"
     },
     "RAN": {
       "name": "RAN",
@@ -194,7 +196,10 @@
       "slug": "mobile-core/incidents/sgi-throughput-drop",
       "title": "Sgi Throughput Drop",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.active",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-08T06:08:52.221Z",
       "in_degree": 0,
@@ -206,7 +211,10 @@
       "slug": "incidents/mobile-core/sgi-throughput-drop",
       "title": "Sgi Throughput Drop",
       "type": "concept",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.active",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-08T06:08:51.204Z",
       "in_degree": 0,
@@ -219,6 +227,9 @@
       "title": "Trouble Ticket TT-984210 Journey",
       "type": "ticket-journey",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:28.808Z",
       "in_degree": 0,
@@ -231,6 +242,9 @@
       "title": "Protocols & Network Elements Root Cause Findings Matrix",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:28.581Z",
       "in_degree": 1,
@@ -243,6 +257,9 @@
       "title": "Specialized Services & Diagnostic Tools Catalog",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:28.319Z",
       "in_degree": 1,
@@ -255,6 +272,9 @@
       "title": "Huawei MML Runbooks",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:28.045Z",
       "in_degree": 1,
@@ -267,6 +287,9 @@
       "title": "Mobile Core RTR Queue Topology",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:27.814Z",
       "in_degree": 1,
@@ -279,6 +302,9 @@
       "title": "Customer Trouble Ticket Journey: Schema, SLA Hierarchy & Bouncing Rules",
       "type": "procedure",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T21:15:27.569Z",
       "in_degree": 1,
@@ -291,6 +317,9 @@
       "title": "RTR Shift-Level Curated Ticket Summary",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T18:22:46.395Z",
       "in_degree": 1,
@@ -303,6 +332,9 @@
       "title": "Mobile RTR Multi-Stage Investigation & Troubleshooting Pipeline",
       "type": "concept",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-07T18:22:38.896Z",
       "in_degree": 0,
@@ -315,6 +347,9 @@
       "title": "Learning note for LTE Attach",
       "type": "learning-note",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:07.441Z",
       "in_degree": 1,
@@ -327,6 +362,9 @@
       "title": "LTE Attach telemetry query",
       "type": "query-asset",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:07.186Z",
       "in_degree": 1,
@@ -339,6 +377,9 @@
       "title": "LTE Attach failure triage",
       "type": "playbook",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:07.069Z",
       "in_degree": 1,
@@ -351,6 +392,9 @@
       "title": "Story build trace for incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "type": "story-run",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:06.883Z",
       "in_degree": 0,
@@ -363,6 +407,9 @@
       "title": "Story for incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "type": "story",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:06.755Z",
       "in_degree": 1,
@@ -374,7 +421,10 @@
       "slug": "grafana/logs/grafana-loki-attach-001",
       "title": "MME attach reject logs increased",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:06.565Z",
       "in_degree": 3,
@@ -386,7 +436,10 @@
       "slug": "grafana/metrics/grafana-prom-attach-001",
       "title": "4G Attach SR dropped below intent target",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:06.168Z",
       "in_degree": 3,
@@ -399,6 +452,9 @@
       "title": "4G Attach Sr",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:05.693Z",
       "in_degree": 1,
@@ -410,7 +466,10 @@
       "slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
       "title": "4G Attach SR dropped below intent target",
       "type": "kpi-event",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:05.574Z",
       "in_degree": 2,
@@ -422,7 +481,10 @@
       "slug": "grafana/alerts/grafana-alert-attach-ran-001",
       "title": "Major ran alarm S1AP_INITIAL_UE_MSG_DROP on enodeb-17",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:05.386Z",
       "in_degree": 3,
@@ -435,6 +497,9 @@
       "title": "enodeb-17 (enodeb, ran)",
       "type": "domain-function",
       "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:05.221Z",
       "in_degree": 3,
@@ -446,7 +511,10 @@
       "slug": "grafana/alerts/grafana-alert-attach-hss-001",
       "title": "Major mobile-core alarm DIAMETER_ULR_TIMEOUTS_HIGH on hss-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:05.038Z",
       "in_degree": 3,
@@ -459,6 +527,9 @@
       "title": "hss-01 (hss, mobile-core)",
       "type": "domain-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:04.857Z",
       "in_degree": 3,
@@ -470,7 +541,10 @@
       "slug": "grafana/alerts/grafana-alert-attach-mme-001",
       "title": "Critical mobile-core alarm ATTACH_REJECT_RATE_HIGH on mme-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:04.677Z",
       "in_degree": 3,
@@ -483,6 +557,9 @@
       "title": "mme-01 (mme, mobile-core)",
       "type": "domain-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:04.500Z",
       "in_degree": 3,
@@ -495,6 +572,9 @@
       "title": "LTE Attach",
       "type": "service-procedure",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:04.319Z",
       "in_degree": 2,
@@ -506,7 +586,10 @@
       "slug": "correlation/mobile-core/decisions/54db6ef325fbf758",
       "title": "Correlation decision 54db6ef325fbf758",
       "type": "correlation-decision",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:04.071Z",
       "in_degree": 1,
@@ -518,7 +601,10 @@
       "slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "title": "Correlation cluster 54db6ef325fbf758",
       "type": "correlation-cluster",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "INFERRED",
       "updated_at": "2026-09-01T09:04:03.952Z",
       "in_degree": 2,
@@ -530,7 +616,10 @@
       "slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core, ran",
       "type": "hypothesis",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-09-01T09:04:03.698Z",
       "in_degree": 2,
@@ -542,7 +631,10 @@
       "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "title": "Inter-Domain incident candidate for LTE Attach",
       "type": "incident-alias",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:03.577Z",
       "in_degree": 0,
@@ -554,7 +646,10 @@
       "slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "title": "Inter-Domain incident candidate for LTE Attach",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:03.204Z",
       "in_degree": 4,
@@ -567,6 +662,9 @@
       "title": "Learning note for SGI Data",
       "type": "learning-note",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:02.773Z",
       "in_degree": 1,
@@ -579,6 +677,9 @@
       "title": "SGI Data telemetry query",
       "type": "query-asset",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:02.518Z",
       "in_degree": 1,
@@ -591,6 +692,9 @@
       "title": "SGI Data failure triage",
       "type": "playbook",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:02.399Z",
       "in_degree": 1,
@@ -603,6 +707,9 @@
       "title": "Story build trace for incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "type": "story-run",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:02.220Z",
       "in_degree": 0,
@@ -615,6 +722,9 @@
       "title": "Story for incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "type": "story",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:02.089Z",
       "in_degree": 1,
@@ -626,7 +736,10 @@
       "slug": "grafana/traces/grafana-tempo-sgi-001",
       "title": "Packet gateway request path latency increased",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:01.908Z",
       "in_degree": 3,
@@ -638,7 +751,10 @@
       "slug": "grafana/logs/grafana-loki-sgi-001",
       "title": "NAT allocation warnings observed during SGi throughput drop",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:01.437Z",
       "in_degree": 3,
@@ -650,7 +766,10 @@
       "slug": "grafana/metrics/grafana-prom-sgi-001",
       "title": "SGi throughput dropped below committed intent",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:00.932Z",
       "in_degree": 3,
@@ -663,6 +782,9 @@
       "title": "SGI Throughput",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:00.412Z",
       "in_degree": 1,
@@ -674,7 +796,10 @@
       "slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
       "title": "SGi throughput dropped below committed intent",
       "type": "kpi-event",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:00.300Z",
       "in_degree": 2,
@@ -686,7 +811,10 @@
       "slug": "grafana/alerts/grafana-alert-sgi-transport-001",
       "title": "Major transport alarm INTERFACE_DISCARDS_HIGH on sgi-edge-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:04:00.130Z",
       "in_degree": 3,
@@ -699,6 +827,9 @@
       "title": "sgi-edge-01 (edge-router, transport)",
       "type": "domain-function",
       "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.974Z",
       "in_degree": 3,
@@ -710,7 +841,10 @@
       "slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
       "title": "Major mobile-core alarm NAT_SESSION_TABLE_HIGH on nat-fw-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.782Z",
       "in_degree": 3,
@@ -723,6 +857,9 @@
       "title": "nat-fw-01 (firewall-nat, mobile-core)",
       "type": "domain-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.612Z",
       "in_degree": 3,
@@ -734,7 +871,10 @@
       "slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
       "title": "Critical mobile-core alarm SGI_THROUGHPUT_DROP on pgw-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.415Z",
       "in_degree": 3,
@@ -747,6 +887,9 @@
       "title": "pgw-01 (pgw, mobile-core)",
       "type": "domain-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.225Z",
       "in_degree": 3,
@@ -759,6 +902,9 @@
       "title": "SGI Data",
       "type": "service-procedure",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:59.059Z",
       "in_degree": 2,
@@ -770,7 +916,10 @@
       "slug": "correlation/mobile-core/decisions/a154bb7a3997859c",
       "title": "Correlation decision a154bb7a3997859c",
       "type": "correlation-decision",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:58.803Z",
       "in_degree": 1,
@@ -782,7 +931,10 @@
       "slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "title": "Correlation cluster a154bb7a3997859c",
       "type": "correlation-cluster",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "INFERRED",
       "updated_at": "2026-09-01T09:03:58.666Z",
       "in_degree": 2,
@@ -794,7 +946,10 @@
       "slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "title": "Inter-Domain alarm correlation impacting SGI Data across mobile-core, transport",
       "type": "hypothesis",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-09-01T09:03:58.387Z",
       "in_degree": 2,
@@ -806,7 +961,10 @@
       "slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "title": "Inter-Domain incident candidate for SGI Data",
       "type": "incident-alias",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:58.256Z",
       "in_degree": 0,
@@ -818,7 +976,10 @@
       "slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "title": "Inter-Domain incident candidate for SGI Data",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:57.834Z",
       "in_degree": 4,
@@ -831,6 +992,9 @@
       "title": "Learning note for Voice Call Setup",
       "type": "learning-note",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:57.350Z",
       "in_degree": 1,
@@ -843,6 +1007,9 @@
       "title": "Voice Call Setup telemetry query",
       "type": "query-asset",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:57.116Z",
       "in_degree": 1,
@@ -855,6 +1022,9 @@
       "title": "Voice Call Setup failure triage",
       "type": "playbook",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:56.993Z",
       "in_degree": 1,
@@ -867,6 +1037,9 @@
       "title": "Story build trace for incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "type": "story-run",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:56.808Z",
       "in_degree": 0,
@@ -879,6 +1052,9 @@
       "title": "Story for incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "type": "story",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:56.652Z",
       "in_degree": 1,
@@ -890,7 +1066,10 @@
       "slug": "grafana/logs/grafana-loki-cssr-001",
       "title": "SIP INVITE failures increased during CSSR drop",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:56.403Z",
       "in_degree": 3,
@@ -902,7 +1081,10 @@
       "slug": "grafana/metrics/grafana-prom-cssr-001",
       "title": "CSSR dropped below intent target for voice-call-setup",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:55.987Z",
       "in_degree": 3,
@@ -915,6 +1097,9 @@
       "title": "Cssr",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:55.489Z",
       "in_degree": 1,
@@ -926,7 +1111,10 @@
       "slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
       "title": "CSSR dropped below intent target for voice-call-setup",
       "type": "kpi-event",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:55.377Z",
       "in_degree": 2,
@@ -938,7 +1126,10 @@
       "slug": "grafana/alerts/grafana-alert-cssr-transport-001",
       "title": "Major transport alarm PACKET_LOSS_HIGH on voice-backhaul-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:55.202Z",
       "in_degree": 3,
@@ -951,6 +1142,9 @@
       "title": "voice-backhaul-01 (backhaul-link, transport)",
       "type": "domain-function",
       "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:55.043Z",
       "in_degree": 3,
@@ -962,7 +1156,10 @@
       "slug": "grafana/alerts/grafana-alert-cssr-ims-001",
       "title": "Major mobile-core alarm SIP_INVITE_FAILURE_RATE_HIGH on pcscf-01",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:54.852Z",
       "in_degree": 3,
@@ -975,6 +1172,9 @@
       "title": "pcscf-01 (pcscf, mobile-core)",
       "type": "domain-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:54.683Z",
       "in_degree": 3,
@@ -986,7 +1186,10 @@
       "slug": "grafana/alerts/grafana-alert-cssr-ran-001",
       "title": "Critical ran alarm RRC_SETUP_FAILURE_SPIKE on enodeb-22",
       "type": "evidence",
-      "domain": "Observability / Telemetry",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:54.459Z",
       "in_degree": 3,
@@ -999,6 +1202,9 @@
       "title": "enodeb-22 (enodeb, ran)",
       "type": "domain-function",
       "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:54.094Z",
       "in_degree": 3,
@@ -1011,6 +1217,9 @@
       "title": "Voice Call Setup",
       "type": "service-procedure",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:53.916Z",
       "in_degree": 2,
@@ -1022,7 +1231,10 @@
       "slug": "correlation/mobile-core/decisions/05841af2e3f4f430",
       "title": "Correlation decision 05841af2e3f4f430",
       "type": "correlation-decision",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:53.603Z",
       "in_degree": 1,
@@ -1034,7 +1246,10 @@
       "slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "title": "Correlation cluster 05841af2e3f4f430",
       "type": "correlation-cluster",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "INFERRED",
       "updated_at": "2026-09-01T09:03:53.446Z",
       "in_degree": 2,
@@ -1046,7 +1261,10 @@
       "slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "title": "Inter-Domain alarm correlation impacting Voice Call Setup across mobile-core, ran, transport",
       "type": "hypothesis",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-09-01T09:03:53.129Z",
       "in_degree": 2,
@@ -1058,7 +1276,10 @@
       "slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "title": "Inter-Domain incident candidate for Voice Call Setup",
       "type": "incident-alias",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:52.951Z",
       "in_degree": 0,
@@ -1070,7 +1291,10 @@
       "slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "title": "Inter-Domain incident candidate for Voice Call Setup",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-09-01T09:03:52.321Z",
       "in_degree": 4,
@@ -1083,6 +1307,9 @@
       "title": "LTE Attach",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.services",
+      "tmforum_layer": "SM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:57:07.804Z",
       "in_degree": 1,
@@ -1095,6 +1322,9 @@
       "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-31T10:57:07.632Z",
       "in_degree": 1,
@@ -1107,6 +1337,9 @@
       "title": "SGI Throughput",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:57:06.804Z",
       "in_degree": 1,
@@ -1119,6 +1352,9 @@
       "title": "SGI Data",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:57:06.362Z",
       "in_degree": 1,
@@ -1131,6 +1367,9 @@
       "title": "Inter-Domain alarm correlation impacting SGI Data across gi-lan, mobile-core-user-plane, transport",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-31T10:57:06.206Z",
       "in_degree": 1,
@@ -1143,6 +1382,9 @@
       "title": "4G Attach Sr",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:44.530Z",
       "in_degree": 1,
@@ -1155,6 +1397,9 @@
       "title": "4G Attach SR dropped below intent target",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:44.370Z",
       "in_degree": 1,
@@ -1167,6 +1412,9 @@
       "title": "enodeb-17 (enodeb, ran)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:43.902Z",
       "in_degree": 1,
@@ -1179,6 +1427,9 @@
       "title": "hss-01 (hss, signaling)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:43.387Z",
       "in_degree": 1,
@@ -1191,6 +1442,9 @@
       "title": "mme-01 (mme, mobile-core-control-plane)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:42.934Z",
       "in_degree": 1,
@@ -1203,6 +1457,9 @@
       "title": "SGi throughput dropped below committed intent",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:39.819Z",
       "in_degree": 1,
@@ -1215,6 +1472,9 @@
       "title": "sgi-edge-01 (edge-router, transport)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:39.438Z",
       "in_degree": 1,
@@ -1227,6 +1487,9 @@
       "title": "nat-fw-01 (firewall-nat, gi-lan)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:39.062Z",
       "in_degree": 1,
@@ -1239,6 +1502,9 @@
       "title": "pgw-01 (pgw, mobile-core-user-plane)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:38.674Z",
       "in_degree": 1,
@@ -1251,6 +1517,9 @@
       "title": "Cssr",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:36.205Z",
       "in_degree": 1,
@@ -1263,6 +1532,9 @@
       "title": "CSSR dropped below intent target for voice-call-setup",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:36.047Z",
       "in_degree": 1,
@@ -1275,6 +1547,9 @@
       "title": "voice-backhaul-01 (backhaul-link, transport)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:35.652Z",
       "in_degree": 1,
@@ -1287,6 +1562,9 @@
       "title": "pcscf-01 (pcscf, ims)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:35.259Z",
       "in_degree": 1,
@@ -1299,6 +1577,9 @@
       "title": "enodeb-22 (enodeb, ran)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:34.823Z",
       "in_degree": 1,
@@ -1311,6 +1592,9 @@
       "title": "Voice Call Setup",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.services",
+      "tmforum_layer": "SM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-31T10:54:34.580Z",
       "in_degree": 1,
@@ -1323,6 +1607,9 @@
       "title": "Inter-Domain alarm correlation impacting Voice Call Setup across ims, ran, transport",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-31T10:54:34.314Z",
       "in_degree": 1,
@@ -1335,6 +1622,9 @@
       "title": "Service KPI",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:23:53.927Z",
       "in_degree": 1,
@@ -1347,6 +1637,9 @@
       "title": "UE Registration",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.services",
+      "tmforum_layer": "SM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:23:53.570Z",
       "in_degree": 1,
@@ -1359,6 +1652,9 @@
       "title": "Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-28T20:23:53.449Z",
       "in_degree": 1,
@@ -1370,7 +1666,10 @@
       "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "title": "Inter-Domain incident candidate for UE Registration",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:23:53.320Z",
       "in_degree": 0,
@@ -1383,6 +1682,9 @@
       "title": "unknown-cell-9 (component, ran)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:50.146Z",
       "in_degree": 1,
@@ -1395,6 +1697,9 @@
       "title": "Intra-Domain alarm correlation impacting unmapped service across ran",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-28T20:21:50.015Z",
       "in_degree": 1,
@@ -1407,6 +1712,9 @@
       "title": "power-ups-77 (ups, power)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:49.809Z",
       "in_degree": 1,
@@ -1419,6 +1727,9 @@
       "title": "Site Power",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.services",
+      "tmforum_layer": "SM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:49.674Z",
       "in_degree": 1,
@@ -1431,6 +1742,9 @@
       "title": "Intra-Domain alarm correlation impacting Site Power across power",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CANDIDATE",
       "updated_at": "2026-08-28T20:21:49.522Z",
       "in_degree": 1,
@@ -1443,6 +1757,9 @@
       "title": "core-amf-01 (amf, mobile-core)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:49.066Z",
       "in_degree": 1,
@@ -1455,6 +1772,9 @@
       "title": "transport-agg-sw-03 (aggregation-switch, transport)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:48.881Z",
       "in_degree": 1,
@@ -1467,6 +1787,9 @@
       "title": "ran-gnodeb-17 (gnodeb, ran)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:21:48.681Z",
       "in_degree": 1,
@@ -1479,6 +1802,9 @@
       "title": "Warning ran alarm TEMP_HIGH on unknown-cell-9",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:36.548Z",
       "in_degree": 1,
@@ -1490,7 +1816,10 @@
       "slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
       "title": "Intra-Domain incident candidate for Unmapped Service",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:36.127Z",
       "in_degree": 0,
@@ -1503,6 +1832,9 @@
       "title": "Critical power alarm BATTERY_LOW on power-ups-77",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:35.874Z",
       "in_degree": 1,
@@ -1514,7 +1846,10 @@
       "slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
       "title": "Intra-Domain incident candidate for Site Power",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.operational",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:35.276Z",
       "in_degree": 0,
@@ -1527,6 +1862,9 @@
       "title": "TICKET observation for ue-registration",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:34.981Z",
       "in_degree": 1,
@@ -1539,6 +1877,9 @@
       "title": "KPI breach for ue-registration",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:34.685Z",
       "in_degree": 1,
@@ -1551,6 +1892,9 @@
       "title": "KPI breach for ue-registration",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:34.200Z",
       "in_degree": 1,
@@ -1563,6 +1907,9 @@
       "title": "Major mobile-core alarm CPU_HIGH on core-amf-01",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:34.056Z",
       "in_degree": 1,
@@ -1575,6 +1922,9 @@
       "title": "Major transport alarm INTERFACE_ERRORS on transport-agg-sw-03",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:33.753Z",
       "in_degree": 1,
@@ -1587,6 +1937,9 @@
       "title": "Critical ran alarm LINK_DOWN on ran-gnodeb-17",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.alarms",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "CONFIRMED",
       "updated_at": "2026-08-28T20:20:33.455Z",
       "in_degree": 1,
@@ -1599,6 +1952,9 @@
       "title": "Signaling burst correlated with mobile-terminated location updates",
       "type": "observation",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:24.863Z",
       "in_degree": 0,
@@ -1611,6 +1967,9 @@
       "title": "Scale out AMF-01 and throttle registration signaling",
       "type": "remediation",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:23.377Z",
       "in_degree": 1,
@@ -1623,6 +1982,9 @@
       "title": "NAS REGISTRATION REJECT 'congestion' cause codes",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:21.595Z",
       "in_degree": 1,
@@ -1635,6 +1997,9 @@
       "title": "AMF-01 CPU utilization pegged at 98%",
       "type": "evidence",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:20.143Z",
       "in_degree": 1,
@@ -1647,6 +2012,9 @@
       "title": "AMF-01 CPU saturation from registration signaling burst",
       "type": "hypothesis",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:18.747Z",
       "in_degree": 1,
@@ -1659,6 +2027,9 @@
       "title": "Spike in UE registration failures",
       "type": "symptom",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.network_functions",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:13.111Z",
       "in_degree": 2,
@@ -1671,6 +2042,9 @@
       "title": "RSR recovery at 07:05",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:11.770Z",
       "in_degree": 1,
@@ -1683,6 +2057,9 @@
       "title": "RSR critical breach at 06:14",
       "type": "kpi-event",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:10.506Z",
       "in_degree": 1,
@@ -1694,7 +2071,10 @@
       "slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "title": "AMF-01 overload causes mass registration failures",
       "type": "incident",
-      "domain": "Mobile Core",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "sub_cluster": "incidents.active",
+      "tmforum_layer": "AIOps",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:09.400Z",
       "in_degree": 1,
@@ -1707,6 +2087,9 @@
       "title": "Registration Success Rate (RSR)",
       "type": "kpi",
       "domain": "Mobile Core",
+      "plane": "observability",
+      "sub_cluster": "mobile_core.kpis",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:13:00.517Z",
       "in_degree": 2,
@@ -1719,6 +2102,9 @@
       "title": "UE Registration Service",
       "type": "service",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.services",
+      "tmforum_layer": "SM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:12:59.371Z",
       "in_degree": 1,
@@ -1731,6 +2117,9 @@
       "title": "SMF-01 (Session Management Function)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:12:58.372Z",
       "in_degree": 1,
@@ -1743,6 +2132,9 @@
       "title": "AMF-01 (Access and Mobility Management Function)",
       "type": "network-function",
       "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T23:12:57.969Z",
       "in_degree": 2,
@@ -1755,6 +2147,9 @@
       "title": "Install",
       "type": "note",
       "domain": "Other",
+      "plane": "topology",
+      "sub_cluster": "other.general",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T22:22:48.469Z",
       "in_degree": 0,
@@ -1767,6 +2162,9 @@
       "title": "remember test results",
       "type": "note",
       "domain": "Other",
+      "plane": "topology",
+      "sub_cluster": "other.general",
+      "tmforum_layer": "RM&O",
       "knowledge_state": "STALE",
       "updated_at": "2026-08-08T22:08:48.981Z",
       "in_degree": 0,
@@ -1783,7 +2181,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/queue-topology",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
@@ -1792,7 +2191,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
@@ -1801,7 +2201,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
@@ -1810,7 +2211,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
@@ -1819,7 +2221,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
@@ -1828,7 +2231,8 @@
       "to_slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
@@ -1836,8 +2240,9 @@
       "human_link_type": "Learned-From",
       "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
@@ -1846,7 +2251,8 @@
       "to_slug": "assets/mobile-core/playbooks/lte-attach-failure-triage",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
@@ -1855,7 +2261,8 @@
       "to_slug": "assets/mobile-core/queries/promql/lte-attach",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "storytelling/mobile-core/story-runs/lte-attach-54db6ef325fbf758-54db6ef325fbf758",
@@ -1863,8 +2270,9 @@
       "human_link_type": "Builds-Story-For",
       "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
@@ -1872,350 +2280,389 @@
       "human_link_type": "Narrates",
       "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
       "link_type": "measures",
       "human_link_type": "Measures",
       "to_slug": "knowledge/mobile-core/kpis/4g-attach-sr",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-attach-ran-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/ran/functions/enodeb-17",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-attach-hss-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/mobile-core/networks/lte/functions/hss-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-attach-mme-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/mobile-core/networks/lte/functions/mme-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "link_type": "has-decision",
       "human_link_type": "Has-Decision",
       "to_slug": "correlation/mobile-core/decisions/54db6ef325fbf758",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
+    },
+    {
+      "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "link_type": "grouped",
+      "human_link_type": "Grouped",
+      "to_slug": "grafana/alerts/grafana-alert-attach-mme-001",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
-    },
-    {
-      "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
-      "link_type": "grouped",
-      "human_link_type": "Grouped",
-      "to_slug": "grafana/alerts/grafana-alert-attach-mme-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-attach-hss-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-attach-ran-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/metrics/grafana-prom-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/logs/grafana-loki-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-mme-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-hss-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-ran-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/lte-attach",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/mobile-core-control-plane-mme-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/signaling-hss-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/ran-enodeb-17",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "mobile-core/kpi-events/grafana-prom-attach-001",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "alias-of",
       "human_link_type": "Alias-Of",
       "to_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/lte/functions/mme-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/lte/functions/hss-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/ran/functions/enodeb-17",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/lte/functions/mme-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/lte/functions/hss-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/ran/functions/enodeb-17",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "has-story",
       "human_link_type": "Has-Story",
       "to_slug": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
       "link_type": "has-learning-note",
       "human_link_type": "Has-Learning-Note",
       "to_slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
@@ -2223,8 +2670,9 @@
       "human_link_type": "Learned-From",
       "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
@@ -2233,7 +2681,8 @@
       "to_slug": "assets/mobile-core/playbooks/sgi-data-failure-triage",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
@@ -2242,7 +2691,8 @@
       "to_slug": "assets/mobile-core/queries/promql/sgi-data",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "storytelling/mobile-core/story-runs/sgi-data-a154bb7a3997859c-a154bb7a3997859c",
@@ -2250,8 +2700,9 @@
       "human_link_type": "Builds-Story-For",
       "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
@@ -2259,368 +2710,409 @@
       "human_link_type": "Narrates",
       "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
       "link_type": "measures",
       "human_link_type": "Measures",
       "to_slug": "knowledge/mobile-core/kpis/sgi-throughput",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/transport/functions/sgi-edge-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "has-decision",
       "human_link_type": "Has-Decision",
       "to_slug": "correlation/mobile-core/decisions/a154bb7a3997859c",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
+    },
+    {
+      "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "link_type": "grouped",
+      "human_link_type": "Grouped",
+      "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
-    },
-    {
-      "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
-      "link_type": "grouped",
-      "human_link_type": "Grouped",
-      "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/metrics/grafana-prom-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/logs/grafana-loki-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/traces/grafana-tempo-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/traces/grafana-tempo-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/sgi-data",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/mobile-core-user-plane-pgw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/gi-lan-nat-fw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/transport-sgi-edge-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "alias-of",
       "human_link_type": "Alias-Of",
       "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/transport/functions/sgi-edge-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ps/functions/pgw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ps/functions/nat-fw-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/transport/functions/sgi-edge-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "has-story",
       "human_link_type": "Has-Story",
       "to_slug": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
       "link_type": "has-learning-note",
       "human_link_type": "Has-Learning-Note",
       "to_slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
@@ -2628,8 +3120,9 @@
       "human_link_type": "Learned-From",
       "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
@@ -2638,7 +3131,8 @@
       "to_slug": "assets/mobile-core/playbooks/voice-call-setup-failure-triage",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
@@ -2647,7 +3141,8 @@
       "to_slug": "assets/mobile-core/queries/promql/voice-call-setup",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "storytelling/mobile-core/story-runs/voice-call-setup-05841af2e3f4f430-05841af2e3f4f430",
@@ -2655,8 +3150,9 @@
       "human_link_type": "Builds-Story-For",
       "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
@@ -2664,350 +3160,389 @@
       "human_link_type": "Narrates",
       "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
       "link_type": "measures",
       "human_link_type": "Measures",
       "to_slug": "knowledge/mobile-core/kpis/cssr",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/transport/functions/voice-backhaul-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
       "link_type": "observed-on",
       "human_link_type": "Observed on",
       "to_slug": "domains/ran/functions/enodeb-22",
-      "source_domain": "Observability / Telemetry",
+      "source_domain": "Mobile Core",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "link_type": "has-decision",
       "human_link_type": "Has-Decision",
       "to_slug": "correlation/mobile-core/decisions/05841af2e3f4f430",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
+    },
+    {
+      "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "link_type": "grouped",
+      "human_link_type": "Grouped",
+      "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
-    },
-    {
-      "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
-      "link_type": "grouped",
-      "human_link_type": "Grouped",
-      "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/metrics/grafana-prom-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
       "link_type": "grouped",
       "human_link_type": "Grouped",
       "to_slug": "grafana/logs/grafana-loki-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
       "link_type": "supported-by",
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/voice-call-setup",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/ran-enodeb-22",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/ims-pcscf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/transport-voice-backhaul-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "alias-of",
       "human_link_type": "Alias-Of",
       "to_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/ran/functions/enodeb-22",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/transport/functions/voice-backhaul-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "derived-from",
       "human_link_type": "Derived-From",
       "to_slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/ran/functions/enodeb-22",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "RAN",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/mobile-core/networks/ims/functions/pcscf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "domains/transport/functions/voice-backhaul-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Transport",
-      "is_cross_domain": true
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
-      "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "source_domain": "Cross-Domain Operations",
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "has-story",
       "human_link_type": "Has-Story",
       "to_slug": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
       "link_type": "has-learning-note",
       "human_link_type": "Has-Learning-Note",
       "to_slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
@@ -3015,8 +3550,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-mme-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
@@ -3024,8 +3560,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-hss-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
@@ -3033,8 +3570,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-attach-ran-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
@@ -3042,8 +3580,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-attach-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
@@ -3051,8 +3590,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-attach-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3060,8 +3600,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3069,8 +3610,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3078,8 +3620,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-sgi-transport-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3087,8 +3630,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-sgi-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3096,8 +3640,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-sgi-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
@@ -3105,8 +3650,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/traces/grafana-tempo-sgi-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/kpi-events/grafana-prom-attach-001",
@@ -3115,7 +3661,8 @@
       "to_slug": "mobile-core/kpis/4g-attach-sr",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
@@ -3124,7 +3671,8 @@
       "to_slug": "mobile-core/kpis/sgi-throughput",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
@@ -3133,7 +3681,8 @@
       "to_slug": "mobile-core/kpis/cssr",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
@@ -3141,8 +3690,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-ran-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
@@ -3150,8 +3700,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-ims-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
@@ -3159,8 +3710,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/alerts/grafana-alert-cssr-transport-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
@@ -3168,8 +3720,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/metrics/grafana-prom-cssr-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
@@ -3177,8 +3730,9 @@
       "human_link_type": "Supported-By",
       "to_slug": "grafana/logs/grafana-loki-cssr-001",
       "source_domain": "Mobile Core",
-      "target_domain": "Observability / Telemetry",
-      "is_cross_domain": true
+      "target_domain": "Mobile Core",
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
@@ -3187,7 +3741,8 @@
       "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
@@ -3196,7 +3751,8 @@
       "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
@@ -3205,7 +3761,8 @@
       "to_slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
@@ -3214,7 +3771,8 @@
       "to_slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
@@ -3223,61 +3781,68 @@
       "to_slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/ue-registration",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/ran-ran-gnodeb-17",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/transport-transport-agg-sw-03",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/mobile-core-core-amf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "mobile-core/kpi-events/kpi-registration-001",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
@@ -3286,7 +3851,8 @@
       "to_slug": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
@@ -3295,52 +3861,58 @@
       "to_slug": "mobile-core/evidence/alarm-81cec920e94d3a59-0",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/ran-unknown-cell-9",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/site-power",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/power-power-ups-77",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/kpi-events/kpi-registration-001",
@@ -3349,7 +3921,8 @@
       "to_slug": "mobile-core/kpis/service-kpi",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/observations/amf-01-signaling-burst",
@@ -3357,8 +3930,9 @@
       "human_link_type": "Relates to",
       "to_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "source_domain": "Mobile Core",
-      "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "target_domain": "Cross-Domain Operations",
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/remediations/scale-out-amf-01",
@@ -3367,7 +3941,8 @@
       "to_slug": "mobile-core/network-functions/amf-01",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/remediations/scale-out-amf-01",
@@ -3376,7 +3951,8 @@
       "to_slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
@@ -3385,7 +3961,8 @@
       "to_slug": "mobile-core/evidence/amf-cpu-metrics",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
@@ -3394,7 +3971,8 @@
       "to_slug": "mobile-core/evidence/nas-reject-logs",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/hypotheses/amf-cpu-saturation",
@@ -3403,7 +3981,8 @@
       "to_slug": "mobile-core/symptoms/registration-failure-spike",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
@@ -3412,7 +3991,8 @@
       "to_slug": "mobile-core/kpis/registration-success-rate",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
@@ -3421,70 +4001,78 @@
       "to_slug": "mobile-core/kpis/registration-success-rate",
       "source_domain": "Mobile Core",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "detected-by",
       "human_link_type": "Detected-By",
       "to_slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": true
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/amf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "affects",
       "human_link_type": "Affects",
       "to_slug": "mobile-core/services/ue-registration-service",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "has-symptom",
       "human_link_type": "Has-Symptom",
       "to_slug": "mobile-core/symptoms/registration-failure-spike",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "has-hypothesis",
       "human_link_type": "Has-Hypothesis",
       "to_slug": "mobile-core/hypotheses/amf-cpu-saturation",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "has-remediation",
       "human_link_type": "Has-Remediation",
       "to_slug": "mobile-core/remediations/scale-out-amf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     },
     {
       "from_slug": "mobile-core/incidents/amf-overload-2026-08-09",
       "link_type": "involves",
       "human_link_type": "Involves",
       "to_slug": "mobile-core/network-functions/smf-01",
-      "source_domain": "Mobile Core",
+      "source_domain": "Cross-Domain Operations",
       "target_domain": "Mobile Core",
-      "is_cross_domain": false
+      "is_cross_domain": false,
+      "is_telemetry_link": false
     }
   ],
   "knowledge_states": {
@@ -3495,14 +4083,7 @@
     "STATE_NOT_AVAILABLE": 0
   },
   "coverage": {
-    "cross_domain_links": {
-      "Observability / Telemetry \u2194 RAN": 2,
-      "Observability / Telemetry \u2194 Mobile Core": 5,
-      "Mobile Core \u2194 Observability / Telemetry": 48,
-      "Mobile Core \u2194 RAN": 4,
-      "Observability / Telemetry \u2194 Transport": 2,
-      "Mobile Core \u2194 Transport": 4
-    }
+    "cross_domain_links": {}
   },
   "gaps": [
     {
@@ -3536,16 +4117,30 @@
     {
       "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
       "severity": "HIGH",
+      "entity_or_domain": "Mobile Core \u2194 Transport",
+      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'Transport'.",
+      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to Transport."
+    },
+    {
+      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
+      "severity": "HIGH",
       "entity_or_domain": "Mobile Core \u2194 OCS",
-      "description": "Zero cross-domain dependency links between 'Mobile Core' and 'OCS'.",
-      "recommendation": "Define transport routing and inter-domain links connecting Mobile Core functions to OCS."
+      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'OCS'.",
+      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to OCS."
     },
     {
       "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
       "severity": "HIGH",
       "entity_or_domain": "IMS \u2194 Transport",
-      "description": "Zero cross-domain dependency links between 'IMS' and 'Transport'.",
-      "recommendation": "Define transport routing and inter-domain links connecting IMS functions to Transport."
+      "description": "Direct operational transport conduit missing between 'IMS' and 'Transport'.",
+      "recommendation": "Define direct transport routing and inter-domain links connecting IMS functions to Transport."
+    },
+    {
+      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
+      "severity": "HIGH",
+      "entity_or_domain": "Mobile Core \u2194 RAN",
+      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'RAN'.",
+      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to RAN."
     }
   ]
 }

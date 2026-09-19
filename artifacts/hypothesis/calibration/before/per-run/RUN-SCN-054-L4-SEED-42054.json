@@ -69,8 +69,8 @@
         "REL-UPF-STORAGE"
       ],
       "status": "SUPPORTED",
-      "hypothesis_confidence": 0.9226,
-      "causal_confidence": 0.8765,
+      "hypothesis_confidence": 0.9101,
+      "causal_confidence": 0.6371,
       "explanation_coverage": 1.0,
       "score_dimensions": {
         "temporal_precedence": 1.0,
@@ -82,7 +82,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.7,
         "evidence_freshness": 0.8031728500744534,
         "source_reliability": 0.8575
       },
@@ -143,8 +143,8 @@
         "REL-CRM-TICKETS-IMPACT"
       ],
       "status": "CANDIDATE",
-      "hypothesis_confidence": 0.6386,
-      "causal_confidence": 0.6067,
+      "hypothesis_confidence": 0.6286,
+      "causal_confidence": 0.4715,
       "explanation_coverage": 0.6666666666666666,
       "score_dimensions": {
         "temporal_precedence": 0.0,
@@ -156,7 +156,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8109593529946,
         "source_reliability": 0.8457142857142859
       },
@@ -580,18 +580,18 @@
         "relationship_id": "REL-CRM-TICKETS-IMPACT",
         "source": "CRM:TICKET:001",
         "target": "SA5G:UPF:003",
-        "link_type": "depends-on",
-        "state": "CONFIRMED",
-        "confidence": 0.95,
+        "link_type": "impacts",
+        "state": "INFERRED",
+        "confidence": 0.75,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-UPF-STORAGE",
         "source": "SA5G:UPF:003",
         "target": "INFRA:DB:SUBS-A",
-        "link_type": "depends-on",
+        "link_type": "stored-on",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 0.7,
         "provenance": "benchmark-operational-fixture"
       }
     ],
@@ -981,9 +981,12 @@
     "topology_gap_detection": false,
     "evidence_requests_before_terminal": 0,
     "steps_to_first_useful_hypothesis": 2,
-    "investigation_duration_seconds": 0.003647486009867862,
+    "investigation_duration_seconds": 0.006440288998419419,
     "impacted_service": "5g_sa_mobile_data",
     "coincidental_evidence": [],
-    "stopping_reason": "Single evidence pass complete; further tests require requested observations"
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [],
+    "unexplained_residuals": [],
+    "model_contradictions": []
   }
 }

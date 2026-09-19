@@ -74,8 +74,8 @@
         "REL-N3-UPF"
       ],
       "status": "SUPPORTED",
-      "hypothesis_confidence": 0.9206,
-      "causal_confidence": 0.8746,
+      "hypothesis_confidence": 0.9106,
+      "causal_confidence": 0.6829,
       "explanation_coverage": 1.0,
       "score_dimensions": {
         "temporal_precedence": 1.0,
@@ -87,7 +87,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8036179895575908,
         "source_reliability": 0.84
       },
@@ -152,9 +152,9 @@
         "REL-CRM-TICKETS-IMPACT",
         "REL-N3-UPF"
       ],
-      "status": "SUPPORTED",
-      "hypothesis_confidence": 0.6513,
-      "causal_confidence": 0.6187,
+      "status": "CANDIDATE",
+      "hypothesis_confidence": 0.6413,
+      "causal_confidence": 0.481,
       "explanation_coverage": 0.75,
       "score_dimensions": {
         "temporal_precedence": 0.0,
@@ -166,7 +166,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8098831446156028,
         "source_reliability": 0.828888888888889
       },
@@ -227,8 +227,8 @@
         "REL-CRM-TICKETS-IMPACT"
       ],
       "status": "CANDIDATE",
-      "hypothesis_confidence": 0.571,
-      "causal_confidence": 0.5424,
+      "hypothesis_confidence": 0.561,
+      "causal_confidence": 0.4208,
       "explanation_coverage": 0.5,
       "score_dimensions": {
         "temporal_precedence": 0.0,
@@ -240,7 +240,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8146707878640527,
         "source_reliability": 0.8185714285714286
       },
@@ -751,27 +751,27 @@
         "relationship_id": "REL-CRM-TICKETS-IMPACT",
         "source": "CRM:TICKET:001",
         "target": "SA5G:UPF:003",
-        "link_type": "depends-on",
-        "state": "CONFIRMED",
-        "confidence": 0.95,
+        "link_type": "impacts",
+        "state": "INFERRED",
+        "confidence": 0.75,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-N3-PE21",
         "source": "IP:VRF:N3-01",
         "target": "IP:PE:RTR-21",
-        "link_type": "depends-on",
+        "link_type": "routes-through",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-N3-UPF",
         "source": "SA5G:UPF:003",
         "target": "IP:VRF:N3-01",
-        "link_type": "depends-on",
+        "link_type": "connected-to",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "provenance": "benchmark-operational-fixture"
       }
     ],
@@ -1185,9 +1185,12 @@
     "topology_gap_detection": false,
     "evidence_requests_before_terminal": 0,
     "steps_to_first_useful_hypothesis": 2,
-    "investigation_duration_seconds": 0.0032805189839564264,
+    "investigation_duration_seconds": 0.0031944809888955206,
     "impacted_service": "5g_sa_mobile_data",
     "coincidental_evidence": [],
-    "stopping_reason": "Single evidence pass complete; further tests require requested observations"
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [],
+    "unexplained_residuals": [],
+    "model_contradictions": []
   }
 }

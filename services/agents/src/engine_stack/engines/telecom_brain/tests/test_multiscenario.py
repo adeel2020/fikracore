@@ -44,10 +44,10 @@ def test_scenario_search_filter_by_stage_domain_service():
     scenarios = client.get("/api/v1/fikracore/scenarios").json()["scenarios"]
     h4 = [s for s in scenarios if s["stage"] == "H4"]
     transport = [s for s in scenarios if "Transport" in s["domains"]]
-    sgi = [s for s in scenarios if "SGi Transport" in s["services"]]
+    mobile_data = [s for s in scenarios if any("Mobile Data" in srv for srv in s.get("services", []))]
     assert h4
     assert transport
-    assert any(s["id"] == "SCN-001" for s in sgi)
+    assert any(s["id"] == "SCN-001" for s in mobile_data)
 
 
 def test_scenario_alias_resolution():

@@ -322,7 +322,12 @@ function JourneyStepper() {
   const { theme, simulationState } = useFikraCore();
   const isLight = theme === "light";
 
-  const currentStageIndex =
+  const isRunningOrPaused =
+    simulationState?.run?.status === "RUNNING" ||
+    simulationState?.run?.status === "PAUSED" ||
+    simulationState?.run?.status === "COMPLETED";
+
+  const rawStageIndex =
     simulationState?.stages?.find((s) => s.status === "ACTIVE")?.index ??
     simulationState?.run?.stage_index ??
     (simulationState?.current_stage
@@ -333,12 +338,14 @@ function JourneyStepper() {
         )
       : -1);
 
+  const currentStageIndex = isRunningOrPaused ? rawStageIndex : -1;
+
   const isCompleted =
     simulationState?.run?.status === "COMPLETED" ||
     simulationState?.stage_status === "COMPLETED" ||
-    (currentStageIndex >= 7 && simulationState?.terminal_state != null);
+    (isRunningOrPaused && currentStageIndex >= 7 && simulationState?.terminal_state != null);
 
-  const isBlocked = simulationState?.stage_status === "BLOCKED";
+  const isBlocked = isRunningOrPaused && simulationState?.stage_status === "BLOCKED";
 
   // Dynamic progress line percent
   const progressPercent = isCompleted
@@ -476,45 +483,38 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, setActiveWorkspace]);
 
-  const lastSyncedScenarioFromUrl = useRef<string | null>(null);
+  const isInternalChangeRef = useRef<boolean>(false);
 
-  // Sync from URL only when the URL parameter actually changes (e.g. browser back/forward or initial load)
+  // Sync from URL only when the URL parameter changes externally (e.g. browser back/forward or initial load)
   useEffect(() => {
     const scenarioFromUrl = searchParams.get("scenario");
-    if (scenarioFromUrl && scenarioFromUrl !== scenarioId && scenarioFromUrl !== lastSyncedScenarioFromUrl.current) {
-      lastSyncedScenarioFromUrl.current = scenarioFromUrl;
+    if (isInternalChangeRef.current) {
+      isInternalChangeRef.current = false;
+      return;
+    }
+    if (scenarioFromUrl && scenarioFromUrl !== scenarioId) {
       selectScenario(scenarioFromUrl);
     }
   }, [searchParams, scenarioId, selectScenario]);
-
-  // Synchronize URL when scenarioId changes internally (e.g. user clicked a card in library or dropdown)
-  useEffect(() => {
-    if (!scenarioId) return;
-    const currentParam = searchParams.get("scenario");
-    if (currentParam !== scenarioId) {
-      lastSyncedScenarioFromUrl.current = scenarioId;
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("scenario", scenarioId);
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
-    }
-  }, [scenarioId, pathname, searchParams, router]);
 
   const activeWorkspace = (pathname.split("/")[2] || "investigate") as Workspace;
 
   const displayScenarios = mounted ? scenarioRegistry : DEFAULT_SCENARIO_REGISTRY;
 
-  const activeScenarioEntry = displayScenarios.find((s) => s.id === scenarioId) || displayScenarios[0] || {
-    id: "DEMO-001",
-    display_name: "Transport-Induced Mobile Data Degradation",
-    description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
-    stage: "H1",
-    concept: "Understand",
-    domains: ["Transport", "RAN", "Mobile Core"],
-    services: ["5G SA Mobile Data"],
-  };
+  const activeScenarioEntry =
+    displayScenarios.find((s) => s.id === scenarioId || s.aliases?.includes(scenarioId || "")) ||
+    displayScenarios[0] || {
+      id: "SCN-001",
+      display_name: "SGi Throughput Degradation & MTU Blackhole",
+      description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
+      stage: "H1",
+      concept: "Understand",
+      domains: ["Transport", "RAN", "Mobile Core"],
+      services: ["5G SA Mobile Data"],
+    };
 
   const handleScenarioChange = (newId: string) => {
-    lastSyncedScenarioFromUrl.current = newId;
+    isInternalChangeRef.current = true;
     selectScenario(newId);
     const params = new URLSearchParams(searchParams.toString());
     params.set("scenario", newId);
@@ -526,7 +526,7 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn(
-        "relative flex flex-col h-full overflow-hidden font-sans select-none transition-colors duration-200",
+        "relative flex flex-col h-full overflow-hidden font-sans transition-colors duration-200",
         isLight ? "bg-slate-100 text-slate-900 light-theme" : "bg-[#050b18] text-slate-100"
       )}
     >
@@ -668,38 +668,99 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
             <Cpu className="h-5 w-5" />
           </div>
           <div>
-            <div className="flex items-center gap-1.5">
-              <span className={cn("text-[10px] font-mono uppercase tracking-wider", isLight ? "text-slate-500" : "text-slate-400")}>Scenario</span>
-              <div className="relative flex items-center">
+            <div className="flex items-center gap-2">
+              <span className={cn("text-[10px] font-mono uppercase tracking-wider font-semibold", isLight ? "text-slate-500" : "text-slate-400")}>
+                Scenario
+              </span>
+              <div
+                className={cn(
+                  "relative flex items-center rounded-lg border px-2.5 py-1 transition-all duration-150 shadow-sm",
+                  isLight
+                    ? "bg-slate-50 border-slate-300 hover:border-cyan-500 hover:bg-white text-slate-900"
+                    : "bg-[#09152b] border-cyan-500/30 hover:border-cyan-400 hover:bg-[#0c1c38] text-white"
+                )}
+              >
                 <select
                   suppressHydrationWarning
-                  value={scenarioId || "DEMO-001"}
+                  value={(() => {
+                    const match = displayScenarios.find(
+                      (s) => s.id === scenarioId || s.aliases?.includes(scenarioId || "")
+                    );
+                    return match ? match.id : scenarioId || "SCN-001";
+                  })()}
                   onChange={(e) => handleScenarioChange(e.target.value)}
-                  className={cn(
-                    "bg-transparent text-xs font-bold cursor-pointer focus:outline-none pr-4 appearance-none",
-                    isLight ? "text-slate-900" : "text-white"
-                  )}
+                  className="bg-transparent text-xs font-bold cursor-pointer focus:outline-none pr-6 appearance-none max-w-[420px] truncate"
                 >
                   {displayScenarios.length > 0 ? (
-                    displayScenarios.map((sc) => (
-                      <option
-                        key={sc.id}
-                        value={sc.id}
-                        className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}
-                      >
-                        {sc.id} &lt; {sc.display_name}
-                      </option>
-                    ))
+                    <>
+                      <optgroup label="Featured Scenarios (H1–H4 Workspaces)" className="bg-slate-900 text-cyan-300 font-bold">
+                        {displayScenarios
+                          .filter((s) => ["SCN-001", "DEMO-001", "TWIN-INC-001", "H2-GAP-001", "TWIN-GAP-001", "H3-LRN-001", "TWIN-LRN-001", "H4-WI-001", "TWIN-WIF-001"].includes(s.id))
+                          .map((sc) => (
+                            <option
+                              key={`feat-${sc.id}`}
+                              value={sc.id}
+                              className={isLight ? "bg-white text-slate-900 font-bold" : "bg-slate-900 text-cyan-300 font-bold"}
+                            >
+                              [{sc.concept || sc.stage}] {sc.id} · {sc.display_name}
+                            </option>
+                          ))}
+                      </optgroup>
+                      {displayScenarios.some((s) => (s.stage === "H1" || s.concept === "Understand") && !["SCN-001", "DEMO-001", "TWIN-INC-001"].includes(s.id)) && (
+                        <optgroup label="Understand (H1) · Incidents & RCA" className="bg-slate-900 text-slate-300 font-bold">
+                          {displayScenarios
+                            .filter((s) => (s.stage === "H1" || s.concept === "Understand") && !["SCN-001", "DEMO-001", "TWIN-INC-001"].includes(s.id))
+                            .map((sc) => (
+                              <option key={`h1-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                                {sc.id} · {sc.display_name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      )}
+                      {displayScenarios.some((s) => (s.stage === "H2" || s.concept === "Discover") && !["H2-GAP-001", "TWIN-GAP-001"].includes(s.id)) && (
+                        <optgroup label="Discover (H2) · Knowledge Gaps" className="bg-slate-900 text-slate-300 font-bold">
+                          {displayScenarios
+                            .filter((s) => (s.stage === "H2" || s.concept === "Discover") && !["H2-GAP-001", "TWIN-GAP-001"].includes(s.id))
+                            .map((sc) => (
+                              <option key={`h2-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                                {sc.id} · {sc.display_name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      )}
+                      {displayScenarios.some((s) => (s.stage === "H3" || s.concept === "Learn") && !["H3-LRN-001", "TWIN-LRN-001"].includes(s.id)) && (
+                        <optgroup label="Learn (H3) · Learning Units" className="bg-slate-900 text-slate-300 font-bold">
+                          {displayScenarios
+                            .filter((s) => (s.stage === "H3" || s.concept === "Learn") && !["H3-LRN-001", "TWIN-LRN-001"].includes(s.id))
+                            .map((sc) => (
+                              <option key={`h3-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                                {sc.id} · {sc.display_name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      )}
+                      {displayScenarios.some((s) => (s.stage === "H4" || s.concept === "Anticipate") && !["H4-WI-001", "TWIN-WIF-001"].includes(s.id)) && (
+                        <optgroup label="Anticipate (H4) · Resilience & What-If" className="bg-slate-900 text-slate-300 font-bold">
+                          {displayScenarios
+                            .filter((s) => (s.stage === "H4" || s.concept === "Anticipate") && !["H4-WI-001", "TWIN-WIF-001"].includes(s.id))
+                            .map((sc) => (
+                              <option key={`h4-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                                {sc.id} · {sc.display_name}
+                              </option>
+                            ))}
+                        </optgroup>
+                      )}
+                    </>
                   ) : (
-                    <option value="DEMO-001" className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                      DEMO-001 &lt; Transport-Induced Mobile Data Degradation
+                    <option value="SCN-001" className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
+                      SCN-001 · SGi Throughput Degradation & MTU Blackhole
                     </option>
                   )}
                 </select>
-                <ChevronDown className="h-3 w-3 text-slate-400 pointer-events-none -ml-3.5" />
+                <ChevronDown className="absolute right-2.5 h-3.5 w-3.5 text-cyan-400 pointer-events-none" />
               </div>
             </div>
-            <p className={cn("text-[10px] leading-tight", isLight ? "text-slate-600" : "text-slate-400")}>
+            <p className={cn("text-[10px] leading-tight mt-0.5", isLight ? "text-slate-600" : "text-slate-400")}>
               {activeScenarioEntry.description || "Enterprise data degradation across multiple services"}
             </p>
           </div>
@@ -710,11 +771,18 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
           <div>
             <div className={cn("flex items-center gap-1 text-xs font-mono font-semibold", isLight ? "text-slate-900" : "text-white")}>
               <span className={isLight ? "text-slate-500 font-normal" : "text-slate-400 font-normal"}>Run</span>
-              <span>{runId || "RUN-20260913-103431"}</span>
+              <span>{simulationState?.run?.run_id || (simulationState as any)?.run_id || runId || "RUN-LIVE"}</span>
               <span className={cn("px-1 py-0.2 rounded text-[9px] border", isLight ? "bg-slate-100 text-slate-700 border-slate-300" : "bg-slate-800 text-slate-400 border-slate-700")}>B</span>
             </div>
             <p className={cn("text-[10px] font-mono", isLight ? "text-slate-500" : "text-slate-400")}>
-              Started 13 Sep 2026, 08:54:50
+              {(() => {
+                const started = simulationState?.run?.started_at || (simulationState as any)?.started_at;
+                if (!started) return "Active Run Context";
+                const d = new Date(started);
+                return isNaN(d.getTime())
+                  ? `Started ${started}`
+                  : `Started ${d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" })}, ${d.toLocaleTimeString("en-GB", { hour12: false })}`;
+              })()}
             </p>
           </div>
         </div>

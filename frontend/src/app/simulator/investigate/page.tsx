@@ -24,6 +24,7 @@ import {
   Cpu,
   Database,
   Eye,
+  ExternalLink,
   FileCode,
   FileText,
   GitBranch,
@@ -696,13 +697,15 @@ export function buildEvidenceItems(
   const stateObj = simulationState as Record<string, unknown> | null | undefined;
   const isStopped =
     stateObj?.run != null && (stateObj.run as { status?: string }).status === "STOPPED";
+  const isReady =
+    stateObj?.run != null && (stateObj.run as { status?: string }).status === "READY";
   const isScenarioMismatch = Boolean(
     currentScenarioId &&
     stateObj?.scenario_id &&
     stateObj.scenario_id !== currentScenarioId
   );
   const hasNoRun = stateObj != null && "run" in stateObj && stateObj.run === null;
-  const isInactive = !stateObj || isStopped || isScenarioMismatch || hasNoRun;
+  const isInactive = !stateObj || isStopped || isReady || isScenarioMismatch || hasNoRun;
 
   const reasoningMap = stateObj?.reasoningMap as Record<string, unknown> | null | undefined;
   const mapEvidence = reasoningMap?.evidence as Record<string, unknown>[] | undefined;
@@ -843,6 +846,9 @@ export function buildPathwayItems(
   const isStopped =
     simulationState?.run != null &&
     (simulationState.run as { status?: string }).status === "STOPPED";
+  const isReady =
+    simulationState?.run != null &&
+    (simulationState.run as { status?: string }).status === "READY";
   const isScenarioMismatch = Boolean(
     currentScenarioId &&
     simulationState?.scenario_id &&
@@ -850,7 +856,7 @@ export function buildPathwayItems(
   );
   const hasNoRun =
     simulationState != null && "run" in simulationState && simulationState.run === null;
-  const isInactive = !simulationState || isStopped || isScenarioMismatch || hasNoRun;
+  const isInactive = !simulationState || isStopped || isReady || isScenarioMismatch || hasNoRun;
 
   const backendPathways = !isInactive ? simulationState?.reasoningMap?.reasoning_pathways || [] : [];
 
@@ -991,13 +997,15 @@ export function buildHypothesisItems(
   const stateObj = simulationState as Record<string, unknown> | null | undefined;
   const isStopped =
     stateObj?.run != null && (stateObj.run as { status?: string }).status === "STOPPED";
+  const isReady =
+    stateObj?.run != null && (stateObj.run as { status?: string }).status === "READY";
   const isScenarioMismatch = Boolean(
     currentScenarioId &&
     stateObj?.scenario_id &&
     stateObj.scenario_id !== currentScenarioId
   );
   const hasNoRun = stateObj != null && "run" in stateObj && stateObj.run === null;
-  const isInactive = !stateObj || isStopped || isScenarioMismatch || hasNoRun;
+  const isInactive = !stateObj || isStopped || isReady || isScenarioMismatch || hasNoRun;
 
   const reasoningMap = stateObj?.reasoningMap as Record<string, unknown> | null | undefined;
   const mapHypotheses = reasoningMap?.hypotheses as Record<string, unknown>[] | undefined;
@@ -1008,25 +1016,39 @@ export function buildHypothesisItems(
       ? mapHypotheses
       : stateHypotheses || []
     : [];
+
+  const rankLabels = [
+    "Rank #1 · Leading Root Cause Candidate",
+    "Rank #2 · Competing Candidate",
+    "Rank #3 · Plausible Candidate",
+    "Rank #4 · Rejected Candidate",
+  ];
+
   if (!backendHypotheses?.length) {
-    return HYPOTHESES_LIST.map((hyp, idx) => ({
-      ...hyp,
-      name: `Awaiting backend hypothesis ${idx + 1}`,
+    return [0, 1, 2, 3].map((idx) => ({
+      id: `HYP-00${idx + 1}`,
+      code: `Rank #${idx + 1}`,
+      name: `Awaiting Twin Analysis Candidate #${idx + 1}`,
       confidence: null,
       delta: "Unranked",
-      status: "CANDIDATE",
+      deltaIsPos: true,
+      status: "CANDIDATE" as const,
+      color: HYPOTHESIS_COLORS[idx] || "#60a5fa",
+      progressColor: HYPOTHESIS_PROGRESS[idx] || "bg-blue-400",
     }));
   }
 
   const mapped = backendHypotheses.slice(0, 4).map((hyp, idx) => {
     const confidence = typeof hyp.confidence === "number" ? hyp.confidence : null;
-    const displayId = String(hyp.display_id || `H${idx + 1}`);
+    const displayId = String(hyp.display_id || `Rank #${idx + 1}`);
     const status = statusToHypothesisStatus(String(hyp.state || hyp.status || ""), confidence, idx);
     const delta = String(hyp.delta || hyp.last_delta || (confidence === null ? "Unranked" : ""));
+    const hypName = String(hyp.display_name || hyp.label || `Candidate Hypothesis ${idx + 1}`);
+
     return {
       id: String(hyp.hypothesis_id || hyp.id || displayId),
       code: displayId,
-      name: String(hyp.display_name || hyp.label || HYPOTHESES_LIST[idx]?.name || `Hypothesis ${idx + 1}`),
+      name: hypName,
       confidence,
       delta: delta || "Backend scored",
       deltaIsPos: !delta.trim().startsWith("-"),
@@ -1039,11 +1061,15 @@ export function buildHypothesisItems(
   while (mapped.length < 4) {
     const idx = mapped.length;
     mapped.push({
-      ...HYPOTHESES_LIST[idx],
-      name: `Awaiting backend hypothesis ${idx + 1}`,
+      id: `HYP-00${idx + 1}`,
+      code: `Rank #${idx + 1}`,
+      name: `Awaiting Twin Candidate #${idx + 1}`,
       confidence: null,
       delta: "Unranked",
-      status: "CANDIDATE",
+      deltaIsPos: true,
+      status: "CANDIDATE" as const,
+      color: HYPOTHESIS_COLORS[idx] || "#60a5fa",
+      progressColor: HYPOTHESIS_PROGRESS[idx] || "bg-blue-400",
     });
   }
   return mapped;
@@ -2293,11 +2319,12 @@ function NeuralReasoningCanvas({
 
   // Backend-driven reasoning mode driving the 3 concentric HUD rings and 3D orb
   const reasoningMode: ReasoningCoreHUDMode = useMemo(() => {
-    // 1. Guard: When no run exists for the active scenario, or when stopped, orb must be completely IDLE
+    // 1. Guard: When no run exists for the active scenario, or when stopped/ready, orb must be completely IDLE
     const hasActiveRun =
       simulationState?.run != null &&
       simulationState.scenario_id === scenarioId &&
-      simulationState.run.status !== "STOPPED";
+      simulationState.run.status !== "STOPPED" &&
+      simulationState.run.status !== "READY";
 
     if (!hasActiveRun) {
       return "IDLE";
@@ -2443,7 +2470,8 @@ function NeuralReasoningCanvas({
     const hasActiveRun =
       simulationState?.run != null &&
       simulationState.scenario_id === scenarioId &&
-      simulationState.run.status !== "STOPPED";
+      simulationState.run.status !== "STOPPED" &&
+      simulationState.run.status !== "READY";
 
     if (!hasActiveRun) {
       return {
@@ -4790,6 +4818,7 @@ export default function InvestigatePage() {
     setZakiSelectedContext(undefined);
   }
   const [activeViewMode, setActiveViewMode] = useState<"Live" | "Replay">("Live");
+  const [showKnowledgeGraphModal, setShowKnowledgeGraphModal] = useState<boolean>(false);
   const [isZakiOpen, setIsZakiOpen] = useState(true);
   const [zakiInput, setZakiInput] = useState("");
   const [isZakiThinking, setIsZakiThinking] = useState(false);
@@ -5145,11 +5174,11 @@ export default function InvestigatePage() {
 
   const extractZakiReply = (data: ZakiChatApiResponse): string => {
     return (
+      data.answer ||
+      data.response?.response ||
       data.response?.copilot?.message ||
       data.copilot?.message ||
       data.conversation?.reply ||
-      data.response?.response ||
-      data.answer ||
       "I am online, but I could not parse the latest response envelope."
     );
   };
@@ -5260,14 +5289,14 @@ export default function InvestigatePage() {
         {
           id: storyId,
           sender: "zaki",
-          text: "Run the simulation first. Once the selected scenario has an active execution state, I can provide the Storyteller narrative for that scenario context.",
+          text: "Run the simulation first. Once the selected scenario has an active execution state, I can provide the Curated Incident Story for that scenario context.",
         },
       ]);
       return;
     }
     setIsZakiThinking(true);
     try {
-      const query = `Show the Storyteller narrative for the selected scenario context: ${zakiSelectedContext?.display_name || scenarioId || "current scenario"}.`;
+      const query = `Generate a curated incident story for this simulation run. Selected context: ${zakiSelectedContext?.display_name || scenarioId || "current scenario"}.`;
       const res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -5278,21 +5307,20 @@ export default function InvestigatePage() {
       }
       const data = (await res.json()) as ZakiChatApiResponse;
       const storyteller = data.zaki_v2?.storyteller || null;
-      if (!storyteller) {
-        throw new Error("No Storyteller narrative is mapped to this selected scenario context yet.");
-      }
+      const reply = extractZakiReply(data);
       setZakiMessages((prev) => [
         ...(prev.length ? prev : [{ id: "zaki-initial", sender: "zaki" as const, text: zakiSummary }]),
         {
           id: storyId,
           sender: "zaki",
-          text: storyteller.answer || "Storyteller narrative",
+          text: reply || storyteller?.answer || "Curated Incident Story",
           storyteller,
           storyOnly: true,
+          zaki_v2: data.zaki_v2,
         },
       ]);
     } catch (error) {
-      const fallback = error instanceof Error ? error.message : "Storyteller narrative is unavailable right now.";
+      const fallback = error instanceof Error ? error.message : "Curated Incident Story is unavailable right now.";
       setZakiMessages((prev) => [
         ...(prev.length ? prev : [{ id: "zaki-initial", sender: "zaki" as const, text: zakiSummary }]),
         {
@@ -5624,15 +5652,21 @@ export default function InvestigatePage() {
                   <Maximize2 className="h-3.5 w-3.5" />
                 </button>
 
-                <div className={cn(
-                  "flex items-center gap-1 border rounded-lg px-2 py-1 text-[10px] font-mono cursor-pointer transition-colors",
-                  isLight
-                    ? "border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900"
-                    : "border-slate-800 bg-[#09152b] text-slate-300 hover:text-white"
-                )}>
-                  <span>Investigation View</span>
-                  <ChevronDown className="h-3 w-3 text-slate-400" />
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowKnowledgeGraphModal(true)}
+                  className={cn(
+                    "flex items-center gap-1.5 border rounded-lg px-2.5 py-1 text-[10.5px] font-mono font-bold cursor-pointer transition-all shadow-sm group",
+                    isLight
+                      ? "border-cyan-400/80 bg-cyan-50 text-cyan-900 hover:bg-cyan-100 hover:border-cyan-500 shadow-cyan-500/10"
+                      : "border-cyan-500/40 bg-gradient-to-r from-cyan-950/80 to-blue-950/80 text-cyan-300 hover:border-cyan-400 hover:text-white hover:shadow-[0_0_15px_rgba(6,182,212,0.4)]"
+                  )}
+                  title="Project Digital Twin simulation into the Telecom Knowledge Graph topology"
+                >
+                  <Network className="h-3.5 w-3.5 text-cyan-400 group-hover:scale-110 transition-transform shrink-0" />
+                  <span>Digital Twin Projection</span>
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-cyan-400 animate-ping ml-0.5" />
+                </button>
               </div>
             </div>
 
@@ -6058,11 +6092,11 @@ export default function InvestigatePage() {
       </div>
 
       {/* Detached Zaki Copilot */}
-      <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3 pointer-events-none">
+      <div className="fixed top-3 bottom-3 right-4 z-50 flex flex-col items-end pointer-events-none justify-end">
         {isZakiOpen && (
           <div
             className={cn(
-              "pointer-events-auto flex h-[min(540px,calc(100vh-6rem))] w-[min(410px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl backdrop-blur-xl border border-slate-700/60 shadow-2xl",
+              "pointer-events-auto flex h-full max-h-[calc(100vh-1.5rem)] w-[min(430px,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl backdrop-blur-xl border border-slate-700/60 shadow-2xl",
               glassSurfaceStatic
             )}
           >
@@ -6250,34 +6284,27 @@ export default function InvestigatePage() {
                           <p className="mt-0.5">{message.contextExplanation.nextMove}</p>
                         </div>
                       </div>
-                    ) : message.zaki_v2?.sections?.length || (message.storyOnly && message.storyteller) ? (
+                    ) : (
                       <div className="w-full space-y-3">
-                        {message.zaki_v2?.sections?.length ? (
-                          <ZakiResponseSections response={message.zaki_v2} />
-                        ) : null}
+                        <div
+                          className={cn(
+                            "rounded-2xl px-4 py-3 text-sm w-full",
+                            isAssistant
+                              ? `${glassSurfaceStatic} text-neutral-100`
+                              : "bg-cyan-500/20 text-white whitespace-pre-wrap"
+                          )}
+                        >
+                          {isAssistant ? renderStyledMessage(message.text, isLight) : message.text}
+                        </div>
                         {message.storyOnly && message.storyteller ? (
                           <div className={cn("rounded-2xl px-4 py-3 text-sm text-neutral-100", glassSurfaceStatic)}>
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2 text-xs font-semibold text-cyan-200">
-                                <Sparkles className="h-4 w-4 text-fuchsia-300" />
-                                <span>Storyteller view</span>
-                              </div>
-                              {message.storyteller.answer ? renderStyledMessage(message.storyteller.answer, isLight) : null}
+                            <div className="flex items-center gap-2 text-xs font-semibold text-cyan-200 mb-2">
+                              <Sparkles className="h-4 w-4 text-fuchsia-300" />
+                              <span>Storyteller Breakdown</span>
                             </div>
                             <StorytellerVisualExplanation payload={message.storyteller} />
                           </div>
                         ) : null}
-                      </div>
-                    ) : (
-                      <div
-                        className={cn(
-                          "rounded-2xl px-4 py-3 text-sm w-full",
-                          isAssistant
-                            ? `${glassSurfaceStatic} text-neutral-100`
-                            : "bg-cyan-500/20 text-white whitespace-pre-wrap"
-                        )}
-                      >
-                        {isAssistant ? renderStyledMessage(message.text, isLight) : message.text}
                       </div>
                     )}
                     </div>
@@ -6371,6 +6398,170 @@ export default function InvestigatePage() {
             selectedContextName={zakiSelectedContext?.display_name}
           />
         )}
+      </div>
+
+      {showKnowledgeGraphModal && (
+        <KnowledgeGraphProjectionModal
+          scenarioId={scenarioId}
+          isLight={isLight}
+          onClose={() => setShowKnowledgeGraphModal(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+// ─── Twin Projection Modal ───────────────────────────────────────────────────
+
+function KnowledgeGraphProjectionModal({
+  scenarioId,
+  isLight,
+  onClose,
+}: {
+  scenarioId?: string | null;
+  isLight: boolean;
+  onClose: () => void;
+}) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md animate-in fade-in duration-200">
+      <div
+        className={cn(
+          "relative w-full max-w-7xl h-[88vh] rounded-2xl border shadow-2xl overflow-hidden flex flex-col my-auto",
+          isLight
+            ? "bg-white border-cyan-300 text-slate-900 shadow-cyan-500/20"
+            : "bg-[#060e1d] border-cyan-500/40 text-white shadow-[0_0_60px_rgba(6,182,212,0.3)]"
+        )}
+      >
+        {/* Header */}
+        <div
+          className={cn(
+            "flex items-center justify-between px-5 py-3.5 border-b shrink-0",
+            isLight ? "bg-slate-50 border-slate-200" : "bg-[#08152b] border-cyan-500/20"
+          )}
+        >
+          <div className="flex items-center gap-3">
+            <span
+              className={cn(
+                "flex h-9 w-9 items-center justify-center rounded-xl border shadow-inner",
+                isLight
+                  ? "bg-cyan-100 border-cyan-300 text-cyan-800"
+                  : "bg-cyan-500/20 border-cyan-500/40 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+              )}
+            >
+              <Network className="h-5 w-5 animate-pulse" />
+            </span>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-sm font-black tracking-wide uppercase font-mono">
+                  Telecom Digital Twin • Topology Projection
+                </h3>
+                <span
+                  className={cn(
+                    "text-[9.5px] font-mono px-2 py-0.5 rounded-full font-bold uppercase border",
+                    isLight
+                      ? "bg-cyan-50 text-cyan-800 border-cyan-300"
+                      : "bg-cyan-950/80 text-cyan-300 border-cyan-500/40"
+                  )}
+                >
+                  Scenario: {scenarioId || "SCN-001"}
+                </span>
+              </div>
+              <p className={cn("text-[11px] font-mono mt-0.5", isLight ? "text-slate-600" : "text-slate-400")}>
+                Live Simulation State Ingested into 3GPP/ETSI Knowledge Graph & Causal Dependency Map
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <a
+              href={`/telecom-knowledge-graph.html?scenario=${encodeURIComponent(scenarioId || "SCN-001")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer",
+                isLight
+                  ? "bg-cyan-50 border-cyan-300 text-cyan-800 hover:bg-cyan-100"
+                  : "bg-cyan-500/15 border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/25 hover:text-white"
+              )}
+              title="Open full interactive knowledge graph explorer in a new browser tab"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>Full Tab Explorer</span>
+            </a>
+
+            <button
+              type="button"
+              onClick={() => {
+                onClose();
+                router.push(`/simulator/knowledge?scenario=${scenarioId || "SCN-001"}`);
+              }}
+              className={cn(
+                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer",
+                isLight
+                  ? "bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200"
+                  : "bg-slate-800 border-slate-700 text-slate-200 hover:bg-slate-700 hover:text-white"
+              )}
+              title="Switch to the full Knowledge Core investigation view"
+            >
+              <Cpu className="h-3.5 w-3.5 text-purple-400" />
+              <span>Knowledge Workspace</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 rounded-lg border border-slate-700/60 hover:bg-slate-800 text-slate-400 hover:text-white transition-colors cursor-pointer ml-1"
+              aria-label="Close Digital Twin Projection"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Embedded Interactive Viewer */}
+        <div className="flex-1 min-h-0 relative bg-[#060c18] overflow-hidden">
+          <iframe
+            src={`/telecom-knowledge-graph.html?scenario=${encodeURIComponent(scenarioId || "SCN-001")}`}
+            title="Telecom Knowledge Graph"
+            className="w-full h-full border-0"
+          />
+        </div>
+
+        {/* Footer Statistics */}
+        <div
+          className={cn(
+            "px-5 py-2 border-t flex items-center justify-between text-[10px] font-mono shrink-0",
+            isLight ? "bg-slate-50 border-slate-200 text-slate-600" : "bg-[#08152b] border-cyan-500/20 text-slate-400"
+          )}
+        >
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
+              <strong className={isLight ? "text-slate-800" : "text-slate-200"}>11 Domains</strong>
+            </span>
+            <span>•</span>
+            <span><strong className={isLight ? "text-slate-800" : "text-slate-200"}>132</strong> Topology Entities</span>
+            <span>•</span>
+            <span><strong className={isLight ? "text-slate-800" : "text-slate-200"}>190</strong> Causal Links</span>
+            <span>•</span>
+            <span className="text-cyan-400 font-semibold">3GPP Release 17 / 5G SA / Open-RAN Topology</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <kbd className="px-1.5 py-0.5 rounded bg-black/40 border border-white/10 text-[9px]">ESC</kbd>
+            <span>to close</span>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-16T10:18:43.407820+00:00",
-  "duration_seconds": 0.635,
+  "timestamp": "2026-09-18T19:29:46.248610+00:00",
+  "duration_seconds": 6.446,
   "endpoint": "http://localhost:3131/mcp",
   "decision": "LIVE_MCP_SMOKE_SUPPORTED",
   "passed_count": "16/16",
@@ -262,7 +262,7 @@
     },
     "mark_zaki_grounding": {
       "query": "Why is this service affected?",
-      "response_preview": "Investigation focus: operational explanation and telemetry correlation.\n\nDirect dependency in operational telecombrain: ...",
+      "response_preview": "Investigation focus: operational explanation and telemetry correlation.\n\n### Causal & Blast Radius Analysis: Service Imp...",
       "grounded": true
     }
   }

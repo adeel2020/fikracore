@@ -11,7 +11,23 @@ import json
 import logging
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
-from pydantic import BaseModel, ConfigDict, Field
+try:
+    from pydantic import ConfigDict
+except ImportError:
+    ConfigDict = dict  # type: ignore
+
+from pydantic import BaseModel, Field
+
+if not hasattr(BaseModel, "model_dump"):
+    BaseModel.model_dump = lambda self, **kwargs: self.dict(**{k: v for k, v in kwargs.items() if k != "mode"})
+if not hasattr(BaseModel, "model_copy"):
+    BaseModel.model_copy = lambda self, **kwargs: self.copy(**kwargs)
+if not hasattr(BaseModel, "model_validate"):
+    BaseModel.model_validate = classmethod(lambda cls, obj, **kwargs: obj if isinstance(obj, cls) else cls.parse_obj(obj))
+if not hasattr(BaseModel, "model_validate_json"):
+    BaseModel.model_validate_json = classmethod(lambda cls, json_data, **kwargs: cls.parse_raw(json_data, **kwargs))
+if not hasattr(BaseModel, "model_dump_json"):
+    BaseModel.model_dump_json = lambda self, **kwargs: self.json(**kwargs)
 
 logger = logging.getLogger("fikracore.knowledge_inventory")
 
@@ -28,7 +44,6 @@ DOMAIN_CANONICAL_NAMES = {
     "ran": "RAN",
     "oss-bss": "OSS/BSS",
     "cloud-nfvi": "Cloud/NFVI",
-    "observability": "Observability / Telemetry",
 }
 
 RELATIONSHIP_HUMAN_NAMES = {
@@ -97,6 +112,9 @@ class EntityRecord(BaseModel):
     title: str
     type: str
     domain: str
+    plane: str = "topology"  # "topology", "observability", or "operations"
+    sub_cluster: Optional[str] = None
+    tmforum_layer: Optional[str] = None
     knowledge_state: str = KnowledgeState.CONFIRMED
     updated_at: Optional[str] = None
     in_degree: int = 0
@@ -115,6 +133,7 @@ class LinkRecord(BaseModel):
     source_domain: str
     target_domain: str
     is_cross_domain: bool = False
+    is_telemetry_link: bool = False
 
 
 class KnowledgeInventorySummary(BaseModel):
@@ -131,6 +150,8 @@ class KnowledgeInventorySummary(BaseModel):
     tickets_count: int = 0
     evidence_count: int = 0
     hypotheses_count: int = 0
+    telemetry_entities_count: int = 0
+    telemetry_links_count: int = 0
     orphans_count: int = 0
     unresolved_aliases_count: int = 0
     stale_knowledge_count: int = 0
@@ -194,16 +215,20 @@ class KnowledgeInventoryCollector:
     def __init__(
         self,
         provider: Any = None,
+        url: str | None = None,
+        token: str | None = None,
         stale_threshold_days: int = 30,
     ):
         self.provider = provider
+        self.url = url
+        self.token = token
         self.stale_threshold_days = stale_threshold_days
 
     def _ensure_provider(self):
         if self.provider is not None:
             return
         from .knowledge import GbrainTelecomBrainProvider
-        self.provider = GbrainTelecomBrainProvider()
+        self.provider = GbrainTelecomBrainProvider(url=self.url, token=self.token)
 
     def collect(self) -> KnowledgeInventoryResult:
         """Executes full live knowledge collection across all pages and links."""
@@ -251,7 +276,20 @@ class KnowledgeInventoryCollector:
                     unique_links_set.add(edge_key)
                     src_dom = self._detect_domain(from_slug)
                     tgt_dom = self._detect_domain(to_slug)
-                    is_cross = (src_dom != tgt_dom and src_dom != "Other" and tgt_dom != "Other")
+                    is_telemetry_link = (
+                        self._is_telemetry(from_slug)
+                        or self._is_telemetry(to_slug)
+                        or link_type.lower() in (
+                            "monitored_by", "monitored-by", "observed_on", "observed-on",
+                            "measures", "detected_by", "detected-by", "supported-by", "supported_by"
+                        )
+                    )
+                    is_cross = (
+                        not is_telemetry_link
+                        and src_dom != tgt_dom
+                        and src_dom not in ("Other", "Unknown", "Cross-Domain Operations")
+                        and tgt_dom not in ("Other", "Unknown", "Cross-Domain Operations")
+                    )
                     h_name = RELATIONSHIP_HUMAN_NAMES.get(link_type.lower(), link_type.replace("_", " ").title())
 
                     links_list.append(
@@ -263,6 +301,7 @@ class KnowledgeInventoryCollector:
                             source_domain=src_dom,
                             target_domain=tgt_dom,
                             is_cross_domain=is_cross,
+                            is_telemetry_link=is_telemetry_link,
                         )
                     )
                     out_degree[from_slug] = out_degree.get(from_slug, 0) + 1
@@ -289,6 +328,7 @@ class KnowledgeInventoryCollector:
 
         stale_count = 0
         orphans_count = 0
+        telemetry_entities_count = 0
         unresolved_aliases: List[KnowledgeGap] = []
         alias_pages: List[Dict[str, Any]] = []
 
@@ -299,7 +339,18 @@ class KnowledgeInventoryCollector:
             p_type = page.get("type", "unknown")
             page_types[p_type] = page_types.get(p_type, 0) + 1
 
-            dom = self._detect_domain(slug)
+            dom = self._detect_domain(slug, p_type)
+            is_telem = self._is_telemetry(slug, p_type)
+            if is_telem:
+                telemetry_entities_count += 1
+                plane = "observability"
+            elif p_type in ("incident", "correlation-cluster") or dom == "Cross-Domain Operations":
+                plane = "operations"
+            else:
+                plane = "topology"
+
+            sub_cluster, tmforum_layer = self._detect_sub_cluster(slug, p_type, dom)
+
             if dom not in domain_pages:
                 domain_pages[dom] = []
                 domain_services[dom] = []
@@ -318,8 +369,8 @@ class KnowledgeInventoryCollector:
             deg_out = out_degree.get(slug, 0)
             total_deg = deg_in + deg_out
 
-            # Check orphan rule
-            is_orphan = (p_type in self.OPERATIONAL_TYPES and total_deg == 0)
+            # Check orphan rule (only for operational entities, excluded telemetry)
+            is_orphan = (p_type in self.OPERATIONAL_TYPES and not is_telem and total_deg == 0)
             if is_orphan:
                 orphans_count += 1
 
@@ -353,6 +404,9 @@ class KnowledgeInventoryCollector:
                     title=page.get("title", slug.split("/")[-1]),
                     type=p_type,
                     domain=dom,
+                    plane=plane,
+                    sub_cluster=sub_cluster,
+                    tmforum_layer=tmforum_layer,
                     knowledge_state=k_state,
                     updated_at=updated_at_str,
                     in_degree=deg_in,
@@ -376,13 +430,13 @@ class KnowledgeInventoryCollector:
                     )
                 )
 
-        # 6. Domain Summary Objects
+        # 6. Domain Summary Objects (Pure Telecom Operational Domains)
         domains_summary: Dict[str, Dict[str, Any]] = {}
         for dom, d_pages in domain_pages.items():
             nfs = domain_nfs.get(dom, [])
             svcs = domain_services.get(dom, [])
             incidents = [p for p in d_pages if p.get("type") == "incident"]
-            evidence = [p for p in d_pages if p.get("type") == "evidence"]
+            evidence = [p for p in d_pages if self._is_telemetry(p.get("slug", ""), p.get("type", ""))]
             hypotheses = [p for p in d_pages if p.get("type") == "hypothesis"]
             tickets = [p for p in d_pages if p.get("type") == "ticket-journey"]
 
@@ -432,7 +486,7 @@ class KnowledgeInventoryCollector:
                 )
 
         for dom, dom_data in domains_summary.items():
-            if dom_data["coverage_status"] == "SPARSE" and dom not in ("Other", "Observability / Telemetry"):
+            if dom_data["coverage_status"] == "SPARSE" and dom not in ("Other", "Unknown"):
                 gaps.append(
                     KnowledgeGap(
                         gap_class=GapClass.SPARSE_DOMAIN,
@@ -443,7 +497,7 @@ class KnowledgeInventoryCollector:
                     )
                 )
 
-        # 9. Cross-Domain Coverage Gaps (§24)
+        # 9. Cross-Domain Coverage Gaps (Physical / Network Interfaces Only)
         cross_domain_counts: Dict[str, int] = {}
         for l in links_list:
             if l.is_cross_domain:
@@ -454,6 +508,7 @@ class KnowledgeInventoryCollector:
             ("Mobile Core", "Transport"),
             ("Mobile Core", "OCS"),
             ("IMS", "Transport"),
+            ("Mobile Core", "RAN"),
         ]
         for src, tgt in expected_pairs:
             pair_forward = f"{src} ↔ {tgt}"
@@ -465,14 +520,15 @@ class KnowledgeInventoryCollector:
                         gap_class=GapClass.INCOMPLETE_CROSS_DOMAIN_COVERAGE,
                         severity="HIGH",
                         entity_or_domain=f"{src} ↔ {tgt}",
-                        description=f"Zero cross-domain dependency links between '{src}' and '{tgt}'.",
-                        recommendation=f"Define transport routing and inter-domain links connecting {src} functions to {tgt}.",
+                        description=f"Direct operational transport conduit missing between '{src}' and '{tgt}'.",
+                        recommendation=f"Define direct transport routing and inter-domain links connecting {src} functions to {tgt}.",
                     )
                 )
 
         # 10. Summary Object
         total_p = len(pages)
         total_l = len(links_list)
+        telem_links_cnt = sum(1 for l in links_list if l.is_telemetry_link)
         summary = KnowledgeInventorySummary(
             brain="telecombrain",
             schema_identity=str(schema_identity) if isinstance(schema_identity, str) else "mobile-core@0.1.0+2eea5e14",
@@ -485,6 +541,8 @@ class KnowledgeInventoryCollector:
             tickets_count=page_types.get("ticket-journey", 0),
             evidence_count=page_types.get("evidence", 0),
             hypotheses_count=page_types.get("hypothesis", 0),
+            telemetry_entities_count=telemetry_entities_count,
+            telemetry_links_count=telem_links_cnt,
             orphans_count=orphans_count,
             unresolved_aliases_count=len(unresolved_aliases),
             stale_knowledge_count=stale_count,
@@ -539,29 +597,203 @@ class KnowledgeInventoryCollector:
         return all_pages
 
     @staticmethod
-    def _detect_domain(slug: str) -> str:
-        """Detects high-level telecom domain from canonical slug path or prefix."""
+    def _is_telemetry(slug: str, p_type: str = "") -> bool:
+        """Identifies whether an entity belongs to the Telemetry & Observability Layer."""
+        s = slug.lower()
+        return (
+            p_type in ("evidence", "kpi", "kpi-event", "observation", "query-asset")
+            or "grafana" in s
+            or "telemetry" in s
+            or "loki" in s
+            or "prom" in s
+            or "tempo" in s
+            or "alert" in s
+            or "alarm" in s
+        )
+
+    @staticmethod
+    def _detect_domain(slug: str, p_type: str = "") -> str:
+        """Detects high-level telecom operational domain from canonical slug path or prefix."""
         parts = slug.lower().split("/")
         if not parts:
             return "Other"
 
+        # 0. Dedicated isolation for Incidents and Correlation Clusters (Cross-Domain Operations)
+        if p_type in ("incident", "correlation-cluster") or "incidents" in parts or "correlation" in parts:
+            return "Cross-Domain Operations"
+
+        # 1. Explicit prefix resolution for operational entities (e.g. SA5G:UPF:003, TX:FIBER:FR-07)
+        prefix_map = {
+            "SA5G": "Mobile Core", "EPC": "Mobile Core", "PS3G": "Mobile Core", "CS": "Mobile Core",
+            "RAN": "RAN", "NSA": "RAN",
+            "TX": "Transport", "IP": "Transport", "MPLS": "Transport", "GPON": "Transport",
+            "IMSM": "IMS", "IMSF": "IMS",
+            "CHG": "OCS", "IN": "OCS",
+            "CRM": "OSS/BSS", "BSS": "OSS/BSS", "PROV": "OSS/BSS", "OSS": "OSS/BSS", "VAS": "OSS/BSS",
+            "INFRA": "Cloud/NFVI",
+            "EXT": "Cross-Domain Operations", "REGION": "Cross-Domain Operations", "SITE": "Cross-Domain Operations"
+        }
+        raw_prefix = slug.split(":")[0].split("-")[0].upper()
+        if raw_prefix in prefix_map:
+            return prefix_map[raw_prefix]
+
+        # 2. Explicit domain path components
         if "mobile-core" in parts:
             return "Mobile Core"
         if "transport" in parts:
             return "Transport"
         if "ims" in parts:
             return "IMS"
-        if "ocs" in parts:
+        if "ocs" in parts or "charging" in parts:
             return "OCS"
         if "ran" in parts:
             return "RAN"
         if "oss-bss" in parts or "oss" in parts or "bss" in parts:
             return "OSS/BSS"
-        if "grafana" in parts or "observability" in parts or "telemetry" in parts:
-            return "Observability / Telemetry"
+        if "cloud-nfvi" in parts or "nfvi" in parts:
+            return "Cloud/NFVI"
 
         first = parts[0]
         if first in DOMAIN_CANONICAL_NAMES:
             return DOMAIN_CANONICAL_NAMES[first]
 
+        # 3. Comprehensive heuristic keyword domain resolution
+        s = slug.lower()
+        if any(k in s for k in ("mobile-core", "attach", "mme", "pgw", "sgw", "upf", "amf", "smf", "sgi", "gilan", "cssr", "core", "ue-registration", "hss", "5g_sa", "5g_nsa", "lte", "3g_mobile")):
+            return "Mobile Core"
+        if any(k in s for k in ("transport", "router", "mpls", "backhaul", "pe-rtr", "gpon", "broadband", "peering", "l3vpn", "optical", "fiber", "dwdm", "otn")):
+            return "Transport"
+        if any(k in s for k in ("ran", "enodeb", "gnodeb", "cell", "nodeb", "rnc")):
+            return "RAN"
+        if any(k in s for k in ("ims", "pcscf", "scscf", "icscf", "volte", "vonr", "tas", "sbc", "sip")):
+            return "IMS"
+        if any(k in s for k in ("ocs", "charging", "billing", "diameter", "chf", "recharge", "balance")):
+            return "OCS"
+        if any(k in s for k in ("oss", "bss", "crm", "prov", "order", "catalog", "ticket", "itsm", "sms", "ussd", "esme", "vas")):
+            return "OSS/BSS"
+        if any(k in s for k in ("cloud", "nfvi", "k8s", "power", "cooling", "dc", "dns", "ntp", "cgnat", "infra")):
+            return "Cloud/NFVI"
+        if any(k in s for k in ("ext", "external", "roaming", "internet", "region", "site")):
+            return "Cross-Domain Operations"
+
         return "Other"
+
+    @staticmethod
+    def _detect_sub_cluster(slug: str, p_type: str, domain: str) -> Tuple[str, str]:
+        """Maps an entity to TM Forum sub-cluster and architectural layer (RM&O, SM&O, AIOps, CCM)."""
+        s = slug.lower()
+        # Cross-domain incidents
+        if domain == "Cross-Domain Operations" or p_type == "incident":
+            sub = "incidents.active" if any(k in s for k in ("active", "drop", "degradation", "fail", "overload", "surge")) else "incidents.operational"
+            return sub, "AIOps"
+
+        if domain == "OSS/BSS":
+            if any(k in s for k in ("alarm", "alert", "trap", "snmp")):
+                return "oss.alarms_events", "AIOps"
+            elif any(k in s for k in ("metric", "prom", "grafana", "kpi")):
+                return "oss.metrics_kpis", "AIOps"
+            elif any(k in s for k in ("log", "loki", "syslog")):
+                return "oss.logs", "AIOps"
+            elif any(k in s for k in ("trace", "tempo", "pcap", "wireshark")):
+                return "oss.traces_pcaps", "AIOps"
+            elif any(k in s for k in ("cluster", "correlation")):
+                return "oss.correlation_clusters", "AIOps"
+            elif any(k in s for k in ("hyp", "hypothesis")):
+                return "oss.hypotheses", "AIOps"
+            elif any(k in s for k in ("playbook", "remediation", "procedure")):
+                return "oss.remediations", "AIOps"
+            return "oss.fault_management", "AIOps"
+
+        if domain == "Mobile Core":
+            if any(k in s for k in ("amf", "smf", "nrf", "ausf", "udm", "mme", "sgw-c", "nas")):
+                return "mobile_core.control_plane", "RM&O"
+            elif any(k in s for k in ("upf", "pgw", "sgw-u", "gtp", "sgi", "data-forwarding", "nat-fw")):
+                return "mobile_core.user_plane", "RM&O"
+            elif any(k in s for k in ("metric", "kpi", "cssr", "drop")):
+                return "mobile_core.kpis", "RM&O"
+            elif any(k in s for k in ("alarm", "alert", "buffer")):
+                return "mobile_core.alarms", "RM&O"
+            elif p_type == "service":
+                return "mobile_core.services", "SM&O"
+            return "mobile_core.network_functions", "RM&O"
+
+        if domain == "Transport":
+            if any(k in s for k in ("metric", "drop", "jitter", "delay", "loss", "bandwidth", "attenuation")):
+                return "transport.link_performance", "RM&O"
+            elif any(k in s for k in ("alarm", "flap", "error", "down")):
+                return "transport.alarms", "RM&O"
+            return "transport.topology", "RM&O"
+
+        if domain == "RAN":
+            if any(k in s for k in ("kpi", "rrc", "prb", "cqi", "hosr")):
+                return "ran.radio_kpis", "RM&O"
+            elif any(k in s for k in ("alarm", "rlf", "vswr")):
+                return "ran.alarms", "RM&O"
+            return "ran.topology", "RM&O"
+
+        if domain == "OCS":
+            if any(k in s for k in ("session", "ccr", "cca", "gy", "ro", "quota")):
+                return "ocs.protocol_sessions", "CCM"
+            elif any(k in s for k in ("metric", "kpi", "latency", "timeout")):
+                return "ocs.kpis", "CCM"
+            return "ocs.charging_gateways", "CCM"
+
+        if domain == "IMS":
+            if any(k in s for k in ("sbc", "mrfp", "media", "rtp")):
+                return "ims.media_plane", "RM&O"
+            elif any(k in s for k in ("metric", "kpi", "cssr", "mos")):
+                return "ims.kpis", "SM&O"
+            return "ims.sip_core", "RM&O"
+
+        if p_type == "service":
+            return "services.cfs", "SM&O"
+
+        clean_dom = domain.lower().replace(" ", "_").replace("/", "_")
+        return f"{clean_dom}.general", "RM&O"
+
+    def export_snapshot(self, output_path: Path, version_label: str | None = None) -> dict[str, Any]:
+        """Exports authoritative full-fidelity gbrain knowledge snapshot compatible with FrozenTelecomBrainProvider."""
+        now = datetime.now(timezone.utc)
+        ts = now.strftime("%Y%m%d-%H%M%S")
+        version = version_label or f"v1.0.0-snapshot-{ts}"
+
+        inventory = self.collect()
+        
+        pages = []
+        for ent in inventory.entities:
+            pages.append({
+                "slug": ent.slug,
+                "title": ent.title,
+                "type": ent.type,
+                "domain": ent.domain,
+                "plane": ent.plane,
+                "sub_cluster": ent.sub_cluster,
+                "tmforum_layer": ent.tmforum_layer,
+                "knowledge_state": ent.knowledge_state,
+                "updated_at": ent.updated_at,
+            })
+
+        relationships = []
+        for idx, link in enumerate(inventory.unique_links, 1):
+            relationships.append({
+                "relationship_id": f"REL-GBRAIN-SNAP-{idx:04d}",
+                "source": link.from_slug,
+                "target": link.to_slug,
+                "link_type": link.link_type,
+                "state": "CONFIRMED",
+                "confidence": 1.0,
+                "provenance": "gbrain-mcp",
+            })
+
+        snapshot_data = {
+            "brain": "telecombrain",
+            "snapshot_version": version,
+            "pages": pages,
+            "relationships": relationships,
+        }
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, "w", encoding="utf-8") as f:
+            json.dump(snapshot_data, f, indent=2)
+
+        return snapshot_data

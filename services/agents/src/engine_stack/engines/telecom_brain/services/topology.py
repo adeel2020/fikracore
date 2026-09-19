@@ -5,15 +5,20 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import yaml
+
 from ..engine_context import TelecomContext
 from ..models import FCAPSClassification, ServiceProcedure, TelecomRequest, TelecomResult, TelecomTrace, TopologyNode
+
+_REFERENCE_YAML = Path(__file__).resolve().parent.parent / "simulator" / "operator_model" / "reference_synthetic_network.yaml"
 
 
 class TopologyService:
     id = "topology"
 
-    def __init__(self, topology_path: Path | None = None) -> None:
+    def __init__(self, topology_path: Path | None = None, reference_yaml: Path | None = None) -> None:
         self.topology_path = topology_path or self._default_topology_path()
+        self.reference_yaml = reference_yaml or _REFERENCE_YAML
 
     async def can_handle(self, request: TelecomRequest) -> float:
         query = request.query.lower()
@@ -73,9 +78,42 @@ class TopologyService:
         return None
 
     def _load_topology(self) -> dict:
+        if self.reference_yaml.exists():
+            return self._load_from_yaml(self.reference_yaml)
         if self.topology_path.exists():
             return json.loads(self.topology_path.read_text(encoding="utf-8"))
         return {"services": {}, "intents": {}}
+
+    @staticmethod
+    def _load_from_yaml(yaml_path: Path) -> dict:
+        with open(yaml_path, encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+
+        entities = {e.get("entity_id"): e for e in data.get("entities", [])}
+        rels = data.get("relationships", [])
+
+        adj: dict[str, list[str]] = {}
+        for r in rels:
+            src = r.get("source_entity", "")
+            tgt = r.get("target_entity", "")
+            adj.setdefault(src, []).append(tgt)
+
+        services: dict[str, list[str]] = {}
+        intents: dict[str, str] = {}
+
+        for chain in data.get("service_chains", []):
+            chain_id = chain.get("chain_id", "")
+            hops = chain.get("hops", [])
+            if chain_id and hops:
+                services[chain_id] = hops
+                intents[chain_id.replace("_", " ")] = chain_id
+
+        for domain, info in data.get("domains", {}).items():
+            domain_entities = [e.get("entity_id") for e in data.get("entities", []) if e.get("domain") == domain]
+            if domain_entities:
+                services[f"domain-{domain.lower()}"] = domain_entities
+
+        return {"services": services, "intents": intents, "entities": entities, "adjacency": adj}
 
     @staticmethod
     def _format(service_id: str | None, path: list[str]) -> str:

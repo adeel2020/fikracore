@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PYTHONPATH="$REPO_ROOT/services/agents/src:$REPO_ROOT/services/agents/src/engine_stack:$PYTHONPATH"
+exec python3 -m engine_stack.engines.telecom_brain.investigation.cli "$@"

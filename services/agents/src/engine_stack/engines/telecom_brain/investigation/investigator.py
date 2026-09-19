@@ -1,4 +1,8 @@
-"""Deterministic topology/service-aware investigation over operational evidence only."""
+"""Deterministic topology/service-aware investigation over operational evidence only.
+
+Refactored to use the 4-Dimension Correlation Engine (Phases 2.1-2.4)
+for temporal/identity, topological, pathway, and blast radius correlation.
+"""
 
 from itertools import combinations
 from time import perf_counter
@@ -7,75 +11,121 @@ import networkx as nx
 
 from .contracts import (Assumption, CandidateRelationship, CausalRole, Evidence,
                         EvidenceRequest, Hypothesis, InvestigationResult, KnowledgeState, Terminal)
-from .evidence import collapse, load_evidence, reject_truth
+from .evidence import load_evidence
 from .knowledge import CanonicalKnowledge
+from .correlation.engine import CorrelationEngine
 
 # Dependency edges point from consumer to supplier. Connectivity alone is not causal direction.
-DEPENDENCIES = {"depends-on", "routes-through", "carried-by", "hosted-on", "runs-on",
-                "backhauled-by", "powered-by", "charges-via", "authenticates-via", "resolves-via",
-                "timed-by", "uses-database", "uses-cache", "uses-message-bus", "provisioned-by"}
 ACTIVE = {KnowledgeState.CONFIRMED, KnowledgeState.SUPPORTED, KnowledgeState.INFERRED, KnowledgeState.UNKNOWN}
 
 
-def quality(evidence):
+def _quality(evidence):
     observed = 1 if evidence.observed_or_inferred in {"OBSERVED", "CONFIRMED"} else .4
     return evidence.source_reliability * evidence.freshness * observed
 
 
 class Investigator:
-    def __init__(self, provider, resolver=None):
+    def __init__(self, provider, resolver=None, step_callback=None):
         self.provider = provider
         self.resolver = resolver
+        self.step_callback = step_callback
 
-    def run(self, generated_input, operational_root):
+    def run(self, generated_input, operational_root, step_callback=None):
+        callback = step_callback or self.step_callback
         evidence, hashes = load_evidence(generated_input, operational_root)
-        return self.investigate(generated_input, evidence, hashes)
+        if callback:
+            callback("ingestion", {"raw_evidence_count": len(evidence), "hashes_count": len(hashes), "operational_root": str(operational_root)})
+        return self.investigate(generated_input, evidence, hashes, step_callback=callback)
 
-    def investigate(self, run, evidence: list[Evidence], input_hashes=None):
+    def investigate(self, run, evidence: list[Evidence], input_hashes=None, step_callback=None):
+        callback = step_callback or self.step_callback
         started = perf_counter()
         knowledge = CanonicalKnowledge(self.provider, self.resolver)
-        normalized = []
-        observation_time = max((item.ingestion_time for item in evidence), default=None)
-        for item in evidence:
-            reject_truth(item.model_dump(mode="json"))
-            canonical = knowledge.resolve_entity(item.canonical_entity, item.source_native_entity)
-            age_hours = max(0, (observation_time - item.event_time).total_seconds() / 3600) if observation_time else 0
-            normalized.append(item.model_copy(update={"canonical_entity": canonical,
-                "freshness": item.freshness / (1 + age_hours),
-                "observed_path": [knowledge.canonical(entity) for entity in item.observed_path]}))
-        events = collapse(normalized)
-        edges = {}
-        for slug in sorted({item.canonical_entity for item in events}):
-            for edge in knowledge.traverse(slug):
-                edges[edge.relationship_id] = edge
-        graph = nx.DiGraph()
-        graph.add_nodes_from(item.canonical_entity for item in events)
-        FORWARD_TYPES = {"member-of", "monitored-by", "supports-service", "serves"}
-        for edge in sorted(edges.values(), key=lambda edge: edge.relationship_id):
-            if edge.state not in ACTIVE:
-                continue
-            if edge.link_type in FORWARD_TYPES:
-                source, target = edge.source, edge.target
-            else:
-                source, target = edge.target, edge.source
-            graph.add_edge(source, target, relationship=edge)
 
-        service_entities = {}
-        for item in events:
-            if item.polarity == "abnormal":
-                for service in item.service:
-                    service_entities.setdefault(service, set()).add(item.canonical_entity)
-        impacted_service = min(service_entities, key=lambda service: (-len(service_entities[service]), service)) if service_entities else None
-        unrelated = [item for item in events if item.service and impacted_service not in item.service]
-        abnormal = [item for item in events if item.polarity == "abnormal" and quality(item) >= .3 and item not in unrelated]
-        healthy = [item for item in events if item.polarity == "healthy" and quality(item) >= .5]
-        # Equal weight per affected entity prevents an alarm flood from defining blast radius.
-        impacted = {item.canonical_entity for item in abnormal}
-        roots = sorted({item.canonical_entity for item in events})
-        roots = sorted(set(roots) | {ancestor for entity in impacted for ancestor in nx.ancestors(graph, entity)})
+        # ── Stage 1: Ingestion ──────────────────────────────────────────────
+        if callback:
+            sources = {}
+            types = {}
+            for e in evidence:
+                sources[e.source] = sources.get(e.source, 0) + 1
+                types[e.evidence_type] = types.get(e.evidence_type, 0) + 1
+            min_t = min((e.event_time for e in evidence), default=None)
+            max_t = max((e.event_time for e in evidence), default=None)
+            span = (max_t - min_t).total_seconds() if min_t and max_t else 0
+            callback("ingestion", {
+                "raw_count": len(evidence),
+                "raw_evidence_count": len(evidence),
+                "sources": sources,
+                "types": types,
+                "min_time": str(min_t) if min_t else "",
+                "max_time": str(max_t) if max_t else "",
+                "time_span": span,
+                "hashes_count": len(input_hashes or []),
+            })
+
+        # ── Stage 2: Correlation Engine (Phases 2.1-2.4) ────────────────────
+        correlation = CorrelationEngine(knowledge)
+        corr_result = correlation.run(evidence, step_callback=callback)
+
+        events = corr_result.events
+        abnormal = corr_result.abnormal
+        healthy = corr_result.healthy
+        impacted = corr_result.impacted
+        unrelated = corr_result.blast_radius.unrelated
+        roots = corr_result.roots
+        edges = corr_result.edges
+        graph = corr_result.graph
+        impacted_service = corr_result.blast_radius.impacted_service
+
         hypotheses = []
         first_useful = None
 
+        if callback:
+            earliest = min((item.event_time for item in abnormal), default=None)
+            local_sources = {item.source for item in abnormal if item.evidence_type not in {"changes", "recovery", "tickets"}}
+            independence = min(1.0, len(local_sources) / 2)
+            avg_freshness = sum(item.freshness for item in abnormal) / max(1, len(abnormal))
+            avg_reliability = sum(item.source_reliability for item in abnormal) / max(1, len(abnormal))
+            has_changes = any(item.evidence_type == "changes" for item in events)
+
+            score_dims = {
+                "temporal_precedence": 1.0 if earliest else 0.5,
+                "evidence_freshness": avg_freshness,
+                "source_reliability": avg_reliability,
+                "independent_telemetry": independence,
+                "upstream_position": 1.0 if edges else 0.0,
+                "knowledge_confidence": min((edge.confidence for edge in edges.values()), default=1.0),
+                "change_relevance": 1.0 if has_changes else 0.0,
+                "historical_support": 0.0,
+                "symptom_likelihood_penalty": 0.0,
+                "blast_radius_coverage": 1.0,
+                "service_dependency_relevance": 1.0 if impacted_service else 0.0,
+                "negative_evidence": 0.0,
+            }
+            callback("correlation_payload", {
+                "score_dimensions": score_dims,
+                "raw_count": len(evidence),
+                "abnormal_count": len(abnormal),
+                "impacted_count": len(impacted),
+                "domain_count": len(corr_result.pathways.domains),
+            })
+            callback("pathways", {
+                "evidence_count": len(events),
+                "abnormal_count": len(abnormal),
+                "root_count": len(roots),
+                "domains": corr_result.pathways.domains,
+                "relationship_count": len(edges),
+                "knowledge_gap_count": len(knowledge.failures & impacted),
+            })
+
+        # ── Stage 3: Hypothesis Generation ──────────────────────────────────
+        if callback:
+            callback("hypotheses_generated", {
+                "roots": roots,
+                "dual_cause_count": 0,
+            })
+
+        # ── Stage 4: Hypothesis Testing (12-Factor Synthesis Core) ───────────
         def assess(root_set, index):
             reachable = set(root_set)
             for root in root_set:
@@ -99,8 +149,8 @@ class Investigator:
             temporal = .5 if not local_time else float(local_time == earliest)
             sources = {item.source for item in local if item.evidence_type not in {"changes", "recovery", "tickets"}}
             independence = min(1, len(sources) / 2)
-            direct = sum(quality(item) for item in local) / max(1, len(local))
-            negative_strength = max((quality(item) for item in negative), default=0)
+            direct = sum(_quality(item) for item in local) / max(1, len(local))
+            negative_strength = max((_quality(item) for item in negative), default=0)
             service = float(any(item.service for item in supported))
             changes = [item for item in events if item.evidence_type == "changes" and
                        item.canonical_entity in root_set and local_time and item.event_time <= local_time]
@@ -161,9 +211,24 @@ class Investigator:
         for index, root in enumerate(roots, 1):
             hypothesis = assess((root,), index)
             hypotheses.append(hypothesis)
+            if callback:
+                callback("assess", {
+                    "candidate": root,
+                    "index": index,
+                    "score": hypothesis.hypothesis_confidence,
+                    "causal_confidence": hypothesis.causal_confidence,
+                    "coverage": hypothesis.explanation_coverage,
+                    "status": str(hypothesis.status),
+                    "causal_role": str(hypothesis.causal_role),
+                    "score_dimensions": hypothesis.score_dimensions,
+                    "supporting_evidence": hypothesis.supporting_evidence,
+                    "contradicting_evidence": hypothesis.contradicting_evidence,
+                    "knowledge_relationships_used": hypothesis.knowledge_relationships_used,
+                })
             if first_useful is None and hypothesis.status == KnowledgeState.SUPPORTED:
                 first_useful = index
-        # Explicit two-cause hypotheses are admitted only when both have direct independent evidence.
+
+        # Two-cause hypotheses admitted only when both have direct independent evidence
         independent = [h for h in hypotheses if h.score_dimensions["independent_telemetry"] == 1 and not h.contradicting_evidence]
         for left, right in combinations(independent[:12], 2):
             if nx.has_path(graph, left.canonical_root_entity, right.canonical_root_entity) or nx.has_path(graph, right.canonical_root_entity, left.canonical_root_entity):
@@ -171,8 +236,12 @@ class Investigator:
             joint = assess((left.canonical_root_entity, right.canonical_root_entity), len(hypotheses) + 1)
             if joint.explanation_coverage > max(left.explanation_coverage, right.explanation_coverage):
                 hypotheses.append(joint)
+
+        # ── Stage 5: Convergence & Knowledge Gap Detection ───────────────────
         hypotheses.sort(key=lambda h: (h.status == KnowledgeState.REJECTED, -h.hypothesis_confidence, h.hypothesis_id))
         best = next((h for h in hypotheses if h.status != KnowledgeState.REJECTED), None)
+        if callback and best:
+            callback("ranked", {"best_root": best.canonical_root_entity, "best_score": best.hypothesis_confidence, "coverage": best.explanation_coverage, "total_hypotheses": len(hypotheses)})
         explained = set(best.supporting_evidence) if best else set()
         residual = [item.evidence_id for item in abnormal if item.evidence_id not in explained]
         gaps = sorted(knowledge.failures & impacted)
@@ -219,6 +288,73 @@ class Investigator:
         else:
             terminal = Terminal.UNRESOLVED
         requests = self._requests(hypotheses, candidates, residual) if terminal != Terminal.EXPLAINED else []
+
+        if callback:
+            ranked_info = [
+                {"entity": h.canonical_root_entity, "score": h.hypothesis_confidence, "coverage": h.explanation_coverage}
+                for h in hypotheses
+            ]
+            best_info = {
+                "canonical_root_entity": best.canonical_root_entity,
+                "score": best.hypothesis_confidence,
+            } if best else None
+            callback("convergence", {
+                "hypotheses": hypotheses,
+                "best": best_info,
+                "ranked": ranked_info,
+                "explained": len(explained),
+                "total_abnormal": len(abnormal),
+                "coverage": coverage,
+                "residual_count": len(residual),
+                "gap_count": len(candidates) + len(gaps),
+                "terminal": terminal.value,
+            })
+
+            primary_dom = best.candidate_root_domain if best and best.candidate_root_domain != "unknown" else (
+                corr_result.pathways.domains[0] if corr_result.pathways.domains else "transport"
+            )
+            chain = [best.canonical_root_entity] if best else []
+            curr = best.canonical_root_entity if best else None
+            if curr:
+                while True:
+                    succs = sorted(set(graph.successors(curr)) & impacted)
+                    if not succs or succs[0] in chain:
+                        break
+                    curr = succs[0]
+                    chain.append(curr)
+                    if len(chain) >= 5:
+                        break
+            domain_list = []
+            for d in corr_result.pathways.domains:
+                is_prim = (d == primary_dom)
+                domain_list.append({
+                    "name": d,
+                    "primary": is_prim,
+                    "contributing": not is_prim,
+                    "reason": "Root cause origin" if is_prim else "Impacted layer",
+                })
+            svc_ents = list(corr_result.blast_radius.service_entities.get(impacted_service or "", []))
+            callback("domain_attribution", {
+                "primary_domain": primary_dom,
+                "domains": domain_list,
+                "impacted_service": impacted_service or "NONE",
+                "service_entities": svc_ents,
+                "propagation_chain": " ──► ".join(chain) if chain else "",
+            })
+
+            req_data = [
+                {"id": r.request_id, "question": r.question, "priority": r.priority, "cost": r.cost, "latency": r.latency}
+                for r in requests
+            ]
+            callback("next_best_evidence", {
+                "requests": req_data,
+                "terminal": terminal.value,
+            })
+
+            callback("promotion", {
+                "no_gaps": not bool(candidates),
+                "gap_count": len(candidates),
+            })
         summary = (f"{terminal.value}: best operational explanation covers {coverage:.0%} of affected entities; "
                    f"{len(residual)} abnormal observations remain unexplained. "
                    "Confidence is a deterministic heuristic, not a calibrated probability.")

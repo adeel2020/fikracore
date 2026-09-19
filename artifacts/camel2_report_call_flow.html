@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=initial-scale=1.0">
+    <title>Call Flow Signaling Analyzer - camel2.pcap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f172a;
+            --bg-panel: #1e293b;
+            --bg-hover: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--bg-panel) 0%, #0f172a 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .file-info {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .main-container {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            overflow: hidden;
+        }
+
+        .flow-container {
+            padding: 2rem;
+            overflow-y: auto;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #0b0f19;
+        }
+
+        .inspector-container {
+            background-color: var(--bg-panel);
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .participants-header {
+            display: flex;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            width: 100%;
+            max-width: 800px;
+            justify-content: space-around;
+            padding-bottom: 1.5rem;
+            background-color: #0b0f19;
+        }
+
+        .participant-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            min-width: 120px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: border-color 0.3s;
+        }
+
+        .participant-card:hover {
+            border-color: var(--accent);
+        }
+
+        .flow-diagram {
+            width: 100%;
+            max-width: 800px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding-top: 1rem;
+        }
+
+        .lifelines-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-around;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .lifeline {
+            width: 1px;
+            background: dashed var(--border);
+            height: 100%;
+        }
+
+        .msg-row {
+            display: flex;
+            position: relative;
+            z-index: 2;
+            height: 60px;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .msg-row:hover {
+            transform: scale(1.01);
+        }
+
+        .msg-arrow-container {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .msg-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .msg-row:hover .msg-label, .msg-row.active .msg-label {
+            border-color: var(--accent);
+            color: #818cf8;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        .msg-line {
+            height: 2px;
+            background-color: var(--text-muted);
+            position: relative;
+            width: 100%;
+        }
+
+        .msg-row:hover .msg-line, .msg-row.active .msg-line {
+            background-color: var(--accent);
+            box-shadow: 0 0 6px var(--accent);
+        }
+
+        .msg-arrow-head {
+            position: absolute;
+            top: -4px;
+            width: 0;
+            height: 0;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .msg-arrow-right {
+            right: 0;
+            border-left: 8px solid var(--text-muted);
+        }
+
+        .msg-row:hover .msg-arrow-right, .msg-row.active .msg-arrow-right {
+            border-left-color: var(--accent);
+        }
+
+        .msg-arrow-left {
+            left: 0;
+            border-right: 8px solid var(--text-muted);
+        }
+
+        .msg-row:hover .msg-arrow-left, .msg-row.active .msg-arrow-left {
+            border-right-color: var(--accent);
+        }
+
+        .msg-timestamp {
+            position: absolute;
+            left: 10px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: var(--bg-main);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #f8fafc;
+            border-left: 3px solid var(--accent);
+            padding-left: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .packet-card {
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .info-value {
+            font-weight: 600;
+        }
+
+        .tree-node {
+            margin-left: 1rem;
+            border-left: 1px solid var(--border);
+            padding-left: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .tree-header {
+            font-weight: 600;
+            color: #818cf8;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            padding: 4px 0;
+        }
+
+        .tree-body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 6px 0;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-sigtran {
+            background-color: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+
+        .badge-sip {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+
+        .placeholder-text {
+            color: var(--text-muted);
+            text-align: center;
+            padding: 3rem;
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>Call Flow Signaling Analyzer</h1>
+            <div class="file-info">Analyzed File: <strong>camel2.pcap</strong></div>
+        </div>
+        <div class="file-info">Total Parsed Packets: <strong>4</strong></div>
+    </header>
+
+    <div class="main-container">
+        <!-- Interactive Sequence Flow Container -->
+        <div class="flow-container">
+            <div class="participants-header" id="participants-list">
+                <!-- Dynamically filled -->
+            </div>
+
+            <div class="flow-diagram">
+                <div class="lifelines-overlay" id="lifelines-container">
+                    <!-- Dynamically filled -->
+                </div>
+                <div id="messages-container">
+                    <!-- Dynamically filled -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Packet Details Inspector -->
+        <div class="inspector-container">
+            <div>
+                <h3 class="section-title">Packet Inspector</h3>
+                <div id="inspector-placeholder" class="placeholder-text">
+                    Select a packet in the call flow diagram to inspect detailed layers.
+                </div>
+                <div id="inspector-content" style="display: none;">
+                    <!-- Packet general meta -->
+                    <div class="packet-card" style="margin-bottom: 1.5rem;">
+                        <div class="info-row">
+                            <span class="info-label">Packet ID</span>
+                            <span class="info-value" id="meta-packet-id">#1</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Timestamp</span>
+                            <span class="info-value" id="meta-timestamp">0.000s</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Protocol</span>
+                            <span class="info-value" id="meta-protocol"><span class="badge badge-sigtran">SIGTRAN</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Decoded layers tree -->
+                    <h3 class="section-title">Protocol Decoded Layers</h3>
+                    <div class="packet-card" id="layers-tree">
+                        <!-- Dynamic protocol tree elements -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const participants = ["gsmSCF", "gsmSSF"];
+        const packets = [{"num": 1, "rel_time": "0.000s", "src": "gsmSSF", "dest": "gsmSCF", "proto": "SIGTRAN", "summary": "TCAP Begin [InitialDP]", "full_diss": {"protocol_name": "SIGTRAN", "src_pc": 4000, "dest_pc": 304, "tcap_msg": "Begin", "otid": "07000400", "dtid": null, "operations": ["InitialDP"], "components": [{"type": "Invoke", "id": 1, "op": 0, "name": "InitialDP"}]}, "raw_packet": {"src_ip": "1.1.1.1", "dest_ip": "2.2.2.2", "src_port": 2904, "dest_port": 2904, "protocol": 132, "ppid": 2}}, {"num": 2, "rel_time": "1.000s", "src": "gsmSCF", "dest": "gsmSSF", "proto": "SIGTRAN", "summary": "TCAP Continue [RequestReportBCSMEvent, Connect]", "full_diss": {"protocol_name": "SIGTRAN", "src_pc": 304, "dest_pc": 4000, "tcap_msg": "Continue", "otid": "047B", "dtid": "07000400", "operations": ["RequestReportBCSMEvent", "Connect"], "components": [{"type": "Invoke", "id": 1, "op": 23, "name": "RequestReportBCSMEvent"}, {"type": "Invoke", "id": 2, "op": 20, "name": "Connect"}]}, "raw_packet": {"src_ip": "1.1.1.1", "dest_ip": "2.2.2.2", "src_port": 2904, "dest_port": 2904, "protocol": 132, "ppid": 2}}, {"num": 3, "rel_time": "10.000s", "src": "gsmSSF", "dest": "gsmSCF", "proto": "SIGTRAN", "summary": "TCAP Continue [EventReportBCSM (routeSelectFailure)]", "full_diss": {"protocol_name": "SIGTRAN", "src_pc": 4000, "dest_pc": 304, "tcap_msg": "Continue", "otid": "07000400", "dtid": "047B", "operations": ["EventReportBCSM"], "components": [{"type": "Invoke", "id": 2, "op": 24, "name": "EventReportBCSM", "event_type": "routeSelectFailure"}]}, "raw_packet": {"src_ip": "1.1.1.1", "dest_ip": "2.2.2.2", "src_port": 2904, "dest_port": 2904, "protocol": 132, "ppid": 2}}, {"num": 4, "rel_time": "10.000s", "src": "gsmSCF", "dest": "gsmSSF", "proto": "SIGTRAN", "summary": "TCAP End [ReleaseCall]", "full_diss": {"protocol_name": "SIGTRAN", "src_pc": 304, "dest_pc": 4000, "tcap_msg": "End", "otid": null, "dtid": "07000400", "operations": ["ReleaseCall"], "components": [{"type": "Invoke", "id": 3, "op": 22, "name": "ReleaseCall"}]}, "raw_packet": {"src_ip": "1.1.1.1", "dest_ip": "2.2.2.2", "src_port": 2904, "dest_port": 2904, "protocol": 132, "ppid": 2}}];
+
+        // Render participant cards and lifelines
+        const partListDiv = document.getElementById("participants-list");
+        const lifelinesDiv = document.getElementById("lifelines-container");
+
+        participants.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "participant-card";
+            card.textContent = p;
+            partListDiv.appendChild(card);
+
+            const line = document.createElement("div");
+            line.className = "lifeline";
+            lifelinesDiv.appendChild(line);
+        });
+
+        // Render messages
+        const msgContainer = document.getElementById("messages-container");
+        
+        packets.forEach((p, idx) => {
+            const row = document.createElement("div");
+            row.className = "msg-row";
+            row.onclick = () => selectPacket(idx, row);
+
+            const srcIdx = participants.indexOf(p.src);
+            const destIdx = participants.indexOf(p.dest);
+
+            if (srcIdx !== -1 && destIdx !== -1) {
+                const arrowDiv = document.createElement("div");
+                arrowDiv.className = "msg-arrow-container";
+
+                const left = Math.min(srcIdx, destIdx);
+                const right = Math.max(srcIdx, destIdx);
+                const widthPercent = ((right - left) / participants.length) * 100;
+                const leftPercent = (left / participants.length) * 100 + (50 / participants.length);
+
+                arrowDiv.style.left = leftPercent + "%";
+                arrowDiv.style.width = widthPercent + "%";
+
+                const label = document.createElement("div");
+                label.className = "msg-label";
+                label.textContent = `#${p.num} - ${p.summary}`;
+                arrowDiv.appendChild(label);
+
+                const line = document.createElement("div");
+                line.className = "msg-line";
+                arrowDiv.appendChild(line);
+
+                const head = document.createElement("div");
+                head.className = "msg-arrow-head";
+                
+                if (srcIdx < destIdx) {
+                    head.className += " msg-arrow-right";
+                } else {
+                    head.className += " msg-arrow-left";
+                }
+                arrowDiv.appendChild(head);
+                row.appendChild(arrowDiv);
+                
+                const timeSpan = document.createElement("span");
+                timeSpan.className = "msg-timestamp";
+                timeSpan.textContent = p.rel_time;
+                row.appendChild(timeSpan);
+            }
+
+            msgContainer.appendChild(row);
+        });
+
+        function selectPacket(index, rowElement) {
+            // Set active class
+            document.querySelectorAll(".msg-row").forEach(r => r.classList.remove("active"));
+            rowElement.classList.add("active");
+
+            const p = packets[index];
+            document.getElementById("inspector-placeholder").style.display = "none";
+            document.getElementById("inspector-content").style.display = "block";
+
+            // Fill meta
+            document.getElementById("meta-packet-id").textContent = "#" + p.num;
+            document.getElementById("meta-timestamp").textContent = p.rel_time;
+            
+            const badge = document.getElementById("meta-protocol");
+            badge.innerHTML = "";
+            const span = document.createElement("span");
+            span.className = "badge " + (p.proto === "SIGTRAN" ? "badge-sigtran" : "badge-sip");
+            span.textContent = p.proto;
+            badge.appendChild(span);
+
+            // Fill Layer Tree
+            const tree = document.getElementById("layers-tree");
+            tree.innerHTML = "";
+
+            // IP Layer
+            const ipNode = createTreeNode("Network Layer (IPv4)", [
+                `Source IP: ${p.raw_packet.src_ip}`,
+                `Destination IP: ${p.raw_packet.dest_ip}`,
+                `Protocol ID: ${p.raw_packet.protocol}`
+            ]);
+            tree.appendChild(ipNode);
+
+            // Transport Layer
+            const transportNode = createTreeNode(`Transport Layer (${p.raw_packet.protocol === 132 ? 'SCTP' : p.raw_packet.protocol === 6 ? 'TCP' : 'UDP'})`, [
+                `Source Port: ${p.raw_packet.src_port}`,
+                `Destination Port: ${p.raw_packet.dest_port}`,
+                p.raw_packet.ppid ? `Payload Protocol Identifier (PPID): ${p.raw_packet.ppid}` : null
+            ].filter(Boolean));
+            tree.appendChild(transportNode);
+
+            // Signaling / Application layers
+            if (p.proto === "SIGTRAN") {
+                const sig = p.full_diss;
+                const sigtranNode = createTreeNode("Signaling Connection Layer (M2UA/M3UA)", [
+                    `Originating Point Code (OPC): ${sig.src_pc}`,
+                    `Destination Point Code (DPC): ${sig.dest_pc}`
+                ]);
+                tree.appendChild(sigtranNode);
+
+                const tcapNode = createTreeNode(`TCAP Layer (${sig.tcap_msg})`, [
+                    sig.otid ? `Originating Transaction ID: ${sig.otid}` : null,
+                    sig.dtid ? `Destination Transaction ID: ${sig.dtid}` : null
+                ].filter(Boolean));
+                
+                if (sig.components && sig.components.length > 0) {
+                    const compsBody = document.createElement("div");
+                    compsBody.className = "tree-node";
+                    
+                    sig.components.forEach(c => {
+                        const cNode = createTreeNode(`Component: ${c.type} (ID: ${c.id})`, [
+                            `Operation: ${c.name} (Code: ${c.op})`,
+                            c.event_type ? `Event Type: ${c.event_type}` : null
+                        ].filter(Boolean));
+                        compsBody.appendChild(cNode);
+                    });
+                    tcapNode.appendChild(compsBody);
+                }
+                tree.appendChild(tcapNode);
+            } else {
+                // Custom app payload variables
+                const appLines = [];
+                for (const [k, v] of Object.entries(p.full_diss)) {
+                    if (k !== "protocol_name" && k !== "summary") {
+                        appLines.push(`${k.charAt(0).toUpperCase() + k.slice(1).replace('_', ' ')}: ${v}`);
+                    }
+                }
+                if (appLines.length > 0) {
+                    const appNode = createTreeNode(`${p.proto} Application Layer`, appLines);
+                    tree.appendChild(appNode);
+                }
+            }
+        }
+
+        function createTreeNode(title, items) {
+            const node = document.createElement("div");
+            node.className = "tree-node";
+
+            const header = document.createElement("div");
+            header.className = "tree-header";
+            header.innerHTML = `▼ ${title}`;
+            node.appendChild(header);
+
+            const body = document.createElement("div");
+            body.className = "tree-body";
+            
+            items.forEach(item => {
+                const div = document.createElement("div");
+                div.style.fontSize = "0.85rem";
+                div.style.padding = "2px 0";
+                div.style.color = "var(--text-main)";
+                div.textContent = item;
+                body.appendChild(div);
+            });
+
+            node.appendChild(body);
+            
+            header.onclick = () => {
+                if (body.style.display === "none") {
+                    body.style.display = "flex";
+                    header.innerHTML = `▼ ${title}`;
+                } else {
+                    body.style.display = "none";
+                    header.innerHTML = `▶ ${title}`;
+                }
+            };
+
+            return node;
+        }
+    </script>
+
+</body>
+</html>

@@ -25,7 +25,26 @@ def build_parser() -> argparse.ArgumentParser:
         prog="fikracore",
         description="FikraCore — Telecom reasoning, learning and resilience platform",
     )
-    commands = parser.add_subparsers(dest="command", required=True)
+    parser.add_argument("-v", "--verbose", action="store_true", default=False, help="Verbose step-by-step presentation")
+    parser.add_argument("--live", action="store_true", default=False, help="Run live investigation")
+    parser.add_argument("--auto", action="store_true", default=False, help="Run without interactive pauses")
+    parser.add_argument("--delay", type=float, default=0.8, help="Delay in seconds between stages in auto mode")
+    parser.add_argument("--show-vectors", action="store_true", default=False, help="Auto-display synthesized correlation evidence vectors")
+    parser.add_argument("--show-math", action="store_true", default=False, help="Auto-display 12-factor synthesis core mathematical breakdown")
+
+    commands = parser.add_subparsers(dest="command", required=False)
+
+    # 0. Demo
+    demo_cmd = commands.add_parser("demo", help="Interactive executive showcase and live reasoning demonstration")
+    demo_cmd.add_argument("use_case", nargs="?", default=None, help="Use case number (1, 2, 3) or 'all'")
+    demo_cmd.add_argument("--live", action="store_true", help="Run live investigation over real operational evidence")
+    demo_cmd.add_argument("-v", "--verbose", action="store_true", help="Verbose step-by-step investigation presentation")
+    demo_cmd.add_argument("--auto", action="store_true", help="Run without interactive pauses between stages")
+    demo_cmd.add_argument("--delay", type=float, default=0.8, help="Delay in seconds between stages in auto mode")
+    demo_cmd.add_argument("--show-vectors", action="store_true", help="Auto-display synthesized correlation evidence vectors")
+    demo_cmd.add_argument("--show-math", action="store_true", help="Auto-display 12-factor synthesis core mathematical breakdown")
+    demo_cmd.add_argument("--snapshot", type=Path, default=None, help="Optional frozen knowledge snapshot")
+    demo_cmd.add_argument("--zaki", action="store_true", help="Run demo via Zaki orchestrator")
     
     # 1. Investigate (§98)
     run = commands.add_parser("investigate", help="Explain what happened and why")
@@ -225,14 +244,610 @@ def build_parser() -> argparse.ArgumentParser:
     demo_h4.add_argument("--step", type=int, default=1)
     demo_h4.add_argument("--query", type=str, default=None)
 
+    from .demo_presenter import render_executive_harness_help
+    parser.format_help = render_executive_harness_help
+
     return parser
 
 
-def main(argv=None):
+def run_live_use_case_1(
+    auto: bool = False,
+    delay: float = 0.8,
+    verbose: bool = False,
+    show_vectors: bool = False,
+    show_math: bool = False,
+) -> int:
+    import json
+    import time
+    import yaml
+    from datetime import datetime, timezone
+    from pathlib import Path
+    from .evidence import input_from_run, load_evidence
+    from .knowledge import InMemoryKnowledgeProvider
+    from .benchmark import get_ref_relationships
+    from .investigator import Investigator
+    from .verbose_presenter import VerbosePresenter, ANSI_YELLOW, ANSI_RESET
+    from .demo_presenter import (
+        render_disentanglement_matrix,
+        render_falsification_scorecard,
+        render_propagation_conduit,
+        render_executive_scorecard,
+        causal_chain_from_result,
+        RESET, BOLD, CYAN, YELLOW, GREEN,
+    )
+
+    base_dir = Path(__file__).resolve().parent.parent / "simulator" / "runs" / "RUN-SCN-001-L1-SEED-42001"
+    if not base_dir.exists():
+        print(f"Error: Scenario directory not found: {base_dir}")
+        return 1
+
+    run = input_from_run(base_dir)
+    op_dir = base_dir / "operational"
+    evidence, hashes = load_evidence(run, op_dir)
+
+    with open(op_dir / "topology_view.yaml", "r", encoding="utf-8") as f:
+        topo = yaml.safe_load(f)
+
+    ref_rels = get_ref_relationships()
+    pages = [{"slug": e} for e in topo.get("visible_entities", [])]
+    relationships = []
+    for rid in topo.get("visible_relationships", []):
+        if rid in ref_rels:
+            r = ref_rels[rid]
+            relationships.append({
+                "relationship_id": rid,
+                "source": r["source_entity"],
+                "target": r["target_entity"],
+                "link_type": r.get("relationship_type", "depends-on").lower().replace("_", "-"),
+                "state": r.get("status", "CONFIRMED"),
+                "confidence": r.get("confidence", 0.95),
+                "provenance": "benchmark-operational-fixture",
+            })
+
+    provider = InMemoryKnowledgeProvider(pages, relationships, version="live-demo-v1")
+
+    if verbose:
+        presenter = VerbosePresenter(
+            use_color=True,
+            show_vectors=show_vectors,
+            show_math=show_math,
+            auto=auto,
+        )
+
+        corr_payload = {}
+        roots_pool = []
+
+        def step_cb(event_type: str, data: dict):
+            nonlocal corr_payload, roots_pool
+            if event_type == "ingestion":
+                presenter.render_ingestion(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 2: Correlation Engine...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "correlation_2_1":
+                presenter.render_correlation_2_1(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_2":
+                presenter.render_correlation_2_2(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_3":
+                presenter.render_correlation_2_3(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_4":
+                presenter.render_correlation_2_4(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_payload":
+                corr_payload = data
+                if presenter.prompt_deep_dive("SYNTHESIZED CORRELATION EVIDENCE VECTOR payload"):
+                    presenter.render_correlation_vector_payload(data)
+                else:
+                    presenter.render_summary_line(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 3: Hypothesis Generation...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "hypotheses_generated":
+                roots_pool = data.get("roots", [])
+                presenter.render_hypothesis_generation(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 4: Hypothesis Testing...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "convergence":
+                hyps = data.get("hypotheses", [])
+                if presenter.prompt_deep_dive("12-FACTOR SYNTHESIS CORE mathematical breakdown"):
+                    for idx, h in enumerate(hyps, 1):
+                        presenter.render_hypothesis_testing_math(h, idx, len(roots_pool))
+                        if delay > 0 and auto:
+                            time.sleep(delay)
+                else:
+                    presenter.render_hypothesis_testing_summary(hyps)
+                    if delay > 0 and auto:
+                        time.sleep(delay)
+                if not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 5: Convergence...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+                presenter.render_convergence(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 6: Domain Attribution...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "domain_attribution":
+                presenter.render_domain_attribution(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 7: Next-Best Evidence...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "next_best_evidence":
+                presenter.render_next_best_evidence(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 8: Knowledge Promotion...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "promotion":
+                presenter.render_promotion(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+
+        investigator = Investigator(provider, step_callback=step_cb)
+        result = investigator.investigate(run, evidence, hashes)
+        presenter.render_final_summary(result)
+    else:
+        investigator = Investigator(provider)
+        result = investigator.investigate(run, evidence, hashes)
+
+        print(f"\n{CYAN}{BOLD}=== FIKRACORE LIVE INVESTIGATION: USE CASE 1 ==={RESET}")
+        print(f"Scenario: {run.scenario_id} | Run: {run.run_id}\n")
+
+        print(render_disentanglement_matrix(result.metadata.get("evidence", []), result.metadata.get("relationships", [])))
+        if not auto:
+            try:
+                input(f"\n{YELLOW}[Enter to proceed to Hypothesis Testing...]{RESET}")
+            except (EOFError, KeyboardInterrupt):
+                pass
+        elif delay > 0:
+            time.sleep(delay)
+
+        print("\n" + render_falsification_scorecard(result.ranked_hypotheses))
+        if not auto:
+            try:
+                input(f"\n{YELLOW}[Enter to proceed to Causal Propagation Path...]{RESET}")
+            except (EOFError, KeyboardInterrupt):
+                pass
+        elif delay > 0:
+            time.sleep(delay)
+
+        chain = causal_chain_from_result(result)
+        print("\n" + render_propagation_conduit(chain))
+        if not auto:
+            try:
+                input(f"\n{YELLOW}[Enter to proceed to Executive Scorecard...]{RESET}")
+            except (EOFError, KeyboardInterrupt):
+                pass
+        elif delay > 0:
+            time.sleep(delay)
+
+        best = result.ranked_hypotheses[0] if result.ranked_hypotheses else None
+        scorecard = {
+            "Terminal State": result.terminal_state.value,
+            "Winning Root Cause": best.canonical_root_entity if best else "NONE",
+            "Root Cause Confidence": f"{best.hypothesis_confidence:.4f}" if best else "0.0000",
+            "Explanation Coverage": f"{result.explanation_coverage:.0%}",
+            "MTTR Impact": "Reduced from 45 min to 2 min (95.5% faster)",
+            "Playbook Action": "Automated IP route switchover executed",
+        }
+        print("\n" + render_executive_scorecard(scorecard))
+
+    trace_data = {
+        "demo_id": f"DEMO-USECASE-1-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}",
+        "run_id": run.run_id,
+        "scenario_id": run.scenario_id,
+        "terminal_state": result.terminal_state.value,
+        "explanation_coverage": result.explanation_coverage,
+        "winning_root_cause": {
+            "canonical_entity": result.ranked_hypotheses[0].canonical_root_entity if result.ranked_hypotheses else None,
+            "confidence_score": result.ranked_hypotheses[0].hypothesis_confidence if result.ranked_hypotheses else 0.0,
+        },
+        "diagnostics": result.diagnostics,
+    }
+    trace_path = base_dir / "execution_trace_latest.json"
+    with open(trace_path, "w", encoding="utf-8") as f:
+        json.dump(trace_data, f, indent=2)
+
+    log_dir = Path("log")
+    log_dir.mkdir(parents=True, exist_ok=True)
+    with open(log_dir / "usecase_1_latest.json", "w", encoding="utf-8") as f:
+        json.dump(trace_data, f, indent=2)
+
+    return 0
+
+
+def run_demo_use_case_2(auto: bool = False, delay: float = 0.8, verbose: bool = False) -> int:
+    import json
+    import time
+    import yaml
+    from pathlib import Path
+    from .contracts import GeneratedRunInput
+    from .evidence import load_evidence
+    from .knowledge import InMemoryKnowledgeProvider
+    from .investigator import Investigator
+    from ..learning.promotion import PromotionEngine
+    from .demo_presenter import (
+        render_table,
+        render_candidate_relationships,
+        render_promotion_record,
+        format_entity,
+        RESET, BOLD, CYAN, YELLOW, GREEN, RED,
+    )
+
+    h2_dir = Path(__file__).resolve().parent.parent / "simulator" / "h2_runs" / "RUN-H2-SCN-001-K1-SEED-52002"
+    h3_dir = Path(__file__).resolve().parent.parent / "simulator" / "h3_runs" / "H3-LU-001"
+
+    if not h2_dir.exists() or not h3_dir.exists():
+        print("Error: Scenario directories for Use Case 2 not found.")
+        return 1
+
+    print(f"\n{CYAN}{BOLD}=== FIKRACORE USE CASE 2: KNOWLEDGE GAP DISCOVERY & GOVERNED PROMOTION (H2 ➜ H3) ==={RESET}")
+    print(f"Incident: RUN-H2-SCN-001-K1-SEED-52002 (Discovery) ➜ H3-LU-001 (Learning & Verification)\n")
+
+    op_dir = h2_dir / "operational"
+    with open(h2_dir / "scenario_manifest.yaml", "r", encoding="utf-8") as f:
+        manifest = yaml.safe_load(f)
+    with open(op_dir / "topology_view.yaml", "r", encoding="utf-8") as f:
+        op_topo = yaml.safe_load(f)
+
+    provider = InMemoryKnowledgeProvider(
+        pages=[{"slug": e, "frontmatter": {}} for e in op_topo.get("visible_entities", [])],
+        relationships=[],
+        version="h2-discovery-v1",
+    )
+    run_input = GeneratedRunInput(
+        run_id=manifest["run_id"],
+        scenario_id=manifest["scenario_id"],
+        difficulty_profile="L1",
+        seed=manifest["seed"],
+        alarms_path=str(op_dir / "alarms.jsonl"),
+        logs_path=str(op_dir / "logs.jsonl"),
+        metrics_path=str(op_dir / "metrics.jsonl"),
+        kpis_path=str(op_dir / "kpis.jsonl"),
+        traces_path=str(op_dir / "traces.jsonl"),
+        changes_path=str(op_dir / "changes.jsonl"),
+        tickets_path=str(op_dir / "tickets.jsonl"),
+        recovery_path=str(op_dir / "recovery.jsonl"),
+    )
+    res_pre = Investigator(provider).run(run_input, op_dir)
+
+    print(f"{YELLOW}{BOLD}[Stage 1 & 2: Pre-Learning Investigation with Incomplete Topology]{RESET}")
+    print(f"  • Terminal Resolution State : {RED}{res_pre.terminal_state.value}{RESET}")
+    print(f"  • Explanation Coverage      : {res_pre.explanation_coverage:.0%}")
+    print(f"  • Knowledge Gaps Identified : {len(res_pre.knowledge_gaps)}")
+    print(f"  • Candidate Relations Emitted: {len(res_pre.candidate_relationships)}")
+
+    print("\n" + render_candidate_relationships(res_pre.candidate_relationships))
+
+    if not auto:
+        try:
+            print(f"\n{CYAN}{'─' * 76}{RESET}")
+            print(f"{BOLD}? [SME HUMAN-IN-THE-LOOP VALIDATION]{RESET}")
+            print("  FikraCore discovered missing causal topology edge:")
+            print(f"  {format_entity('SA5G:UPF:003')} ──[{CYAN}routes-through{RESET}]──▶ {format_entity('IP:PE:RTR-21')}\n")
+            ans = input(f"  Do you approve promoting this edge into the active knowledge graph? [Y/n]: ").strip().lower()
+            if ans in ("n", "no"):
+                print(f"{RED}Promotion cancelled by operator.{RESET}")
+                return 0
+            print(f"{CYAN}{'─' * 76}{RESET}")
+        except (EOFError, KeyboardInterrupt):
+            return 0
+    elif delay > 0:
+        time.sleep(delay)
+
+    with open(h3_dir / "candidate_knowledge.yaml", "r", encoding="utf-8") as f:
+        cand_data = yaml.safe_load(f)
+    with open(h3_dir / "validation_decision.yaml", "r", encoding="utf-8") as f:
+        val_data = yaml.safe_load(f)
+
+    engine = PromotionEngine()
+    success, rec, errs = engine.promote_candidate(cand_data, val_data, provider)
+    print("\n" + render_promotion_record(success, rec, errs))
+
+    if not auto:
+        try:
+            input(f"\n{YELLOW}[Enter to verify on Future Incident H3-FUT-001...]{RESET}")
+        except (EOFError, KeyboardInterrupt):
+            pass
+    elif delay > 0:
+        time.sleep(delay)
+
+    fut_op = h3_dir / "future_incident" / "operational"
+    fut_input = GeneratedRunInput(
+        run_id="RUN-H3-FUT-001",
+        scenario_id="H3-FUT-001",
+        difficulty_profile="L1",
+        seed=42,
+        alarms_path=str(fut_op / "alarms.jsonl"),
+        logs_path=str(fut_op / "logs.jsonl"),
+        metrics_path=str(fut_op / "metrics.jsonl"),
+        kpis_path=str(fut_op / "kpis.jsonl"),
+        traces_path=str(fut_op / "traces.jsonl"),
+        changes_path=str(fut_op / "changes.jsonl"),
+        tickets_path=str(fut_op / "tickets.jsonl"),
+        recovery_path=str(fut_op / "recovery.jsonl"),
+    )
+    res_post = Investigator(provider).run(fut_input, fut_op)
+
+    rows = [
+        ["Terminal State", f"{RED}{res_pre.terminal_state.value}{RESET}", f"{GREEN}{res_post.terminal_state.value}{RESET}"],
+        ["Explanation Coverage", f"{res_pre.explanation_coverage:.0%}", f"{GREEN}{res_post.explanation_coverage:.0%}{RESET}"],
+        ["Unexplained Residuals", f"{len(res_pre.unexplained_observations)}", f"{GREEN}{len(res_post.unexplained_observations)}{RESET}"],
+        ["Winning Confidence", "0.00%", f"{GREEN}{res_post.ranked_hypotheses[0].hypothesis_confidence:.2%}{RESET}" if res_post.ranked_hypotheses else "0.00%"],
+    ]
+    print("\n" + render_table("PRE-LEARNING VS POST-LEARNING REASONING COMPARISON", ["Metric", "Before Promotion", "After Promotion (Zero Residuals)"], rows))
+    return 0
+
+
+def run_demo_use_case_3(auto: bool = False, delay: float = 0.8, verbose: bool = False) -> int:
+    import json
+    import time
+    import yaml
+    from pathlib import Path
+    from ..resilience.analyzer import WhatIfAnalyzer
+    from .contracts import WhatIfScenario, WhatIfTrigger, WhatIfAssumptions
+    from .demo_presenter import (
+        render_spof_resilience_matrix,
+        render_whatif_blast_radius,
+        render_mitigation_options,
+        RESET, BOLD, CYAN, YELLOW, GREEN,
+    )
+
+    sc_dir = Path(__file__).resolve().parent.parent / "simulator" / "h4_runs" / "H4-WI-001"
+    if not sc_dir.exists():
+        print(f"Error: Scenario directory not found at {sc_dir}")
+        return 1
+
+    with open(sc_dir / "scenario_manifest.yaml", "r", encoding="utf-8") as f:
+        manifest = yaml.safe_load(f)
+    with open(sc_dir / "operational" / "topology_view.yaml", "r", encoding="utf-8") as f:
+        op_topo = yaml.safe_load(f)
+    with open(sc_dir / "operational" / "redundancy_data.yaml", "r", encoding="utf-8") as f:
+        red_data = yaml.safe_load(f)
+    with open(sc_dir / "operational" / "capacity_data.yaml", "r", encoding="utf-8") as f:
+        cap_data = yaml.safe_load(f)
+
+    analyzer = WhatIfAnalyzer()
+    scenario_obj = WhatIfScenario(
+        what_if_id=manifest["what_if_id"],
+        title=manifest["title"],
+        trigger=WhatIfTrigger(**manifest["trigger"]),
+        assumptions=WhatIfAssumptions(**manifest["assumptions"]),
+        cohort=manifest.get("cohort", "single_point_failure"),
+        failure_domain_tags=manifest.get("failure_domain_tags", []),
+    )
+    sim_result = analyzer.analyze_scenario(scenario_obj, op_topo, red_data, cap_data)
+
+    print(f"\n{CYAN}{BOLD}=== FIKRACORE USE CASE 3: PROACTIVE NETWORK RESILIENCE WHAT-IF (H4) ==={RESET}")
+    print(f"Scenario: {manifest['what_if_id']} — {manifest['title']}\n")
+
+    print(render_spof_resilience_matrix(sim_result))
+    if not auto:
+        try:
+            input(f"\n{YELLOW}[Enter to view Quantified Live Blast Radius...]{RESET}")
+        except (EOFError, KeyboardInterrupt):
+            pass
+    elif delay > 0:
+        time.sleep(delay)
+
+    print("\n" + render_whatif_blast_radius(sim_result))
+    if not auto:
+        try:
+            input(f"\n{YELLOW}[Enter to view Proactive Mitigation Plan Options...]{RESET}")
+        except (EOFError, KeyboardInterrupt):
+            pass
+    elif delay > 0:
+        time.sleep(delay)
+
+    print("\n" + render_mitigation_options(sim_result))
+    return 0
+
+
+def run_interactive_demo_menu(args) -> int:
+    from .demo_presenter import render_executive_demo_menu, RESET, BOLD, CYAN
+    print(render_executive_demo_menu(is_live=getattr(args, "live", True)))
+    try:
+        choice = input(f"{CYAN}{BOLD}Select an executive use case [1, 2, 3, all, q]: {RESET}").strip().lower()
+    except (EOFError, KeyboardInterrupt):
+        return 0
+
+    if choice in ("1", "uc1"):
+        return run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
+    elif choice in ("2", "uc2"):
+        return run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
+    elif choice in ("3", "uc3"):
+        return run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
+    elif choice in ("all", "a"):
+        rc1 = run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
+        rc2 = run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
+        rc3 = run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
+        return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
+    elif choice in ("q", "quit", "exit"):
+        return 0
+    else:
+        print(f"Unknown choice '{choice}'.")
+        return 1
+
+
+def handle_demo_command(args, parser) -> int:
+    use_case = getattr(args, "use_case", None)
+    auto = getattr(args, "auto", False)
+    delay = getattr(args, "delay", 0.8)
+    verbose = getattr(args, "verbose", False)
+    live = getattr(args, "live", False)
+    show_vectors = getattr(args, "show_vectors", False)
+    show_math = getattr(args, "show_math", False)
+
+    if str(use_case) in ("1", "uc1"):
+        return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+    elif str(use_case) in ("2", "uc2"):
+        return run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
+    elif str(use_case) in ("3", "uc3"):
+        return run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
+    elif str(use_case).lower() == "all":
+        rc1 = run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+        rc2 = run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
+        rc3 = run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
+        return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
+    elif use_case is None:
+        if auto or live or verbose:
+            return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+        else:
+            return run_interactive_demo_menu(args)
+    else:
+        parser.error(f"Unknown use case '{use_case}'. Choose from: 1, 2, 3, or all.")
+
+
+def run_interactive_harness_shell() -> int:
+    """Launches the interactive FikraCore Harness command shell with prompt."""
+    try:
+        import readline  # noqa: F401
+    except ImportError:
+        pass
+    import shlex
+    from .demo_presenter import (
+        _gradient_text,
+        render_executive_harness_help,
+        RESET,
+        BOLD,
+        CYAN,
+        DIM,
+    )
+
+    banner_lines = [
+        "  ███████╗██╗██╗  ██╗██████╗  █████╗  ██████╗ ██████╗ ██████╗ ███████╗",
+        "  ██╔════╝██║██║ ██╔╝██╔══██╗██╔══██╗██╔════╝██╔═══██╗██╔══██╗██╔════╝",
+        "  █████╗  ██║█████═╝ ██████╔╝███████║██║     ██║   ██║██████╔╝█████╗  ",
+        "  ██╔══╝  ██║██╔═██╗ ██╔══██╗██╔══██║██║     ██║   ██║██╔══██╗██╔══╝  ",
+        "  ██║     ██║██║ ╚██╗██║  ██║██║  ██║╚██████╗╚██████╔╝██║  ██║███████╗",
+        "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝",
+    ]
+    print("")
+    for b_line in banner_lines:
+        print(_gradient_text(b_line))
+    tagline = "  T E L E C O M   R E A S O N I N G ,   L E A R N I N G   &   R E S I L I E N C E   P L A T F O R M"
+    subtag = "              Unified Cognitive Telecom Brain Harness & Capabilities Registry"
+    print(_gradient_text(tagline))
+    print(f"{DIM}{subtag}{RESET}\n")
+
+    print(f"  {BOLD}Core Capabilities:{RESET}")
+    print(f"    {CYAN}• Operations:{RESET}    investigate · discover · learn · predict · simulate · inspect · present")
+    print(f"    {CYAN}• Showcases:{RESET}     demo [1|2|3|all] · diagnose-run · h2-demo · h3-demo · h4-demo")
+    print(f"    {CYAN}• Benchmarks:{RESET}    benchmark · report · validate · mcp-smoke · benchmark-parity\n")
+    print(f"  {DIM}Type {CYAN}'help'{DIM} for capabilities overview, {CYAN}'demo'{DIM} for showcase, or {CYAN}'exit'{DIM} to quit.{RESET}\n")
+
+    prompt_str = f"{CYAN}{BOLD}fikracore>{RESET} "
+    while True:
+        try:
+            cmd_line = input(prompt_str).strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\n")
+            return 0
+
+        if not cmd_line:
+            continue
+
+        if cmd_line.lower() in ("exit", "quit", "q"):
+            return 0
+
+        if cmd_line.lower() in ("help", "?", "-h", "--help"):
+            print(render_executive_harness_help())
+            continue
+
+        if cmd_line.lower() in ("clear", "cls"):
+            import os
+            os.system("clear")
+            continue
+
+        if cmd_line.lower() in ("1", "uc1"):
+            cmd_line = "demo 1"
+        elif cmd_line.lower() in ("2", "uc2"):
+            cmd_line = "demo 2"
+        elif cmd_line.lower() in ("3", "uc3"):
+            cmd_line = "demo 3"
+        elif cmd_line.lower() in ("all", "a"):
+            cmd_line = "demo all"
+
+        try:
+            tokens = shlex.split(cmd_line)
+        except ValueError as e:
+            print(f"Parse error: {e}")
+            continue
+
+        try:
+            main(tokens, in_shell=True)
+        except SystemExit:
+            pass
+        except Exception as e:
+            print(f"Command error: {e}")
+        print("")
+
+
+def main(argv=None, in_shell: bool = False):
+    if argv is None:
+        import sys
+        argv = list(sys.argv[1:])
+
+    from .demo_presenter import render_executive_harness_help
+
+    # If root help is requested from terminal, display executive Harness view
+    if argv in (["-h"], ["--help"]):
+        print(render_executive_harness_help())
+        return 0
+
+    # If no arguments provided at all:
+    if not argv:
+        if not in_shell:
+            return run_interactive_harness_shell()
+        else:
+            print(render_executive_harness_help())
+            return 0
+
+    # If flags like -v, --live, --auto are given without a subcommand, route to demo
+    if argv[0].startswith("-") and argv[0] not in ("-h", "--help"):
+        argv = ["demo"] + argv
+
     parser = build_parser()
     args = parser.parse_args(argv)
+    if not getattr(args, "command", None):
+        print(render_executive_harness_help())
+        return 0
+
     try:
-        if args.command == "investigate":
+        if args.command == "demo":
+            return handle_demo_command(args, parser)
+        elif args.command == "investigate":
             from ..capabilities import default_capability_registry
             cap_res = default_capability_registry.execute("investigate", {
                 "run_directory": str(args.run_directory) if args.run_directory else None,

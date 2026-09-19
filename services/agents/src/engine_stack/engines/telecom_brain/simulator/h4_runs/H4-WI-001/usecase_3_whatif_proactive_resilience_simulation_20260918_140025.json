@@ -1,0 +1,66 @@
+{
+  "demo_id": "DEMO-USECASE-3-WHATIF-20260918T140025Z",
+  "scenario_id": "H4-WI-001",
+  "scenario_title": "MPLS Edge Router Failure",
+  "execution_timestamp": "2026-09-18T14:00:25.484990+00:00",
+  "target_directory": "/Users/adeelarshad/kagent/services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001",
+  "trigger": {
+    "canonical_id": "IP:PE:RTR-07",
+    "entity_display_name": "MPLS Edge Router-07",
+    "event_type": "FAILURE",
+    "severity": "CRITICAL"
+  },
+  "assumptions": {
+    "failover_available": false,
+    "failover_capacity": "NONE",
+    "duration_minutes": 30,
+    "traffic_load_profile": "NORMAL"
+  },
+  "terminal_state": "Terminal.EXPLAINED",
+  "confidence": 0.95,
+  "propagation_paths_count": 0,
+  "critical_failure_surfaces_count": 1,
+  "critical_failure_surfaces": [
+    {
+      "surface_id": "CFS-SPOF-H4-WI-001",
+      "risk_type": "SPOF",
+      "components": [
+        "MPLS Edge Router-07"
+      ],
+      "criticality_score": 0.59,
+      "rationale": "Single point of failure: MPLS Edge Router-07 has no designated standby peer."
+    }
+  ],
+  "blast_radius": {
+    "directly_affected_entities": [],
+    "indirectly_affected_entities": [],
+    "affected_services": [
+      "5G SA Mobile Data",
+      "Enterprise MPLS VPN"
+    ],
+    "customer_facing_impact": "Direct Outage: 1 components impacted across 1 domain(s). Affected services: 5G SA Mobile Data, Enterprise MPLS VPN."
+  },
+  "mitigation_options": [
+    {
+      "option_id": "OPT-A",
+      "title": "Introduce Diverse Secondary Transport / Failure Domain",
+      "risk_reduction": 0.85,
+      "complexity": "MEDIUM",
+      "disruption": "NONE"
+    },
+    {
+      "option_id": "OPT-B",
+      "title": "Scale Backup Headroom to 120% Peak Capacity",
+      "risk_reduction": 0.75,
+      "complexity": "LOW",
+      "disruption": "MINIMAL"
+    },
+    {
+      "option_id": "OPT-C",
+      "title": "Separate Physical Power / Conduit Dependencies",
+      "risk_reduction": 0.92,
+      "complexity": "HIGH",
+      "disruption": "DISRUPTIVE"
+    }
+  ]
+}

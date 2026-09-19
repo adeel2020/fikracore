@@ -103,6 +103,22 @@ def _timeline_value(value) -> str:
     return text[2:].strip() if text.startswith("- ") else text
 
 
+def _clean_timeline(raw_timeline: list) -> list[str]:
+    """Filter out bare timestamps and remove empty or duplicate lines."""
+    cleaned = []
+    seen = set()
+    for t in raw_timeline:
+        val = _timeline_value(t.value if hasattr(t, "value") else t).strip()
+        # Drop bare ISO timestamps with no explanatory text
+        if re.match(r"^\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(\.\d+)?Z?$", val):
+            continue
+        if not val or val in seen:
+            continue
+        seen.add(val)
+        cleaned.append(val)
+    return cleaned
+
+
 def _friendly_incident_title(story: IncidentStory) -> str:
     """Derive a human-friendly, professional incident name without raw slugs, IDs, or file paths."""
     service = _spoken_service(story) if hasattr(story, "services") else ""
@@ -142,7 +158,13 @@ def render_story(story: IncidentStory) -> str:
         for svc in story.services:
             lines.append(f"- **Service:** {_fmt_fact(svc.value)}")
         for nf in story.network_functions:
-            lines.append(f"- **Component:** {_fmt_fact(nf.value)}")
+            nf_val = _fmt_fact(nf.value)
+            nf_slug = getattr(nf, "slug", "") or ""
+            slug_name = nf_slug.split("/")[-1].upper() if "/" in nf_slug else nf_slug.upper()
+            if slug_name and slug_name.lower() not in nf_val.lower():
+                lines.append(f"- **Component:** `{slug_name}` — {nf_val}")
+            else:
+                lines.append(f"- **Component:** {nf_val}")
     if story.root_cause:
         lines += ["", "### 🔍 Root Cause Analysis (RCA)", f"**Confirmed root cause:** {story.root_cause.value}"]
     elif story.hypotheses:
@@ -155,18 +177,21 @@ def render_story(story: IncidentStory) -> str:
         if reasons:
             lines += ["", "**Why these alarms were grouped:**"]
             lines += [f"- {reason}" for reason in reasons]
-    if story.causal_chain:
+    if story.causal_chain and story.causal_chain.steps:
         lines += ["", "### ⛓️ Causal Chain", "**Causal chain:**"]
         for step in story.causal_chain.steps:
-            lines.append(f"- **{step.label}:** {step.fact.value if step.fact else ''} ({step.claim_type})")
+            fact_desc = f" ──► {step.fact.value}" if step.fact and step.fact.value else ""
+            lines.append(f"- **{step.label}**{fact_desc} *({step.claim_type})*")
     evidence = _hypothesis_evidence(story)
     if evidence:
         lines += ["", "### 📊 Correlated Evidence", "**Supporting evidence:**"]
         lines += [f"- {item}" for item in evidence]
     if story.timeline:
-        lines += ["", "### ⏱️ Timeline & Chronology", "**Timeline:**"]
-        for t in story.timeline:
-            lines.append(f"- {_timeline_value(t.value)}")
+        clean_tl = _clean_timeline(story.timeline)
+        if clean_tl:
+            lines += ["", "### ⏱️ Timeline & Chronology", "**Timeline:**"]
+            for item in clean_tl:
+                lines.append(f"- {item}")
     if story.remediations:
         lines += ["", "### 🛠️ Remediation & Actions", "**Remediation:**"] + [f"- {_fmt_fact(r.value)}" for r in story.remediations]
     if story.recovery_events:
@@ -580,7 +605,7 @@ def _spoken_incident_story(story: IncidentStory) -> str:
     # 2. Root Cause / Primary Mechanism
     if story.root_cause:
         rc = _spoken_fact(story.root_cause.value)
-        parts.append(f"The investigation confirmed the root cause is {rc}.")
+        parts.append(f"The investigation confirmed root cause is {rc}.")
     elif story.hypotheses:
         lead = _spoken_fact(story.hypotheses[0].hypothesis.value)
         parts.append(f"The leading cause identified is {lead}.")
@@ -620,6 +645,15 @@ def _spoken_incident_story(story: IncidentStory) -> str:
 def render_spoken_answer(intent: str, story: IncidentStory) -> str:
     """Render a professional spoken briefing from structured story context."""
     service = _spoken_service(story)
+
+    if intent == "executive":
+        severity = _spoken_severity(_spoken_fact(story.severity))
+        status = _spoken_fact(story.status, "active")
+        hypo = _spoken_hypothesis(story)
+        if not story.root_cause:
+            open_items = f" {_spoken_open_items(story)}"
+            return f"{service} is currently {severity} {status}. {hypo}{open_items}".strip()
+        return f"{service} is currently {severity} {status}. {hypo}".strip()
 
     if intent in ("root_cause", "why"):
         return f"For {service}, {_spoken_hypothesis(story)} {_spoken_open_items(story)}".strip()

@@ -1,13 +1,51 @@
-"""Strict operational contracts; no simulator world or answer labels are accepted."""
-
+import pydantic
+from datetime import datetime
 from enum import Enum
-from typing import Any, Literal
+from typing import Any, Literal, Union
 
-from pydantic import BaseModel, ConfigDict, Field, AwareDatetime
+from pydantic import BaseModel, Field
 
+IS_PYDANTIC_V2 = getattr(pydantic, "__version__", "1.").startswith("2")
 
-class Contract(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
+if IS_PYDANTIC_V2:
+    from pydantic import ConfigDict
+
+    class Contract(BaseModel):
+        model_config = ConfigDict(extra="forbid", frozen=True)
+else:
+    class Contract(BaseModel):
+        class Config:
+            extra = "forbid"
+            allow_mutation = False
+            frozen = True
+
+        @classmethod
+        def __init_subclass__(cls, **kwargs):
+            super().__init_subclass__(**kwargs)
+            if not hasattr(cls, "model_fields"):
+                cls.model_fields = getattr(cls, "__fields__", {})
+
+        @classmethod
+        def model_validate(cls, obj: Any):
+            if isinstance(obj, cls):
+                return obj
+            return cls.parse_obj(obj)
+
+        @classmethod
+        def model_validate_json(cls, json_data: str | bytes, **kwargs):
+            return cls.parse_raw(json_data, **kwargs)
+
+        def model_dump(self, mode: str = "python", **kwargs) -> dict:
+            import json
+            if mode == "json":
+                return json.loads(self.json(**kwargs))
+            return self.dict(**kwargs)
+
+        def model_dump_json(self, **kwargs) -> str:
+            return self.json(**kwargs)
+
+        def model_copy(self, update: dict = None, deep: bool = False):
+            return self.copy(update=update, deep=deep)
 
 
 class Terminal(str, Enum):
@@ -58,8 +96,8 @@ class GeneratedRunInput(Contract):
 
 class Evidence(Contract):
     evidence_id: str
-    event_time: AwareDatetime
-    ingestion_time: AwareDatetime
+    event_time: datetime
+    ingestion_time: datetime
     domain: str
     entity: str
     canonical_entity: str
@@ -175,7 +213,7 @@ class ValidationDecision(Contract):
     validator: str = Field(min_length=1)
     decision: Literal["validate", "reject"]
     reason: str = Field(min_length=1)
-    timestamp: AwareDatetime
+    timestamp: datetime
 
 
 # ==========================================
@@ -351,7 +389,7 @@ class ValidationRecord(Contract):
     decision: ValidationDecisionType
     validated_by_role: str = "Transport Domain SME"
     reason: str
-    timestamp: AwareDatetime
+    timestamp: datetime
     evidence_refs: list[str] = Field(default_factory=list)
     modified_relation: dict[str, Any] | None = None
 
@@ -383,7 +421,7 @@ class LearningLedgerEntry(Contract):
     reused_in: list[str] = Field(default_factory=list)
     helpful_reuse_count: int = 0
     harmful_reuse_count: int = 0
-    last_verified_at: AwareDatetime
+    last_verified_at: datetime
 
 
 class LearningUnit(Contract):

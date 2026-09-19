@@ -92,8 +92,13 @@ class SimulationManager:
         return self.runs.get(run_id)
 
     def get_run_for_scenario(self, scenario_id: str) -> Optional[SimulationRun]:
+        from ..presentation.scenario_resolver import ScenarioResolver, get_default_h4_registry
+        resolver = ScenarioResolver(get_default_h4_registry())
+        rec, _, _ = resolver.resolve_or_disambiguate(scenario_id)
+        canonical_id = rec.id.upper() if rec else scenario_id.upper()
+
         for run in self.runs.values():
-            if run.scenario_id.upper() == scenario_id.upper():
+            if run.scenario_id.upper() in (scenario_id.upper(), canonical_id):
                 return run
         return None
 
@@ -112,6 +117,7 @@ class SimulationManager:
             executed_actions=[],
         )
         self.runs[run_id] = run
+        self.runs[scenario_id.upper()] = run
         self.runs["default"] = run
         return run
 

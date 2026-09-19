@@ -45,6 +45,20 @@ class CrossDomainPairCoverage(BaseModel):
     status: str  # "CONNECTED", "SPARSE", "UNLINKED"
 
 
+class TelemetryInstrumentationScore(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+
+    total_telemetry_entities: int = 0
+    loki_log_streams: int = 0
+    prometheus_metric_streams: int = 0
+    trace_spans: int = 0
+    alert_rules: int = 0
+    monitored_entities_count: int = 0
+    telemetry_links_count: int = 0
+    instrumentation_coverage_pct: float = 0.0
+    status: str = "INSTRUMENTED"
+
+
 class ServiceTopologyCoverage(BaseModel):
     model_config = ConfigDict(extra="ignore")
 
@@ -67,6 +81,7 @@ class CoverageReport(BaseModel):
         "25% entity_cov + 25% rel_cov + 20% service_cov + 15% evidence_cov + 15% validated_cov"
     )
     domain_scores: Dict[str, DomainCoverageScore] = Field(default_factory=dict)
+    telemetry_instrumentation: Optional[TelemetryInstrumentationScore] = None
     cross_domain_matrix: List[CrossDomainPairCoverage] = Field(default_factory=list)
     service_topologies: List[ServiceTopologyCoverage] = Field(default_factory=list)
     top_gaps: List[KnowledgeGap] = Field(default_factory=list)
@@ -82,15 +97,15 @@ class KnowledgeCoverageAnalyzer:
         "OCS": 10,
         "RAN": 20,
         "OSS/BSS": 10,
-        "Observability / Telemetry": 10,
+        "Cross-Domain Operations": 5,
     }
 
     EXPECTED_CROSS_DOMAIN_PAIRS = [
         ("Mobile Core", "Transport"),
         ("Mobile Core", "OCS"),
         ("IMS", "Transport"),
-        ("Mobile Core", "Observability / Telemetry"),
         ("Mobile Core", "RAN"),
+        ("Mobile Core", "IMS"),
     ]
 
     def __init__(self, inventory: KnowledgeInventoryResult):
@@ -164,15 +179,27 @@ class KnowledgeCoverageAnalyzer:
                 coverage_label=label,
             )
 
-        # 2. Cross-domain coverage (§24)
+        # 2. Cross-domain coverage (§24) - Physical Interfaces & Cross-Domain Incident Bridges
         cross_matrix: List[CrossDomainPairCoverage] = []
         links = self.inventory.unique_links
+
+        # Index domains connected by cross-domain incidents/correlations
+        incident_connected_domains: Dict[str, Set[str]] = {}
+        for l in links:
+            if l.source_domain == "Cross-Domain Operations" and l.target_domain in ("Mobile Core", "Transport", "RAN", "OCS", "IMS"):
+                incident_connected_domains.setdefault(l.from_slug, set()).add(l.target_domain)
+
         for src, tgt in self.EXPECTED_CROSS_DOMAIN_PAIRS:
-            cnt = sum(
+            direct_cnt = sum(
                 1 for l in links
-                if (l.source_domain == src and l.target_domain == tgt)
-                or (l.source_domain == tgt and l.target_domain == src)
+                if (not getattr(l, "is_telemetry_link", False))
+                and ((l.source_domain == src and l.target_domain == tgt)
+                or (l.source_domain == tgt and l.target_domain == src))
             )
+            # Count incidents that bridge both domains
+            bridge_cnt = sum(1 for inc, doms in incident_connected_domains.items() if src in doms and tgt in doms)
+            cnt = direct_cnt + bridge_cnt
+
             status = "CONNECTED" if cnt >= 5 else ("SPARSE" if cnt > 0 else "UNLINKED")
             cross_matrix.append(
                 CrossDomainPairCoverage(
@@ -183,7 +210,31 @@ class KnowledgeCoverageAnalyzer:
                 )
             )
 
-        # 3. Service topology coverage (§35)
+        # 3. Telemetry & Observability Layer Coverage (§35)
+        telem_ents = [e for e in self.inventory.entities if getattr(e, "plane", "") == "observability" or "grafana" in e.slug or e.type in ("evidence", "kpi", "kpi-event", "observation")]
+        loki_logs = sum(1 for e in telem_ents if "loki" in e.slug or "log" in e.slug)
+        prom_metrics = sum(1 for e in telem_ents if "prom" in e.slug or "metric" in e.slug or e.type == "kpi")
+        tempo_traces = sum(1 for e in telem_ents if "tempo" in e.slug or "trace" in e.slug)
+        alerts = sum(1 for e in telem_ents if "alert" in e.slug or "alarm" in e.slug)
+        
+        telem_links = [l for l in links if getattr(l, "is_telemetry_link", False) or "grafana" in l.from_slug or "grafana" in l.to_slug]
+        monitored_nodes = {l.to_slug for l in telem_links} | {l.from_slug for l in telem_links if "grafana" not in l.from_slug}
+        op_nodes = [e for e in self.inventory.entities if e.type in ("network-function", "domain-function", "service")]
+        inst_cov = min(100.0, (len(monitored_nodes) / max(1, len(op_nodes))) * 100.0) if op_nodes else 100.0
+        
+        telem_score = TelemetryInstrumentationScore(
+            total_telemetry_entities=len(telem_ents),
+            loki_log_streams=loki_logs,
+            prometheus_metric_streams=prom_metrics,
+            trace_spans=tempo_traces,
+            alert_rules=alerts,
+            monitored_entities_count=len(monitored_nodes),
+            telemetry_link_count=len(telem_links),
+            instrumentation_coverage_pct=round(inst_cov, 1),
+            status="INSTRUMENTED" if inst_cov >= 60.0 else "PARTIALLY_INSTRUMENTED",
+        )
+
+        # 4. Service topology coverage (§35)
         service_topologies: List[ServiceTopologyCoverage] = []
         for s_slug, s_info in self.inventory.services.items():
             title = s_info.get("title", s_slug)
@@ -194,7 +245,7 @@ class KnowledgeCoverageAnalyzer:
             svc_links = [l for l in links if l.from_slug == s_slug or l.to_slug == s_slug]
             has_transport = any(l.target_domain == "Transport" or l.source_domain == "Transport" for l in svc_links)
             has_charging = any("ocs" in (l.to_slug + l.from_slug).lower() for l in svc_links)
-            has_mon = any("grafana" in (l.to_slug + l.from_slug).lower() or l.target_domain == "Observability / Telemetry" for l in svc_links)
+            has_mon = any(getattr(l, "is_telemetry_link", False) or "grafana" in (l.to_slug + l.from_slug).lower() for l in svc_links)
 
             score = 25.0
             if funcs:
@@ -217,8 +268,8 @@ class KnowledgeCoverageAnalyzer:
                 )
             )
 
-        # 4. Overall composite score
-        valid_scores = [s.composite_score_pct for s in domain_scores.values() if s.domain != "Other"]
+        # 5. Overall composite score
+        valid_scores = [s.composite_score_pct for s in domain_scores.values() if s.domain not in ("Other", "Unknown")]
         overall_pct = round(sum(valid_scores) / max(1, len(valid_scores)), 1) if valid_scores else 0.0
 
         if overall_pct >= 75.0:
@@ -232,6 +283,7 @@ class KnowledgeCoverageAnalyzer:
             overall_composite_score_pct=overall_pct,
             overall_status=overall_status,
             domain_scores=domain_scores,
+            telemetry_instrumentation=telem_score,
             cross_domain_matrix=cross_matrix,
             service_topologies=service_topologies,
             top_gaps=self.inventory.gaps[:10],
@@ -398,9 +450,21 @@ class KnowledgeCoverageAnalyzer:
         for cd in report.cross_domain_matrix:
             lines.append(f"| **{cd.source_domain}** | **{cd.target_domain}** | {cd.link_count} | `{cd.status}` |")
 
+        if report.telemetry_instrumentation:
+            ti = report.telemetry_instrumentation
+            lines.extend([
+                "",
+                "## 3. Telemetry & Observability Layer Instrumentation",
+                "",
+                f"- **Overall Instrumentation Coverage**: **`{ti.instrumentation_coverage_pct}%` ({ti.status})**",
+                f"- **Total Telemetry Artifacts**: `{ti.total_telemetry_entities}` (Logs: {ti.loki_log_streams}, Metrics: {ti.prometheus_metric_streams}, Traces: {ti.trace_spans}, Alerts: {ti.alert_rules})",
+                f"- **Monitored Network Functions / Services**: `{ti.monitored_entities_count}`",
+                f"- **Active Telemetry Linkages**: `{ti.telemetry_links_count}`",
+            ])
+
         lines.extend([
             "",
-            "## 3. Service Topology Completeness (§35)",
+            "## 4. Service Topology Completeness (§35)",
             "",
             "| Service | Domain | Functions Mapped | Transport Path | Charging | Monitoring | Completeness |",
             "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |",

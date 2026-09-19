@@ -13,6 +13,12 @@ if not hasattr(BaseModel, "model_dump"):
     BaseModel.model_dump = lambda self, **kwargs: self.dict(**{k: v for k, v in kwargs.items() if k != "mode"})
 if not hasattr(BaseModel, "model_copy"):
     BaseModel.model_copy = lambda self, **kwargs: self.copy(**kwargs)
+if not hasattr(BaseModel, "model_validate"):
+    BaseModel.model_validate = classmethod(lambda cls, obj, **kwargs: obj if isinstance(obj, cls) else cls.parse_obj(obj))
+if not hasattr(BaseModel, "model_validate_json"):
+    BaseModel.model_validate_json = classmethod(lambda cls, json_data, **kwargs: cls.parse_raw(json_data, **kwargs))
+if not hasattr(BaseModel, "model_dump_json"):
+    BaseModel.model_dump_json = lambda self, **kwargs: self.json(**kwargs)
 
 
 class FCAPSClassification(str, Enum):

@@ -295,9 +295,9 @@
     "semantic_hash": "a2760511c65806022ad20adf74370ff3"
   },
   "AGENTS.md": {
-    "mtime": 1783977120.6059594,
-    "ast_hash": "62c05a2bf20bf036a0b2633478663e64",
-    "semantic_hash": "62c05a2bf20bf036a0b2633478663e64"
+    "mtime": 1789555331.6588066,
+    "ast_hash": "50aed984ca0b41b8bebf125b9a87c3f9",
+    "semantic_hash": ""
   },
   "ckg-graphify-out/.graphify_detect.json": {
     "mtime": 1781162947.7532923,
@@ -500,8 +500,8 @@
     "semantic_hash": ""
   },
   "frontend/src/components/features/chat-history-panel/ChatHistoryPanel.tsx": {
-    "mtime": 1783977200.0568945,
-    "ast_hash": "72f0757b25cdfb43c75ba7924cdcfef9",
+    "mtime": 1789556389.6580367,
+    "ast_hash": "5820e880305b49e9874f39a43d2b8bf6",
     "semantic_hash": ""
   },
   "frontend/src/components/features/chat-history-panel/index.ts": {
@@ -510,8 +510,8 @@
     "semantic_hash": ""
   },
   "frontend/src/components/features/chat-history-panel/useChatHistory.ts": {
-    "mtime": 1786331784.3684247,
-    "ast_hash": "d3312ff42de8c4b2cca3fe4ac1da30ec",
+    "mtime": 1789556373.001875,
+    "ast_hash": "5de7a5cbe8cf68cbe807b45fdfd3f3d6",
     "semantic_hash": ""
   },
   "frontend/src/components/features/dashboard-view/DashboardView.tsx": {
@@ -605,18 +605,18 @@
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/ChatPanel.tsx": {
-    "mtime": 1788849613.4907434,
-    "ast_hash": "4348d6ba0fe3943ca3b5f84ca2aa9578",
+    "mtime": 1789556344.4232004,
+    "ast_hash": "553eb93d4b30d467624bc9682068a332",
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/HistorySidebar.tsx": {
-    "mtime": 1783977200.013699,
-    "ast_hash": "1bee56b64269008df14654e2ba4a7f42",
+    "mtime": 1789556408.0692916,
+    "ast_hash": "94e0e087f7dd9855b7d912c117baaba7",
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/MessageItem.tsx": {
-    "mtime": 1789452908.9617076,
-    "ast_hash": "3477af1125f3dc6063db8b5ad0d434af",
+    "mtime": 1789561411.09264,
+    "ast_hash": "95e59e1ffa0bc809b13c20f699e7a835",
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/components/TelemetrySidebar.tsx": {
@@ -645,8 +645,8 @@
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/hooks/useAgenticQna.ts": {
-    "mtime": 1788851095.0385358,
-    "ast_hash": "a74adf69884d8ffe0044d5e592ce819a",
+    "mtime": 1789556311.1461647,
+    "ast_hash": "e031fa17d6c702299610d64384211eed",
     "semantic_hash": ""
   },
   "frontend/src/components/features/agentic-qna-view/index.ts": {
@@ -3370,8 +3370,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/qna/router.py": {
-    "mtime": 1788849118.4916968,
-    "ast_hash": "abdf771243b5c62b836d063ddf780d7d",
+    "mtime": 1789556243.240463,
+    "ast_hash": "6d2a374af60edbb4522872ee0957e1df",
     "semantic_hash": ""
   },
   "services/agents/src/qna/skill_manager.py": {
@@ -3620,7 +3620,7 @@
     "semantic_hash": ""
   },
   "services/agents/trace_graph.json": {
-    "mtime": 1789497782.5956943,
+    "mtime": 1789721024.7369413,
     "ast_hash": "c4bc949acbfbd65927bf61313037fc04",
     "semantic_hash": ""
   },
@@ -5950,8 +5950,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/models.py": {
-    "mtime": 1788728871.3042238,
-    "ast_hash": "b70e4adae4fec8b2018539ffa513e531",
+    "mtime": 1789644648.8559468,
+    "ast_hash": "a75bdc9a8c605ab742963cf610dcd2d9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/services/__init__.py": {
@@ -6640,8 +6640,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines.txt": {
-    "mtime": 1789027653.2955322,
-    "ast_hash": "3b61c56a0594fa95b523e0bf9aa3412e",
+    "mtime": 1789704881.244208,
+    "ast_hash": "68b329da9893e34099c7d8ad5cb9c940",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/operator_model/reference_synthetic_network.yaml": {
@@ -10215,13 +10215,13 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/cli.py": {
-    "mtime": 1789414888.784096,
-    "ast_hash": "ea783c5c55dc2693ce29b4b13d222a0d",
+    "mtime": 1789720998.2993782,
+    "ast_hash": "14e6443fc2f679f9d8eae64a0e6710ab",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/contracts.py": {
-    "mtime": 1789413276.1137714,
-    "ast_hash": "cb00340aa5fc81daf64ede01ccdd9ac0",
+    "mtime": 1789703330.161354,
+    "ast_hash": "ddc589513c548c8e3f3dae6050e36f80",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/evaluator.py": {
@@ -13540,8 +13540,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/presentation/zaki_bridge.py": {
-    "mtime": 1789381074.4955683,
-    "ast_hash": "35b18f3656f7fb3ff0b63af151103160",
+    "mtime": 1789708056.3399508,
+    "ast_hash": "5be77583f4f7ba7fc9e050566a3a7c05",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h2_generator.py": {
@@ -15480,1052 +15480,1052 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/candidate_knowledge.yaml": {
-    "mtime": 1789413204.5587234,
+    "mtime": 1789644540.963006,
     "ast_hash": "558a3fa017acfd8d703a3bcf603749f3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/demo_metadata.yaml": {
-    "mtime": 1789413204.5671117,
+    "mtime": 1789644540.9698663,
     "ast_hash": "47d9aeeab50575f94fe02fbdb99de31a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.5650601,
+    "mtime": 1789644540.968301,
     "ast_hash": "fe6f8e330e31e2acc7cba8649b0d671e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.5639102,
+    "mtime": 1789644540.9675717,
     "ast_hash": "6bf9ae09c4d9354cbd0cb9d658aa372d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.563042,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644540.966852,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.5576394,
+    "mtime": 1789644540.961845,
     "ast_hash": "45dc8bf560d36be71d099e0e0c8a0c19",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-001/validation_decision.yaml": {
-    "mtime": 1789413204.559788,
+    "mtime": 1789644540.9640224,
     "ast_hash": "2dcd58d08074c49b3ff1e85ad66d416b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/candidate_knowledge.yaml": {
-    "mtime": 1789413204.5752215,
+    "mtime": 1789644540.9759939,
     "ast_hash": "55d2c1c2ae038c3f5adbdf1b6aa829da",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/demo_metadata.yaml": {
-    "mtime": 1789413204.587526,
+    "mtime": 1789644540.9843953,
     "ast_hash": "df1e904e80306d2c23eac1552cca1cab",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.585062,
+    "mtime": 1789644540.9827425,
     "ast_hash": "d5ff8d944e56972b0951efb510a765a7",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.5834317,
+    "mtime": 1789644540.981961,
     "ast_hash": "9a59703a94e9f9dd1d0970b8bced02c6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.5815258,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644540.9808087,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.5737276,
+    "mtime": 1789644540.974966,
     "ast_hash": "ae5924800b32ca72d25ebfa4e213077c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-002/validation_decision.yaml": {
-    "mtime": 1789413204.576652,
+    "mtime": 1789644540.9770308,
     "ast_hash": "ed2f9dd07cf85343764a90791d18400f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/candidate_knowledge.yaml": {
-    "mtime": 1789413204.596892,
+    "mtime": 1789644540.9902947,
     "ast_hash": "4ea088a3e11f1c28f01af0ca81f9555a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/demo_metadata.yaml": {
-    "mtime": 1789413204.6055918,
+    "mtime": 1789644540.998108,
     "ast_hash": "ad78a196c93d3c6940211e68a003e4d2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.6035576,
+    "mtime": 1789644540.996504,
     "ast_hash": "8629fdeedb6b985a5b173add9e2bba85",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.602556,
+    "mtime": 1789644540.9952948,
     "ast_hash": "ee2cfada653098d419d9358b10203dfa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.6015265,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644540.9940012,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.5956068,
+    "mtime": 1789644540.9892354,
     "ast_hash": "f5f13f238839ed0bfd6c6b8a19af7dfb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-003/validation_decision.yaml": {
-    "mtime": 1789413204.598485,
+    "mtime": 1789644540.9912384,
     "ast_hash": "f0ad08e958f100463b8bafe7690877e0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/candidate_knowledge.yaml": {
-    "mtime": 1789413204.6142378,
+    "mtime": 1789644541.003972,
     "ast_hash": "366060a8aa5673923ba1db1aef614927",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/demo_metadata.yaml": {
-    "mtime": 1789413204.6228619,
+    "mtime": 1789644541.0111353,
     "ast_hash": "74f48075b00946135bc112047583d700",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.6210651,
+    "mtime": 1789644541.0092223,
     "ast_hash": "bd10a4606006ae76f9f77b03ecffadba",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.6198478,
+    "mtime": 1789644541.0084932,
     "ast_hash": "0d8db643e2a13451027219d7de97c547",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.6189957,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.0077786,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.6124208,
+    "mtime": 1789644541.0029614,
     "ast_hash": "deac30b93d135cc3dc2bda2ff4b872e1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-004/validation_decision.yaml": {
-    "mtime": 1789413204.6153314,
+    "mtime": 1789644541.0048933,
     "ast_hash": "212ba6f4d239758f6fce3298d5173e4e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/candidate_knowledge.yaml": {
-    "mtime": 1789413204.6331363,
+    "mtime": 1789644541.017758,
     "ast_hash": "567229f483fa66700f3654f8a63847d9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/demo_metadata.yaml": {
-    "mtime": 1789413204.6474652,
+    "mtime": 1789644541.0261714,
     "ast_hash": "052604b1c2d2583b4c7bf2b07b4479d5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.6449971,
+    "mtime": 1789644541.02438,
     "ast_hash": "a068965fa6f44c8bfac5dfc3dfd35637",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.6430454,
+    "mtime": 1789644541.0235488,
     "ast_hash": "82a9cf6f698fafddbe8402f2287b25f3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.640862,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.0226247,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.6313953,
+    "mtime": 1789644541.0166645,
     "ast_hash": "4224205840ee8019c2f0e8be76ef849e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-005/validation_decision.yaml": {
-    "mtime": 1789413204.6349778,
+    "mtime": 1789644541.0189002,
     "ast_hash": "56d37d523e3df54a002ae7faeea9e4c3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/candidate_knowledge.yaml": {
-    "mtime": 1789413204.6559267,
+    "mtime": 1789644541.033348,
     "ast_hash": "d0d1c2d0850ecdc22baec68337580fde",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/demo_metadata.yaml": {
-    "mtime": 1789413204.6657784,
+    "mtime": 1789644541.0401337,
     "ast_hash": "0b4274830a2b19ce8b574350894a3df2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.662752,
+    "mtime": 1789644541.0385823,
     "ast_hash": "855255e3335c73c6be65bb3b93eecc78",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.6615891,
+    "mtime": 1789644541.0378318,
     "ast_hash": "a81b2a237cb9360fa2fb8289c44acf7b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.6602683,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.037091,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.6543534,
+    "mtime": 1789644541.0323122,
     "ast_hash": "41f112284beb5a832de11318f7f2d4b6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-006/validation_decision.yaml": {
-    "mtime": 1789413204.6570263,
+    "mtime": 1789644541.0342634,
     "ast_hash": "0a6c80fa58895408bbdfe25c85db1efe",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/candidate_knowledge.yaml": {
-    "mtime": 1789413204.674066,
+    "mtime": 1789644541.046856,
     "ast_hash": "d5580468baa4400b08c403081dbbfec4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/demo_metadata.yaml": {
-    "mtime": 1789413204.6877816,
+    "mtime": 1789644541.0535452,
     "ast_hash": "2c8b85da42f6bc8c28bc756aba863bda",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.68489,
+    "mtime": 1789644541.0519996,
     "ast_hash": "f082665a97c31f2a56f2cd98280e4b42",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.6831496,
+    "mtime": 1789644541.0512261,
     "ast_hash": "e8bd309fff6c414c954521b051c34c75",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.6816962,
-    "ast_hash": "38078e321dd7f7d6108e7ad393113725",
+    "mtime": 1789644541.050535,
+    "ast_hash": "40b9a4c53b163299f40d42e473b8925f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.6726623,
+    "mtime": 1789644541.045682,
     "ast_hash": "9a62ae9cfbade96f78cebda59dd7116f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-007/validation_decision.yaml": {
-    "mtime": 1789413204.6756663,
+    "mtime": 1789644541.047808,
     "ast_hash": "7f70f3702f19a72667ccd16587939dc4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/candidate_knowledge.yaml": {
-    "mtime": 1789413204.6993182,
+    "mtime": 1789644541.059774,
     "ast_hash": "8cc12b0a7e4e7f3b73193b70463c9926",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/demo_metadata.yaml": {
-    "mtime": 1789413204.711616,
+    "mtime": 1789644541.0677555,
     "ast_hash": "b4ff78bcfd5c1602f947b59c9a54cabe",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.7091424,
+    "mtime": 1789644541.0661387,
     "ast_hash": "ca497b869d4d3683d5f3eb518ae5acf5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7080529,
+    "mtime": 1789644541.065407,
     "ast_hash": "22d304013abd312de7b20529c9314c08",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.706993,
-    "ast_hash": "38078e321dd7f7d6108e7ad393113725",
+    "mtime": 1789644541.06468,
+    "ast_hash": "40b9a4c53b163299f40d42e473b8925f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.6974986,
+    "mtime": 1789644541.0587564,
     "ast_hash": "48f92fccf6bf8ca0a7bc395601f93634",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-008/validation_decision.yaml": {
-    "mtime": 1789413204.701086,
+    "mtime": 1789644541.0607433,
     "ast_hash": "31abb4ddb459cdf2a6fd55c9c11dd2b6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/candidate_knowledge.yaml": {
-    "mtime": 1789413204.7196639,
+    "mtime": 1789644541.074196,
     "ast_hash": "9d9c9887bc31fb1ba2d943adf35c7b10",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/demo_metadata.yaml": {
-    "mtime": 1789413204.7279532,
+    "mtime": 1789644541.0819342,
     "ast_hash": "617f93bec4640e2af4bb00ccc0d66d21",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.7252543,
+    "mtime": 1789644541.080404,
     "ast_hash": "f1b69ab7bc1aab22b83a74e3bc58d7bf",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7242937,
+    "mtime": 1789644541.0796332,
     "ast_hash": "6a854e2a877bec5b1599a10d658e3ff4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.723508,
-    "ast_hash": "38078e321dd7f7d6108e7ad393113725",
+    "mtime": 1789644541.0785341,
+    "ast_hash": "40b9a4c53b163299f40d42e473b8925f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.7183936,
+    "mtime": 1789644541.0730882,
     "ast_hash": "3db69c2164c9ff079202febd8bd2c219",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-009/validation_decision.yaml": {
-    "mtime": 1789413204.7206473,
+    "mtime": 1789644541.0751255,
     "ast_hash": "5cb5b8df5590b9d1b8f66aee8d2f2659",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/candidate_knowledge.yaml": {
-    "mtime": 1789413204.737101,
+    "mtime": 1789644541.087801,
     "ast_hash": "dcd4fb50f1faf17b7daab3ff604ba5b2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/demo_metadata.yaml": {
-    "mtime": 1789413204.7472112,
+    "mtime": 1789644541.0970716,
     "ast_hash": "0494d1347c5564278b679d076a5c0c50",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.7450643,
+    "mtime": 1789644541.0941632,
     "ast_hash": "d39a7840b85bb0c2d860179a0d641395",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7435656,
+    "mtime": 1789644541.0932574,
     "ast_hash": "e3628b7c1508d025a8da5886e2ff4c68",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.7422452,
-    "ast_hash": "4333fa34cbfb3ce3483e961998e3bcc0",
+    "mtime": 1789644541.092358,
+    "ast_hash": "68d9f47d8b0e4036a8194504432e53d9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.7350407,
+    "mtime": 1789644541.0867567,
     "ast_hash": "0e4cd6235f46dca9c77d1418e65dcbf7",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-010/validation_decision.yaml": {
-    "mtime": 1789413204.738483,
+    "mtime": 1789644541.08874,
     "ast_hash": "cf534872ab730c7f3110f634e73f5eaa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/candidate_knowledge.yaml": {
-    "mtime": 1789413204.754028,
+    "mtime": 1789644541.103558,
     "ast_hash": "ec43f3f3f70271d1eda4764091ef2d0e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/demo_metadata.yaml": {
-    "mtime": 1789413204.7627728,
+    "mtime": 1789644541.1123126,
     "ast_hash": "17fd2488c245d6d0804e3fedb8684413",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.7611363,
+    "mtime": 1789644541.1101415,
     "ast_hash": "f8aacc837cd014de5cdcfa4d9f92456c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7602217,
+    "mtime": 1789644541.1093962,
     "ast_hash": "370e2446cb7e0cf8f75439402219cdd2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.7594543,
-    "ast_hash": "4333fa34cbfb3ce3483e961998e3bcc0",
+    "mtime": 1789644541.108575,
+    "ast_hash": "68d9f47d8b0e4036a8194504432e53d9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.7528174,
+    "mtime": 1789644541.102373,
     "ast_hash": "da8795d5ecc6d3c4b8cd90a284da64bb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-011/validation_decision.yaml": {
-    "mtime": 1789413204.7557669,
+    "mtime": 1789644541.1048717,
     "ast_hash": "22451544a62fac88d517a09b4e3b6bc6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/candidate_knowledge.yaml": {
-    "mtime": 1789413204.7705731,
+    "mtime": 1789644541.1187153,
     "ast_hash": "a8e07011d8de99070d78fca65d572e7d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/demo_metadata.yaml": {
-    "mtime": 1789413204.77846,
+    "mtime": 1789644541.1255043,
     "ast_hash": "325e5ad61b39be94f6e312c0df36aa5b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.7758458,
+    "mtime": 1789644541.1239662,
     "ast_hash": "615dcc6c856f763c207847776793fd27",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7750502,
+    "mtime": 1789644541.1231866,
     "ast_hash": "06a7cf768d3d98d90318463327d4bfd9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.774316,
-    "ast_hash": "4333fa34cbfb3ce3483e961998e3bcc0",
+    "mtime": 1789644541.1224034,
+    "ast_hash": "68d9f47d8b0e4036a8194504432e53d9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.7694886,
+    "mtime": 1789644541.117623,
     "ast_hash": "386fee67d243bcf19a16694c26b87390",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-012/validation_decision.yaml": {
-    "mtime": 1789413204.7715268,
+    "mtime": 1789644541.1196516,
     "ast_hash": "3208c316addba49e82b3aba40ce1351c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/candidate_knowledge.yaml": {
-    "mtime": 1789413204.7862527,
+    "mtime": 1789644541.1317546,
     "ast_hash": "c4908ceceeeb6a95768f62b8a9b5276e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/demo_metadata.yaml": {
-    "mtime": 1789413204.7947652,
+    "mtime": 1789644541.138988,
     "ast_hash": "5e6bcf80e4f2836d4ceebcf678cc433c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.792337,
+    "mtime": 1789644541.1374211,
     "ast_hash": "df859ee205f9c2e9851cce94cfdf2388",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.7915606,
+    "mtime": 1789644541.1365476,
     "ast_hash": "30cc2fecc8519e3fa2902ffe92c66930",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.7906578,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.1358085,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.7849622,
+    "mtime": 1789644541.1306546,
     "ast_hash": "01f166fce2bd19adbf5037df76adac84",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-013/validation_decision.yaml": {
-    "mtime": 1789413204.7874055,
+    "mtime": 1789644541.132696,
     "ast_hash": "89b401e4e8a33c64973ec7354a37d9ea",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/candidate_knowledge.yaml": {
-    "mtime": 1789413204.8043418,
+    "mtime": 1789644541.1457362,
     "ast_hash": "58d80114f9c9b097a240157a15e4341c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/demo_metadata.yaml": {
-    "mtime": 1789413204.8146565,
+    "mtime": 1789644541.1530364,
     "ast_hash": "a7da9a72f73bc225a5e06b2d67e0746e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.8114693,
+    "mtime": 1789644541.1515024,
     "ast_hash": "dba9de7f99090e709c185b56b50170da",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.8103776,
+    "mtime": 1789644541.150744,
     "ast_hash": "6da486e2cd76366da0a21c918b6ee751",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.809223,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.1500258,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.8029816,
+    "mtime": 1789644541.1442878,
     "ast_hash": "1aa2ee700c1b6696e26b1341e3f1d7cd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-014/validation_decision.yaml": {
-    "mtime": 1789413204.8057137,
+    "mtime": 1789644541.1469016,
     "ast_hash": "0ee54d0fa01cd65dd2a2b751b92fc9ca",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/candidate_knowledge.yaml": {
-    "mtime": 1789413204.8229358,
+    "mtime": 1789644541.159662,
     "ast_hash": "d2e4028a5be27d8efc7ee268a5aff0cf",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/demo_metadata.yaml": {
-    "mtime": 1789413204.8343422,
+    "mtime": 1789644541.1680157,
     "ast_hash": "32a6a28ac24ec2ec984b1ba66ea4384d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.8318825,
+    "mtime": 1789644541.166059,
     "ast_hash": "9acfc0b2f57cbbda1c268a65e8a53d55",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.8303921,
+    "mtime": 1789644541.165257,
     "ast_hash": "e4b02a14bdd3e107ff50c26c644f2c28",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.8291903,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.164507,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.8218563,
+    "mtime": 1789644541.1586323,
     "ast_hash": "b43199b83a758888b52aa0145a6530b3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-015/validation_decision.yaml": {
-    "mtime": 1789413204.8239625,
+    "mtime": 1789644541.1605558,
     "ast_hash": "8ae22e0a41a64fd1af1b53e9c8378426",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/candidate_knowledge.yaml": {
-    "mtime": 1789413204.8422556,
+    "mtime": 1789644541.1756513,
     "ast_hash": "02684c034aed6addfed454899eb51c2d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/demo_metadata.yaml": {
-    "mtime": 1789413204.8534482,
+    "mtime": 1789644541.1826503,
     "ast_hash": "1ff897acc932d93d9a9f15239c5fc82e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.8508031,
+    "mtime": 1789644541.181016,
     "ast_hash": "6089ffe4e0a7f9b228474d168f0a3084",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.8495607,
+    "mtime": 1789644541.1802664,
     "ast_hash": "252e485b7c6cc8d61a5b40bcddac7bf6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.8482687,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.1795373,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.8409393,
+    "mtime": 1789644541.174569,
     "ast_hash": "5ae97a05483d71db3b3f30e86837ab85",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-016/validation_decision.yaml": {
-    "mtime": 1789413204.8436904,
+    "mtime": 1789644541.1765969,
     "ast_hash": "c7f71fa5789b60be64e44fdbcbb7e4a0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/candidate_knowledge.yaml": {
-    "mtime": 1789413204.8636746,
+    "mtime": 1789644541.1912472,
     "ast_hash": "1a82c1ca69d1a0896dbc48df1a3ac907",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/demo_metadata.yaml": {
-    "mtime": 1789413204.8753023,
+    "mtime": 1789644541.203016,
     "ast_hash": "40026a43e31e02c4b5fc6471be21b9e8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.8721318,
+    "mtime": 1789644541.2007062,
     "ast_hash": "09040e7674eed3a18c9a2225994b2da3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.8711603,
+    "mtime": 1789644541.199464,
     "ast_hash": "57885cdca6c8cdb4113e64d2b486075e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.869924,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.198148,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.861745,
+    "mtime": 1789644541.1896338,
     "ast_hash": "262b1553507b2a6d5857de20c7b043f5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-017/validation_decision.yaml": {
-    "mtime": 1789413204.8655298,
+    "mtime": 1789644541.1928096,
     "ast_hash": "3d7c8a0402b5449b9eab76b9c8852178",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/candidate_knowledge.yaml": {
-    "mtime": 1789413204.8869708,
+    "mtime": 1789644541.2116528,
     "ast_hash": "18b7e22fd7804bb950dd8f4708d18774",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/demo_metadata.yaml": {
-    "mtime": 1789413204.9004366,
+    "mtime": 1789644541.2216213,
     "ast_hash": "2480e18b01da28ee10c8e93558411c82",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.8976498,
+    "mtime": 1789644541.2196274,
     "ast_hash": "713e1341ffc34a4b61d4af22b72d741a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.8963215,
+    "mtime": 1789644541.2187636,
     "ast_hash": "c236985181b88c09d42d0531762c7a98",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.8951378,
-    "ast_hash": "8a3616633d49b159df4cbfcc53a4e124",
+    "mtime": 1789644541.21738,
+    "ast_hash": "7a473d4b40adf84d7d23de64223e3590",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.8853865,
+    "mtime": 1789644541.209706,
     "ast_hash": "e756e8c822357a772e0798d921949e8b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-018/validation_decision.yaml": {
-    "mtime": 1789413204.8890314,
+    "mtime": 1789644541.2133007,
     "ast_hash": "497ec69814028fdeb02086c51afcb28a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/candidate_knowledge.yaml": {
-    "mtime": 1789413204.9096923,
+    "mtime": 1789644541.228496,
     "ast_hash": "d0b4de0f4eaad99ac8186eb1d04be81f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/demo_metadata.yaml": {
-    "mtime": 1789413204.9186795,
+    "mtime": 1789644541.2387185,
     "ast_hash": "e8651f0de479036e5fb9c973cf9b8fae",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.916659,
+    "mtime": 1789644541.2355528,
     "ast_hash": "3f545f592382ad67ddfef8e0e2010e5e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.915503,
+    "mtime": 1789644541.2342632,
     "ast_hash": "c9102397cf319ae535b0309186968814",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.9143076,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.2330427,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.9081414,
+    "mtime": 1789644541.2271063,
     "ast_hash": "22876235d5efc59e70c5b24f931444ed",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-019/validation_decision.yaml": {
-    "mtime": 1789413204.9109368,
+    "mtime": 1789644541.2295215,
     "ast_hash": "d8d408daa6aa9de5e4921337f284409c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/candidate_knowledge.yaml": {
-    "mtime": 1789413204.926052,
+    "mtime": 1789644541.247331,
     "ast_hash": "30910b6c38e67691c7e09bca7aecad4c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/demo_metadata.yaml": {
-    "mtime": 1789413204.9371424,
+    "mtime": 1789644541.2593048,
     "ast_hash": "86710dd4e4c36ac2e34c00d966687e29",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.9349375,
+    "mtime": 1789644541.2570536,
     "ast_hash": "3ade0d7487e3abcc86e2c192b1c4e6dd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.9337559,
+    "mtime": 1789644541.2557573,
     "ast_hash": "17fda0faed75efce73e735bb655973c2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.9323785,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.2546449,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.92487,
+    "mtime": 1789644541.245505,
     "ast_hash": "f23ce4ebc7d2543bbb0c78b3aff94635",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-020/validation_decision.yaml": {
-    "mtime": 1789413204.9276788,
+    "mtime": 1789644541.2490845,
     "ast_hash": "e2c6e78e3d52221a4a637b6f86d35bce",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/candidate_knowledge.yaml": {
-    "mtime": 1789413204.9441726,
+    "mtime": 1789644541.2695332,
     "ast_hash": "fe632e23f95043a63d7d4d9ed2a45efd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/demo_metadata.yaml": {
-    "mtime": 1789413204.954264,
+    "mtime": 1789644541.2817264,
     "ast_hash": "8cf7cb3c142c0c16e5d09e881511794b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.9525821,
+    "mtime": 1789644541.2785804,
     "ast_hash": "6ed185ab31658904b8acf6a40a5c03dc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.9515836,
+    "mtime": 1789644541.2765734,
     "ast_hash": "004a0344afcd1621dc9001ea714ed16c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.950358,
-    "ast_hash": "41fa2602185587e31224ebd1f6ecfb5d",
+    "mtime": 1789644541.2753596,
+    "ast_hash": "aea9e24e041318ad83d7fcf5af23fcbd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.9426942,
+    "mtime": 1789644541.2675219,
     "ast_hash": "405400a37d34d675185727b3f5c1a4f1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-021/validation_decision.yaml": {
-    "mtime": 1789413204.9452856,
+    "mtime": 1789644541.2709875,
     "ast_hash": "5c59b101f70c5f9bd661042a7d5ab181",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/candidate_knowledge.yaml": {
-    "mtime": 1789413204.9634643,
+    "mtime": 1789644541.290595,
     "ast_hash": "d4a2b351f3e7629f3222fcbf224d0b3f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/demo_metadata.yaml": {
-    "mtime": 1789413204.9730895,
+    "mtime": 1789644541.2997284,
     "ast_hash": "b326dd3e09d35298f3a4e7dc879d32e5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.971294,
+    "mtime": 1789644541.2981265,
     "ast_hash": "4cee8670e8a5b8e93761db107fa155b2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.97035,
+    "mtime": 1789644541.2972612,
     "ast_hash": "b2494a83680fcf494a71273e91207b06",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.9693716,
-    "ast_hash": "92524b760b1a685f971c8075b24a254e",
+    "mtime": 1789644541.2963989,
+    "ast_hash": "959531f678538227b17e1e2437c9f25b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.96125,
+    "mtime": 1789644541.2890086,
     "ast_hash": "e43ef94f3c53139edbe3cbf2da0bde8d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-022/validation_decision.yaml": {
-    "mtime": 1789413204.9656699,
+    "mtime": 1789644541.2920337,
     "ast_hash": "64fde4c0296fea8ed3f17841c8445d6e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/candidate_knowledge.yaml": {
-    "mtime": 1789413204.984033,
+    "mtime": 1789644541.3063598,
     "ast_hash": "94804029c032e9a8c5fd4d1a8cf724c0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/demo_metadata.yaml": {
-    "mtime": 1789413204.9938052,
+    "mtime": 1789644541.3151772,
     "ast_hash": "3ce87f4bd9e097f4aad3f7facabaa33f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413204.9915915,
+    "mtime": 1789644541.313344,
     "ast_hash": "e1b0052746d8e4d15715b6d8cc639df9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413204.9908247,
+    "mtime": 1789644541.3122125,
     "ast_hash": "25b251b07441473bd75bb93e9c785096",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413204.989838,
-    "ast_hash": "92524b760b1a685f971c8075b24a254e",
+    "mtime": 1789644541.3105347,
+    "ast_hash": "959531f678538227b17e1e2437c9f25b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.9815743,
+    "mtime": 1789644541.3053014,
     "ast_hash": "8d2dd980dd3981695e4eebeb33cf4ef3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-023/validation_decision.yaml": {
-    "mtime": 1789413204.9855974,
+    "mtime": 1789644541.3072786,
     "ast_hash": "864c687f89be49ff1162589b7bf63185",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/candidate_knowledge.yaml": {
-    "mtime": 1789413205.000969,
+    "mtime": 1789644541.3216944,
     "ast_hash": "b896d85318e2549260a3fbf447427854",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/demo_metadata.yaml": {
-    "mtime": 1789413205.0110466,
+    "mtime": 1789644541.329282,
     "ast_hash": "d35b6f69300157aacf5639515fc7ba12",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.007891,
+    "mtime": 1789644541.327521,
     "ast_hash": "5964ae665f8aa280ffb3a171b2d79f52",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.006613,
+    "mtime": 1789644541.3263998,
     "ast_hash": "8e19161b3abcae78e35ec09fab0740f3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.0053897,
-    "ast_hash": "92524b760b1a685f971c8075b24a254e",
+    "mtime": 1789644541.325642,
+    "ast_hash": "959531f678538227b17e1e2437c9f25b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/learning_unit_manifest.yaml": {
-    "mtime": 1789413204.9998264,
+    "mtime": 1789644541.3206456,
     "ast_hash": "2b6ba1114c1246ea8e6fd2b86c11de5b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-024/validation_decision.yaml": {
-    "mtime": 1789413205.0019462,
+    "mtime": 1789644541.3226275,
     "ast_hash": "f893cb375954e1375707c57265f5b1ff",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/candidate_knowledge.yaml": {
-    "mtime": 1789413205.0200315,
+    "mtime": 1789644541.338164,
     "ast_hash": "c5416e5bccb663e5d46883b41f3a56da",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/demo_metadata.yaml": {
-    "mtime": 1789413205.0314739,
+    "mtime": 1789644541.3494554,
     "ast_hash": "99c0e6421e661f4a1f37a929f50c38d1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.028363,
+    "mtime": 1789644541.3471,
     "ast_hash": "06ccce76b0f881b6c49573b8d2297e8b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.026883,
+    "mtime": 1789644541.3458145,
     "ast_hash": "915e3a0867a5c0039ea4e6cae9212711",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.025096,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.343799,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.018773,
+    "mtime": 1789644541.3362627,
     "ast_hash": "621317edb5302e8193d2690c0b6722db",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-025/validation_decision.yaml": {
-    "mtime": 1789413205.0210326,
+    "mtime": 1789644541.3396227,
     "ast_hash": "fe86154db28c67854f777c41f8786b1d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/candidate_knowledge.yaml": {
-    "mtime": 1789413205.042764,
+    "mtime": 1789644541.356823,
     "ast_hash": "7f61c1b0499e2101d6adb392b13c01b4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/demo_metadata.yaml": {
-    "mtime": 1789413205.0513299,
+    "mtime": 1789644541.3658364,
     "ast_hash": "e84d6848ef56d3d1ae4a91d132a787d6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.049468,
+    "mtime": 1789644541.364035,
     "ast_hash": "0341f11819ee5f5a968369b7d3ceb0b1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.048627,
+    "mtime": 1789644541.3631818,
     "ast_hash": "5543b79a8a2b3402a66803f8db8a18be",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.0473871,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.3622208,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.0414963,
+    "mtime": 1789644541.3554237,
     "ast_hash": "98382bee866bb1079d13bc5fa30f360f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-026/validation_decision.yaml": {
-    "mtime": 1789413205.0441487,
+    "mtime": 1789644541.3581421,
     "ast_hash": "5ba21a12b6469803a2293e1df0b3918a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/candidate_knowledge.yaml": {
-    "mtime": 1789413205.0585063,
+    "mtime": 1789644541.3732896,
     "ast_hash": "891b57106d801b1e02c6344f9beaf038",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/demo_metadata.yaml": {
-    "mtime": 1789413205.0664468,
+    "mtime": 1789644541.3818998,
     "ast_hash": "ede0ca43668b4669d1308fd56a205192",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.06436,
+    "mtime": 1789644541.3797412,
     "ast_hash": "0db835e6c8171954b55c5c5f167ace70",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.0635638,
+    "mtime": 1789644541.378524,
     "ast_hash": "de0d086eff16ad28c04d559288a4b411",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.0625777,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.3772495,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.057398,
+    "mtime": 1789644541.3720841,
     "ast_hash": "7cc464045d9ae79f4ea81714627bc84b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-027/validation_decision.yaml": {
-    "mtime": 1789413205.059469,
+    "mtime": 1789644541.374396,
     "ast_hash": "5445adb8fd391f61a0b2b6a3288dfaea",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/candidate_knowledge.yaml": {
-    "mtime": 1789413205.0730796,
+    "mtime": 1789644541.3888698,
     "ast_hash": "bd4f542d0fc9e45b1086e4baf7beaf7e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/demo_metadata.yaml": {
-    "mtime": 1789413205.0841095,
+    "mtime": 1789644541.3988492,
     "ast_hash": "8b680075fcd67a25205a06c12f762860",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.0812833,
+    "mtime": 1789644541.3965752,
     "ast_hash": "a1babc3c716ceb788df7b69bc71d4c67",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.0797434,
+    "mtime": 1789644541.395235,
     "ast_hash": "b4a611d2dcdfe2958765951f969c50c5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.0783234,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.393555,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.0720165,
+    "mtime": 1789644541.387646,
     "ast_hash": "3ead877166ed799915a21d61fd2942fa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-028/validation_decision.yaml": {
-    "mtime": 1789413205.0740504,
+    "mtime": 1789644541.389817,
     "ast_hash": "f166c06aa94f065192e71803c0eaeda7",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/candidate_knowledge.yaml": {
-    "mtime": 1789413205.0927775,
+    "mtime": 1789644541.4431527,
     "ast_hash": "90e35a8232e70117903dae6edc603342",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/demo_metadata.yaml": {
-    "mtime": 1789413205.1038425,
+    "mtime": 1789644541.4623187,
     "ast_hash": "119973be11534d389d1784faba03d656",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.102074,
+    "mtime": 1789644541.4595146,
     "ast_hash": "83134819661f5fa35eb7fcfc577b8ea6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.100974,
+    "mtime": 1789644541.4586015,
     "ast_hash": "99281ea70d159612265e02686e217b29",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.0998294,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.4578278,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.0916767,
+    "mtime": 1789644541.4413676,
     "ast_hash": "b9b72b4168c5ccef0367b378e7feca1f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-029/validation_decision.yaml": {
-    "mtime": 1789413205.0943546,
+    "mtime": 1789644541.4451716,
     "ast_hash": "ac452cd6ce6de896f705378841dedcaa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/candidate_knowledge.yaml": {
-    "mtime": 1789413205.1117783,
+    "mtime": 1789644541.4688745,
     "ast_hash": "8d7f464e0f92d15fd125139b16f4eca1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/demo_metadata.yaml": {
-    "mtime": 1789413205.1210878,
+    "mtime": 1789644541.4769042,
     "ast_hash": "157c62f779ac31e1863a7bc2f16cb890",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/future_incident/hidden/evaluator_expectations.yaml": {
-    "mtime": 1789413205.118897,
+    "mtime": 1789644541.4752603,
     "ast_hash": "ed3fd4064b235e2809b9d251487c2c9f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/future_incident/hidden/ground_truth.yaml": {
-    "mtime": 1789413205.1180809,
+    "mtime": 1789644541.4744215,
     "ast_hash": "2a5be0198747d3f0f71225130aa6d63f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/future_incident/operational/topology_view.yaml": {
-    "mtime": 1789413205.1167905,
-    "ast_hash": "330ea4f14a692a39c28f15550800605b",
+    "mtime": 1789644541.4731543,
+    "ast_hash": "bd9da24abf2882c1ff8ac069cec16b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/learning_unit_manifest.yaml": {
-    "mtime": 1789413205.1106358,
+    "mtime": 1789644541.4677901,
     "ast_hash": "adbf9fe44fc124c77a7b33f768428b8d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h3_runs/H3-LU-030/validation_decision.yaml": {
-    "mtime": 1789413205.1127555,
+    "mtime": 1789644541.469837,
     "ast_hash": "3efeaa26b581962355d0bef330f69c26",
     "semantic_hash": ""
   },
@@ -16595,8 +16595,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/presentation/scenario_resolver.py": {
-    "mtime": 1789120567.7470634,
-    "ast_hash": "2e46a096e6d396a6efdb3a18640e3ab8",
+    "mtime": 1789707125.8272185,
+    "ast_hash": "9fff03422e46f48aefdf2cd6e985e24a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/resilience/__init__.py": {
@@ -16650,1202 +16650,1202 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/demo_metadata.yaml": {
-    "mtime": 1789413347.1833785,
+    "mtime": 1789644542.5011404,
     "ast_hash": "e9dd5e9b480d36eb2471581fa0c4698f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.182301,
+    "mtime": 1789644542.5000436,
     "ast_hash": "b95406711f11528f6a456e670a20de59",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/operational/capacity_data.yaml": {
-    "mtime": 1789413347.1813076,
+    "mtime": 1789644542.499019,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.1808264,
+    "mtime": 1789644542.4984918,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/operational/topology_view.yaml": {
-    "mtime": 1789413347.1802096,
+    "mtime": 1789644542.4977944,
     "ast_hash": "177104bbfaaca20a27c7eb26543151c6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-001/scenario_manifest.yaml": {
-    "mtime": 1789413347.1793306,
+    "mtime": 1789644542.4968278,
     "ast_hash": "276ddac2e2429d841b4b0827f726f117",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/demo_metadata.yaml": {
-    "mtime": 1789413347.1888378,
+    "mtime": 1789644542.5082922,
     "ast_hash": "e6442f08a9f4447fa4297390b6347060",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.187656,
+    "mtime": 1789644542.5068676,
     "ast_hash": "849dcd2dff3877508ba457365daede56",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/operational/capacity_data.yaml": {
-    "mtime": 1789413347.1866634,
+    "mtime": 1789644542.5051305,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.1861587,
+    "mtime": 1789644542.5043552,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/operational/topology_view.yaml": {
-    "mtime": 1789413347.185574,
+    "mtime": 1789644542.5035896,
     "ast_hash": "5e3253d6315d6ac4e0df862a1001b6bf",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-002/scenario_manifest.yaml": {
-    "mtime": 1789413347.1848614,
+    "mtime": 1789644542.5027797,
     "ast_hash": "1646770a925ddcbe1c683e45d41f0dc2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/demo_metadata.yaml": {
-    "mtime": 1789413347.1944811,
+    "mtime": 1789644542.5149999,
     "ast_hash": "8da390f8730758c5dc6008b0d1011878",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.1933951,
+    "mtime": 1789644542.5134559,
     "ast_hash": "51ea038dd693349eedb374f955dd5927",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/operational/capacity_data.yaml": {
-    "mtime": 1789413347.1923451,
+    "mtime": 1789644542.512413,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.1917987,
+    "mtime": 1789644542.511906,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/operational/topology_view.yaml": {
-    "mtime": 1789413347.1912043,
+    "mtime": 1789644542.5111852,
     "ast_hash": "ab0847ffad894dfb8d19894c61df697e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-003/scenario_manifest.yaml": {
-    "mtime": 1789413347.1904633,
+    "mtime": 1789644542.5098617,
     "ast_hash": "4148199c9c32f5e28d7a2814d5da278d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/demo_metadata.yaml": {
-    "mtime": 1789413347.2024705,
+    "mtime": 1789644542.5235565,
     "ast_hash": "392d276614c1e8a9ef959d81ff5e6fdc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2014096,
+    "mtime": 1789644542.522371,
     "ast_hash": "a5aceed88a22e6d8fcebd84d0e31eebe",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2004206,
+    "mtime": 1789644542.5212126,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.1999006,
+    "mtime": 1789644542.5205512,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/operational/topology_view.yaml": {
-    "mtime": 1789413347.1989841,
+    "mtime": 1789644542.5194821,
     "ast_hash": "55c416609bdd1256bd2a89b2e3d8a2ed",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-004/scenario_manifest.yaml": {
-    "mtime": 1789413347.196401,
+    "mtime": 1789644542.516518,
     "ast_hash": "aa11c9d35859bb55f11ba0569be1fab3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/demo_metadata.yaml": {
-    "mtime": 1789413347.2080534,
+    "mtime": 1789644542.5307577,
     "ast_hash": "2943488f18b9047ef46fc41957d66f48",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.206946,
+    "mtime": 1789644542.529008,
     "ast_hash": "8d62aa5d40334f6376445cf1e6f23c32",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/operational/capacity_data.yaml": {
-    "mtime": 1789413347.205777,
+    "mtime": 1789644542.5276647,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.205307,
+    "mtime": 1789644542.5268323,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/operational/topology_view.yaml": {
-    "mtime": 1789413347.2047036,
+    "mtime": 1789644542.5262098,
     "ast_hash": "b83a035490065959206aaed6633b8cb3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-005/scenario_manifest.yaml": {
-    "mtime": 1789413347.2039824,
+    "mtime": 1789644542.5253737,
     "ast_hash": "b31c1ffa8e8d67dd43c8d9dd1f6ac456",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/demo_metadata.yaml": {
-    "mtime": 1789413347.214964,
+    "mtime": 1789644542.5405445,
     "ast_hash": "02ec779f827b4727833d94009345b04b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2137134,
+    "mtime": 1789644542.5386736,
     "ast_hash": "103f3bff08d497840610fb34e94a2ae3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2123914,
+    "mtime": 1789644542.5369537,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2115114,
+    "mtime": 1789644542.5360916,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/operational/topology_view.yaml": {
-    "mtime": 1789413347.2108986,
+    "mtime": 1789644542.5349433,
     "ast_hash": "0914e72f3472645e906db7d9c9788142",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-006/scenario_manifest.yaml": {
-    "mtime": 1789413347.2096736,
+    "mtime": 1789644542.5329704,
     "ast_hash": "068cb8543811e44834c1ced41dd4c7ed",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/demo_metadata.yaml": {
-    "mtime": 1789413347.2204802,
+    "mtime": 1789644542.5488775,
     "ast_hash": "ebb767c1a3f2b415dc2276cf247e1ea1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2194183,
+    "mtime": 1789644542.5477774,
     "ast_hash": "984077779bf456cf12bddeebd24fcbbc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2184412,
+    "mtime": 1789644542.5466852,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2179513,
+    "mtime": 1789644542.5460703,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/operational/topology_view.yaml": {
-    "mtime": 1789413347.217351,
+    "mtime": 1789644542.5449753,
     "ast_hash": "1014db8251def8f6950d467bd4e9ab62",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-007/scenario_manifest.yaml": {
-    "mtime": 1789413347.2165937,
+    "mtime": 1789644542.5433273,
     "ast_hash": "51bbb0105ca0b343439aab6f93dd9f9a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/demo_metadata.yaml": {
-    "mtime": 1789413347.226956,
+    "mtime": 1789644542.5560682,
     "ast_hash": "cb6abea7b75f2055be6f2cbbbd76d61b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2257152,
+    "mtime": 1789644542.5542352,
     "ast_hash": "ff72e11950a80b92376deebb2af7cabb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2247145,
+    "mtime": 1789644542.5532405,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2242165,
+    "mtime": 1789644542.552729,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/operational/topology_view.yaml": {
-    "mtime": 1789413347.2235835,
+    "mtime": 1789644542.5520606,
     "ast_hash": "25380fd39b51e6b635faf081bf9c4f5c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-008/scenario_manifest.yaml": {
-    "mtime": 1789413347.2219877,
+    "mtime": 1789644542.5503461,
     "ast_hash": "a95ce57aee6f5ee20dcf3e54e3500fe4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/demo_metadata.yaml": {
-    "mtime": 1789413347.2354398,
+    "mtime": 1789644542.5638058,
     "ast_hash": "efee30d3fa92a55bc9f00d61c90d4e0f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2340343,
+    "mtime": 1789644542.56272,
     "ast_hash": "ef7346793d08aadc2e748fac91a9b8db",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2329564,
+    "mtime": 1789644542.5615165,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2324064,
+    "mtime": 1789644542.5603282,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/operational/topology_view.yaml": {
-    "mtime": 1789413347.2314243,
+    "mtime": 1789644542.5596511,
     "ast_hash": "d8cf6a3b90225c8d40eda9323aa6c507",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-009/scenario_manifest.yaml": {
-    "mtime": 1789413347.2287843,
+    "mtime": 1789644542.557874,
     "ast_hash": "18693d20f05788ce18ca3c1c2ce15d6d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/demo_metadata.yaml": {
-    "mtime": 1789413347.2445269,
+    "mtime": 1789644542.5703068,
     "ast_hash": "abee2db499ee2891ffa064e86658af88",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2426407,
+    "mtime": 1789644542.5692263,
     "ast_hash": "f9f3b3e1ce932dcc11d0aeb2cec96a86",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2409499,
+    "mtime": 1789644542.5679061,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2401097,
+    "mtime": 1789644542.567412,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/operational/topology_view.yaml": {
-    "mtime": 1789413347.2392244,
+    "mtime": 1789644542.5667555,
     "ast_hash": "dd109f688a1498b1c96fff51a4c53b12",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-010/scenario_manifest.yaml": {
-    "mtime": 1789413347.237546,
+    "mtime": 1789644542.565421,
     "ast_hash": "09d6e1a65502d6071f6850689487d230",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/demo_metadata.yaml": {
-    "mtime": 1789413347.2560122,
+    "mtime": 1789644542.5802166,
     "ast_hash": "932de966c2a00c327dcfd28e1448d29d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.254943,
+    "mtime": 1789644542.5789044,
     "ast_hash": "72d976eb80dc454ad87d8db9948d7dae",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2539768,
+    "mtime": 1789644542.5772977,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2534401,
+    "mtime": 1789644542.576774,
     "ast_hash": "be63d9bd934bcfbbd4db97b55cc8c2a9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/operational/topology_view.yaml": {
-    "mtime": 1789413347.2522633,
+    "mtime": 1789644542.5757778,
     "ast_hash": "68022f6827d1b71ab6ebbc89d15305d4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-011/scenario_manifest.yaml": {
-    "mtime": 1789413347.2473207,
+    "mtime": 1789644542.5719383,
     "ast_hash": "f8fa00fa92bb408b5555d476def8bdfa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/demo_metadata.yaml": {
-    "mtime": 1789413347.265306,
+    "mtime": 1789644542.5907228,
     "ast_hash": "935d6c58d32882934249f2635fa2611d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2631202,
+    "mtime": 1789644542.588696,
     "ast_hash": "658c33d0b218cd1003519d1ac401d000",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2618692,
+    "mtime": 1789644542.5863729,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2610312,
+    "mtime": 1789644542.5852811,
     "ast_hash": "664072755ae82be5037775ceebe74a24",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/operational/topology_view.yaml": {
-    "mtime": 1789413347.2595098,
+    "mtime": 1789644542.58364,
     "ast_hash": "501b48aecb692e3d891f0da9b8d95152",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-012/scenario_manifest.yaml": {
-    "mtime": 1789413347.2581158,
+    "mtime": 1789644542.5820556,
     "ast_hash": "ac80e021e0362d4d1e5de9f75fe68fa4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/demo_metadata.yaml": {
-    "mtime": 1789413347.2776275,
+    "mtime": 1789644542.6003313,
     "ast_hash": "6d724b376d922886bca55bffeab6ffab",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2756479,
+    "mtime": 1789644542.5992026,
     "ast_hash": "59a17514adafb644087b3d9e3e6a16a8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2739472,
+    "mtime": 1789644542.5978427,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.273132,
+    "mtime": 1789644542.5969625,
     "ast_hash": "f5ca57ee8877a22cda08e69eaa073cdb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/operational/topology_view.yaml": {
-    "mtime": 1789413347.2712257,
+    "mtime": 1789644542.5949914,
     "ast_hash": "4936f58b43f87d8bc749bd9fd23bef2f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-013/scenario_manifest.yaml": {
-    "mtime": 1789413347.268452,
+    "mtime": 1789644542.5932946,
     "ast_hash": "3a3d6fa7238f29cfee414b5677c56e79",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/demo_metadata.yaml": {
-    "mtime": 1789413347.2889812,
+    "mtime": 1789644542.6065838,
     "ast_hash": "4fd5138b0e57e8bce00e47f33f62c39e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.2870812,
+    "mtime": 1789644542.6055162,
     "ast_hash": "fd0f7566364489a1cdd3cadc9b3f2794",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2851384,
+    "mtime": 1789644542.6044738,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2842574,
+    "mtime": 1789644542.6037698,
     "ast_hash": "06e16d3db97c4ec39887858b60222d2b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/operational/topology_view.yaml": {
-    "mtime": 1789413347.2824087,
+    "mtime": 1789644542.6027217,
     "ast_hash": "d9e2e90220f85c15f0820cdd31580b0c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-014/scenario_manifest.yaml": {
-    "mtime": 1789413347.2810376,
+    "mtime": 1789644542.6019282,
     "ast_hash": "1c71745c5c8992484f15b3a0941c09d1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/demo_metadata.yaml": {
-    "mtime": 1789413347.3019269,
+    "mtime": 1789644542.6173687,
     "ast_hash": "e0a6fa66c35611757018ff4dbd0bf4c5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3008363,
+    "mtime": 1789644542.6160588,
     "ast_hash": "9b47bd6836796d386f9e7b82731494b8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/operational/capacity_data.yaml": {
-    "mtime": 1789413347.2998655,
+    "mtime": 1789644542.6150944,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.2993636,
+    "mtime": 1789644542.6145701,
     "ast_hash": "dafd4cc3fb627864f64c0d9cb636c23f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/operational/topology_view.yaml": {
-    "mtime": 1789413347.2983005,
+    "mtime": 1789644542.6135118,
     "ast_hash": "93e418974118b7b3269768bc5bc1b7b2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-015/scenario_manifest.yaml": {
-    "mtime": 1789413347.2919703,
+    "mtime": 1789644542.608715,
     "ast_hash": "39e417fe142bbb41eef5461786256561",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/demo_metadata.yaml": {
-    "mtime": 1789413347.3088999,
+    "mtime": 1789644542.6253574,
     "ast_hash": "fc115bb0763f64249155b98af2fb6536",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3078034,
+    "mtime": 1789644542.6241875,
     "ast_hash": "4ae995a6213628d9f7d1326b7cd1e98e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3067663,
+    "mtime": 1789644542.6232164,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3062758,
+    "mtime": 1789644542.6226938,
     "ast_hash": "292bbc749c6f2f83b6627b509858a940",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/operational/topology_view.yaml": {
-    "mtime": 1789413347.305337,
+    "mtime": 1789644542.6214058,
     "ast_hash": "a73916dee68f4cb2dff9acb6a5bffd13",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-016/scenario_manifest.yaml": {
-    "mtime": 1789413347.3037004,
+    "mtime": 1789644542.619152,
     "ast_hash": "19981ca3a30a4c6a8250a4a8677e7048",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/demo_metadata.yaml": {
-    "mtime": 1789413347.3156414,
+    "mtime": 1789644542.6328335,
     "ast_hash": "3697f93687b7ddc383a8543e4f637c81",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3144884,
+    "mtime": 1789644542.630934,
     "ast_hash": "0b4b46396731f6cbbc36e0e83d5ae2cb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/operational/capacity_data.yaml": {
-    "mtime": 1789413347.31314,
+    "mtime": 1789644542.6297007,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3121505,
+    "mtime": 1789644542.6290107,
     "ast_hash": "e99de51abb2f01c4ece20d33d66944ce",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/operational/topology_view.yaml": {
-    "mtime": 1789413347.311169,
+    "mtime": 1789644542.6278124,
     "ast_hash": "6efb377e34262bb8530c807e2ae95a11",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-017/scenario_manifest.yaml": {
-    "mtime": 1789413347.3104234,
+    "mtime": 1789644542.6269977,
     "ast_hash": "be9b525aa50a1bf564c8f0087d02581b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/demo_metadata.yaml": {
-    "mtime": 1789413347.321656,
+    "mtime": 1789644542.6427908,
     "ast_hash": "26958a1c5a1743039fd3f6becfaa80b5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3205853,
+    "mtime": 1789644542.6408145,
     "ast_hash": "fd957f7a641e4dbec6ae704b7d875894",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3196294,
+    "mtime": 1789644542.6391888,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3191507,
+    "mtime": 1789644542.6383688,
     "ast_hash": "60b3ec2d7bfcc54a464a27b4a0f7ba5d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/operational/topology_view.yaml": {
-    "mtime": 1789413347.3182044,
+    "mtime": 1789644542.6366336,
     "ast_hash": "43e56c3f13d6b3726d053605e33a31cc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-018/scenario_manifest.yaml": {
-    "mtime": 1789413347.3174443,
+    "mtime": 1789644542.635427,
     "ast_hash": "14af57ca19adccb07a60885802895da7",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/demo_metadata.yaml": {
-    "mtime": 1789413347.3274179,
+    "mtime": 1789644542.6500516,
     "ast_hash": "4f04aaa5d07fb3655a3b097a01af5b41",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3263164,
+    "mtime": 1789644542.6490216,
     "ast_hash": "69dfc2dd4f9bf251d24aae387bb98ceb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/operational/capacity_data.yaml": {
-    "mtime": 1789413347.325331,
+    "mtime": 1789644542.648048,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.324847,
+    "mtime": 1789644542.6475291,
     "ast_hash": "348e9a5a92cd473caaccf621ac4f30cc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/operational/topology_view.yaml": {
-    "mtime": 1789413347.3239014,
+    "mtime": 1789644542.646476,
     "ast_hash": "a3a53843f301d62a9409fb80feebf311",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-019/scenario_manifest.yaml": {
-    "mtime": 1789413347.3231661,
+    "mtime": 1789644542.6454556,
     "ast_hash": "d07845470738cc3802f195c9632d2642",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/demo_metadata.yaml": {
-    "mtime": 1789413347.336812,
+    "mtime": 1789644542.6575663,
     "ast_hash": "acd3c75b486e5c8249f094925525e5f6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.335432,
+    "mtime": 1789644542.6563036,
     "ast_hash": "061f443d8ca2e79011afd5f5704aeb63",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/operational/capacity_data.yaml": {
-    "mtime": 1789413347.334092,
+    "mtime": 1789644542.6546397,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3334234,
+    "mtime": 1789644542.6536617,
     "ast_hash": "d850f4c44178efcacad73669c1795a47",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/operational/topology_view.yaml": {
-    "mtime": 1789413347.3316884,
+    "mtime": 1789644542.6527138,
     "ast_hash": "a5d2ff63bc7dc31618022d303716a2f8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-020/scenario_manifest.yaml": {
-    "mtime": 1789413347.3293943,
+    "mtime": 1789644542.651545,
     "ast_hash": "bf58213b5206e86b14612c88ba2fe4ee",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/demo_metadata.yaml": {
-    "mtime": 1789413347.3463829,
+    "mtime": 1789644542.6650229,
     "ast_hash": "a355dfb73fc6dbe3b868cab86ad0c706",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3440945,
+    "mtime": 1789644542.6637805,
     "ast_hash": "d2342fdbc349215a136eb021703a9deb",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3426182,
+    "mtime": 1789644542.662001,
     "ast_hash": "5381fd15d28182b20ae5f4f33be20641",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3418217,
+    "mtime": 1789644542.6610765,
     "ast_hash": "b5069e5c58d13a03f22626b87d908146",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/operational/topology_view.yaml": {
-    "mtime": 1789413347.3405645,
+    "mtime": 1789644542.6600637,
     "ast_hash": "4ce7b2c8214782b3207564bbf177b902",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-021/scenario_manifest.yaml": {
-    "mtime": 1789413347.3393013,
+    "mtime": 1789644542.659244,
     "ast_hash": "c46bb260f8a37d59b166fe66ed9669ac",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/demo_metadata.yaml": {
-    "mtime": 1789413347.3556342,
+    "mtime": 1789644542.6728976,
     "ast_hash": "ca1c0e377ed9c47ccd5dbbeacc0ed209",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3543398,
+    "mtime": 1789644542.6714358,
     "ast_hash": "39db13284e7b578455b21261975a0fc9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3527508,
+    "mtime": 1789644542.670126,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3520842,
+    "mtime": 1789644542.6692302,
     "ast_hash": "05e39c98e770828d6b93bbc62cc5e00e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/operational/topology_view.yaml": {
-    "mtime": 1789413347.3508112,
+    "mtime": 1789644542.6682172,
     "ast_hash": "4fce0e9d7b8965db51e23b6bb77b5cf1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-022/scenario_manifest.yaml": {
-    "mtime": 1789413347.3493743,
+    "mtime": 1789644542.6672013,
     "ast_hash": "51576ee139c88635c9517e4dc0cdf652",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/demo_metadata.yaml": {
-    "mtime": 1789413347.3680649,
+    "mtime": 1789644542.6825955,
     "ast_hash": "8b0601ee8c03af4a42cbe85082ef8bee",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3659954,
+    "mtime": 1789644542.6805518,
     "ast_hash": "d2c087ed7cbe3c74f8bc6dbc4577e2e0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3638208,
+    "mtime": 1789644542.6786635,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3610756,
+    "mtime": 1789644542.6776671,
     "ast_hash": "2ca6776484dae93082d91aa671f62ce5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/operational/topology_view.yaml": {
-    "mtime": 1789413347.3594735,
+    "mtime": 1789644542.6764245,
     "ast_hash": "0fc672ec34d1a7e49805346d315770c8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-023/scenario_manifest.yaml": {
-    "mtime": 1789413347.358081,
+    "mtime": 1789644542.6751685,
     "ast_hash": "3fac072932927ebe434b4a5107a37856",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/demo_metadata.yaml": {
-    "mtime": 1789413347.3779912,
+    "mtime": 1789644542.693498,
     "ast_hash": "f9964412ba6bc7b21443a757ace38151",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3766057,
+    "mtime": 1789644542.6916225,
     "ast_hash": "dbd0eccd95e4367833ff77c34dacc1a3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3745577,
+    "mtime": 1789644542.689865,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3737352,
+    "mtime": 1789644542.6889307,
     "ast_hash": "4cf8331f04de7396dd851260fd0504ae",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/operational/topology_view.yaml": {
-    "mtime": 1789413347.3722985,
+    "mtime": 1789644542.6875234,
     "ast_hash": "36be15c15b8d830aabeed8f6540cff87",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-024/scenario_manifest.yaml": {
-    "mtime": 1789413347.370923,
+    "mtime": 1789644542.6861393,
     "ast_hash": "c7a15fbe4f0a1dd27279ac207b8a7a61",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/demo_metadata.yaml": {
-    "mtime": 1789413347.388999,
+    "mtime": 1789644542.7025902,
     "ast_hash": "1281bd906a0b6ad507b8648b81f733bf",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3871176,
+    "mtime": 1789644542.7010334,
     "ast_hash": "1d5bcfe5d9499718d029a65c1450ea66",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/operational/capacity_data.yaml": {
-    "mtime": 1789413347.3853736,
+    "mtime": 1789644542.6999013,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.3844798,
+    "mtime": 1789644542.6992137,
     "ast_hash": "bc6c35778118f633126ac6dcebefde10",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/operational/topology_view.yaml": {
-    "mtime": 1789413347.3828194,
+    "mtime": 1789644542.6981087,
     "ast_hash": "03ac8ce5786a2bfd3e63396c0b9c0a07",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-025/scenario_manifest.yaml": {
-    "mtime": 1789413347.3810601,
+    "mtime": 1789644542.6968608,
     "ast_hash": "73ec7da8fc92a68354824d0e107f76d2",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/demo_metadata.yaml": {
-    "mtime": 1789413347.3999517,
+    "mtime": 1789644542.7126224,
     "ast_hash": "a7ab1f03e185ec6e4711d3c272d839e8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.3978348,
+    "mtime": 1789644542.710652,
     "ast_hash": "fb415ef3dd001f7c9ff50af2bcfa3357",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/operational/capacity_data.yaml": {
-    "mtime": 1789413347.396085,
+    "mtime": 1789644542.7088418,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.394818,
+    "mtime": 1789644542.708048,
     "ast_hash": "41c200ff974c578382da929c6457b913",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/operational/topology_view.yaml": {
-    "mtime": 1789413347.3934853,
+    "mtime": 1789644542.7066028,
     "ast_hash": "8d5c73f11ff765ce60a146ba91b6ffc0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-026/scenario_manifest.yaml": {
-    "mtime": 1789413347.3917935,
+    "mtime": 1789644542.704966,
     "ast_hash": "a8ca3cc6b09378a5c33b945f9520b4f0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/demo_metadata.yaml": {
-    "mtime": 1789413347.4084666,
+    "mtime": 1789644542.722233,
     "ast_hash": "ed843a396ad846ee157d331abbd53a03",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.407053,
+    "mtime": 1789644542.7201993,
     "ast_hash": "a1b8c978ae30215f5d9b45bdc7c18cf0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4053557,
+    "mtime": 1789644542.7183113,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4046009,
+    "mtime": 1789644542.717722,
     "ast_hash": "59c946350339c0fdd28b7ef4810c56f3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/operational/topology_view.yaml": {
-    "mtime": 1789413347.4032826,
+    "mtime": 1789644542.7165377,
     "ast_hash": "fb5fe0334db7ef3cb459ddde26afe6d4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-027/scenario_manifest.yaml": {
-    "mtime": 1789413347.401974,
+    "mtime": 1789644542.715229,
     "ast_hash": "f779e074ed6f29aa39ce8fb9581e210d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/demo_metadata.yaml": {
-    "mtime": 1789413347.4194474,
+    "mtime": 1789644542.7339847,
     "ast_hash": "550417835d026b213f3c872bf3dbf1c3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4174821,
+    "mtime": 1789644542.7319012,
     "ast_hash": "1d0c1f1c4ff3ba9232d746caa724c557",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4157553,
+    "mtime": 1789644542.730379,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.414532,
+    "mtime": 1789644542.7292125,
     "ast_hash": "78be014290fb20e67e5d575f9af5c3c1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/operational/topology_view.yaml": {
-    "mtime": 1789413347.412468,
+    "mtime": 1789644542.7268336,
     "ast_hash": "c3a0bd95a30771f40e0b8b9b7e3c60a8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-028/scenario_manifest.yaml": {
-    "mtime": 1789413347.4109004,
+    "mtime": 1789644542.7255383,
     "ast_hash": "6f6f4be7dbff62126f5b3a8f14a30d16",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/demo_metadata.yaml": {
-    "mtime": 1789413347.4306962,
+    "mtime": 1789644542.7442286,
     "ast_hash": "56cdbc8078530b529f40040810e327f1",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4279697,
+    "mtime": 1789644542.7423017,
     "ast_hash": "11f3df6d2f6c8fc155515a5ebc7398e8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4261284,
+    "mtime": 1789644542.740596,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4253395,
+    "mtime": 1789644542.7397416,
     "ast_hash": "1624647827a7f32b8af013fe1cc45b95",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/operational/topology_view.yaml": {
-    "mtime": 1789413347.4240065,
+    "mtime": 1789644542.7383387,
     "ast_hash": "a8f1583d54bbdd667b3befcc9d09a4bc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-029/scenario_manifest.yaml": {
-    "mtime": 1789413347.4224138,
+    "mtime": 1789644542.7368577,
     "ast_hash": "b3c8bdd07fe7c852361cd9ccb6c99bc5",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/demo_metadata.yaml": {
-    "mtime": 1789413347.4387095,
+    "mtime": 1789644542.7523139,
     "ast_hash": "218c90e384c5d92a86991767c8998849",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4376063,
+    "mtime": 1789644542.7504501,
     "ast_hash": "f21f2ff47b911cb510caeb1239a0248b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4365377,
+    "mtime": 1789644542.7490695,
     "ast_hash": "4d803f0c3650e8d915b3f788c548da71",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4360082,
+    "mtime": 1789644542.7483425,
     "ast_hash": "24f31da1e97a415ce59c3584407f3805",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/operational/topology_view.yaml": {
-    "mtime": 1789413347.4349763,
+    "mtime": 1789644542.7471466,
     "ast_hash": "ab7419863349be68c8ce86893675d71c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-030/scenario_manifest.yaml": {
-    "mtime": 1789413347.4336622,
+    "mtime": 1789644542.7459455,
     "ast_hash": "d21bb2e7c23bd083957cd3a9427dcc4e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/demo_metadata.yaml": {
-    "mtime": 1789413347.4455614,
+    "mtime": 1789644542.7615857,
     "ast_hash": "6d821552712d7d4ed51a31459458e0fd",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4438806,
+    "mtime": 1789644542.7597141,
     "ast_hash": "99b0e8f61b639a1618d16039a3aa9f94",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/operational/capacity_data.yaml": {
-    "mtime": 1789413347.442921,
+    "mtime": 1789644542.7578163,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4423923,
+    "mtime": 1789644542.7571766,
     "ast_hash": "d7af5617a0bccb8afd51da5ea0fe21cc",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/operational/topology_view.yaml": {
-    "mtime": 1789413347.4415686,
+    "mtime": 1789644542.7560697,
     "ast_hash": "63fe0ccee5df14d3f7686ac31e2355a0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-031/scenario_manifest.yaml": {
-    "mtime": 1789413347.4402876,
+    "mtime": 1789644542.7548113,
     "ast_hash": "340af9f77fd32dd572d6887a39030bd0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/demo_metadata.yaml": {
-    "mtime": 1789413347.452767,
+    "mtime": 1789644542.7703393,
     "ast_hash": "bf213163b98045b039a0cc0583d05f95",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4516983,
+    "mtime": 1789644542.7682512,
     "ast_hash": "a6b6f095f9d21bb1200ba4d26d667170",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4507048,
+    "mtime": 1789644542.767165,
     "ast_hash": "4a4b2e06b6242d117cca79110ad358f9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.450144,
+    "mtime": 1789644542.7665772,
     "ast_hash": "ff1a8f23b0b0eb6034175e0a9b1784a4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/operational/topology_view.yaml": {
-    "mtime": 1789413347.4493425,
+    "mtime": 1789644542.7654474,
     "ast_hash": "864c74376085a6961224ce2291ea95da",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-032/scenario_manifest.yaml": {
-    "mtime": 1789413347.4483974,
+    "mtime": 1789644542.7643104,
     "ast_hash": "35791d0ee7945afe5335bb2de50fdf5e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/demo_metadata.yaml": {
-    "mtime": 1789413347.4588034,
+    "mtime": 1789644542.7829518,
     "ast_hash": "a1b3fbfada548d448d101241da5923aa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4576147,
+    "mtime": 1789644542.7812712,
     "ast_hash": "63ecd33704e60ee45583bd62938c2498",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4565508,
+    "mtime": 1789644542.7801466,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4560165,
+    "mtime": 1789644542.7793293,
     "ast_hash": "3e4c6ef7ce1c7e422e2c124ed80f244b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/operational/topology_view.yaml": {
-    "mtime": 1789413347.4551053,
+    "mtime": 1789644542.7780342,
     "ast_hash": "7e8064906fd5b726f03710076ebe0c4f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-033/scenario_manifest.yaml": {
-    "mtime": 1789413347.4543424,
+    "mtime": 1789644542.7762737,
     "ast_hash": "01e0f10426f61d4670ff52eebe2cb602",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/demo_metadata.yaml": {
-    "mtime": 1789413347.4651806,
+    "mtime": 1789644542.7945142,
     "ast_hash": "62e7a260fbd917d5bfbd747852c065c6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4640722,
+    "mtime": 1789644542.7909877,
     "ast_hash": "35de4839bf5a1449a363008139150f67",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4630456,
+    "mtime": 1789644542.7892573,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4624755,
+    "mtime": 1789644542.7884328,
     "ast_hash": "b1cf9caa26ab15a659aa65ae654186f4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/operational/topology_view.yaml": {
-    "mtime": 1789413347.4613585,
+    "mtime": 1789644542.786998,
     "ast_hash": "0c70be9415c8aadd8f634216f3c1f5a6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-034/scenario_manifest.yaml": {
-    "mtime": 1789413347.4605694,
+    "mtime": 1789644542.7856479,
     "ast_hash": "923270c4df29147f033a28de20e8a969",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/demo_metadata.yaml": {
-    "mtime": 1789413347.4710045,
+    "mtime": 1789644542.837258,
     "ast_hash": "25d52e7d50e574d07b8d43bcfcecece8",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.469941,
+    "mtime": 1789644542.8352587,
     "ast_hash": "6fe06d59c1c403a2954456d7b0e6608a",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4689589,
+    "mtime": 1789644542.833554,
     "ast_hash": "803eade1e3845aefb70ccc3211d0a66b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.468458,
+    "mtime": 1789644542.8326416,
     "ast_hash": "37c9e4ddb645ed887b10d04ee3f95939",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/operational/topology_view.yaml": {
-    "mtime": 1789413347.4676576,
+    "mtime": 1789644542.831337,
     "ast_hash": "509d8ee187c5c9ca2635c623c4740433",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-035/scenario_manifest.yaml": {
-    "mtime": 1789413347.4667401,
+    "mtime": 1789644542.8213809,
     "ast_hash": "25db307ed6d4b1de4e61d6906071bbaa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/demo_metadata.yaml": {
-    "mtime": 1789413347.476728,
+    "mtime": 1789644542.8468213,
     "ast_hash": "c26f4d80a1ddd73c5f5c9b7bc87fd05f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.47565,
+    "mtime": 1789644542.845701,
     "ast_hash": "8f3eb879fbc76b7862d990149ec92b6f",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4746642,
+    "mtime": 1789644542.844083,
     "ast_hash": "439e88a54b91e0562f9141f963f79053",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4741852,
+    "mtime": 1789644542.84299,
     "ast_hash": "be8db73f3923b351623b1ae8d0e2fcaa",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/operational/topology_view.yaml": {
-    "mtime": 1789413347.4732327,
+    "mtime": 1789644542.8413112,
     "ast_hash": "b38e9599c01791f0eeb94b09a12e67e9",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-036/scenario_manifest.yaml": {
-    "mtime": 1789413347.4725115,
+    "mtime": 1789644542.8400018,
     "ast_hash": "c046fd71099f268c9223c2d88be7fac4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/demo_metadata.yaml": {
-    "mtime": 1789413347.4834285,
+    "mtime": 1789644542.8532505,
     "ast_hash": "40d36a9f8dc38d487bd6538cc74a3a5e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4823477,
+    "mtime": 1789644542.8520503,
     "ast_hash": "3d934a31784df6a79940a96a9510cde6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4813838,
+    "mtime": 1789644542.8509293,
     "ast_hash": "439e88a54b91e0562f9141f963f79053",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4808445,
+    "mtime": 1789644542.8502839,
     "ast_hash": "c88c7ab6e5364ed6e48cf23b19393b21",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/operational/topology_view.yaml": {
-    "mtime": 1789413347.4795098,
+    "mtime": 1789644542.8491015,
     "ast_hash": "426635a244578ef7ccaf102afe600051",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-037/scenario_manifest.yaml": {
-    "mtime": 1789413347.4783442,
+    "mtime": 1789644542.8483605,
     "ast_hash": "f5c18e10bfdbb59c6087696f53283042",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/demo_metadata.yaml": {
-    "mtime": 1789413347.4913397,
+    "mtime": 1789644542.860207,
     "ast_hash": "f5ae9d21defe456a8fe64696e5d44b8c",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.489519,
+    "mtime": 1789644542.8590817,
     "ast_hash": "9890132b1bb964aeddcd5fe60915cc5d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4877658,
+    "mtime": 1789644542.8578205,
     "ast_hash": "439e88a54b91e0562f9141f963f79053",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4870312,
+    "mtime": 1789644542.8570836,
     "ast_hash": "89e580fafa887817bc623fb8eb692e81",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/operational/topology_view.yaml": {
-    "mtime": 1789413347.485946,
+    "mtime": 1789644542.8558886,
     "ast_hash": "4e1e3aad6ce294acc0366f0f5ab12d4b",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-038/scenario_manifest.yaml": {
-    "mtime": 1789413347.484982,
+    "mtime": 1789644542.8547304,
     "ast_hash": "bef777803a96073dc516fbf5817c0c91",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/demo_metadata.yaml": {
-    "mtime": 1789413347.4979897,
+    "mtime": 1789644542.8687103,
     "ast_hash": "fe4a13da0125f9960be34d70424fc6d0",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.4968362,
+    "mtime": 1789644542.8671656,
     "ast_hash": "ab8448be86b7df810473eac538b3ca89",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/operational/capacity_data.yaml": {
-    "mtime": 1789413347.4954557,
+    "mtime": 1789644542.8661153,
     "ast_hash": "439e88a54b91e0562f9141f963f79053",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.4948123,
+    "mtime": 1789644542.8651657,
     "ast_hash": "63266ab00f07cc66cb52a0643f952024",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/operational/topology_view.yaml": {
-    "mtime": 1789413347.493883,
+    "mtime": 1789644542.8636768,
     "ast_hash": "deefefb8285453229e5a17e3ccfbf5a6",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-039/scenario_manifest.yaml": {
-    "mtime": 1789413347.4931524,
+    "mtime": 1789644542.8625755,
     "ast_hash": "b65fd3f5435566839542dbb545cf45b3",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/demo_metadata.yaml": {
-    "mtime": 1789413347.504711,
+    "mtime": 1789644542.8759763,
     "ast_hash": "63ca6874edf3f29ddb0f895ff9bf6f0e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/hidden/ground_truth.yaml": {
-    "mtime": 1789413347.5030375,
+    "mtime": 1789644542.8742254,
     "ast_hash": "5598e373383729833c8395206a004745",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/operational/capacity_data.yaml": {
-    "mtime": 1789413347.5018594,
+    "mtime": 1789644542.8727007,
     "ast_hash": "73d74b7b7a99e4af43c009c5d4741ba4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/operational/redundancy_data.yaml": {
-    "mtime": 1789413347.501304,
+    "mtime": 1789644542.871964,
     "ast_hash": "0f87492da4869eca6763b14cf2044915",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/operational/topology_view.yaml": {
-    "mtime": 1789413347.5006294,
+    "mtime": 1789644542.8711586,
     "ast_hash": "a38fa4a98d3c273a73b5af093ff00527",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs/H4-WI-040/scenario_manifest.yaml": {
-    "mtime": 1789413347.4996626,
+    "mtime": 1789644542.8703704,
     "ast_hash": "18ac3fce3e3a2f7e629e91d841998766",
     "semantic_hash": ""
   },
@@ -17855,8 +17855,8 @@
     "semantic_hash": ""
   },
   "artifacts/integration/mcp-smoke-test.json": {
-    "mtime": 1789129938.9727628,
-    "ast_hash": "c862c77b929b5789ac2294e242cd480f",
+    "mtime": 1789553923.408823,
+    "ast_hash": "9ec9f9fea4d7bd9056781aad22367e34",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/mcp_smoke_test.py": {
@@ -17870,8 +17870,8 @@
     "semantic_hash": ""
   },
   "artifacts/integration/mcp-smoke-test.md": {
-    "mtime": 1789129938.9731526,
-    "ast_hash": "3c64fe26d5c570ff914d0523435ea9a2",
+    "mtime": 1789553923.409249,
+    "ast_hash": "493379d3fac923353fa6747caac78985",
     "semantic_hash": ""
   },
   "docs/fikracore-step-4.5-live-gbrain-mcp-integration-smoke-test.md": {
@@ -17945,28 +17945,28 @@
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/coverage-report.json": {
-    "mtime": 1789129923.1821067,
-    "ast_hash": "c4eb6dcdc92ebb4ee487a0e38690524e",
+    "mtime": 1789713997.2000513,
+    "ast_hash": "eba67172b1a6a4e34a9e64a93ebdc5c0",
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/knowledge-gaps.json": {
-    "mtime": 1789129923.1811485,
-    "ast_hash": "cf48ef322200541b20d07befa18ef6c3",
+    "mtime": 1789713997.197821,
+    "ast_hash": "95d079bfaf23718838c3ea92cd6be72d",
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/knowledge-inventory.json": {
-    "mtime": 1789129923.1800735,
-    "ast_hash": "5238cf375432593957da7cca08cf4fff",
+    "mtime": 1789713997.196483,
+    "ast_hash": "42d3448c37a0117f426a99f96ee1ed68",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/knowledge_coverage.py": {
-    "mtime": 1789129564.1572688,
-    "ast_hash": "3c5e41539260b7669498cfee78277309",
+    "mtime": 1789712888.5528853,
+    "ast_hash": "58df3f672bc1937d22f47c48a6d8b251",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/investigation/knowledge_inventory.py": {
-    "mtime": 1789130009.305274,
-    "ast_hash": "908e3603dcf73514d6b1ae98cdd82e9e",
+    "mtime": 1789712626.922662,
+    "ast_hash": "99040f8065f2b08237a17c37ab31f6d4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_knowledge_inventory.py": {
@@ -17975,18 +17975,18 @@
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/coverage-report.md": {
-    "mtime": 1789129923.1824472,
-    "ast_hash": "2013f6b15595527ba326770b046392c0",
+    "mtime": 1789713997.201262,
+    "ast_hash": "1f5384096a71a441c97a27d6e1049252",
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/knowledge-gaps.md": {
-    "mtime": 1789129923.1814377,
-    "ast_hash": "8011969ad0a5548dd6961ec372ecfb04",
+    "mtime": 1789713997.1981127,
+    "ast_hash": "ced1bd55c3834ea8c4d6e959ac33a3e5",
     "semantic_hash": ""
   },
   "artifacts/knowledge-inventory/knowledge-inventory.md": {
-    "mtime": 1789129923.1807232,
-    "ast_hash": "a79312dc4785b932d4c4b9dac7d4eade",
+    "mtime": 1789713997.197142,
+    "ast_hash": "bb4429370f6e26523e32e7b846ad5242",
     "semantic_hash": ""
   },
   "docs/fikracore-step-4.7-knowledge-inventory-coverage-validation.md": {
@@ -17995,8 +17995,8 @@
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/page.tsx": {
-    "mtime": 1789281732.0464063,
-    "ast_hash": "cade39eff4c2db8e7520fc35c2cff0a4",
+    "mtime": 1789551667.6423564,
+    "ast_hash": "8521b046b26356adef856b189c8bc5bf",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/api/__init__.py": {
@@ -18005,8 +18005,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/api/capability_api.py": {
-    "mtime": 1789447103.012701,
-    "ast_hash": "f426babf6a1d060c44f24e5745d87f14",
+    "mtime": 1789644454.2998896,
+    "ast_hash": "a741c5f73b444d357e7f41f9f358ce6e",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/capabilities/__init__.py": {
@@ -18080,13 +18080,13 @@
     "semantic_hash": ""
   },
   "frontend/src/lib/simulation-store.ts": {
-    "mtime": 1789378458.7861872,
-    "ast_hash": "04fbd0d85c1d51fc59b4ed64adf22427",
+    "mtime": 1789592987.912789,
+    "ast_hash": "196d1e960ec5b624037ecce03e10719d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/simulation_manager.py": {
-    "mtime": 1789378291.3496382,
-    "ast_hash": "b4d8614e38cd5645d775882ab9fe61c6",
+    "mtime": 1789592433.8337007,
+    "ast_hash": "b8828442c314b40272f99211f3478338",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_simulation_endpoints.py": {
@@ -18100,23 +18100,23 @@
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/_components/workspace-page.tsx": {
-    "mtime": 1789494673.0904045,
-    "ast_hash": "c6e9f614f37d3ded31ee19318b2a6015",
+    "mtime": 1789639995.835652,
+    "ast_hash": "84eb1ae801bae195c4a38bba77a2e6fc",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/benchmarks/page.tsx": {
-    "mtime": 1789145397.5866277,
-    "ast_hash": "6caa13b6e1f689fc79d8c57a5398b827",
+    "mtime": 1789551035.0005987,
+    "ast_hash": "3b04571bd44f1ba0ff4ee5b7b8d6541b",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/discover/page.tsx": {
-    "mtime": 1789145396.365257,
-    "ast_hash": "6315233995c9e59d8016eca12660b8e4",
+    "mtime": 1789551020.3650982,
+    "ast_hash": "78a067c1f558a5d72435e34bb7537722",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/investigate/page.tsx": {
-    "mtime": 1789452739.1721246,
-    "ast_hash": "33812e476ab9756d9a879079b74e233b",
+    "mtime": 1789663860.7799456,
+    "ast_hash": "add808373d3f4c55a17f5a0b109ecc22",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/knowledge/page.tsx": {
@@ -18130,28 +18130,28 @@
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/layout.tsx": {
-    "mtime": 1789320165.8136325,
-    "ast_hash": "cd0614026c30c55296603e62d86108dd",
+    "mtime": 1789702737.4299343,
+    "ast_hash": "83ee92bc0daf5558cef6f6b0b41fa52d",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/learn/page.tsx": {
-    "mtime": 1789145396.6316898,
-    "ast_hash": "c716a835aa02c08e948b013068971a7b",
+    "mtime": 1789551024.807533,
+    "ast_hash": "6061b4b6c3ff4c84003a38cfa00891fa",
     "semantic_hash": ""
   },
   "frontend/src/app/simulator/predict/page.tsx": {
-    "mtime": 1789145396.8407493,
-    "ast_hash": "5f53d9fa7a5e69a84e321bd41265243f",
+    "mtime": 1789551029.2260184,
+    "ast_hash": "e92ba47a13c9e6358b8eb547484cf29a",
     "semantic_hash": ""
   },
   "frontend/src/lib/fikracore-context.tsx": {
-    "mtime": 1789321227.0307043,
-    "ast_hash": "1f4d8845f361af5fac03267734707a07",
+    "mtime": 1789638070.9947188,
+    "ast_hash": "e8614c1ef15343ed6e584809f0f5f377",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_multiscenario.py": {
-    "mtime": 1789145576.5178235,
-    "ast_hash": "ac30ff2dfeabe3e49733c2042c7b4ece",
+    "mtime": 1789639703.4107773,
+    "ast_hash": "5fc66c764d02694e9169c361c1454d23",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_zaki_context.py": {
@@ -18165,8 +18165,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenario_state_compiler.py": {
-    "mtime": 1789334260.5343032,
-    "ast_hash": "8ad58733421a71da7690ecf0bb6c3194",
+    "mtime": 1789639199.9252844,
+    "ast_hash": "18bbf74e032c8d31b4561e23a41b35e4",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_scenario_state_compiler.py": {
@@ -18270,8 +18270,8 @@
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/tests/test_zaki_floating_copilot.py": {
-    "mtime": 1789322823.7310488,
-    "ast_hash": "7fc9eea1547187a3ba6d4a0cb89640c6",
+    "mtime": 1789644567.022123,
+    "ast_hash": "1b226a85537d40fca0053531f1918117",
     "semantic_hash": ""
   },
   "docs/fikracore-step5-scenario-run-scoped-backend-driven-ui-activation.md": {
@@ -18385,8 +18385,8 @@
     "semantic_hash": ""
   },
   "docs/presentation.md": {
-    "mtime": 1789453190.3040297,
-    "ast_hash": "b659d0a93a7ac664b32751a22731e444",
+    "mtime": 1789701497.3790238,
+    "ast_hash": "f59ba88670b7d2792e432e6b2162878d",
     "semantic_hash": ""
   },
   "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/DEMO-001-transport-mobile-data.yaml": {
@@ -18482,6 +18482,196 @@
   "docs/image.png": {
     "mtime": 1789452878.825293,
     "ast_hash": "3694c3ac433ee74a8712e58abf346af0",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/coverage-report.json": {
+    "mtime": 1789558876.9526842,
+    "ast_hash": "c4eb6dcdc92ebb4ee487a0e38690524e",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/knowledge-gaps.json": {
+    "mtime": 1789558876.9516716,
+    "ast_hash": "cf48ef322200541b20d07befa18ef6c3",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/knowledge-inventory.json": {
+    "mtime": 1789558876.950815,
+    "ast_hash": "ab78990ef2ed12a632c387f70929f14a",
+    "semantic_hash": ""
+  },
+  "artifacts/knowledge-graph-data.json": {
+    "mtime": 1789554628.6628525,
+    "ast_hash": "84b037623cd2f72c213e9cb1c5d41451",
+    "semantic_hash": ""
+  },
+  "fikracore": {
+    "mtime": 1789716667.4495373,
+    "ast_hash": "b36ed488c8bd4ec4c8b2269b262d702d",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenario_catalog.py": {
+    "mtime": 1789638834.813927,
+    "ast_hash": "8c20f948fdd814e682a32eb491513f8e",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/integration/mcp-smoke-test.json": {
+    "mtime": 1789706505.348189,
+    "ast_hash": "94c715f54a730cc8d85718ddf8c52965",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/coverage-report.json": {
+    "mtime": 1789709952.6450322,
+    "ast_hash": "c4eb6dcdc92ebb4ee487a0e38690524e",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/knowledge-gaps.json": {
+    "mtime": 1789709952.6441045,
+    "ast_hash": "cf48ef322200541b20d07befa18ef6c3",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/knowledge-inventory.json": {
+    "mtime": 1789709952.642,
+    "ast_hash": "63dc5be7f0a8d93b8478788a99901b02",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/tests/test_scenario_catalog.py": {
+    "mtime": 1789552498.546267,
+    "ast_hash": "4ac559afbd4e2d971797e5ad5ef7b795",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/tests/test_zaki_universal_qa.py": {
+    "mtime": 1789642473.6443336,
+    "ast_hash": "b62b7e636b51650d0258cc11f09d7b45",
+    "semantic_hash": ""
+  },
+  "skills/telecom-knowledge-graph/scripts/build_graph.py": {
+    "mtime": 1789715097.4576507,
+    "ast_hash": "afde0941493004c089810d47f5e01bf6",
+    "semantic_hash": ""
+  },
+  "skills/telecom-knowledge-graph/scripts/formatter.py": {
+    "mtime": 1789577260.4585533,
+    "ast_hash": "504697348318685fdbaf9aca0628b7f0",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/coverage-report.md": {
+    "mtime": 1789558876.9530191,
+    "ast_hash": "96db15bdd4767ca3969053c8fcc150a6",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/knowledge-gaps.md": {
+    "mtime": 1789558876.9519508,
+    "ast_hash": "583d3506945ee00d671254df309ade7a",
+    "semantic_hash": ""
+  },
+  "artifacts/artifacts/knowledge-inventory/knowledge-inventory.md": {
+    "mtime": 1789558876.9512875,
+    "ast_hash": "61bc5950372441123f33101db07ca879",
+    "semantic_hash": ""
+  },
+  "artifacts/telecom-knowledge-graph.html": {
+    "mtime": 1789715106.3163316,
+    "ast_hash": "47386e10b7596d766a248fca26e06219",
+    "semantic_hash": ""
+  },
+  "artifacts/telecom-knowledge-graphify.html": {
+    "mtime": 1789554635.1476173,
+    "ast_hash": "39489f39583843701b1f960e3de35d0c",
+    "semantic_hash": ""
+  },
+  "docs/demo-cli.md": {
+    "mtime": 1789720537.0569088,
+    "ast_hash": "49b456d32334a8da70952517d6979858",
+    "semantic_hash": ""
+  },
+  "docs/fikracore-cli.md": {
+    "mtime": 1789704600.4182415,
+    "ast_hash": "9466e0286121b80066c2c413950bc93f",
+    "semantic_hash": ""
+  },
+  "docs/fikracore-cli.txt": {
+    "mtime": 1789704651.4554994,
+    "ast_hash": "9466e0286121b80066c2c413950bc93f",
+    "semantic_hash": ""
+  },
+  "docs/fikracore-simulator-lab-unified-scenario-library-fix-plan.md": {
+    "mtime": 1789549928.4279158,
+    "ast_hash": "a928bbec21663e718369e716f2b3018b",
+    "semantic_hash": ""
+  },
+  "docs/fikracore/README.md": {
+    "mtime": 1789553551.8871543,
+    "ast_hash": "e1319f5a14f14a4aedb490d114c2dee0",
+    "semantic_hash": ""
+  },
+  "docs/fikracore/cli-reference.md": {
+    "mtime": 1789553537.5668235,
+    "ast_hash": "9622d876ea9049a4d029cdda722e3c25",
+    "semantic_hash": ""
+  },
+  "frontend/public/telecom-knowledge-graph.html": {
+    "mtime": 1789715106.3636253,
+    "ast_hash": "47386e10b7596d766a248fca26e06219",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/H3-LRN-001.yaml": {
+    "mtime": 1789585200.557563,
+    "ast_hash": "639325cce4c912bef01129298cf4c314",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/integration/mcp-smoke-test.md": {
+    "mtime": 1789706505.348531,
+    "ast_hash": "703e107bcf3e790184f8bbda9c372920",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/coverage-report.md": {
+    "mtime": 1789709952.645353,
+    "ast_hash": "7d7f5d80e709e9360f969caea1c7572a",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/knowledge-gaps.md": {
+    "mtime": 1789709952.6443772,
+    "ast_hash": "b913bbe26e87428a42ee15bad4536b1c",
+    "semantic_hash": ""
+  },
+  "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios/artifacts/knowledge-inventory/knowledge-inventory.md": {
+    "mtime": 1789709952.643669,
+    "ast_hash": "897b41842621f4cb96bef9ff9b96f36d",
+    "semantic_hash": ""
+  },
+  "skills/telecom-knowledge-graph/SKILL.md": {
+    "mtime": 1789556195.6946342,
+    "ast_hash": "4a9fe7ca6d709307fa6680cfeb0528ff",
+    "semantic_hash": ""
+  },
+  "docs/image-18.png": {
+    "mtime": 1789552526.9967299,
+    "ast_hash": "bb4449d73b0e4bb975eb59b6d6227789",
+    "semantic_hash": ""
+  },
+  "docs/image-19.png": {
+    "mtime": 1789553062.1005387,
+    "ast_hash": "71d3ef4f17768c4e0ecda7252affb63e",
+    "semantic_hash": ""
+  },
+  "docs/image-20.png": {
+    "mtime": 1789555336.1837993,
+    "ast_hash": "82e8ceac1535c8f8db4850ca0056c615",
+    "semantic_hash": ""
+  },
+  "docs/image-21.png": {
+    "mtime": 1789558121.0063012,
+    "ast_hash": "d6b8893aecc76bbc2c986ae671460168",
+    "semantic_hash": ""
+  },
+  "docs/image-22.png": {
+    "mtime": 1789566398.4152992,
+    "ast_hash": "c9b41de4f8ee4c53f09aae0c72a0bc44",
+    "semantic_hash": ""
+  },
+  "docs/image-23.png": {
+    "mtime": 1789632017.1599174,
+    "ast_hash": "4f7cda75e4234eada596823e25a8891c",
     "semantic_hash": ""
   }
 }

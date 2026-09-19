@@ -198,34 +198,17 @@ function deriveCapabilities(entry: {
 
 export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   {
-    id: "DEMO-001",
-    display_name: "Transport-Induced Mobile Data Degradation",
-    description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
-    stage: "H1",
-    concept: "Understand",
-    scenario_type: "INCIDENT",
-    aliases: ["mobile data transport failure", "cross-domain outage", "demo-001"],
-    tags: ["transport", "mobile_core", "ran", "bgp", "5g"],
-    domains: ["Transport", "RAN", "Mobile Core"],
-    services: ["5G SA Mobile Data"],
-    difficulty: "INTERMEDIATE",
-    status: "READY",
-    source: "declarative_scenario",
-    capabilities: { investigate: true, discover: false, learn: false, predict: false, knowledge: true, lab: true, benchmarks: true },
-    demo_enabled: true,
-  },
-  {
     id: "SCN-001",
-    display_name: "SGi Throughput Degradation & MTU Blackhole",
-    description: "Simulates an MTU blackhole on SGi transport interface causing TCP degradation while control plane remains healthy.",
+    display_name: "Transport N3 Degradation Cascades into Mobile Data Failure",
+    description: "Intermittent transport path degradation on PE-RTR-21 N3 backhaul causes UPF reachability starvation and customer ticket surges.",
     stage: "H1",
     concept: "Understand",
     scenario_type: "INCIDENT",
-    aliases: ["SGi MTU Blackhole", "MTU Mismatch", "SGi Throughput Degradation", "tr-01 MTU drop", "H1-INC-001"],
-    tags: ["transport", "mobile_core", "mtu", "tcp", "4g"],
-    domains: ["Transport", "Mobile Core"],
-    services: ["SGi-LAN", "Data Services"],
-    difficulty: "INTERMEDIATE",
+    aliases: ["TWIN-INC-001", "DEMO-001", "Transport N3 Degradation", "PE-RTR-21 N3 degradation", "H1-INC-001", "SCN-001"],
+    tags: ["ip_transport", "sa_5g_core", "crm", "n3_tunnel", "5g"],
+    domains: ["IP Transport", "5G SA Core", "CRM"],
+    services: ["5G SA Mobile Data (REGION-NORTH)"],
+    difficulty: "L1",
     status: "READY",
     source: "incident_catalog",
     capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
@@ -238,7 +221,7 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     stage: "H2",
     concept: "Discover",
     scenario_type: "KNOWLEDGE_GAP",
-    aliases: ["missing ocs dependency", "charging gap", "H2-SCN-001"],
+    aliases: ["TWIN-GAP-001", "missing ocs dependency", "charging gap", "H2-SCN-001"],
     tags: ["charging", "ocs", "knowledge_gap", "boundary"],
     domains: ["Mobile Core", "OCS"],
     services: ["Subscriber Charging", "5G Data Session"],
@@ -255,7 +238,7 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     stage: "H3",
     concept: "Learn",
     scenario_type: "LEARNING_UNIT",
-    aliases: ["validated charging dependency", "h3 learning unit", "H3-LU-001"],
+    aliases: ["TWIN-LRN-001", "validated charging dependency", "h3 learning unit", "H3-LU-001"],
     tags: ["learning", "promotion", "curated_learning", "fcaps"],
     domains: ["Mobile Core", "OCS"],
     services: ["Subscriber Charging"],
@@ -267,12 +250,12 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   },
   {
     id: "H4-WI-001",
-    display_name: "MPLS Edge Router Failure",
+    display_name: "MPLS Edge Router Shared Power Feed Loss",
     description: "Simulates loss of a shared transport edge and estimates downstream service impact.",
     stage: "H4",
     concept: "Anticipate",
     scenario_type: "WHAT_IF",
-    aliases: ["H4-WT-001", "MPLS router failure", "edge router outage", "transport edge failure"],
+    aliases: ["TWIN-WIF-001", "H4-WT-001", "MPLS router failure", "edge router outage", "transport edge failure"],
     tags: ["transport", "routing", "spof", "resilience"],
     domains: ["Transport"],
     services: ["IP Routing"],
@@ -283,13 +266,13 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     demo_enabled: true,
   },
   {
-    id: "H4-WI-002",
-    display_name: "Data Center Gateway Failure",
+    id: "TWIN-WIF-002",
+    display_name: "Data Center Gateway Switch Failure",
     description: "Simulates complete outage of primary DC gateway interconnecting core services.",
     stage: "H4",
     concept: "Anticipate",
     scenario_type: "WHAT_IF",
-    aliases: ["DC gateway outage", "DC-GW failure", "core dc gateway down"],
+    aliases: ["H4-WI-002", "DC gateway outage", "DC-GW failure", "core dc gateway down"],
     tags: ["core", "dc", "spof"],
     domains: ["Cloud / NFVI", "Mobile Core"],
     services: ["Core Infrastructure"],
@@ -300,13 +283,13 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     demo_enabled: false,
   },
   {
-    id: "H4-WI-003",
+    id: "TWIN-WIF-003",
     display_name: "Packet Gateway User Plane Failure",
     description: "Simulates user plane packet forwarder collapse affecting mobile internet traffic.",
     stage: "H4",
     concept: "Anticipate",
     scenario_type: "WHAT_IF",
-    aliases: ["PGW-U failure", "UPF outage", "packet core user plane down"],
+    aliases: ["H4-WI-003", "PGW-U failure", "UPF outage", "packet core user plane down"],
     tags: ["packet_core", "5g", "spof"],
     domains: ["Packet Core", "5G Core"],
     services: ["5G SA Mobile Data", "VoNR High Definition Voice"],
@@ -317,13 +300,13 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     demo_enabled: false,
   },
   {
-    id: "H4-WI-011",
-    display_name: "Dual Router Shared Power Feed Loss",
+    id: "TWIN-WIF-011",
+    display_name: "Dual Router Shared Power Feed Rack Outage",
     description: "Simulates utility feed failure affecting two routers sharing the same PDU rack.",
     stage: "H4",
     concept: "Anticipate",
     scenario_type: "WHAT_IF",
-    aliases: ["site power feed failure", "shared power loss"],
+    aliases: ["H4-WI-011", "site power feed failure", "shared power loss"],
     tags: ["common_cause", "power", "shared_dependency"],
     domains: ["Transport", "Facilities"],
     services: ["Transmission"],
@@ -335,7 +318,7 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   },
 ];
 
-const DEFAULT_SCENARIO_ID = "DEMO-001";
+const DEFAULT_SCENARIO_ID = "SCN-001";
 
 export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<FikraCoreAppState>({
@@ -465,16 +448,6 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
       syncState: "SWITCHING_SCENARIO",
       connectionState: "DISCONNECTED",
     }));
-
-    if (typeof window !== "undefined") {
-      try {
-        const url = new URL(window.location.href);
-        url.searchParams.set("scenario", scenarioId);
-        window.history.replaceState(null, "", url.toString());
-      } catch {
-        // ignore in test / non-browser environments
-      }
-    }
 
     if (simClientRef.current) {
       await simClientRef.current.loadScenario(scenarioId);

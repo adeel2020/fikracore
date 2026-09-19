@@ -87,3 +87,30 @@ POC  covered:
 ![alt text](image-18.png)
 
 ![alt text](image-19.png)
+
+
+USE CASES
+
+
+For management, I would not demonstrate three similar RCA cases. Use three scenarios that prove three different strengths of FikraCore:
+
+Cross-domain reasoning
+Knowledge-gap discovery + curated learning
+Proactive what-if / resilience
+That gives you a much stronger story than three fault-isolation demos.
+
+Demo	Scenario	Domains	What it proves
+1. Cross-Domain Service Outage	Transport degradation causes 5G/mobile-data impact while Core and RAN generate secondary alarms	Transport + Mobile Core + RAN	Correlation, causal reasoning, contradictions, blast radius
+
+2. Prepaid Charging Failure	OCS/Diameter degradation causes intermittent session/charging failures after a recent change	IN/OCS + Mobile Core + Transport	Subscriber journey, signaling correlation, change relevance, knowledge-gap discovery, curated learning
+
+3. Network Resilience What-if	What happens if a critical transport/RAN aggregation component fails?	RAN + Transport + Mobile Core + Services	H4 prediction, propagation, SPOF discovery, blast radius, mitigation comparison
+
+
+![alt text](image-21.png)
+
+![alt text](image-20.png)
+
+![alt text](image-22.png)
+
+![alt text](image-23.png)

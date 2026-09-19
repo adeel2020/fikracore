@@ -54,6 +54,7 @@ class UnifiedScenario(BaseModel):
     source: str = "declarative"
     demo_enabled: bool = True
     legacy: bool = False
+    is_benchmark_run: bool = False
     scenario_path: str = ""
     metadata: dict[str, Any] = Field(default_factory=dict)
 
@@ -103,7 +104,7 @@ class ScenarioCatalog:
             return
 
         for path in sorted(scenarios_dir.glob("*.yaml")):
-            if path.name == "h4_registry.yaml":
+            if path.name == "h4_registry.yaml" or path.name == "index.yaml":
                 continue
             try:
                 data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
@@ -114,15 +115,22 @@ class ScenarioCatalog:
             if not scenario_id:
                 continue
 
-            # Check if this is DEMO-001 or declarative incident
             stage = str(data.get("stage") or "H1").upper()
             concept = concept_for_stage(stage)
             display_name = str(data.get("display_name") or data.get("scenario_name") or scenario_id)
-            domains = [str(d).replace("_", " ").title() for d in (data.get("domains") or [])]
-            services = [str(s).replace("_", " ").title() for s in (data.get("affected_services") or [])]
+            
+            classification = data.get("classification") or {}
+            explanation = data.get("scenario_explanation") or {}
+            
+            raw_domains = data.get("domains") or classification.get("domains") or []
+            raw_services = data.get("affected_services") or classification.get("affected_services") or []
+            domains = [str(d).replace("_", " ").title() for d in raw_domains]
+            services = [str(s).replace("_", " ").title() for s in raw_services]
             aliases = [str(a) for a in (data.get("aliases") or [])]
             demo_meta = data.get("demo_metadata") or {}
             demo_enabled = bool(demo_meta.get("enabled", True)) if isinstance(demo_meta, dict) else True
+            desc = str(data.get("description") or explanation.get("problem_statement") or f"Declarative scenario {scenario_id}")
+            difficulty = str(data.get("difficulty") or classification.get("difficulty_profile") or "L1")
 
             sc = UnifiedScenario(
                 id=scenario_id,
@@ -130,11 +138,11 @@ class ScenarioCatalog:
                 stage=stage,
                 concept=concept,
                 scenario_type=str(data.get("scenario_type") or "INCIDENT"),
-                domains=domains or ["Transport", "RAN", "Mobile Core"],
+                domains=domains or ["IP Transport", "5G SA Core", "CRM"],
                 services=services or ["5G SA Mobile Data"],
-                description=str(data.get("description") or f"Declarative scenario {scenario_id}"),
+                description=desc,
                 aliases=aliases,
-                difficulty=str(data.get("difficulty") or "L2"),
+                difficulty=difficulty,
                 status="READY" if demo_enabled else "AVAILABLE",
                 source="declarative_scenario",
                 demo_enabled=demo_enabled,
@@ -144,37 +152,11 @@ class ScenarioCatalog:
             self._scenarios[scenario_id] = sc
 
     def _load_h1_scenarios(self) -> None:
-        # SCN-001 is the primary H1 benchmark & demo incident
-        if "SCN-001" not in self._scenarios:
-            self._scenarios["SCN-001"] = UnifiedScenario(
-                id="SCN-001",
-                display_name="SGi Throughput Degradation & MTU Blackhole",
-                stage="H1",
-                concept="Understand",
-                scenario_type="INCIDENT",
-                domains=["Transport", "Mobile Core"],
-                services=["SGi-LAN", "Data Services"],
-                description="Simulates an MTU blackhole on SGi transport interface causing TCP degradation while control plane remains healthy.",
-                aliases=[
-                    "SGi MTU Blackhole",
-                    "MTU Mismatch",
-                    "SGi Throughput Degradation",
-                    "tr-01 MTU drop",
-                    "H1-INC-001",
-                ],
-                tags=["transport", "mobile_core", "mtu", "tcp", "4g"],
-                difficulty="L2",
-                status="READY",
-                source="incident_catalog",
-                demo_enabled=True,
-                legacy=True,
-                scenario_path="simulator/scenarios/SCN-001.yaml",
-            )
-        else:
-            # Ensure SCN-001 is always H1 / Understand
-            self._scenarios["SCN-001"].stage = "H1"
-            self._scenarios["SCN-001"].concept = "Understand"
-            self._scenarios["SCN-001"].scenario_type = "INCIDENT"
+        # All H1 scenarios (SCN-001 to SCN-100) are dynamically loaded from scenarios/ and runs/
+        # Ensure standard aliases point to canonical records
+        if "SCN-001" in self._scenarios:
+            self._scenarios["TWIN-INC-001"] = self._scenarios["SCN-001"]
+            self._scenarios["H1-INC-001"] = self._scenarios["SCN-001"]
 
     def _load_h2_scenarios(self) -> None:
         # Curated representative H2 scenario
@@ -187,7 +169,7 @@ class ScenarioCatalog:
             domains=["Mobile Core", "OCS"],
             services=["Subscriber Charging", "5G Data Session"],
             description="Exposes an unmodeled billing/charging dependency boundary causing unexplained service dropouts.",
-            aliases=["missing ocs dependency", "charging gap", "H2-SCN-001"],
+            aliases=["TWIN-GAP-001", "missing ocs dependency", "charging gap", "H2-SCN-001"],
             tags=["charging", "ocs", "knowledge_gap", "boundary"],
             difficulty="K2",
             status="READY",
@@ -196,6 +178,7 @@ class ScenarioCatalog:
             scenario_path="simulator/h2_runs/RUN-H2-SCN-001-K1-SEED-52002/",
         )
         self._scenarios["H2-GAP-001"] = curated_h2
+        self._scenarios["TWIN-GAP-001"] = curated_h2
 
         # Index available runs from h2_runs directory
         h2_dir = self.base_dir / "h2_runs"
@@ -240,7 +223,7 @@ class ScenarioCatalog:
             domains=["Mobile Core", "OCS"],
             services=["Subscriber Charging"],
             description="Curated learning unit demonstrating SME validation and promotion of discovered charging path.",
-            aliases=["validated charging dependency", "h3 learning unit", "H3-LU-001"],
+            aliases=["TWIN-LRN-001", "validated charging dependency", "h3 learning unit", "H3-LU-001"],
             tags=["learning", "promotion", "curated_learning", "fcaps"],
             difficulty="L3",
             status="READY",
@@ -249,6 +232,7 @@ class ScenarioCatalog:
             scenario_path="simulator/h3_runs/H3-LU-001/",
         )
         self._scenarios["H3-LRN-001"] = curated_h3
+        self._scenarios["TWIN-LRN-001"] = curated_h3
 
         # Index available runs from h3_runs directory
         h3_dir = self.base_dir / "h3_runs"
@@ -339,7 +323,13 @@ class ScenarioCatalog:
 
     def all(self) -> list[UnifiedScenario]:
         self._ensure_loaded()
-        return list(self._scenarios.values())
+        seen = set()
+        unique = []
+        for sc in self._scenarios.values():
+            if sc.id not in seen:
+                seen.add(sc.id)
+                unique.append(sc)
+        return unique
 
     def get(self, scenario_id: str) -> Optional[UnifiedScenario]:
         self._ensure_loaded()
@@ -349,11 +339,11 @@ class ScenarioCatalog:
 
         # Check aliases
         query_norm = scenario_id.strip().lower()
-        for sc in self._scenarios.values():
-            if sc.display_name.strip().lower() == query_norm:
+        for sc in self.all():
+            if sc.id.strip().lower() == query_norm or sc.display_name.strip().lower() == query_norm:
                 return sc
             for al in sc.aliases:
-                if al.strip().lower() == query_norm:
+                if al.strip().lower() == query_norm or al.strip().upper() == cleaned:
                     return sc
         return None
 
@@ -362,14 +352,14 @@ class ScenarioCatalog:
         target = concept.strip().upper()
         if target == "ALL":
             return self.all()
-        return [sc for sc in self._scenarios.values() if sc.concept.upper() == target]
+        return [sc for sc in self.all() if sc.concept.upper() == target]
 
     def filter_by_stage(self, stage: str) -> list[UnifiedScenario]:
         self._ensure_loaded()
         target = stage.strip().upper()
         if target == "ALL":
             return self.all()
-        return [sc for sc in self._scenarios.values() if sc.stage.upper() == target]
+        return [sc for sc in self.all() if sc.stage.upper() == target]
 
     def get_yaml(self, scenario_id: str) -> tuple[str, str, bool]:
         """Return (yaml_content, source_filename, is_read_only)."""

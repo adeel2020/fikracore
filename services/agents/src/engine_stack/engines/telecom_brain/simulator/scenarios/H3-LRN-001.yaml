@@ -1,0 +1,24 @@
+scenario_id: H3-LRN-001
+display_name: Validated OCS Charging Dependency Promotion
+stage: H3
+concept: Learn
+scenario_type: LEARNING_UNIT
+domains:
+- Mobile Core
+- OCS
+services:
+- Subscriber Charging
+description: Curated learning unit demonstrating SME validation and promotion of discovered
+  charging path.
+aliases:
+- validated charging dependency
+- h3 learning unit
+- H3-LU-001
+tags:
+- learning
+- promotion
+- curated_learning
+- fcaps
+difficulty: L3
+status: READY
+demo_enabled: true

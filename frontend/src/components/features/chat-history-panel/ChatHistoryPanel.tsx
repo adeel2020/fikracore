@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   ChevronDown,
   Trash2,
@@ -12,6 +14,12 @@ import {
   Loader2,
   CheckCircle2,
   Play,
+  Activity,
+  Layers,
+  AlertTriangle,
+  GitBranch,
+  Wrench,
+  ShieldCheck,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -65,100 +73,160 @@ function cleanStructuredEvents(text: string): string {
   return result.trim();
 }
 
-/** Render formatted message content supporting bold, code, and clickable markdown links */
+/** Render formatted message content using rich ReactMarkdown with telecom styling */
 function renderFormattedContent(text: string): React.ReactNode {
   const cleaned = cleanStructuredEvents(text);
   if (!cleaned) return null;
 
-  const lines = cleaned.split("\n");
   return (
-    <div className="space-y-1.5 text-xs leading-relaxed">
-      {lines.map((line, lineIdx) => {
-        const trimmed = line.trim();
-        if (trimmed === "---") {
-          return <div key={`hr-${lineIdx}`} className="my-2 border-t border-white/10" />;
-        }
-        if (!trimmed) {
-          return <div key={`empty-${lineIdx}`} className="h-1" />;
-        }
+    <div className="telecom-story-container text-xs leading-relaxed text-zinc-300">
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          h1: ({ children }) => (
+            <div className="my-3 pb-2 border-b border-cyan-500/30 flex items-center justify-between">
+              <span className="text-sm font-bold tracking-wide text-cyan-200 uppercase flex items-center gap-2">
+                <Activity className="w-4 h-4 text-cyan-400 animate-pulse shrink-0" />
+                <span>{children}</span>
+              </span>
+            </div>
+          ),
+          h2: ({ children }) => (
+            <div className="mt-4 mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-cyan-300 border-l-2 border-cyan-500 pl-2">
+              <Layers className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span>{children}</span>
+            </div>
+          ),
+          h3: ({ children }) => {
+            const title = String(children);
+            let Icon = Layers;
+            if (/summary/i.test(title)) Icon = Activity;
+            else if (/topology|blast/i.test(title)) Icon = Layers;
+            else if (/root cause|rca/i.test(title)) Icon = AlertTriangle;
+            else if (/causal/i.test(title)) Icon = GitBranch;
+            else if (/timeline|chronolog/i.test(title)) Icon = Clock;
+            else if (/remediation|action/i.test(title)) Icon = Wrench;
+            else if (/recovery/i.test(title)) Icon = ShieldCheck;
 
-        // Parse markdown links: [label](url)
-        const linkRegex = /\[(.*?)\]\((.*?)\)/g;
-        const parts: React.ReactNode[] = [];
-        let lastIndex = 0;
-        let match: RegExpExecArray | null;
+            return (
+              <div className="mt-3.5 mb-1.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-cyan-300 border-l-2 border-cyan-500/80 pl-2">
+                <Icon className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>{children}</span>
+              </div>
+            );
+          },
+          blockquote: ({ children }) => (
+            <div className="my-2 p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-700/60 flex flex-wrap items-center gap-2 text-[11px] text-zinc-300 shadow-sm">
+              {children}
+            </div>
+          ),
+          strong: ({ children }) => (
+            <strong className="font-bold text-cyan-200">{children}</strong>
+          ),
+          code: ({ className, children }) => {
+            const isInline = !className?.includes("language-");
+            const val = String(children).trim();
 
-        while ((match = linkRegex.exec(line)) !== null) {
-          if (match.index > lastIndex) {
-            parts.push(line.substring(lastIndex, match.index));
-          }
-          const label = match[1];
-          const url = match[2];
-          const isGraphLink =
-            url.includes("telecom-knowledge-graph") || url.includes("artifacts");
+            if (isInline) {
+              if (/\b(SEV-1|CRITICAL|P1)\b/i.test(val)) {
+                return (
+                  <span className="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold font-mono text-[11px] shadow-[0_0_8px_rgba(244,63,94,0.2)]">
+                    {val}
+                  </span>
+                );
+              }
+              if (/\b(SEV-2|MAJOR|P2)\b/i.test(val)) {
+                return (
+                  <span className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 font-bold font-mono text-[11px] shadow-[0_0_8px_rgba(245,158,11,0.2)]">
+                    {val}
+                  </span>
+                );
+              }
+              if (/\b(RESOLVED|HEALTHY|CLOSED)\b/i.test(val)) {
+                return (
+                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold font-mono text-[11px] shadow-[0_0_8px_rgba(16,185,129,0.2)]">
+                    {val}
+                  </span>
+                );
+              }
+              return (
+                <code className="px-1.5 py-0.5 rounded bg-black/50 border border-zinc-800 text-pink-400 font-mono text-[11px]">
+                  {children}
+                </code>
+              );
+            }
 
-          parts.push(
-            <a
-              key={`link-${lineIdx}-${match.index}`}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                "inline-flex items-center gap-1.5 font-medium transition-all",
-                isGraphLink
-                  ? "my-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] hover:shadow-[0_0_18px_rgba(16,185,129,0.45)] no-underline text-xs"
-                  : "text-cyan-400 hover:text-cyan-300 underline underline-offset-2"
-              )}
-            >
-              {isGraphLink && <Network className="w-3.5 h-3.5 shrink-0" />}
-              <span>{label}</span>
-              <ExternalLink className="w-3 h-3 shrink-0 opacity-70" />
-            </a>
-          );
-          lastIndex = match.index + match[0].length;
-        }
+            return (
+              <pre className="my-2 p-3 rounded-lg bg-black/70 border border-zinc-800 font-mono text-[11px] overflow-x-auto text-emerald-400 leading-relaxed">
+                <code>{children}</code>
+              </pre>
+            );
+          },
+          a: ({ href, children }) => {
+            const url = href || "";
+            const isGraphLink =
+              url.includes("telecom-knowledge-graph") || url.includes("artifacts");
 
-        if (lastIndex < line.length) {
-          parts.push(line.substring(lastIndex));
-        }
+            return (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "inline-flex items-center gap-1.5 font-medium transition-all",
+                  isGraphLink
+                    ? "my-1 px-3 py-1 rounded-lg bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] hover:shadow-[0_0_18px_rgba(16,185,129,0.45)] no-underline text-xs"
+                    : "text-cyan-400 hover:text-cyan-300 underline underline-offset-2"
+                )}
+              >
+                {isGraphLink && <Network className="w-3.5 h-3.5 shrink-0" />}
+                <span>{children}</span>
+                <ExternalLink className="w-3 h-3 shrink-0 opacity-70" />
+              </a>
+            );
+          },
+          li: ({ children }) => {
+            const textContent = React.Children.toArray(children)
+              .map((c) => (typeof c === "string" ? c : ""))
+              .join(" ");
 
-        const nodes = parts.length > 0 ? parts : [line];
+            const isTimeline = /\b\d{2}:\d{2}(?::\d{2})?Z?\b/.test(textContent);
+            const isCausal = textContent.includes("──►");
 
-        return (
-          <div key={`line-${lineIdx}`}>
-            {nodes.map((node, nodeIdx) => {
-              if (typeof node !== "string") return node;
+            if (isTimeline) {
+              return (
+                <li className="relative pl-4 py-1 list-none before:absolute before:left-0 before:top-2.5 before:w-2 before:h-2 before:rounded-full before:bg-cyan-400 border-l border-cyan-500/30 ml-2 my-0.5">
+                  <span className="text-zinc-200">{children}</span>
+                </li>
+              );
+            }
 
-              // Format bold **text**
-              const boldTokens = node.split(/\*\*(.*?)\*\*/g);
-              return boldTokens.map((bToken, bIdx) => {
-                if (bIdx % 2 === 1) {
-                  return (
-                    <strong key={`b-${nodeIdx}-${bIdx}`} className="font-bold text-cyan-200">
-                      {bToken}
-                    </strong>
-                  );
-                }
-                // Format inline code `code`
-                const codeTokens = bToken.split(/`(.*?)`/g);
-                return codeTokens.map((cToken, cIdx) => {
-                  if (cIdx % 2 === 1) {
-                    return (
-                      <code
-                        key={`c-${nodeIdx}-${bIdx}-${cIdx}`}
-                        className="px-1.5 py-0.5 rounded bg-black/40 text-pink-400 font-mono text-[11px]"
-                      >
-                        {cToken}
-                      </code>
-                    );
-                  }
-                  return cToken;
-                });
-              });
-            })}
-          </div>
-        );
-      })}
+            if (isCausal) {
+              return (
+                <li className="my-1.5 p-2 rounded-lg bg-zinc-900/60 border border-zinc-800/80 list-none flex items-center gap-2 text-zinc-200 shadow-sm">
+                  <GitBranch className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <span className="flex-1">{children}</span>
+                </li>
+              );
+            }
+
+            return (
+              <li className="my-1 ml-4 list-disc text-zinc-300 leading-normal">
+                {children}
+              </li>
+            );
+          },
+          ul: ({ children }) => (
+            <ul className="my-1.5 space-y-1">{children}</ul>
+          ),
+          p: ({ children }) => (
+            <p className="my-1.5 text-zinc-300 leading-relaxed">{children}</p>
+          ),
+          hr: () => <hr className="my-3 border-t border-white/10" />,
+        }}
+      >
+        {cleaned}
+      </ReactMarkdown>
     </div>
   );
 }

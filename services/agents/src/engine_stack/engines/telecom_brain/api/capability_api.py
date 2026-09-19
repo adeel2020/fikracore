@@ -323,8 +323,8 @@ def list_scenarios(
             "description": r.description,
             "aliases": r.aliases,
             "tags": r.tags,
-            "domains": r.domains or _derive_domains(r.tags),
-            "services": r.services or _derive_services(r.tags),
+            "domains": list(dict.fromkeys((r.domains or []) + _derive_domains(r.tags))),
+            "services": list(dict.fromkeys((r.services or []) + _derive_services(r.tags))),
             "difficulty": r.difficulty or _derive_difficulty(r.tags),
             "status": r.status,
             "source": r.source,
@@ -861,6 +861,19 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         query=query_text,
         session_id=req.run_id,
     )
+    if not storyteller_payload and any(w in query_text.lower() for w in ["story", "storyteller", "narrative", "post-mortem", "curated story"]):
+        storyteller_payload = {
+            "incident_id": scenario_id,
+            "answer": raw_answer_str,
+            "spoken_summary": raw_answer_str.split("\n\n")[0] if "\n\n" in raw_answer_str else raw_answer_str,
+            "visual_explanations": [
+                {
+                    "title": "Incident Genesis & Causal Conduits",
+                    "content": raw_answer_str,
+                }
+            ],
+            "claims": [],
+        }
     zaki_v2 = {
         "answer": raw_answer_str,
         "run_id": req.run_id,

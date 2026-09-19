@@ -1,16 +1,16 @@
-# Graph Report - kagent  (2026-09-15)
+# Graph Report - kagent  (2026-09-18)
 
 ## Corpus Check
-- 1783 files · ~4,214,733 words
+- 1810 files · ~4,917,713 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 17713 nodes · 33873 edges · 952 communities (599 shown, 353 thin omitted)
-- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 2475 edges (avg confidence: 0.64)
+- 18012 nodes · 34362 edges · 961 communities (609 shown, 352 thin omitted)
+- Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 2500 edges (avg confidence: 0.64)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `93ef5183`
+- Built from commit: `887131c5`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -559,6 +559,7 @@
 - [[_COMMUNITY_Community 544|Community 544]]
 - [[_COMMUNITY_Community 545|Community 545]]
 - [[_COMMUNITY_Community 546|Community 546]]
+- [[_COMMUNITY_Community 547|Community 547]]
 - [[_COMMUNITY_Community 548|Community 548]]
 - [[_COMMUNITY_Community 549|Community 549]]
 - [[_COMMUNITY_Community 550|Community 550]]
@@ -838,6 +839,7 @@
 - [[_COMMUNITY_Community 873|Community 873]]
 - [[_COMMUNITY_Community 874|Community 874]]
 - [[_COMMUNITY_Community 876|Community 876]]
+- [[_COMMUNITY_Community 877|Community 877]]
 - [[_COMMUNITY_Community 878|Community 878]]
 - [[_COMMUNITY_Community 879|Community 879]]
 - [[_COMMUNITY_Community 880|Community 880]]
@@ -869,7 +871,10 @@
 - [[_COMMUNITY_Community 908|Community 908]]
 - [[_COMMUNITY_Community 909|Community 909]]
 - [[_COMMUNITY_Community 910|Community 910]]
+- [[_COMMUNITY_Community 911|Community 911]]
 - [[_COMMUNITY_Community 912|Community 912]]
+- [[_COMMUNITY_Community 913|Community 913]]
+- [[_COMMUNITY_Community 914|Community 914]]
 - [[_COMMUNITY_Community 915|Community 915]]
 - [[_COMMUNITY_Community 916|Community 916]]
 - [[_COMMUNITY_Community 917|Community 917]]
@@ -877,12 +882,15 @@
 - [[_COMMUNITY_Community 919|Community 919]]
 - [[_COMMUNITY_Community 920|Community 920]]
 - [[_COMMUNITY_Community 921|Community 921]]
+- [[_COMMUNITY_Community 922|Community 922]]
 - [[_COMMUNITY_Community 923|Community 923]]
 - [[_COMMUNITY_Community 924|Community 924]]
 - [[_COMMUNITY_Community 925|Community 925]]
+- [[_COMMUNITY_Community 926|Community 926]]
 - [[_COMMUNITY_Community 927|Community 927]]
 - [[_COMMUNITY_Community 928|Community 928]]
 - [[_COMMUNITY_Community 929|Community 929]]
+- [[_COMMUNITY_Community 930|Community 930]]
 - [[_COMMUNITY_Community 931|Community 931]]
 - [[_COMMUNITY_Community 932|Community 932]]
 - [[_COMMUNITY_Community 933|Community 933]]
@@ -891,26 +899,27 @@
 - [[_COMMUNITY_Community 936|Community 936]]
 - [[_COMMUNITY_Community 937|Community 937]]
 - [[_COMMUNITY_Community 938|Community 938]]
+- [[_COMMUNITY_Community 939|Community 939]]
 - [[_COMMUNITY_Community 940|Community 940]]
 - [[_COMMUNITY_Community 941|Community 941]]
 - [[_COMMUNITY_Community 942|Community 942]]
 - [[_COMMUNITY_Community 943|Community 943]]
 - [[_COMMUNITY_Community 944|Community 944]]
+- [[_COMMUNITY_Community 945|Community 945]]
 - [[_COMMUNITY_Community 946|Community 946]]
+- [[_COMMUNITY_Community 947|Community 947]]
+- [[_COMMUNITY_Community 948|Community 948]]
 - [[_COMMUNITY_Community 949|Community 949]]
 - [[_COMMUNITY_Community 950|Community 950]]
 - [[_COMMUNITY_Community 951|Community 951]]
-- [[_COMMUNITY_Community 952|Community 952]]
 - [[_COMMUNITY_Community 954|Community 954]]
 - [[_COMMUNITY_Community 955|Community 955]]
 - [[_COMMUNITY_Community 956|Community 956]]
-- [[_COMMUNITY_Community 957|Community 957]]
 - [[_COMMUNITY_Community 958|Community 958]]
 - [[_COMMUNITY_Community 959|Community 959]]
 - [[_COMMUNITY_Community 960|Community 960]]
 - [[_COMMUNITY_Community 961|Community 961]]
 - [[_COMMUNITY_Community 962|Community 962]]
-- [[_COMMUNITY_Community 971|Community 971]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `br()` - 239 edges
@@ -925,8 +934,6 @@
 10. `TalkingHead` - 89 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `main()` --calls--> `benchmark_all()`  [INFERRED]
-  scripts/run_full_benchmark.py → services/agents/src/engine_stack/engines/telecom_brain/investigation/benchmark.py
 - `build_plan()` --calls--> `load_default_resolver()`  [INFERRED]
   scripts/telecombrain_canonicalization_dry_run.py → services/agents/src/engine_stack/engines/telecom_brain/canonicalization/resolver.py
 - `dry_run()` --calls--> `load_default_resolver()`  [INFERRED]
@@ -935,16 +942,18 @@
   tests/test_graph_coherence.py → services/agents/src/complaint/complaint/utils.py
 - `list_sessions()` --calls--> `get_dubai_timestamp()`  [INFERRED]
   services/agents/src/core/history.py → shared/agenticaiops_shared/database/models.py
+- `get_session_messages()` --calls--> `get_dubai_timestamp()`  [INFERRED]
+  services/agents/src/core/history.py → shared/agenticaiops_shared/database/models.py
 
 ## Import Cycles
 - 1-file cycle: `services/agents/src/storyteller/voice/__init__.py -> services/agents/src/storyteller/voice/__init__.py`
 - 3-file cycle: `frontend/src/components/features/narrative-notebook-view/components/presentation-template/AvatarContext.tsx -> frontend/src/components/features/narrative-notebook-view/components/presentation-template/TalkingAvatar.tsx -> frontend/src/components/voice/VoiceActivityDetector.tsx -> frontend/src/components/features/narrative-notebook-view/components/presentation-template/AvatarContext.tsx`
 
-## Communities (952 total, 353 thin omitted)
+## Communities (961 total, 352 thin omitted)
 
 ### Community 0 - "analyze_trace.py Cluster"
 Cohesion: 0.01
-Nodes (122): $a(), addOnPostRun(), addOnPreRun(), ak(), alignUp(), allocate(), am(), an() (+114 more)
+Nodes (116): $a(), addOnPostRun(), addOnPreRun(), aj(), ak(), alignUp(), allocate(), assert() (+108 more)
 
 ### Community 1 - "dependencies Cluster"
 Cohesion: 0.01
@@ -952,7 +961,7 @@ Nodes (118): addOnPostRun(), addOnPreRun(), ai(), aj(), al(), alignUp(), allocat
 
 ### Community 2 - "complaint_analyst.py Cluster"
 Cohesion: 0.02
-Nodes (104): ABS(), ADD(), addName(), addSegment(), addStringToPool(), addTerminatorSegment(), AND(), CEILING() (+96 more)
+Nodes (98): wB(), ABS(), ADD(), addSegment(), addStringToPool(), addTerminatorSegment(), AND(), CEILING() (+90 more)
 
 ### Community 3 - "eSIM & Provisioning Support Team Cluster"
 Cohesion: 0.08
@@ -960,19 +969,19 @@ Nodes (31): Android App Client, iOS App Client, Subscriber Mobile App Channel, I
 
 ### Community 4 - "performance-view.tsx Cluster"
 Cohesion: 0.02
-Nodes (64): A(), activate(), addPlayingCount(), addPropertyDecorator(), B(), binarySubdivide(), $bm_isInstanceOfArray(), $bm_neg() (+56 more)
+Nodes (67): A(), activate(), addPlayingCount(), addPropertyDecorator(), B(), binarySubdivide(), $bm_isInstanceOfArray(), $bm_neg() (+59 more)
 
 ### Community 5 - "performance-view.tsx Cluster"
 Cohesion: 0.08
-Nodes (23): _event, drain_until_done(), FakeJarvisConversation, FakeKnowledge, FakeSTT, FakeTTS, FakeVAD, make_app() (+15 more)
+Nodes (28): _event, ConversationService, Stateless orchestrator; the only mutable state is the session store., ndarray, _ctx(), drain_until_done(), FakeJarvisConversation, FakeKnowledge (+20 more)
 
 ### Community 6 - "models.py Cluster"
 Cohesion: 0.02
-Nodes (59): LUTShader, _camera, FullScreenQuad, FullscreenTriangleGeometry, _geometry, Pass, _JitterVectors, _JitterVectors (+51 more)
+Nodes (56): LUTShader, _camera, FullScreenQuad, FullscreenTriangleGeometry, _geometry, Pass, _JitterVectors, _JitterVectors (+48 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.04
-Nodes (39): IncidentContext, IncidentContext — the single Layer 1 → Layer 2 contract.  Requirements §4: a nor, Normalized retrieval result for one incident., Counts per kind — useful for tests and debugging., Knowledge layer (Layer 1) — gbrain-backed retrieval for mobile-core incidents., MobileCoreKnowledge — Layer 1 (Knowledge / Retrieval).  A Python abstraction ove, fact(), Convenience constructor for a provenance-wrapped fact. (+31 more)
+Cohesion: 0.06
+Nodes (15): app(), _ask(), client(), FakeKnowledge, FastAPI, Phase 3A tests — conversational storyteller API.  Tests use a fake knowledge lay, A knowledge layer that returns a canned context for known incidents., TestAskEndpoint (+7 more)
 
 ### Community 8 - "sft.py Cluster"
 Cohesion: 0.02
@@ -980,11 +989,11 @@ Nodes (72): arrayCacheF32, arrayCacheI32, _clearColor, _cubeDirections, _cubeUps
 
 ### Community 9 - "test_orchestrate.py Cluster"
 Cohesion: 0.03
-Nodes (46): addRunDependency(), asyncLoad(), convertI32PairToI53Checked(), craftEmvalAllocator(), doCallback(), done(), doReadv(), doWritev() (+38 more)
+Nodes (28): addRunDependency(), asyncLoad(), convertI32PairToI53Checked(), craftEmvalAllocator(), createWasm(), doCallback(), done(), doReadv() (+20 more)
 
 ### Community 10 - "data_storyteller_agent.py Cluster"
 Cohesion: 0.03
-Nodes (7): dB(), gC(), iB(), jB(), k(), OB(), w()
+Nodes (6): dB(), gC(), iB(), jB(), k(), w()
 
 ### Community 11 - "Community 11"
 Cohesion: 0.06
@@ -1000,7 +1009,7 @@ Nodes (26): extract_cluster_context(), _fallback_narration(), _fallback_text_sum
 
 ### Community 14 - "agentic-qna-view.tsx Cluster"
 Cohesion: 0.03
-Nodes (28): addRunDependency(), asyncLoad(), convertI32PairToI53Checked(), craftEmvalAllocator(), createWasm(), doCallback(), done(), doReadv() (+20 more)
+Nodes (34): addRunDependency(), asyncLoad(), convertI32PairToI53Checked(), craftEmvalAllocator(), createWasm(), doCallback(), done(), doReadv() (+26 more)
 
 ### Community 15 - "api_router.py Cluster"
 Cohesion: 0.04
@@ -1011,16 +1020,16 @@ Cohesion: 0.04
 Nodes (57): getDashboardFeed(), buildAllColumns(), COLUMN_COLORS, ColumnDef, ColumnEdge, computeEdges(), computeInsertSuggestions(), EXCLUDE_FIELDS (+49 more)
 
 ### Community 17 - "sft.ts Cluster"
-Cohesion: 0.02
-Nodes (18): aC(), B(), bC(), cC(), dC(), E(), G(), h() (+10 more)
+Cohesion: 0.03
+Nodes (18): aB(), B(), bC(), cC(), dC(), E(), fC(), G() (+10 more)
 
 ### Community 18 - "SessionMemory Cluster"
 Cohesion: 0.05
 Nodes (44): Accessor, AccessorElements, Break, Comment, Conditional, Continue, Discard, DynamicElement (+36 more)
 
 ### Community 19 - "qna_agent.py Cluster"
-Cohesion: 0.07
-Nodes (40): MobileCoreKnowledge, Any, Timeline entries from the incident page (compiled_truth + frontmatter)., Return ``(kpi_events, kpis)`` via detected-by then measures., Evidence supporting a hypothesis (supported-by)., Remediations, enriched with their targets + verified-by kpi-events., Recovery KPI events: remediation -> verified-by -> kpi-event., Semantic search for similar incidents (query op) + same-type listing. (+32 more)
+Cohesion: 0.06
+Nodes (48): IncidentContext — the single Layer 1 → Layer 2 contract.  Requirements §4: a nor, Knowledge layer (Layer 1) — gbrain-backed retrieval for mobile-core incidents., MobileCoreKnowledge, Any, MobileCoreKnowledge — Layer 1 (Knowledge / Retrieval).  A Python abstraction ove, Timeline entries from the incident page (compiled_truth + frontmatter)., Return ``(kpi_events, kpis)`` via detected-by then measures., Evidence supporting a hypothesis (supported-by). (+40 more)
 
 ### Community 20 - "Community 20"
 Cohesion: 0.09
@@ -1028,15 +1037,15 @@ Nodes (15): Any, JARVIS Security Engine - Security Guardrails & Validation Prote
 
 ### Community 21 - "qna.ts Cluster"
 Cohesion: 0.05
-Nodes (54): create_default_context(), AlarmEvidence, TelecomRequest, IntentService, FakeService, test_default_context_uses_canonical_registry_and_mcp_hub(), test_router_retains_unmatched_requests_as_observations(), test_router_selects_highest_confidence_service() (+46 more)
+Nodes (55): create_default_context(), TelecomRequest, FCAPSLearningService, _alarm(), test_correlation_service_produces_incident_candidate_with_intent_context(), test_correlation_service_retains_unknown_unmatched_alarm(), test_incident_registry_service_lists_existing_registry_records(), test_incident_registry_service_retains_unknown_alarm_candidates() (+47 more)
 
 ### Community 22 - "context-view.tsx Cluster"
-Cohesion: 0.04
-Nodes (65): AnalyticsViewProps, COLORS, NOC_COLORS, PercentageNocTickets(), TopReassignmentsQueue(), TopRejectionReason(), TroubleTicketsHandled30Days(), EarlyWarningDiagnostics() (+57 more)
+Cohesion: 0.06
+Nodes (52): AnalyticsViewProps, COLORS, NOC_COLORS, PercentageNocTickets(), TopReassignmentsQueue(), TopRejectionReason(), TroubleTicketsHandled30Days(), EarlyWarningDiagnostics() (+44 more)
 
 ### Community 23 - "Agentic QnA View Component Cluster"
 Cohesion: 0.08
-Nodes (19): ConversationTurn, MarkSession, MarkSessionStore, Any, Return the most recent turns in chronological order., Resolve the operator's name across context, active session, conversation clues,, Thread-safe 3-tier adaptive session store:     - Tier 1: In-process RAM cache (t, Attempt to connect to Redis; gracefully skip if not installed or unreachable. (+11 more)
+Nodes (20): ConversationTurn, MarkSession, MarkSessionStore, Any, M.A.R.K. 3-Tier Adaptive Session Store  Maintains conversation history and incid, Return the most recent turns in chronological order., Resolve the operator's name across context, active session, conversation clues,, Thread-safe 3-tier adaptive session store:     - Tier 1: In-process RAM cache (t (+12 more)
 
 ### Community 24 - "Agentic AIOps Dashboard Cluster"
 Cohesion: 0.27
@@ -1047,20 +1056,20 @@ Cohesion: 0.24
 Nodes (11): Active Agents Metric Tracker, Agent Specialization Distribution Metric Tracker, Compute Cost Metric Tracker, AgentOps Dashboard Design Rationale, Inference Cost Cap Metric Tracker, Agent Latency Metric Tracker, Agent Progress and Correctness Metric Tracker, Project Rollouts Metric Tracker (+3 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.07
-Nodes (10): _closestPoint, ConvexHull, Face, HalfEdge, _line3, _plane, _triangle, _v1 (+2 more)
+Cohesion: 0.05
+Nodes (13): ConvexGeometry, _closestPoint, ConvexHull, Face, HalfEdge, _line3, _plane, _triangle (+5 more)
 
 ### Community 27 - "orchestrator.py Cluster"
 Cohesion: 0.04
-Nodes (63): ConduitDetailModal(), CoreSynthesisDetailModal(), NeuralEntityDetailModal(), AgenticQnaView(), ChatPanel(), HistorySidebar(), HistorySidebarProps, AnimatedNumber() (+55 more)
+Nodes (56): AgenticQnaView(), ChatPanel(), HistorySidebar(), HistorySidebarProps, AnimatedNumber(), AnimatedNumberProps, LinearProgressMeter(), LinearProgressMeterProps (+48 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.06
-Nodes (45): BaseModel, Runtime context for TelecomBrainEngine service calls., TelecomContext, TelecomBrainEngine facade., TelecomBrainEngine canonical package., FCAPSClassification, IncidentRef, IntentViolation (+37 more)
+Cohesion: 0.07
+Nodes (50): BaseModel, Runtime context for TelecomBrainEngine service calls., TelecomContext, Any, TelecomBrainEngine facade., One telecom cognition engine composed of internal services., Match Jarvis superpower lifecycle; current services are lazy., TelecomBrainEngine (+42 more)
 
 ### Community 29 - "Community 29"
 Cohesion: 0.03
-Nodes (30): a(), assert(), c(), CA(), d(), Fa(), gB(), hB() (+22 more)
+Nodes (34): a(), assert(), c(), d(), Fa(), hB(), IA(), iC() (+26 more)
 
 ### Community 30 - "history.py Cluster"
 Cohesion: 0.04
@@ -1071,8 +1080,8 @@ Cohesion: 0.22
 Nodes (9): Aggregation Metrics, BLEU Metric, Classification Metrics (F1, Accuracy), nltk, numpy, ROUGE Metrics (ROUGE-1/2/L), rouge-score, scikit-learn (+1 more)
 
 ### Community 33 - "db.py Cluster"
-Cohesion: 0.11
-Nodes (67): ad(), aj(), aq(), bd(), bf(), _c(), cd(), ce() (+59 more)
+Cohesion: 0.10
+Nodes (61): ad(), bd(), _c(), cd(), ce(), de(), ee(), eg() (+53 more)
 
 ### Community 34 - "chat-history-panel.tsx Cluster"
 Cohesion: 0.07
@@ -1080,11 +1089,11 @@ Nodes (8): Value, ValueButton, ValueCheckbox, ValueColor, ValueNumber, ValueSele
 
 ### Community 35 - "Community 35"
 Cohesion: 0.08
-Nodes (36): argument(), ELSE(), fail(), getFixed(), getUShort(), IF(), makeColrTable(), makeCpalTable() (+28 more)
+Nodes (37): argument(), ELSE(), fail(), getFixed(), getULong(), getUShort(), IF(), makeColrTable() (+29 more)
 
 ### Community 36 - "corda_eval.py Cluster"
-Cohesion: 0.05
-Nodes (42): main(), Any, Handler dispatching artifact, scenario, or learning unit validation., validate_handler(), H2ValidationError, Any, Path, Pre-Benchmark Integrity Validator for Step 4.2 / H2 Unknown-Unknown Scenarios. (+34 more)
+Cohesion: 0.06
+Nodes (38): Any, Handler dispatching artifact, scenario, or learning unit validation., validate_handler(), H2ValidationError, Any, Path, Pre-Benchmark Integrity Validator for Step 4.2 / H2 Unknown-Unknown Scenarios., Validate all H2 runs in a directory. (+30 more)
 
 ### Community 38 - "Community 38"
 Cohesion: 0.06
@@ -1103,8 +1112,8 @@ Cohesion: 0.06
 Nodes (33): 10. Scenario-Specific Live State, 11. Backend Capability Binding, 12. No UI-Specific Reasoning, 14. Cross-Panel Synchronization, 15. Next-Best-Evidence Actions, 16. Contextual Zaki AI Copilot, 17. Zaki Context Envelope, 18. Zaki Workspace Awareness (+25 more)
 
 ### Community 56 - "get_correlation_matrix() Cluster"
-Cohesion: 0.11
-Nodes (24): B(), C(), D(), E(), f(), G(), H(), I() (+16 more)
+Cohesion: 0.07
+Nodes (25): A(), B(), C(), D(), E(), f(), G(), H() (+17 more)
 
 ### Community 61 - "controls-view.tsx Cluster"
 Cohesion: 0.12
@@ -1123,12 +1132,12 @@ Cohesion: 0.06
 Nodes (12): ConditionalLineSegments, createObject(), generateFaceNormals(), isPartType(), LDrawLoader, LDrawParsedCache, LDrawPartsGeometryCache, LineParser (+4 more)
 
 ### Community 67 - "Community 67"
-Cohesion: 0.05
-Nodes (12): CVCompElement(), CVImageElement(), CVSolidElement(), destroy(), FootageElement(), getAsset(), ICompElement(), IImageElement() (+4 more)
+Cohesion: 0.07
+Nodes (9): CVCompElement(), CVImageElement(), CVSolidElement(), FootageElement(), getAsset(), IImageElement(), ISolidElement(), SVGCompElement() (+1 more)
 
 ### Community 68 - "Community 68"
 Cohesion: 0.08
-Nodes (7): createRenderFunction(), CVShapeElement(), getModifier(), GroupEffect(), init(), SVGShapeData(), SVGShapeElement()
+Nodes (11): cloneFromProps(), CVContextData(), CVShapeElement(), CVTextElement(), getModifier(), GroupEffect(), init(), renderPath() (+3 more)
 
 ### Community 70 - "__init__.py Cluster"
 Cohesion: 0.19
@@ -1136,23 +1145,23 @@ Nodes (4): GbrainWriter, Any, Upsert a correlation hypothesis and its evidence u
 
 ### Community 71 - "main.py Cluster"
 Cohesion: 0.05
-Nodes (25): addOnPostRun(), addOnPreRun(), addRunDependency(), craftInvokerFunction(), createJsInvoker(), createWasm(), destructor(), findWasmBinary() (+17 more)
+Nodes (23): addOnPostRun(), addOnPreRun(), addRunDependency(), craftInvokerFunction(), createJsInvoker(), createWasm(), destructor(), findWasmBinary() (+15 more)
 
 ### Community 73 - "Community 73"
 Cohesion: 0.07
 Nodes (7): _refMaterials, _resposeByCommand, TSLGraphEditor, _library, _storageKey(), TSLGraphLoader, TSLGraphLoaderApplier
 
 ### Community 74 - "Community 74"
-Cohesion: 0.09
-Nodes (29): Singleton simulation manager holding live runs and handling state updates., SimulationManager, Tests for FikraCore Live Simulator Endpoints & Lifecycle (§25, §26, §50)., A fresh scenario run starts epistemically empty and does not expose final incide, Resume should only change status, while explicit fresh start creates a clean run, The live stream should not auto-drive the stage machine using elapsed time or a, Verify listing scenarios includes SCN-001 and resolves details., The SSE payload must expose the live reasoning trace and raw event burst used by (+21 more)
+Cohesion: 0.06
+Nodes (41): RunCorrelationDecision, Any, Create a fresh epistemically empty run for an explicit simulator start., Attach to an existing active operational run or create a new one (§9, §10)., Record explicit failure from an operational evidence provider (§23, §56)., Record operational recovery telemetry without auto-confirming root cause (§32)., Advance one stage only when the compiler reports the stage gate is satisfied., Add run scope to nested runtime objects without removing legacy fields. (+33 more)
 
 ### Community 75 - "Community 75"
 Cohesion: 0.04
 Nodes (31): addMorphTargets(), addPrimitiveAttributes(), ALPHA_MODES, ATTRIBUTES, BINARY_EXTENSION_CHUNK_TYPES, computeBounds(), createAttributesKey(), createPrimitiveKey() (+23 more)
 
 ### Community 76 - "Community 76"
-Cohesion: 0.09
-Nodes (37): ask(), ask_stream(), _build_telemetry(), chat(), chat_stream(), get_complaints_telemetry(), get_telemetry(), mobile_core_analyst() (+29 more)
+Cohesion: 0.07
+Nodes (41): ask(), ask_stream(), _build_telemetry(), chat(), chat_stream(), get_complaints_telemetry(), get_telemetry(), mobile_core_analyst() (+33 more)
 
 ### Community 77 - "Community 77"
 Cohesion: 0.03
@@ -1195,12 +1204,12 @@ Cohesion: 0.14
 Nodes (26): extract_cluster_context(), _fallback_narration(), _fallback_text_summary(), _find_issue_in_stories(), _find_reassignment_reason(), _get_edges_for_reason(), _get_kg_state(), _get_stories() (+18 more)
 
 ### Community 88 - "page.tsx Cluster"
-Cohesion: 0.07
-Nodes (37): AGENT_OPTIONS, ChatPanelProps, iconStroke, PAGE_HEADER_META, SUGGESTED_PROMPTS_PAGES, SuggestedPrompts, SuggestedPromptsProps, cleanStructuredEvents() (+29 more)
+Cohesion: 0.06
+Nodes (43): AGENT_OPTIONS, ChatPanelProps, iconStroke, PAGE_HEADER_META, SUGGESTED_PROMPTS_PAGES, SuggestedPrompts, SuggestedPromptsProps, cleanStructuredEvents() (+35 more)
 
 ### Community 89 - "Community 89"
 Cohesion: 0.06
-Nodes (19): c(), defaults(), Dn(), Dr(), Es(), Ii(), In(), Iu() (+11 more)
+Nodes (23): ai(), c(), defaults(), Dn(), Dr(), Es(), Ii(), In() (+15 more)
 
 ### Community 90 - "Community 90"
 Cohesion: 0.09
@@ -1216,7 +1225,7 @@ Nodes (25): _bbox, _cameraToLightMatrix, _center, CSM, _lightOrientationMatrix, 
 
 ### Community 95 - "slider.tsx Cluster"
 Cohesion: 0.03
-Nodes (105): Benchmark Capability for FikraCore (§87, §88, §234).  Run H1-H4 and integration, discover_handler(), Any, Discover Capability for FikraCore (§24, §25, §228).  Identifies missing or insuf, Handler executing operational discovery of knowledge gaps., create_default_registry(), Unified Capability Registry Package for FikraCore (§9, §10, §47)., Build and populate default capability registry with all 10 core capabilities. (+97 more)
+Nodes (113): Benchmark Capability for FikraCore (§87, §88, §234).  Run H1-H4 and integration, discover_handler(), Any, Discover Capability for FikraCore (§24, §25, §228).  Identifies missing or insuf, Handler executing operational discovery of knowledge gaps., create_default_registry(), Unified Capability Registry Package for FikraCore (§9, §10, §47)., Build and populate default capability registry with all 10 core capabilities. (+105 more)
 
 ### Community 96 - "switch.tsx Cluster"
 Cohesion: 0.10
@@ -1226,17 +1235,13 @@ Nodes (23): A(), ba(), C(), D(), E(), f(), G(), h() (+15 more)
 Cohesion: 0.06
 Nodes (18): Capsule, checkAABBAxis(), _box, _capsule, _center, _line1, _line2, lineToLineClosestPoints() (+10 more)
 
-### Community 98 - "utils.ts Cluster"
-Cohesion: 0.07
-Nodes (8): getItem(), Inspector, setItem(), forceWebGL(), _loadState(), _saveState(), Settings, Style
-
 ### Community 105 - "Community 105"
-Cohesion: 0.13
-Nodes (44): ab(), bb(), cb(), cg(), _d(), db(), Dc(), df() (+36 more)
+Cohesion: 0.11
+Nodes (56): CA(), ab(), Ac(), Ae(), aq(), bb(), be(), cb() (+48 more)
 
 ### Community 106 - "__init__.py Cluster"
-Cohesion: 0.09
-Nodes (12): DecodeUTF8(), decompressSync(), gunzip, gunzipSync(), inflate, inflateSync(), unzip, UnzipPassThrough() (+4 more)
+Cohesion: 0.08
+Nodes (17): AsyncUnzipInflate(), DecodeUTF8(), decompressSync(), deflateSync(), EncodeUTF8(), gunzip, gunzipSync(), inflate (+9 more)
 
 ### Community 107 - "sanity_check.py Cluster"
 Cohesion: 0.05
@@ -1247,7 +1252,7 @@ Cohesion: 0.08
 Nodes (38): $a(), Ac(), aq(), _b(), bi(), bk(), Cc(), dg() (+30 more)
 
 ### Community 109 - "Community 109"
-Cohesion: 0.09
+Cohesion: 0.10
 Nodes (21): bezFunction(), clone(), createPath(), createSizedArray(), double(), EllShapePropertyFactory(), KeyframedShapeProperty(), newElement() (+13 more)
 
 ### Community 120 - "Community 120"
@@ -1255,8 +1260,8 @@ Cohesion: 0.06
 Nodes (12): getMaterialExtension(), GLTFMaterialsAnisotropyExtension, GLTFMaterialsBumpExtension, GLTFMaterialsClearcoatExtension, GLTFMaterialsDispersionExtension, GLTFMaterialsEmissiveStrengthExtension, GLTFMaterialsIorExtension, GLTFMaterialsIridescenceExtension (+4 more)
 
 ### Community 121 - "Community 121"
-Cohesion: 0.11
-Nodes (21): build_causal_chain(), Deterministic causal chain construction.  Builds the ordered chain:      KPI deg, Deterministically reconstruct the causal chain from the context., Return the confirmed root cause if the top hypothesis is confirmed., resolved_root_cause(), _top_assessment(), Layer 2 — Reasoning / Storytelling (deterministic).  Builds a deterministic ``In, build_story_response() (+13 more)
+Cohesion: 0.09
+Nodes (28): ProvenanceFact, A fact retrieved from gbrain, wrapped with provenance metadata.      Attributes:, Convert to a JSON-serializable dictionary., build_causal_chain(), Deterministic causal chain construction.  Builds the ordered chain:      KPI deg, Deterministically reconstruct the causal chain from the context., Return the confirmed root cause if the top hypothesis is confirmed., resolved_root_cause() (+20 more)
 
 ### Community 123 - "Community 123"
 Cohesion: 0.10
@@ -1276,11 +1281,11 @@ Nodes (15): CinquefoilKnot, DecoratedTorusKnot4a, DecoratedTorusKnot4b, Decorate
 
 ### Community 131 - "Community 131"
 Cohesion: 0.04
-Nodes (57): generate_all_h4_scenarios(), _generate_single_h4_scenario(), Any, Path, Dedicated 40-Scenario Generator for Step 4.4 / H4 Proactive What-If Benchmark., Generate all 40 H4 scenarios under output_dir., h4_scenarios(), Comprehensive Automated Test Suite for Step 4.4 / H4 Proactive What-If, Critical (+49 more)
+Nodes (55): generate_all_h4_scenarios(), _generate_single_h4_scenario(), Any, Path, Dedicated 40-Scenario Generator for Step 4.4 / H4 Proactive What-If Benchmark., Generate all 40 H4 scenarios under output_dir., h4_scenarios(), Comprehensive Automated Test Suite for Step 4.4 / H4 Proactive What-If, Critical (+47 more)
 
 ### Community 132 - "Community 132"
 Cohesion: 0.08
-Nodes (9): applyToX(), applyToY(), cloneFromProps(), CVContextData(), CVTextElement(), ITextElement(), renderPath(), setTransform() (+1 more)
+Nodes (30): CategorizedHelpFormatter, Custom argparse formatter that groups subparsers into clearly labeled categories, CoverageReport, CrossDomainPairCoverage, DomainCoverageScore, KnowledgeCoverageAnalyzer, Path, FikraCore Step 4.7 Knowledge Coverage Analyzer & Artifact Generator.  Calculates (+22 more)
 
 ### Community 133 - "Community 133"
 Cohesion: 0.08
@@ -1291,16 +1296,16 @@ Cohesion: 0.30
 Nodes (15): ab(), ah(), bb(), db(), eb(), go(), hi(), ho() (+7 more)
 
 ### Community 135 - "Community 135"
-Cohesion: 0.11
-Nodes (33): ao(), Ar(), au(), compact(), difference(), En(), gn(), gr() (+25 more)
+Cohesion: 0.14
+Nodes (24): ao(), Ar(), compact(), En(), gr(), ht(), indexOf(), isFunction() (+16 more)
 
 ### Community 136 - "Community 136"
-Cohesion: 0.09
-Nodes (11): average(), checkArgument(), computeCheckSum(), Font(), fontToSfntTable(), getUnicodeRange(), log2(), makeSfntTable() (+3 more)
+Cohesion: 0.10
+Nodes (3): Bidi(), checkArgument(), Font()
 
 ### Community 137 - "Community 137"
-Cohesion: 0.04
-Nodes (91): MarkResponse, Any, Per-turn presentation context, compatible with legacy text consumers., _await_done(), _await_true(), Backend, build_pipeline(), _drive_until_done() (+83 more)
+Cohesion: 0.06
+Nodes (57): MarkResponse, Any, Per-turn presentation context, compatible with legacy text consumers., _await_done(), _await_true(), Backend, build_pipeline(), _drive_until_done() (+49 more)
 
 ### Community 138 - "Community 138"
 Cohesion: 0.06
@@ -1311,8 +1316,8 @@ Cohesion: 0.05
 Nodes (38): 1. Install Dependencies, 2. Start JARVIS, 3. Access JARVIS, Adding New Superpowers, API Endpoints, Architecture, 🤖 Autopilot, Basic Query (+30 more)
 
 ### Community 140 - "Community 140"
-Cohesion: 0.12
-Nodes (6): _is_non_retryable_provider_error(), ndarray, Append mono float32 audio to the running utterance., Provider auth/policy errors should fail fast instead of loading local STT., Load the backend model. Idempotent; may download weights., Transcribe mono audio (float32 in [-1, 1]) to text.
+Cohesion: 0.13
+Nodes (5): _float32_to_wav_bytes(), ndarray, Append mono float32 audio to the running utterance., Load the backend model. Idempotent; may download weights., Transcribe mono audio (float32 in [-1, 1]) to text.
 
 ### Community 141 - "Community 141"
 Cohesion: 0.10
@@ -1323,8 +1328,8 @@ Cohesion: 0.05
 Nodes (43): 10. Hypothesis-to-Domain Mapping, 11. No Impact-to-Causality Shortcut, 12. Domain Attribution Matrix Semantics, 13. Zaki Grounding Rule, 14. Zaki Must Not Re-Derive Attribution, 15. Zaki Conflict Response, 16. Zaki Revision Binding, 17. Strong Revision Rule (+35 more)
 
 ### Community 144 - "Community 144"
-Cohesion: 0.11
-Nodes (37): af(), bh(), bn(), bq(), ci(), dd(), dj(), _e() (+29 more)
+Cohesion: 0.08
+Nodes (55): af(), _b(), bh(), bm(), bq(), ci(), dd(), dg() (+47 more)
 
 ### Community 145 - "Community 145"
 Cohesion: 0.06
@@ -1335,8 +1340,8 @@ Cohesion: 0.13
 Nodes (9): NodeWithScore, Initialize RAG pipeline., RAGQueryEngine, ConcurrentRetriever, is_huggingface_reachable(), Any, BaseNode, HyDE (Hypothetical Document Embeddings): Expands the query by generating a hypot (+1 more)
 
 ### Community 148 - "Community 148"
-Cohesion: 0.09
-Nodes (16): applyToPointArray(), applyToPointStringified(), applyToTriplePoints(), CVMaskElement(), CVShapeData(), fromComp(), getInverseMatrix(), getShapeProp() (+8 more)
+Cohesion: 0.12
+Nodes (12): applyToPointArray(), applyToPointStringified(), applyToTriplePoints(), CVMaskElement(), CVShapeData(), fromComp(), getInverseMatrix(), getShapeProp() (+4 more)
 
 ### Community 149 - "Community 149"
 Cohesion: 0.03
@@ -1347,20 +1352,20 @@ Cohesion: 0.03
 Nodes (66): 10. Live Run Correlation / Deduplication, 11. Live Evidence Adapter, 12. Evidence Types, 13. Live Evidence Admission, 14. Live Evidence Provenance, 15. Evidence Time Semantics, 16. Live Run Stage Model, 18. Live Runs Are Potentially Long-Lived (+58 more)
 
 ### Community 151 - "Community 151"
-Cohesion: 0.11
-Nodes (35): craftInvokerFunction(), __embind_finalize_value_array(), __embind_finalize_value_object(), __embind_register_bool(), __embind_register_class(), __embind_register_class_class_function(), __embind_register_class_constructor(), __embind_register_class_function() (+27 more)
+Cohesion: 0.10
+Nodes (37): makeDynCaller(), craftInvokerFunction(), __embind_finalize_value_array(), __embind_finalize_value_object(), __embind_register_bool(), __embind_register_class(), __embind_register_class_class_function(), __embind_register_class_constructor() (+29 more)
 
 ### Community 152 - "Community 152"
-Cohesion: 0.11
-Nodes (35): craftInvokerFunction(), __embind_finalize_value_array(), __embind_finalize_value_object(), __embind_register_bool(), __embind_register_class(), __embind_register_class_class_function(), __embind_register_class_constructor(), __embind_register_class_function() (+27 more)
+Cohesion: 0.12
+Nodes (30): craftInvokerFunction(), createNamedFunction(), __embind_finalize_value_array(), __embind_finalize_value_object(), __embind_register_class(), __embind_register_class_class_function(), __embind_register_class_constructor(), __embind_register_class_function() (+22 more)
 
 ### Community 153 - "Community 153"
 Cohesion: 0.08
 Nodes (26): generate_stratified_splits(), load_splits(), Path, Deterministic stratified splitting for Step 4.1 calibration.  Partitions 100 sce, Partition runs deterministically into calibration (60), validation (20), and hol, Generate and save splits JSON to output_path., save_splits(), Unit and regression tests for Step 4.1 Calibration per Section 31. (+18 more)
 
 ### Community 154 - "Community 154"
-Cohesion: 0.08
-Nodes (17): AngleEffect(), CheckboxEffect(), ColorEffect(), DashProperty(), getProp(), getTransformProperty(), GradientProperty(), LayerIndexEffect() (+9 more)
+Cohesion: 0.11
+Nodes (15): AngleEffect(), CheckboxEffect(), ColorEffect(), DashProperty(), getProp(), getTransformProperty(), GradientProperty(), LayerIndexEffect() (+7 more)
 
 ### Community 155 - "Community 155"
 Cohesion: 0.08
@@ -1371,8 +1376,8 @@ Cohesion: 0.14
 Nodes (10): _createPlanes(), _createRenderTarget(), _getBlurShader(), _getCommonVertexShader(), _getCubemapMaterial(), _getEquirectMaterial(), _getGGXShader(), PMREMGenerator (+2 more)
 
 ### Community 157 - "Community 157"
-Cohesion: 0.13
-Nodes (21): AgentCycleStepper, AIAgencyModule, AIAgencyModuleProps, DelegationBar, InProgressTaskList, MetricBadge, EmbeddingLatencyPanel, EmbeddingLatencyPanelProps (+13 more)
+Cohesion: 0.06
+Nodes (35): 10. Step 6 — Ensure DEMO-001 Is Discoverable, 11. Step 7 — Fix the Frontend Default Filter, 12. Step 8 — Group Instead of Only Filter, 13. Step 9 — Fix Scenario Card Labels, 14. Step 10 — Handle Legacy SCN-* IDs, 15. Step 11 — Treat H3 Differently but Keep It Unified, 16. Step 12 — Scenario Selection Must Resolve or Create a Run, 17. Step 13 — Preserve Scenario / Run Separation (+27 more)
 
 ### Community 159 - "Community 159"
 Cohesion: 0.07
@@ -1383,12 +1388,12 @@ Cohesion: 0.09
 Nodes (35): cg(), ck(), co(), _f(), Fc(), fj(), fn(), fo() (+27 more)
 
 ### Community 161 - "Community 161"
-Cohesion: 0.09
-Nodes (28): DocumentsPanel(), EmbeddingsPanel(), GraphDetailPanel(), GraphDetailPanelProps, ForceGraph2D, GraphViewPanel(), GraphViewPanelProps, ChartOption (+20 more)
+Cohesion: 0.07
+Nodes (34): ComplaintDashboardView(), getTelemetryDateStr(), isDateInFilter(), AnalyticsView, TelemetryLedger, TelemetryLedgerProps, useTelemetryProcessor(), DocumentsPanel() (+26 more)
 
 ### Community 162 - "Community 162"
-Cohesion: 0.07
-Nodes (29): _await_done(), _chunks(), _Knowledge, _LongAnswerConversation, ndarray, End-to-end real ML voice pipeline test.  Runs the *real* Silero VAD + faster-whi, A conversation whose ``ask`` returns a deliberately long answer.      Lets the b, _real_streamers() (+21 more)
+Cohesion: 0.12
+Nodes (14): Generation, State for one user turn., ndarray, Explicitly start a fresh turn (client ``start`` message / text)., Drive a full text turn: transcript -> answer -> TTS -> done., Feed one PCM float32 frame (mono 16 kHz). Drives VAD/STT/barge-in., Cancel the active turn (barge-in, client ``interrupt``, disconnect)., Full teardown on disconnect. (+6 more)
 
 ### Community 163 - "Community 163"
 Cohesion: 0.14
@@ -1399,12 +1404,12 @@ Cohesion: 0.10
 Nodes (6): generateUniformsList(), getObjectHash(), RendererProxy, SceneContext, WebGLNodeBuilder, WebGLNodesHandler
 
 ### Community 166 - "Community 166"
-Cohesion: 0.05
-Nodes (95): DiGraph, Enum, KnowledgeGap, Assumption, BlastRadiusAssessment, BlastRadiusLevel, CandidateRelationship, CausalRole (+87 more)
+Cohesion: 0.04
+Nodes (106): DiGraph, Enum, KnowledgeGap, Assumption, BlastRadiusAssessment, BlastRadiusLevel, CandidateRelationship, CausalRole (+98 more)
 
 ### Community 167 - "Community 167"
-Cohesion: 0.08
-Nodes (10): addRunDependency(), castObject(), createWasm(), ensureString(), intArrayFromString(), lengthBytesUTF8(), stringToUTF8Array(), UTF8ArrayToString() (+2 more)
+Cohesion: 0.06
+Nodes (34): addRunDependency(), AttributeOctahedronTransform(), AttributeQuantizationTransform(), AttributeTransformData(), c(), castObject(), createWasm(), Decoder() (+26 more)
 
 ### Community 168 - "Community 168"
 Cohesion: 0.09
@@ -1415,16 +1420,16 @@ Cohesion: 0.10
 Nodes (11): BoundingBox(), CALL(), derive(), getContours(), getPath(), getPathDefinition(), Glyph(), Hinting() (+3 more)
 
 ### Community 170 - "Community 170"
-Cohesion: 0.06
-Nodes (38): LiveMcpSmokeTestRunner, Any, Path, Smoke Test 2 - MCP Authentication & Session Handshake (Section 8)., Smoke Test 3 - Tool Discovery (Section 9)., Smoke Test 4 - Active Schema (Section 10)., Smoke Test 5 - Read Known telecombrain Pages (Section 11)., Smoke Test 6 - Read Links and Backlinks (Section 12). (+30 more)
+Cohesion: 0.05
+Nodes (39): LiveMcpSmokeTestRunner, Any, Smoke Test 2 - MCP Authentication & Session Handshake (Section 8)., Smoke Test 3 - Tool Discovery (Section 9)., Smoke Test 4 - Active Schema (Section 10)., Smoke Test 5 - Read Known telecombrain Pages (Section 11)., Smoke Test 6 - Read Links and Backlinks (Section 12)., Smoke Test 7 - Graph Traversal (Section 13). (+31 more)
 
 ### Community 172 - "Community 172"
 Cohesion: 0.13
-Nodes (9): RCAHypothesis, Any, RCAService, FakeConfirmedConversation, FakeConfirmedStory, test_rca_confidence_prefers_root_cause_questions(), FakeConfirmedConversation, FakeConfirmedStory (+1 more)
+Nodes (10): RCAHypothesis, Any, RCAService, FakeConfirmedConversation, FakeConfirmedStory, test_rca_confidence_prefers_root_cause_questions(), test_rca_reports_confirmed_root_only_from_story_evidence(), FakeConfirmedConversation (+2 more)
 
 ### Community 173 - "Community 173"
-Cohesion: 0.12
-Nodes (8): applyArabicPresentationForms(), applyArabicRequireLigatures(), applyLatinLigatures(), Event(), initializeCoreEvents(), reverseArabicSentences(), Tokenizer(), tokenizeText()
+Cohesion: 0.09
+Nodes (13): applyArabicPresentationForms(), applyArabicRequireLigatures(), applyLatinLigatures(), chainingSubstitutionFormat3$1(), Event(), initializeCoreEvents(), ligatureSubstitutionFormat1$1(), reverseArabicSentences() (+5 more)
 
 ### Community 174 - "Community 174"
 Cohesion: 0.21
@@ -1432,7 +1437,7 @@ Nodes (3): getGroupDelta(), GLSLDecoder, isBuiltinType()
 
 ### Community 175 - "Community 175"
 Cohesion: 0.07
-Nodes (29): Aa(), kr(), np(), _p(), bj(), cp(), ej(), eq() (+21 more)
+Nodes (32): Aa(), kr(), np(), _p(), bj(), bk(), cp(), ej() (+24 more)
 
 ### Community 176 - "Community 176"
 Cohesion: 0.06
@@ -1440,7 +1445,7 @@ Nodes (35): Architecture Fit, Baseline Comparison, Canonical Implementation Loca
 
 ### Community 179 - "Community 179"
 Cohesion: 0.04
-Nodes (84): activate_live_intent(), _build_zaki_storyteller_payload(), create_operational_run(), CreateOperationalRunRequest, CreateSimulationRequest, _derive_capabilities(), _derive_difficulty(), _derive_domains() (+76 more)
+Nodes (87): activate_live_intent(), _build_zaki_storyteller_payload(), create_operational_run(), CreateOperationalRunRequest, CreateSimulationRequest, _derive_capabilities(), _derive_difficulty(), _derive_domains() (+79 more)
 
 ### Community 181 - "Community 181"
 Cohesion: 0.09
@@ -1491,11 +1496,11 @@ Cohesion: 0.11
 Nodes (4): ComputeStats, ObjectStats, RendererInspector, RenderStats
 
 ### Community 194 - "Community 194"
-Cohesion: 0.05
-Nodes (58): RuntimeError, build_plan(), dry_run(), duplicate_candidates(), inventory(), live_tools_probe(), load_backend_env(), main() (+50 more)
+Cohesion: 0.08
+Nodes (35): _env_value(), _extract_json(), _extract_mcp_payload(), GbrainClient, GbrainError, _normalize_result(), Any, gbrain transport client — talks to the running gbrain brain.  Layer 1 (Knowledge (+27 more)
 
 ### Community 195 - "Community 195"
-Cohesion: 0.07
+Cohesion: 0.08
 Nodes (13): SimplexNoise, GTAOPass, generateMagicSquare(), generateMagicSquareNoise(), GTAOBlendShader, GTAODepthShader, GTAOShader, generateDenoiseSamples() (+5 more)
 
 ### Community 196 - "Community 196"
@@ -1510,9 +1515,13 @@ Nodes (16): _diff, DragControls, findGroup(), _intersection, _intersections, _in
 Cohesion: 0.08
 Nodes (23): _alignVector, _changeEvent, _dirVector, _identityQuaternion, _lookAtMatrix, _mouseDownEvent, _mouseUpEvent, _objectChangeEvent (+15 more)
 
-### Community 200 - "Community 200"
+### Community 199 - "Community 199"
 Cohesion: 0.12
-Nodes (25): ah(), Bc(), be(), Cc(), fg(), gf(), _i(), lh() (+17 more)
+Nodes (27): build_ready(), decode_audio_event(), decode_message(), encode_audio_event(), encode_message(), float32_to_pcm16(), pcm16_to_float32(), Any (+19 more)
+
+### Community 200 - "Community 200"
+Cohesion: 0.08
+Nodes (33): ah(), Bc(), Cc(), dl(), eh(), fg(), fp(), gf() (+25 more)
 
 ### Community 201 - "Community 201"
 Cohesion: 0.04
@@ -1539,28 +1548,28 @@ Cohesion: 0.09
 Nodes (19): _center, _frustum, _matrix, _quaternion, _scale, SelectionBox, _tmpPoint, _vecDownLeft (+11 more)
 
 ### Community 208 - "Community 208"
-Cohesion: 0.12
-Nodes (24): getInstanceTypeName(), attachFinalizer(), ClassHandle_clone(), ClassHandle_delete(), ClassHandle_deleteLater(), constNoSmartPtrRawPointerToWireType(), detachFinalizer(), downcastPointer() (+16 more)
+Cohesion: 0.23
+Nodes (14): getInstanceTypeName(), ClassHandle_delete(), ClassHandle_deleteLater(), constNoSmartPtrRawPointerToWireType(), detachFinalizer(), embindRepr(), genericPointerToWireType(), nonConstNoSmartPtrRawPointerToWireType() (+6 more)
 
 ### Community 209 - "Community 209"
 Cohesion: 0.13
 Nodes (23): calcCFFSubroutineBias(), cffGlyphLoader(), entriesToObject(), gatherCFFTopDicts(), getByte(), getBytes(), getCffIndexObject(), getCFFString() (+15 more)
 
-### Community 210 - "Community 210"
-Cohesion: 0.11
-Nodes (9): addOnPostRun(), addOnPreRun(), callRuntimeCallbacks(), ___cxa_throw(), ExceptionInfo(), initRuntime(), postRun(), preRun() (+1 more)
+### Community 211 - "Community 211"
+Cohesion: 0.07
+Nodes (4): MD2Loader, _normalData, MD2Character, MorphBlendMesh
 
 ### Community 212 - "Community 212"
-Cohesion: 0.09
-Nodes (6): EffectComposer, FXAAPass, ClearMaskPass, MaskPass, ShaderPass, FXAAShader
+Cohesion: 0.14
+Nodes (5): FXAAPass, ClearMaskPass, MaskPass, ShaderPass, FXAAShader
 
 ### Community 213 - "Community 213"
 Cohesion: 0.17
 Nodes (3): Block, Linker, Transpiler
 
 ### Community 214 - "Community 214"
-Cohesion: 0.17
-Nodes (4): extractParentUrl(), GeometryParser, LWOLoader, LWOTreeParser
+Cohesion: 0.14
+Nodes (5): OBJExporter, extractParentUrl(), GeometryParser, LWOLoader, LWOTreeParser
 
 ### Community 215 - "Community 215"
 Cohesion: 0.24
@@ -1583,8 +1592,8 @@ Cohesion: 0.09
 Nodes (19): cellStructure, colorNode, Finishes, GetWoodPreset(), mapRange, noiseFbm, noiseFbm3d, params (+11 more)
 
 ### Community 220 - "Community 220"
-Cohesion: 0.06
-Nodes (43): ABC, FakeKnowledge, FakeSTT, FakeTTS, FakeVAD, make_conversation(), pipeline_factory(), ndarray (+35 more)
+Cohesion: 0.04
+Nodes (69): ABC, Exception, _amf_context(), FakeKnowledge, FakeSTT, FakeVAD, _generic_context(), make_conversation() (+61 more)
 
 ### Community 221 - "Community 221"
 Cohesion: 0.04
@@ -1595,8 +1604,8 @@ Cohesion: 0.24
 Nodes (3): equalArray(), GLTFWriter, isIdentityMatrix()
 
 ### Community 223 - "Community 223"
-Cohesion: 0.11
-Nodes (11): DEFAULT_OPTIONS, enableRemoteDevtools(), generateId(), hookConsoleAndErrors(), includeRemoteIdHTML(), injectScript(), proxyHandler, proxyMap (+3 more)
+Cohesion: 0.09
+Nodes (12): DEFAULT_OPTIONS, enableRemoteDevtools(), EventDispatcher, generateId(), hookConsoleAndErrors(), includeRemoteIdHTML(), injectScript(), proxyHandler (+4 more)
 
 ### Community 224 - "Community 224"
 Cohesion: 0.17
@@ -1619,8 +1628,8 @@ Cohesion: 0.06
 Nodes (32): 10. Stage Eligibility, 11. Managed Worker Per Run, 12. Action Execution, 13. Atomic Synchronization, 14. Scenario / Run Protection, 15. Reconnect Behavior, 16. Restart Replay, 17. Frontend Must Never Become the Reasoning Engine (+24 more)
 
 ### Community 230 - "Community 230"
-Cohesion: 0.13
-Nodes (14): normalize_text(), Path, Tier 1: Exact scenario ID., Tier 2: Exact display-name match (case-insensitive)., Tier 3: Exact alias match (case-insensitive)., Tier 4: Normalized substring or index match., Tier 5: Fuzzy / NLP token overlap match.                  NLP Safety Rule: Only, Resolves query in strict order: ID -> display name -> alias -> normalized -> NLP (+6 more)
+Cohesion: 0.12
+Nodes (17): get_unified_registry(), normalize_text(), Path, Tier 1: Exact scenario ID., Tier 2: Exact display-name match (case-insensitive)., Tier 3: Exact alias match (case-insensitive)., Tier 4: Normalized substring or index match., Tier 5: Fuzzy / NLP token overlap match.                  NLP Safety Rule: Only (+9 more)
 
 ### Community 231 - "Community 231"
 Cohesion: 0.10
@@ -1667,16 +1676,20 @@ Cohesion: 0.07
 Nodes (28): Current Architecture, Current Scaffolding, Hard Constraints, Implemented Phases, Phase 10: FCAPS Learning Service, Phase 11: Playbook / Runbook Service, Phase 12: Remediation Advisory Service, Phase 13: Network Health Service (+20 more)
 
 ### Community 244 - "Community 244"
-Cohesion: 0.11
-Nodes (31): EvaluateStage(), EvaluateStageProps, FineTuneStageProps, iconStroke, PreprocessStage(), PreprocessStageProps, CategoryEvaluation, fetchSftConfig() (+23 more)
+Cohesion: 0.09
+Nodes (36): EvaluateStage(), EvaluateStageProps, FineTuneStageProps, iconStroke, PreprocessStage(), PreprocessStageProps, iconStroke, TemplateAccordion (+28 more)
+
+### Community 246 - "Community 246"
+Cohesion: 0.08
+Nodes (5): T(), au(), cu(), Ot(), peek()
 
 ### Community 247 - "Community 247"
 Cohesion: 0.04
 Nodes (50): 10. Live Message Guard, 11. Close Previous Stream, 12. Prevent Race Conditions, 13. Sync State Machine, 14. UI During Scenario Switch, 15. Identity Consistency Guard, 16. Out-of-Sync Protection, 17. Automatic Resynchronization (+42 more)
 
 ### Community 248 - "Community 248"
-Cohesion: 0.06
-Nodes (7): BaseRenderer(), CanvasRenderer(), CanvasRendererBase(), initExpressions(), NullElement(), registerComposition(), SVGRendererBase()
+Cohesion: 0.05
+Nodes (11): BaseRenderer(), CanvasRenderer(), CanvasRendererBase(), destroy(), ICompElement(), initExpressions(), NullElement(), registerComposition() (+3 more)
 
 ### Community 249 - "Community 249"
 Cohesion: 0.03
@@ -1687,8 +1700,8 @@ Cohesion: 0.04
 Nodes (47): FikraCore Step 5.1 Simulation Orchestration & Zaki Copilot Test Suite (§43).  Ve, Verify stop marks status STOPPED, never COMPLETED., Verify replay mode is read-only and does not reset or recalculate reasoning., Verify watchdog exposes structured unsatisfied conditions and blocking reason., Verify run finalizes only on recognized terminal states., Verify Zaki responses are scoped to the requested run_id., Verify Zaki responses are correctly scoped to the scenario., Verify Zaki rejects chat requests with stale revisions. (+39 more)
 
 ### Community 251 - "Community 251"
-Cohesion: 0.13
-Nodes (11): addGlyphNames(), addGlyphNamesAll(), addGlyphNamesToUnicodeMap(), getTag(), getULong(), GlyphSet(), parseBuffer(), parseOpenTypeTableEntries() (+3 more)
+Cohesion: 0.12
+Nodes (12): addGlyphNames(), addGlyphNamesAll(), addGlyphNamesToUnicodeMap(), getTag(), GlyphSet(), load(), loadFromUrl(), parseBuffer() (+4 more)
 
 ### Community 254 - "Community 254"
 Cohesion: 0.15
@@ -1720,15 +1733,15 @@ Nodes (3): Parameters, ParametersGroup, createValueSpan()
 
 ### Community 261 - "Community 261"
 Cohesion: 0.04
-Nodes (71): eslintConfig, HTMLResponse, get_voice_settings(), Realtime voice configuration (Phase 3D).  Centralizes the voice stack's deployme, Env-driven settings for the realtime voice stack., Return the process-wide voice settings (cached, env-read once)., VoiceSettings, build_ready() (+63 more)
+Nodes (53): eslintConfig, HTMLResponse, get_voice_settings(), Realtime voice configuration (Phase 3D).  Centralizes the voice stack's deployme, Env-driven settings for the realtime voice stack., Return the process-wide voice settings (cached, env-read once)., VoiceSettings, Raise ``ValueError`` if the frame is empty or over the size limit. (+45 more)
 
 ### Community 262 - "Community 262"
 Cohesion: 0.15
 Nodes (13): devDependencies, eslint, eslint-config-next, puppeteer, tailwindcss, @tailwindcss/postcss, tsx, @types/d3-force (+5 more)
 
 ### Community 263 - "Community 263"
-Cohesion: 0.05
-Nodes (63): CoverageReport, CrossDomainPairCoverage, DomainCoverageScore, KnowledgeCoverageAnalyzer, Path, FikraCore Step 4.7 Knowledge Coverage Analyzer & Artifact Generator.  Calculates, Computes transparent coverage scores across all dimensions (§14, §48)., Generates all 6 required artifacts (§38, §39, §40, §41). (+55 more)
+Cohesion: 0.03
+Nodes (103): ArgumentParser, main(), build_parser(), _demo_header(), _demo_list(), _demo_rule(), _demo_scorecard(), _demo_stage() (+95 more)
 
 ### Community 267 - "Community 267"
 Cohesion: 0.21
@@ -1739,8 +1752,12 @@ Cohesion: 0.11
 Nodes (17): arr, axisx, axisy, axisz, e, forward, m, minv (+9 more)
 
 ### Community 270 - "Community 270"
-Cohesion: 0.10
-Nodes (5): Pa(), Ua(), wq(), hq(), A()
+Cohesion: 0.07
+Nodes (29): 1. Architecture & Execution Model, 2. Core Commands by Conceptual Stage, 3. Inspection & Knowledge Health Commands, 4. Benchmarking & Quality Flywheel, 5. Summary Reference Cheat Sheet, Actions, Companion Generation & Validation Commands, Example (+21 more)
+
+### Community 272 - "Community 272"
+Cohesion: 0.19
+Nodes (4): unzipSync(), AMFLoader, ColladaLoader, KMZLoader
 
 ### Community 274 - "Community 274"
 Cohesion: 0.15
@@ -1771,8 +1788,8 @@ Cohesion: 0.02
 Nodes (101): 100. Final Architecture, 10. H1–H4 Mapping, 11. Primary Operator Navigation, 12. UX Visual Direction, 13. Main Simulator Screen, 14. Recommended Main Layout, 15. Central Causal / Service Graph, 16. Required Graph Visual States (+93 more)
 
 ### Community 285 - "Community 285"
-Cohesion: 0.10
-Nodes (20): AttributeOctahedronTransform(), AttributeQuantizationTransform(), AttributeTransformData(), Decoder(), DecoderBuffer(), destroy(), DracoFloat32Array(), DracoInt16Array() (+12 more)
+Cohesion: 0.12
+Nodes (17): IncidentContext, Normalized retrieval result for one incident., Counts per kind — useful for tests and debugging., _await_done(), _chunks(), _Knowledge, _LongAnswerConversation, ndarray (+9 more)
 
 ### Community 286 - "Community 286"
 Cohesion: 0.15
@@ -1799,20 +1816,20 @@ Cohesion: 0.12
 Nodes (8): CSS3DObject, CSS3DRenderer, CSS3DSprite, _matrix, _matrix2, _position, _quaternion, _scale
 
 ### Community 295 - "Community 295"
-Cohesion: 0.06
-Nodes (19): ANAGLYPH_MATRICES, AnaglyphAlgorithm, AnaglyphColorMode, AnaglyphPassNode, _eyeL, _eyeR, _forward, LUM (+11 more)
+Cohesion: 0.15
+Nodes (4): ParallaxBarrierPassNode, _quadMesh, _size, StereoCompositePassNode
 
 ### Community 296 - "Community 296"
-Cohesion: 0.11
-Nodes (12): createAlphaToLuminanceFilter(), createFilter(), createImageData(), createImgData(), createNS(), ShapeGroupData(), SVGEffects(), SVGGradientFillStyleData() (+4 more)
+Cohesion: 0.07
+Nodes (19): addChars(), addFonts(), createAlphaToLuminanceFilter(), createFilter(), createHelper(), createImageData(), createImgData(), createNS() (+11 more)
 
 ### Community 297 - "Community 297"
 Cohesion: 0.12
 Nodes (14): axisx, axisy, axisz, box, e, forward, m, minv (+6 more)
 
 ### Community 299 - "Community 299"
-Cohesion: 0.09
-Nodes (17): JARVIS, PowerUp, Any, M.A.R.K. - Telecom Incident Manager & Operations Commander          Cognitive in, Initialize all MARK superpowers with OpenAI configuration., Initialize a single superpower with error handling., Process operational query with MARK's Incident Manager persona., Intelligent routing based on query content. (+9 more)
+Cohesion: 0.07
+Nodes (26): JARVIS, Any, M.A.R.K. - Telecom Incident Manager & Operations Commander          Cognitive in, Initialize all MARK superpowers with OpenAI configuration., Initialize a single superpower with error handling., Process operational query with MARK's Incident Manager persona., Intelligent routing based on query content., Handle voice checks and casual assistant turns without gbrain lookup. (+18 more)
 
 ### Community 300 - "Community 300"
 Cohesion: 0.09
@@ -1844,7 +1861,7 @@ Nodes (6): TiledLighting, circleIntersectsAABB, _size, tiledLights, TiledLightsN
 
 ### Community 309 - "Community 309"
 Cohesion: 0.05
-Nodes (35): BenchmarkWorkspace(), DiscoverWorkspace(), iconByWorkspace, KnowledgeWorkspace(), LabWorkspace(), LearnWorkspace(), Metric(), Panel() (+27 more)
+Nodes (40): BenchmarkWorkspace(), CONCEPT_FILTERS, DiscoverWorkspace(), iconByWorkspace, KnowledgeWorkspace(), LabWorkspace(), LearnWorkspace(), Metric() (+32 more)
 
 ### Community 310 - "Community 310"
 Cohesion: 0.17
@@ -1863,8 +1880,8 @@ Cohesion: 0.06
 Nodes (33): 10. Hypotheses, 11. Hypothesis Connections, 12. Validation & Learning, 13. Domain Attribution, 14. Live Simulation Journey, 15. Live Event Stream, 16. Knowledge Gaps, 17. Next Best Evidence (+25 more)
 
 ### Community 315 - "Community 315"
-Cohesion: 0.12
-Nodes (11): ComplaintDashboardView(), getTelemetryDateStr(), isDateInFilter(), AnalyticsView, TelemetryLedger, TelemetryLedgerProps, useTelemetryProcessor(), aggregateRawTickets() (+3 more)
+Cohesion: 0.16
+Nodes (5): aggregateRawTickets(), DataLoaderView(), iconStroke, DatasetFile, useDataLoader()
 
 ### Community 316 - "Community 316"
 Cohesion: 0.26
@@ -1879,8 +1896,8 @@ Cohesion: 0.12
 Nodes (23): Row, MCP writer for correlation outputs using the existing gbrain schema., canonicalize_incident_slug(), correlation_cluster_slug(), correlation_decision_slug(), correlation_hypothesis_slug(), incident_aliases(), incident_slug() (+15 more)
 
 ### Community 319 - "Community 319"
-Cohesion: 0.10
-Nodes (22): HTTPException, Request, validate_token(), delete_session(), get_session_messages(), list_sessions(), Session, advance_simulation_stage() (+14 more)
+Cohesion: 0.09
+Nodes (24): HTTPException, Request, validate_token(), delete_session(), get_session_messages(), list_sessions(), Session, advance_simulation_stage() (+16 more)
 
 ### Community 320 - "Community 320"
 Cohesion: 0.17
@@ -1923,8 +1940,8 @@ Cohesion: 0.19
 Nodes (10): g, Q, concat(), FORMAT_MAP, getTranscoderFormat(), isPowerOfTwo(), _taskCache, transcode() (+2 more)
 
 ### Community 337 - "Community 337"
-Cohesion: 0.04
-Nodes (15): CSMShadowNode, LightProbeHelper, LDrawConditionalLineMaterial, SkyMesh, WaterMesh, Uniform, BloomNode, _BlurDirectionX (+7 more)
+Cohesion: 0.05
+Nodes (11): CSMShadowNode, LightProbeHelper, Uniform, BloomNode, dotScreen(), DotScreenNode, rgbShift(), RGBShiftNode (+3 more)
 
 ### Community 338 - "Community 338"
 Cohesion: 0.14
@@ -1979,8 +1996,8 @@ Cohesion: 0.18
 Nodes (5): _quadMesh, _size, _spatialOffsets, sss(), SSSNode
 
 ### Community 356 - "Community 356"
-Cohesion: 0.08
-Nodes (21): build_incident_story(), Any, Deterministic one-line summary; only uses present facts., Questions that remain unanswered, based on missing provenance., Deterministically build the story artifact from an incident context., _summary(), _unresolved_questions(), amf_context() (+13 more)
+Cohesion: 0.07
+Nodes (28): Layer 2 — Reasoning / Storytelling (deterministic).  Builds a deterministic ``In, build_incident_story(), build_story_response(), Any, Deterministic reasoning pipeline: IncidentContext → StoryResponse.  Layer 2 entr, Deterministic one-line summary; only uses present facts., Questions that remain unanswered, based on missing provenance., Deterministically build the story artifact from an incident context. (+20 more)
 
 ### Community 357 - "Community 357"
 Cohesion: 0.24
@@ -2007,8 +2024,8 @@ Cohesion: 0.12
 Nodes (7): _box, LineSegmentsGeometry, _vector, _end, _start, Wireframe, WireframeGeometry2
 
 ### Community 363 - "Community 363"
-Cohesion: 0.12
-Nodes (9): c, h, i, l, n, o, r, s (+1 more)
+Cohesion: 0.17
+Nodes (7): h, i, l, n, o, r, s
 
 ### Community 364 - "Community 364"
 Cohesion: 0.22
@@ -2027,8 +2044,8 @@ Cohesion: 0.10
 Nodes (20): AttributeOctahedronTransform(), AttributeQuantizationTransform(), AttributeTransformData(), Decoder(), DecoderBuffer(), destroy(), DracoFloat32Array(), DracoInt16Array() (+12 more)
 
 ### Community 369 - "Community 369"
-Cohesion: 0.15
-Nodes (9): AsyncUnzipInflate(), deflateSync(), EncodeUTF8(), strFromU8(), strToU8(), UnzipInflate(), zip, ZipDeflate() (+1 more)
+Cohesion: 0.18
+Nodes (9): concept_for_stage(), Any, Path, Unified Scenario Catalog for FikraCore.  Exposes the full FikraCore conceptual c, Return (yaml_content, source_filename, is_read_only)., Validate and save updated YAML definition for a scenario., Authoritative scenario catalog consolidating all FikraCore scenarios., ScenarioCatalog (+1 more)
 
 ### Community 370 - "Community 370"
 Cohesion: 0.09
@@ -2079,12 +2096,12 @@ Cohesion: 0.04
 Nodes (48): 10. Impact Contract, 11. Stage Transition Events, 12. Stage Blocked Trace, 13. Stage Watchdog, 14. Stage Progress UI, 15. Backend-Driven Progress, 16. Stage Snapshot Contract, 17. Transition Engine Audit (+40 more)
 
 ### Community 383 - "Community 383"
-Cohesion: 0.19
-Nodes (11): assess_hypothesis(), _base_score(), _explain(), _is_confirmed(), _is_conflicting(), rank_hypotheses(), Deterministic hypothesis assessment and ranking.  Rules (never fabricate):   - A, Assess and sort all hypotheses, most-confident first. (+3 more)
+Cohesion: 0.11
+Nodes (24): am(), an(), bf(), gh(), Hc(), hj(), il(), jj() (+16 more)
 
 ### Community 384 - "Community 384"
-Cohesion: 0.14
-Nodes (30): EvidenceClaim, IncidentLifecycleState, NarrativeAction, ProvenanceRef, Next best question/action produced by the NOC storyteller., Lifecycle states supported by incident-aware storytelling., Audience profiles for written, spoken, and visual incident outputs., Traceable source reference for claims and widgets. (+22 more)
+Cohesion: 0.15
+Nodes (28): EvidenceClaim, IncidentLifecycleState, NarrativeAction, ProvenanceRef, Next best question/action produced by the NOC storyteller., Lifecycle states supported by incident-aware storytelling., Traceable source reference for claims and widgets., One storyteller claim with explicit grade, confidence, and provenance. (+20 more)
 
 ### Community 385 - "Community 385"
 Cohesion: 0.07
@@ -2099,16 +2116,16 @@ Cohesion: 0.25
 Nodes (5): DataStorytellerAgent, Any, LLM orchestrator that synthesises the semantic narrative into an executive brief, Generates an executive narrative from the narrative stream JSON.      Loads the, Produce a markdown executive brief from the narrative stream.
 
 ### Community 390 - "Community 390"
-Cohesion: 0.36
-Nodes (11): Deterministically render the answer for an intent from the story., render_answer(), _golden_context(), Golden regression tests for the professional storyteller contract., _read_golden(), _story(), test_golden_customer_update_is_stable(), test_golden_executive_story_is_stable() (+3 more)
+Cohesion: 0.21
+Nodes (18): Deterministically render the answer for an intent from the story., render_answer(), _golden_context(), Golden regression tests for the professional storyteller contract., _read_golden(), _story(), test_golden_customer_update_is_stable(), test_golden_executive_story_is_stable() (+10 more)
 
 ### Community 391 - "Community 391"
 Cohesion: 0.14
 Nodes (21): BackgroundTasks, create_task(), get_db_connection(), get_task(), init_db(), Any, update_task(), get_docstore() (+13 more)
 
 ### Community 392 - "Community 392"
-Cohesion: 0.10
-Nodes (18): Any, Build topology from entities with stage-aware causal-path disclosure., Build scenario-specific impact with epistemic labeling., Build scenario-specific knowledge gaps., Build scenario-specific next-best actions., Build scenario-specific reasoning tasks., Build learning state with validation gating., Build Zaki AI cognitive state. (+10 more)
+Cohesion: 0.07
+Nodes (29): Any, Build scenario-specific hypotheses with stage-aware ranking., Generate scenario-specific candidate hypothesis names tailored to the failure mo, Build topology from entities with stage-aware causal-path disclosure., Build scenario-specific impact with epistemic labeling., Build scenario-specific knowledge gaps., Build scenario-specific next-best actions., Build scenario-specific reasoning tasks. (+21 more)
 
 ### Community 393 - "Community 393"
 Cohesion: 0.20
@@ -2135,16 +2152,16 @@ Cohesion: 0.06
 Nodes (31): Acceptance Test, Atomic Synchronization, Authoritative InvestigationRun Contract, Connection Contract, Core Principle, Definition of Done, Domain Attribution Contract, Evidence Contract (+23 more)
 
 ### Community 402 - "Community 402"
-Cohesion: 0.17
-Nodes (15): bn(), Cn(), co(), filter(), forEach(), Gs(), Ir(), isArray() (+7 more)
+Cohesion: 0.16
+Nodes (23): as(), Ci(), co(), ds(), every(), Fi(), filter(), findAll() (+15 more)
 
 ### Community 405 - "Community 405"
 Cohesion: 0.09
 Nodes (17): PresentationNamingResolver, Stateful or stateless resolver mapping machine IDs to human-readable names., Clear cache of expanded acronyms (e.g. for a new document or session)., Expand acronym on first use: 'User Plane Function (UPF)'. Subsequent: 'UPF'., Format protocol/interface term with vendor/standard name., Convert machine relationship enum/string to human-readable label., Convert evidence source/type to human-readable label., Translate machine or slug entity ID into a human-readable display name. (+9 more)
 
 ### Community 406 - "Community 406"
-Cohesion: 0.21
-Nodes (10): FakeTelecomPower, test_5g_core_uses_domain_summary_not_docs(), test_http_response_preserves_turn_presentation(), test_jarvis_handles_general_discussion_without_scope_refusal(), test_jarvis_handles_voice_check_without_telecom_lookup(), test_jarvis_keeps_full_reply_and_spoken_reply_separate(), test_jarvis_keeps_operational_questions_on_telecom_path(), test_jarvis_lists_intents_when_requested() (+2 more)
+Cohesion: 0.11
+Nodes (4): createRenderFunction(), ShapeModifier(), SVGShapeData(), SVGShapeElement()
 
 ### Community 407 - "Community 407"
 Cohesion: 0.22
@@ -2155,12 +2172,16 @@ Cohesion: 0.25
 Nodes (7): Disclosure Policy, Reporting a Vulnerability, Response timeline, Security Controls, Security Policy, Supported Versions, What to include
 
 ### Community 412 - "Community 412"
-Cohesion: 0.18
-Nodes (11): MultiAgentSystemView(), useMultiAgentSystem(), Agent, AgentCard(), AgentCardProps, AgentStatus, defaultAgents, MultiAgentSystem() (+3 more)
+Cohesion: 0.16
+Nodes (7): getItem(), setItem(), forceWebGL(), _loadState(), _saveState(), Settings, Style
 
 ### Community 415 - "Community 415"
 Cohesion: 0.29
 Nodes (9): Ei(), Fi, Hi(), Ni(), Oi, Pi(), Si(), Ti() (+1 more)
+
+### Community 418 - "Community 418"
+Cohesion: 0.12
+Nodes (5): unzlib, unzlibSync(), _taskCache, EXRLoader, VTKLoader
 
 ### Community 420 - "Community 420"
 Cohesion: 0.20
@@ -2191,8 +2212,8 @@ Cohesion: 0.22
 Nodes (5): MapControls, _mouse, _panCurrent, _plane, _raycaster
 
 ### Community 429 - "Community 429"
-Cohesion: 0.10
-Nodes (23): get_compiler(), Get or create the singleton scenario state compiler., Test suite for FikraCore Step 5.2.1 Domain Attribution & Zaki Context Consistenc, Verify scenario H4-WI-036 attributes to Transport/IP Transport with no UI/Zaki c, Verify Zaki answers domain attribution using authoritative backend domain_attrib, Verify /zaki/chat rejects stale revisions with 409 STALE_REVISION (§16, §17)., Verify /zaki/chat rejects invalid future revisions with 409 INVALID_REVISION (§1, Verify Zaki response includes structured highlighted entities with cyan/magenta (+15 more)
+Cohesion: 0.07
+Nodes (31): get_compiler(), datetime, Scenario-Specific State Compiler for FikraCore Live Simulator.  Generates scenar, Get or create the singleton scenario state compiler., Validate domain attribution consistency against hypothesis and run state (§9)., validate_domain_attribution(), Test suite for FikraCore Step 5.2.1 Domain Attribution & Zaki Context Consistenc, Verify scenario H4-WI-036 attributes to Transport/IP Transport with no UI/Zaki c (+23 more)
 
 ### Community 430 - "Community 430"
 Cohesion: 0.11
@@ -2211,28 +2232,28 @@ Cohesion: 0.28
 Nodes (9): allocateUTF8(), __embind_register_std_string(), intArrayFromString(), lengthBytesUTF8(), stringToUTF8(), stringToUTF8Array(), __tzset_js(), UTF8ArrayToString() (+1 more)
 
 ### Community 435 - "Community 435"
-Cohesion: 0.12
-Nodes (17): Crew, Initialize autopilot with available agents., _create_antigravity_agent(), execute_primary_agent(), execute_skill_tool(), StreamChunk, Primary Agent File: Antigravity. A powerful agentic AI coding assistant designed, Dynamically invoke a workspace skill (like /trace-analyzer) with optional argume (+9 more)
+Cohesion: 0.14
+Nodes (15): Crew, Initialize autopilot with available agents., _create_antigravity_agent(), execute_primary_agent(), StreamChunk, Primary Agent File: Antigravity. A powerful agentic AI coding assistant designed, Run the Cognitive Operation & Customer Center Agent and return the final respons, Stream the Cognitive Operation & Customer Center Agent execution chunk-by-chunk. (+7 more)
 
 ### Community 436 - "Community 436"
 Cohesion: 0.31
 Nodes (4): MCPHubError, MCPStdioSession, Raised when an MCP connector call fails., Persistent JSON-RPC MCP session over stdio.
 
 ### Community 437 - "Community 437"
-Cohesion: 0.11
-Nodes (11): Any, Create a fresh epistemically empty run for an explicit simulator start., Admit operational evidence with provenance, deduplication, and authorization (§1, Record explicit failure from an operational evidence provider (§23, §56)., Record operational recovery telemetry without auto-confirming root cause (§32)., Advance one stage only when the compiler reports the stage gate is satisfied., Add run scope to nested runtime objects without removing legacy fields., Validate whether an event should be accepted or rejected according to §50. (+3 more)
+Cohesion: 0.15
+Nodes (10): ServiceRouter, TelecomService, FakeService, test_default_context_uses_canonical_registry_and_mcp_hub(), test_router_retains_unmatched_requests_as_observations(), test_router_selects_highest_confidence_service(), FakeService, test_default_context_uses_canonical_registry_and_mcp_hub() (+2 more)
 
 ### Community 438 - "Community 438"
-Cohesion: 0.13
-Nodes (16): compute_evidence_fingerprint(), EvidenceAdmission, LiveIntentObserved, LiveIntentRecord, LiveIntentRegistry, LiveIntentTarget, normalize_live_evidence(), Live Reasoning Activation & Operational Run Ingestion Layer (§25, §26, §52).  Pr (+8 more)
+Cohesion: 0.14
+Nodes (15): compute_evidence_fingerprint(), EvidenceAdmission, LiveIntentObserved, LiveIntentRecord, LiveIntentRegistry, LiveIntentTarget, normalize_live_evidence(), Live Reasoning Activation & Operational Run Ingestion Layer (§25, §26, §52).  Pr (+7 more)
 
 ### Community 439 - "Community 439"
 Cohesion: 0.02
-Nodes (110): buildGapItems(), buildHypothesisItems(), buildPathwayItems(), Conduit, DetailedConduitTelemetry, DetailedEntityModal, DomainAttributionInfo, DomainClassification (+102 more)
+Nodes (114): buildGapItems(), buildHypothesisItems(), buildPathwayItems(), Conduit, ConduitDetailModal(), CoreSynthesisDetailModal(), DetailedConduitTelemetry, DetailedEntityModal (+106 more)
 
 ### Community 440 - "Community 440"
-Cohesion: 0.25
-Nodes (17): diagnose_complaint(), _evaluate_prechecks(), _evaluate_resource_dependency(), _generate_causal_signature(), _get_tool_usage_state(), _log_observation_to_stream(), _match_telecom_rule(), _query_causal_knowledge_graph() (+9 more)
+Cohesion: 0.14
+Nodes (33): _format_structured_event(), diagnose_complaint(), _evaluate_prechecks(), _evaluate_resource_dependency(), gate1_route_complaint(), _generate_causal_signature(), _get_tool_usage_state(), _log_observation_to_stream() (+25 more)
 
 ### Community 441 - "Community 441"
 Cohesion: 0.44
@@ -2243,8 +2264,8 @@ Cohesion: 0.39
 Nodes (8): anglesEncode(), compressNormals(), compressPositions(), compressUvs(), defaultEncode(), octEncodeBest(), quantizedEncode(), quantizedEncodeUV()
 
 ### Community 445 - "Community 445"
-Cohesion: 0.10
-Nodes (23): IncidentNarrative, Professional, incident-agnostic narrative contract., Any, Build the same Storyteller payload used by chat clients.          This keeps dow, StorytellingService, Build frontend-ready visual widgets from an IncidentNarrative., VisualExplanationService, FakeConversation (+15 more)
+Cohesion: 0.16
+Nodes (9): Audience profiles for written, spoken, and visual incident outputs., StoryAudience, Any, Build the same Storyteller payload used by chat clients.          This keeps dow, StorytellingService, FakeConversation, FakeStory, test_storytelling_confidence_prefers_incident_story_queries() (+1 more)
 
 ### Community 446 - "Community 446"
 Cohesion: 0.22
@@ -2272,27 +2293,27 @@ Nodes (8): abort(), assert(), getBinary(), getBinaryPromise(), intArrayFromBase6
 
 ### Community 456 - "Community 456"
 Cohesion: 0.10
-Nodes (34): Exception, Phase 3A — conversational storyteller (text only; no voice infrastructure)., classify_intent(), Determine the intent from free text. ``story`` is the default., ask(), AskRequest, AskResponse, _audience_from_intent() (+26 more)
+Nodes (30): Phase 3A — conversational storyteller (text only; no voice infrastructure)., classify_intent(), Determine the intent from free text. ``story`` is the default., ask(), AskRequest, AskResponse, _audience_from_intent(), get_story() (+22 more)
 
 ### Community 457 - "Community 457"
 Cohesion: 0.17
 Nodes (11): API, Connectors, Core Model, Engines, FCAPS Lens, gbrain Boundaries, Mark Enterprise Capability Registry, Purpose (+3 more)
 
 ### Community 458 - "Community 458"
-Cohesion: 0.04
-Nodes (50): Protocol, Canonical telecombrain identity helpers., CanonicalResolver, load_default_resolver(), Backward-compatible canonical slug resolver for telecombrain.  The resolver is i, Resolve legacy telecombrain slugs to canonical slugs without mutation., ResolutionResult, Relationship (+42 more)
+Cohesion: 0.05
+Nodes (47): Protocol, Canonical telecombrain identity helpers., CanonicalResolver, load_default_resolver(), Backward-compatible canonical slug resolver for telecombrain.  The resolver is i, Resolve legacy telecombrain slugs to canonical slugs without mutation., ResolutionResult, Relationship (+39 more)
 
 ### Community 459 - "Community 459"
 Cohesion: 0.33
 Nodes (6): create_llamaindex_llm_with_fallback(), create_llm_with_fallback(), Any, LLM Helper - Unified LLM instantiation with fallback support., Create a LlamaIndex OpenAI LLM instance with fallback support.          Args:, Create an LLM instance with fallback support.          Tries to create an LLM wi
 
 ### Community 460 - "Community 460"
-Cohesion: 0.08
-Nodes (23): addChars(), addFonts(), checkReady(), completeAnimation(), createFootageData(), createHelper(), createProcess(), createTag() (+15 more)
+Cohesion: 0.11
+Nodes (16): checkReady(), completeAnimation(), createFootageData(), createProcess(), createWorker(), getRenderer(), loadAnimation(), loadAssets() (+8 more)
 
 ### Community 464 - "Community 464"
-Cohesion: 0.24
-Nodes (10): ContextLatencyChart, ContextLatencyChartProps, GraphHopsBars, GraphHopsBarsProps, SubgraphVisualizer, SubgraphVisualizerProps, CKGModule, CKGModuleProps (+2 more)
+Cohesion: 0.15
+Nodes (18): _chat(), Comprehensive tests for Zaki Universal AI Copilot & Knowledge Graph Reasoning., Test Zaki generates an end-to-end curated incident story with multi-perspective, Test Zaki produces concise executive summaries when response_level=executive., Test Zaki answers counterfactual what-if questions evaluating redundancy and fai, Test Zaki warns against premature traffic rerouting before root cause validation, Test Zaki provides exact spatial guidance on how to navigate the 3D Knowledge Gr, Test Zaki explains the exact causal rationale for why diagnostic probes are requ (+10 more)
 
 ### Community 465 - "Community 465"
 Cohesion: 0.16
@@ -2339,24 +2360,24 @@ Cohesion: 0.33
 Nodes (3): _v1, _v2, VertexTangentsHelper
 
 ### Community 478 - "Community 478"
-Cohesion: 0.06
-Nodes (35): format_ssml_spoken_journey(), Any, Mark Voice Persona: Mobile Core RTR Ticket Analyst Mode  Provides explicit vocal, Format SSML-annotated spoken journey text ensuring TTS engines respect natural p, MobileRTRKnowledge, Any, MobileRTRKnowledge: Knowledge retrieval adapter over gbrain MCP for Mobile RTR., Retrieve Huawei MML runbooks from gbrain MCP or local YAML. (+27 more)
+Cohesion: 0.10
+Nodes (14): MobileRTRKnowledge, Any, MobileRTRKnowledge: Knowledge retrieval adapter over gbrain MCP for Mobile RTR., Retrieve Huawei MML runbooks from gbrain MCP or local YAML., Retrieve telecom services portfolio from gbrain MCP or local YAML., Retrieve tools matrix from gbrain MCP or local YAML., Retrieval layer connecting Mobile RTR services to gbrain MCP., Retrieve SLA thresholds (AOLA, OLA, E2E SLA) from gbrain MCP.         Falls back (+6 more)
 
 ### Community 479 - "Community 479"
-Cohesion: 0.10
-Nodes (34): ActionRule, ClassifiedAction, classify_action(), _detect_service_intent(), _deterministic_fallback(), _fast_path_classify(), Any, Action classifier for M.A.R.K.  Two-Pass Hybrid Architecture: 1. Pass 1: Ultra-f (+26 more)
+Cohesion: 0.07
+Nodes (43): ActionRule, ClassifiedAction, classify_action(), _detect_service_intent(), _deterministic_fallback(), _fast_path_classify(), Any, Action classifier for M.A.R.K.  Two-Pass Hybrid Architecture: 1. Pass 1: Ultra-f (+35 more)
 
 ### Community 480 - "Community 480"
 Cohesion: 0.32
 Nodes (9): _chunks(), _events(), ndarray, Real Silero VAD integration tests.  These exercise genuine neural VAD classifica, _silence(), test_real_vad_detects_real_speech(), test_real_vad_instances_are_isolated(), test_real_vad_reset_clears_streaming_state() (+1 more)
 
 ### Community 481 - "Community 481"
-Cohesion: 0.14
-Nodes (19): wB(), assign(), assignNoOverwrite(), cloneObj(), e(), first(), groupBy(), ht() (+11 more)
+Cohesion: 0.19
+Nodes (16): assign(), assignNoOverwrite(), cloneObj(), e(), first(), groupBy(), i(), keys() (+8 more)
 
 ### Community 482 - "Community 482"
-Cohesion: 0.04
-Nodes (74): ArgumentParser, main(), build_parser(), main(), CLI entry points for operational investigation and separate examiner/validation, ValidationDecision, analyze_run(), classify_failures() (+66 more)
+Cohesion: 0.33
+Nodes (9): generate_all_h3_learning_units(), _generate_single_learning_unit(), Any, Path, Dedicated 30-Unit H3 Learning Pair Generator.  Generates 30 Paired Learning Unit, Generate all 30 paired learning units under output_dir., _write_jsonl(), h3_units() (+1 more)
 
 ### Community 483 - "Community 483"
 Cohesion: 0.29
@@ -2375,28 +2396,24 @@ Cohesion: 0.23
 Nodes (4): IncidentRegistryService, Any, extract_incident_ref(), Pull a full slug (preferred) or bare incident id from the message.
 
 ### Community 487 - "Community 487"
-Cohesion: 0.05
-Nodes (50): ZakiContextContract, build_ui_presentation_model(), build_ui_presentation_model_h4(), Any, Path, Build the unified UI presentation model from investigation result and scenario f, Build unified UI presentation model for H4 Proactive What-If simulation results., Any (+42 more)
+Cohesion: 0.04
+Nodes (59): ZakiContextContract, Presentation layer for FikraCore Telecom Brain., build_ui_presentation_model(), Build the unified UI presentation model from investigation result and scenario f, Any, Mark / Zaki Assistant Bridge for FikraCore Simulator.  Provides grounded voice/c, Perform on-the-fly counterfactual resilience and failover risk analysis., Provide exact spatial navigation cues for the 3D Digital Twin Knowledge Graph. (+51 more)
 
 ### Community 488 - "Community 488"
-Cohesion: 0.21
-Nodes (13): ai(), ds(), Fi(), findAll(), go(), io(), isUndefined(), jt() (+5 more)
+Cohesion: 0.16
+Nodes (16): An(), bn(), Cn(), gn(), go(), has(), io(), isObject() (+8 more)
 
 ### Community 489 - "Community 489"
 Cohesion: 0.17
 Nodes (6): BaseDissector, GenericIpFlowDissector, HttpDissector, Abstract interface for all protocol-specific dissectors., Dissector for HTTP/1.x, HTTP/2 RESTful APIs, and 5G SA Service-Based Architectur, Fallback conversation flow dissector for generic TCP/UDP flows.
 
-### Community 490 - "Community 490"
-Cohesion: 0.18
-Nodes (6): Build simulation journey stages from the runtime state machine, not demo constan, Parse the runtime started_at value if provided; otherwise use the current UTC ti, Compile live operational run state without any simulator hidden truth (§25, §26), Expose why the current stage is waiting or ready to move., Build only raw operational events. Reasoning artifacts live in reasoning_trace., Build a dedicated reasoning trace separate from raw operational signals.
-
 ### Community 494 - "Community 494"
-Cohesion: 0.21
-Nodes (8): ChatHistoryPanel(), ChatHistoryPanelProps, iconStroke, HistoryMessage, HistorySession, SessionData, useChatHistory(), UseChatHistoryProps
+Cohesion: 0.05
+Nodes (29): ChatHistoryPanel(), ChatHistoryPanelProps, cleanStructuredEvents(), iconStroke, renderFormattedContent(), HistoryMessage, HistorySession, SessionData (+21 more)
 
 ### Community 495 - "Community 495"
-Cohesion: 0.12
-Nodes (18): MiniSparkline, MiniSparklineProps, ProgressRing, ProgressRingProps, SpeedometerGauge, SpeedometerGaugeProps, GlassWidgetCard, GlassWidgetCardProps (+10 more)
+Cohesion: 0.05
+Nodes (59): AgentCycleStepper, AIAgencyModule, AIAgencyModuleProps, DelegationBar, InProgressTaskList, MetricBadge, ContextLatencyChart, ContextLatencyChartProps (+51 more)
 
 ### Community 496 - "Community 496"
 Cohesion: 0.48
@@ -2438,21 +2455,29 @@ Nodes (10): compiler(), Tests for Scenario-Specific State Compiler (§26, §27).
 Cohesion: 0.08
 Nodes (28): JarvisPageContent(), normalizeMarkNodeId(), useJarvisTheme(), RTRJourneyOverlay(), RTRJourneyOverlayProps, AiInsights(), INSIGHTS, ThreeNeuralSphere (+20 more)
 
+### Community 510 - "Community 510"
+Cohesion: 0.17
+Nodes (13): addName(), average(), computeCheckSum(), fontToSfntTable(), getUnicodeRange(), log2(), makeFvarAxis(), makeFvarInstance() (+5 more)
+
 ### Community 514 - "Community 514"
 Cohesion: 0.14
 Nodes (9): decodeIntegers32(), decompressIntegers32(), decompressLZ4(), HALF_DENORM_SCALE, HALF_EXPONENT_TABLE, lz4DecompressBlock(), textDecoder, TypeEnum (+1 more)
 
 ### Community 515 - "Community 515"
-Cohesion: 0.18
+Cohesion: 0.22
 Nodes (8): bt(), Ka(), Mt(), PRINT_ERROR(), PRINT_WARNING(), Va(), values(), yr()
 
+### Community 519 - "Community 519"
+Cohesion: 0.15
+Nodes (16): __embind_register_bool(), __embind_register_emval(), __embind_register_enum(), __embind_register_float(), __embind_register_integer(), __embind_register_memory_view(), __embind_register_void(), __emval_decref() (+8 more)
+
 ### Community 520 - "Community 520"
-Cohesion: 0.35
-Nodes (10): useAgentCycle(), useContextLatencyStream(), useGraphHops(), useRealtimeArray(), useRealtimeValue(), useTasksStream(), useTelemetryStream(), useVectorData() (+2 more)
+Cohesion: 0.15
+Nodes (13): format_ssml_spoken_journey(), Any, Mark Voice Persona: Mobile Core RTR Ticket Analyst Mode  Provides explicit vocal, Format SSML-annotated spoken journey text ensuring TTS engines respect natural p, MobileRTRTicketIntelligenceService, datetime, Isolated service dedicated to Mobile Core RTR Trouble Ticket Intelligence.     E, Aggregate curated shift-level summary across all tickets assigned to RTR. (+5 more)
 
 ### Community 521 - "Community 521"
-Cohesion: 0.35
-Nodes (4): Any, One telecom cognition engine composed of internal services., Match Jarvis superpower lifecycle; current services are lazy., TelecomBrainEngine
+Cohesion: 0.20
+Nodes (15): build_knowledge_graph(), compile_all_scenarios(), generate_html_viewer(), main(), map_entity_slug(), map_sub_cluster(), map_telecom_domain(), precalculate_layout() (+7 more)
 
 ### Community 522 - "Community 522"
 Cohesion: 0.40
@@ -2463,28 +2488,28 @@ Cohesion: 0.33
 Nodes (6): _fd_write(), printChar(), UTF8ArrayToString(), UTF8ToString(), flush_NO_FILESYSTEM(), flush_NO_FILESYSTEM()
 
 ### Community 524 - "Community 524"
-Cohesion: 0.12
-Nodes (9): JARVIS Voice Engine - Speech Synthesis & Recognition with ElevenLabs. Handles vo, Return a serializable list of skills for backend API endpoints., Locate, execute, and format the output of a specific skill.                  Ret, Dynamically load format_output function from formatter.py if present., Scan the skills directory and load metadata from SKILL.md for each skill., Fetch a skill by name. Re-runs discovery if cache is empty.         Also tries n, SkillItem, SkillManager (+1 more)
+Cohesion: 0.11
+Nodes (11): JARVIS Voice Engine - Speech Synthesis & Recognition with ElevenLabs. Handles vo, execute_skill_tool(), Dynamically invoke a workspace skill (like /trace-analyzer) with optional argume, Return a serializable list of skills for backend API endpoints., Locate, execute, and format the output of a specific skill.                  Ret, Dynamically load format_output function from formatter.py if present., Scan the skills directory and load metadata from SKILL.md for each skill., Fetch a skill by name. Re-runs discovery if cache is empty.         Also tries n (+3 more)
 
 ### Community 525 - "Community 525"
-Cohesion: 0.20
-Nodes (3): ConvexGeometry, ConvexObjectBreaker, _v1
+Cohesion: 0.16
+Nodes (12): Unit tests for ``voice.runtime`` (thread/OMP configuration).  These are lightwei, _reset(), test_configure_runtime_is_idempotent(), test_darwin_default_omp_pin(), test_force_omp_override_respected(), _apply_omp_pin(), _pin_omp(), Runtime / threading configuration for the voice ML stack (Phase 3E).  The two re (+4 more)
 
 ### Community 527 - "Community 527"
-Cohesion: 0.11
-Nodes (25): a(), An(), as(), Br(), Ci(), contains(), every(), find() (+17 more)
+Cohesion: 0.22
+Nodes (9): contains(), find(), fn(), Ha(), hs(), s(), some(), wr() (+1 more)
 
 ### Community 528 - "Community 528"
-Cohesion: 0.24
-Nodes (4): estimate_tokens(), Rough token estimate (~4 chars per token for English)., Get existing session or create a new one., SessionMemory
+Cohesion: 0.14
+Nodes (13): 1. Executive Overview & Objectives, 2. Interactive Scenarios & Stage Architecture, 3. Technical Architecture & File Changes, 4. Verification Plan, Automated Tests, Key Highlights, Manual Interactive Verification, Modules to Add: (+5 more)
 
 ### Community 530 - "Community 530"
-Cohesion: 0.27
-Nodes (5): BaseHTTPMiddleware, Response, AuditMiddleware, FastAPI, Request
+Cohesion: 0.15
+Nodes (9): BaseHTTPMiddleware, Response, Compatibility wrapper for the canonical MARK assistant core., _init_background(), Agents Service — FastAPI application entry point. Runs on port 8001., startup(), AuditMiddleware, FastAPI (+1 more)
 
 ### Community 531 - "Community 531"
-Cohesion: 0.24
-Nodes (10): cloneArr(), drop(), dropRight(), last(), o(), Pi(), Qo(), sortBy() (+2 more)
+Cohesion: 0.16
+Nodes (19): a(), Br(), cloneArr(), difference(), drop(), dropRight(), Fr(), isEmpty() (+11 more)
 
 ### Community 534 - "Community 534"
 Cohesion: 0.20
@@ -2534,13 +2559,21 @@ Nodes (5): Action Steps for the Agent, Argument Details, Execution Path, How to 
 Cohesion: 0.28
 Nodes (4): KnowledgeGraphRetriever, ndarray, Find links connected directly to the intent or pointer entities., Traverse the CKG starting from matched_node_id and compute path likelihood score
 
+### Community 554 - "Community 554"
+Cohesion: 0.34
+Nodes (13): build_plan(), dry_run(), duplicate_candidates(), inventory(), live_tools_probe(), load_backend_env(), main(), page_hash() (+5 more)
+
 ### Community 555 - "Community 555"
-Cohesion: 0.22
-Nodes (8): datetime, Scenario-Specific State Compiler for FikraCore Live Simulator.  Generates scenar, Validate domain attribution consistency against hypothesis and run state (§9)., validate_domain_attribution(), Verify stale domain attribution is detected and marked UNRESOLVED (§8)., Verify inconsistency between leading hypothesis and primary domain is flagged as, test_domain_attribution_conflict_detected(), test_stale_attribution_marked_unresolved()
+Cohesion: 0.15
+Nodes (8): Real Kokoro TTS integration tests.  Verifies genuine synthesis (audio bytes at 2, test_real_tts_chunked_empty_returns_none(), test_real_tts_chunked_streaming(), test_real_tts_raw_first_use_is_lazy(), test_real_tts_split_sentences_for_real_streaming(), test_real_tts_uninitialized_raises(), Split answer text into TTS-sized sentence chunks.      Splits on sentence bounda, split_sentences()
 
 ### Community 556 - "Community 556"
 Cohesion: 0.33
 Nodes (6): scripts, build, dev, lint, start, test
+
+### Community 564 - "Community 564"
+Cohesion: 0.41
+Nodes (6): IncidentNarrative, Professional, incident-agnostic narrative contract., Build frontend-ready visual widgets from an IncidentNarrative., VisualExplanationService, VisualExplanation, VisualWidget
 
 ### Community 566 - "Community 566"
 Cohesion: 0.28
@@ -2550,17 +2583,21 @@ Nodes (6): _chunks(), ndarray, Real faster-whisper STT integration tests.  Verif
 Cohesion: 0.24
 Nodes (5): BloomPass, buildKernel(), CombineShader, gauss(), ConvolutionShader
 
+### Community 568 - "Community 568"
+Cohesion: 0.17
+Nodes (4): stage_for_concept(), api_client(), Tests for Unified Scenario Catalog and Conceptual Model Mapping (§7, §8, §23)., test_stage_concept_mapping()
+
 ### Community 569 - "Community 569"
-Cohesion: 0.20
-Nodes (11): createNamedFunction(), __embind_register_enum_value(), emval_addMethodCaller(), __emval_as(), __emval_get_method_caller(), emval_lookupTypes(), __emval_take_value(), extendError() (+3 more)
+Cohesion: 0.19
+Nodes (12): confirmed_hypothesis_ctx(), ctx_confirmed(), ctx_insufficient(), ctx_plausible(), gbrain_available(), insufficient_ctx(), knowledge(), plausible_hypothesis_ctx() (+4 more)
 
 ### Community 571 - "Community 571"
 Cohesion: 0.40
 Nodes (3): meshphong_frag_body, meshphong_frag_head, SubsurfaceScatteringShader
 
 ### Community 572 - "Community 572"
-Cohesion: 0.14
-Nodes (21): benchmark_handler(), Any, Handler executing stage-specific or parity benchmarks., benchmark_all(), benchmark_run(), get_ref_relationships(), Any, Path (+13 more)
+Cohesion: 0.08
+Nodes (34): main(), benchmark_handler(), Any, Handler executing stage-specific or parity benchmarks., benchmark_all(), benchmark_run(), get_ref_relationships(), Any (+26 more)
 
 ### Community 576 - "Community 576"
 Cohesion: 0.18
@@ -2579,8 +2616,8 @@ Cohesion: 0.50
 Nodes (3): Deploy on Vercel, Getting Started, Learn More
 
 ### Community 586 - "Community 586"
-Cohesion: 0.16
-Nodes (9): Any, RAGEngine, JARVIS RAG Engine - Retrieval Augmented Generation Intelligent document retrieva, Stream RAG responses., Cleanup RAG resources., MARK RAG superpower - retrieve, augment, generate with OpenAI., Process RAG queries with MARK Incident Manager persona., Retrieve relevant documents. (+1 more)
+Cohesion: 0.25
+Nodes (5): Any, Stream RAG responses., Process RAG queries with MARK Incident Manager persona., Retrieve relevant documents., Generate response with retrieved context using OpenAI.
 
 ### Community 587 - "Community 587"
 Cohesion: 0.25
@@ -2595,40 +2632,40 @@ Cohesion: 0.29
 Nodes (7): 8. Human-Readable Naming Contract, Domain Attribution, Evidence, Hypotheses, Knowledge Gaps, Reasoning Pathways, Validation
 
 ### Community 593 - "Community 593"
-Cohesion: 0.06
-Nodes (69): main(), GeneratedRunInput, input_from_run(), load_evidence(), normalize(), operational_path(), Path, Allowlisted operational ingestion, timestamp handling, and flood reduction. (+61 more)
+Cohesion: 0.04
+Nodes (98): main(), GeneratedRunInput, input_from_run(), load_evidence(), normalize(), operational_path(), Path, Allowlisted operational ingestion, timestamp handling, and flood reduction. (+90 more)
 
 ### Community 596 - "Community 596"
 Cohesion: 0.29
 Nodes (8): find_ber_element(), find_workspace_root(), generate_html_report(), generate_report(), main(), parse_ber(), Dissector for SS7/SIGTRAN (M2UA, M3UA, SCCP, TCAP, MAP/CAMEL) over SCTP., SigtranDissector
-
-### Community 599 - "Community 599"
-Cohesion: 0.46
-Nodes (7): generate_all_h2_scenarios(), _generate_single_scenario(), Any, Path, Deterministic H2 Scenario Generator for Operational Knowledge-Gap Discovery & Un, Generate the full suite of 60 H2 scenarios with zero trivial leakage., _write_jsonl()
 
 ### Community 600 - "Community 600"
 Cohesion: 0.50
 Nodes (3): Basis Universal GPU Texture Compression, License, Transcoders
 
 ### Community 601 - "Community 601"
-Cohesion: 0.23
-Nodes (14): _build_prompt(), _chat_completion(), _env_api_key(), _env_base_url(), _env_model(), is_synthesis_enabled(), Any, Optional LLM narrative synthesizer.  Layer 2 presentation step: turns a determin (+6 more)
+Cohesion: 0.12
+Nodes (23): RuntimeError, _extract_payload(), _extract_tool_result(), GrafanaMcpClient, GrafanaMcpError, Any, Grafana MCP transport helpers.  This module intentionally stays transport-only., Raised when Grafana MCP returns an error or cannot be reached. (+15 more)
 
 ### Community 608 - "Community 608"
-Cohesion: 0.08
-Nodes (29): ai(), ao(), bi(), ch(), cj(), cm(), dm(), dp() (+21 more)
+Cohesion: 0.11
+Nodes (20): ai(), ao(), bi(), bn(), ch(), cj(), dp(), _g() (+12 more)
 
 ### Community 614 - "Community 614"
 Cohesion: 0.50
 Nodes (3): Contents, Draco 3D Data Compression, License
 
 ### Community 615 - "Community 615"
-Cohesion: 0.25
-Nodes (6): Unit tests for provenance wrapping and the claim taxonomy (§5, §7)., test_fact_constructor_defaults(), test_fact_full_provenance(), test_provenance_fact_frozen(), test_provenance_from_page_confidence_parse_failure(), test_provenance_from_page_frontmatter()
+Cohesion: 0.24
+Nodes (3): Water, WaterMesh, WaterNode
 
 ### Community 616 - "Community 616"
 Cohesion: 0.20
 Nodes (3): _JitterVectors, _size, SSAAPassNode
+
+### Community 617 - "Community 617"
+Cohesion: 0.20
+Nodes (10): attachFinalizer(), ClassHandle_clone(), downcastPointer(), getBasestPointer(), getInheritedInstance(), makeClassHandle(), RegisteredPointer_fromWireType(), replacePublicSymbol() (+2 more)
 
 ### Community 619 - "Community 619"
 Cohesion: 0.17
@@ -2671,8 +2708,8 @@ Cohesion: 0.07
 Nodes (68): Ra(), af(), Bc(), be(), bf(), bg(), bh(), di() (+60 more)
 
 ### Community 643 - "Community 643"
-Cohesion: 0.33
-Nodes (3): some(), wr(), xr()
+Cohesion: 0.28
+Nodes (3): DenoiseNode, generateDefaultNoise(), generateDenoiseSamples()
 
 ### Community 644 - "Community 644"
 Cohesion: 0.29
@@ -2687,8 +2724,8 @@ Cohesion: 0.29
 Nodes (7): addOnPostRun(), addOnPreRun(), callRuntimeCallbacks(), initRuntime(), postRun(), preRun(), run()
 
 ### Community 653 - "Community 653"
-Cohesion: 0.04
-Nodes (50): Namespace, Real Kokoro TTS integration tests.  Verifies genuine synthesis (audio bytes at 2, test_real_tts_chunked_empty_returns_none(), test_real_tts_chunked_streaming(), test_real_tts_raw_first_use_is_lazy(), test_real_tts_split_sentences_for_real_streaming(), test_real_tts_uninitialized_raises(), Unit tests for ``voice.runtime`` (thread/OMP configuration).  These are lightwei (+42 more)
+Cohesion: 0.06
+Nodes (34): Namespace, FakeTTS, TestTTSAdapter, _build_pipeline(), _configure_logging(), main(), _print_result(), Local voice CLI.  Usage:      python -m storyteller.voice.cli --text "why did it (+26 more)
 
 ### Community 654 - "Community 654"
 Cohesion: 0.20
@@ -2710,10 +2747,6 @@ Nodes (3): agenticaiops, agenticaiops-agents, agenticaiops-shared
 Cohesion: 0.67
 Nodes (3): 3. Source Modes, Live Operations, Offline Network Simulation
 
-### Community 699 - "Community 699"
-Cohesion: 0.20
-Nodes (19): _format_structured_event(), gate1_route_complaint(), _log_unresolved_complaint(), Logs an unresolved query to unresolved_complaints.json for admin review., _deduplicate_sentences(), _generate_dynamic_agent_intro(), _generate_dynamic_agent_outro(), _get_causal_rules() (+11 more)
-
 ### Community 705 - "Community 705"
 Cohesion: 0.15
 Nodes (17): capability_payload(), Any, UI-facing helpers for exposing Mark capabilities., Return registry capabilities in the stable UI/debug API shape., load_default_registry(), capabilities(), Return MARK's engine/service/connector/skill capability registry., test_all_connectors_are_mcp_managed_by_the_shared_hub() (+9 more)
@@ -2727,12 +2760,12 @@ Cohesion: 0.15
 Nodes (6): colorSpaceLib, MaterialX, MaterialXLoader, MtlXLibrary, MXElement, MXElements
 
 ### Community 768 - "Community 768"
-Cohesion: 0.33
-Nodes (3): Build the authoritative Neural Reasoning Map contract for Step 5., Get canonical display domain for an entity., Derive display domain names from scenario tags.
+Cohesion: 0.36
+Nodes (8): tinf_build_tree(), tinf_decode_symbol(), tinf_decode_trees(), tinf_getbit(), tinf_inflate_block_data(), tinf_inflate_uncompressed_block(), tinf_read_bits(), tinf_uncompress()
 
 ### Community 772 - "Community 772"
-Cohesion: 0.13
-Nodes (11): addDecorator(), addDynamicProperty(), addEffect(), getCharData(), getFontByName(), initialize(), isCombinedCharacter(), isModifier() (+3 more)
+Cohesion: 0.08
+Nodes (14): addDecorator(), addDynamicProperty(), addEffect(), applyToX(), applyToY(), getCharData(), getFontByName(), initialize() (+6 more)
 
 ### Community 773 - "Community 773"
 Cohesion: 0.50
@@ -2743,20 +2776,24 @@ Cohesion: 0.22
 Nodes (9): 21. Stage-Aware Zaki Behavior, Action / Learning, Correlation, Evidence Build, Hypothesis Generation, Hypothesis Testing, Knowledge Gap, Trigger / Detection (+1 more)
 
 ### Community 777 - "Community 777"
-Cohesion: 0.09
-Nodes (21): AnaglyphEffect, _cameraL, _cameraR, _eyeL, _eyeR, _forward, _right, _screenBottomLeft (+13 more)
+Cohesion: 0.05
+Nodes (36): AnaglyphEffect, _cameraL, _cameraR, _eyeL, _eyeR, _forward, _right, _screenBottomLeft (+28 more)
 
 ### Community 778 - "Community 778"
 Cohesion: 0.22
 Nodes (9): 17. Stage Semantics for Live Operations, ACTION, CORRELATION, HYPOTHESIS_GENERATION, HYPOTHESIS_TESTING, KNOWLEDGE_GAP_CHECK, LEARNING_VALIDATION, SIGNAL_FLOOD (+1 more)
 
 ### Community 779 - "Community 779"
-Cohesion: 0.16
-Nodes (5): MobileCustomerComplaintAnalyst, StreamChunk, AgentResponse, _reconstruct_session_state(), _route_diagnostics()
+Cohesion: 0.13
+Nodes (9): Agent, MobileCustomerComplaintAnalyst, StreamChunk, AgentResponse, _reconstruct_session_state(), _route_diagnostics(), _deduplicate_sentences(), _generate_dynamic_agent_intro() (+1 more)
 
 ### Community 780 - "Community 780"
 Cohesion: 0.33
 Nodes (6): 23. Hyper Canvas Lenses, Evidence, Hypotheses, Impact, Knowledge Gaps, Network
+
+### Community 783 - "Community 783"
+Cohesion: 0.29
+Nodes (6): 1. Executive Summary, 2. Domain Distribution, 3. Knowledge Type Breakdown, 4. Knowledge States & Epistemic Segregation, 5. Prioritized Operational Gaps, FikraCore Knowledge Inventory Report
 
 ### Community 786 - "Community 786"
 Cohesion: 0.29
@@ -2840,7 +2877,7 @@ Nodes (4): 32. Simulation Modes, Live, Replay, What-If
 
 ### Community 819 - "Community 819"
 Cohesion: 0.04
-Nodes (15): WebGPU, ChromaticAberrationNode, dotScreen(), DotScreenNode, film, FilmNode, sobel(), SobelOperatorNode (+7 more)
+Nodes (19): WebGPU, LDrawConditionalLineMaterial, SkyMesh, WaterMesh, _BlurDirectionX, _BlurDirectionY, _quadMesh, _size (+11 more)
 
 ### Community 820 - "Community 820"
 Cohesion: 0.50
@@ -2878,25 +2915,17 @@ Nodes (4): Baseline Comparison, FikraCore Step 4.4 / H4 Aggregate Benchmark Repo
 Cohesion: 0.60
 Nodes (4): SASession, get_audit_logs(), get_security_events(), Request
 
-### Community 834 - "Community 834"
-Cohesion: 0.12
-Nodes (5): Reflector, Refractor, Water, WaterMesh, WaterNode
-
 ### Community 835 - "Community 835"
 Cohesion: 0.29
 Nodes (6): 1. Executive Summary, 2. Domain Distribution, 3. Knowledge Type Breakdown, 4. Knowledge States & Epistemic Segregation, 5. Prioritized Operational Gaps, FikraCore Knowledge Inventory Report
 
 ### Community 836 - "Community 836"
-Cohesion: 0.12
-Nodes (6): PlaybookRunbookService, Path, Path, TopologyService, FakeHub, FakeHub
+Cohesion: 0.16
+Nodes (4): NetworkHealthService, Path, TopologyService, FakeHub
 
 ### Community 837 - "Community 837"
 Cohesion: 0.22
 Nodes (9): Acronym and Abbreviation Rule, Evidence Display Names, Fallback Rule, Global Human-Readable Naming Requirement, H2 Test Requirement, Persistence Requirement, Relationship Display Names, Required Display-Name Pattern (+1 more)
-
-### Community 838 - "Community 838"
-Cohesion: 0.50
-Nodes (3): _init_background(), Agents Service — FastAPI application entry point. Runs on port 8001., startup()
 
 ### Community 842 - "Community 842"
 Cohesion: 0.33
@@ -2909,6 +2938,10 @@ Nodes (8): 1. Comparative Benchmark Summary (30 Paired Learning Units), 2. Multi
 ### Community 846 - "Community 846"
 Cohesion: 0.33
 Nodes (6): Mark / Mark / Zaki Voice / Chat Integration, Mark / Zaki Must Not Create a Parallel Truth, Mode Awareness, Zaki Context Contract, Zaki in Curated Demo Mode, Zaki in Investigation Mode
+
+### Community 847 - "Community 847"
+Cohesion: 0.29
+Nodes (7): addOnPostRun(), addOnPreRun(), callRuntimeCallbacks(), initRuntime(), postRun(), preRun(), run()
 
 ### Community 848 - "Community 848"
 Cohesion: 0.50
@@ -2935,8 +2968,8 @@ Cohesion: 0.40
 Nodes (5): Curated Demo Mode, Investigation Mode, Shared Architecture, Simulator UI, Curated Demonstration & Zaki Integration Requirement, Standard UI Presentation Model
 
 ### Community 856 - "Community 856"
-Cohesion: 0.08
-Nodes (52): Ac(), Ae(), ag(), _b(), bk(), bm(), dg(), di() (+44 more)
+Cohesion: 0.22
+Nodes (9): ag(), di(), gi(), gj(), jf(), rh(), tl(), vh() (+1 more)
 
 ### Community 857 - "Community 857"
 Cohesion: 0.67
@@ -2951,12 +2984,12 @@ Cohesion: 0.50
 Nodes (4): 39. H3 Baselines, Baseline A — No Learning, Baseline B — Blind Auto-Learning, Method B — FikraCore Governed Learning
 
 ### Community 860 - "Community 860"
-Cohesion: 0.13
-Nodes (11): Any, JARVIS Vision Engine - Document & Image Analysis Handles OCR, image analysis, do, Capture and analyze screen., Stream vision analysis., Cleanup vision resources., JARVIS vision superpower - see and understand the world., Initialize vision models., Process vision-related queries. (+3 more)
+Cohesion: 0.22
+Nodes (6): Any, Capture and analyze screen., Stream vision analysis., Process vision-related queries., Extract text from image/document using OCR., Analyze image content using vision model.
 
 ### Community 862 - "Community 862"
-Cohesion: 0.40
-Nodes (4): 1. Domain Coverage Matrix, 2. Cross-Domain Dependency Coverage (§24), 3. Service Topology Completeness (§35), FikraCore Knowledge Coverage & Topology Report
+Cohesion: 0.33
+Nodes (5): 1. Domain Coverage Matrix, 2. Cross-Domain Dependency Coverage (§24), 3. Telemetry & Observability Layer Instrumentation, 4. Service Topology Completeness (§35), FikraCore Knowledge Coverage & Topology Report
 
 ### Community 864 - "Community 864"
 Cohesion: 0.50
@@ -2969,6 +3002,10 @@ Nodes (5): 1. Five Levels of Evaluation (§26), 2. Performance by Difficulty Tie
 ### Community 872 - "Community 872"
 Cohesion: 0.50
 Nodes (4): get_run_snapshot(), get_simulation_state(), Get authoritative run-bound simulation snapshot., Canonical authoritative run-bound snapshot for Step 5 & 5.2.
+
+### Community 873 - "Community 873"
+Cohesion: 0.29
+Nodes (7): emval_allocateDestructors(), __emval_call_method(), __emval_call_void_method(), emval_get_global(), __emval_get_module_property(), __emval_new_cstring(), getStringOrSymbol()
 
 ### Community 878 - "Community 878"
 Cohesion: 0.33
@@ -3018,9 +3055,21 @@ Nodes (4): BaseSettings, RAGSettings, Centralized configuration with OpenAI as p
 Cohesion: 0.29
 Nodes (7): 4. Stage Advancement Rules, Correlation exits when, Hypothesis Generation exits when, Hypothesis Testing exits when, Learning / Validation may begin only when, Signal Flood exits when, Trigger exits when
 
+### Community 911 - "Community 911"
+Cohesion: 0.29
+Nodes (6): 1. Executive Summary, 2. Domain Distribution, 3. Knowledge Type Breakdown, 4. Knowledge States & Epistemic Segregation, 5. Prioritized Operational Gaps, FikraCore Knowledge Inventory Report
+
 ### Community 912 - "Community 912"
 Cohesion: 0.22
 Nodes (4): _affineUv, _clipSpaceRetro, RetroPassNode, _w
+
+### Community 913 - "Community 913"
+Cohesion: 0.40
+Nodes (6): getSocketAddress(), getSocketFromFD(), inetNtop4(), inetNtop6(), readSockaddr(), ___syscall_connect()
+
+### Community 914 - "Community 914"
+Cohesion: 0.33
+Nodes (6): __gmtime_js(), __isLeapYear(), __localtime_js(), __mktime_js(), readI53FromI64(), __yday_from_date()
 
 ### Community 916 - "Community 916"
 Cohesion: 0.33
@@ -3034,6 +3083,10 @@ Nodes (4): Any, execute_sql_query(), Any, Executes a SQL query against the local
 Cohesion: 0.32
 Nodes (8): buildPath(), defineDependentProperty(), glyphLoader(), parseGlyfTable(), parseGlyfTableAll(), parseGlyfTableOnLowMemory(), transformPoints(), ttfGlyphLoader()
 
+### Community 922 - "Community 922"
+Cohesion: 0.40
+Nodes (4): 1. Domain Coverage Matrix, 2. Cross-Domain Dependency Coverage (§24), 3. Service Topology Completeness (§35), FikraCore Knowledge Coverage & Topology Report
+
 ### Community 923 - "Community 923"
 Cohesion: 0.29
 Nodes (6): 1. Executive Summary, 2. Domain Distribution, 3. Knowledge Type Breakdown, 4. Knowledge States & Epistemic Segregation, 5. Prioritized Operational Gaps, FikraCore Knowledge Inventory Report
@@ -3046,9 +3099,9 @@ Nodes (4): 2. Separate Health, Reasoning Role, and Knowledge State, Knowledge St
 Cohesion: 0.50
 Nodes (4): 7. Trace Levels, Summary, Technical, Verbose
 
-### Community 927 - "Community 927"
-Cohesion: 0.50
-Nodes (7): _contract(), _incident(), Phase 15 end-to-end validation matrix for professional storytelling.  These test, test_phase15_contradiction_and_missing_evidence_are_visible(), test_phase15_customer_update_avoids_internal_technical_detail(), test_phase15_lifecycle_states_are_mapped(), test_phase15_storytelling_matrix()
+### Community 926 - "Community 926"
+Cohesion: 0.40
+Nodes (4): 1. Conceptual Model, 2. Directory & Architecture Layout, 3. Documentation Index, FikraCore: AI-Native Telecom Intelligence & Simulation Platform
 
 ### Community 928 - "Community 928"
 Cohesion: 0.33
@@ -3057,6 +3110,10 @@ Nodes (6): 10. Click-to-Explain, Connection, Domain Attribution, Hypothesis, Kno
 ### Community 929 - "Community 929"
 Cohesion: 0.33
 Nodes (6): 14. Context-Specific Quick Prompts, Domain, Hypothesis, Knowledge Gap, Pathway, Stage
+
+### Community 930 - "Community 930"
+Cohesion: 0.40
+Nodes (4): 1. Validation Results Summary, 2. Telecombrain Environment Details, 3. Failure Report, Live gbrain MCP Integration Smoke Test Report
 
 ### Community 934 - "Community 934"
 Cohesion: 0.33
@@ -3067,12 +3124,16 @@ Cohesion: 0.40
 Nodes (6): getSocketAddress(), getSocketFromFD(), inetNtop4(), inetNtop6(), readSockaddr(), ___syscall_connect()
 
 ### Community 937 - "Community 937"
-Cohesion: 0.29
-Nodes (5): chainingSubstitutionFormat3$1(), ligatureSubstitutionFormat1$1(), singleSubstitutionFormat1$1(), singleSubstitutionFormat2$1(), Token()
+Cohesion: 0.40
+Nodes (4): 1. Domain Coverage Matrix, 2. Cross-Domain Dependency Coverage (§24), 3. Service Topology Completeness (§35), FikraCore Knowledge Coverage & Topology Report
 
 ### Community 938 - "Community 938"
 Cohesion: 0.29
 Nodes (7): emval_allocateDestructors(), __emval_call_method(), __emval_call_void_method(), emval_get_global(), __emval_get_module_property(), __emval_new_cstring(), getStringOrSymbol()
+
+### Community 939 - "Community 939"
+Cohesion: 0.40
+Nodes (4): Action Steps for the Agent, Execution Path, /telecom-knowledge-graph, Usage & Commands
 
 ### Community 942 - "Community 942"
 Cohesion: 0.40
@@ -3094,45 +3155,33 @@ Nodes (4): 31. Play / Pause / Stop / Replay Awareness, Play, Replay, Stop
 Cohesion: 0.11
 Nodes (19): bl(), cb(), dq(), eg(), fr(), gj(), gr(), hf() (+11 more)
 
-### Community 952 - "Community 952"
-Cohesion: 0.33
-Nodes (6): __gmtime_js(), __isLeapYear(), __localtime_js(), __mktime_js(), readI53FromI64(), __yday_from_date()
-
 ### Community 954 - "Community 954"
 Cohesion: 0.40
 Nodes (5): 4. Color Transition Rules, Entity, Hypothesis, Pathway, Stage
-
-### Community 957 - "Community 957"
-Cohesion: 0.60
-Nodes (5): Coverage(), FeatureList(), recordList(), ScriptList(), ushortList()
 
 ### Community 961 - "Community 961"
 Cohesion: 0.50
 Nodes (4): 3. Visual Design Language, Cyan — Operational Structure, Magenta — Focus / Attention, Turquoise — Convergence / Trust
 
-### Community 971 - "Community 971"
-Cohesion: 0.50
-Nodes (4): c(), ha(), l(), p()
-
 ## Knowledge Gaps
-- **3034 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+3029 more)
+- **3124 isolated node(s):** `eslintConfig`, `nextConfig`, `name`, `version`, `private` (+3119 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **353 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **352 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `_event` connect `performance-view.tsx Cluster` to `Community 343`?**
-  _High betweenness centrality (0.256) - this node is a cross-community bridge._
-- **Why does `FakeTTS` connect `performance-view.tsx Cluster` to `Community 7`, `Community 456`, `Community 137`, `Community 653`, `Community 220`?**
-  _High betweenness centrality (0.139) - this node is a cross-community bridge._
-- **Why does `ConversationService` connect `Community 456` to `Community 162`, `performance-view.tsx Cluster`, `Community 261`, `Community 7`, `Community 137`, `Community 329`, `Community 172`, `Community 300`, `Community 653`, `Community 312`, `Community 121`, `Community 220`, `Community 445`?**
+  _High betweenness centrality (0.262) - this node is a cross-community bridge._
+- **Why does `FakeTTS` connect `performance-view.tsx Cluster` to `Community 261`, `Community 137`, `Community 653`, `Community 220`, `Community 285`?**
   _High betweenness centrality (0.133) - this node is a cross-community bridge._
+- **Why does `ConversationService` connect `performance-view.tsx Cluster` to `Community 356`, `Community 261`, `Community 7`, `Community 456`, `Community 137`, `Community 329`, `Community 172`, `Community 300`, `Community 653`, `qna_agent.py Cluster`, `Community 312`, `Community 285`, `Community 220`, `Community 445`?**
+  _High betweenness centrality (0.094) - this node is a cross-community bridge._
 - **What connects `Convert CRD env (list of {name, value?, valueFrom?}) to V1EnvVar list.`, `Convert CRD extraVolumes to K8s Volume + VolumeMount lists.`, `eslintConfig` to the rest of the system?**
-  _4201 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _4341 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `analyze_trace.py Cluster` be split into smaller, more focused modules?**
-  _Cohesion score 0.011419361475943898 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.011648034619545618 - nodes in this community are weakly interconnected._
 - **Should `dependencies Cluster` be split into smaller, more focused modules?**
   _Cohesion score 0.013689614321442676 - nodes in this community are weakly interconnected._
 - **Should `complaint_analyst.py Cluster` be split into smaller, more focused modules?**
-  _Cohesion score 0.019175846593227255 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.019406969194141838 - nodes in this community are weakly interconnected._

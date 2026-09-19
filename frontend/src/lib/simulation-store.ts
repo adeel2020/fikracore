@@ -718,6 +718,24 @@ export class SimulationClient {
       if (version !== this.switchVersion) return;
       this.activeScenarioId = resolvedScenarioId;
       this.state.scenario_id = resolvedScenarioId;
+
+      // Load static compiled scenario state snapshot without auto-starting run or SSE streaming
+      const stateRes = await fetch(`${API_BASE}/api/v1/fikracore/scenarios/${resolvedScenarioId}/state`, {
+        signal: this.abortController.signal,
+      });
+      if (stateRes.ok) {
+        const stateData = await stateRes.json();
+        if (version === this.switchVersion) {
+          if (stateData.run && stateData.run.status !== "PAUSED" && stateData.run.status !== "STOPPED") {
+            stateData.run.status = "READY";
+          }
+          if (stateData.status && stateData.status !== "PAUSED" && stateData.status !== "STOPPED") {
+            stateData.status = "READY";
+          }
+          this.applySnapshot(stateData);
+        }
+      }
+
       this.state.syncState = "IDLE";
       this.state.connectionState = "DISCONNECTED";
       this.notify();

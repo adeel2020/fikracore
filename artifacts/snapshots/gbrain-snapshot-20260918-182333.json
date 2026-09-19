@@ -1,0 +1,2906 @@
+{
+  "brain": "telecombrain",
+  "snapshot_version": "v1.0.0-snapshot-20260918-182333",
+  "pages": [
+    {
+      "slug": "mobile-core/incidents/sgi-throughput-drop",
+      "title": "Sgi Throughput Drop",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-08T06:08:52.221Z"
+    },
+    {
+      "slug": "incidents/mobile-core/sgi-throughput-drop",
+      "title": "Sgi Throughput Drop",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-08T06:08:51.204Z"
+    },
+    {
+      "slug": "tickets/mobile-core/tt-984210",
+      "title": "Trouble Ticket TT-984210 Journey",
+      "type": "ticket-journey",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:28.808Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix",
+      "title": "Protocols & Network Elements Root Cause Findings Matrix",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:28.581Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog",
+      "title": "Specialized Services & Diagnostic Tools Catalog",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:28.319Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks",
+      "title": "Huawei MML Runbooks",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:28.045Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/queue-topology",
+      "title": "Mobile Core RTR Queue Topology",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:27.814Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+      "title": "Customer Trouble Ticket Journey: Schema, SLA Hierarchy & Bouncing Rules",
+      "type": "procedure",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T21:15:27.569Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary",
+      "title": "RTR Shift-Level Curated Ticket Summary",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T18:22:46.395Z"
+    },
+    {
+      "slug": "domains/mobile-core/roles/mobile-rtr/pipeline",
+      "title": "Mobile RTR Multi-Stage Investigation & Troubleshooting Pipeline",
+      "type": "concept",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-07T18:22:38.896Z"
+    },
+    {
+      "slug": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+      "title": "Learning note for LTE Attach",
+      "type": "learning-note",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:07.441Z"
+    },
+    {
+      "slug": "assets/mobile-core/queries/promql/lte-attach",
+      "title": "LTE Attach telemetry query",
+      "type": "query-asset",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:07.186Z"
+    },
+    {
+      "slug": "assets/mobile-core/playbooks/lte-attach-failure-triage",
+      "title": "LTE Attach failure triage",
+      "type": "playbook",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:07.069Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/story-runs/lte-attach-54db6ef325fbf758-54db6ef325fbf758",
+      "title": "Story build trace for incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "type": "story-run",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:06.883Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
+      "title": "Story for incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "type": "story",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:06.755Z"
+    },
+    {
+      "slug": "grafana/logs/grafana-loki-attach-001",
+      "title": "MME attach reject logs increased",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:06.565Z"
+    },
+    {
+      "slug": "grafana/metrics/grafana-prom-attach-001",
+      "title": "4G Attach SR dropped below intent target",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:06.168Z"
+    },
+    {
+      "slug": "knowledge/mobile-core/kpis/4g-attach-sr",
+      "title": "4G Attach Sr",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:05.693Z"
+    },
+    {
+      "slug": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+      "title": "4G Attach SR dropped below intent target",
+      "type": "kpi-event",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:05.574Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-attach-ran-001",
+      "title": "Major ran alarm S1AP_INITIAL_UE_MSG_DROP on enodeb-17",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:05.386Z"
+    },
+    {
+      "slug": "domains/ran/functions/enodeb-17",
+      "title": "enodeb-17 (enodeb, ran)",
+      "type": "domain-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:05.221Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-attach-hss-001",
+      "title": "Major mobile-core alarm DIAMETER_ULR_TIMEOUTS_HIGH on hss-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:05.038Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/lte/functions/hss-01",
+      "title": "hss-01 (hss, mobile-core)",
+      "type": "domain-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:04.857Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-attach-mme-001",
+      "title": "Critical mobile-core alarm ATTACH_REJECT_RATE_HIGH on mme-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:04.677Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/lte/functions/mme-01",
+      "title": "mme-01 (mme, mobile-core)",
+      "type": "domain-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:04.500Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
+      "title": "LTE Attach",
+      "type": "service-procedure",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:04.319Z"
+    },
+    {
+      "slug": "correlation/mobile-core/decisions/54db6ef325fbf758",
+      "title": "Correlation decision 54db6ef325fbf758",
+      "type": "correlation-decision",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:04.071Z"
+    },
+    {
+      "slug": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "title": "Correlation cluster 54db6ef325fbf758",
+      "type": "correlation-cluster",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "INFERRED",
+      "updated_at": "2026-09-01T09:04:03.952Z"
+    },
+    {
+      "slug": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core, ran",
+      "type": "hypothesis",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-09-01T09:04:03.698Z"
+    },
+    {
+      "slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "title": "Inter-Domain incident candidate for LTE Attach",
+      "type": "incident-alias",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:03.577Z"
+    },
+    {
+      "slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "title": "Inter-Domain incident candidate for LTE Attach",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:03.204Z"
+    },
+    {
+      "slug": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+      "title": "Learning note for SGI Data",
+      "type": "learning-note",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:02.773Z"
+    },
+    {
+      "slug": "assets/mobile-core/queries/promql/sgi-data",
+      "title": "SGI Data telemetry query",
+      "type": "query-asset",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:02.518Z"
+    },
+    {
+      "slug": "assets/mobile-core/playbooks/sgi-data-failure-triage",
+      "title": "SGI Data failure triage",
+      "type": "playbook",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:02.399Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/story-runs/sgi-data-a154bb7a3997859c-a154bb7a3997859c",
+      "title": "Story build trace for incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "type": "story-run",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:02.220Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
+      "title": "Story for incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "type": "story",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:02.089Z"
+    },
+    {
+      "slug": "grafana/traces/grafana-tempo-sgi-001",
+      "title": "Packet gateway request path latency increased",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:01.908Z"
+    },
+    {
+      "slug": "grafana/logs/grafana-loki-sgi-001",
+      "title": "NAT allocation warnings observed during SGi throughput drop",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:01.437Z"
+    },
+    {
+      "slug": "grafana/metrics/grafana-prom-sgi-001",
+      "title": "SGi throughput dropped below committed intent",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:00.932Z"
+    },
+    {
+      "slug": "knowledge/mobile-core/kpis/sgi-throughput",
+      "title": "SGI Throughput",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:00.412Z"
+    },
+    {
+      "slug": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+      "title": "SGi throughput dropped below committed intent",
+      "type": "kpi-event",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:00.300Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-sgi-transport-001",
+      "title": "Major transport alarm INTERFACE_DISCARDS_HIGH on sgi-edge-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:04:00.130Z"
+    },
+    {
+      "slug": "domains/transport/functions/sgi-edge-01",
+      "title": "sgi-edge-01 (edge-router, transport)",
+      "type": "domain-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.974Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-sgi-gilan-001",
+      "title": "Major mobile-core alarm NAT_SESSION_TABLE_HIGH on nat-fw-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.782Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/ps/functions/nat-fw-01",
+      "title": "nat-fw-01 (firewall-nat, mobile-core)",
+      "type": "domain-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.612Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "title": "Critical mobile-core alarm SGI_THROUGHPUT_DROP on pgw-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.415Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/ps/functions/pgw-01",
+      "title": "pgw-01 (pgw, mobile-core)",
+      "type": "domain-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.225Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
+      "title": "SGI Data",
+      "type": "service-procedure",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:59.059Z"
+    },
+    {
+      "slug": "correlation/mobile-core/decisions/a154bb7a3997859c",
+      "title": "Correlation decision a154bb7a3997859c",
+      "type": "correlation-decision",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:58.803Z"
+    },
+    {
+      "slug": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "title": "Correlation cluster a154bb7a3997859c",
+      "type": "correlation-cluster",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "INFERRED",
+      "updated_at": "2026-09-01T09:03:58.666Z"
+    },
+    {
+      "slug": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "title": "Inter-Domain alarm correlation impacting SGI Data across mobile-core, transport",
+      "type": "hypothesis",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-09-01T09:03:58.387Z"
+    },
+    {
+      "slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "title": "Inter-Domain incident candidate for SGI Data",
+      "type": "incident-alias",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:58.256Z"
+    },
+    {
+      "slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "title": "Inter-Domain incident candidate for SGI Data",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:57.834Z"
+    },
+    {
+      "slug": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+      "title": "Learning note for Voice Call Setup",
+      "type": "learning-note",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:57.350Z"
+    },
+    {
+      "slug": "assets/mobile-core/queries/promql/voice-call-setup",
+      "title": "Voice Call Setup telemetry query",
+      "type": "query-asset",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:57.116Z"
+    },
+    {
+      "slug": "assets/mobile-core/playbooks/voice-call-setup-failure-triage",
+      "title": "Voice Call Setup failure triage",
+      "type": "playbook",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:56.993Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/story-runs/voice-call-setup-05841af2e3f4f430-05841af2e3f4f430",
+      "title": "Story build trace for incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "type": "story-run",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:56.808Z"
+    },
+    {
+      "slug": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
+      "title": "Story for incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "type": "story",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:56.652Z"
+    },
+    {
+      "slug": "grafana/logs/grafana-loki-cssr-001",
+      "title": "SIP INVITE failures increased during CSSR drop",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:56.403Z"
+    },
+    {
+      "slug": "grafana/metrics/grafana-prom-cssr-001",
+      "title": "CSSR dropped below intent target for voice-call-setup",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:55.987Z"
+    },
+    {
+      "slug": "knowledge/mobile-core/kpis/cssr",
+      "title": "Cssr",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:55.489Z"
+    },
+    {
+      "slug": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+      "title": "CSSR dropped below intent target for voice-call-setup",
+      "type": "kpi-event",
+      "domain": "Cross-Domain Operations",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:55.377Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-cssr-transport-001",
+      "title": "Major transport alarm PACKET_LOSS_HIGH on voice-backhaul-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:55.202Z"
+    },
+    {
+      "slug": "domains/transport/functions/voice-backhaul-01",
+      "title": "voice-backhaul-01 (backhaul-link, transport)",
+      "type": "domain-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:55.043Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-cssr-ims-001",
+      "title": "Major mobile-core alarm SIP_INVITE_FAILURE_RATE_HIGH on pcscf-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:54.852Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/ims/functions/pcscf-01",
+      "title": "pcscf-01 (pcscf, mobile-core)",
+      "type": "domain-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:54.683Z"
+    },
+    {
+      "slug": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "title": "Critical ran alarm RRC_SETUP_FAILURE_SPIKE on enodeb-22",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:54.459Z"
+    },
+    {
+      "slug": "domains/ran/functions/enodeb-22",
+      "title": "enodeb-22 (enodeb, ran)",
+      "type": "domain-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:54.094Z"
+    },
+    {
+      "slug": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
+      "title": "Voice Call Setup",
+      "type": "service-procedure",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:53.916Z"
+    },
+    {
+      "slug": "correlation/mobile-core/decisions/05841af2e3f4f430",
+      "title": "Correlation decision 05841af2e3f4f430",
+      "type": "correlation-decision",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:53.603Z"
+    },
+    {
+      "slug": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "title": "Correlation cluster 05841af2e3f4f430",
+      "type": "correlation-cluster",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "INFERRED",
+      "updated_at": "2026-09-01T09:03:53.446Z"
+    },
+    {
+      "slug": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "title": "Inter-Domain alarm correlation impacting Voice Call Setup across mobile-core, ran, transport",
+      "type": "hypothesis",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-09-01T09:03:53.129Z"
+    },
+    {
+      "slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "title": "Inter-Domain incident candidate for Voice Call Setup",
+      "type": "incident-alias",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:52.951Z"
+    },
+    {
+      "slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "title": "Inter-Domain incident candidate for Voice Call Setup",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-09-01T09:03:52.321Z"
+    },
+    {
+      "slug": "mobile-core/services/lte-attach",
+      "title": "LTE Attach",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:57:07.804Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "title": "Inter-Domain alarm correlation impacting LTE Attach across mobile-core-control-plane, ran, signaling",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-31T10:57:07.632Z"
+    },
+    {
+      "slug": "mobile-core/kpis/sgi-throughput",
+      "title": "SGI Throughput",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:57:06.804Z"
+    },
+    {
+      "slug": "mobile-core/services/sgi-data",
+      "title": "SGI Data",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:57:06.362Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "title": "Inter-Domain alarm correlation impacting SGI Data across gi-lan, mobile-core-user-plane, transport",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-31T10:57:06.206Z"
+    },
+    {
+      "slug": "mobile-core/kpis/4g-attach-sr",
+      "title": "4G Attach Sr",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:44.530Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/grafana-prom-attach-001",
+      "title": "4G Attach SR dropped below intent target",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:44.370Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/ran-enodeb-17",
+      "title": "enodeb-17 (enodeb, ran)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:43.902Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/signaling-hss-01",
+      "title": "hss-01 (hss, signaling)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:43.387Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/mobile-core-control-plane-mme-01",
+      "title": "mme-01 (mme, mobile-core-control-plane)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:42.934Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/grafana-prom-sgi-001",
+      "title": "SGi throughput dropped below committed intent",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:39.819Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/transport-sgi-edge-01",
+      "title": "sgi-edge-01 (edge-router, transport)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:39.438Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/gi-lan-nat-fw-01",
+      "title": "nat-fw-01 (firewall-nat, gi-lan)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:39.062Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/mobile-core-user-plane-pgw-01",
+      "title": "pgw-01 (pgw, mobile-core-user-plane)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:38.674Z"
+    },
+    {
+      "slug": "mobile-core/kpis/cssr",
+      "title": "Cssr",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:36.205Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/grafana-prom-cssr-001",
+      "title": "CSSR dropped below intent target for voice-call-setup",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:36.047Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/transport-voice-backhaul-01",
+      "title": "voice-backhaul-01 (backhaul-link, transport)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:35.652Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/ims-pcscf-01",
+      "title": "pcscf-01 (pcscf, ims)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:35.259Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/ran-enodeb-22",
+      "title": "enodeb-22 (enodeb, ran)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:34.823Z"
+    },
+    {
+      "slug": "mobile-core/services/voice-call-setup",
+      "title": "Voice Call Setup",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-31T10:54:34.580Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "title": "Inter-Domain alarm correlation impacting Voice Call Setup across ims, ran, transport",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-31T10:54:34.314Z"
+    },
+    {
+      "slug": "mobile-core/kpis/service-kpi",
+      "title": "Service KPI",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:23:53.927Z"
+    },
+    {
+      "slug": "mobile-core/services/ue-registration",
+      "title": "UE Registration",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:23:53.570Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "title": "Inter-Domain alarm correlation impacting UE Registration across mobile-core, ran, transport",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-28T20:23:53.449Z"
+    },
+    {
+      "slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "title": "Inter-Domain incident candidate for UE Registration",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:23:53.320Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/ran-unknown-cell-9",
+      "title": "unknown-cell-9 (component, ran)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:50.146Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+      "title": "Intra-Domain alarm correlation impacting unmapped service across ran",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-28T20:21:50.015Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/power-power-ups-77",
+      "title": "power-ups-77 (ups, power)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:49.809Z"
+    },
+    {
+      "slug": "mobile-core/services/site-power",
+      "title": "Site Power",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:49.674Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+      "title": "Intra-Domain alarm correlation impacting Site Power across power",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CANDIDATE",
+      "updated_at": "2026-08-28T20:21:49.522Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/mobile-core-core-amf-01",
+      "title": "core-amf-01 (amf, mobile-core)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:49.066Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/transport-transport-agg-sw-03",
+      "title": "transport-agg-sw-03 (aggregation-switch, transport)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:48.881Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/ran-ran-gnodeb-17",
+      "title": "ran-gnodeb-17 (gnodeb, ran)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:21:48.681Z"
+    },
+    {
+      "slug": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0",
+      "title": "Warning ran alarm TEMP_HIGH on unknown-cell-9",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:36.548Z"
+    },
+    {
+      "slug": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+      "title": "Intra-Domain incident candidate for Unmapped Service",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:36.127Z"
+    },
+    {
+      "slug": "mobile-core/evidence/alarm-81cec920e94d3a59-0",
+      "title": "Critical power alarm BATTERY_LOW on power-ups-77",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:35.874Z"
+    },
+    {
+      "slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "title": "Intra-Domain incident candidate for Site Power",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:35.276Z"
+    },
+    {
+      "slug": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
+      "title": "TICKET observation for ue-registration",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:34.981Z"
+    },
+    {
+      "slug": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+      "title": "KPI breach for ue-registration",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:34.685Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/kpi-registration-001",
+      "title": "KPI breach for ue-registration",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:34.200Z"
+    },
+    {
+      "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
+      "title": "Major mobile-core alarm CPU_HIGH on core-amf-01",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:34.056Z"
+    },
+    {
+      "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
+      "title": "Major transport alarm INTERFACE_ERRORS on transport-agg-sw-03",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:33.753Z"
+    },
+    {
+      "slug": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
+      "title": "Critical ran alarm LINK_DOWN on ran-gnodeb-17",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "CONFIRMED",
+      "updated_at": "2026-08-28T20:20:33.455Z"
+    },
+    {
+      "slug": "mobile-core/observations/amf-01-signaling-burst",
+      "title": "Signaling burst correlated with mobile-terminated location updates",
+      "type": "observation",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:24.863Z"
+    },
+    {
+      "slug": "mobile-core/remediations/scale-out-amf-01",
+      "title": "Scale out AMF-01 and throttle registration signaling",
+      "type": "remediation",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:23.377Z"
+    },
+    {
+      "slug": "mobile-core/evidence/nas-reject-logs",
+      "title": "NAS REGISTRATION REJECT 'congestion' cause codes",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:21.595Z"
+    },
+    {
+      "slug": "mobile-core/evidence/amf-cpu-metrics",
+      "title": "AMF-01 CPU utilization pegged at 98%",
+      "type": "evidence",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:20.143Z"
+    },
+    {
+      "slug": "mobile-core/hypotheses/amf-cpu-saturation",
+      "title": "AMF-01 CPU saturation from registration signaling burst",
+      "type": "hypothesis",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:18.747Z"
+    },
+    {
+      "slug": "mobile-core/symptoms/registration-failure-spike",
+      "title": "Spike in UE registration failures",
+      "type": "symptom",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:13.111Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+      "title": "RSR recovery at 07:05",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:11.770Z"
+    },
+    {
+      "slug": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+      "title": "RSR critical breach at 06:14",
+      "type": "kpi-event",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:10.506Z"
+    },
+    {
+      "slug": "mobile-core/incidents/amf-overload-2026-08-09",
+      "title": "AMF-01 overload causes mass registration failures",
+      "type": "incident",
+      "domain": "Cross-Domain Operations",
+      "plane": "operations",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:09.400Z"
+    },
+    {
+      "slug": "mobile-core/kpis/registration-success-rate",
+      "title": "Registration Success Rate (RSR)",
+      "type": "kpi",
+      "domain": "Mobile Core",
+      "plane": "observability",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:13:00.517Z"
+    },
+    {
+      "slug": "mobile-core/services/ue-registration-service",
+      "title": "UE Registration Service",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:12:59.371Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/smf-01",
+      "title": "SMF-01 (Session Management Function)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:12:58.372Z"
+    },
+    {
+      "slug": "mobile-core/network-functions/amf-01",
+      "title": "AMF-01 (Access and Mobility Management Function)",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T23:12:57.969Z"
+    },
+    {
+      "slug": "install",
+      "title": "Install",
+      "type": "note",
+      "domain": "Other",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T22:22:48.469Z"
+    },
+    {
+      "slug": "inbox/2026-08-08-abb62c33",
+      "title": "remember test results",
+      "type": "note",
+      "domain": "Other",
+      "plane": "topology",
+      "knowledge_state": "STALE",
+      "updated_at": "2026-08-08T22:08:48.981Z"
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0001",
+      "source": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+      "target": "domains/mobile-core/roles/mobile-rtr/queue-topology",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0002",
+      "source": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+      "target": "domains/mobile-core/roles/mobile-rtr/rtr-curated-summary",
+      "link_type": "aggregated-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0003",
+      "source": "domains/mobile-core/roles/mobile-rtr/pipeline",
+      "target": "domains/mobile-core/roles/mobile-rtr/concern-findings-matrix",
+      "link_type": "classifies-with",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0004",
+      "source": "domains/mobile-core/roles/mobile-rtr/pipeline",
+      "target": "domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog",
+      "link_type": "diagnoses",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0005",
+      "source": "domains/mobile-core/roles/mobile-rtr/pipeline",
+      "target": "domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks",
+      "link_type": "executes-with",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0006",
+      "source": "domains/mobile-core/roles/mobile-rtr/pipeline",
+      "target": "domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
+      "link_type": "structures-journey",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0007",
+      "source": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+      "target": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "link_type": "learned-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0008",
+      "source": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+      "target": "assets/mobile-core/playbooks/lte-attach-failure-triage",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0009",
+      "source": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+      "target": "assets/mobile-core/queries/promql/lte-attach",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0010",
+      "source": "storytelling/mobile-core/story-runs/lte-attach-54db6ef325fbf758-54db6ef325fbf758",
+      "target": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "link_type": "builds-story-for",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0011",
+      "source": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
+      "target": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "link_type": "narrates",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0012",
+      "source": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+      "target": "knowledge/mobile-core/kpis/4g-attach-sr",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0013",
+      "source": "grafana/alerts/grafana-alert-attach-ran-001",
+      "target": "domains/ran/functions/enodeb-17",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0014",
+      "source": "grafana/alerts/grafana-alert-attach-hss-001",
+      "target": "domains/mobile-core/networks/lte/functions/hss-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0015",
+      "source": "grafana/alerts/grafana-alert-attach-mme-001",
+      "target": "domains/mobile-core/networks/lte/functions/mme-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0016",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "correlation/mobile-core/decisions/54db6ef325fbf758",
+      "link_type": "has-decision",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0017",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-mme-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0018",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-hss-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0019",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-ran-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0020",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "grafana/metrics/grafana-prom-attach-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0021",
+      "source": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "target": "grafana/logs/grafana-loki-attach-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0022",
+      "source": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-mme-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0023",
+      "source": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-hss-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0024",
+      "source": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-ran-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0025",
+      "source": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "target": "grafana/metrics/grafana-prom-attach-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0026",
+      "source": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "target": "grafana/logs/grafana-loki-attach-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0027",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0028",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/services/lte-attach",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0029",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/network-functions/mobile-core-control-plane-mme-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0030",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/network-functions/signaling-hss-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0031",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/network-functions/ran-enodeb-17",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0032",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "mobile-core/kpi-events/grafana-prom-attach-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0033",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "link_type": "alias-of",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0034",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0035",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0036",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0037",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/functions/mme-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0038",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/functions/hss-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0039",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "domains/ran/functions/enodeb-17",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0040",
+      "source": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0041",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "correlation/mobile-core/hypotheses/54db6ef325fbf758",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0042",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "correlation/mobile-core/clusters/54db6ef325fbf758",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0043",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/service-procedures/lte-attach",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0044",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/functions/mme-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0045",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "domains/mobile-core/networks/lte/functions/hss-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0046",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "domains/ran/functions/enodeb-17",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0047",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-attach-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0048",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "storytelling/mobile-core/stories/lte-attach-54db6ef325fbf758",
+      "link_type": "has-story",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0049",
+      "source": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "target": "learning/mobile-core/notes/lte-attach-54db6ef325fbf758",
+      "link_type": "has-learning-note",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0050",
+      "source": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+      "target": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "link_type": "learned-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0051",
+      "source": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+      "target": "assets/mobile-core/playbooks/sgi-data-failure-triage",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0052",
+      "source": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+      "target": "assets/mobile-core/queries/promql/sgi-data",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0053",
+      "source": "storytelling/mobile-core/story-runs/sgi-data-a154bb7a3997859c-a154bb7a3997859c",
+      "target": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "link_type": "builds-story-for",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0054",
+      "source": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
+      "target": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "link_type": "narrates",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0055",
+      "source": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+      "target": "knowledge/mobile-core/kpis/sgi-throughput",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0056",
+      "source": "grafana/alerts/grafana-alert-sgi-transport-001",
+      "target": "domains/transport/functions/sgi-edge-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0057",
+      "source": "grafana/alerts/grafana-alert-sgi-gilan-001",
+      "target": "domains/mobile-core/networks/ps/functions/nat-fw-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0058",
+      "source": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "target": "domains/mobile-core/networks/ps/functions/pgw-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0059",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "correlation/mobile-core/decisions/a154bb7a3997859c",
+      "link_type": "has-decision",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0060",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0061",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-gilan-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0062",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-transport-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0063",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/metrics/grafana-prom-sgi-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0064",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/logs/grafana-loki-sgi-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0065",
+      "source": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "target": "grafana/traces/grafana-tempo-sgi-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0066",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0067",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-gilan-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0068",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-transport-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0069",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/metrics/grafana-prom-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0070",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/logs/grafana-loki-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0071",
+      "source": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "target": "grafana/traces/grafana-tempo-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0072",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0073",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/services/sgi-data",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0074",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/network-functions/mobile-core-user-plane-pgw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0075",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/network-functions/gi-lan-nat-fw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0076",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/network-functions/transport-sgi-edge-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0077",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "mobile-core/kpi-events/grafana-prom-sgi-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0078",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "link_type": "alias-of",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0079",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0080",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0081",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0082",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/functions/pgw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0083",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/functions/nat-fw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0084",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "domains/transport/functions/sgi-edge-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0085",
+      "source": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0086",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "correlation/mobile-core/hypotheses/a154bb7a3997859c",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0087",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "correlation/mobile-core/clusters/a154bb7a3997859c",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0088",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/service-procedures/sgi-data-forwarding",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0089",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/functions/pgw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0090",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "domains/mobile-core/networks/ps/functions/nat-fw-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0091",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "domains/transport/functions/sgi-edge-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0092",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-sgi-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0093",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "storytelling/mobile-core/stories/sgi-data-a154bb7a3997859c",
+      "link_type": "has-story",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0094",
+      "source": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+      "target": "learning/mobile-core/notes/sgi-data-a154bb7a3997859c",
+      "link_type": "has-learning-note",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0095",
+      "source": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+      "target": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "link_type": "learned-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0096",
+      "source": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+      "target": "assets/mobile-core/playbooks/voice-call-setup-failure-triage",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0097",
+      "source": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+      "target": "assets/mobile-core/queries/promql/voice-call-setup",
+      "link_type": "proposes-asset",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0098",
+      "source": "storytelling/mobile-core/story-runs/voice-call-setup-05841af2e3f4f430-05841af2e3f4f430",
+      "target": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "link_type": "builds-story-for",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0099",
+      "source": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
+      "target": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "link_type": "narrates",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0100",
+      "source": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+      "target": "knowledge/mobile-core/kpis/cssr",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0101",
+      "source": "grafana/alerts/grafana-alert-cssr-transport-001",
+      "target": "domains/transport/functions/voice-backhaul-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0102",
+      "source": "grafana/alerts/grafana-alert-cssr-ims-001",
+      "target": "domains/mobile-core/networks/ims/functions/pcscf-01",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0103",
+      "source": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "target": "domains/ran/functions/enodeb-22",
+      "link_type": "observed-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0104",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "correlation/mobile-core/decisions/05841af2e3f4f430",
+      "link_type": "has-decision",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0105",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0106",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ims-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0107",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-transport-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0108",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "grafana/metrics/grafana-prom-cssr-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0109",
+      "source": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "target": "grafana/logs/grafana-loki-cssr-001",
+      "link_type": "grouped",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0110",
+      "source": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0111",
+      "source": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ims-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0112",
+      "source": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-transport-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0113",
+      "source": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "target": "grafana/metrics/grafana-prom-cssr-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0114",
+      "source": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "target": "grafana/logs/grafana-loki-cssr-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0115",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0116",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/services/voice-call-setup",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0117",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/network-functions/ran-enodeb-22",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0118",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/network-functions/ims-pcscf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0119",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/network-functions/transport-voice-backhaul-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0120",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "mobile-core/kpi-events/grafana-prom-cssr-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0121",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "link_type": "alias-of",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0122",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0123",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0124",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0125",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/ran/functions/enodeb-22",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0126",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/mobile-core/networks/ims/functions/pcscf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0127",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/transport/functions/voice-backhaul-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0128",
+      "source": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0129",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "correlation/mobile-core/hypotheses/05841af2e3f4f430",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0130",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "correlation/mobile-core/clusters/05841af2e3f4f430",
+      "link_type": "derived-from",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0131",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/mobile-core/networks/ims/service-procedures/voice-call-setup",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0132",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/ran/functions/enodeb-22",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0133",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/mobile-core/networks/ims/functions/pcscf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0134",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "domains/transport/functions/voice-backhaul-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0135",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "incidents/mobile-core/kpi-events/grafana-prom-cssr-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0136",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "storytelling/mobile-core/stories/voice-call-setup-05841af2e3f4f430",
+      "link_type": "has-story",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0137",
+      "source": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+      "target": "learning/mobile-core/notes/voice-call-setup-05841af2e3f4f430",
+      "link_type": "has-learning-note",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0138",
+      "source": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-mme-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0139",
+      "source": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-hss-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0140",
+      "source": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "target": "grafana/alerts/grafana-alert-attach-ran-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0141",
+      "source": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "target": "grafana/metrics/grafana-prom-attach-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0142",
+      "source": "mobile-core/hypotheses/correlation-54db6ef325fbf758",
+      "target": "grafana/logs/grafana-loki-attach-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0143",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-pgw-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0144",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-gilan-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0145",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/alerts/grafana-alert-sgi-transport-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0146",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/metrics/grafana-prom-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0147",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/logs/grafana-loki-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0148",
+      "source": "mobile-core/hypotheses/correlation-a154bb7a3997859c",
+      "target": "grafana/traces/grafana-tempo-sgi-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0149",
+      "source": "mobile-core/kpi-events/grafana-prom-attach-001",
+      "target": "mobile-core/kpis/4g-attach-sr",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0150",
+      "source": "mobile-core/kpi-events/grafana-prom-sgi-001",
+      "target": "mobile-core/kpis/sgi-throughput",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0151",
+      "source": "mobile-core/kpi-events/grafana-prom-cssr-001",
+      "target": "mobile-core/kpis/cssr",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0152",
+      "source": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ran-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0153",
+      "source": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-ims-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0154",
+      "source": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "target": "grafana/alerts/grafana-alert-cssr-transport-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0155",
+      "source": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "target": "grafana/metrics/grafana-prom-cssr-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0156",
+      "source": "mobile-core/hypotheses/correlation-05841af2e3f4f430",
+      "target": "grafana/logs/grafana-loki-cssr-001",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0157",
+      "source": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "target": "mobile-core/evidence/alarm-1fe005ed908a3f26-0",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0158",
+      "source": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "target": "mobile-core/evidence/alarm-1fe005ed908a3f26-1",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0159",
+      "source": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "target": "mobile-core/evidence/alarm-1fe005ed908a3f26-2",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0160",
+      "source": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "target": "mobile-core/evidence/kpi-1fe005ed908a3f26-0",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0161",
+      "source": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "target": "mobile-core/evidence/ticket-1fe005ed908a3f26-1",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0162",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/hypotheses/correlation-1fe005ed908a3f26",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0163",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/services/ue-registration",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0164",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/network-functions/ran-ran-gnodeb-17",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0165",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/network-functions/transport-transport-agg-sw-03",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0166",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/network-functions/mobile-core-core-amf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0167",
+      "source": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+      "target": "mobile-core/kpi-events/kpi-registration-001",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0168",
+      "source": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+      "target": "mobile-core/evidence/alarm-a5eef0c5e022eeff-0",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0169",
+      "source": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+      "target": "mobile-core/evidence/alarm-81cec920e94d3a59-0",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0170",
+      "source": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+      "target": "mobile-core/hypotheses/correlation-a5eef0c5e022eeff",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0171",
+      "source": "mobile-core/incidents/unmapped-service-a5eef0c5e022eeff",
+      "target": "mobile-core/network-functions/ran-unknown-cell-9",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0172",
+      "source": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "target": "mobile-core/hypotheses/correlation-81cec920e94d3a59",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0173",
+      "source": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "target": "mobile-core/services/site-power",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0174",
+      "source": "mobile-core/incidents/site-power-81cec920e94d3a59",
+      "target": "mobile-core/network-functions/power-power-ups-77",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0175",
+      "source": "mobile-core/kpi-events/kpi-registration-001",
+      "target": "mobile-core/kpis/service-kpi",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0176",
+      "source": "mobile-core/observations/amf-01-signaling-burst",
+      "target": "mobile-core/incidents/amf-overload-2026-08-09",
+      "link_type": "relates_to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0177",
+      "source": "mobile-core/remediations/scale-out-amf-01",
+      "target": "mobile-core/network-functions/amf-01",
+      "link_type": "targets",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0178",
+      "source": "mobile-core/remediations/scale-out-amf-01",
+      "target": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+      "link_type": "verified-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0179",
+      "source": "mobile-core/hypotheses/amf-cpu-saturation",
+      "target": "mobile-core/evidence/amf-cpu-metrics",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0180",
+      "source": "mobile-core/hypotheses/amf-cpu-saturation",
+      "target": "mobile-core/evidence/nas-reject-logs",
+      "link_type": "supported-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0181",
+      "source": "mobile-core/hypotheses/amf-cpu-saturation",
+      "target": "mobile-core/symptoms/registration-failure-spike",
+      "link_type": "explains",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0182",
+      "source": "mobile-core/kpi-events/amf-rsr-recovery-07-05",
+      "target": "mobile-core/kpis/registration-success-rate",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0183",
+      "source": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+      "target": "mobile-core/kpis/registration-success-rate",
+      "link_type": "measures",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0184",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/kpi-events/amf-rsr-drop-06-14",
+      "link_type": "detected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0185",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/network-functions/amf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0186",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/services/ue-registration-service",
+      "link_type": "affects",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0187",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/symptoms/registration-failure-spike",
+      "link_type": "has-symptom",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0188",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/hypotheses/amf-cpu-saturation",
+      "link_type": "has-hypothesis",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0189",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/remediations/scale-out-amf-01",
+      "link_type": "has-remediation",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    },
+    {
+      "relationship_id": "REL-GBRAIN-SNAP-0190",
+      "source": "mobile-core/incidents/amf-overload-2026-08-09",
+      "target": "mobile-core/network-functions/smf-01",
+      "link_type": "involves",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "gbrain-snapshot-backup"
+    }
+  ]
+}

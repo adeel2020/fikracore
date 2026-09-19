@@ -228,13 +228,19 @@ class ScenarioResolver:
             return by_norm, [], None
 
         # 5. Semantic / Fuzzy
+        # ID Code Guardrail: If query looks like a specific scenario code (e.g. H1-WI-001, SCN-999)
+        # and exact ID match failed, do NOT silently alias to a different scenario ID.
+        is_id_pattern = bool(re.match(r"^[A-Za-z0-9]{2,}-[A-Za-z0-9]+(-[A-Za-z0-9]+)*$", query.strip()))
         semantic_matches = self.resolve_semantically(query)
         if not semantic_matches:
-            return None, [], "No existing scenario matched with sufficient confidence."
+            return None, [], f"No scenario found matching '{query}'."
 
-        # Check for ambiguity
         top_rec, top_score = semantic_matches[0]
-        # Candidates within 0.06 of top score
+
+        if is_id_pattern:
+            return None, [top_rec], f"Scenario ID '{query}' not found. Did you mean '{top_rec.id}' ({top_rec.display_name})?"
+
+        # Check for ambiguity on general natural language queries
         close_candidates = [
             rec for rec, sc in semantic_matches if abs(sc - top_score) < 0.06 and sc >= 0.4
         ]

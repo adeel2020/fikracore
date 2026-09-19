@@ -97,31 +97,35 @@ def _summary(
     root: Any,
     assessments: list[Any],
 ) -> str:
-    """Deterministic one-line summary; only uses present facts."""
+    """Deterministic, professional executive summary; only uses present facts."""
     incident = ctx.incident or {}
     fm = incident.get("frontmatter", {}) or {}
+    severity = fm.get("severity") or "SEV-UNKNOWN"
+    status = fm.get("status") or "active"
     correlation = ctx.correlation_metadata or {}
+
+    services = ", ".join(str(s.value) for s in ctx.services[:2]) or "affected telecom services"
+
+    if root is not None:
+        cause_str = f"confirmed root cause: {root.value}"
+    elif assessments and assessments[0].status != hyp_mod.CONFIRMED:
+        cause_str = f"leading hypothesis: {assessments[0].hypothesis.value}"
+    elif assessments:
+        cause_str = f"leading hypothesis: {assessments[0].hypothesis.value}"
+    else:
+        cause_str = "root cause under investigation"
+
     if correlation:
-        severity = fm.get("severity") or "severity unknown"
-        status = fm.get("status") or "status unknown"
-        scope = correlation.get("correlation_scope") or "unclassified"
+        scope = correlation.get("correlation_scope") or "correlated"
         domains = correlation.get("contributing_domains") or []
+        domain_phrase = f" across {', '.join(str(d) for d in domains)}" if domains else ""
         score = correlation.get("correlation_score")
-        intent_status = correlation.get("intent_status")
-        services = ", ".join(str(s.value) for s in ctx.services[:2]) or "an unmapped service"
-        domain_text = ", ".join(str(domain) for domain in domains) if domains else "unknown domains"
-        fragments = [
-            f"{severity} {status} {scope} correlation impacting {services} across {domain_text}"
-        ]
-        if score is not None:
-            fragments.append(f"score {score}")
-        if intent_status:
-            fragments.append(f"intent {intent_status}")
-        if root is not None:
-            fragments.append(f"confirmed root cause: {root.value}")
-        elif assessments:
-            fragments.append(f"leading hypothesis: {assessments[0].hypothesis.value}")
-        return f"incident {ctx.incident_id or 'unknown'} — " + "; ".join(fragments)
+        score_phrase = f" (correlation score: {score})" if score is not None else ""
+
+        return (
+            f"A {severity} {status} incident with {scope} scope{score_phrase} impacted {services}{domain_phrase}. "
+            f"Investigation {cause_str}."
+        )
 
     parts: list[str] = []
     if fm.get("severity"):

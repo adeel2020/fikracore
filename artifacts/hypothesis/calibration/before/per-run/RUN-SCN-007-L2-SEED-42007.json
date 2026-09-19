@@ -1,7 +1,7 @@
 {
   "run_id": "RUN-SCN-007-L2-SEED-42007",
   "scenario_id": "SCN-007",
-  "terminal_state": "MODEL_INSUFFICIENT",
+  "terminal_state": "EXPLAINED",
   "ranked_hypotheses": [
     {
       "hypothesis_id": "H-003",
@@ -60,8 +60,8 @@
         "REL-CORE-NTP"
       ],
       "status": "SUPPORTED",
-      "hypothesis_confidence": 0.7262,
-      "causal_confidence": 0.6899,
+      "hypothesis_confidence": 0.7287,
+      "causal_confidence": 0.7287,
       "explanation_coverage": 0.4,
       "score_dimensions": {
         "temporal_precedence": 1.0,
@@ -73,7 +73,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 1.0,
         "evidence_freshness": 0.792615126823837,
         "source_reliability": 0.8514285714285715
       },
@@ -142,8 +142,8 @@
         "REL-UPF-HOSTED"
       ],
       "status": "SUPPORTED",
-      "hypothesis_confidence": 0.6637,
-      "causal_confidence": 0.6305,
+      "hypothesis_confidence": 0.6537,
+      "causal_confidence": 0.4903,
       "explanation_coverage": 0.8,
       "score_dimensions": {
         "temporal_precedence": 0.0,
@@ -155,7 +155,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8117743067235912,
         "source_reliability": 0.835
       },
@@ -214,8 +214,8 @@
         "REL-CRM-TICKETS-IMPACT"
       ],
       "status": "CANDIDATE",
-      "hypothesis_confidence": 0.5414,
-      "causal_confidence": 0.5143,
+      "hypothesis_confidence": 0.5314,
+      "causal_confidence": 0.3985,
       "explanation_coverage": 0.4,
       "score_dimensions": {
         "temporal_precedence": 0.0,
@@ -227,7 +227,7 @@
         "historical_support": 0.0,
         "negative_evidence": 0.0,
         "symptom_likelihood_penalty": 0.0,
-        "knowledge_confidence": 0.95,
+        "knowledge_confidence": 0.75,
         "evidence_freshness": 0.8215007054737402,
         "source_reliability": 0.8233333333333334
       },
@@ -364,7 +364,7 @@
       "failed_assumptions": []
     }
   ],
-  "selected_hypothesis_id": null,
+  "selected_hypothesis_id": "H-003",
   "supporting_evidence": [
     "ALM-SCN-007-0001",
     "LOG-SCN-007-0001",
@@ -398,7 +398,7 @@
     "SA5G:AMF:001",
     "SA5G:UPF:003"
   ],
-  "reasoning_summary": "MODEL_INSUFFICIENT: best operational explanation covers 40% of affected entities; 8 abnormal observations remain unexplained. Confidence is a deterministic heuristic, not a calibrated probability.",
+  "reasoning_summary": "EXPLAINED: best operational explanation covers 40% of affected entities; 8 abnormal observations remain unexplained. Confidence is a deterministic heuristic, not a calibrated probability.",
   "provenance": [
     {
       "hypothesis_id": "H-003",
@@ -592,46 +592,7 @@
       ]
     }
   ],
-  "next_best_evidence": [
-    {
-      "request_id": "REQ-002",
-      "question": "Compare direct fault telemetry with a healthy peer over the incident interval",
-      "target_entities": [
-        "INFRA:K8S:CORE-A",
-        "INFRA:NTP:CORE"
-      ],
-      "discriminates": [
-        "H-003",
-        "H-002"
-      ],
-      "information_gain": 0.8,
-      "cost": 1.0,
-      "latency": 1.0,
-      "risk": 0.0,
-      "reliability": 0.9,
-      "availability": 1.0,
-      "priority": 0.36
-    },
-    {
-      "request_id": "REQ-001",
-      "question": "Obtain an independent path trace and authoritative dependency inventory",
-      "target_entities": [
-        "INFRA:K8S:CORE-A",
-        "INFRA:NTP:CORE"
-      ],
-      "discriminates": [
-        "H-003",
-        "H-002"
-      ],
-      "information_gain": 0.95,
-      "cost": 1.5,
-      "latency": 2.0,
-      "risk": 0.05,
-      "reliability": 0.9,
-      "availability": 1.0,
-      "priority": 0.2408
-    }
-  ],
+  "next_best_evidence": [],
   "discovery_mode": true,
   "causal_event_graph": [
     {
@@ -872,36 +833,36 @@
         "relationship_id": "REL-AMF-HOSTED",
         "source": "SA5G:AMF:001",
         "target": "INFRA:K8S:CORE-A",
-        "link_type": "depends-on",
+        "link_type": "hosted-on",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-CORE-NTP",
         "source": "SA5G:AMF:001",
         "target": "INFRA:NTP:CORE",
-        "link_type": "depends-on",
+        "link_type": "timed-by",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-CRM-TICKETS-IMPACT",
         "source": "CRM:TICKET:001",
         "target": "SA5G:UPF:003",
-        "link_type": "depends-on",
-        "state": "CONFIRMED",
-        "confidence": 0.95,
+        "link_type": "impacts",
+        "state": "INFERRED",
+        "confidence": 0.75,
         "provenance": "benchmark-operational-fixture"
       },
       {
         "relationship_id": "REL-UPF-HOSTED",
         "source": "SA5G:UPF:003",
         "target": "INFRA:K8S:CORE-A",
-        "link_type": "depends-on",
+        "link_type": "hosted-on",
         "state": "CONFIRMED",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "provenance": "benchmark-operational-fixture"
       }
     ],
@@ -1362,11 +1323,85 @@
     "candidate_relationship_count": 0,
     "canonical_resolution_failures": [],
     "topology_gap_detection": false,
-    "evidence_requests_before_terminal": 2,
+    "evidence_requests_before_terminal": 0,
     "steps_to_first_useful_hypothesis": 2,
-    "investigation_duration_seconds": 0.005377193010644987,
+    "investigation_duration_seconds": 0.005237111996393651,
     "impacted_service": "5g_sa_mobile_data",
     "coincidental_evidence": [],
-    "stopping_reason": "Single evidence pass complete; further tests require requested observations"
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [
+      {
+        "gap_id": "KG-001",
+        "gap_type": "MISSING_SERVICE_TO_FUNCTION",
+        "status": "CANDIDATE",
+        "affected_entities": [
+          "SA5G:AMF:001",
+          "CRM:TICKET:001",
+          "INFRA:K8S:CORE-A"
+        ],
+        "suspected_missing_relation": {
+          "from_entity": "SA5G:AMF:001",
+          "relation": "ROUTES_THROUGH",
+          "to_entity": null
+        },
+        "reason": "Degradation propagates beyond known boundary at SA5G Amf 001; downstream transport or service dependency missing.",
+        "supporting_evidence": [
+          "ALM-SCN-007-0003",
+          "LOG-SCN-007-0003",
+          "ALM-SCN-007-0004",
+          "LOG-SCN-007-0004",
+          "ALM-SCN-007-0005",
+          "LOG-SCN-007-0005",
+          "KPI-SCN-007-CRM1",
+          "TKT-SCN-007-0001"
+        ],
+        "contradicting_evidence": [],
+        "unexplained_residual": [
+          "RES-001"
+        ],
+        "confidence": 0.7,
+        "required_validation": true,
+        "display_name": "Operational knowledge gap downstream of SA5G Amf 001"
+      }
+    ],
+    "unexplained_residuals": [
+      {
+        "residual_id": "RES-001",
+        "evidence_ids": [
+          "ALM-SCN-007-0003",
+          "LOG-SCN-007-0003",
+          "ALM-SCN-007-0004",
+          "LOG-SCN-007-0004",
+          "ALM-SCN-007-0005",
+          "LOG-SCN-007-0005",
+          "KPI-SCN-007-CRM1",
+          "TKT-SCN-007-0001"
+        ],
+        "affected_services": [
+          "5g_sa_mobile_data"
+        ],
+        "known_path_exhausted_at": "SA5G:AMF:001",
+        "severity": 0.85,
+        "structural_suspicion": true
+      }
+    ],
+    "model_contradictions": [
+      {
+        "contradiction_id": "MOD-CONTRA-001",
+        "expected_behavior": "Operational topology predicts degradation contained within reachable subgraph of SA5G Amf 001.",
+        "observed_behavior": "Degradation observed across unlinked components (CRM:TICKET:001, INFRA:K8S:CORE-A, SA5G:UPF:003) without known causal path.",
+        "evidence_ids": [
+          "ALM-SCN-007-0003",
+          "LOG-SCN-007-0003",
+          "ALM-SCN-007-0004",
+          "LOG-SCN-007-0004",
+          "ALM-SCN-007-0005",
+          "LOG-SCN-007-0005",
+          "KPI-SCN-007-CRM1",
+          "TKT-SCN-007-0001"
+        ],
+        "severity": 0.85
+      }
+    ]
   }
 }
