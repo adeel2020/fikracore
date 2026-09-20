@@ -2,7 +2,7 @@
 
 - **Overall Coverage Score**: **`68.5%` (PARTIALLY_COVERED)**
 - **Formula**: `25% entity_cov + 25% rel_cov + 20% service_cov + 15% evidence_cov + 15% validated_cov`
-- **Timestamp**: `2026-09-19T19:57:53.537115+00:00`
+- **Timestamp**: `2026-09-20T04:13:17.953055+00:00`
 
 ## 1. Domain Coverage Matrix
 

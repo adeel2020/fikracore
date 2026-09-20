@@ -17,8 +17,6 @@ FikraCore Ecosystem
 	Validation - HITL
 	FCAPS - Structured Learning
 	
-
-
 ![alt text](image.png)
 
 ![alt text](image-1.png)
@@ -53,7 +51,14 @@ FikraCore Ecosystem
 
 ![alt text](image-16.png)
 
-![alt text](image-17.png)
+![alt text](image-26.png)
+
+![alt text](image-29.png)
+![alt text](image-27.png)
+
+
+![alt text](image-28.png)
+
 
 currently in POC i have:
 
@@ -109,7 +114,7 @@ Demo	Scenario	Domains	What it proves
 
 ![alt text](image-21.png)
 
-![alt text](image-20.png)
+![alt text](image-25.png)
 
 ![alt text](image-22.png)
 

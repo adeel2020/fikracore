@@ -199,6 +199,13 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_cmd.add_argument("--runs-dir", type=Path, default=Path("services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs"))
     inspect_cmd.add_argument("--output-dir", type=Path, default=None)
 
+    # Zaki orchestrator (demo-agnostic)
+    zaki_cmd = commands.add_parser("zaki", help="Run Zaki orchestrator against a run directory or snapshot")
+    zaki_cmd.add_argument("run_directory", type=Path, nargs="?", default=None)
+    zaki_cmd.add_argument("--storage-dir", type=Path, default=Path(".zaki"), help="Directory to store zaki runtime artifacts")
+    zaki_cmd.add_argument("--snapshot", type=Path, default=None, help="Optional knowledge snapshot to load instead of building provider from operational topology")
+    zaki_cmd.add_argument("--auto", action="store_true", help="Run without interactive pauses")
+
     mcp_smoke_cmd = commands.add_parser("mcp-smoke", help="Run Step 4.5 Live gbrain MCP Integration Smoke Test")
     mcp_smoke_cmd.add_argument("--url", type=str, default=None, help="Live gbrain MCP URL")
     mcp_smoke_cmd.add_argument("--token", type=str, default=None, help="Live gbrain MCP Bearer token")
@@ -256,6 +263,7 @@ def run_live_use_case_1(
     verbose: bool = False,
     show_vectors: bool = False,
     show_math: bool = False,
+    zaki: bool = False,
 ) -> int:
     import json
     import time
@@ -414,8 +422,19 @@ def run_live_use_case_1(
                 if delay > 0 and auto:
                     time.sleep(delay)
 
-        investigator = Investigator(provider, step_callback=step_cb)
-        result = investigator.investigate(run, evidence, hashes)
+        if zaki:
+            try:
+                from .zaki.orchestrator import ZakiOrchestrator
+            except Exception:
+                print("Zaki orchestrator not available; falling back to Investigator")
+                investigator = Investigator(provider, step_callback=step_cb)
+                result = investigator.investigate(run, evidence, hashes)
+            else:
+                orchestrator = ZakiOrchestrator(provider, step_callback=step_cb)
+                result = orchestrator.start_investigation(run, op_dir)
+        else:
+            investigator = Investigator(provider, step_callback=step_cb)
+            result = investigator.investigate(run, evidence, hashes)
         presenter.render_final_summary(result)
     else:
         investigator = Investigator(provider)
@@ -683,13 +702,13 @@ def run_interactive_demo_menu(args) -> int:
         return 0
 
     if choice in ("1", "uc1"):
-        return run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
+        return run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math, zaki=getattr(args, "zaki", False))
     elif choice in ("2", "uc2"):
         return run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
     elif choice in ("3", "uc3"):
         return run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
     elif choice in ("all", "a"):
-        rc1 = run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
+        rc1 = run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math, zaki=getattr(args, "zaki", False))
         rc2 = run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
         rc3 = run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
         return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
@@ -710,13 +729,13 @@ def handle_demo_command(args, parser) -> int:
     show_math = getattr(args, "show_math", False)
 
     if str(use_case) in ("1", "uc1"):
-        return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+        return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math, zaki=getattr(args, "zaki", False))
     elif str(use_case) in ("2", "uc2"):
         return run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
     elif str(use_case) in ("3", "uc3"):
         return run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
     elif str(use_case).lower() == "all":
-        rc1 = run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+        rc1 = run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math, zaki=getattr(args, "zaki", False))
         rc2 = run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
         rc3 = run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
         return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
@@ -1207,6 +1226,69 @@ def main(argv=None, in_shell: bool = False):
                 "zaki_response": response,
             }
             print(json.dumps(output, indent=2))
+            return
+        elif args.command == "zaki":
+            # Run Zaki orchestrator in a demo-agnostic way.
+            run_dir = Path(args.run_directory) if args.run_directory else None
+            # Try to locate run directory if only a run id was provided
+            if run_dir and not run_dir.exists():
+                candidate = Path("services/agents/src/engine_stack/engines/telecom_brain/simulator/runs") / str(run_dir)
+                if candidate.exists():
+                    run_dir = candidate
+            if not run_dir:
+                parser.error("Please provide a run directory or run id for Zaki to execute")
+
+            op_dir = run_dir / "operational"
+            if not op_dir.exists():
+                parser.error(f"Operational directory not found: {op_dir}")
+
+            # Build provider from snapshot or operational topology
+            try:
+                import yaml
+                from .evidence import input_from_run, load_evidence
+                from .knowledge import InMemoryKnowledgeProvider
+                from .benchmark import get_ref_relationships
+            except Exception as e:
+                parser.error(f"Failed to import zaki dependencies: {e}")
+
+            run = input_from_run(run_dir)
+            evidence, hashes = load_evidence(run, op_dir)
+
+            if args.snapshot:
+                # Snapshot should provide pages+relationships as JSON/YAML
+                with open(args.snapshot, 'r', encoding='utf-8') as f:
+                    snap = yaml.safe_load(f)
+                pages = snap.get('pages', [])
+                relationships = snap.get('relationships', [])
+            else:
+                with open(op_dir / 'topology_view.yaml', 'r', encoding='utf-8') as f:
+                    topo = yaml.safe_load(f)
+                ref_rels = get_ref_relationships()
+                pages = [{'slug': e} for e in topo.get('visible_entities', [])]
+                relationships = []
+                for rid in topo.get('visible_relationships', []):
+                    if rid in ref_rels:
+                        r = ref_rels[rid]
+                        relationships.append({
+                            'relationship_id': rid,
+                            'source': r['source_entity'],
+                            'target': r['target_entity'],
+                            'link_type': r.get('relationship_type', 'depends-on').lower().replace('_', '-'),
+                            'state': r.get('status', 'CONFIRMED'),
+                            'confidence': r.get('confidence', 0.95),
+                            'provenance': 'zaki-cli',
+                        })
+
+            provider = InMemoryKnowledgeProvider(pages, relationships, version='zaki-cli')
+
+            try:
+                from .zaki.orchestrator import ZakiOrchestrator
+            except Exception as e:
+                parser.error(f"Zaki orchestrator not available: {e}")
+
+            orchestrator = ZakiOrchestrator(provider, storage_dir=Path(args.storage_dir))
+            res = orchestrator.start_investigation(run, op_dir)
+            print(f"Zaki terminal state: {res.terminal_state.value}")
             return
         elif args.command == "mcp-smoke":
             from .mcp_smoke_test import run_mcp_smoke_test

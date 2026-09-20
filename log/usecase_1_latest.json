@@ -1,5 +1,5 @@
 {
-  "demo_id": "DEMO-USECASE-1-20260919T185017Z",
+  "demo_id": "DEMO-USECASE-1-20260920T092510Z",
   "run_id": "RUN-SCN-001-L1-SEED-42001",
   "scenario_id": "SCN-001",
   "terminal_state": "EXPLAINED",
@@ -18,7 +18,7 @@
     "topology_gap_detection": false,
     "evidence_requests_before_terminal": 0,
     "steps_to_first_useful_hypothesis": 2,
-    "investigation_duration_seconds": 84.64920782201807,
+    "investigation_duration_seconds": 244.07937630999368,
     "impacted_service": "5g_sa_mobile_data",
     "coincidental_evidence": [],
     "stopping_reason": "Single evidence pass complete; further tests require requested observations",
