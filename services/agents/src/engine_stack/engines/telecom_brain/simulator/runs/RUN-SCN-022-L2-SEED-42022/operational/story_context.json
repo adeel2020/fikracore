@@ -1,0 +1,134 @@
+{
+  "scenario_id": "SCN-022",
+  "run_id": "RUN-SCN-022-L2-SEED-42022",
+  "title": "Operational Incident SCN-022",
+  "domain": "epc_4g",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T08:22:07Z",
+  "resolved_at": "2026-09-10T08:38:00Z",
+  "executive_summary": "Autonomous root cause confirmed at EPC:DRA:001 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "EPC:DRA:001",
+    "condition": "Operational failure on EPC:DRA:001",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "EPC:DRA:001",
+    "CHG:OCS:001",
+    "CHG:OCS:001",
+    "SA5G:PCF:001",
+    "SA5G:SMF:001",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "EPC:DRA:001",
+      "role": "ROOT_CAUSE",
+      "status": "DIAMETER_ROUTER_DEGRADED"
+    },
+    {
+      "entity": "CHG:OCS:001",
+      "role": "CAUSAL_RELAY",
+      "status": "OCS_DEGRADED"
+    },
+    {
+      "entity": "SA5G:PCF:001",
+      "role": "CAUSAL_RELAY",
+      "status": "PCF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:SMF:001",
+      "role": "CAUSAL_RELAY",
+      "status": "SMF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:22:07Z",
+      "event": "DIAMETER_ROUTER_DEGRADED",
+      "entity": "EPC:DRA:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: DIAMETER_ROUTER_DEGRADED on EPC:DRA:001"
+    },
+    {
+      "time": "2026-09-10T08:22:42Z",
+      "event": "OCS_DEGRADED",
+      "entity": "CHG:OCS:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: OCS_DEGRADED on CHG:OCS:001"
+    },
+    {
+      "time": "2026-09-10T08:22:42Z",
+      "event": "OCS_DEGRADED",
+      "entity": "CHG:OCS:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: OCS_DEGRADED on CHG:OCS:001"
+    },
+    {
+      "time": "2026-09-10T08:23:25Z",
+      "event": "PCF_DEGRADED",
+      "entity": "SA5G:PCF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: PCF_DEGRADED on SA5G:PCF:001"
+    },
+    {
+      "time": "2026-09-10T08:23:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Online Charging Data Success Rate degraded to 73.73percent"
+    },
+    {
+      "time": "2026-09-10T08:23:56Z",
+      "event": "SMF_DEGRADED",
+      "entity": "SA5G:SMF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: SMF_DEGRADED on SA5G:SMF:001"
+    },
+    {
+      "time": "2026-09-10T08:24:34Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T08:25:19Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T08:38:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "EPC:DRA:001",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 10,
+    "kpi_breach": {
+      "name": "Online Charging Data Success Rate",
+      "value": 73.73,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

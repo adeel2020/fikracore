@@ -477,7 +477,7 @@ interface ChatPanelProps {
   activeIncidentId: string | null;
   incidentQueue: IncidentQueueItem[];
   setActiveIncidentId: (incidentId: string | null) => void;
-  refreshIncidentQueue: () => Promise<void>;
+  refreshIncidentQueue: (sync?: boolean) => Promise<void>;
   activeIndex: number;
   scrollRef: React.RefObject<HTMLDivElement | null>;
   inputRef: React.RefObject<HTMLInputElement | null>;
@@ -883,17 +883,37 @@ export function ChatPanel({
             className="h-7 max-w-[290px] rounded border border-white/10 bg-black/30 px-2 text-xs text-neutral-200 outline-none focus:border-cyan-400"
           >
             <option value="">Select incident</option>
-            {incidentQueue.map((incident) => (
-              <option key={incident.incident_id} value={incident.incident_id}>
-                {incident.scope} | {incident.status} | score {incident.score} | {incident.incident_id}
-              </option>
-            ))}
+            {incidentQueue
+              .filter((incident) => {
+                if (/[0-9a-f]{16}/i.test(incident.incident_id)) return false;
+                const matchScn = incident.incident_id.match(/(?:scn|demo)-\d+/i);
+                const aliasMatch = incident.aliases?.some((a) => /^(?:scn|demo)-\d+$/i.test(a));
+                return Boolean(matchScn || aliasMatch);
+              })
+              .map((incident) => {
+                const scnTag = incident.aliases?.find((a) => /^(?:scn|demo)-\d+$/i.test(a))?.toUpperCase()
+                  ?? incident.incident_id.match(/(?:scn|demo)-\d+/i)?.[0]?.toUpperCase();
+
+                const slugName = incident.incident_id.split("/").pop() || incident.incident_id;
+                const readableName = slugName
+                  .replace(/^(scn-\d+|demo-\d+)-/i, "")
+                  .split("-")
+                  .map((w) => (w.length <= 3 && !["and", "the", "for", "via", "to"].includes(w.toLowerCase()) ? w.toUpperCase() : w.charAt(0).toUpperCase() + w.slice(1)))
+                  .join(" ");
+
+                const label = scnTag ? `${scnTag}: ${readableName}` : readableName;
+                return (
+                  <option key={incident.incident_id} value={incident.incident_id}>
+                    {label}
+                  </option>
+                );
+              })}
           </select>
           <Button
             type="button"
             size="sm"
             variant="ghost"
-            onClick={() => void refreshIncidentQueue()}
+            onClick={() => void refreshIncidentQueue(true)}
             className="h-7 w-7 p-0"
             title="Refresh incident queue"
             aria-label="Refresh incident queue"

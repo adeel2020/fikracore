@@ -1,149 +1,168 @@
-scenario_id: SCN-007
-scenario_name: Shared Timing Source Failure Affects RAN and Transport
-reference_network:
-  network_id: REF-MDO-001
-  file: ../operator_model/reference_synthetic_network.yaml
-scenario_explanation:
-  problem_statement: A common timing source degrades, producing synchronization, radio
-    and transport symptoms across domains.
-  what_will_occur: Core Timing Cluster experiences the root condition; effects propagate
-    through modeled dependencies into 5G SA Mobile Data and mapped customer/service
-    signals.
-classification:
-  primary_engineering_effect: CORRELATED_COMMON_CAUSE_FAILURE
-  secondary_effects:
-  - CASCADING_FAILURE
-  friendly_effect_label: Shared Dependency
-  fcaps_primary: FAULT
-  fcaps_secondary:
-  - PERFORMANCE
-  domains:
-  - CRM
-  - IP_TRANSPORT
-  - IT_CLOUD_INFRA
-  - RAN
-  affected_services:
-  - 5g_sa_mobile_data
-  effect_families:
-    primary: CORRELATED_COMMON_CAUSE_FAILURE
-    secondary:
+apiVersion: darknoc.ai/v1
+kind: IncidentDefinition
+metadata:
+  name: sync-ntp-drift-ran-transport-degrade
+  labels:
+    assurance.telecom.ai/phase: diagnose
+    assurance.telecom.ai/sequence: '07'
+    telecom.ai/domain: synchronization
+    service.tmforum.org/cfs: 5g-mobile-data
+    incident.telecom.ai/severity: major
+    incident.telecom.ai/effect: common-cause-failure
+  annotations:
+    presentation.telecom.ai/display-title: Shared Timing Source Failure Affects RAN
+      and Transport
+    presentation.telecom.ai/business-impact: NTP/PTP timing reference drift triggered
+      radio frame slip alarms and transport packet discards.
+    telecom.ai/root-cause-entity: topology/infra/ntp/infra-ntp-core
+    telecom.ai/target-mttr: 3m
+spec:
+  scenario_id: SCN-007
+  scenario_name: Shared Timing Source Failure Affects RAN and Transport
+  reference_network:
+    network_id: REF-MDO-001
+    file: ../operator_model/reference_synthetic_network.yaml
+  scenario_explanation:
+    problem_statement: A common timing source degrades, producing synchronization,
+      radio and transport symptoms across domains.
+    what_will_occur: Core Timing Cluster experiences the root condition; effects propagate
+      through modeled dependencies into 5G SA Mobile Data and mapped customer/service
+      signals.
+  classification:
+    primary_engineering_effect: CORRELATED_COMMON_CAUSE_FAILURE
+    secondary_effects:
     - CASCADING_FAILURE
-  friendly_effect_labels:
-  - Shared Dependency
-  difficulty_profile: L2
-preconditions:
-  normal_state:
-  - reference synthetic network validates before scenario compilation
-  - 5G SA Mobile Data is healthy before trigger
-  - operational graph may be incomplete according to scenario difficulty profile
-  required_entities:
-  - INFRA:NTP:CORE
-  - SA5G:AMF:001
-  - INFRA:K8S:CORE-A
-  - SA5G:UPF:003
-  - CRM:TICKET:001
-  required_entity_types:
-  - amf
-  - customer_ticket_service
-  - kubernetes_cluster
-  - ntp_ptp_cluster
-  - upf
-  required_relationships:
-  - REL-CORE-NTP
-  - REL-AMF-HOSTED
-  - REL-UPF-HOSTED
-  - REL-CRM-TICKETS-IMPACT
-  required_service_chain: 5g_sa_mobile_data
-  required_failure_domains:
-  - FD-K8S-A
-hidden_reality:
-  root_condition: 'Shared Timing Source Failure Affects RAN and Transport: root condition
-    at Core Timing Cluster'
-  trigger: synthetic deterministic scenario trigger with seeded timing and difficulty-specific
-    imperfections
-  origin_domain: IT_CLOUD_INFRA
-  origin_entity: INFRA:NTP:CORE
-  causal_propagation_chain:
-  - INFRA:NTP:CORE
-  - SA5G:AMF:001
-  - INFRA:K8S:CORE-A
-  - SA5G:UPF:003
-  - CRM:TICKET:001
-  hidden_dependencies: []
-  actual_blast_radius:
-    services:
+    friendly_effect_label: Shared Dependency
+    fcaps_primary: FAULT
+    fcaps_secondary:
+    - PERFORMANCE
+    domains:
+    - CRM
+    - IP_TRANSPORT
+    - IT_CLOUD_INFRA
+    - RAN
+    affected_services:
     - 5g_sa_mobile_data
-    regions:
-    - REGION-NORTH
-    customer_segments:
-    - consumer_mobile
-    - enterprise_mobile
-    entity_count: 5
-evidence_to_generate:
-  alarms:
-  - Core Timing Cluster reports ntp_ptp_cluster degradation
-  - 5G SA Mobile Data dependent symptom alarm
-  logs:
-  - source-native logs show retries/timeouts near Core Timing Cluster
-  metrics:
-  - latency_ms increases on the affected dependency path
-  - packet_loss_pct, timeout_rate, queue_depth, or resource_saturation rises according
-    to failure mechanism
-  kpis:
-  - 5G SA Mobile Data success rate decreases
-  - customer-visible service quality falls below normal baseline
-  traces_protocol_evidence:
-  - protocol traces show retries, retransmissions, or failed handshakes along the
-    causal path
-  changes: []
-  tickets_customer_signals:
-  - customer tickets increase only for mapped service, region, and customer segment
-  healthy_negative_evidence:
-  - unaffected adjacent domain remains healthy as negative evidence
-  - non-causal recent changes remain tracked as unrelated metadata
-noise_and_uncertainty:
-  unrelated_events:
-  - seeded unrelated event in a non-causal domain
-  - optional non-causal recent change for bias testing
-  delayed_events:
-  - root-domain evidence may arrive after downstream symptoms according to difficulty
-    profile
-  missing_evidence:
-  - one expected signal may be absent only when source coverage permits it
-  contradictory_evidence:
-  - conflicting interpretation may appear only as operational evidence, never as hidden-world
-    inconsistency
-  topology_gaps: []
-timing:
-  propagation_constraints:
-  - causal state changes must follow dependency path order before jitter is applied
-  event_time_rules:
-  - event_time follows hidden propagation with seeded jitter
-  ingestion_delay_rules:
-  - ingestion_time follows observability source profile delay and clock-skew behavior
-recovery:
-  recovery_sequence:
-  - remove or mitigate root condition
-  - observe dependent KPI recovery in reverse or service-specific order
-  - verify no unsupported RCA certainty remains
-  recovery_side_effects:
-  - recovery surge, backlog flush, or transient reroute may be generated when matching
-    effect family
-reasoning_test:
-  plausible_wrong_hypotheses:
-  - first visible downstream alarm is the root cause
-  - highest-severity domain is the root cause
-  - recent unrelated change is causal without supporting evidence
-  - 5G SA Mobile Data application fault without upstream dependency evidence
-  expected_root_domain: IT_CLOUD_INFRA
-  expected_root_entity: INFRA:NTP:CORE
-  expected_terminal_state: EXPLAINED
-  expected_discovery_findings: []
-evaluation_assertions:
-- all required entities must exist in the reference synthetic network
-- every causal hop must resolve through a modeled relationship or valid service-chain
-  dependency
-- operational evidence must not contain root-cause labels
-- customer impact must follow affected service, region, and customer segment mapping
-- healthy evidence must not contradict hidden reality
-- unrelated noise must remain evaluator metadata and must not become causal truth
+    effect_families:
+      primary: CORRELATED_COMMON_CAUSE_FAILURE
+      secondary:
+      - CASCADING_FAILURE
+    friendly_effect_labels:
+    - Shared Dependency
+    difficulty_profile: L2
+  preconditions:
+    normal_state:
+    - reference synthetic network validates before scenario compilation
+    - 5G SA Mobile Data is healthy before trigger
+    - operational graph may be incomplete according to scenario difficulty profile
+    required_entities:
+    - INFRA:NTP:CORE
+    - SA5G:AMF:001
+    - INFRA:K8S:CORE-A
+    - SA5G:UPF:003
+    - CRM:TICKET:001
+    required_entity_types:
+    - amf
+    - customer_ticket_service
+    - kubernetes_cluster
+    - ntp_ptp_cluster
+    - upf
+    required_relationships:
+    - REL-CORE-NTP
+    - REL-AMF-HOSTED
+    - REL-UPF-HOSTED
+    - REL-CRM-TICKETS-IMPACT
+    required_service_chain: 5g_sa_mobile_data
+    required_failure_domains:
+    - FD-K8S-A
+  hidden_reality:
+    root_condition: 'Shared Timing Source Failure Affects RAN and Transport: root
+      condition at Core Timing Cluster'
+    trigger: synthetic deterministic scenario trigger with seeded timing and difficulty-specific
+      imperfections
+    origin_domain: IT_CLOUD_INFRA
+    origin_entity: INFRA:NTP:CORE
+    causal_propagation_chain:
+    - INFRA:NTP:CORE
+    - SA5G:AMF:001
+    - INFRA:K8S:CORE-A
+    - SA5G:UPF:003
+    - CRM:TICKET:001
+    hidden_dependencies: []
+    actual_blast_radius:
+      services:
+      - 5g_sa_mobile_data
+      regions:
+      - REGION-NORTH
+      customer_segments:
+      - consumer_mobile
+      - enterprise_mobile
+      entity_count: 5
+  evidence_to_generate:
+    alarms:
+    - Core Timing Cluster reports ntp_ptp_cluster degradation
+    - 5G SA Mobile Data dependent symptom alarm
+    logs:
+    - source-native logs show retries/timeouts near Core Timing Cluster
+    metrics:
+    - latency_ms increases on the affected dependency path
+    - packet_loss_pct, timeout_rate, queue_depth, or resource_saturation rises according
+      to failure mechanism
+    kpis:
+    - 5G SA Mobile Data success rate decreases
+    - customer-visible service quality falls below normal baseline
+    traces_protocol_evidence:
+    - protocol traces show retries, retransmissions, or failed handshakes along the
+      causal path
+    changes: []
+    tickets_customer_signals:
+    - customer tickets increase only for mapped service, region, and customer segment
+    healthy_negative_evidence:
+    - unaffected adjacent domain remains healthy as negative evidence
+    - non-causal recent changes remain tracked as unrelated metadata
+  noise_and_uncertainty:
+    unrelated_events:
+    - seeded unrelated event in a non-causal domain
+    - optional non-causal recent change for bias testing
+    delayed_events:
+    - root-domain evidence may arrive after downstream symptoms according to difficulty
+      profile
+    missing_evidence:
+    - one expected signal may be absent only when source coverage permits it
+    contradictory_evidence:
+    - conflicting interpretation may appear only as operational evidence, never as
+      hidden-world inconsistency
+    topology_gaps: []
+  timing:
+    propagation_constraints:
+    - causal state changes must follow dependency path order before jitter is applied
+    event_time_rules:
+    - event_time follows hidden propagation with seeded jitter
+    ingestion_delay_rules:
+    - ingestion_time follows observability source profile delay and clock-skew behavior
+  recovery:
+    recovery_sequence:
+    - remove or mitigate root condition
+    - observe dependent KPI recovery in reverse or service-specific order
+    - verify no unsupported RCA certainty remains
+    recovery_side_effects:
+    - recovery surge, backlog flush, or transient reroute may be generated when matching
+      effect family
+  reasoning_test:
+    plausible_wrong_hypotheses:
+    - first visible downstream alarm is the root cause
+    - highest-severity domain is the root cause
+    - recent unrelated change is causal without supporting evidence
+    - 5G SA Mobile Data application fault without upstream dependency evidence
+    expected_root_domain: IT_CLOUD_INFRA
+    expected_root_entity: INFRA:NTP:CORE
+    expected_terminal_state: EXPLAINED
+    expected_discovery_findings: []
+  evaluation_assertions:
+  - all required entities must exist in the reference synthetic network
+  - every causal hop must resolve through a modeled relationship or valid service-chain
+    dependency
+  - operational evidence must not contain root-cause labels
+  - customer impact must follow affected service, region, and customer segment mapping
+  - healthy evidence must not contradict hidden reality
+  - unrelated noise must remain evaluator metadata and must not become causal truth

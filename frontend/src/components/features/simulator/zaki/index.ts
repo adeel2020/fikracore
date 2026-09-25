@@ -6,3 +6,8 @@ export * from "./ZakiQuickActions";
 export * from "./ZakiResponseLevelSwitcher";
 export * from "./ZakiConflictBanner";
 export * from "./ZakiReplayBadge";
+export * from "./MarkVoiceNarrator";
+export * from "./MarkVoiceFAB";
+export * from "./ZakiVoiceFAB";
+export * from "./ZakiSpeechVisualizer";
+export * from "./ZakiLiveStoryOverlay";

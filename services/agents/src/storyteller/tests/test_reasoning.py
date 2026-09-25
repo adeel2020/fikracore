@@ -29,7 +29,7 @@ class TestStoryConstruction:
     def test_confirmed_story_fields(self, ctx_confirmed):
         story = build_incident_story(ctx_confirmed)
         assert isinstance(story, IncidentStory)
-        assert story.incident_id == "mobile-core/incidents/amf-overload-2026-08-09"
+        assert story.incident_id == ctx_confirmed.incident_id
         assert story.severity == "SEV-2"
         assert story.status == "resolved"
         assert len(story.services) == 1
@@ -144,7 +144,7 @@ class TestStoryResponse:
         monkeypatch.delenv("STORYTELLER_MODEL", raising=False)
         d = build_story_response(ctx_confirmed).to_dict()
         assert "story" in d
-        assert d["story"]["incident_id"].startswith("mobile-core")
+        assert d["story"]["incident_id"] == ctx_confirmed.incident_id
 
 
 class TestUnresolvedQuestions:

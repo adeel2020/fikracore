@@ -1,28 +1,100 @@
 [
   {
-    "legacy_slug": "mobile-core/incidents/sgi-throughput-drop",
-    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-    "entity_class": "incident",
-    "action": "alias",
-    "reason": "legacy incident slug and descriptive canonical incident page identify the same SGi data-forwarding incident",
-    "confidence": 0.98,
-    "requires_review": false
-  },
-  {
-    "legacy_slug": "incidents/mobile-core/sgi-throughput-drop",
-    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-    "entity_class": "incident",
-    "action": "alias",
-    "reason": "descriptive incident slug is cross-linked to the correlation-key canonical incident page",
-    "confidence": 0.97,
-    "requires_review": false
-  },
-  {
     "legacy_slug": "mobile-core/incidents/sgi-data-a154bb7a3997859c",
-    "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "canonical_slug": "incidents/mobile-core/sgi-throughput-drop",
     "entity_class": "incident",
     "action": "alias",
-    "reason": "same correlation-key incident expressed with the legacy mobile-core/incidents prefix",
+    "reason": "legacy hex-suffixed incident slug maps to canonical descriptive carrier incident",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
+    "canonical_slug": "incidents/mobile-core/sgi-throughput-drop",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "hex-suffixed incident slug is aliased to canonical descriptive carrier incident",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "mobile-core/incidents/sgi-throughput-drop",
+    "canonical_slug": "incidents/mobile-core/sgi-throughput-drop",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy prefix mapped to canonical prefix",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "mobile-core/incidents/site-power-81cec920e94d3a59",
+    "canonical_slug": "incidents/power/power-grid-trip-ran-transport",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy site-power hex slug maps to canonical shared power outage incident",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "incidents/mobile-core/site-power-81cec920e94d3a59",
+    "canonical_slug": "incidents/power/power-grid-trip-ran-transport",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy site-power hex slug maps to canonical shared power outage incident",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "mobile-core/incidents/ue-registration-1fe005ed908a3f26",
+    "canonical_slug": "incidents/mobile-core/ue-registration-congestion",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy ue-registration hex slug maps to canonical ue-registration-congestion",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "incidents/mobile-core/ue-registration-1fe005ed908a3f26",
+    "canonical_slug": "incidents/mobile-core/ue-registration-congestion",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy ue-registration hex slug maps to canonical ue-registration-congestion",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "mobile-core/incidents/voice-call-setup-05841af2e3f4f430",
+    "canonical_slug": "incidents/mobile-core/voice-call-setup-failure",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy voice call setup hex slug maps to canonical voice-call-setup-failure",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "incidents/mobile-core/voice-call-setup-05841af2e3f4f430",
+    "canonical_slug": "incidents/mobile-core/voice-call-setup-failure",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy voice call setup hex slug maps to canonical voice-call-setup-failure",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "mobile-core/incidents/lte-attach-54db6ef325fbf758",
+    "canonical_slug": "incidents/mobile-core/lte-attach-failure",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy lte-attach hex slug maps to canonical lte-attach-failure",
+    "confidence": 0.99,
+    "requires_review": false
+  },
+  {
+    "legacy_slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+    "canonical_slug": "incidents/mobile-core/lte-attach-failure",
+    "entity_class": "incident",
+    "action": "alias",
+    "reason": "legacy lte-attach hex slug maps to canonical lte-attach-failure",
     "confidence": 0.99,
     "requires_review": false
   },
@@ -42,6 +114,6 @@
     "action": "alias",
     "reason": "same VoLTE incident expressed with the legacy mobile-core/incidents prefix",
     "confidence": 0.92,
-    "requires_review": true
+    "requires_review": false
   }
 ]

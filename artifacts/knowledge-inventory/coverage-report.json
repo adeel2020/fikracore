@@ -1,114 +1,170 @@
 {
-  "overall_composite_score_pct": 68.5,
+  "overall_composite_score_pct": 57.8,
   "overall_status": "PARTIALLY_COVERED",
   "scoring_formula": "25% entity_cov + 25% rel_cov + 20% service_cov + 15% evidence_cov + 15% validated_cov",
   "domain_scores": {
-    "Cross-Domain Operations": {
-      "domain": "Cross-Domain Operations",
-      "entity_count": 24,
-      "relationship_count": 135,
-      "service_count": 0,
-      "network_function_count": 0,
-      "entity_coverage_pct": 100.0,
-      "relationship_coverage_pct": 91.7,
-      "service_mapping_coverage_pct": 100.0,
-      "evidence_coverage_pct": 0.0,
-      "validated_knowledge_pct": 70.8,
-      "composite_score_pct": 78.5,
-      "coverage_label": "WELL_COVERED"
-    },
     "Mobile Core": {
       "domain": "Mobile Core",
-      "entity_count": 102,
-      "relationship_count": 158,
-      "service_count": 6,
-      "network_function_count": 21,
-      "entity_coverage_pct": 100.0,
-      "relationship_coverage_pct": 99.0,
+      "entity_count": 25,
+      "relationship_count": 28,
+      "service_count": 5,
+      "network_function_count": 20,
+      "entity_coverage_pct": 83.3,
+      "relationship_coverage_pct": 80.0,
       "service_mapping_coverage_pct": 0.0,
-      "evidence_coverage_pct": 50.0,
-      "validated_knowledge_pct": 82.4,
-      "composite_score_pct": 69.6,
-      "coverage_label": "PARTIALLY_COVERED"
-    },
-    "RAN": {
-      "domain": "RAN",
-      "entity_count": 2,
-      "relationship_count": 6,
-      "service_count": 0,
-      "network_function_count": 2,
-      "entity_coverage_pct": 10.0,
-      "relationship_coverage_pct": 100.0,
-      "service_mapping_coverage_pct": 100.0,
       "evidence_coverage_pct": 0.0,
       "validated_knowledge_pct": 100.0,
-      "composite_score_pct": 62.5,
-      "coverage_label": "PARTIALLY_COVERED"
-    },
-    "Transport": {
-      "domain": "Transport",
-      "entity_count": 2,
-      "relationship_count": 6,
-      "service_count": 0,
-      "network_function_count": 2,
-      "entity_coverage_pct": 13.3,
-      "relationship_coverage_pct": 100.0,
-      "service_mapping_coverage_pct": 100.0,
-      "evidence_coverage_pct": 0.0,
-      "validated_knowledge_pct": 100.0,
-      "composite_score_pct": 63.3,
+      "composite_score_pct": 55.8,
       "coverage_label": "PARTIALLY_COVERED"
     },
     "Other": {
       "domain": "Other",
       "entity_count": 2,
-      "relationship_count": 0,
-      "service_count": 0,
+      "relationship_count": 2,
+      "service_count": 2,
       "network_function_count": 0,
       "entity_coverage_pct": 20.0,
-      "relationship_coverage_pct": 0.0,
+      "relationship_coverage_pct": 100.0,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 45.0,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "IMS": {
+      "domain": "IMS",
+      "entity_count": 10,
+      "relationship_count": 6,
+      "service_count": 2,
+      "network_function_count": 8,
+      "entity_coverage_pct": 83.3,
+      "relationship_coverage_pct": 60.0,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 50.8,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "OSS/BSS": {
+      "domain": "OSS/BSS",
+      "entity_count": 21,
+      "relationship_count": 19,
+      "service_count": 7,
+      "network_function_count": 14,
+      "entity_coverage_pct": 100.0,
+      "relationship_coverage_pct": 90.5,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 62.6,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "OCS": {
+      "domain": "OCS",
+      "entity_count": 8,
+      "relationship_count": 6,
+      "service_count": 3,
+      "network_function_count": 5,
+      "entity_coverage_pct": 80.0,
+      "relationship_coverage_pct": 62.5,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 50.6,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "Cross-Domain Operations": {
+      "domain": "Cross-Domain Operations",
+      "entity_count": 14,
+      "relationship_count": 3,
+      "service_count": 2,
+      "network_function_count": 3,
+      "entity_coverage_pct": 100.0,
+      "relationship_coverage_pct": 28.6,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 47.1,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "Transport": {
+      "domain": "Transport",
+      "entity_count": 19,
+      "relationship_count": 21,
+      "service_count": 4,
+      "network_function_count": 15,
+      "entity_coverage_pct": 100.0,
+      "relationship_coverage_pct": 94.7,
+      "service_mapping_coverage_pct": 0.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 63.7,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "Cloud/NFVI": {
+      "domain": "Cloud/NFVI",
+      "entity_count": 11,
+      "relationship_count": 5,
+      "service_count": 0,
+      "network_function_count": 11,
+      "entity_coverage_pct": 100.0,
+      "relationship_coverage_pct": 27.3,
       "service_mapping_coverage_pct": 100.0,
       "evidence_coverage_pct": 0.0,
-      "validated_knowledge_pct": 0.0,
-      "composite_score_pct": 25.0,
-      "coverage_label": "SPARSE"
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 66.8,
+      "coverage_label": "PARTIALLY_COVERED"
+    },
+    "RAN": {
+      "domain": "RAN",
+      "entity_count": 7,
+      "relationship_count": 21,
+      "service_count": 0,
+      "network_function_count": 7,
+      "entity_coverage_pct": 35.0,
+      "relationship_coverage_pct": 85.7,
+      "service_mapping_coverage_pct": 100.0,
+      "evidence_coverage_pct": 0.0,
+      "validated_knowledge_pct": 100.0,
+      "composite_score_pct": 65.2,
+      "coverage_label": "PARTIALLY_COVERED"
     }
   },
   "telemetry_instrumentation": {
-    "total_telemetry_entities": 46,
-    "loki_log_streams": 4,
-    "prometheus_metric_streams": 21,
-    "trace_spans": 1,
-    "alert_rules": 14,
-    "monitored_entities_count": 78,
+    "total_telemetry_entities": 0,
+    "loki_log_streams": 0,
+    "prometheus_metric_streams": 0,
+    "trace_spans": 0,
+    "alert_rules": 0,
+    "monitored_entities_count": 4,
     "telemetry_links_count": 0,
-    "instrumentation_coverage_pct": 100.0,
-    "status": "INSTRUMENTED"
+    "instrumentation_coverage_pct": 3.7,
+    "status": "PARTIALLY_INSTRUMENTED"
   },
   "cross_domain_matrix": [
     {
       "source_domain": "Mobile Core",
       "target_domain": "Transport",
-      "link_count": 4,
+      "link_count": 2,
       "status": "SPARSE"
     },
     {
       "source_domain": "Mobile Core",
       "target_domain": "OCS",
-      "link_count": 0,
-      "status": "UNLINKED"
+      "link_count": 3,
+      "status": "SPARSE"
     },
     {
       "source_domain": "IMS",
       "target_domain": "Transport",
-      "link_count": 0,
-      "status": "UNLINKED"
+      "link_count": 1,
+      "status": "SPARSE"
     },
     {
       "source_domain": "Mobile Core",
       "target_domain": "RAN",
-      "link_count": 4,
-      "status": "SPARSE"
+      "link_count": 11,
+      "status": "CONNECTED"
     },
     {
       "source_domain": "Mobile Core",
@@ -119,8 +175,8 @@
   ],
   "service_topologies": [
     {
-      "service_slug": "mobile-core/services/lte-attach",
-      "service_name": "LTE Attach",
+      "service_slug": "services/3g_mobile_data",
+      "service_name": "3G Mobile Data",
       "domain": "Mobile Core",
       "supporting_functions": [],
       "has_transport_path": false,
@@ -129,8 +185,8 @@
       "completeness_score_pct": 25.0
     },
     {
-      "service_slug": "mobile-core/services/sgi-data",
-      "service_name": "SGI Data",
+      "service_slug": "services/lte_mobile_data",
+      "service_name": "LTE Mobile Data",
       "domain": "Mobile Core",
       "supporting_functions": [],
       "has_transport_path": false,
@@ -139,8 +195,8 @@
       "completeness_score_pct": 25.0
     },
     {
-      "service_slug": "mobile-core/services/voice-call-setup",
-      "service_name": "Voice Call Setup",
+      "service_slug": "services/5g_nsa_mobile_data",
+      "service_name": "5G NSA Mobile Data",
       "domain": "Mobile Core",
       "supporting_functions": [],
       "has_transport_path": false,
@@ -149,8 +205,8 @@
       "completeness_score_pct": 25.0
     },
     {
-      "service_slug": "mobile-core/services/ue-registration",
-      "service_name": "UE Registration",
+      "service_slug": "services/5g_sa_mobile_data",
+      "service_name": "5G SA Mobile Data",
       "domain": "Mobile Core",
       "supporting_functions": [],
       "has_transport_path": false,
@@ -159,8 +215,18 @@
       "completeness_score_pct": 25.0
     },
     {
-      "service_slug": "mobile-core/services/site-power",
-      "service_name": "Site Power",
+      "service_slug": "services/3g_voice",
+      "service_name": "3G Voice",
+      "domain": "Other",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/volte",
+      "service_name": "VoLTE",
       "domain": "Mobile Core",
       "supporting_functions": [],
       "has_transport_path": false,
@@ -169,9 +235,189 @@
       "completeness_score_pct": 25.0
     },
     {
-      "service_slug": "mobile-core/services/ue-registration-service",
-      "service_name": "UE Registration Service",
-      "domain": "Mobile Core",
+      "service_slug": "services/mobile_ims_voice",
+      "service_name": "Mobile IMS Voice",
+      "domain": "IMS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/fixed_ims_voice",
+      "service_name": "Fixed IMS Voice",
+      "domain": "IMS",
+      "supporting_functions": [],
+      "has_transport_path": true,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 50.0
+    },
+    {
+      "service_slug": "services/mo_sms",
+      "service_name": "Mobile Originated SMS",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/mt_sms",
+      "service_name": "Mobile Terminated SMS",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/enterprise_sms_esme",
+      "service_name": "Enterprise SMS via ESME",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/ussd",
+      "service_name": "USSD",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/prepaid_recharge",
+      "service_name": "Prepaid Recharge",
+      "domain": "OCS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/prepaid_balance_inquiry",
+      "service_name": "Prepaid Balance Inquiry",
+      "domain": "OCS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/online_charging_data",
+      "service_name": "Online Charging for Data",
+      "domain": "OCS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/roaming_data",
+      "service_name": "Roaming Data",
+      "domain": "Cross-Domain Operations",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/roaming_voice",
+      "service_name": "Roaming Voice",
+      "domain": "Cross-Domain Operations",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/subscriber_provisioning",
+      "service_name": "Subscriber Provisioning",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/sim_service_activation",
+      "service_name": "SIM and Service Activation",
+      "domain": "Other",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/gpon_broadband",
+      "service_name": "GPON Broadband",
+      "domain": "Transport",
+      "supporting_functions": [],
+      "has_transport_path": true,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 50.0
+    },
+    {
+      "service_slug": "services/fixed_broadband_authentication",
+      "service_name": "Fixed Broadband Authentication",
+      "domain": "Transport",
+      "supporting_functions": [],
+      "has_transport_path": true,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 50.0
+    },
+    {
+      "service_slug": "services/enterprise_mpls_vpn",
+      "service_name": "Enterprise MPLS VPN",
+      "domain": "Transport",
+      "supporting_functions": [],
+      "has_transport_path": true,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 50.0
+    },
+    {
+      "service_slug": "services/internet_peering_service",
+      "service_name": "Internet Peering Service",
+      "domain": "Transport",
+      "supporting_functions": [],
+      "has_transport_path": true,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 50.0
+    },
+    {
+      "service_slug": "services/vas_short_code_service",
+      "service_name": "VAS Short-Code Service",
+      "domain": "OSS/BSS",
+      "supporting_functions": [],
+      "has_transport_path": false,
+      "has_charging_dependency": false,
+      "has_monitoring_dependency": false,
+      "completeness_score_pct": 25.0
+    },
+    {
+      "service_slug": "services/oss_network_management_connectivity",
+      "service_name": "OSS to Network Management Connectivity",
+      "domain": "OSS/BSS",
       "supporting_functions": [],
       "has_transport_path": false,
       "has_charging_dependency": false,
@@ -183,58 +429,72 @@
     {
       "gap_class": "ORPHAN_ENTITY",
       "severity": "LOW",
-      "entity_or_domain": "mobile-core/incidents/sgi-throughput-drop",
-      "description": "Operational entity 'Sgi Throughput Drop' (incident) has no incoming or outgoing topology relationships.",
-      "recommendation": "Add dependency or service link to connect 'mobile-core/incidents/sgi-throughput-drop' into the operational graph."
+      "entity_or_domain": "ext:vas:001",
+      "description": "Operational entity 'Third Party VAS Gateway' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'ext:vas:001' into the operational graph."
     },
     {
       "gap_class": "ORPHAN_ENTITY",
       "severity": "LOW",
-      "entity_or_domain": "tickets/mobile-core/tt-984210",
-      "description": "Operational entity 'Trouble Ticket TT-984210 Journey' (ticket-journey) has no incoming or outgoing topology relationships.",
-      "recommendation": "Add dependency or service link to connect 'tickets/mobile-core/tt-984210' into the operational graph."
+      "entity_or_domain": "infra:dc:a",
+      "description": "Operational entity 'DC-A Facility' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:dc:a' into the operational graph."
     },
     {
-      "gap_class": "SPARSE_DOMAIN",
-      "severity": "MEDIUM",
-      "entity_or_domain": "RAN",
-      "description": "Domain 'RAN' has sparse representation (2 entities).",
-      "recommendation": "Ingest topology and service definitions for domain 'RAN'."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:dc:b",
+      "description": "Operational entity 'DC-B Facility' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:dc:b' into the operational graph."
     },
     {
-      "gap_class": "SPARSE_DOMAIN",
-      "severity": "MEDIUM",
-      "entity_or_domain": "Transport",
-      "description": "Domain 'Transport' has sparse representation (2 entities).",
-      "recommendation": "Ingest topology and service definitions for domain 'Transport'."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:power:a",
+      "description": "Operational entity 'DC-A Power Feed A' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:power:a' into the operational graph."
     },
     {
-      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
-      "severity": "HIGH",
-      "entity_or_domain": "Mobile Core \u2194 Transport",
-      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'Transport'.",
-      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to Transport."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:cool:a",
+      "description": "Operational entity 'DC-A Cooling Plant' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:cool:a' into the operational graph."
     },
     {
-      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
-      "severity": "HIGH",
-      "entity_or_domain": "Mobile Core \u2194 OCS",
-      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'OCS'.",
-      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to OCS."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:nfvi:a",
+      "description": "Operational entity 'NFVI Cluster A' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:nfvi:a' into the operational graph."
     },
     {
-      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
-      "severity": "HIGH",
-      "entity_or_domain": "IMS \u2194 Transport",
-      "description": "Direct operational transport conduit missing between 'IMS' and 'Transport'.",
-      "recommendation": "Define direct transport routing and inter-domain links connecting IMS functions to Transport."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:db:subs-a",
+      "description": "Operational entity 'Subscriber DB Cluster A' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:db:subs-a' into the operational graph."
     },
     {
-      "gap_class": "INCOMPLETE_CROSS_DOMAIN_COVERAGE",
-      "severity": "HIGH",
-      "entity_or_domain": "Mobile Core \u2194 RAN",
-      "description": "Direct operational transport conduit missing between 'Mobile Core' and 'RAN'.",
-      "recommendation": "Define direct transport routing and inter-domain links connecting Mobile Core functions to RAN."
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:dns:core",
+      "description": "Operational entity 'Core DNS Cluster' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:dns:core' into the operational graph."
+    },
+    {
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "infra:ntp:core",
+      "description": "Operational entity 'Core Timing Cluster' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'infra:ntp:core' into the operational graph."
+    },
+    {
+      "gap_class": "ORPHAN_ENTITY",
+      "severity": "LOW",
+      "entity_or_domain": "ip:rr:001",
+      "description": "Operational entity 'Route Reflector 01' (network-function) has no incoming or outgoing topology relationships.",
+      "recommendation": "Add dependency or service link to connect 'ip:rr:001' into the operational graph."
     }
   ]
 }

@@ -24,7 +24,10 @@ def list_incidents(
     tenant_id: str | None = None,
     status: str | None = None,
     limit: int = Query(default=50, ge=1, le=100),
+    sync: bool = False,
 ) -> list[dict]:
+    if sync:
+        _registry.ensure_seeded()
     return _registry.list(tenant_id=tenant_id, status=status, limit=limit)
 
 

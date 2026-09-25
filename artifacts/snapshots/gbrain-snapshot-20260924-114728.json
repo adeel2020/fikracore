@@ -1,0 +1,826 @@
+{
+  "brain": "telecombrain",
+  "snapshot_version": "v1.0.0-snapshot-20260924-114728",
+  "pages": [
+    {
+      "slug": "services/oss_network_management_connectivity",
+      "source_id": "default",
+      "type": "service",
+      "title": "OSS to Network Management Connectivity",
+      "updated_at": "2026-09-24T11:44:21.456Z"
+    },
+    {
+      "slug": "services/vas_short_code_service",
+      "source_id": "default",
+      "type": "service",
+      "title": "VAS Short-Code Service",
+      "updated_at": "2026-09-24T11:44:21.327Z"
+    },
+    {
+      "slug": "services/internet_peering_service",
+      "source_id": "default",
+      "type": "service",
+      "title": "Internet Peering Service",
+      "updated_at": "2026-09-24T11:44:21.197Z"
+    },
+    {
+      "slug": "services/enterprise_mpls_vpn",
+      "source_id": "default",
+      "type": "service",
+      "title": "Enterprise MPLS VPN",
+      "updated_at": "2026-09-24T11:44:21.078Z"
+    },
+    {
+      "slug": "services/fixed_broadband_authentication",
+      "source_id": "default",
+      "type": "service",
+      "title": "Fixed Broadband Authentication",
+      "updated_at": "2026-09-24T11:44:20.952Z"
+    },
+    {
+      "slug": "services/gpon_broadband",
+      "source_id": "default",
+      "type": "service",
+      "title": "GPON Broadband",
+      "updated_at": "2026-09-24T11:44:20.829Z"
+    },
+    {
+      "slug": "services/sim_service_activation",
+      "source_id": "default",
+      "type": "service",
+      "title": "SIM and Service Activation",
+      "updated_at": "2026-09-24T11:44:20.705Z"
+    },
+    {
+      "slug": "services/subscriber_provisioning",
+      "source_id": "default",
+      "type": "service",
+      "title": "Subscriber Provisioning",
+      "updated_at": "2026-09-24T11:44:20.582Z"
+    },
+    {
+      "slug": "services/roaming_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Roaming Voice",
+      "updated_at": "2026-09-24T11:44:20.442Z"
+    },
+    {
+      "slug": "services/roaming_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "Roaming Data",
+      "updated_at": "2026-09-24T11:44:20.289Z"
+    },
+    {
+      "slug": "services/online_charging_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "Online Charging for Data",
+      "updated_at": "2026-09-24T11:44:20.143Z"
+    },
+    {
+      "slug": "services/prepaid_balance_inquiry",
+      "source_id": "default",
+      "type": "service",
+      "title": "Prepaid Balance Inquiry",
+      "updated_at": "2026-09-24T11:44:20.027Z"
+    },
+    {
+      "slug": "services/prepaid_recharge",
+      "source_id": "default",
+      "type": "service",
+      "title": "Prepaid Recharge",
+      "updated_at": "2026-09-24T11:44:19.897Z"
+    },
+    {
+      "slug": "services/ussd",
+      "source_id": "default",
+      "type": "service",
+      "title": "USSD",
+      "updated_at": "2026-09-24T11:44:19.776Z"
+    },
+    {
+      "slug": "services/enterprise_sms_esme",
+      "source_id": "default",
+      "type": "service",
+      "title": "Enterprise SMS via ESME",
+      "updated_at": "2026-09-24T11:44:19.665Z"
+    },
+    {
+      "slug": "services/mt_sms",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile Terminated SMS",
+      "updated_at": "2026-09-24T11:44:19.549Z"
+    },
+    {
+      "slug": "services/mo_sms",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile Originated SMS",
+      "updated_at": "2026-09-24T11:44:19.432Z"
+    },
+    {
+      "slug": "services/fixed_ims_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Fixed IMS Voice",
+      "updated_at": "2026-09-24T11:44:19.315Z"
+    },
+    {
+      "slug": "services/mobile_ims_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile IMS Voice",
+      "updated_at": "2026-09-24T11:44:19.204Z"
+    },
+    {
+      "slug": "services/volte",
+      "source_id": "default",
+      "type": "service",
+      "title": "VoLTE",
+      "updated_at": "2026-09-24T11:44:19.082Z"
+    },
+    {
+      "slug": "services/3g_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "3G Voice",
+      "updated_at": "2026-09-24T11:44:18.967Z"
+    },
+    {
+      "slug": "services/5g_sa_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "5G SA Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.846Z"
+    },
+    {
+      "slug": "services/5g_nsa_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "5G NSA Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.714Z"
+    },
+    {
+      "slug": "services/lte_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "LTE Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.566Z"
+    },
+    {
+      "slug": "services/3g_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "3G Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.439Z"
+    },
+    {
+      "slug": "gpon:bng:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "BNG-01",
+      "updated_at": "2026-09-24T11:44:18.306Z"
+    },
+    {
+      "slug": "gpon:ont:015001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "ONT-015001",
+      "updated_at": "2026-09-24T11:44:18.152Z"
+    },
+    {
+      "slug": "gpon:olt:015",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OLT-015",
+      "updated_at": "2026-09-24T11:44:17.865Z"
+    },
+    {
+      "slug": "oss:itsm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "ITSM 01",
+      "updated_at": "2026-09-24T11:44:17.692Z"
+    },
+    {
+      "slug": "oss:inv:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Inventory System 01",
+      "updated_at": "2026-09-24T11:44:17.492Z"
+    },
+    {
+      "slug": "oss:pm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Performance Manager 01",
+      "updated_at": "2026-09-24T11:44:17.303Z"
+    },
+    {
+      "slug": "oss:fm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fault Manager 01",
+      "updated_at": "2026-09-24T11:44:17.034Z"
+    },
+    {
+      "slug": "prov:engine:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Provisioning Engine 01",
+      "updated_at": "2026-09-24T11:44:16.739Z"
+    },
+    {
+      "slug": "prov:order:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Order Management 01",
+      "updated_at": "2026-09-24T11:44:16.564Z"
+    },
+    {
+      "slug": "bss:catalog:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Product Catalog 01",
+      "updated_at": "2026-09-24T11:44:16.430Z"
+    },
+    {
+      "slug": "bss:billing:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Billing System 01",
+      "updated_at": "2026-09-24T11:44:16.303Z"
+    },
+    {
+      "slug": "crm:ticket:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Customer Ticket Service",
+      "updated_at": "2026-09-24T11:44:16.178Z"
+    },
+    {
+      "slug": "crm:profile:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Customer Profile Service",
+      "updated_at": "2026-09-24T11:44:16.055Z"
+    },
+    {
+      "slug": "in:c:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-C SCP-01",
+      "updated_at": "2026-09-24T11:44:15.939Z"
+    },
+    {
+      "slug": "in:b:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-B SCP-01",
+      "updated_at": "2026-09-24T11:44:15.730Z"
+    },
+    {
+      "slug": "in:a:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-A SCP-01",
+      "updated_at": "2026-09-24T11:44:15.533Z"
+    },
+    {
+      "slug": "chg:chf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Charging Function-01",
+      "updated_at": "2026-09-24T11:44:15.328Z"
+    },
+    {
+      "slug": "chg:ocs:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OCS-01",
+      "updated_at": "2026-09-24T11:44:15.214Z"
+    },
+    {
+      "slug": "vas:esme:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise ESME-01",
+      "updated_at": "2026-09-24T11:44:15.099Z"
+    },
+    {
+      "slug": "vas:ussd:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "USSD GW-01",
+      "updated_at": "2026-09-24T11:44:14.959Z"
+    },
+    {
+      "slug": "vas:smsr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMS Router-01",
+      "updated_at": "2026-09-24T11:44:14.839Z"
+    },
+    {
+      "slug": "vas:smsc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMSC-01",
+      "updated_at": "2026-09-24T11:44:14.708Z"
+    },
+    {
+      "slug": "imsf:sbc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed SBC-01",
+      "updated_at": "2026-09-24T11:44:14.575Z"
+    },
+    {
+      "slug": "imsf:tas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed TAS-01",
+      "updated_at": "2026-09-24T11:44:14.427Z"
+    },
+    {
+      "slug": "imsf:scscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed S-CSCF-01",
+      "updated_at": "2026-09-24T11:44:14.296Z"
+    },
+    {
+      "slug": "imsf:pcscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed P-CSCF-01",
+      "updated_at": "2026-09-24T11:44:14.067Z"
+    },
+    {
+      "slug": "imsm:sbc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile SBC-01",
+      "updated_at": "2026-09-24T11:44:13.849Z"
+    },
+    {
+      "slug": "imsm:tas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile TAS-01",
+      "updated_at": "2026-09-24T11:44:13.741Z"
+    },
+    {
+      "slug": "imsm:scscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile S-CSCF-01",
+      "updated_at": "2026-09-24T11:44:13.631Z"
+    },
+    {
+      "slug": "imsm:pcscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile P-CSCF-01",
+      "updated_at": "2026-09-24T11:44:13.405Z"
+    },
+    {
+      "slug": "sa5g:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SCP-01",
+      "updated_at": "2026-09-24T11:44:13.179Z"
+    },
+    {
+      "slug": "sa5g:nrf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NRF-01",
+      "updated_at": "2026-09-24T11:44:13.063Z"
+    },
+    {
+      "slug": "sa5g:pcf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PCF-01",
+      "updated_at": "2026-09-24T11:44:12.940Z"
+    },
+    {
+      "slug": "sa5g:ausf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "AUSF-01",
+      "updated_at": "2026-09-24T11:44:12.824Z"
+    },
+    {
+      "slug": "sa5g:udm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "UDM-01",
+      "updated_at": "2026-09-24T11:44:12.699Z"
+    },
+    {
+      "slug": "sa5g:upf:003",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "UPF-03",
+      "updated_at": "2026-09-24T11:44:12.565Z"
+    },
+    {
+      "slug": "sa5g:smf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMF-01",
+      "updated_at": "2026-09-24T11:44:12.417Z"
+    },
+    {
+      "slug": "sa5g:amf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "AMF-01",
+      "updated_at": "2026-09-24T11:44:12.277Z"
+    },
+    {
+      "slug": "nsa:endc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "EN-DC Controller 001",
+      "updated_at": "2026-09-24T11:44:12.150Z"
+    },
+    {
+      "slug": "nsa:anchor:lte-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NSA LTE Anchor 001",
+      "updated_at": "2026-09-24T11:44:12.029Z"
+    },
+    {
+      "slug": "epc:dra:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DRA-01",
+      "updated_at": "2026-09-24T11:44:11.890Z"
+    },
+    {
+      "slug": "epc:pcrf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PCRF-01",
+      "updated_at": "2026-09-24T11:44:11.738Z"
+    },
+    {
+      "slug": "epc:hss:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "HSS-01",
+      "updated_at": "2026-09-24T11:44:11.589Z"
+    },
+    {
+      "slug": "epc:pgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PGW-01",
+      "updated_at": "2026-09-24T11:44:11.460Z"
+    },
+    {
+      "slug": "epc:sgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGW-01",
+      "updated_at": "2026-09-24T11:44:11.311Z"
+    },
+    {
+      "slug": "epc:mme:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MME-01",
+      "updated_at": "2026-09-24T11:44:11.185Z"
+    },
+    {
+      "slug": "ps3g:ggsn:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "GGSN-01",
+      "updated_at": "2026-09-24T11:44:11.054Z"
+    },
+    {
+      "slug": "ps3g:sgsn:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGSN-01",
+      "updated_at": "2026-09-24T11:44:10.939Z"
+    },
+    {
+      "slug": "cs:stp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "STP-01",
+      "updated_at": "2026-09-24T11:44:10.826Z"
+    },
+    {
+      "slug": "cs:hlr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "HLR-01",
+      "updated_at": "2026-09-24T11:44:10.703Z"
+    },
+    {
+      "slug": "cs:mgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MGW-01",
+      "updated_at": "2026-09-24T11:44:10.594Z"
+    },
+    {
+      "slug": "cs:msc-s:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MSC-S-01",
+      "updated_at": "2026-09-24T11:44:10.481Z"
+    },
+    {
+      "slug": "ran:nodeb:03101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NodeB-03101",
+      "updated_at": "2026-09-24T11:44:10.367Z"
+    },
+    {
+      "slug": "ran:rnc:031",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "RNC-031",
+      "updated_at": "2026-09-24T11:44:10.247Z"
+    },
+    {
+      "slug": "ran:gnb:501",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "gNodeB-501",
+      "updated_at": "2026-09-24T11:44:10.128Z"
+    },
+    {
+      "slug": "ran:enb:101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "eNodeB-101",
+      "updated_at": "2026-09-24T11:44:10.009Z"
+    },
+    {
+      "slug": "ran:site:101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "RAN Site 101",
+      "updated_at": "2026-09-24T11:44:09.893Z"
+    },
+    {
+      "slug": "mpls:ce:cust-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise CE 001",
+      "updated_at": "2026-09-24T11:44:09.776Z"
+    },
+    {
+      "slug": "mpls:l3vpn:ent-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise L3VPN 001",
+      "updated_at": "2026-09-24T11:44:09.667Z"
+    },
+    {
+      "slug": "ip:rr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Route Reflector 01",
+      "updated_at": "2026-09-24T11:44:09.463Z"
+    },
+    {
+      "slug": "ip:vrf:sgi-01",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGi-VRF-01",
+      "updated_at": "2026-09-24T11:44:09.340Z"
+    },
+    {
+      "slug": "ip:vrf:n3-01",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "N3-VRF-01",
+      "updated_at": "2026-09-24T11:44:09.133Z"
+    },
+    {
+      "slug": "ip:sec:gw-02",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SEC-GW-02",
+      "updated_at": "2026-09-24T11:44:08.934Z"
+    },
+    {
+      "slug": "ip:pe:rtr-21",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PE-RTR-21",
+      "updated_at": "2026-09-24T11:44:08.803Z"
+    },
+    {
+      "slug": "ip:p:rtr-07",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "P-RTR-07",
+      "updated_at": "2026-09-24T11:44:08.672Z"
+    },
+    {
+      "slug": "tx:mw:backhaul-101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Microwave Backhaul 101",
+      "updated_at": "2026-09-24T11:44:08.549Z"
+    },
+    {
+      "slug": "tx:otn:trail-22",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OTN Trail 22",
+      "updated_at": "2026-09-24T11:44:08.423Z"
+    },
+    {
+      "slug": "tx:dwdm:lambda-22",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DWDM Lambda 22",
+      "updated_at": "2026-09-24T11:44:08.278Z"
+    },
+    {
+      "slug": "tx:fiber:fr-07",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fiber Route FR-07",
+      "updated_at": "2026-09-24T11:44:08.142Z"
+    },
+    {
+      "slug": "infra:cgnat:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "CGNAT-01",
+      "updated_at": "2026-09-24T11:44:08.022Z"
+    },
+    {
+      "slug": "infra:fw:sgi",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGi Firewall Pair",
+      "updated_at": "2026-09-24T11:44:07.900Z"
+    },
+    {
+      "slug": "infra:ntp:core",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core Timing Cluster",
+      "updated_at": "2026-09-24T11:44:07.737Z"
+    },
+    {
+      "slug": "infra:dns:core",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core DNS Cluster",
+      "updated_at": "2026-09-24T11:44:07.592Z"
+    },
+    {
+      "slug": "infra:db:subs-a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Subscriber DB Cluster A",
+      "updated_at": "2026-09-24T11:44:07.459Z"
+    },
+    {
+      "slug": "infra:nfvi:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NFVI Cluster A",
+      "updated_at": "2026-09-24T11:44:07.341Z"
+    },
+    {
+      "slug": "infra:k8s:core-a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core Kubernetes Cluster A",
+      "updated_at": "2026-09-24T11:44:07.223Z"
+    },
+    {
+      "slug": "infra:cool:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Cooling Plant",
+      "updated_at": "2026-09-24T11:44:06.993Z"
+    },
+    {
+      "slug": "infra:power:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Power Feed A",
+      "updated_at": "2026-09-24T11:44:06.872Z"
+    },
+    {
+      "slug": "infra:dc:b",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-B Facility",
+      "updated_at": "2026-09-24T11:44:06.748Z"
+    },
+    {
+      "slug": "infra:dc:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Facility",
+      "updated_at": "2026-09-24T11:44:06.631Z"
+    },
+    {
+      "slug": "ext:vas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Third Party VAS Gateway",
+      "updated_at": "2026-09-24T11:44:06.514Z"
+    },
+    {
+      "slug": "ext:roaming:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Roaming Partner 01",
+      "updated_at": "2026-09-24T11:44:06.386Z"
+    },
+    {
+      "slug": "ext:internet:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "External Internet",
+      "updated_at": "2026-09-24T11:44:06.250Z"
+    },
+    {
+      "slug": "site-gpon-15",
+      "source_id": "default",
+      "type": "concept",
+      "title": "GPON Hub 15",
+      "updated_at": "2026-09-24T11:44:06.130Z"
+    },
+    {
+      "slug": "site-ran-101",
+      "source_id": "default",
+      "type": "concept",
+      "title": "RAN Site 101",
+      "updated_at": "2026-09-24T11:44:05.993Z"
+    },
+    {
+      "slug": "site-pop-07",
+      "source_id": "default",
+      "type": "concept",
+      "title": "POP-07",
+      "updated_at": "2026-09-24T11:44:05.854Z"
+    },
+    {
+      "slug": "site-pop-21",
+      "source_id": "default",
+      "type": "concept",
+      "title": "POP-21",
+      "updated_at": "2026-09-24T11:44:05.701Z"
+    },
+    {
+      "slug": "site-dc-b",
+      "source_id": "default",
+      "type": "concept",
+      "title": "DC-B",
+      "updated_at": "2026-09-24T11:44:05.570Z"
+    },
+    {
+      "slug": "site-dc-a",
+      "source_id": "default",
+      "type": "concept",
+      "title": "DC-A",
+      "updated_at": "2026-09-24T11:44:05.430Z"
+    },
+    {
+      "slug": "region-south",
+      "source_id": "default",
+      "type": "concept",
+      "title": "South Region",
+      "updated_at": "2026-09-24T11:44:05.303Z"
+    },
+    {
+      "slug": "region-central",
+      "source_id": "default",
+      "type": "concept",
+      "title": "Central Region",
+      "updated_at": "2026-09-24T11:44:05.160Z"
+    },
+    {
+      "slug": "region-north",
+      "source_id": "default",
+      "type": "concept",
+      "title": "North Region",
+      "updated_at": "2026-09-24T11:44:04.420Z"
+    }
+  ],
+  "relationships": []
+}

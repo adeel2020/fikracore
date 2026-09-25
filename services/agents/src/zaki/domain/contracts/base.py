@@ -30,3 +30,6 @@ else:
             if mode == "json":
                 return json.loads(self.json(**kwargs))
             return self.dict(**kwargs)
+
+        def model_dump_json(self, **kwargs) -> str:
+            return self.json(**kwargs)

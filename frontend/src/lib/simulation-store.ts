@@ -623,6 +623,7 @@ export interface SimulationState {
   nextBestActions: NextBestAction[];
   learning: LearningState | null;
   zaki: ZakiCognitiveState | null;
+  storyContext?: Record<string, unknown> | null;
   source_mode?: "SIMULATION" | "LIVE_INTENT";
   intent_id?: string | null;
   live_intents?: LiveIntentMeta[];
@@ -1055,6 +1056,10 @@ export class SimulationClient {
     if (zaki) {
       this.state.zaki = zaki;
     }
+    const storyContext = payload.story_context as Record<string, unknown> | undefined;
+    if (storyContext) {
+      this.state.storyContext = storyContext;
+    }
     this.state.scenario_id = (payload.scenario_id as string | undefined) || this.state.scenario_id;
     this.state.run_id = (payload.run_id as string | undefined) || this.state.run_id;
     this.state.sequence = sequence || this.state.sequence;
@@ -1113,6 +1118,7 @@ export class SimulationClient {
       nextBestActions,
       learning: (data.learning as LearningState | null | undefined) ?? null,
       zaki: (data.zaki as ZakiCognitiveState | null | undefined) ?? null,
+      storyContext: (data.story_context as Record<string, unknown> | undefined) ?? null,
       source_mode: (data.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined) ?? (data.run as Record<string, unknown> | undefined)?.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined ?? this.state.source_mode ?? "SIMULATION",
       intent_id: (data.intent_id as string | undefined) ?? (data.run as Record<string, unknown> | undefined)?.intent_id as string | undefined ?? this.state.intent_id ?? null,
       live_intents: this.state.live_intents || [],

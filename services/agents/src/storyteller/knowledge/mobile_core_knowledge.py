@@ -107,15 +107,35 @@ class MobileCoreKnowledge:
             if self._get_page(candidate):
                 return candidate, trace
 
+        def _norm(s: str) -> str:
+            t = str(s or "").lower().strip("/")
+            for pfx in (
+                "incidents/", "mobile-core/", "5g-core/", "core/", "transport/",
+                "cloud-infra/", "cloud/", "database/", "power/", "synchronization/",
+                "sync/", "cloud-storage/", "storage/", "security/",
+            ):
+                if t.startswith(pfx):
+                    t = t[len(pfx):]
+            t = t.replace("-outage", "")
+            for pfx in ("transport-", "core-", "cloud-", "database-", "power-", "sync-", "storage-", "security-"):
+                if t.startswith(pfx):
+                    t = t[len(pfx):]
+            return t.strip("/")
+
         suffix = incident_id.rstrip("/").split("/")[-1]
+        norm_req = _norm(incident_id)
         try:
             trace.append("list_pages:type=incident")
             pages = self.client.call("list_pages", {"type": "incident", "limit": 500, "sort": "updated_desc"})
             for page in pages if isinstance(pages, list) else []:
                 slug = page.get("slug")
-                if isinstance(slug, str) and slug.rstrip("/").split("/")[-1] == suffix:
-                    trace.append(f"list_pages:matched_suffix:{slug}")
-                    return slug, trace
+                if isinstance(slug, str):
+                    if slug.rstrip("/").split("/")[-1] == suffix:
+                        trace.append(f"list_pages:matched_suffix:{slug}")
+                        return slug, trace
+                    if norm_req and _norm(slug) == norm_req:
+                        trace.append(f"list_pages:matched_normalized:{slug}")
+                        return slug, trace
         except Exception as exc:  # noqa: BLE001 - optional resolver path
             trace.append(f"list_pages:error:{exc}")
 
@@ -128,6 +148,7 @@ class MobileCoreKnowledge:
                 if isinstance(slug, str) and (
                     slug == incident_id
                     or slug.rstrip("/").split("/")[-1] == suffix
+                    or (norm_req and _norm(slug) == norm_req)
                     or incident_id in incident_aliases(slug)
                 ):
                     trace.append(f"query:matched_exact:{slug}")
@@ -405,6 +426,14 @@ class MobileCoreKnowledge:
     # ------------------------------------------------------------------
     def get_incident_context(self, incident_id: str) -> IncidentContext:
         """Retrieve the complete normalized context for an incident."""
+        try:
+            from .story_context_reader import StoryContextReader
+            story_ctx = StoryContextReader().read(incident_id)
+            if story_ctx is not None and story_ctx.incident is not None:
+                return story_ctx
+        except Exception as err:
+            logger.debug("StoryContextReader lookup skipped: %s", err)
+
         resolved_id, lookup_trace = self.resolve_incident_id(incident_id)
         if not resolved_id:
             return IncidentContext(lookup_trace=lookup_trace)

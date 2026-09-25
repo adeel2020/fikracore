@@ -7,6 +7,8 @@ executive CLI views without changing simulator or reasoning state.
 
 from __future__ import annotations
 
+import re
+import textwrap
 from typing import Any, Iterable
 
 from ..presentation.naming import default_naming_resolver
@@ -50,35 +52,55 @@ def format_entity(slug: str, *, color: str = CYAN) -> str:
     return f"{color}{BOLD}{slug} ({name}){RESET}"
 
 
-def render_table(title: str, headers: list[str], rows: Iterable[Iterable[Any]]) -> str:
-    rows = [[str(cell) for cell in row] for row in rows]
-    widths = [len(header) for header in headers]
-    for row in rows:
-        for index, cell in enumerate(row):
-            widths[index] = max(widths[index], len(_strip_ansi(cell)))
+def _strip_ansi(text: str) -> str:
+    return re.sub(r"\033\[[0-9;]*m", "", text)
 
-    def fmt_row(row: list[str], sep: str = "│") -> str:
+
+def render_table(title: str, headers: list[str], rows: Iterable[Iterable[Any]]) -> str:
+    raw_rows = [[str(cell) for cell in row] for row in rows]
+    num_cols = len(headers)
+
+    # Split multiline cells so rows can expand vertically without breaking borders
+    processed_rows = []
+    for row in raw_rows:
+        cells = list(row) + [""] * max(0, num_cols - len(row))
+        cells = cells[:num_cols]
+        col_lines = [cell.split("\n") for cell in cells]
+        processed_rows.append(col_lines)
+
+    widths = [len(_strip_ansi(header)) for header in headers]
+    for col_lines in processed_rows:
+        for idx in range(num_cols):
+            for line in col_lines[idx]:
+                widths[idx] = max(widths[idx], len(_strip_ansi(line)))
+
+    def fmt_sub_row(sub_row: list[str], sep: str = "│") -> str:
         cells = []
-        for index, cell in enumerate(row):
+        for idx in range(num_cols):
+            cell = sub_row[idx] if idx < len(sub_row) else ""
             visible = len(_strip_ansi(cell))
-            cells.append(cell + " " * (widths[index] - visible))
+            cells.append(cell + " " * max(0, widths[idx] - visible))
         return f"{CYAN}{sep}{RESET} " + f" {CYAN}{sep}{RESET} ".join(cells) + f" {CYAN}{sep}{RESET}"
 
     def plain_len(text: str) -> int:
         return len(_strip_ansi(text))
 
-    title_plain_width = max(sum(widths) + 3 * (len(widths) - 1) + 4, plain_len(title) + 4)
+    title_plain_width = max(sum(widths) + 3 * (num_cols - 1) + 4, plain_len(title) + 4)
     rule = f"{CYAN}{'─' * title_plain_width}{RESET}"
-    out = [rule, f"{CYAN}{BOLD}{title}{RESET}", rule, fmt_row(headers)]
+    out = [rule, f"{CYAN}{BOLD}{title}{RESET}", rule, fmt_sub_row(headers)]
     out.append(f"{CYAN}{'├' + '┼'.join('─' * (width + 2) for width in widths) + '┤'}{RESET}")
-    out.extend(fmt_row(row) for row in rows)
+
+    for col_lines in processed_rows:
+        row_height = max(len(lines) for lines in col_lines) if col_lines else 1
+        for sub_idx in range(row_height):
+            sub_row = [
+                col_lines[c][sub_idx] if sub_idx < len(col_lines[c]) else ""
+                for c in range(num_cols)
+            ]
+            out.append(fmt_sub_row(sub_row))
+
     out.append(rule)
     return "\n".join(out)
-
-
-def _strip_ansi(text: str) -> str:
-    import re
-    return re.sub(r"\033\[[0-9;]*m", "", text)
 
 
 def render_disentanglement_matrix(evidence_list: list[Any], relationships: list[dict[str, Any]]) -> str:
@@ -323,12 +345,14 @@ def render_spof_resilience_matrix(whatif_result: Any) -> str:
     surfaces = _value(whatif_result, "critical_failure_surfaces", []) or []
     rows = []
     for surface in surfaces:
+        rationale = _value(surface, "rationale", "") or "-"
+        wrapped_rationale = "\n".join(textwrap.wrap(rationale, width=40)) if len(rationale) > 40 else rationale
         rows.append([
             _value(surface, "surface_id", "-"),
             _value(surface, "risk_type", "-"),
             ", ".join(_value(surface, "components", [])[:3]) or "-",
             f"{float(_value(surface, 'criticality_score', 0) or 0):.2f}",
-            (_value(surface, "rationale", "") or "-")[:48],
+            wrapped_rationale,
         ])
     return render_table(
         "SPOF & RESILIENCE SURFACE MATRIX",
@@ -339,13 +363,31 @@ def render_spof_resilience_matrix(whatif_result: Any) -> str:
 
 def render_whatif_blast_radius(whatif_result: Any) -> str:
     blast = _value(whatif_result, "blast_radius")
+    trigger = _value(whatif_result, "trigger")
+    trigger_name = _value(trigger, "entity_display_name", "") or "Primary Trigger"
+
+    directly_affected = _value(blast, "directly_affected_entities", [])
+    if directly_affected:
+        direct_str = ", ".join(directly_affected[:5])
+    else:
+        direct_str = f"Isolated to primary node ({trigger_name})"
+
+    indirectly_affected = _value(blast, "indirectly_affected_entities", [])
+    if indirectly_affected:
+        indirect_str = ", ".join(indirectly_affected[:5])
+    else:
+        indirect_str = "None (Contained at edge boundary)"
+
+    cust_impact = _value(blast, "customer_facing_impact", "-")
+    wrapped_impact = "\n".join(textwrap.wrap(cust_impact, width=60)) if len(cust_impact) > 60 else cust_impact
+
     rows = [
         ["Terminal State", _terminal(_value(whatif_result, "terminal_state"))],
         ["Confidence", f"{float(_value(whatif_result, 'confidence', 0) or 0):.0%}"],
-        ["Directly Affected", ", ".join(_value(blast, "directly_affected_entities", [])[:5]) or "-"],
-        ["Indirectly Affected", ", ".join(_value(blast, "indirectly_affected_entities", [])[:5]) or "-"],
+        ["Directly Affected", direct_str],
+        ["Indirectly Affected", indirect_str],
         ["Affected Services", ", ".join(_value(blast, "affected_services", [])[:5]) or "-"],
-        ["Customer Impact", _value(blast, "customer_facing_impact", "-")],
+        ["Customer Impact", wrapped_impact],
     ]
     return render_table("QUANTIFIED LIVE BLAST RADIUS", ["Metric", "Value"], rows)
 
@@ -354,9 +396,11 @@ def render_mitigation_options(whatif_result: Any) -> str:
     mitigations = _value(whatif_result, "mitigation_options", []) or []
     rows = []
     for item in mitigations:
+        title = _value(item, "title", "-")
+        wrapped_title = "\n".join(textwrap.wrap(title, width=42)) if len(title) > 42 else title
         rows.append([
             _value(item, "option_id", "-"),
-            _value(item, "title", "-"),
+            wrapped_title,
             f"{float(_value(item, 'risk_reduction', 0) or 0):.0%}",
             _value(item, "implementation_complexity", "-"),
             _value(item, "operational_disruption", "-"),
@@ -573,6 +617,7 @@ def render_executive_harness_help() -> str:
         ("predict", "Proactive forward what-if failure simulation and blast radius"),
         ("inspect", "Inspect scenario operational topology, manifest, or live MCP knowledge"),
         ("present", "Generate UI standard presentation model for scenario"),
+        ("snapshot", "Manage operational knowledge snapshots (list, inspect, export)"),
     ])
 
     add_section("Showcase Demos:", [
@@ -581,6 +626,16 @@ def render_executive_harness_help() -> str:
         ("h2-demo", "[Demo 2a] Interactive 7-step H2 knowledge gap discovery & evidence probe"),
         ("h3-demo", "[Demo 2b] Interactive 7-step H3 knowledge curation, promotion & reuse"),
         ("h4-demo", "[Demo 3] Interactive H4 proactive resilience what-if simulation"),
+    ])
+
+    add_section("Zaki Agent Harness (Dark NOC):", [
+        ("zaki investigate", "Run Zaki-orchestrated investigation over intent or scenario"),
+        ("zaki intent", "Parse natural language operator intent into TM Forum-aligned contract"),
+        ("zaki agents", "List and inspect registered Dark NOC domain agents (PS, CS, RAN, etc.)"),
+        ("zaki tasks", "Inspect operational tasks in durable Task Ledger"),
+        ("zaki story", "View multi-depth incident story projection (executive/operator/technical)"),
+        ("zaki handover", "Create, list, or accept 24x7 shift handovers"),
+        ("zaki validate", "Submit human validation decision to HITL inbox"),
     ])
 
     add_section("Knowledge Governance & Promotion:", [

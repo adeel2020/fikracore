@@ -117,6 +117,8 @@ class _JarvisConversationBridge:
     def __init__(self) -> None:
         self._jarvis = None
         self._lock = threading.Lock()
+        self._simulation_run_id: str | None = None
+        self._simulation_context: dict | None = None
 
     def _get_jarvis(self):
         if self._jarvis is not None:
@@ -130,6 +132,37 @@ class _JarvisConversationBridge:
                 self._jarvis = jarvis
         return self._jarvis
 
+    def set_simulation_context(self, run_id: str | None) -> None:
+        """Pre-load simulation story_context.json for the given run_id.
+
+        When set, Mark's voice responses will be grounded in the active
+        simulation's authentic operational context, enabling intelligent
+        incident-aware conversation without the user needing to specify
+        which incident they're asking about.
+        """
+        self._simulation_run_id = run_id
+        self._simulation_context = None
+        if not run_id:
+            return
+        try:
+            from storyteller.knowledge.story_context_reader import StoryContextReader  # noqa: PLC0415
+
+            reader = StoryContextReader()
+            story_file = reader.resolve_story_file(run_id)
+            if story_file:
+                import json as _json  # noqa: PLC0415
+
+                self._simulation_context = _json.loads(
+                    story_file.read_text(encoding="utf-8")
+                )
+                logger.info(
+                    "voice bridge loaded simulation context for %s (%s)",
+                    run_id,
+                    story_file,
+                )
+        except Exception:
+            logger.debug("failed to load simulation context for %s", run_id, exc_info=True)
+
     def warm(self) -> None:
         """Load MARK once per process while the user is connecting/listening."""
         self._get_jarvis()
@@ -142,11 +175,28 @@ class _JarvisConversationBridge:
         session_id: str,
     ) -> tuple[None, str, str, str | None]:
         jarvis = self._get_jarvis()
-        context = {"path_incident_id": path_incident_id} if path_incident_id else None
+        # Enrich context with active simulation if available
+        context: dict | None = None
+        effective_incident = path_incident_id
+        if self._simulation_context:
+            sc = self._simulation_context
+            context = {
+                "path_incident_id": path_incident_id,
+                "simulation_run_id": self._simulation_run_id,
+                "simulation_summary": sc.get("executive_summary", ""),
+                "simulation_stage": sc.get("stage", ""),
+                "simulation_root_cause": sc.get("root_cause", {}),
+                "simulation_severity": sc.get("severity", ""),
+            }
+            if not effective_incident:
+                effective_incident = self._simulation_run_id
+        elif path_incident_id:
+            context = {"path_incident_id": path_incident_id}
+
         answer = asyncio.run(
             jarvis.process(message, session_id=session_id, context=context)
         )
-        return None, "mark_general", answer, path_incident_id
+        return None, "mark_general", answer, effective_incident
 
 
 def _get_shared_stt_backend() -> STTAdapter:
@@ -590,6 +640,7 @@ async def voice_ws(
 async def jarvis_voice_ws(
     websocket: WebSocket,
     session_id: str,
+    run_id: str | None = None,
     conversation: _JarvisConversationBridge = Depends(_jarvis_conversation_dep),
     vad: VADAdapter = Depends(_vad_dep, use_cache=False),
     stt: StreamingSTTAdapter = Depends(_stt_dep, use_cache=False),
@@ -626,6 +677,14 @@ async def jarvis_voice_ws(
         return
 
     settings = get_voice_settings()
+
+    # Pre-load simulation context if a run_id was provided
+    if run_id and hasattr(conversation, "set_simulation_context"):
+        try:
+            conversation.set_simulation_context(run_id)
+        except Exception:
+            logger.debug("failed to set simulation context for voice: %s", run_id, exc_info=True)
+
     conn = _Connection(
         websocket, session_id, out_queue_size=settings.voice_out_queue_size
     )

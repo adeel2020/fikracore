@@ -1,0 +1,69 @@
+{
+  "scenario_id": "SCN-063",
+  "run_id": "RUN-SCN-063-L3-SEED-42063",
+  "title": "Operational Incident SCN-063",
+  "domain": "external",
+  "severity": "CRITICAL",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:03:03Z",
+  "resolved_at": "2026-09-10T09:19:00Z",
+  "executive_summary": "Autonomous root cause confirmed at EXT:VAS:001 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "EXT:VAS:001",
+    "condition": "Operational failure on EXT:VAS:001",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "EXT:VAS:001",
+    "EXT:VAS:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "EXT:VAS:001",
+      "role": "ROOT_CAUSE",
+      "status": "THIRD_PARTY_GATEWAY_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:03:03Z",
+      "event": "THIRD_PARTY_GATEWAY_DEGRADED",
+      "entity": "EXT:VAS:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: THIRD_PARTY_GATEWAY_DEGRADED on EXT:VAS:001"
+    },
+    {
+      "time": "2026-09-10T09:03:03Z",
+      "event": "THIRD_PARTY_GATEWAY_DEGRADED",
+      "entity": "EXT:VAS:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: THIRD_PARTY_GATEWAY_DEGRADED on EXT:VAS:001"
+    },
+    {
+      "time": "2026-09-10T09:04:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "EXT:VAS:001",
+      "severity": "CRITICAL",
+      "summary": "Vas Short Code Service Success Rate degraded to 76.46percent"
+    },
+    {
+      "time": "2026-09-10T09:19:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "EXT:VAS:001",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 4,
+    "kpi_breach": {
+      "name": "Vas Short Code Service Success Rate",
+      "value": 76.46,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

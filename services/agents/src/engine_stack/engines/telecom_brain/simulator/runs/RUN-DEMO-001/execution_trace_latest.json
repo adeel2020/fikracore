@@ -1,0 +1,908 @@
+{
+  "scenario_id": "DEMO-001",
+  "run_id": "RUN-20260924151512571934",
+  "status": "RUNNING",
+  "current_stage": "TRIGGER",
+  "stage_status": "READY_TO_ADVANCE",
+  "entered_at": "2026-09-24T15:15:12.571982Z",
+  "elapsed_ms": 439,
+  "exit_conditions": [
+    "valid_observation_count >= 1"
+  ],
+  "exit_conditions_detail": [
+    {
+      "condition_id": "EC-TRI-01",
+      "display_name": "valid_observation_count >= 1",
+      "satisfied": true,
+      "expected": ">= threshold",
+      "actual": "true",
+      "reason": "Condition satisfied",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    }
+  ],
+  "exit_condition_state": {
+    "valid_observation_count": 1
+  },
+  "next_stage": "SIGNAL_FLOOD",
+  "blocking_reason": null,
+  "waiting_for": null,
+  "allowed_disclosures": [
+    "observations"
+  ],
+  "disclosure_policy": {
+    "observations": true,
+    "correlations": false,
+    "ranked_hypotheses": false,
+    "root_candidate": false,
+    "confirmed_path": false,
+    "knowledge_gaps": false,
+    "recommendations": false,
+    "allowed_disclosures": [
+      "observations"
+    ]
+  },
+  "snapshot_version": 1,
+  "sequence": 0,
+  "updated_at": "2026-09-24T15:15:13.030400+00:00",
+  "scenario": {
+    "id": "DEMO-001",
+    "display_name": "Transport-Induced Mobile Data Degradation",
+    "stage": "STAGE H4",
+    "service": "4G LTE Data",
+    "domains": [
+      "Transport",
+      "Mobile Core",
+      "RAN"
+    ],
+    "status": "RUNNING",
+    "scenario_id": "DEMO-001",
+    "run_id": "RUN-20260924151512571934",
+    "revision": 1,
+    "sequence": 0
+  },
+  "run": {
+    "run_id": "RUN-20260924151512571934",
+    "scenario_id": "DEMO-001",
+    "status": "RUNNING",
+    "speed": 1.0,
+    "started_at": "2026-09-24T15:15:12.571982+00:00",
+    "elapsed_seconds": 0,
+    "elapsed_formatted": "00:00:00",
+    "active_entity_id": "IP:PE:RTR-21",
+    "active_event_id": "",
+    "terminal_state": null,
+    "is_replay": false,
+    "source_mode": "SIMULATION",
+    "intent_id": null,
+    "revision": 1,
+    "sequence": 0
+  },
+  "zaki": {
+    "phase": "OBSERVING",
+    "thought": "Only raw observations are available. No causal claim is justified yet.",
+    "active_focus_entity": "MPLS Edge Router-07",
+    "confidence": 0.0,
+    "scenario_id": "DEMO-001",
+    "run_id": "RUN-20260924151512571934"
+  },
+  "stages": [
+    {
+      "index": 0,
+      "key": "trigger",
+      "label": "Trigger",
+      "summary": "Incident detected",
+      "status": "ACTIVE",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 1,
+      "key": "signals",
+      "label": "SIGNAL_FLOOD",
+      "summary": "Events ingested",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 2,
+      "key": "correlation",
+      "label": "CORRELATION",
+      "summary": "Linking across domains",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 3,
+      "key": "hypothesis_generation",
+      "label": "HYPOTHESIS_GENERATION",
+      "summary": "Evaluating root causes",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 4,
+      "key": "hypothesis_testing",
+      "label": "HYPOTHESIS_TESTING",
+      "summary": "Testing the leading hypothesis",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 5,
+      "key": "knowledge_gap_check",
+      "label": "KNOWLEDGE_GAP_CHECK",
+      "summary": "Finding missing context",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 6,
+      "key": "learning_validation",
+      "label": "LEARNING_VALIDATION",
+      "summary": "Validating insights",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "index": 7,
+      "key": "action",
+      "label": "ACTION",
+      "summary": "Generate next best action",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    }
+  ],
+  "events": [],
+  "raw_events": [],
+  "noise_events": [],
+  "reasoning_trace": [
+    {
+      "timestamp": "2026-09-24T15:15:12.571982Z",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "sequence": 0,
+      "stage": "TRIGGER",
+      "component": "simulation_manager",
+      "event_type": "run_created",
+      "entity_ids": [
+        "IP:PE:RTR-21"
+      ],
+      "message": "Clean simulation run created for MPLS Edge Router-07",
+      "details": {
+        "initial_state": "epistemically_empty"
+      },
+      "provenance": "fikracore_simulation_runtime"
+    },
+    {
+      "timestamp": "2026-09-24T15:15:13.571982Z",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "sequence": 1,
+      "stage": "TRIGGER",
+      "component": "scenario_state_compiler",
+      "event_type": "run_state_initialized",
+      "entity_ids": [
+        "IP:PE:RTR-21"
+      ],
+      "message": "Operational state initialized with unknown impact, no hypotheses, no root candidate, and no learning.",
+      "details": {
+        "impact_state": "UNKNOWN",
+        "hypotheses": 0,
+        "root_candidate": null,
+        "causal_path": null
+      },
+      "provenance": "fikracore_simulation_runtime"
+    },
+    {
+      "timestamp": "2026-09-24T15:15:12.571982Z",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "sequence": 2,
+      "stage": "TRIGGER",
+      "component": "hypothesis_engine",
+      "event_type": "stage_enter",
+      "entity_ids": [
+        "IP:PE:RTR-21"
+      ],
+      "hypothesis_id": null,
+      "message": "TRIGGER stage entered for MPLS Edge Router-07",
+      "details": {
+        "confidence": 0.0,
+        "lifecycle": "OBSERVING"
+      },
+      "provenance": "fikracore_reasoning_engine",
+      "revision": 1
+    }
+  ],
+  "topology": {
+    "domains": [
+      {
+        "name": "TRANSPORT",
+        "subtitle": "IP / Optical",
+        "entities": [
+          {
+            "id": "IP:PE:RTR-21",
+            "display_name": "PE-RTR-21",
+            "subtitle": "Observed signal",
+            "state": "SYMPTOM",
+            "icon": "alert",
+            "domain": "IP_TRANSPORT",
+            "scenario_id": "DEMO-001",
+            "run_id": "RUN-20260924151512571934",
+            "revision": 1,
+            "sequence": 0
+          }
+        ]
+      },
+      {
+        "name": "UNKNOWN",
+        "subtitle": "UNKNOWN",
+        "entities": [
+          {
+            "id": "IP:PE:RTR-07",
+            "display_name": "RTR-07",
+            "subtitle": "Affected",
+            "state": "SYMPTOM",
+            "icon": "server",
+            "domain": "UNKNOWN",
+            "scenario_id": "DEMO-001",
+            "run_id": "RUN-20260924151512571934",
+            "revision": 1,
+            "sequence": 0
+          }
+        ]
+      },
+      {
+        "name": "EXTERNAL",
+        "subtitle": "External",
+        "entities": [
+          {
+            "id": "EXT:INTERNET:001",
+            "display_name": "External Internet",
+            "subtitle": "Healthy",
+            "state": "HEALTHY",
+            "icon": "server",
+            "domain": "EXTERNAL",
+            "scenario_id": "DEMO-001",
+            "run_id": "RUN-20260924151512571934",
+            "revision": 1,
+            "sequence": 0
+          },
+          {
+            "id": "EXT:ROAMING:001",
+            "display_name": "Roaming Partner 01",
+            "subtitle": "Healthy",
+            "state": "HEALTHY",
+            "icon": "server",
+            "domain": "EXTERNAL",
+            "scenario_id": "DEMO-001",
+            "run_id": "RUN-20260924151512571934",
+            "revision": 1,
+            "sequence": 0
+          },
+          {
+            "id": "EXT:VAS:001",
+            "display_name": "Third Party VAS Gateway",
+            "subtitle": "Healthy",
+            "state": "HEALTHY",
+            "icon": "server",
+            "domain": "EXTERNAL",
+            "scenario_id": "DEMO-001",
+            "run_id": "RUN-20260924151512571934",
+            "revision": 1,
+            "sequence": 0
+          }
+        ]
+      }
+    ],
+    "causal_path": [],
+    "confirmed_path_label": "Awaiting causal path analysis",
+    "path_confidence": 0.0,
+    "operational_edges": [],
+    "hypothesis_paths": []
+  },
+  "evidence_clusters": [],
+  "frontiers": [],
+  "search_space": {
+    "events": 0,
+    "correlated_signals": 0,
+    "relevant_entities": 5,
+    "hypotheses": 0,
+    "plausible_causes": 0,
+    "root_candidates": 0,
+    "open_frontiers": 0
+  },
+  "reasoning_focus": {
+    "entity_id": "IP:PE:RTR-21",
+    "hypothesis_id": null,
+    "test_id": null,
+    "stage": "TRIGGER",
+    "reason": "Waiting for enough evidence to form competing explanations",
+    "frontier_id": null,
+    "stage_status": "READY_TO_ADVANCE",
+    "scenario_id": "DEMO-001",
+    "run_id": "RUN-20260924151512571934",
+    "revision": 1,
+    "sequence": 0
+  },
+  "reasoning_map": {
+    "contract_version": 2,
+    "run_id": "RUN-20260924151512571934",
+    "scenario_id": "DEMO-001",
+    "source_mode": "OFFLINE_SIMULATION",
+    "revision": 0,
+    "sequence": 0,
+    "stage": "TRIGGER",
+    "source": {
+      "id": "SRC-DEMO-001",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "display_name": "Transport-Induced Mobile Data Degradation",
+      "mode": "OFFLINE_SIMULATION",
+      "status": "ACTIVE",
+      "context": {
+        "service": "4G LTE Data",
+        "trigger_entity": "IP:PE:RTR-21"
+      },
+      "explain": {
+        "what": "Offline simulation source selected for this run.",
+        "why": "The scenario releases deterministic operational evidence without revealing hidden truth.",
+        "supports": [],
+        "affects": [],
+        "unknown": "The source does not determine the root cause.",
+        "recent": "Current stage is TRIGGER."
+      },
+      "revision": 1,
+      "sequence": 0
+    },
+    "evidence": [],
+    "reasoning_pathways": [
+      {
+        "id": "PATH-OPERATIONAL-EVIDENCE",
+        "pathway_id": "PATH-OPERATIONAL-EVIDENCE",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Operational Evidence",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "Raw alarms, KPIs and tickets have been admitted.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Operational Evidence reasoning pathway",
+          "why": "Raw alarms, KPIs and tickets have been admitted.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-SERVICE-DEPENDENCY",
+        "pathway_id": "PATH-SERVICE-DEPENDENCY",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Service Dependency",
+        "status": "DISCOVERED",
+        "state": "DISCOVERED",
+        "activation_reason": "4G LTE Data is being mapped to dependent network elements.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Service Dependency reasoning pathway",
+          "why": "4G LTE Data is being mapped to dependent network elements.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DISCOVERED."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-TOPOLOGY-PROPAGATION",
+        "pathway_id": "PATH-TOPOLOGY-PROPAGATION",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Topology & Propagation",
+        "status": "DISCOVERED",
+        "state": "DISCOVERED",
+        "activation_reason": "Failure propagation tracked across physical and logical topological links.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Topology & Propagation reasoning pathway",
+          "why": "Failure propagation tracked across physical and logical topological links.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DISCOVERED."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-SUBSCRIBER-JOURNEY",
+        "pathway_id": "PATH-SUBSCRIBER-JOURNEY",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Subscriber Journey",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "Customer-impact evidence is available for journey correlation.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Subscriber Journey reasoning pathway",
+          "why": "Customer-impact evidence is available for journey correlation.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-CHANGE-CONFIGURATION",
+        "pathway_id": "PATH-CHANGE-CONFIGURATION",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Change & Configuration",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "No admitted change evidence is active yet.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Change & Configuration reasoning pathway",
+          "why": "No admitted change evidence is active yet.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-TRAFFIC-CAPACITY",
+        "pathway_id": "PATH-TRAFFIC-CAPACITY",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Traffic & Capacity",
+        "status": "DISCOVERED",
+        "state": "DISCOVERED",
+        "activation_reason": "Traffic degradation evidence is being tested against capacity explanations.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Traffic & Capacity reasoning pathway",
+          "why": "Traffic degradation evidence is being tested against capacity explanations.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DISCOVERED."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-CONTROL-SIGNALING",
+        "pathway_id": "PATH-CONTROL-SIGNALING",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Control & Signaling",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "Trace or log signals can explain control-plane behavior.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Control & Signaling reasoning pathway",
+          "why": "Trace or log signals can explain control-plane behavior.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-RESILIENCE-FAILOVER",
+        "pathway_id": "PATH-RESILIENCE-FAILOVER",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Resilience & Failover",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "Backup-path behavior is evaluated during topology correlation.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Resilience & Failover reasoning pathway",
+          "why": "Backup-path behavior is evaluated during topology correlation.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-HISTORICAL-PATTERN",
+        "pathway_id": "PATH-HISTORICAL-PATTERN",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Historical Pattern",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "Similar incidents are matched for precedent during correlation.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Historical Pattern reasoning pathway",
+          "why": "Similar incidents are matched for precedent during correlation.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      },
+      {
+        "id": "PATH-KNOWLEDGE-GAP",
+        "pathway_id": "PATH-KNOWLEDGE-GAP",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "display_name": "Knowledge Gap",
+        "status": "DORMANT",
+        "state": "DORMANT",
+        "activation_reason": "No explicit knowledge gap has been raised yet.",
+        "evidence_ids": [],
+        "hypothesis_ids": [],
+        "explain": {
+          "what": "Knowledge Gap reasoning pathway",
+          "why": "No explicit knowledge gap has been raised yet.",
+          "supports": [],
+          "affects": [],
+          "unknown": "Awaiting more evidence.",
+          "recent": "Pathway state is DORMANT."
+        },
+        "revision": 1,
+        "sequence": 0
+      }
+    ],
+    "connections": [
+      {
+        "id": "CONN-001",
+        "connection_id": "CONN-001",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "source_id": "SYNTHESIS-001",
+        "target_id": "VAL-001",
+        "relation_type": "REQUIRES",
+        "state": "DORMANT",
+        "reason": "Transport Engineer Review Pending",
+        "sequence": 1,
+        "revision": 1
+      },
+      {
+        "id": "CONN-002",
+        "connection_id": "CONN-002",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "source_id": "VAL-001",
+        "target_id": "ATTR-001",
+        "relation_type": "ATTRIBUTES_TO",
+        "state": "BLOCKED",
+        "reason": "Domain attribution follows validation readiness.",
+        "sequence": 2,
+        "revision": 1
+      },
+      {
+        "id": "CONN-003",
+        "connection_id": "CONN-003",
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260924151512571934",
+        "source_id": "VAL-001",
+        "target_id": "LEARNING-001",
+        "relation_type": "SUPPORTS",
+        "state": "DORMANT",
+        "reason": "Learning is gated by validation.",
+        "sequence": 3,
+        "revision": 1
+      }
+    ],
+    "hypotheses": [],
+    "knowledge_gaps": [],
+    "next_best_evidence": [],
+    "synthesis": {
+      "id": "SYNTHESIS-001",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "display_name": "Intelligence Synthesis",
+      "state": "INSUFFICIENT_EVIDENCE",
+      "summary": "Evidence is being admitted and organized; no candidate explanation is ready.",
+      "dimensions": [
+        {
+          "display_name": "Evidence Support",
+          "state": "ACTIVE",
+          "value": 0,
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        },
+        {
+          "display_name": "Service Dependency Fit",
+          "state": "PENDING",
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        },
+        {
+          "display_name": "Contradictions",
+          "state": "UNKNOWN",
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        },
+        {
+          "display_name": "Knowledge Gaps",
+          "state": "CLEAR",
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        },
+        {
+          "display_name": "Validation State",
+          "state": "NOT_READY",
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        }
+      ],
+      "leading_hypothesis_id": null,
+      "explain": {
+        "what": "Convergence layer for the investigation.",
+        "why": "Evidence is being admitted and organized; no candidate explanation is ready.",
+        "supports": [],
+        "affects": [],
+        "unknown": "Domain attribution waits for validation readiness.",
+        "recent": "Synthesis state is INSUFFICIENT_EVIDENCE."
+      },
+      "revision": 1,
+      "sequence": 0
+    },
+    "validation": {
+      "id": "VAL-001",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "display_name": "Transport Engineer Review Pending",
+      "status": "NOT_READY",
+      "state": "NOT_STARTED",
+      "reviewer_role": "Transport Engineer",
+      "evidence_package_ids": [],
+      "explain": {
+        "what": "Domain engineer validation state.",
+        "why": "Validation is based on the backend evidence package.",
+        "supports": [],
+        "affects": [],
+        "unknown": "Pending engineer review.",
+        "recent": "Validation has not accepted the conclusion yet."
+      },
+      "revision": 1,
+      "sequence": 0
+    },
+    "learning": {
+      "id": "LEARNING-001",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "display_name": "No validated learning yet",
+      "status": "NOT_READY",
+      "summary": "Learning is gated by validation.",
+      "explain": {
+        "what": "Learning eligibility for future investigations.",
+        "why": "Learning is created only from validated run state.",
+        "supports": [],
+        "affects": [],
+        "unknown": "Validation must complete before promotion.",
+        "recent": "NOT_READY"
+      },
+      "revision": 1,
+      "sequence": 0
+    },
+    "domain_attribution": {
+      "id": "ATTR-001",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 0,
+      "sequence": 0,
+      "attribution_status": "UNRESOLVED",
+      "status": "PENDING",
+      "primary_domain": null,
+      "domains": [
+        {
+          "domain_id": "mobile_core",
+          "display_name": "Mobile Core",
+          "role": "INVOLVED",
+          "attribution_basis": "DEPENDENCY",
+          "confidence": 30,
+          "reason": "Backend reasoning marked Mobile Core relevant to active failure path.",
+          "supporting_hypothesis_ids": [
+            "HYP-001"
+          ],
+          "supporting_evidence_ids": [],
+          "supporting_pathway_ids": [],
+          "source_revision": 0,
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        },
+        {
+          "domain_id": "ran",
+          "display_name": "RAN",
+          "role": "INVOLVED",
+          "attribution_basis": "DEPENDENCY",
+          "confidence": 30,
+          "reason": "Backend reasoning marked RAN relevant to active failure path.",
+          "supporting_hypothesis_ids": [
+            "HYP-001"
+          ],
+          "supporting_evidence_ids": [],
+          "supporting_pathway_ids": [],
+          "source_revision": 0,
+          "scenario_id": "DEMO-001",
+          "run_id": "RUN-20260924151512571934",
+          "revision": 1,
+          "sequence": 0
+        }
+      ],
+      "explain": {
+        "what": "Domain responsibility and impact attribution.",
+        "why": "Attribution appears after synthesis and validation readiness.",
+        "supports": [],
+        "affects": [],
+        "unknown": "Final responsibility awaits validation.",
+        "recent": "Attribution withheld until enough evidence converges."
+      }
+    },
+    "reasoning_focus": {
+      "entity": "MPLS Edge Router-07",
+      "pathway": "Operational Evidence",
+      "hypothesis": null,
+      "test": null,
+      "reason": "Evidence is being admitted and organized; no candidate explanation is ready."
+    }
+  },
+  "hypotheses": [],
+  "reasoning_tasks": [
+    {
+      "id": 1,
+      "name": "Correlating alarms from MPLS Edge Router-07",
+      "status": "RUNNING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "id": 2,
+      "name": "Analyzing failure propagation path",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "id": 3,
+      "name": "Tracing packet flow across domains",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "id": 4,
+      "name": "Evaluating hypothesis confidence",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "id": 5,
+      "name": "Checking similar historical incidents",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    },
+    {
+      "id": 6,
+      "name": "Generating next best evidence",
+      "status": "PENDING",
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "revision": 1,
+      "sequence": 0
+    }
+  ],
+  "impact": {
+    "service": "4G LTE Data",
+    "impact_state": "UNKNOWN",
+    "state": "UNKNOWN",
+    "throughput_impact_pct": null,
+    "degradation_pct": null,
+    "regions_affected": null,
+    "regions": [],
+    "affected_users": null,
+    "affected_services": [],
+    "affected_label": "Unknown",
+    "confidence": null,
+    "evidence_ids": [],
+    "status_label": "Unknown",
+    "summary": "No customer-impact evidence yet.",
+    "trend_sparkline": [],
+    "scenario_id": "DEMO-001",
+    "run_id": "RUN-20260924151512571934",
+    "revision": 1,
+    "sequence": 0
+  },
+  "knowledge_gaps": [],
+  "next_best_actions": [],
+  "next_best_evidence": [],
+  "learning": null,
+  "provenance": {
+    "scenario_source": "h4_registry",
+    "topology_source": "scenario_manifest + reference_network",
+    "evidence_source": "scenario_state_compiler",
+    "hypothesis_source": "scenario_state_compiler",
+    "impact_source": "scenario_state_compiler",
+    "gap_source": "scenario_state_compiler",
+    "action_source": "scenario_state_compiler",
+    "data_source": "LIVE_FIKRACORE"
+  },
+  "revision": 1
+}

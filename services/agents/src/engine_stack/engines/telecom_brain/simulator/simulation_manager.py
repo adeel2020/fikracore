@@ -78,7 +78,7 @@ class SimulationManager:
         default_run = SimulationRun(
             run_id=f"RUN-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S%f')}",
             scenario_id="SCN-001",
-            status="RUNNING",
+            status="READY",
             speed=1.0,
             mode="live",
             started_at=now_str,
@@ -297,7 +297,50 @@ class SimulationManager:
             run.stage_index += 1
             run.sequence += 1
             run.snapshot_version += 1
+            self._materialize_story_context(run)
         return run
+
+    def _materialize_story_context(self, run: SimulationRun, is_final: bool = False) -> Optional[dict[str, Any]]:
+        """Materialize story_context.json progressively into the run's operational/ directory."""
+        try:
+            from .story_compiler import compile_story_context
+            from pathlib import Path
+            runs_dir = Path(__file__).parent / "runs"
+            clean_id = run.scenario_id.upper().strip()
+            matches = list(runs_dir.glob(f"RUN-{clean_id}*"))
+            run_dir = matches[0] if matches else (runs_dir / run.run_id)
+            if not run_dir.exists():
+                return None
+            op_dir = run_dir / "operational"
+            if not op_dir.exists():
+                return None
+
+            stage_idx = 7 if is_final else run.stage_index
+            state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+            story = compile_story_context(run_dir, stage_index=stage_idx, run_state=state)
+            if is_final:
+                story["status"] = "resolved"
+
+            story_path = op_dir / "story_context.json"
+            story_path.write_text(json.dumps(story, indent=2), encoding="utf-8")
+            return story
+        except Exception:
+            return None
+
+    def _resolve_story_context_for_sse(self, run: SimulationRun) -> Optional[dict[str, Any]]:
+        """Fetch or compile story_context for live SSE emission."""
+        try:
+            from pathlib import Path
+            runs_dir = Path(__file__).parent / "runs"
+            clean_id = run.scenario_id.upper().strip()
+            matches = list(runs_dir.glob(f"RUN-{clean_id}*"))
+            run_dir = matches[0] if matches else (runs_dir / run.run_id)
+            story_file = run_dir / "operational" / "story_context.json"
+            if story_file.is_file():
+                return json.loads(story_file.read_text(encoding="utf-8"))
+            return self._materialize_story_context(run)
+        except Exception:
+            return None
 
     def advance_stage_if_gate_satisfied(self, run: SimulationRun, state: dict[str, Any]) -> bool:
         """Advance one stage only when the compiler reports the stage gate is satisfied."""
@@ -361,6 +404,7 @@ class SimulationManager:
         run.status = "COMPLETED"
         run.snapshot_version += 1
         run.sequence += 1
+        self._materialize_story_context(run, is_final=True)
         return run
 
     def get_watchdog_state(self, run_id: str) -> dict[str, Any]:
@@ -689,6 +733,7 @@ class SimulationManager:
                 "knowledge_gaps": state["knowledge_gaps"],
                 "learning": state["learning"],
                 "zaki": state["zaki"],
+                "story_context": self._resolve_story_context_for_sse(run),
             }
             yield f"data: {json.dumps(event_data)}\n\n"
             if self._advanced_sequences.get(run.run_id) != run.sequence:

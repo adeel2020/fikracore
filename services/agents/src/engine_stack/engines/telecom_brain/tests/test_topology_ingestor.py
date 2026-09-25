@@ -330,3 +330,73 @@ def test_default_version_label(reference_network_path):
     """Default version label must start with v2.0-full-topology."""
     snap = ingest_reference_topology(reference_network_path)
     assert snap["snapshot_version"].startswith("v2.0-full-topology")
+
+
+# ── 13. Restore Snapshot & Obsolete MVP Cleanup ──
+
+def test_restore_snapshot_clean_and_mcp_format(tmp_path, monkeypatch):
+    """Restoring a snapshot must clean obsolete MVP pages and use valid put_page schema."""
+    from engine_stack.engines.telecom_brain.investigation.snapshot import SnapshotManager
+
+    snap_file = tmp_path / "test-snap.json"
+    snap_data = {
+        "brain": "telecombrain",
+        "snapshot_version": "v-test",
+        "pages": [
+            {"slug": "NODE:001", "title": "Node 1", "type": "network-function", "domain": "Mobile Core"},
+            {"slug": "NODE:002", "title": "Node 2", "type": "network-function", "domain": "RAN"},
+        ],
+        "relationships": [
+            {"source": "NODE:001", "target": "NODE:002", "link_type": "depends-on"}
+        ],
+    }
+    snap_file.write_text(json.dumps(snap_data))
+
+    class MockProvider:
+        contracts = {
+            "list_pages": {"properties": {"offset": {}, "limit": {}}},
+            "delete_page": {"properties": {"slug": {}}, "required": ["slug"]},
+            "put_page": {"properties": {"slug": {}, "content": {}}, "required": ["slug", "content"]},
+            "add_link": {"properties": {"from": {}, "to": {}, "link_type": {}}, "required": ["from", "to"]},
+        }
+
+        def __init__(self, *args, **kwargs):
+            self.calls = []
+            self.deleted = []
+            self.put = {}
+            self.links = []
+
+        def _call(self, name, args):
+            self.calls.append((name, args))
+            if name == "list_pages":
+                return [{"slug": "OLD:MVP:001"}, {"slug": "NODE:001"}]
+            elif name == "delete_page":
+                self.deleted.append(args["slug"])
+                return {"status": "ok"}
+            elif name == "put_page":
+                assert set(args.keys()) == {"slug", "content"}
+                assert args["content"].startswith("---\n")
+                self.put[args["slug"]] = args["content"]
+                return {"status": "ok"}
+            elif name == "add_link":
+                self.links.append((args["from"], args["to"], args["link_type"]))
+                return {"status": "ok"}
+
+    mock = MockProvider()
+    monkeypatch.setattr(
+        "engine_stack.engines.telecom_brain.investigation.knowledge.GbrainTelecomBrainProvider",
+        lambda *args, **kwargs: mock,
+    )
+
+    sm = SnapshotManager(snapshots_dir=tmp_path)
+    res = sm.restore_snapshot(snap_file, clean=True)
+
+    assert res["status"] == "success"
+    assert res["mcp_cleaned_pages"] == 1
+    assert "OLD:MVP:001" in mock.deleted
+    assert res["mcp_restored_pages"] == 2
+    assert "NODE:001" in mock.put
+    assert "NODE:002" in mock.put
+    assert res["mcp_restored_links"] == 1
+    assert (tmp_path / "gbrain-snapshot-active.json").exists()
+

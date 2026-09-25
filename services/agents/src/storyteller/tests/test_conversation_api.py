@@ -168,6 +168,26 @@ class TestIntentClassification:
             ("any similar incidents?", "similar"),
             ("what was the impact?", "impact"),
             ("why did it happen?", "why"),
+            (
+                "Tell the incident story for incidents/5g-core/upf-failure-cascades-into-charging-and-customer-impact.",
+                "story",
+            ),
+            (
+                "Tell the incident story for incidents/cloud-storage/shared-storage-failure-impacts-multiple-core-cnfs.",
+                "story",
+            ),
+            (
+                "What is the impact of incidents/5g-core/upf-failure-cascades-into-charging-and-customer-impact?",
+                "impact",
+            ),
+            (
+                "Executive summary for incidents/5g-core/upf-failure-cascades-into-charging-and-customer-impact",
+                "executive",
+            ),
+            (
+                "NOC brief for incidents/cloud-storage/shared-storage-failure-impacts-multiple-core-cnfs",
+                "noc_brief",
+            ),
         ],
     )
     def test_classifier(self, message, expected):

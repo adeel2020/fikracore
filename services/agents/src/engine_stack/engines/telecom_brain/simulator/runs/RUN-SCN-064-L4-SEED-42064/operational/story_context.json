@@ -1,0 +1,160 @@
+{
+  "scenario_id": "SCN-064",
+  "run_id": "RUN-SCN-064-L4-SEED-42064",
+  "title": "Operational Incident SCN-064",
+  "domain": "external",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:04:04Z",
+  "resolved_at": "2026-09-10T09:20:00Z",
+  "executive_summary": "Autonomous root cause confirmed at EXT:ROAMING:001 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "EXT:ROAMING:001",
+    "condition": "Operational failure on EXT:ROAMING:001",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "EXT:ROAMING:001",
+    "TX:FIBER:FR-07",
+    "TX:FIBER:FR-07",
+    "TX:DWDM:LAMBDA-22",
+    "TX:OTN:TRAIL-22",
+    "IP:PE:RTR-21",
+    "IP:VRF:N3-01",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "EXT:ROAMING:001",
+      "role": "ROOT_CAUSE",
+      "status": "ROAMING_PARTNER_DEGRADED"
+    },
+    {
+      "entity": "TX:FIBER:FR-07",
+      "role": "CAUSAL_RELAY",
+      "status": "FIBER_ROUTE_DEGRADED"
+    },
+    {
+      "entity": "TX:DWDM:LAMBDA-22",
+      "role": "CAUSAL_RELAY",
+      "status": "DWDM_LAMBDA_DEGRADED"
+    },
+    {
+      "entity": "TX:OTN:TRAIL-22",
+      "role": "CAUSAL_RELAY",
+      "status": "OTN_TRAIL_DEGRADED"
+    },
+    {
+      "entity": "IP:PE:RTR-21",
+      "role": "CAUSAL_RELAY",
+      "status": "PE_ROUTER_DEGRADED"
+    },
+    {
+      "entity": "IP:VRF:N3-01",
+      "role": "CAUSAL_RELAY",
+      "status": "VRF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:04:04Z",
+      "event": "ROAMING_PARTNER_DEGRADED",
+      "entity": "EXT:ROAMING:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: ROAMING_PARTNER_DEGRADED on EXT:ROAMING:001"
+    },
+    {
+      "time": "2026-09-10T09:04:46Z",
+      "event": "FIBER_ROUTE_DEGRADED",
+      "entity": "TX:FIBER:FR-07",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: FIBER_ROUTE_DEGRADED on TX:FIBER:FR-07"
+    },
+    {
+      "time": "2026-09-10T09:04:46Z",
+      "event": "FIBER_ROUTE_DEGRADED",
+      "entity": "TX:FIBER:FR-07",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: FIBER_ROUTE_DEGRADED on TX:FIBER:FR-07"
+    },
+    {
+      "time": "2026-09-10T09:05:19Z",
+      "event": "DWDM_LAMBDA_DEGRADED",
+      "entity": "TX:DWDM:LAMBDA-22",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: DWDM_LAMBDA_DEGRADED on TX:DWDM:LAMBDA-22"
+    },
+    {
+      "time": "2026-09-10T09:05:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Roaming Data Success Rate degraded to 69.14percent"
+    },
+    {
+      "time": "2026-09-10T09:06:03Z",
+      "event": "OTN_TRAIL_DEGRADED",
+      "entity": "TX:OTN:TRAIL-22",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: OTN_TRAIL_DEGRADED on TX:OTN:TRAIL-22"
+    },
+    {
+      "time": "2026-09-10T09:06:38Z",
+      "event": "PE_ROUTER_DEGRADED",
+      "entity": "IP:PE:RTR-21",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: PE_ROUTER_DEGRADED on IP:PE:RTR-21"
+    },
+    {
+      "time": "2026-09-10T09:07:14Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
+    },
+    {
+      "time": "2026-09-10T09:07:48Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T09:08:27Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T09:20:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "EXT:ROAMING:001",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 12,
+    "kpi_breach": {
+      "name": "Roaming Data Success Rate",
+      "value": 69.14,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

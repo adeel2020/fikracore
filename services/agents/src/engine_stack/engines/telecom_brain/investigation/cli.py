@@ -20,8 +20,22 @@ from .knowledge import (
 )
 
 
+class CleanArgumentParser(argparse.ArgumentParser):
+    """ArgumentParser that outputs clean, operator-friendly errors without dumping huge usage blobs."""
+
+    def error(self, message: str):
+        import sys
+        if "invalid choice:" in message and "argument command" in message:
+            # Extract bad command
+            bad_cmd = message.split("invalid choice:")[-1].split("(")[0].strip()
+            sys.stderr.write(f"\nUnknown command {bad_cmd}. Type 'help' for available capabilities.\n\n")
+        else:
+            sys.stderr.write(f"\nError: {message}\n\n")
+        sys.exit(2)
+
+
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = CleanArgumentParser(
         prog="fikracore",
         description="FikraCore — Telecom reasoning, learning and resilience platform",
     )
@@ -199,13 +213,6 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_cmd.add_argument("--runs-dir", type=Path, default=Path("services/agents/src/engine_stack/engines/telecom_brain/simulator/h4_runs"))
     inspect_cmd.add_argument("--output-dir", type=Path, default=None)
 
-    # Zaki orchestrator (demo-agnostic)
-    zaki_cmd = commands.add_parser("zaki", help="Run Zaki orchestrator against a run directory or snapshot")
-    zaki_cmd.add_argument("run_directory", type=Path, nargs="?", default=None)
-    zaki_cmd.add_argument("--storage-dir", type=Path, default=Path(".zaki"), help="Directory to store zaki runtime artifacts")
-    zaki_cmd.add_argument("--snapshot", type=Path, default=None, help="Optional knowledge snapshot to load instead of building provider from operational topology")
-    zaki_cmd.add_argument("--auto", action="store_true", help="Run without interactive pauses")
-
     mcp_smoke_cmd = commands.add_parser("mcp-smoke", help="Run Step 4.5 Live gbrain MCP Integration Smoke Test")
     mcp_smoke_cmd.add_argument("--url", type=str, default=None, help="Live gbrain MCP URL")
     mcp_smoke_cmd.add_argument("--token", type=str, default=None, help="Live gbrain MCP Bearer token")
@@ -250,6 +257,54 @@ def build_parser() -> argparse.ArgumentParser:
     demo_h4.add_argument("--mode", choices=["INVESTIGATION", "DEMO"], default="DEMO")
     demo_h4.add_argument("--step", type=int, default=1)
     demo_h4.add_argument("--query", type=str, default=None)
+
+    # 5. Knowledge Snapshot Management
+    snap_cmd = commands.add_parser("snapshot", help="Manage operational knowledge snapshots (take, create, list, inspect, export)")
+    snap_cmd.add_argument("action", nargs="?", default="take", help="Snapshot action: take (default), list, inspect, create, export, or target filename")
+    snap_cmd.add_argument("target", nargs="?", default=None, help="Target snapshot name, path, or output filename")
+    snap_cmd.add_argument("--output", type=Path, default=None, help="Destination file path for create/export")
+    snap_cmd.add_argument("--version", type=str, default=None, help="Version tag for exported snapshot")
+    snap_cmd.add_argument("--json", action="store_true", default=False, help="Render output in JSON format")
+    snap_cmd.add_argument("--clean", action="store_true", default=True, help="Purge obsolete pages from live gbrain before restore (default: True)")
+    snap_cmd.add_argument("--no-clean", dest="clean", action="store_false", help="Do not purge obsolete pages during restore")
+
+    # 6. Zaki Agent Harness
+    zaki_cmd = commands.add_parser("zaki", help="Zaki v1 Dark NOC Agent Harness operations")
+    zaki_subs = zaki_cmd.add_subparsers(dest="zaki_action", required=False)
+
+    z_inv = zaki_subs.add_parser("investigate", help="Run Zaki-orchestrated investigation")
+    z_inv.add_argument("target", nargs="?", default="Investigate mobile data degradation in Region-1", help="Operator intent query or scenario ID")
+    z_inv.add_argument("--scenario", type=str, default=None, help="Optional scenario ID (e.g. DEMO-001)")
+    z_inv.add_argument("--depth", choices=["executive", "operator", "technical"], default="operator", help="Presentation depth")
+    z_inv.add_argument("--authority", type=int, default=1, help="Authority level (0-5)")
+    z_inv.add_argument("--operator", type=str, default="operator-01", help="Operator identifier")
+    z_inv.add_argument("--snapshot", type=Path, default=None, help="Optional frozen knowledge snapshot (e.g. artifacts/snapshots/gbrain-snapshot-initial.json)")
+
+    z_intent = zaki_subs.add_parser("intent", help="Parse and classify natural language operator intent")
+    z_intent.add_argument("query", type=str, help="Natural language operator intent query")
+
+    z_agents = zaki_subs.add_parser("agents", help="List and inspect registered domain agents")
+    z_agents.add_argument("agent_id", nargs="?", default=None, help="Agent ID to inspect")
+    z_agents.add_argument("--domain", type=str, default=None, help="Filter by domain")
+
+    z_tasks = zaki_subs.add_parser("tasks", help="Inspect operational tasks in durable Task Ledger")
+    z_tasks.add_argument("task_id", nargs="?", default=None, help="Task ID to inspect")
+
+    z_hdo = zaki_subs.add_parser("handover", help="Manage shift handovers")
+    z_hdo.add_argument("action", choices=["create", "accept", "list"], default="list", nargs="?")
+    z_hdo.add_argument("--incident-id", type=str, default=None)
+    z_hdo.add_argument("--handover-id", type=str, default=None)
+    z_hdo.add_argument("--to", type=str, default="operator-shift-b")
+    z_hdo.add_argument("--notes", type=str, default="Accepted shift handover")
+
+    z_val = zaki_subs.add_parser("validate", help="Submit human validation decision to HITL inbox")
+    z_val.add_argument("validation_id", type=str, help="Validation request ID")
+    z_val.add_argument("--decision", choices=["CONFIRM", "REJECT", "MODIFY", "REQUEST_EVIDENCE", "APPROVE_LEARNING"], default="CONFIRM")
+    z_val.add_argument("--reason", type=str, default="Confirmed by operator")
+
+    z_story = zaki_subs.add_parser("story", help="View incident story projection")
+    z_story.add_argument("incident_id", nargs="?", default=None)
+    z_story.add_argument("--depth", choices=["executive", "operator", "technical"], default="operator")
 
     from .demo_presenter import render_executive_harness_help
     parser.format_help = render_executive_harness_help
@@ -506,7 +561,13 @@ def run_live_use_case_1(
     return 0
 
 
-def run_demo_use_case_2(auto: bool = False, delay: float = 0.8, verbose: bool = False) -> int:
+def run_demo_use_case_2(
+    auto: bool = False,
+    delay: float = 0.8,
+    verbose: bool = False,
+    show_vectors: bool = False,
+    show_math: bool = False,
+) -> int:
     import json
     import time
     import yaml
@@ -516,8 +577,19 @@ def run_demo_use_case_2(auto: bool = False, delay: float = 0.8, verbose: bool = 
     from .knowledge import InMemoryKnowledgeProvider
     from .investigator import Investigator
     from ..learning.promotion import PromotionEngine
+    from .verbose_presenter import (
+        VerbosePresenter,
+        ANSI_RESET,
+        ANSI_YELLOW,
+        ANSI_CYAN,
+        ANSI_BOLD,
+        ANSI_GREEN,
+        ANSI_RED,
+    )
     from .demo_presenter import (
         render_table,
+        render_disentanglement_matrix,
+        render_falsification_scorecard,
         render_candidate_relationships,
         render_promotion_record,
         format_entity,
@@ -559,13 +631,143 @@ def run_demo_use_case_2(auto: bool = False, delay: float = 0.8, verbose: bool = 
         tickets_path=str(op_dir / "tickets.jsonl"),
         recovery_path=str(op_dir / "recovery.jsonl"),
     )
-    res_pre = Investigator(provider).run(run_input, op_dir)
 
-    print(f"{YELLOW}{BOLD}[Stage 1 & 2: Pre-Learning Investigation with Incomplete Topology]{RESET}")
-    print(f"  • Terminal Resolution State : {RED}{res_pre.terminal_state.value}{RESET}")
-    print(f"  • Explanation Coverage      : {res_pre.explanation_coverage:.0%}")
-    print(f"  • Knowledge Gaps Identified : {len(res_pre.knowledge_gaps)}")
-    print(f"  • Candidate Relations Emitted: {len(res_pre.candidate_relationships)}")
+    if verbose:
+        presenter = VerbosePresenter(
+            use_color=True,
+            show_vectors=show_vectors,
+            show_math=show_math,
+            auto=auto,
+        )
+
+        corr_payload = {}
+        roots_pool = []
+
+        def step_cb(event_type: str, data: dict):
+            nonlocal corr_payload, roots_pool
+            if event_type == "ingestion":
+                presenter.render_ingestion(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 2: Correlation Engine...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "correlation_2_1":
+                presenter.render_correlation_2_1(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_2":
+                presenter.render_correlation_2_2(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_3":
+                presenter.render_correlation_2_3(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_2_4":
+                presenter.render_correlation_2_4(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+            elif event_type == "correlation_payload":
+                corr_payload = data
+                if presenter.prompt_deep_dive("SYNTHESIZED CORRELATION EVIDENCE VECTOR payload"):
+                    presenter.render_correlation_vector_payload(data)
+                else:
+                    presenter.render_summary_line(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 3: Hypothesis Generation...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "hypotheses_generated":
+                roots_pool = data.get("roots", [])
+                presenter.render_hypothesis_generation(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 4: Hypothesis Testing...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "convergence":
+                hyps = data.get("hypotheses", [])
+                if presenter.prompt_deep_dive("12-FACTOR SYNTHESIS CORE mathematical breakdown"):
+                    for idx, h in enumerate(hyps, 1):
+                        presenter.render_hypothesis_testing_math(h, idx, len(roots_pool))
+                        if delay > 0 and auto:
+                            time.sleep(delay)
+                else:
+                    presenter.render_hypothesis_testing_summary(hyps)
+                    if delay > 0 and auto:
+                        time.sleep(delay)
+                if not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 5: Convergence...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+                presenter.render_convergence(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 6: Domain Attribution...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "domain_attribution":
+                presenter.render_domain_attribution(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 7: Next-Best Evidence & Gap Localization...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "next_best_evidence":
+                presenter.render_next_best_evidence(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+                elif not auto:
+                    try:
+                        input(f"\n{ANSI_YELLOW}[Enter to proceed to Stage 8: Knowledge Discovery & SME HITL Validation...]{ANSI_RESET}")
+                    except (EOFError, KeyboardInterrupt):
+                        pass
+            elif event_type == "promotion":
+                presenter.render_promotion(data)
+                if delay > 0 and auto:
+                    time.sleep(delay)
+
+        res_pre = Investigator(provider, step_callback=step_cb).run(run_input, op_dir)
+        presenter.render_final_summary(res_pre)
+    else:
+        print(f"{YELLOW}{BOLD}[Stage 1: Evidence Ingestion & Topology Disentanglement]{RESET}")
+        evidence, hashes = load_evidence(run_input, op_dir)
+        print(f"  • Raw Telemetry Ingested    : {len(evidence)} records across {len(hashes)} sources")
+        print(f"  • Known Topology Baseline   : {len(op_topo.get('visible_entities', []))} visible entities (0 initial causal relations)\n")
+        print(render_disentanglement_matrix(evidence, []))
+
+        if not auto:
+            try:
+                input(f"\n{YELLOW}[Enter to proceed to Stage 2: Incomplete Graph Reasoning & Gap Detection...]{RESET}")
+            except (EOFError, KeyboardInterrupt):
+                pass
+        elif delay > 0:
+            time.sleep(delay)
+
+        res_pre = Investigator(provider).run(run_input, op_dir)
+
+        print(f"\n{YELLOW}{BOLD}[Stage 2: Incomplete Topology Reasoning & Residual Analysis]{RESET}")
+        print(f"  • Terminal Resolution State : {RED}{res_pre.terminal_state.value}{RESET}")
+        print(f"  • Explanation Coverage      : {res_pre.explanation_coverage:.0%}")
+        print(f"  • Unexplained Residuals     : {len(res_pre.unexplained_observations)} observations")
+        print(f"  • Knowledge Gaps Identified : {len(res_pre.knowledge_gaps)}")
+        print(f"  • Candidate Relations Emitted: {len(res_pre.candidate_relationships)}")
+
+        if res_pre.ranked_hypotheses:
+            print("\n" + render_falsification_scorecard(res_pre.ranked_hypotheses))
 
     print("\n" + render_candidate_relationships(res_pre.candidate_relationships))
 
@@ -640,7 +842,8 @@ def run_demo_use_case_3(auto: bool = False, delay: float = 0.8, verbose: bool = 
         render_spof_resilience_matrix,
         render_whatif_blast_radius,
         render_mitigation_options,
-        RESET, BOLD, CYAN, YELLOW, GREEN,
+        format_entity,
+        RESET, BOLD, DIM, CYAN, YELLOW, GREEN, RED,
     )
 
     sc_dir = Path(__file__).resolve().parent.parent / "simulator" / "h4_runs" / "H4-WI-001"
@@ -668,28 +871,76 @@ def run_demo_use_case_3(auto: bool = False, delay: float = 0.8, verbose: bool = 
     )
     sim_result = analyzer.analyze_scenario(scenario_obj, op_topo, red_data, cap_data)
 
-    print(f"\n{CYAN}{BOLD}=== FIKRACORE USE CASE 3: PROACTIVE NETWORK RESILIENCE WHAT-IF (H4) ==={RESET}")
-    print(f"Scenario: {manifest['what_if_id']} — {manifest['title']}\n")
+    print(f"\n{CYAN}{BOLD}=== FIKRACORE USE CASE 3: PROACTIVE WHAT-IF RESILIENCE ANALYSIS (H4) ==={RESET}")
+    print(f"{DIM}Telecom Knowledge Graph (gbrain) · Counterfactual Forward Simulation · Zero Outage Prevention{RESET}")
+    print(f"Scenario: {manifest['what_if_id']} — {manifest['title']}")
+    print(f"{CYAN}Operator Query:{RESET} {BOLD}\"What happens if {manifest['trigger'].get('entity_display_name', 'target')} fails?\"{RESET}\n")
 
-    print(render_spof_resilience_matrix(sim_result))
+    # Knowledge Graph Context & Hypothetical Failure Injection
+    trigger = manifest.get("trigger", {})
+    assumptions = manifest.get("assumptions", {})
+    target_slug = trigger.get("canonical_id", "IP:PE:RTR-07")
+    target_name = trigger.get("entity_display_name", "MPLS Edge Router-07")
+    print(f"{BOLD}[Knowledge Graph Baseline & Hypothetical Failure Injection]{RESET}")
+    print(f"  • Queried Knowledge Node  : {format_entity(target_slug)}")
+    print(f"  • Injected Failure Event  : {RED}{BOLD}{trigger.get('severity', 'CRITICAL')}{RESET} Node Outage under {assumptions.get('traffic_load_profile', 'NORMAL')} load ({assumptions.get('duration_minutes', 30)}m)")
+    print(f"  • Active Standby Peer     : None (Redundancy state: failover_available=False)")
+    print(f"  • Failure Domains Tracked : {', '.join(manifest.get('failure_domain_tags', []))}")
+    print(f"  • Resilience Method       : Forward causal dependency traversal across telecombrain (Zero truth leakage)")
+
     if not auto:
         try:
-            input(f"\n{YELLOW}[Enter to view Quantified Live Blast Radius...]{RESET}")
+            input(f"\n{YELLOW}[Enter to view Knowledge Graph Single Point of Failure (SPOF) Matrix...]{RESET}")
         except (EOFError, KeyboardInterrupt):
-            pass
+            return 0
     elif delay > 0:
         time.sleep(delay)
 
-    print("\n" + render_whatif_blast_radius(sim_result))
+    # 1. Critical Failure Surface & SPOF Identification
+    print(f"\n{render_spof_resilience_matrix(sim_result)}")
+
+    if verbose:
+        gaps = sim_result.resilience_gaps or []
+        if gaps:
+            print(f"\n  {CYAN}▸ Deep Dive Gap Diagnostic:{RESET} {DIM}{gaps[0].risk} Recommendation: {gaps[0].recommended_action}{RESET}")
+
     if not auto:
         try:
-            input(f"\n{YELLOW}[Enter to view Proactive Mitigation Plan Options...]{RESET}")
+            input(f"\n{YELLOW}[Enter to project Downstream Blast Radius & Impacted Services...]{RESET}")
         except (EOFError, KeyboardInterrupt):
-            pass
+            return 0
     elif delay > 0:
         time.sleep(delay)
 
-    print("\n" + render_mitigation_options(sim_result))
+    # 2. Quantified Live Blast Radius & Multi-Domain Service Impact
+    print(f"\n{render_whatif_blast_radius(sim_result)}")
+
+    if not auto:
+        try:
+            input(f"\n{YELLOW}[Enter to compare Counterfactual Architectural Mitigations...]{RESET}")
+        except (EOFError, KeyboardInterrupt):
+            return 0
+    elif delay > 0:
+        time.sleep(delay)
+
+    # 3. Automated Counterfactual Mitigation Plan Comparison
+    print(f"\n{render_mitigation_options(sim_result)}")
+
+    mitigations = sim_result.mitigation_options or []
+    def _mitigation_score(m):
+        disruption_weights = {"NONE": 1.0, "MINIMAL": 0.85, "DISRUPTIVE": 0.6}
+        return m.risk_reduction * disruption_weights.get(m.operational_disruption, 0.7)
+    best_mitigation = max(mitigations, key=_mitigation_score) if mitigations else None
+
+    if best_mitigation:
+        print(f"\n{CYAN}{'─' * 80}{RESET}")
+        print(f"{GREEN}{BOLD}★ EXECUTIVE RESILIENCE RECOMMENDATION & MITIGATION DECISION{RESET}")
+        print(f"  • Recommended Strategy: {BOLD}{best_mitigation.option_id} — {best_mitigation.title}{RESET}")
+        print(f"  • Projected Benefit   : {GREEN}{best_mitigation.risk_reduction:.0%} Outage Risk Reduction{RESET} with {GREEN}{best_mitigation.operational_disruption}{RESET} operational downtime")
+        print(f"  • Protected Services  : {', '.join(best_mitigation.protected_services)}")
+        print(f"  • Core Takeaway       : {DIM}FikraCore uses validated operational knowledge to identify risk before failure occurs.{RESET}")
+        print(f"{CYAN}{'─' * 80}{RESET}")
+
     return 0
 
 
@@ -704,12 +955,12 @@ def run_interactive_demo_menu(args) -> int:
     if choice in ("1", "uc1"):
         return run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math, zaki=getattr(args, "zaki", False))
     elif choice in ("2", "uc2"):
-        return run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
+        return run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
     elif choice in ("3", "uc3"):
         return run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
     elif choice in ("all", "a"):
         rc1 = run_live_use_case_1(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math, zaki=getattr(args, "zaki", False))
-        rc2 = run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose)
+        rc2 = run_demo_use_case_2(auto=args.auto, delay=args.delay, verbose=args.verbose, show_vectors=args.show_vectors, show_math=args.show_math)
         rc3 = run_demo_use_case_3(auto=args.auto, delay=args.delay, verbose=args.verbose)
         return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
     elif choice in ("q", "quit", "exit"):
@@ -731,17 +982,18 @@ def handle_demo_command(args, parser) -> int:
     if str(use_case) in ("1", "uc1"):
         return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math, zaki=getattr(args, "zaki", False))
     elif str(use_case) in ("2", "uc2"):
-        return run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
+        return run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
     elif str(use_case) in ("3", "uc3"):
         return run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
     elif str(use_case).lower() == "all":
         rc1 = run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math, zaki=getattr(args, "zaki", False))
-        rc2 = run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose)
+        rc2 = run_demo_use_case_2(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
         rc3 = run_demo_use_case_3(auto=auto, delay=delay, verbose=verbose)
         return 0 if (rc1 == 0 and rc2 == 0 and rc3 == 0) else 1
     elif use_case is None:
-        if auto or live or verbose:
-            return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math)
+        if auto:
+            # Non-interactive automated pipeline: default to use case 1
+            return run_live_use_case_1(auto=auto, delay=delay, verbose=verbose, show_vectors=show_vectors, show_math=show_math, zaki=getattr(args, "zaki", False))
         else:
             return run_interactive_demo_menu(args)
     else:
@@ -781,9 +1033,10 @@ def run_interactive_harness_shell() -> int:
     print(f"{DIM}{subtag}{RESET}\n")
 
     print(f"  {BOLD}Core Capabilities:{RESET}")
-    print(f"    {CYAN}• Operations:{RESET}    investigate · discover · learn · predict · simulate · inspect · present")
+    print(f"    {CYAN}• Operations:{RESET}    investigate · discover · learn · predict · simulate · inspect · present · snapshot")
     print(f"    {CYAN}• Showcases:{RESET}     demo [1|2|3|all] · diagnose-run · h2-demo · h3-demo · h4-demo")
-    print(f"    {CYAN}• Benchmarks:{RESET}    benchmark · report · validate · mcp-smoke · benchmark-parity\n")
+    print(f"    {CYAN}• Benchmarks:{RESET}    benchmark · report · validate · mcp-smoke · benchmark-parity")
+    print(f"    {CYAN}• Agent Harness:{RESET} zaki [investigate|intent|agents|tasks|story|handover|validate]\n")
     print(f"  {DIM}Type {CYAN}'help'{DIM} for capabilities overview, {CYAN}'demo'{DIM} for showcase, or {CYAN}'exit'{DIM} to quit.{RESET}\n")
 
     prompt_str = f"{CYAN}{BOLD}fikracore>{RESET} "
@@ -833,6 +1086,309 @@ def run_interactive_harness_shell() -> int:
         print("")
 
 
+def handle_zaki_command(args, parser) -> int:
+    import json
+    from zaki.runtime.orchestrator import default_zaki_orchestrator
+    from zaki.storyteller.storyteller import default_storyteller
+    from zaki.intent.manager import default_intent_manager
+    from zaki.agents.registry import default_agent_registry
+    from zaki.operations.task_ledger import default_task_ledger
+    from zaki.operations.handover import default_handover_manager
+    from zaki.governance.hitl import default_hitl_manager
+    from zaki.domain.enums import AuthorityLevel, PresentationDepth, ValidationDecisionType
+
+    action = getattr(args, "zaki_action", None) or "investigate"
+
+    if action == "investigate":
+        target = getattr(args, "target", "Investigate mobile data degradation in Region-1")
+        scenario_id = getattr(args, "scenario", None)
+        if not scenario_id and (target.startswith("DEMO-") or target.startswith("SCN-") or target.startswith("H4-")):
+            scenario_id = target
+
+        depth_str = getattr(args, "depth", "operator").upper()
+        depth = PresentationDepth[depth_str] if depth_str in PresentationDepth.__members__ else PresentationDepth.OPERATOR
+        authority_val = getattr(args, "authority", 1)
+        authority = AuthorityLevel(authority_val) if authority_val in range(6) else AuthorityLevel.LEVEL_1_ANALYZE
+        operator = getattr(args, "operator", "operator-01")
+        snapshot_arg = getattr(args, "snapshot", None)
+        provider = None
+        if snapshot_arg:
+            from .knowledge import FrozenTelecomBrainProvider
+            snapshot_path = Path(snapshot_arg)
+            if not snapshot_path.is_absolute():
+                snapshot_path = Path.cwd() / snapshot_path
+            if snapshot_path.exists():
+                provider = FrozenTelecomBrainProvider(snapshot_path)
+            else:
+                parser.error(f"Snapshot file not found: {snapshot_arg}")
+
+        result = default_zaki_orchestrator.investigate(
+            intent_or_query=target,
+            scenario_id=scenario_id,
+            authority=authority,
+            requested_by=operator,
+            provider=provider,
+        )
+
+        story = result["story"]
+        story.presentation_depth = depth
+        print(default_storyteller.format_story_for_cli(story))
+
+        # Also render ranked hypothesis board
+        from .demo_presenter import BOLD, CYAN, GREEN, RESET, YELLOW
+        print(f" {BOLD}RANKED HYPOTHESES BOARD (Zaki v1 Harness):{RESET}")
+        print(f" ┌{'─'*66}┐")
+        for h in result["ranked_hypotheses"].spec.hypotheses:
+            color = GREEN if h.role == "LEADING" else YELLOW if h.role == "COMPETING" else RESET
+            print(f" │ #{h.rank:<2} {h.root_entity:<25} {h.score:<5.2f} {color}{h.role:<10}{RESET} [{h.domain}] │")
+            for se in h.supporting_evidence[:2]:
+                print(f" │     + evidence: {se:<50} │")
+            for ce in h.contradicting_evidence[:1]:
+                print(f" │     - counter:  {ce:<50} │")
+        print(f" └{'─'*66}┘\n")
+        return 0
+
+    elif action == "intent":
+        query = args.query
+        intent = default_intent_manager.capture_intent(query)
+        print(json.dumps(intent.model_dump(mode="json"), indent=2))
+        return 0
+
+    elif action == "agents":
+        if args.agent_id:
+            agent = default_agent_registry.get_agent(args.agent_id)
+            if not agent:
+                parser.error(f"Agent '{args.agent_id}' not found")
+            print(json.dumps(agent.model_dump(mode="json"), indent=2))
+        else:
+            agents = default_agent_registry.list_agents(domain=args.domain)
+            print(f"\nRegistered Dark NOC Domain Agents ({len(agents)}):")
+            for a in agents:
+                print(f"  • {a.metadata.id:<20} {a.metadata.name:<24} [{a.metadata.domain}] - {len(a.spec.capabilities)} capabilities")
+            print("")
+        return 0
+
+    elif action == "tasks":
+        if args.task_id:
+            task = default_task_ledger.get_task(args.task_id)
+            if not task:
+                parser.error(f"Task '{args.task_id}' not found")
+            print(json.dumps(task.model_dump(mode="json"), indent=2))
+        else:
+            tasks = default_task_ledger.list_tasks()
+            print(f"\nDurable Task Ledger ({len(tasks)} tasks):")
+            for t in tasks:
+                print(f"  • {t.task_id:<22} stage={t.current_stage:<16} status={t.status.value:<10} priority={t.priority.value}")
+            print("")
+        return 0
+
+    elif action == "handover":
+        sub_act = args.action
+        if sub_act == "create":
+            inc_id = args.incident_id or "INC-DEFAULT"
+            hdo = default_handover_manager.create_handover(
+                incident_id=inc_id,
+                from_operator="Shift-A",
+                to_operator=args.to,
+                what="Active incident investigation handed over",
+                why="Scheduled shift rotation",
+                state={"current_stage": "CONVERGENCE"},
+            )
+            print(f"Created handover record: {hdo.handover_id}")
+            print(json.dumps(hdo.model_dump(mode="json"), indent=2))
+        elif sub_act == "accept":
+            if not args.handover_id:
+                parser.error("--handover-id required to accept handover")
+            hdo = default_handover_manager.accept_handover(args.handover_id, args.to, args.notes)
+            if not hdo:
+                parser.error(f"Handover '{args.handover_id}' not found")
+            print(f"Handover {args.handover_id} accepted by {args.to}")
+        else:
+            hdos = default_handover_manager.list_handovers(args.incident_id)
+            print(f"\nShift Handovers ({len(hdos)}):")
+            for h in hdos:
+                status = "ACCEPTED" if h.accepted else "PENDING"
+                print(f"  • {h.handover_id:<20} incident={h.incident_id:<15} from={h.from_operator} to={h.to_operator} [{status}]")
+            print("")
+        return 0
+
+    elif action == "validate":
+        decision_enum = ValidationDecisionType[args.decision] if args.decision in ValidationDecisionType.__members__ else ValidationDecisionType.CONFIRM
+        val = default_hitl_manager.submit_decision(
+            validation_id=args.validation_id,
+            decision=decision_enum,
+            reason=args.reason,
+        )
+        if not val:
+            print(f"Validation record registered for {args.validation_id}: {args.decision}")
+        else:
+            print(f"Validation {args.validation_id} recorded: {args.decision}")
+        return 0
+
+    elif action == "story":
+        from zaki.operations.incident_ledger import default_incident_ledger
+        incidents = default_incident_ledger.list_incidents()
+        if not incidents:
+            print("No active incidents found. Run 'zaki investigate' first.")
+            return 0
+        inc = incidents[-1]
+        print(f"Incident: {inc.incident_id} - {inc.title}")
+        return 0
+
+        return 0
+
+    return 0
+
+
+def handle_snapshot_command(args, parser) -> int:
+    """Handles fikracore snapshot commands using the dedicated SnapshotManager."""
+    from .snapshot import default_snapshot_manager
+    from .demo_presenter import BOLD, CYAN, GREEN, RESET, YELLOW, DIM
+
+    action_raw = getattr(args, "action", "take")
+    if not action_raw:
+        action_raw = "take"
+    action_str = str(action_raw).strip()
+    target = getattr(args, "target", None)
+
+    if action_str.endswith(".json") or "/" in action_str or "\\" in action_str:
+        action = "take"
+        target = action_str
+    else:
+        action = action_str.lower()
+
+    if action in ("list", "ls"):
+        snapshots = default_snapshot_manager.list_snapshots()
+        if getattr(args, "json", False):
+            print(json.dumps([s.to_dict() for s in snapshots], indent=2))
+            return 0
+
+        print(f"\n{BOLD}FIKRACORE OPERATIONAL KNOWLEDGE SNAPSHOTS{RESET}")
+        print(f"{'─' * 92}")
+        if not snapshots:
+            print(f" {YELLOW}No snapshots found in {default_snapshot_manager.snapshots_dir}{RESET}\n")
+            return 0
+
+        print(f" {'#':<2} {'FILE NAME':<38} {'CREATED':<17} {'PAGES':<7} {'EDGES':<7} {'SIZE':<9} {'STATUS / SHA'}")
+        print(f" {'─'*2} {'─'*38} {'─'*17} {'─'*7} {'─'*7} {'─'*9} {'─'*14}")
+        for idx, s in enumerate(snapshots, 1):
+            sha_short = s.sha256[:10] + ".."
+            size_str = f"{s.size_bytes / 1024:.1f} KB"
+            created_str = s.created_at if s.created_at else "–"
+
+            badges = []
+            if idx == 1:
+                badges.append(f"{GREEN}[LATEST]{RESET}")
+            if s.path.name == "gbrain-snapshot-active.json":
+                badges.append(f"{CYAN}[ACTIVE]{RESET}")
+            tag = (" ".join(badges) + " ") if badges else ""
+
+            print(f" {idx:<2} {s.path.name:<38} {created_str:<17} {s.page_count:<7} {s.relationship_count:<7} {size_str:<9} {tag}{DIM}{sha_short}{RESET}")
+        print(f"{'─' * 92}")
+        print(f" Total: {len(snapshots)} operational snapshots available (sorted newest first).\n")
+        return 0
+
+    elif action in ("inspect", "show", "info"):
+        if not target:
+            print(f"Usage error: Missing snapshot identifier. Run 'fikracore snapshot list' or 'fikracore snapshot inspect <name>'.")
+            return 2
+        try:
+            info = default_snapshot_manager.inspect_snapshot(target)
+            if getattr(args, "json", False):
+                print(json.dumps(info, indent=2))
+                return 0
+
+            print(f"\n{BOLD}SNAPSHOT INSPECTION: {info['filename']}{RESET}")
+            print(f"{'─' * 76}")
+            print(f" • Path:           {info['path']}")
+            print(f" • Brain Identity: {CYAN}{info['brain']}{RESET}")
+            print(f" • Version:        {GREEN}{info['snapshot_version']}{RESET}")
+            print(f" • SHA256:         {DIM}{info['sha256']}{RESET}")
+            print(f" • Total Pages:    {BOLD}{info['total_pages']}{RESET}")
+            print(f" • Total Edges:    {BOLD}{info['total_relationships']}{RESET}")
+            print(f"\n {BOLD}Domain Distribution:{RESET}")
+            for d, count in sorted(info['domains'].items(), key=lambda x: x[1], reverse=True):
+                print(f"   - {d:<24}: {count:>4} pages")
+            print(f"\n {BOLD}Top Page Types:{RESET}")
+            for pt, count in sorted(info['page_types'].items(), key=lambda x: x[1], reverse=True)[:8]:
+                print(f"   - {pt:<24}: {count:>4}")
+            print(f"\n {BOLD}Relationship Types:{RESET}")
+            for rt, count in sorted(info['relationship_types'].items(), key=lambda x: x[1], reverse=True)[:8]:
+                print(f"   - {rt:<24}: {count:>4}")
+            print(f"{'─' * 76}\n")
+            return 0
+        except FileNotFoundError as e:
+            print(f"Error: {e}")
+            return 2
+        except Exception as e:
+            print(f"Inspection error: {e}")
+            return 2
+
+    elif action in ("take", "create", "export", "new", "snapshot"):
+        from .knowledge import GbrainTelecomBrainProvider
+        out_path = getattr(args, "output", None) or target
+        version = getattr(args, "version", None)
+        try:
+            provider = None
+            try:
+                provider = GbrainTelecomBrainProvider()
+            except Exception:
+                provider = None
+
+            path, meta = default_snapshot_manager.create_snapshot(
+                provider=provider,
+                output_path=out_path,
+                version_tag=version,
+            )
+            if getattr(args, "json", False):
+                print(json.dumps(meta, indent=2))
+            else:
+                print(f"\n{GREEN}{BOLD}✓ Knowledge Snapshot Exported Successfully:{RESET}")
+                print(f"  • Path:          {meta['target']}")
+                print(f"  • Version:       {meta['version']}")
+                print(f"  • Pages:         {meta['pages']}")
+                print(f"  • Relationships: {meta['relationships']}")
+                print(f"  • SHA256:        {meta['sha256'][:16]}...\n")
+            return 0
+        except Exception as e:
+            print(f"Error creating snapshot: {e}")
+            return 2
+
+    elif action in ("restore", "load", "import", "clean", "purge"):
+        if action in ("clean", "purge") and not target:
+            target = "gbrain-snapshot-active.json"
+        if not target:
+            print("Usage error: Missing snapshot identifier. Run 'fikracore snapshot restore <snapshot_name_or_path>'.")
+            return 2
+        try:
+            clean_flag = getattr(args, "clean", True)
+            res = default_snapshot_manager.restore_snapshot(target, clean=clean_flag)
+            if getattr(args, "json", False):
+                print(json.dumps(res, indent=2))
+                return 0
+
+            print(f"\n{GREEN}{BOLD}✓ Knowledge Snapshot Restored Successfully:{RESET}")
+            print(f"  • Source File:   {res['filename']}")
+            print(f"  • Version:       {GREEN}{res['version']}{RESET}")
+            print(f"  • Total Pages:   {BOLD}{res['total_pages']}{RESET}")
+            print(f"  • Total Edges:   {BOLD}{res['total_relationships']}{RESET}")
+            if res.get("live_mcp_restored"):
+                clean_msg = f", {res.get('mcp_cleaned_pages', 0)} obsolete pages purged" if res.get("mcp_cleaned_pages") else ""
+                print(f"  • Live MCP:      {CYAN}Active ({res['mcp_restored_pages']} pages synced{clean_msg}, {res['mcp_restored_links']} links synced to gbrain){RESET}")
+            else:
+                print(f"  • Live MCP:      {YELLOW}Daemon offline (Restored to active runtime snapshot){RESET}")
+            if res.get("active_runtime_snapshot"):
+                print(f"  • Active Twin:   {res['active_runtime_snapshot']}")
+            print(f"{'─' * 76}\n")
+            return 0
+        except Exception as e:
+            print(f"Restore error: {e}")
+            return 2
+
+    print(f"Unknown snapshot action: '{action}'. Available: take, list, inspect, create, restore.")
+    return 2
+
+
 def main(argv=None, in_shell: bool = False):
     if argv is None:
         import sys
@@ -864,7 +1420,11 @@ def main(argv=None, in_shell: bool = False):
         return 0
 
     try:
-        if args.command == "demo":
+        if args.command == "snapshot":
+            return handle_snapshot_command(args, parser)
+        elif args.command == "zaki":
+            return handle_zaki_command(args, parser)
+        elif args.command == "demo":
             return handle_demo_command(args, parser)
         elif args.command == "investigate":
             from ..capabilities import default_capability_registry
@@ -1226,69 +1786,6 @@ def main(argv=None, in_shell: bool = False):
                 "zaki_response": response,
             }
             print(json.dumps(output, indent=2))
-            return
-        elif args.command == "zaki":
-            # Run Zaki orchestrator in a demo-agnostic way.
-            run_dir = Path(args.run_directory) if args.run_directory else None
-            # Try to locate run directory if only a run id was provided
-            if run_dir and not run_dir.exists():
-                candidate = Path("services/agents/src/engine_stack/engines/telecom_brain/simulator/runs") / str(run_dir)
-                if candidate.exists():
-                    run_dir = candidate
-            if not run_dir:
-                parser.error("Please provide a run directory or run id for Zaki to execute")
-
-            op_dir = run_dir / "operational"
-            if not op_dir.exists():
-                parser.error(f"Operational directory not found: {op_dir}")
-
-            # Build provider from snapshot or operational topology
-            try:
-                import yaml
-                from .evidence import input_from_run, load_evidence
-                from .knowledge import InMemoryKnowledgeProvider
-                from .benchmark import get_ref_relationships
-            except Exception as e:
-                parser.error(f"Failed to import zaki dependencies: {e}")
-
-            run = input_from_run(run_dir)
-            evidence, hashes = load_evidence(run, op_dir)
-
-            if args.snapshot:
-                # Snapshot should provide pages+relationships as JSON/YAML
-                with open(args.snapshot, 'r', encoding='utf-8') as f:
-                    snap = yaml.safe_load(f)
-                pages = snap.get('pages', [])
-                relationships = snap.get('relationships', [])
-            else:
-                with open(op_dir / 'topology_view.yaml', 'r', encoding='utf-8') as f:
-                    topo = yaml.safe_load(f)
-                ref_rels = get_ref_relationships()
-                pages = [{'slug': e} for e in topo.get('visible_entities', [])]
-                relationships = []
-                for rid in topo.get('visible_relationships', []):
-                    if rid in ref_rels:
-                        r = ref_rels[rid]
-                        relationships.append({
-                            'relationship_id': rid,
-                            'source': r['source_entity'],
-                            'target': r['target_entity'],
-                            'link_type': r.get('relationship_type', 'depends-on').lower().replace('_', '-'),
-                            'state': r.get('status', 'CONFIRMED'),
-                            'confidence': r.get('confidence', 0.95),
-                            'provenance': 'zaki-cli',
-                        })
-
-            provider = InMemoryKnowledgeProvider(pages, relationships, version='zaki-cli')
-
-            try:
-                from .zaki.orchestrator import ZakiOrchestrator
-            except Exception as e:
-                parser.error(f"Zaki orchestrator not available: {e}")
-
-            orchestrator = ZakiOrchestrator(provider, storage_dir=Path(args.storage_dir))
-            res = orchestrator.start_investigation(run, op_dir)
-            print(f"Zaki terminal state: {res.terminal_state.value}")
             return
         elif args.command == "mcp-smoke":
             from .mcp_smoke_test import run_mcp_smoke_test

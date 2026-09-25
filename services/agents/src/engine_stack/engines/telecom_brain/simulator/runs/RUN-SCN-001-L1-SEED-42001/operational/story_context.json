@@ -1,0 +1,97 @@
+{
+  "scenario_id": "SCN-001",
+  "run_id": "RUN-20260925212122350390",
+  "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
+  "domain": "transport",
+  "severity": "MAJOR",
+  "status": "testing",
+  "stage_index": 5,
+  "started_at": "2026-09-10T08:01:02Z",
+  "resolved_at": null,
+  "executive_summary": "Investigation analysis indicates None as the leading root cause candidate with 85% confidence. Boundary verification underway.",
+  "root_cause": {
+    "entity": null,
+    "condition": "Leading operational anomaly",
+    "status": "LEADING_HYPOTHESIS",
+    "confidence": 0.85
+  },
+  "causal_chain": [
+    "{'from': 'IP:PE:RTR-21', 'to': 'IP:VRF:N3-01', 'status': 'LEADING', 'relation': 'CAUSES', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}",
+    "{'from': 'IP:VRF:N3-01', 'to': 'SA5G:UPF:003', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}",
+    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}"
+  ],
+  "blast_radius": [],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:01:02Z",
+      "event": "PE_ROUTER_DEGRADED",
+      "entity": "IP:PE:RTR-21",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: PE_ROUTER_DEGRADED on IP:PE:RTR-21"
+    },
+    {
+      "time": "2026-09-10T08:01:43Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
+    },
+    {
+      "time": "2026-09-10T08:02:24Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T08:02:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 66.06percent"
+    },
+    {
+      "time": "2026-09-10T08:02:54Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    }
+  ],
+  "metrics": {
+    "stage_index": 5,
+    "operational_evidence_count": 7,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 66.06,
+      "baseline": 98.5
+    },
+    "mttr_actual": "in_progress"
+  },
+  "flash_narration": {
+    "time": "08:02:54Z",
+    "phase": "RCA Confirmed",
+    "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
+    "text": "At 08:02:54Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+  },
+  "flash_history": [
+    {
+      "time": "08:01:02Z",
+      "phase": "Trigger",
+      "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
+      "text": "At 08:01:02Z (Trigger):\n\ud83c\udf99\ufe0f \"Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.\""
+    },
+    {
+      "time": "08:02:24Z",
+      "phase": "Propagation",
+      "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
+      "text": "At 08:02:24Z (Propagation):\n\ud83c\udf99\ufe0f \"Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.\""
+    },
+    {
+      "time": "08:02:54Z",
+      "phase": "RCA Confirmed",
+      "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
+      "text": "At 08:02:54Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+    }
+  ]
+}

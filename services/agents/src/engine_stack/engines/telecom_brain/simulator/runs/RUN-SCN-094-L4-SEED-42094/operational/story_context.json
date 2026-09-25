@@ -1,0 +1,69 @@
+{
+  "scenario_id": "SCN-094",
+  "run_id": "RUN-SCN-094-L4-SEED-42094",
+  "title": "Operational Incident SCN-094",
+  "domain": "ran",
+  "severity": "CRITICAL",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:34:02Z",
+  "resolved_at": "2026-09-10T09:50:00Z",
+  "executive_summary": "Autonomous root cause confirmed at RAN:SITE:101 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "RAN:SITE:101",
+    "condition": "Operational failure on RAN:SITE:101",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "RAN:SITE:101",
+    "RAN:SITE:101"
+  ],
+  "blast_radius": [
+    {
+      "entity": "RAN:SITE:101",
+      "role": "ROOT_CAUSE",
+      "status": "RAN_SITE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:34:02Z",
+      "event": "RAN_SITE_DEGRADED",
+      "entity": "RAN:SITE:101",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: RAN_SITE_DEGRADED on RAN:SITE:101"
+    },
+    {
+      "time": "2026-09-10T09:34:02Z",
+      "event": "RAN_SITE_DEGRADED",
+      "entity": "RAN:SITE:101",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: RAN_SITE_DEGRADED on RAN:SITE:101"
+    },
+    {
+      "time": "2026-09-10T09:35:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "RAN:SITE:101",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 71.69percent"
+    },
+    {
+      "time": "2026-09-10T09:50:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "RAN:SITE:101",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 4,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 71.69,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

@@ -1,0 +1,1891 @@
+{
+  "brain": "telecombrain",
+  "snapshot_version": "v1.0.0-snapshot-20260924-115608",
+  "pages": [
+    {
+      "slug": "gpon:bng:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "BNG-01",
+      "updated_at": "2026-09-24T11:55:54.371Z"
+    },
+    {
+      "slug": "gpon:ont:015001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "ONT-015001",
+      "updated_at": "2026-09-24T11:55:54.269Z"
+    },
+    {
+      "slug": "gpon:olt:015",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OLT-015",
+      "updated_at": "2026-09-24T11:55:54.164Z"
+    },
+    {
+      "slug": "oss:itsm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "ITSM 01",
+      "updated_at": "2026-09-24T11:55:54.063Z"
+    },
+    {
+      "slug": "oss:inv:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Inventory System 01",
+      "updated_at": "2026-09-24T11:55:53.962Z"
+    },
+    {
+      "slug": "oss:pm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Performance Manager 01",
+      "updated_at": "2026-09-24T11:55:53.784Z"
+    },
+    {
+      "slug": "oss:fm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fault Manager 01",
+      "updated_at": "2026-09-24T11:55:53.678Z"
+    },
+    {
+      "slug": "prov:engine:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Provisioning Engine 01",
+      "updated_at": "2026-09-24T11:55:53.581Z"
+    },
+    {
+      "slug": "prov:order:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Order Management 01",
+      "updated_at": "2026-09-24T11:55:53.475Z"
+    },
+    {
+      "slug": "bss:catalog:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Product Catalog 01",
+      "updated_at": "2026-09-24T11:55:53.270Z"
+    },
+    {
+      "slug": "bss:billing:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Billing System 01",
+      "updated_at": "2026-09-24T11:55:53.167Z"
+    },
+    {
+      "slug": "crm:ticket:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Customer Ticket Service",
+      "updated_at": "2026-09-24T11:55:53.065Z"
+    },
+    {
+      "slug": "crm:profile:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Customer Profile Service",
+      "updated_at": "2026-09-24T11:55:52.964Z"
+    },
+    {
+      "slug": "in:c:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-C SCP-01",
+      "updated_at": "2026-09-24T11:55:52.860Z"
+    },
+    {
+      "slug": "in:b:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-B SCP-01",
+      "updated_at": "2026-09-24T11:55:52.700Z"
+    },
+    {
+      "slug": "in:a:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "IN-A SCP-01",
+      "updated_at": "2026-09-24T11:55:52.529Z"
+    },
+    {
+      "slug": "chg:chf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Charging Function-01",
+      "updated_at": "2026-09-24T11:55:52.362Z"
+    },
+    {
+      "slug": "chg:ocs:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OCS-01",
+      "updated_at": "2026-09-24T11:55:52.256Z"
+    },
+    {
+      "slug": "vas:esme:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise ESME-01",
+      "updated_at": "2026-09-24T11:55:52.152Z"
+    },
+    {
+      "slug": "vas:ussd:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "USSD GW-01",
+      "updated_at": "2026-09-24T11:55:52.047Z"
+    },
+    {
+      "slug": "vas:smsr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMS Router-01",
+      "updated_at": "2026-09-24T11:55:51.939Z"
+    },
+    {
+      "slug": "vas:smsc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMSC-01",
+      "updated_at": "2026-09-24T11:55:51.831Z"
+    },
+    {
+      "slug": "imsf:sbc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed SBC-01",
+      "updated_at": "2026-09-24T11:55:51.730Z"
+    },
+    {
+      "slug": "imsf:tas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed TAS-01",
+      "updated_at": "2026-09-24T11:55:51.628Z"
+    },
+    {
+      "slug": "imsf:scscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed S-CSCF-01",
+      "updated_at": "2026-09-24T11:55:51.530Z"
+    },
+    {
+      "slug": "imsf:pcscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fixed P-CSCF-01",
+      "updated_at": "2026-09-24T11:55:51.371Z"
+    },
+    {
+      "slug": "imsm:sbc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile SBC-01",
+      "updated_at": "2026-09-24T11:55:51.192Z"
+    },
+    {
+      "slug": "imsm:tas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile TAS-01",
+      "updated_at": "2026-09-24T11:55:51.093Z"
+    },
+    {
+      "slug": "imsm:scscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile S-CSCF-01",
+      "updated_at": "2026-09-24T11:55:50.992Z"
+    },
+    {
+      "slug": "imsm:pcscf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Mobile P-CSCF-01",
+      "updated_at": "2026-09-24T11:55:50.826Z"
+    },
+    {
+      "slug": "sa5g:scp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SCP-01",
+      "updated_at": "2026-09-24T11:55:50.652Z"
+    },
+    {
+      "slug": "sa5g:nrf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NRF-01",
+      "updated_at": "2026-09-24T11:55:50.554Z"
+    },
+    {
+      "slug": "sa5g:pcf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PCF-01",
+      "updated_at": "2026-09-24T11:55:50.403Z"
+    },
+    {
+      "slug": "sa5g:ausf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "AUSF-01",
+      "updated_at": "2026-09-24T11:55:50.295Z"
+    },
+    {
+      "slug": "sa5g:udm:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "UDM-01",
+      "updated_at": "2026-09-24T11:55:50.199Z"
+    },
+    {
+      "slug": "sa5g:upf:003",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "UPF-03",
+      "updated_at": "2026-09-24T11:55:50.095Z"
+    },
+    {
+      "slug": "sa5g:smf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SMF-01",
+      "updated_at": "2026-09-24T11:55:49.995Z"
+    },
+    {
+      "slug": "sa5g:amf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "AMF-01",
+      "updated_at": "2026-09-24T11:55:49.892Z"
+    },
+    {
+      "slug": "nsa:endc:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "EN-DC Controller 001",
+      "updated_at": "2026-09-24T11:55:49.789Z"
+    },
+    {
+      "slug": "nsa:anchor:lte-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NSA LTE Anchor 001",
+      "updated_at": "2026-09-24T11:55:49.686Z"
+    },
+    {
+      "slug": "epc:dra:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DRA-01",
+      "updated_at": "2026-09-24T11:55:49.586Z"
+    },
+    {
+      "slug": "epc:pcrf:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PCRF-01",
+      "updated_at": "2026-09-24T11:55:49.476Z"
+    },
+    {
+      "slug": "epc:hss:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "HSS-01",
+      "updated_at": "2026-09-24T11:55:49.351Z"
+    },
+    {
+      "slug": "epc:pgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PGW-01",
+      "updated_at": "2026-09-24T11:55:49.246Z"
+    },
+    {
+      "slug": "epc:sgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGW-01",
+      "updated_at": "2026-09-24T11:55:49.142Z"
+    },
+    {
+      "slug": "epc:mme:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MME-01",
+      "updated_at": "2026-09-24T11:55:49.034Z"
+    },
+    {
+      "slug": "ps3g:ggsn:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "GGSN-01",
+      "updated_at": "2026-09-24T11:55:48.924Z"
+    },
+    {
+      "slug": "ps3g:sgsn:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGSN-01",
+      "updated_at": "2026-09-24T11:55:48.797Z"
+    },
+    {
+      "slug": "cs:stp:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "STP-01",
+      "updated_at": "2026-09-24T11:55:48.669Z"
+    },
+    {
+      "slug": "cs:hlr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "HLR-01",
+      "updated_at": "2026-09-24T11:55:48.564Z"
+    },
+    {
+      "slug": "cs:mgw:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MGW-01",
+      "updated_at": "2026-09-24T11:55:48.453Z"
+    },
+    {
+      "slug": "cs:msc-s:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "MSC-S-01",
+      "updated_at": "2026-09-24T11:55:48.338Z"
+    },
+    {
+      "slug": "ran:nodeb:03101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NodeB-03101",
+      "updated_at": "2026-09-24T11:55:48.213Z"
+    },
+    {
+      "slug": "ran:rnc:031",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "RNC-031",
+      "updated_at": "2026-09-24T11:55:48.092Z"
+    },
+    {
+      "slug": "ran:gnb:501",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "gNodeB-501",
+      "updated_at": "2026-09-24T11:55:47.982Z"
+    },
+    {
+      "slug": "ran:enb:101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "eNodeB-101",
+      "updated_at": "2026-09-24T11:55:47.878Z"
+    },
+    {
+      "slug": "ran:site:101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "RAN Site 101",
+      "updated_at": "2026-09-24T11:55:47.769Z"
+    },
+    {
+      "slug": "mpls:ce:cust-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise CE 001",
+      "updated_at": "2026-09-24T11:55:47.670Z"
+    },
+    {
+      "slug": "mpls:l3vpn:ent-001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Enterprise L3VPN 001",
+      "updated_at": "2026-09-24T11:55:47.572Z"
+    },
+    {
+      "slug": "ip:rr:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Route Reflector 01",
+      "updated_at": "2026-09-24T11:55:47.387Z"
+    },
+    {
+      "slug": "ip:vrf:sgi-01",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGi-VRF-01",
+      "updated_at": "2026-09-24T11:55:47.279Z"
+    },
+    {
+      "slug": "ip:vrf:n3-01",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "N3-VRF-01",
+      "updated_at": "2026-09-24T11:55:47.101Z"
+    },
+    {
+      "slug": "ip:sec:gw-02",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SEC-GW-02",
+      "updated_at": "2026-09-24T11:55:46.919Z"
+    },
+    {
+      "slug": "ip:pe:rtr-21",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "PE-RTR-21",
+      "updated_at": "2026-09-24T11:55:46.817Z"
+    },
+    {
+      "slug": "ip:p:rtr-07",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "P-RTR-07",
+      "updated_at": "2026-09-24T11:55:46.714Z"
+    },
+    {
+      "slug": "tx:mw:backhaul-101",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Microwave Backhaul 101",
+      "updated_at": "2026-09-24T11:55:46.613Z"
+    },
+    {
+      "slug": "tx:otn:trail-22",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "OTN Trail 22",
+      "updated_at": "2026-09-24T11:55:46.509Z"
+    },
+    {
+      "slug": "tx:dwdm:lambda-22",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DWDM Lambda 22",
+      "updated_at": "2026-09-24T11:55:46.408Z"
+    },
+    {
+      "slug": "tx:fiber:fr-07",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Fiber Route FR-07",
+      "updated_at": "2026-09-24T11:55:46.304Z"
+    },
+    {
+      "slug": "infra:cgnat:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "CGNAT-01",
+      "updated_at": "2026-09-24T11:55:46.203Z"
+    },
+    {
+      "slug": "infra:fw:sgi",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "SGi Firewall Pair",
+      "updated_at": "2026-09-24T11:55:46.101Z"
+    },
+    {
+      "slug": "infra:ntp:core",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core Timing Cluster",
+      "updated_at": "2026-09-24T11:55:45.997Z"
+    },
+    {
+      "slug": "infra:dns:core",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core DNS Cluster",
+      "updated_at": "2026-09-24T11:55:45.897Z"
+    },
+    {
+      "slug": "infra:db:subs-a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Subscriber DB Cluster A",
+      "updated_at": "2026-09-24T11:55:45.795Z"
+    },
+    {
+      "slug": "infra:nfvi:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "NFVI Cluster A",
+      "updated_at": "2026-09-24T11:55:45.689Z"
+    },
+    {
+      "slug": "infra:k8s:core-a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Core Kubernetes Cluster A",
+      "updated_at": "2026-09-24T11:55:45.571Z"
+    },
+    {
+      "slug": "infra:cool:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Cooling Plant",
+      "updated_at": "2026-09-24T11:55:45.372Z"
+    },
+    {
+      "slug": "infra:power:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Power Feed A",
+      "updated_at": "2026-09-24T11:55:45.273Z"
+    },
+    {
+      "slug": "infra:dc:b",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-B Facility",
+      "updated_at": "2026-09-24T11:55:45.166Z"
+    },
+    {
+      "slug": "infra:dc:a",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "DC-A Facility",
+      "updated_at": "2026-09-24T11:55:45.064Z"
+    },
+    {
+      "slug": "ext:vas:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Third Party VAS Gateway",
+      "updated_at": "2026-09-24T11:55:44.961Z"
+    },
+    {
+      "slug": "ext:roaming:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "Roaming Partner 01",
+      "updated_at": "2026-09-24T11:55:44.858Z"
+    },
+    {
+      "slug": "ext:internet:001",
+      "source_id": "default",
+      "type": "network-function",
+      "title": "External Internet",
+      "updated_at": "2026-09-24T11:55:44.756Z"
+    },
+    {
+      "slug": "site-gpon-15",
+      "source_id": "default",
+      "type": "concept",
+      "title": "GPON Hub 15",
+      "updated_at": "2026-09-24T11:55:44.650Z"
+    },
+    {
+      "slug": "site-ran-101",
+      "source_id": "default",
+      "type": "concept",
+      "title": "RAN Site 101",
+      "updated_at": "2026-09-24T11:55:44.545Z"
+    },
+    {
+      "slug": "site-pop-07",
+      "source_id": "default",
+      "type": "concept",
+      "title": "POP-07",
+      "updated_at": "2026-09-24T11:55:44.445Z"
+    },
+    {
+      "slug": "site-pop-21",
+      "source_id": "default",
+      "type": "concept",
+      "title": "POP-21",
+      "updated_at": "2026-09-24T11:55:44.349Z"
+    },
+    {
+      "slug": "site-dc-b",
+      "source_id": "default",
+      "type": "concept",
+      "title": "DC-B",
+      "updated_at": "2026-09-24T11:55:44.247Z"
+    },
+    {
+      "slug": "site-dc-a",
+      "source_id": "default",
+      "type": "concept",
+      "title": "DC-A",
+      "updated_at": "2026-09-24T11:55:44.147Z"
+    },
+    {
+      "slug": "region-south",
+      "source_id": "default",
+      "type": "concept",
+      "title": "South Region",
+      "updated_at": "2026-09-24T11:55:44.034Z"
+    },
+    {
+      "slug": "region-central",
+      "source_id": "default",
+      "type": "concept",
+      "title": "Central Region",
+      "updated_at": "2026-09-24T11:55:43.926Z"
+    },
+    {
+      "slug": "region-north",
+      "source_id": "default",
+      "type": "concept",
+      "title": "North Region",
+      "updated_at": "2026-09-24T11:55:43.776Z"
+    },
+    {
+      "slug": "services/oss_network_management_connectivity",
+      "source_id": "default",
+      "type": "service",
+      "title": "OSS to Network Management Connectivity",
+      "updated_at": "2026-09-24T11:44:21.456Z"
+    },
+    {
+      "slug": "services/vas_short_code_service",
+      "source_id": "default",
+      "type": "service",
+      "title": "VAS Short-Code Service",
+      "updated_at": "2026-09-24T11:44:21.327Z"
+    },
+    {
+      "slug": "services/internet_peering_service",
+      "source_id": "default",
+      "type": "service",
+      "title": "Internet Peering Service",
+      "updated_at": "2026-09-24T11:44:21.197Z"
+    },
+    {
+      "slug": "services/enterprise_mpls_vpn",
+      "source_id": "default",
+      "type": "service",
+      "title": "Enterprise MPLS VPN",
+      "updated_at": "2026-09-24T11:44:21.078Z"
+    },
+    {
+      "slug": "services/fixed_broadband_authentication",
+      "source_id": "default",
+      "type": "service",
+      "title": "Fixed Broadband Authentication",
+      "updated_at": "2026-09-24T11:44:20.952Z"
+    },
+    {
+      "slug": "services/gpon_broadband",
+      "source_id": "default",
+      "type": "service",
+      "title": "GPON Broadband",
+      "updated_at": "2026-09-24T11:44:20.829Z"
+    },
+    {
+      "slug": "services/sim_service_activation",
+      "source_id": "default",
+      "type": "service",
+      "title": "SIM and Service Activation",
+      "updated_at": "2026-09-24T11:44:20.705Z"
+    },
+    {
+      "slug": "services/subscriber_provisioning",
+      "source_id": "default",
+      "type": "service",
+      "title": "Subscriber Provisioning",
+      "updated_at": "2026-09-24T11:44:20.582Z"
+    },
+    {
+      "slug": "services/roaming_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Roaming Voice",
+      "updated_at": "2026-09-24T11:44:20.442Z"
+    },
+    {
+      "slug": "services/roaming_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "Roaming Data",
+      "updated_at": "2026-09-24T11:44:20.289Z"
+    },
+    {
+      "slug": "services/online_charging_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "Online Charging for Data",
+      "updated_at": "2026-09-24T11:44:20.143Z"
+    },
+    {
+      "slug": "services/prepaid_balance_inquiry",
+      "source_id": "default",
+      "type": "service",
+      "title": "Prepaid Balance Inquiry",
+      "updated_at": "2026-09-24T11:44:20.027Z"
+    },
+    {
+      "slug": "services/prepaid_recharge",
+      "source_id": "default",
+      "type": "service",
+      "title": "Prepaid Recharge",
+      "updated_at": "2026-09-24T11:44:19.897Z"
+    },
+    {
+      "slug": "services/ussd",
+      "source_id": "default",
+      "type": "service",
+      "title": "USSD",
+      "updated_at": "2026-09-24T11:44:19.776Z"
+    },
+    {
+      "slug": "services/enterprise_sms_esme",
+      "source_id": "default",
+      "type": "service",
+      "title": "Enterprise SMS via ESME",
+      "updated_at": "2026-09-24T11:44:19.665Z"
+    },
+    {
+      "slug": "services/mt_sms",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile Terminated SMS",
+      "updated_at": "2026-09-24T11:44:19.549Z"
+    },
+    {
+      "slug": "services/mo_sms",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile Originated SMS",
+      "updated_at": "2026-09-24T11:44:19.432Z"
+    },
+    {
+      "slug": "services/fixed_ims_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Fixed IMS Voice",
+      "updated_at": "2026-09-24T11:44:19.315Z"
+    },
+    {
+      "slug": "services/mobile_ims_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "Mobile IMS Voice",
+      "updated_at": "2026-09-24T11:44:19.204Z"
+    },
+    {
+      "slug": "services/volte",
+      "source_id": "default",
+      "type": "service",
+      "title": "VoLTE",
+      "updated_at": "2026-09-24T11:44:19.082Z"
+    },
+    {
+      "slug": "services/3g_voice",
+      "source_id": "default",
+      "type": "service",
+      "title": "3G Voice",
+      "updated_at": "2026-09-24T11:44:18.967Z"
+    },
+    {
+      "slug": "services/5g_sa_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "5G SA Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.846Z"
+    },
+    {
+      "slug": "services/5g_nsa_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "5G NSA Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.714Z"
+    },
+    {
+      "slug": "services/lte_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "LTE Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.566Z"
+    },
+    {
+      "slug": "services/3g_mobile_data",
+      "source_id": "default",
+      "type": "service",
+      "title": "3G Mobile Data",
+      "updated_at": "2026-09-24T11:44:18.439Z"
+    }
+  ],
+  "relationships": [
+    {
+      "from_slug": "gpon:bng:001",
+      "from_source_id": "default",
+      "to_slug": "ip:p:rtr-07",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:bng:001",
+      "target": "ip:p:rtr-07"
+    },
+    {
+      "from_slug": "gpon:ont:015001",
+      "from_source_id": "default",
+      "to_slug": "gpon:olt:015",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:ont:015001",
+      "target": "gpon:olt:015"
+    },
+    {
+      "from_slug": "gpon:ont:015001",
+      "from_source_id": "default",
+      "to_slug": "services/fixed_ims_voice",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:ont:015001",
+      "target": "services/fixed_ims_voice"
+    },
+    {
+      "from_slug": "gpon:ont:015001",
+      "from_source_id": "default",
+      "to_slug": "services/gpon_broadband",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:ont:015001",
+      "target": "services/gpon_broadband"
+    },
+    {
+      "from_slug": "gpon:ont:015001",
+      "from_source_id": "default",
+      "to_slug": "services/fixed_broadband_authentication",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:ont:015001",
+      "target": "services/fixed_broadband_authentication"
+    },
+    {
+      "from_slug": "gpon:olt:015",
+      "from_source_id": "default",
+      "to_slug": "gpon:bng:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "gpon:olt:015",
+      "target": "gpon:bng:001"
+    },
+    {
+      "from_slug": "oss:pm:001",
+      "from_source_id": "default",
+      "to_slug": "ip:pe:rtr-21",
+      "to_source_id": "default",
+      "link_type": "monitored-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "oss:pm:001",
+      "target": "ip:pe:rtr-21"
+    },
+    {
+      "from_slug": "oss:fm:001",
+      "from_source_id": "default",
+      "to_slug": "sa5g:upf:003",
+      "to_source_id": "default",
+      "link_type": "monitored-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "oss:fm:001",
+      "target": "sa5g:upf:003"
+    },
+    {
+      "from_slug": "oss:fm:001",
+      "from_source_id": "default",
+      "to_slug": "services/oss_network_management_connectivity",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "oss:fm:001",
+      "target": "services/oss_network_management_connectivity"
+    },
+    {
+      "from_slug": "prov:engine:001",
+      "from_source_id": "default",
+      "to_slug": "prov:order:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "prov:engine:001",
+      "target": "prov:order:001"
+    },
+    {
+      "from_slug": "prov:engine:001",
+      "from_source_id": "default",
+      "to_slug": "epc:hss:001",
+      "to_source_id": "default",
+      "link_type": "provisioned-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "prov:engine:001",
+      "target": "epc:hss:001"
+    },
+    {
+      "from_slug": "prov:order:001",
+      "from_source_id": "default",
+      "to_slug": "bss:catalog:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "prov:order:001",
+      "target": "bss:catalog:001"
+    },
+    {
+      "from_slug": "bss:catalog:001",
+      "from_source_id": "default",
+      "to_slug": "services/sim_service_activation",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "bss:catalog:001",
+      "target": "services/sim_service_activation"
+    },
+    {
+      "from_slug": "bss:billing:001",
+      "from_source_id": "default",
+      "to_slug": "crm:profile:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "bss:billing:001",
+      "target": "crm:profile:001"
+    },
+    {
+      "from_slug": "crm:ticket:001",
+      "from_source_id": "default",
+      "to_slug": "crm:profile:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "crm:ticket:001",
+      "target": "crm:profile:001"
+    },
+    {
+      "from_slug": "crm:profile:001",
+      "from_source_id": "default",
+      "to_slug": "services/prepaid_recharge",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "crm:profile:001",
+      "target": "services/prepaid_recharge"
+    },
+    {
+      "from_slug": "crm:profile:001",
+      "from_source_id": "default",
+      "to_slug": "services/subscriber_provisioning",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "crm:profile:001",
+      "target": "services/subscriber_provisioning"
+    },
+    {
+      "from_slug": "chg:ocs:001",
+      "from_source_id": "default",
+      "to_slug": "epc:dra:001",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "chg:ocs:001",
+      "target": "epc:dra:001"
+    },
+    {
+      "from_slug": "vas:esme:001",
+      "from_source_id": "default",
+      "to_slug": "services/enterprise_sms_esme",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:esme:001",
+      "target": "services/enterprise_sms_esme"
+    },
+    {
+      "from_slug": "vas:ussd:001",
+      "from_source_id": "default",
+      "to_slug": "in:a:scp:001",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:ussd:001",
+      "target": "in:a:scp:001"
+    },
+    {
+      "from_slug": "vas:ussd:001",
+      "from_source_id": "default",
+      "to_slug": "services/prepaid_balance_inquiry",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:ussd:001",
+      "target": "services/prepaid_balance_inquiry"
+    },
+    {
+      "from_slug": "vas:ussd:001",
+      "from_source_id": "default",
+      "to_slug": "services/vas_short_code_service",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:ussd:001",
+      "target": "services/vas_short_code_service"
+    },
+    {
+      "from_slug": "vas:smsr:001",
+      "from_source_id": "default",
+      "to_slug": "services/mt_sms",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:smsr:001",
+      "target": "services/mt_sms"
+    },
+    {
+      "from_slug": "vas:smsc:001",
+      "from_source_id": "default",
+      "to_slug": "vas:smsr:001",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "vas:smsc:001",
+      "target": "vas:smsr:001"
+    },
+    {
+      "from_slug": "imsm:tas:001",
+      "from_source_id": "default",
+      "to_slug": "imsm:sbc:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "imsm:tas:001",
+      "target": "imsm:sbc:001"
+    },
+    {
+      "from_slug": "imsm:scscf:001",
+      "from_source_id": "default",
+      "to_slug": "imsm:tas:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "imsm:scscf:001",
+      "target": "imsm:tas:001"
+    },
+    {
+      "from_slug": "imsm:pcscf:001",
+      "from_source_id": "default",
+      "to_slug": "imsm:scscf:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "imsm:pcscf:001",
+      "target": "imsm:scscf:001"
+    },
+    {
+      "from_slug": "sa5g:pcf:001",
+      "from_source_id": "default",
+      "to_slug": "chg:ocs:001",
+      "to_source_id": "default",
+      "link_type": "charges-via",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:pcf:001",
+      "target": "chg:ocs:001"
+    },
+    {
+      "from_slug": "sa5g:upf:003",
+      "from_source_id": "default",
+      "to_slug": "ip:vrf:n3-01",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:upf:003",
+      "target": "ip:vrf:n3-01"
+    },
+    {
+      "from_slug": "sa5g:upf:003",
+      "from_source_id": "default",
+      "to_slug": "ip:vrf:sgi-01",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:upf:003",
+      "target": "ip:vrf:sgi-01"
+    },
+    {
+      "from_slug": "sa5g:upf:003",
+      "from_source_id": "default",
+      "to_slug": "infra:k8s:core-a",
+      "to_source_id": "default",
+      "link_type": "hosted-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:upf:003",
+      "target": "infra:k8s:core-a"
+    },
+    {
+      "from_slug": "sa5g:upf:003",
+      "from_source_id": "default",
+      "to_slug": "services/online_charging_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:upf:003",
+      "target": "services/online_charging_data"
+    },
+    {
+      "from_slug": "sa5g:smf:001",
+      "from_source_id": "default",
+      "to_slug": "sa5g:upf:003",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:smf:001",
+      "target": "sa5g:upf:003"
+    },
+    {
+      "from_slug": "sa5g:smf:001",
+      "from_source_id": "default",
+      "to_slug": "sa5g:pcf:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:smf:001",
+      "target": "sa5g:pcf:001"
+    },
+    {
+      "from_slug": "sa5g:amf:001",
+      "from_source_id": "default",
+      "to_slug": "ran:gnb:501",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:amf:001",
+      "target": "ran:gnb:501"
+    },
+    {
+      "from_slug": "sa5g:amf:001",
+      "from_source_id": "default",
+      "to_slug": "sa5g:udm:001",
+      "to_source_id": "default",
+      "link_type": "authenticates-via",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "sa5g:amf:001",
+      "target": "sa5g:udm:001"
+    },
+    {
+      "from_slug": "nsa:endc:001",
+      "from_source_id": "default",
+      "to_slug": "nsa:anchor:lte-001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "nsa:endc:001",
+      "target": "nsa:anchor:lte-001"
+    },
+    {
+      "from_slug": "nsa:anchor:lte-001",
+      "from_source_id": "default",
+      "to_slug": "epc:sgw:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "nsa:anchor:lte-001",
+      "target": "epc:sgw:001"
+    },
+    {
+      "from_slug": "epc:pgw:001",
+      "from_source_id": "default",
+      "to_slug": "epc:pcrf:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "epc:pgw:001",
+      "target": "epc:pcrf:001"
+    },
+    {
+      "from_slug": "epc:pgw:001",
+      "from_source_id": "default",
+      "to_slug": "infra:fw:sgi",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "epc:pgw:001",
+      "target": "infra:fw:sgi"
+    },
+    {
+      "from_slug": "epc:sgw:001",
+      "from_source_id": "default",
+      "to_slug": "epc:pgw:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "epc:sgw:001",
+      "target": "epc:pgw:001"
+    },
+    {
+      "from_slug": "epc:mme:001",
+      "from_source_id": "default",
+      "to_slug": "epc:hss:001",
+      "to_source_id": "default",
+      "link_type": "authenticates-via",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "epc:mme:001",
+      "target": "epc:hss:001"
+    },
+    {
+      "from_slug": "ps3g:sgsn:001",
+      "from_source_id": "default",
+      "to_slug": "ps3g:ggsn:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ps3g:sgsn:001",
+      "target": "ps3g:ggsn:001"
+    },
+    {
+      "from_slug": "cs:msc-s:001",
+      "from_source_id": "default",
+      "to_slug": "cs:mgw:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "cs:msc-s:001",
+      "target": "cs:mgw:001"
+    },
+    {
+      "from_slug": "ran:nodeb:03101",
+      "from_source_id": "default",
+      "to_slug": "ran:rnc:031",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:nodeb:03101",
+      "target": "ran:rnc:031"
+    },
+    {
+      "from_slug": "ran:nodeb:03101",
+      "from_source_id": "default",
+      "to_slug": "services/3g_mobile_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:nodeb:03101",
+      "target": "services/3g_mobile_data"
+    },
+    {
+      "from_slug": "ran:nodeb:03101",
+      "from_source_id": "default",
+      "to_slug": "services/3g_voice",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:nodeb:03101",
+      "target": "services/3g_voice"
+    },
+    {
+      "from_slug": "ran:rnc:031",
+      "from_source_id": "default",
+      "to_slug": "ps3g:sgsn:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:rnc:031",
+      "target": "ps3g:sgsn:001"
+    },
+    {
+      "from_slug": "ran:rnc:031",
+      "from_source_id": "default",
+      "to_slug": "cs:msc-s:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:rnc:031",
+      "target": "cs:msc-s:001"
+    },
+    {
+      "from_slug": "ran:gnb:501",
+      "from_source_id": "default",
+      "to_slug": "tx:mw:backhaul-101",
+      "to_source_id": "default",
+      "link_type": "backhauled-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:gnb:501",
+      "target": "tx:mw:backhaul-101"
+    },
+    {
+      "from_slug": "ran:gnb:501",
+      "from_source_id": "default",
+      "to_slug": "nsa:endc:001",
+      "to_source_id": "default",
+      "link_type": "depends-on",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:gnb:501",
+      "target": "nsa:endc:001"
+    },
+    {
+      "from_slug": "ran:gnb:501",
+      "from_source_id": "default",
+      "to_slug": "services/5g_nsa_mobile_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:gnb:501",
+      "target": "services/5g_nsa_mobile_data"
+    },
+    {
+      "from_slug": "ran:gnb:501",
+      "from_source_id": "default",
+      "to_slug": "services/5g_sa_mobile_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:gnb:501",
+      "target": "services/5g_sa_mobile_data"
+    },
+    {
+      "from_slug": "ran:gnb:501",
+      "from_source_id": "default",
+      "to_slug": "services/mobile_ims_voice",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:gnb:501",
+      "target": "services/mobile_ims_voice"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "tx:mw:backhaul-101",
+      "to_source_id": "default",
+      "link_type": "backhauled-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "tx:mw:backhaul-101"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "epc:mme:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "epc:mme:001"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "epc:sgw:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "epc:sgw:001"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "imsm:pcscf:001",
+      "to_source_id": "default",
+      "link_type": "connected-to",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "imsm:pcscf:001"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "services/lte_mobile_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "services/lte_mobile_data"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "services/volte",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "services/volte"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "services/mo_sms",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "services/mo_sms"
+    },
+    {
+      "from_slug": "ran:enb:101",
+      "from_source_id": "default",
+      "to_slug": "services/ussd",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ran:enb:101",
+      "target": "services/ussd"
+    },
+    {
+      "from_slug": "mpls:ce:cust-001",
+      "from_source_id": "default",
+      "to_slug": "services/enterprise_mpls_vpn",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "mpls:ce:cust-001",
+      "target": "services/enterprise_mpls_vpn"
+    },
+    {
+      "from_slug": "mpls:l3vpn:ent-001",
+      "from_source_id": "default",
+      "to_slug": "ip:pe:rtr-21",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "mpls:l3vpn:ent-001",
+      "target": "ip:pe:rtr-21"
+    },
+    {
+      "from_slug": "ip:vrf:sgi-01",
+      "from_source_id": "default",
+      "to_slug": "infra:fw:sgi",
+      "to_source_id": "default",
+      "link_type": "protected-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ip:vrf:sgi-01",
+      "target": "infra:fw:sgi"
+    },
+    {
+      "from_slug": "ip:vrf:n3-01",
+      "from_source_id": "default",
+      "to_slug": "ip:pe:rtr-21",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ip:vrf:n3-01",
+      "target": "ip:pe:rtr-21"
+    },
+    {
+      "from_slug": "ip:pe:rtr-21",
+      "from_source_id": "default",
+      "to_slug": "tx:otn:trail-22",
+      "to_source_id": "default",
+      "link_type": "carried-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ip:pe:rtr-21",
+      "target": "tx:otn:trail-22"
+    },
+    {
+      "from_slug": "ip:pe:rtr-21",
+      "from_source_id": "default",
+      "to_slug": "ip:sec:gw-02",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ip:pe:rtr-21",
+      "target": "ip:sec:gw-02"
+    },
+    {
+      "from_slug": "ip:p:rtr-07",
+      "from_source_id": "default",
+      "to_slug": "services/internet_peering_service",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ip:p:rtr-07",
+      "target": "services/internet_peering_service"
+    },
+    {
+      "from_slug": "tx:mw:backhaul-101",
+      "from_source_id": "default",
+      "to_slug": "ip:pe:rtr-21",
+      "to_source_id": "default",
+      "link_type": "carried-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "tx:mw:backhaul-101",
+      "target": "ip:pe:rtr-21"
+    },
+    {
+      "from_slug": "tx:otn:trail-22",
+      "from_source_id": "default",
+      "to_slug": "tx:dwdm:lambda-22",
+      "to_source_id": "default",
+      "link_type": "carried-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "tx:otn:trail-22",
+      "target": "tx:dwdm:lambda-22"
+    },
+    {
+      "from_slug": "tx:dwdm:lambda-22",
+      "from_source_id": "default",
+      "to_slug": "tx:fiber:fr-07",
+      "to_source_id": "default",
+      "link_type": "carried-by",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "tx:dwdm:lambda-22",
+      "target": "tx:fiber:fr-07"
+    },
+    {
+      "from_slug": "infra:cgnat:001",
+      "from_source_id": "default",
+      "to_slug": "ext:internet:001",
+      "to_source_id": "default",
+      "link_type": "peers-with",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "infra:cgnat:001",
+      "target": "ext:internet:001"
+    },
+    {
+      "from_slug": "infra:fw:sgi",
+      "from_source_id": "default",
+      "to_slug": "infra:cgnat:001",
+      "to_source_id": "default",
+      "link_type": "routes-through",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "infra:fw:sgi",
+      "target": "infra:cgnat:001"
+    },
+    {
+      "from_slug": "ext:roaming:001",
+      "from_source_id": "default",
+      "to_slug": "services/roaming_data",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ext:roaming:001",
+      "target": "services/roaming_data"
+    },
+    {
+      "from_slug": "ext:roaming:001",
+      "from_source_id": "default",
+      "to_slug": "services/roaming_voice",
+      "to_source_id": "default",
+      "link_type": "supports-service",
+      "context": "",
+      "link_source": "manual",
+      "origin_slug": null,
+      "origin_source_id": null,
+      "origin_field": null,
+      "source": "ext:roaming:001",
+      "target": "services/roaming_voice"
+    }
+  ]
+}

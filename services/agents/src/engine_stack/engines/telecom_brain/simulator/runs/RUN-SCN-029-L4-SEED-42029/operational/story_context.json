@@ -1,0 +1,108 @@
+{
+  "scenario_id": "SCN-029",
+  "run_id": "RUN-SCN-029-L4-SEED-42029",
+  "title": "Operational Incident SCN-029",
+  "domain": "transport",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T08:29:01Z",
+  "resolved_at": "2026-09-10T08:45:00Z",
+  "executive_summary": "Autonomous root cause confirmed at IP:PE:RTR-21 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "IP:PE:RTR-21",
+    "condition": "Operational failure on IP:PE:RTR-21",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "IP:PE:RTR-21",
+    "IP:VRF:N3-01",
+    "IP:VRF:N3-01",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "IP:PE:RTR-21",
+      "role": "ROOT_CAUSE",
+      "status": "PE_ROUTER_DEGRADED"
+    },
+    {
+      "entity": "IP:VRF:N3-01",
+      "role": "CAUSAL_RELAY",
+      "status": "VRF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:29:01Z",
+      "event": "PE_ROUTER_DEGRADED",
+      "entity": "IP:PE:RTR-21",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: PE_ROUTER_DEGRADED on IP:PE:RTR-21"
+    },
+    {
+      "time": "2026-09-10T08:29:38Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
+    },
+    {
+      "time": "2026-09-10T08:29:38Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
+    },
+    {
+      "time": "2026-09-10T08:30:19Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T08:30:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 79.42percent"
+    },
+    {
+      "time": "2026-09-10T08:30:54Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T08:45:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "IP:PE:RTR-21",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 8,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 79.42,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

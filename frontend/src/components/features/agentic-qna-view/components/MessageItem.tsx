@@ -23,9 +23,10 @@ import {
   Layers,
 } from "lucide-react";
 import { cn, glassSurfaceStatic } from "@/lib/utils";
-import { ChatMessage } from "@/lib/api/qna";
+import { ChatMessage, StorytellerPayload } from "@/lib/api/qna";
 import { StructuredAgentResponse } from "../types/agentic-qna.types";
 import { ChartPillPicker } from "../../context-view/components/RagPanel";
+import { StorytellerVisualExplanation } from "./StorytellerVisualExplanation";
 
 const CHART_API_BASE =
   process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:8000";
@@ -780,9 +781,69 @@ const renderStructuredCard = (payload: StructuredAgentResponse | null) => {
   );
 };
 
-// ====================================================================
-// COMPONENT MAIN
-// ====================================================================
+function StoryVisualSection({ message }: { message: ChatMessage }) {
+  const [lazyPayload, setLazyPayload] = useState<StorytellerPayload | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const payload = message.storyteller || lazyPayload;
+
+  useEffect(() => {
+    if (message.storyteller) return;
+    if (
+      !message.content ||
+      (!message.content.includes("Incident story") && !message.content.includes("Incident ID:"))
+    ) {
+      return;
+    }
+
+    const match = message.content.match(
+      /(?:incidents\/[a-zA-Z0-9_\-]+|[a-zA-Z0-9_\-]+\/incidents)\/[a-zA-Z0-9._\-]+/
+    );
+    if (!match) return;
+
+    const slug = match[0];
+    let cancelled = false;
+    setLoading(true);
+
+    fetch(`${CHART_API_BASE}/api/incidents/${encodeURIComponent(slug)}/ask`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "story" }),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!cancelled && data && data.visual_explanation) {
+          setLazyPayload(data);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [message.storyteller, message.content]);
+
+  if (!payload?.visual_explanation?.widgets?.length) {
+    if (loading) {
+      return (
+        <div className="mt-4 pt-3 border-t border-cyan-500/20 flex items-center gap-2 text-xs text-neutral-400">
+          <Loader2 className="h-3.5 w-3.5 animate-spin text-cyan-400" />
+          <span>Loading visual topology & explanation...</span>
+        </div>
+      );
+    }
+    return null;
+  }
+
+  return (
+    <div className="mt-4 pt-3 border-t border-cyan-500/20 w-full animate-in fade-in duration-300">
+      <StorytellerVisualExplanation payload={payload} />
+    </div>
+  );
+}
 
 interface MessageItemProps {
   message: ChatMessage;
@@ -844,7 +905,17 @@ export function MessageItem({
           )}
         </div>
       )}
-      <div className={cn("flex flex-col max-w-[80%]", isAssistant ? "items-start" : "items-end")}>
+      <div
+        className={cn(
+          "flex flex-col",
+          isAssistant
+            ? message.storyteller || message.content?.includes("Incident story")
+              ? "w-full max-w-[96%]"
+              : "max-w-[85%]"
+            : "max-w-[80%]",
+          isAssistant ? "items-start" : "items-end"
+        )}
+      >
         {isAssistant ? (
           <div className="flex items-baseline gap-2 mb-1.5 ml-1 select-none">
             <span className="text-sm font-semibold text-white">{persona}</span>
@@ -905,6 +976,9 @@ export function MessageItem({
                 />
               </div>
             )}
+
+            {/* Render Storyteller Visual Explanation at the end of the story */}
+            {isAssistant && <StoryVisualSection message={message} />}
           </div>
         )}
 

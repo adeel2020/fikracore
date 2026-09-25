@@ -32,8 +32,8 @@ logger = logging.getLogger(__name__)
 # <domain>/incidents/<id> remains accepted as a legacy alias.
 _SLUG_RE = re.compile(r"((?:incidents/[A-Za-z0-9_-]+|[A-Za-z0-9_-]+/incidents)/[A-Za-z0-9._\-]+)")
 
-# Accepted shorthand: a bare incident id like "INC-123" or "amf-overload-2026-08-09".
-_BARE_ID_RE = re.compile(r"\b((?:INC|inc|id)[-_]?\d{1,6}|[a-z0-9]+(?:-[a-z0-9]+)+)\b")
+# Accepted shorthand: a bare incident id like "INC-123", "SCN-001", "DEMO-001", or "amf-overload-2026-08-09".
+_BARE_ID_RE = re.compile(r"\b((?:INC|inc|id|SCN|scn|DEMO|demo|TWIN|twin|H[1-4]|h[1-4])[-_]?[A-Za-z0-9_-]+|[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)+)\b")
 
 
 class IncidentContextRequired(Exception):

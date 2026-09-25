@@ -111,33 +111,53 @@ class ScenarioCatalog:
             except Exception:
                 continue
 
-            scenario_id = str(data.get("id") or data.get("scenario_id") or path.stem).upper()
+            spec = data.get("spec") if isinstance(data.get("spec"), dict) else data
+            scenario_id = str(spec.get("scenario_id") or spec.get("id") or data.get("id") or data.get("scenario_id") or path.stem).upper()
             if not scenario_id:
                 continue
 
-            stage = str(data.get("stage") or "H1").upper()
+            stage = str(spec.get("stage") or data.get("stage") or "H1").upper()
             concept = concept_for_stage(stage)
-            display_name = str(data.get("display_name") or data.get("scenario_name") or scenario_id)
+            meta = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
+            annotations = meta.get("annotations") if isinstance(meta.get("annotations"), dict) else {}
+
+            display_name = str(
+                annotations.get("presentation.telecom.ai/display-title")
+                or spec.get("display_name")
+                or spec.get("scenario_name")
+                or data.get("display_name")
+                or data.get("scenario_name")
+                or scenario_id
+            )
             
-            classification = data.get("classification") or {}
-            explanation = data.get("scenario_explanation") or {}
+            classification = spec.get("classification") or data.get("classification") or {}
+            explanation = spec.get("scenario_explanation") or data.get("scenario_explanation") or {}
             
-            raw_domains = data.get("domains") or classification.get("domains") or []
-            raw_services = data.get("affected_services") or classification.get("affected_services") or []
+            raw_domains = spec.get("domains") or classification.get("domains") or data.get("domains") or []
+            raw_services = spec.get("affected_services") or classification.get("affected_services") or data.get("affected_services") or []
             domains = [str(d).replace("_", " ").title() for d in raw_domains]
             services = [str(s).replace("_", " ").title() for s in raw_services]
-            aliases = [str(a) for a in (data.get("aliases") or [])]
-            demo_meta = data.get("demo_metadata") or {}
+            aliases = [str(a) for a in (spec.get("aliases") or data.get("aliases") or [])]
+            if meta.get("name") and meta["name"] not in aliases:
+                aliases.append(meta["name"])
+
+            demo_meta = spec.get("demo_metadata") or data.get("demo_metadata") or {}
             demo_enabled = bool(demo_meta.get("enabled", True)) if isinstance(demo_meta, dict) else True
-            desc = str(data.get("description") or explanation.get("problem_statement") or f"Declarative scenario {scenario_id}")
-            difficulty = str(data.get("difficulty") or classification.get("difficulty_profile") or "L1")
+            desc = str(
+                annotations.get("presentation.telecom.ai/business-impact")
+                or spec.get("description")
+                or explanation.get("problem_statement")
+                or data.get("description")
+                or f"Declarative scenario {scenario_id}"
+            )
+            difficulty = str(spec.get("difficulty") or classification.get("difficulty_profile") or data.get("difficulty") or "L1")
 
             sc = UnifiedScenario(
                 id=scenario_id,
                 display_name=display_name,
                 stage=stage,
                 concept=concept,
-                scenario_type=str(data.get("scenario_type") or "INCIDENT"),
+                scenario_type=str(spec.get("scenario_type") or data.get("scenario_type") or "INCIDENT"),
                 domains=domains or ["IP Transport", "5G SA Core", "CRM"],
                 services=services or ["5G SA Mobile Data"],
                 description=desc,

@@ -9,6 +9,7 @@ Provides unified REST endpoints for CLI, Simulator UI, Zaki Copilot, and externa
 
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Optional, Dict, List, Literal
 from fastapi import APIRouter, HTTPException, Header, Query
 from fastapi.responses import StreamingResponse
@@ -60,7 +61,10 @@ class ZakiChatRequest(BaseModel):
     mode: str = "INVESTIGATION"  # INVESTIGATION or DEMO
     step: int = 1
     run_id: str | None = None
+    session_id: str | None = None
     revision: int | None = None
+    simulation_status: str | None = None
+    run_status: str | None = None
     selected_context: dict[str, Any] | None = None
 
 
@@ -169,8 +173,27 @@ def _resolve_storyteller_incident_id(
     selected_context: dict[str, Any] | None,
     model: StandardPresentationModel | None,
     state: dict[str, Any] | None,
+    run_id: str | None = None,
 ) -> str | None:
-    """Resolve a public Storyteller incident for Zaki without reading hidden truth."""
+    """Resolve a public Storyteller incident for Zaki without reading hidden truth.
+
+    Priority order:
+    1. Active simulation run_id (checks story_context.json via StoryContextReader).
+    2. Explicit incident_id from selected_context or state metadata.
+    3. Keyword-based heuristic fallback.
+    """
+    # 1. Direct run_id resolution via StoryContextReader (fast-path)
+    effective_run_id = run_id or _nested_string(state, "run", "run_id") or _nested_string(state, "run_id")
+    if effective_run_id:
+        try:
+            from storyteller.knowledge.story_context_reader import StoryContextReader
+            story_file = StoryContextReader().resolve_story_file(effective_run_id)
+            if story_file:
+                return effective_run_id
+        except Exception:
+            pass
+
+    # 2. Explicit incident_id from context or state
     selected_context = selected_context or {}
     metadata = selected_context.get("metadata") if isinstance(selected_context.get("metadata"), dict) else {}
     explicit = (
@@ -187,6 +210,7 @@ def _resolve_storyteller_incident_id(
     if isinstance(explicit, str) and explicit.strip():
         return explicit.strip()
 
+    # 3. Keyword-based heuristic fallback
     searchable = " ".join(
         str(value)
         for value in [
@@ -217,12 +241,14 @@ def _build_zaki_storyteller_payload(
     state: dict[str, Any] | None,
     query: str,
     session_id: str | None,
+    run_id: str | None = None,
 ) -> dict[str, Any] | None:
     incident_id = _resolve_storyteller_incident_id(
         scenario_id=scenario_id,
         selected_context=selected_context,
         model=model,
         state=state,
+        run_id=run_id,
     )
     if not incident_id:
         return None
@@ -412,6 +438,83 @@ def get_scenario_topology(scenario_id: str) -> dict[str, Any]:
 def get_scenario_state(scenario_id: str) -> dict[str, Any]:
     """Retrieve full structured simulation state for the scenario."""
     return simulation_manager.get_state(scenario_id)
+
+
+def _find_repo_root() -> Path:
+    curr = Path(__file__).resolve().parent
+    for _ in range(10):
+        if (curr / "artifacts/knowledge-inventory/knowledge-inventory.json").is_file():
+            return curr
+        if curr.parent == curr:
+            break
+        curr = curr.parent
+    return Path(".").resolve()
+
+
+@router.post("/scenarios/{scenario_id}/digital-twin-projection")
+def project_digital_twin_scenario(scenario_id: str) -> dict[str, Any]:
+    """Dynamically project the live/completed simulation run onto the Telecom Knowledge Graph topology visualizer."""
+    state = simulation_manager.get_state(scenario_id)
+
+    repo_root = _find_repo_root()
+    output_html = repo_root / "artifacts/telecom-knowledge-graph.html"
+
+    import importlib.util
+    script_path = repo_root / "skills/telecom-knowledge-graph/scripts/build_graph.py"
+    if not script_path.is_file():
+        script_path = repo_root / ".agents/skills/telecom-knowledge-graph/scripts/build_graph.py"
+
+    spec = importlib.util.spec_from_file_location("build_graph_module", script_path)
+    if not spec or not spec.loader:
+        raise HTTPException(status_code=500, detail="Could not load build_graph script.")
+    bg_module = importlib.util.module_from_spec(spec)
+    # Persist execution trace into simulator runs directory so the run is permanently recorded
+    import json
+    clean_id = scenario_id.upper().strip()
+    sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
+    if sim_runs_dir.is_dir():
+        target_dir = None
+        for r_dir in sorted(sim_runs_dir.glob(f"*{clean_id}*")):
+            if r_dir.is_dir():
+                target_dir = r_dir
+                break
+        if not target_dir:
+            target_dir = sim_runs_dir / f"RUN-{clean_id}"
+            target_dir.mkdir(parents=True, exist_ok=True)
+
+        trace_file = target_dir / "execution_trace_latest.json"
+        try:
+            with open(trace_file, "w", encoding="utf-8") as f:
+                json.dump(state, f, indent=2, default=str)
+        except Exception:
+            pass
+
+    spec.loader.exec_module(bg_module)
+    res = bg_module.build_knowledge_graph(repo_root=repo_root, output_file=output_html, run_state=state)
+
+    # Sync to frontend public directory so browser iframe serves fresh visualizer immediately
+    public_html = repo_root / "frontend/public/telecom-knowledge-graph.html"
+    if public_html.parent.is_dir():
+        import shutil
+        shutil.copyfile(output_html, public_html)
+
+    # Automatically sync IncidentRegistry so the newly projected scenario appears immediately in storyteller
+    try:
+        from correlation.registry import IncidentRegistry
+        reg = IncidentRegistry()
+        reg.ensure_seeded()
+    except Exception:
+        pass
+
+    return {
+        "status": "SUCCESS",
+        "scenario_id": scenario_id,
+        "run_id": state.get("run_id"),
+        "output_file": res.get("output_file"),
+        "timestamp": res.get("timestamp"),
+        "total_nodes": res.get("total_nodes"),
+        "total_links": res.get("total_links"),
+    }
 
 
 @router.post("/scenarios/{scenario_id}/run")
@@ -802,10 +905,14 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
 
     bridge = ZakiBridge()
     zaki_context = bridge.build_context(model, mode=req.mode, step=req.step)
+    resolved_sim_status = (req.simulation_status or req.run_status or (run.status if run else "READY")).upper()
     ui_context = {
         "workspace": req.workspace,
         "run_id": req.run_id,
         "simulation_stage": sel_stage,
+        "simulation_status": resolved_sim_status,
+        "stage_index": run.stage_index if run else (state.get("stage_index", 0) if state else 0),
+        "events_count": len(state.get("events", [])) if state else 0,
         "response_level": req.response_level,
         "selected_domain": sel_dom_id,
         "selected_service": req.selected_service,
@@ -820,11 +927,14 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         "revision": run.snapshot_version if run else (req.revision or 1),
         "is_replay": getattr(run, "is_replay", False) if run else False,
         "replay_position": getattr(run, "replay_position", 0) if run else 0,
+        "session_id": req.session_id or req.run_id or "default-session",
         "simulation_state": state,
     }
     answer = bridge.answer_query(query_text, zaki_context, ui_context=ui_context)
 
     raw_answer_str = answer.get("response", "") if isinstance(answer, dict) else str(answer)
+    copilot_msg = (answer.get("copilot", {}) if isinstance(answer, dict) else {}).get("message") or raw_answer_str
+    spoken_answer_str = copilot_msg if copilot_msg else raw_answer_str
     grounded_in = answer.get("grounded_in", {}) if isinstance(answer, dict) else {}
     uncertainty = answer.get("uncertainty", []) if isinstance(answer, dict) else []
     suggested_actions = answer.get("suggested_actions", []) if isinstance(answer, dict) else []
@@ -859,7 +969,8 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         model=model,
         state=state,
         query=query_text,
-        session_id=req.run_id,
+        session_id=req.session_id or req.run_id,
+        run_id=req.run_id,
     )
     if not storyteller_payload and any(w in query_text.lower() for w in ["story", "storyteller", "narrative", "post-mortem", "curated story"]):
         storyteller_payload = {
@@ -876,7 +987,9 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         }
     zaki_v2 = {
         "answer": raw_answer_str,
+        "spoken_answer": spoken_answer_str,
         "run_id": req.run_id,
+        "session_id": req.session_id,
         "revision": run.snapshot_version if run else (req.revision or 1),
         "source_mode": getattr(run, "source_mode", "SIMULATION") if run else "SIMULATION",
         "copilot_state": copilot_state,

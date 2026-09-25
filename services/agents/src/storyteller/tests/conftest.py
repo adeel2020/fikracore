@@ -16,7 +16,7 @@ from storyteller.knowledge import GbrainClient, MobileCoreKnowledge
 from storyteller.knowledge.context import IncidentContext
 from storyteller.knowledge.provenance import fact
 
-AMF_INCIDENT = "mobile-core/incidents/amf-overload-2026-08-09"
+AMF_INCIDENT = "incidents/transport/transport-n3-mobile-data-stall"
 REPO_ROOT = Path(__file__).resolve().parents[5]
 
 load_dotenv(REPO_ROOT / ".env.test.local")

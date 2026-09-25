@@ -1,0 +1,82 @@
+{
+  "scenario_id": "SCN-002",
+  "run_id": "RUN-SCN-002-L2-SEED-42002",
+  "title": "Operational Incident SCN-002",
+  "domain": "sa_5g_core",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T08:02:03Z",
+  "resolved_at": "2026-09-10T08:18:00Z",
+  "executive_summary": "Autonomous root cause confirmed at SA5G:UPF:003 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "SA5G:UPF:003",
+    "condition": "Operational failure on SA5G:UPF:003",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "SA5G:UPF:003",
+    "CRM:TICKET:001",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "ROOT_CAUSE",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:02:03Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T08:02:47Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T08:02:47Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T08:03:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Online Charging Data Success Rate degraded to 71.97percent"
+    },
+    {
+      "time": "2026-09-10T08:18:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "SA5G:UPF:003",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 6,
+    "kpi_breach": {
+      "name": "Online Charging Data Success Rate",
+      "value": 71.97,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

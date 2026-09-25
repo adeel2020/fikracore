@@ -296,9 +296,9 @@ export function useAgenticQna() {
     setActiveSkillIndex(0);
   }, [input]);
 
-  const refreshIncidentQueue = useCallback(async () => {
+  const refreshIncidentQueue = useCallback(async (sync = false) => {
     try {
-      setIncidentQueue(await fetchIncidentQueue());
+      setIncidentQueue(await fetchIncidentQueue(sync));
     } catch {
       // The queue is an enhancement; storytelling remains available by typed slug.
       setIncidentQueue([]);

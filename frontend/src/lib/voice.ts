@@ -201,9 +201,25 @@ function prepareSpeechText(rawText: string): string {
   let text = rawText
     .replace(/```[\s\S]*?```/g, "Code snippet omitted.")
     .replace(/`([^`]+)`/g, "$1")
-    .replace(/[*_#~>\[\]()|]/g, " ")
     .replace(/- From `[^`]+` \/ [^:]+:/g, "")
-    .replace(/https?:\/\/\S+/g, "link");
+    .replace(/https?:\/\/\S+/g, "link")
+    // Turn parenthetical notes into natural conversational pauses
+    .replace(/\s*\(([^)]+)\)\s*/g, ", $1, ")
+    // Turn clause-separating dashes and semicolons into breathing pauses
+    .replace(/\s+[-—–]\s+/g, ", ")
+    .replace(/;\s*/g, ". ")
+    .replace(/:\s+/g, ". ")
+    // Natural pause after introductory transition adverbs
+    .replace(/\b(Specifically|Consequently|As a result|However|Furthermore|Additionally|In this case|Notice that)\s+/gi, "$1, ")
+    // Format percentages into natural speech (18.4% -> 18 point 4 percent)
+    .replace(/(\d+)\.(\d+)\s*%/g, "$1 point $2 percent")
+    .replace(/(\d+)\s*%/g, "$1 percent")
+    // Format error codes and HTTP numbers for spoken cadence (502 -> 5, 0, 2)
+    .replace(/\b(HTTP|status|code|error)\s+([1-5])(\d)(\d)\b/gi, "$1 $2, $3, $4")
+    // Format durations (14ms -> 14 milliseconds)
+    .replace(/(\d+)\s*ms\b/gi, "$1 milliseconds")
+    // Remove formatting symbols
+    .replace(/[*_#~>\[\]|]/g, " ");
 
   const pronunciation: [RegExp, string][] = [
     [/\bMARK\b/g, "Mark"],
@@ -246,15 +262,23 @@ function prepareSpeechText(rawText: string): string {
     text = text.replace(regex, replacement);
   }
 
-  return text.replace(/\s+/g, " ").trim();
+  // Clean up punctuation spacing
+  return text
+    .replace(/,\s*,+/g, ",")
+    .replace(/,\s*\./g, ".")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 class JarvisVoiceAssistant {
   private isSpeaking: boolean = false;
+  private isPaused: boolean = false;
   private isListening: boolean = false;
   private isLiveMode: boolean = false;
   private isSubmitting: boolean = false;
   private isMuted: boolean = false;
+  private activeRunId: string | null = null;
+  private lastSpokenText: string = "";
   private audioCtx: AudioContext | null = null;
   private recognition: BrowserSpeechRecognition | null = null;
   private silenceTimer: ReturnType<typeof setTimeout> | null = null;
@@ -387,6 +411,34 @@ class JarvisVoiceAssistant {
     return this.isSpeaking;
   }
 
+  public getIsPaused(): boolean {
+    return this.isPaused;
+  }
+
+  public pause(): void {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.pause();
+      this.isPaused = true;
+    }
+  }
+
+  public resume(): void {
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.resume();
+      this.isPaused = false;
+    }
+  }
+
+  public repeatLastAnswer(): void {
+    if (this.lastSpokenText) {
+      this.speak(this.lastSpokenText);
+    }
+  }
+
+  public getLastSpokenText(): string {
+    return this.lastSpokenText;
+  }
+
   public getIsListening(): boolean {
     return this.isListening;
   }
@@ -455,8 +507,9 @@ class JarvisVoiceAssistant {
     this.stopBackendOutput();
   }
 
-  public startLiveMode(callbacks: LiveVoiceCallbacks) {
+  public startLiveMode(callbacks: LiveVoiceCallbacks, options?: { runId?: string }) {
     this.callbacks = callbacks;
+    this.activeRunId = options?.runId || null;
     this.isLiveMode = true;
     this.isSubmitting = false;
     this.currentTranscript = "";
@@ -501,7 +554,8 @@ class JarvisVoiceAssistant {
     this.wsSessionId = `mark-live-${sessionSuffix}`;
     this.activeGeneration = 0;
     this.lastBargeInAt = 0;
-    const ws = new WebSocket(`${WS_BASE}/ws/jarvis-voice/${this.wsSessionId}`);
+    const query = this.activeRunId ? `?run_id=${encodeURIComponent(this.activeRunId)}` : "";
+    const ws = new WebSocket(`${WS_BASE}/ws/jarvis-voice/${this.wsSessionId}${query}`);
     this.ws = ws;
     ws.binaryType = "arraybuffer";
     ws.onmessage = (event) => this.handleBackendMessage(event);
@@ -1120,28 +1174,22 @@ class JarvisVoiceAssistant {
 
     const cleanText = prepareSpeechText(text);
     this.activeSpokenText = cleanText.toLowerCase();
+    this.lastSpokenText = text;
+    this.isPaused = false;
 
-    // Chunk by sentence/clause boundaries (~160-250 characters) so full responses play reliably
-    const sentenceMatches = cleanText.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g) || [cleanText];
+    // Chunk strictly by sentence boundary for distinct human cadence
+    const rawMatches = cleanText.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g) || [cleanText];
     const chunks: string[] = [];
-    let cur = "";
-    for (const raw of sentenceMatches) {
+    for (const raw of rawMatches) {
       const s = raw.trim();
-      if (!s) continue;
-      if (cur && cur.length + s.length > 220) {
-        chunks.push(cur);
-        cur = s;
-      } else {
-        cur = cur ? `${cur} ${s}` : s;
-      }
+      if (s) chunks.push(s);
     }
-    if (cur) chunks.push(cur);
     if (!chunks.length) chunks.push(cleanText);
 
     this.speechChunks = chunks;
     this.currentChunkIndex = 0;
 
-    console.log(`[MARK Voice Speaking full curated response: ${chunks.length} chunks, ${cleanText.length} chars]`);
+    console.log(`[MARK Voice Speaking: ${chunks.length} sentences with natural pauses, ${cleanText.length} chars]`);
 
     // Cancel previous and resume
     window.speechSynthesis.cancel();
@@ -1153,10 +1201,10 @@ class JarvisVoiceAssistant {
     }
     this.speechKeepAliveTimer = setInterval(() => {
       if (typeof window !== "undefined" && "speechSynthesis" in window) {
-        if (window.speechSynthesis.speaking) {
+        if (window.speechSynthesis.speaking && !this.isPaused) {
           window.speechSynthesis.pause();
           window.speechSynthesis.resume();
-        } else {
+        } else if (!window.speechSynthesis.speaking) {
           if (this.speechKeepAliveTimer) {
             clearInterval(this.speechKeepAliveTimer);
             this.speechKeepAliveTimer = null;
@@ -1166,7 +1214,7 @@ class JarvisVoiceAssistant {
     }, 8000);
 
     const playNextChunk = () => {
-      if (!this.isSpeaking) return;
+      if (!this.isSpeaking || this.isPaused) return;
 
       if (this.currentChunkIndex >= this.speechChunks.length) {
         // Complete speech finished
@@ -1186,8 +1234,14 @@ class JarvisVoiceAssistant {
       try {
         const utterance = new SpeechSynthesisUtterance(chunk);
         const tone = TONE_PROFILES[this.voiceSettings.tone] ?? TONE_PROFILES.executive;
-        utterance.rate = Math.max(0.5, Math.min(2, tone.rate * this.voiceSettings.playbackRate));
-        utterance.pitch = tone.pitch;
+        // Subtle prosodic modulation: questions slightly higher pitch, critical statements slightly slower
+        const isQuestion = chunk.endsWith("?");
+        const isCritical = /\b(critical|root cause|breach|outage|failure|down)\b/i.test(chunk);
+        const pitchMod = isQuestion ? 1.04 : isCritical ? 0.96 : 1.0;
+        const rateMod = isCritical ? 0.94 : 1.0;
+
+        utterance.rate = Math.max(0.5, Math.min(2, tone.rate * this.voiceSettings.playbackRate * rateMod));
+        utterance.pitch = Math.max(0.5, Math.min(2, tone.pitch * pitchMod));
         utterance.volume = tone.volume;
         utterance.lang = "en-US";
 
@@ -1218,7 +1272,11 @@ class JarvisVoiceAssistant {
           const idx = activeUtterances.indexOf(utterance);
           if (idx !== -1) activeUtterances.splice(idx, 1);
           this.currentChunkIndex++;
-          playNextChunk();
+          // Human-like inter-sentence pause: 380ms for periods, 450ms for questions, 520ms for paragraphs
+          const isParagraphEnd = chunk.includes("\n") || this.currentChunkIndex % 3 === 0;
+          const isClauseBreak = chunk.endsWith(",");
+          const pauseMs = isClauseBreak ? 200 : isParagraphEnd ? 500 : isQuestion ? 420 : 350;
+          setTimeout(playNextChunk, pauseMs);
         };
 
         utterance.onerror = (e) => {

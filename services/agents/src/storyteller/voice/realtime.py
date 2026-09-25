@@ -399,9 +399,13 @@ class RealtimeVoicePipeline:
             self.tts.start(sample_rate=OUTPUT_SAMPLE_RATE)
             sentences = split_sentences(answer)
             has_stream = hasattr(self.tts, "synthesize_stream")
-            for sentence in sentences:
+            for beat_idx, sentence in enumerate(sentences):
                 self._check_turn_deadline(gen)
                 gen.check()
+                cue = self._derive_visual_cue(sentence)
+                await self.emit_generation(
+                    gen, "beat_start", beat_id=beat_idx, text=sentence, cue=cue
+                )
                 if has_stream:
                     async for chunk in self._stream_tts_chunks(sentence):
                         self._check_turn_deadline(gen)
@@ -433,6 +437,7 @@ class RealtimeVoicePipeline:
                     await self.emit_generation(
                         gen, "audio", audio=chunk.audio, sample_rate=out_rate
                     )
+                await self.emit_generation(gen, "beat_end", beat_id=beat_idx)
             self.tts.stop()
             gen.timings["tts_ms"] = (time.perf_counter() - t0) * 1000.0
             await self._finish_done(gen)
@@ -539,6 +544,19 @@ class RealtimeVoicePipeline:
         self._audio_received_at = None
         self._transcript_at = None
         self._first_audio_at = None
+
+    @staticmethod
+    def _derive_visual_cue(sentence: str) -> dict[str, Any]:
+        """Derive synchronous visual cue action for this sentence (Narrative Beat)."""
+        lower = sentence.lower()
+        for ent in ("pe-rtr-21", "rtr-21", "upf-003", "upf", "amf", "smf", "ticket"):
+            if ent in lower:
+                return {"type": "HIGHLIGHT_NODE", "target": ent.upper()}
+        if "confidence" in lower or "%" in lower or "percent" in lower:
+            return {"type": "DIAL_CONFIDENCE"}
+        if "recovery" in lower or "mitigat" in lower or "remediat" in lower or "restor" in lower:
+            return {"type": "SHOW_RECOVERY"}
+        return {"type": "GENERAL_NARRATION"}
 
     @staticmethod
     async def _noop_emit(_event: dict) -> None:

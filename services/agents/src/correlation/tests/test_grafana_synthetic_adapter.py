@@ -4,7 +4,7 @@ from correlation.adapters import SyntheticGrafanaAdapter
 from correlation.engine import CorrelationEngine
 
 
-FIXTURES = Path("services/agents/src/correlation/fixtures/grafana-lgtm")
+FIXTURES = Path(__file__).resolve().parents[1] / "fixtures" / "grafana-lgtm"
 
 
 def test_synthetic_adapter_filters_by_intent() -> None:

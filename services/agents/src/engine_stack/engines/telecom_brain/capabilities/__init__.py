@@ -19,10 +19,11 @@ from .present import present_capability
 from .benchmark import benchmark_capability
 from .report import report_capability
 from .validate import validate_capability
+from .snapshot import snapshot_capability
 
 
 def create_default_registry() -> CapabilityRegistry:
-    """Build and populate default capability registry with all 10 core capabilities."""
+    """Build and populate default capability registry with all core capabilities."""
     reg = CapabilityRegistry()
     reg.register(investigate_capability)
     reg.register(discover_capability)
@@ -34,6 +35,7 @@ def create_default_registry() -> CapabilityRegistry:
     reg.register(benchmark_capability)
     reg.register(report_capability)
     reg.register(validate_capability)
+    reg.register(snapshot_capability)
     return reg
 
 
@@ -59,4 +61,5 @@ __all__ = [
     "benchmark_capability",
     "report_capability",
     "validate_capability",
+    "snapshot_capability",
 ]

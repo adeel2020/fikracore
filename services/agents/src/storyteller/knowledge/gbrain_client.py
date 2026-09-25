@@ -21,6 +21,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+from pathlib import Path
 import shutil
 import subprocess
 import urllib.request
@@ -90,424 +91,221 @@ def _normalize_result(payload: Any) -> Any:
 
 
 # ---------------------------------------------------------------------------
-# Embedded Knowledge Graph & Fixture Catalog
+# Embedded Knowledge Graph (Populated dynamically from simulator scenarios & snapshots)
 # ---------------------------------------------------------------------------
-_EMBEDDED_PAGES: dict[str, dict[str, Any]] = {
-    "mobile-core/incidents/amf-overload-2026-08-09": {
-        "slug": "mobile-core/incidents/amf-overload-2026-08-09",
-        "type": "incident",
-        "title": "AMF-01 overload and high registration rejection",
-        "frontmatter": {
-            "severity": "SEV-2",
-            "status": "resolved",
-            "started_at": "2026-08-09T06:14:00Z",
-            "resolved_at": "2026-08-09T07:05:00Z",
-            "correlation_key": "amf-core-overload-01",
-            "correlation_score": 0.94,
-        },
-        "compiled_truth": (
-            "# AMF-01 overload and high registration rejection\n\n"
-            "## Summary\nCritical registration failure burst in Dubai Core DC-1 triggered by CPU saturation on AMF-01.\n\n"
-            "## Timeline\n"
-            "- **06:14:00Z** — RSR (Registration Success Rate) dropped below threshold to 94.7%.\n"
-            "- **06:22:15Z** — Correlated alarm candidate formed with 98% CPU saturation.\n"
-            "- **06:45:00Z** — Automated remediation added AMF-01 capacity.\n"
-            "- **07:05:00Z** — RSR recovered to 99.9%.\n"
-        ),
-    },
-    "incidents/mobile-core/sgi-throughput-drop": {
-        "slug": "incidents/mobile-core/sgi-throughput-drop",
-        "type": "incident",
-        "title": "SGi Data Forwarding Throughput Drop",
-        "frontmatter": {
-            "severity": "SEV-1",
-            "status": "investigating",
-            "started_at": "2026-08-31T07:10:00Z",
-            "correlation_key": "a154bb7a3997859c",
-            "correlation_score": 0.95,
-            "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-            "legacy_aliases": ["mobile-core/incidents/sgi-throughput-drop", "mobile-core/incidents/sgi-data-a154bb7a3997859c"],
-            "contributing_domains": ["mobile-core", "transport"],
-        },
-        "compiled_truth": (
-            "# SGi Data Forwarding Throughput Drop\n\n"
-            "## Summary\nSevere throughput degradation and packet discards across SGi egress interface and GiLAN firewall.\n\n"
-            "## Timeline\n"
-            "- **07:10:00Z** — SGI_THROUGHPUT_DROP critical alarm on pgw-01.\n"
-            "- **07:12:00Z** — NAT_SESSION_TABLE_HIGH major alarm on nat-fw-01.\n"
-            "- **07:14:00Z** — INTERFACE_DISCARDS_HIGH on transport edge router sgi-edge-01.\n"
-            "- **07:15:00Z** — SGi Throughput fell below committed service intent threshold.\n"
-        ),
-    },
-    "incidents/mobile-core/sgi-data-a154bb7a3997859c": {
-        "slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-        "type": "incident",
-        "title": "SGi Data Forwarding Throughput Drop",
-        "frontmatter": {
-            "severity": "SEV-1",
-            "status": "investigating",
-            "started_at": "2026-08-31T07:10:00Z",
-            "correlation_key": "a154bb7a3997859c",
-            "correlation_score": 0.95,
-            "canonical_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c",
-            "legacy_aliases": ["mobile-core/incidents/sgi-throughput-drop", "incidents/mobile-core/sgi-throughput-drop"],
-            "contributing_domains": ["mobile-core", "transport"],
-        },
-        "compiled_truth": (
-            "# SGi Data Forwarding Throughput Drop\n\n"
-            "## Summary\nSevere throughput degradation and packet discards across SGi egress interface and GiLAN firewall.\n\n"
-            "## Timeline\n"
-            "- **07:10:00Z** — SGI_THROUGHPUT_DROP critical alarm on pgw-01.\n"
-            "- **07:12:00Z** — NAT_SESSION_TABLE_HIGH major alarm on nat-fw-01.\n"
-            "- **07:14:00Z** — INTERFACE_DISCARDS_HIGH on transport edge router sgi-edge-01.\n"
-            "- **07:15:00Z** — SGi Throughput fell below committed service intent threshold.\n"
-        ),
-    },
-    "incidents/mobile-core/lte-attach-54db6ef325fbf758": {
-        "slug": "incidents/mobile-core/lte-attach-54db6ef325fbf758",
-        "type": "incident",
-        "title": "LTE Attach Failure & S1-MME Path Degradation",
-        "frontmatter": {
-            "severity": "SEV-1",
-            "status": "investigating",
-            "started_at": "2026-08-31T11:00:00Z",
-            "correlation_key": "lte-attach-54db6ef325fbf758",
-            "correlation_score": 0.91,
-        },
-        "compiled_truth": (
-            "# LTE Attach Failure\n\n"
-            "## Summary\nIntermittent LTE attach failures affecting 14,200 subscribers across Dubai North eNodeBs.\n\n"
-            "## Timeline\n"
-            "- **11:00:00Z** — 4G_Attach_SR KPI fell to 88.2%.\n"
-            "- **11:04:37Z** — High latency detected on S1-MME transport link.\n"
-        ),
-    },
-    "network-functions/amf": {
-        "slug": "network-functions/amf",
-        "type": "network-function",
-        "title": "Access and Mobility Management Function (AMF-01)",
-        "frontmatter": {"summary": "Core 5GC control plane function handling registration, reachability, and mobility management."},
-        "compiled_truth": "AMF handles UE registration, connection management, NAS signaling, and mobility management in 5G Core.",
-    },
-    "network-functions/upf": {
-        "slug": "network-functions/upf",
-        "type": "network-function",
-        "title": "User Plane Function (UPF Core Pod 3)",
-        "frontmatter": {"summary": "Core 5GC user plane function performing packet routing, QoS enforcement, and uplink/downlink forwarding."},
-        "compiled_truth": "UPF handles packet routing and forwarding, data buffering, and QoS enforcement between gNodeB and Data Networks (DN).",
-    },
-    "network-functions/smf": {
-        "slug": "network-functions/smf",
-        "type": "network-function",
-        "title": "Session Management Function (SMF-01)",
-        "frontmatter": {"summary": "Core 5GC control plane function managing PDU session lifecycle, IP address allocation, and UPF selection."},
-        "compiled_truth": "SMF establishes, modifies, and releases PDU sessions, and controls UPF forwarding policies.",
-    },
-    "network-functions/gnb": {
-        "slug": "network-functions/gnb",
-        "type": "network-function",
-        "title": "Next Generation NodeB (gNodeB / RAN Site 42)",
-        "frontmatter": {"summary": "5G NR Radio Access Network base station providing radio connectivity to user equipment."},
-        "compiled_truth": "gNodeB connects mobile devices over NR-Uu interface and connects to AMF via N2 and UPF via N3.",
-    },
-    "kpi/rsr": {
-        "slug": "kpi/rsr",
-        "type": "kpi",
-        "title": "Registration Success Rate (RSR)",
-        "frontmatter": {"unit": "percent", "threshold": "98.5%"},
-        "compiled_truth": "RSR measures the ratio of successful initial registration procedures against total attempts.",
-    },
-    "kpi-event/rsr-breach": {
-        "slug": "kpi-event/rsr-breach",
-        "type": "kpi-event",
-        "title": "RSR Critical Breach (94.7% at 06:14)",
-        "frontmatter": {"value": 94.7, "unit": "percent", "event_type": "alarm", "threshold": "critical", "observed_at": "2026-08-09T06:14:00Z"},
-        "compiled_truth": "Observed severe degradation in registration success rate across DC-1.",
-    },
-    "symptom/reg-fail-spike": {
-        "slug": "symptom/reg-fail-spike",
-        "type": "symptom",
-        "title": "Registration Failure Burst Spike",
-        "frontmatter": {},
-        "compiled_truth": "Bursts of 5G NAS Registration Reject messages with Cause 22 (Congestion).",
-    },
-    "hyp/amf-cpu-sat": {
-        "slug": "hyp/amf-cpu-sat",
-        "type": "hypothesis",
-        "title": "AMF-01 CPU saturation from registration load",
-        "frontmatter": {"status": "confirmed", "confidence": 0.94},
-        "compiled_truth": "AMF-01 worker processes reached 98% CPU utilization causing NAS buffer drops.",
-    },
-    "ev/cpu-98": {
-        "slug": "ev/cpu-98",
-        "type": "evidence",
-        "title": "AMF-01 CPU utilization metric pegged at 98%",
-        "frontmatter": {"source": "prometheus/dc1-amf", "observed_at": "2026-08-09T06:18:00Z"},
-        "compiled_truth": "Prometheus metric node_cpu_seconds_total indicated sustained saturation.",
-    },
-    "ev/nas-reject": {
-        "slug": "ev/nas-reject",
-        "type": "evidence",
-        "title": "NAS REGISTRATION REJECT 'congestion' cause in trace logs",
-        "frontmatter": {"source": "pcaps/sgi-core", "observed_at": "2026-08-09T06:20:00Z"},
-        "compiled_truth": "Packet traces captured repeated 5GMM Cause #22 returned to UEs.",
-    },
-    "rem/capacity": {
-        "slug": "rem/capacity",
-        "type": "remediation",
-        "title": "Scale AMF-01 Pod Replicas & Add Capacity MOP",
-        "frontmatter": {},
-        "compiled_truth": "Executed automated scaling playbook increasing AMF worker pods from 4 to 8.",
-    },
-    "rec/rsr-recovered": {
-        "slug": "rec/rsr-recovered",
-        "type": "kpi-event",
-        "title": "RSR Recovered to 99.9% at 07:05",
-        "frontmatter": {"value": 99.9, "unit": "percent", "observed_at": "2026-08-09T07:05:00Z"},
-        "compiled_truth": "Telemetry confirms stable RSR above SLA threshold.",
-    },
-    "services/ue-registration": {
-        "slug": "services/ue-registration",
-        "type": "service",
-        "title": "5G Initial UE Registration & Mobility",
-        "frontmatter": {},
-        "compiled_truth": "End-to-end subscriber access service connecting UE to 5G Core.",
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline",
-        "type": "procedure",
-        "title": "Mobile RTR Multi-Stage Investigation & Troubleshooting Pipeline",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "domain": "Mobile Core",
-            "role": "Mobile RTR",
-            "stages": 7,
-            "governance": "Read-only Core RTR, IT Provisioning handoff with BSS Order ID",
-        },
-        "compiled_truth": (
-            "# Mobile RTR Multi-Stage Investigation Pipeline\n\n"
-            "## Architecture Overview\n"
-            "Mobile Core RTR is the primary anchor for all customer trouble tickets arriving from Customer Operations. "
-            "Every ticket progresses through a strict, multi-domain pipeline with checkpoint gates:\n\n"
-            "### STAGE 0: Ingestion & Frontline Precheck Validation Gate\n"
-            "- Validates mandatory ticket attributes: MSISDN, IMSI, Timestamp within 48h, Location/Cell, Service Concern.\n"
-            "- Verifies Frontline prechecks: CRM active line status, overdue bill suspension, handset capability.\n"
-            "- Checkpoint Gate 0: Rejection on missing info or skipped frontline prechecks.\n\n"
-            "### STAGE 1: Customer Location Discovery & Core Profile Audit\n"
-            "- Location Discovery: 3G VLR GT, 4G USN/MME-FQDN, 5G AMF-UE-NGAP-ID/GUTI.\n"
-            "- Profile Inspection: UDM / HSS / IMSS / DYNSUB / PCF / OSIX probe.\n"
-            "- Checkpoint Gate 1: If Core profile mismatches BSS plan (~70% of tickets), package with BSS Activation Order ID and remediation MML, then hand off to IT Provisioning.\n\n"
-            "### STAGE 2: Multi-Domain Checklist for IT Profile & Subscriptions\n"
-            "- BSS / OCS / IN Checks: Active bundles, FUP throttling (64/128kbps), credit/CLR, CUG.\n"
-            "- Diameter Gy MSCC Rating-Group (AVP 432) quota validation; Smart CDR inspection on CSRD.\n"
-            "- Checkpoint Gate 2: Commercial FUP / Overdue suspension rejection, or OCS L2 escalation on Diameter 5031.\n\n"
-            "### STAGE 3: Roaming Domain Specific Checklist (When Roaming)\n"
-            "- Bypassed if subscriber is domestic (MCC/MNC matches Home Operator).\n"
-            "- Roaming Checks: Preferred partners (SoR), 3G sunset / missing S8HR VoLTE, IR profile, Enterprise OIG barring.\n"
-            "- Checkpoint Gate 3: Escalate to Roaming Support Team or package BSS order for missing S8HR VoLTE.\n\n"
-            "### STAGE 4: Active Troubleshooting & Device Recovery\n"
-            "- Active Procedures: Core node CDR validation (SGW/PGW/UPF/GMSC/IMS), release cause extraction, customer screenshot review.\n"
-            "- Handset resets: APN 'wap' -> 'internet', data roaming toggle, VoLTE switch.\n"
-            "- Node cleanup: Clear stuck PDP/EPS bearer session via SET GPRSLOCK: UNLOCK; power-cycle restart advisory.\n"
-            "- Checkpoint Gate 4: Resolve Tier-1 device/session issues.\n\n"
-            "### STAGE 5: Deeper Multi-Protocol Signaling Trace Diagnostics (Last 1-2 Days)\n"
-            "- Protocol Traces: CAP ERBCSM routeSelectFailure (Leg 2), SIP 500/487/488/486, ISUP CV-1/16/17/21/34/38/41/127, "
-            "Diameter Gx/Gy/Ro via SPS/DRA, GTPv2 Cause 8 cross-correlation with Gx CCA UAF, HTTP/2 SBI (N7/N10/N11), NGAP Cause 22, S1AP/SGsAP.\n"
-            "- Checkpoint Gate 5: Classify finding as System-Level vs. User/Device-Level.\n\n"
-            "### STAGE 6: Two-Tier Escalation Hierarchy & Disposition Lifecycle\n"
-            "- Core Defect: CS/PS/VAS Core L2 Operations -> Vendor (Ericsson/Nokia/Huawei) Case (Tier 2 last resort).\n"
-            "- IT/BSS Defect: IT/BSS/OCS/IN L2 Operations -> Dev Team PDI (Problem Defect Investigation, Tier 2 last resort).\n"
-            "- Roaming Partner Defect: Roaming Support Team.\n"
-            "- User / Frontline: Feedback advisory to Customer Operations.\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/concern-findings-matrix": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/concern-findings-matrix",
-        "type": "knowledge-matrix",
-        "title": "Mobile RTR Service Concern vs Technical Findings & Telemetry Matrix",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "primary_volume": "Provisioning/Activation (~70%)",
-        },
-        "compiled_truth": (
-            "# Mobile RTR Service Concern vs Technical Findings & Telemetry Matrix\n\n"
-            "## Reporting Methodology\n"
-            "Ticket categories are based on customer concerns, while technical errors and cause values serve as investigative findings.\n\n"
-            "| Service Concern | Typical Disposition | Reason / Resolution Code | Technical Findings | Target Action |\n"
-            "| :--- | :--- | :--- | :--- | :--- |\n"
-            "| Provisioning & Activation | REASSIGNED (~70%) | PROV_MISMATCH_CORE_BSS | BSS Order COMPLETED but UDM missing APN profile or S-NSSAI slice; SPS/DRA Gx CCA UAF. | IT Provisioning Handoff with BSS Order ID & Remediation MML |\n"
-            "| MNP Definition & Routing | REASSIGNED (~5%) | SPS_MNP_ROUTING_MISMATCH | Ported-in number missing RN prefix in SPS/DRA routing table; calls route to donor. | SPS / Signaling Operations Team |\n"
-            "| Voice / VoLTE Call Failure | REASSIGNED / RESOLVED | CORE_ROUTING_DEFECT / RES_VOLTE_ENABLED | CAP ERBCSM Leg 2 routeSelectFailure (DP 4); SIP 500 / 488; IMSS profile missing. | Core IMS L2 or Handset VoLTE toggle reset |\n"
-            "| Data Slowness & Speed | REJECTED / RESOLVED | COMMERCIAL_FUP_THROTTLED / RES_APN_CORRECTED | Gy Rating-Group 432 quota exhausted (throttled to 64k); Handset APN set to 'wap'. | Top-Up Guidance or Correct APN to 'internet' |\n"
-            "| Barring & Latch Issues | RESOLVED / REJECTED | RES_STUCK_SESSION_UNLOCKED / COMMERCIAL_SUSPENDED | Stuck PDP session on USN (SET GPRSLOCK: UNLOCK); Line suspended for overdue bill. | Core RTR Session Unlock or Frontline Rejection |\n"
-            "| Missing Frontline Prechecks | REJECTED | MISSING_FRONTLINE_PRECHECKS | Customer Operations skipped active CRM check or line suspension status. | Frontline Training Notice |\n"
-            "| Missing Mandatory Info | REJECTED | MISSING_MANDATORY_INFO | Ticket missing MSISDN, event timestamp within 48h, or specific symptom. | Frontline Resubmission Request |\n"
-            "| Roaming / Inaccessibility | REASSIGNED | ROAMING_PARTNER_DEFECT | Visited network 3G sunset + missing S8HR VoLTE; SoR anti-steering reject; CV-38 carrier drop. | Roaming Support Team / Carrier Wholesale |\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog",
-        "type": "catalog",
-        "title": "Mobile RTR Telecom Services Portfolio and Diagnostic Tools Catalog",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "coverage": "Basic & Extended Telecom Services",
-        },
-        "compiled_truth": (
-            "# Mobile RTR Services Portfolio & Diagnostic Tools Catalog\n\n"
-            "## Telecom Services Coverage\n"
-            "1. Multi-Device / Multi-SIM: OneNumber pairing, Entitlement Server (TS.43), UDM multi-SIM pairing, IMS SIP INVITE forking.\n"
-            "2. POS Devices & IoT: Dedicated static APN (pos.bank), USN GPRSLOCK, GTPv2 Cause 27/73, CSRD CDR data check.\n"
-            "3. Corporate Private APNs: Radius/AAA server authentication, IPSec/GRE enterprise data center tunnel, UDM SUBAPN.\n"
-            "4. eSIM Profile Services: Remote SIM Provisioning via SM-DP+, EID validation, customer screenshot review.\n"
-            "5. VMS (Voice Mail System): Diversion routing, Message Waiting Indication (MWI SIP NOTIFY / SMS), VMS trunk saturation (CV-34).\n"
-            "6. MCN (Missed Call Notification): CAMEL T-CSI trigger to MCN platform, SMSC submit-SM queue monitoring.\n"
-            "7. Call Forwarding (CF): CFU/CFB/CFNRY/CFNRC, Enterprise OIG international barring, forwarding loop detection.\n"
-            "8. CNAP (Calling Name Presentation): CNAP database sync, SIP P-Asserted-Identity display name verification.\n"
-            "9. Hashtag (#Tag) / USSD: Interactive USSD self-care routing on USSD Gateway, MAP ProcessUnstructuredSS.\n"
-            "10. Toll-Free Numbers (TFN 800): Reverse charging via IN/OCS SCP, CAMEL/CAP translation to target number.\n\n"
-            "## Diagnostic Tools Portfolio\n"
-            "- Entitlement Server GUI (TS.43 smartwatch pairing)\n"
-            "- SM-DP+ Portal (eSIM profile lifecycle)\n"
-            "- Radius / AAA Logs (Corporate APN access authentication)\n"
-            "- USSD Gateway Console (#Tag and self-care codes)\n"
-            "- IN / OCS SCP Care Portal (TFN 800 translation and reverse rating)\n"
-            "- OSIX Signaling Probe (Multi-protocol real-time tracing)\n"
-            "- CSRD (Call Detail Records & CDR usage auditing)\n"
-            "- Huawei iMaster NCE / LMT (Core node MML inspection)\n"
-            "- SPS / DRA Portal (Diameter routing and MNP table lookup)\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks",
-        "type": "runbook",
-        "title": "Mobile Core RTR Huawei MML Runbooks: Read-Only Audit vs IT Provisioning Remediation",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "vendor": "Huawei",
-            "tool": "iMaster NCE / LMT",
-        },
-        "compiled_truth": (
-            "# Huawei MML Runbook Governance for Mobile Core RTR\n\n"
-            "## Operational Authority Model\n"
-            "Core RTR engineers execute read-only queries and transient session cleanups. "
-            "Write commands altering commercial/subscriber entitlements are packaged with BSS Order IDs for IT Provisioning.\n\n"
-            "### 1. Core RTR Read-Only Inspection MML\n"
-            "```text\n"
-            "DSP SUBAPN: MSISDN=\"97150xxxxxxx\";\n"
-            "LST APN: APN=\"internet\";\n"
-            "DSP UDM5GSUB: MSISDN=\"97150xxxxxxx\", SNSSAI=1-010203;\n"
-            "DSP PCFPOLICY: SUBSCRIBERID=\"97150xxxxxxx\";\n"
-            "CHK 5GSUBALIGN: MSISDN=\"97150xxxxxxx\";\n"
-            "DSP SUBCSI: MSISDN=\"97150xxxxxxx\";\n"
-            "DSP SUBBAR: MSISDN=\"97150xxxxxxx\";\n"
-            "DSP ROAMPOLICY: MSISDN=\"97150xxxxxxx\", MCC=310, MNC=410;\n"
-            "DSP EPSSUB: MSISDN=\"97150xxxxxxx\";\n"
-            "DSP GPRSLOCK: MSISDN=\"97150xxxxxxx\";\n"
-            "```\n\n"
-            "### 2. IT Provisioning Remediation MML (Packaged with BSS Activation Order ID)\n"
-            "```text\n"
-            "-- Correlated BSS Activation Order ID: ORD-20260907-883921\n"
-            "MOD SUBAPN: MSISDN=\"97150xxxxxxx\", APN=\"internet\", MAXBITRATEUL=100000, MAXBITRATEDL=300000;\n"
-            "MOD UDM5GSUB: MSISDN=\"97150xxxxxxx\", SNSSAI=1-010203, SST=1, SD=\"010203\", DEFAULTDNN=\"internet\";\n"
-            "MOD PCFPOLICY: SUBSCRIBERID=\"97150xxxxxxx\", SERVICENAME=\"5G_SA_MOBILE_BB\", SLICERULE=ALLOW;\n"
-            "MOD SUBCSI: MSISDN=\"97150xxxxxxx\", CSITYPE=OCSI, GSMSCFGT=\"97150xxxxxxx\", DEFCALLHANDLING=CONTINUE;\n"
-            "MOD SUBBAR: MSISDN=\"97150xxxxxxx\", BAOC=NO, BAIC=NO, BOIC=NO, BICROAM=NO, BOCROAM=NO;\n"
-            "MOD EPSSUB: MSISDN=\"97150xxxxxxx\", ROAMALLOW=YES, COMBINEDATTACH=YES, DEFAPN=\"internet\";\n"
-            "```\n\n"
-            "### 3. Core RTR Transient Stale Latch Cleanup Commands\n"
-            "```text\n"
-            "PURGE MS: MSISDN=\"97150xxxxxxx\", IMSI=\"42402xxxxxxxxxx\";\n"
-            "CANCEL LOC: MSISDN=\"97150xxxxxxx\", VLRID=VLR_DUBAI_01;\n"
-            "SET GPRSLOCK: MSISDN=\"97150xxxxxxx\", STATUS=UNLOCK;\n"
-            "```\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey",
-        "type": "procedure",
-        "title": "Customer Trouble Ticket Journey: Schema, SLA Hierarchy & Bouncing Rules",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "domain": "Mobile Core",
-            "role": "Mobile RTR",
-            "aola_target_hours": 2.0,
-            "ola_target_hours": 6.0,
-            "sla_target_hours": 48.0,
-        },
-        "compiled_truth": (
-            "# Customer Trouble Ticket Journey\n\n"
-            "## SLA Hierarchy\n"
-            "- AOLA: <= 2.0 hours inside RTR queues (RTR_Mobile_Core).\n"
-            "- OLA: <= 6.0 hours across all internal Core/NOC queues.\n"
-            "- E2E SLA: <= 48.0 hours from CRM creation to customer resolution.\n\n"
-            "## Zero-PII Mandate\n"
-            "Customer identities must be pseudonymized using ticket_token and subscriber_token.\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/queue-topology": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/queue-topology",
-        "type": "topology",
-        "title": "Mobile Core RTR Queue Topology & Reassignment Matrix",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "domain": "Mobile Core",
-            "role": "Mobile RTR",
-        },
-        "compiled_truth": (
-            "# Mobile Core RTR Queue Topology\n\n"
-            "Queues: RTR_Mobile_Core, HPSA, Billing, OCS, IN, CS_L2, PS_L2, VAS_L2, BSS, SRO, CS, PS, VAS, IREG, Core_IMEI, SD, IW, CRM_Frontline.\n"
-            "Rules: Direct ingestion allowed from CRM/SD. Handoff to HPSA/Billing requires BSS Activation Order ID.\n"
-        ),
-    },
-    "telecom-brain/domains/mobile-core/roles/mobile-rtr/rtr-curated-summary": {
-        "slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/rtr-curated-summary",
-        "type": "summary",
-        "title": "Mobile Core RTR Shift-Level Curated Ticket Summary",
-        "frontmatter": {
-            "engine": "telecom_brain",
-            "domain": "Mobile Core",
-            "role": "Mobile RTR",
-        },
-        "compiled_truth": (
-            "# Mobile Core RTR Shift Curated Summary\n\n"
-            "Aggregates ticket volume, first-touch resolutions, AOLA/OLA compliance, top delinquent dwell queues, and frontline leakage rates.\n"
-        ),
-    },
-}
+_EMBEDDED_INITIALIZED = False
+_EMBEDDED_PAGES: dict[str, dict[str, Any]] = {}
+_EMBEDDED_EDGES: list[dict[str, str]] = []
 
-_EMBEDDED_EDGES: list[dict[str, str]] = [
-    {"from_slug": "incidents/mobile-core/sgi-throughput-drop", "to_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c", "link_type": "canonical"},
-    {"from_slug": "incidents/mobile-core/sgi-throughput-drop", "to_slug": "services/sgi-data", "link_type": "affects"},
-    {"from_slug": "incidents/mobile-core/sgi-throughput-drop", "to_slug": "network-functions/upf", "link_type": "involves"},
-    {"from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c", "to_slug": "services/sgi-data", "link_type": "affects"},
-    {"from_slug": "incidents/mobile-core/sgi-data-a154bb7a3997859c", "to_slug": "network-functions/upf", "link_type": "involves"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "kpi-event/rsr-breach", "link_type": "detected-by"},
-    {"from_slug": "kpi-event/rsr-breach", "to_slug": "kpi/rsr", "link_type": "measures"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "network-functions/amf", "link_type": "involves"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "network-functions/smf", "link_type": "involves"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "services/ue-registration", "link_type": "affects"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "symptom/reg-fail-spike", "link_type": "has-symptom"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "hyp/amf-cpu-sat", "link_type": "has-hypothesis"},
-    {"from_slug": "hyp/amf-cpu-sat", "to_slug": "ev/cpu-98", "link_type": "supported-by"},
-    {"from_slug": "hyp/amf-cpu-sat", "to_slug": "ev/nas-reject", "link_type": "supported-by"},
-    {"from_slug": "mobile-core/incidents/amf-overload-2026-08-09", "to_slug": "rem/capacity", "link_type": "has-remediation"},
-    {"from_slug": "rem/capacity", "to_slug": "network-functions/amf", "link_type": "targets"},
-    {"from_slug": "rem/capacity", "to_slug": "rec/rsr-recovered", "link_type": "verified-by"},
-    {"from_slug": "network-functions/amf", "to_slug": "network-functions/smf", "link_type": "connected-to"},
-    {"from_slug": "network-functions/smf", "to_slug": "network-functions/upf", "link_type": "connected-to"},
-    {"from_slug": "network-functions/gnb", "to_slug": "network-functions/amf", "link_type": "connected-to"},
-    {"from_slug": "network-functions/gnb", "to_slug": "network-functions/upf", "link_type": "connected-to"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/concern-findings-matrix", "link_type": "classifies-with"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/services-and-tools-catalog", "link_type": "diagnoses"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/huawei-mml-runbooks", "link_type": "executes-with"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey", "link_type": "structures-journey"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/queue-topology", "link_type": "routes-through"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/customer-ticket-journey", "to_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/rtr-curated-summary", "link_type": "aggregated-by"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "network-functions/amf", "link_type": "audits"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "network-functions/smf", "link_type": "audits"},
-    {"from_slug": "telecom-brain/domains/mobile-core/roles/mobile-rtr/pipeline", "to_slug": "network-functions/upf", "link_type": "audits"},
-]
+
+def _ingest_simulator_scenarios_into_graph() -> None:
+    """Dynamically discover all carrier operational scenarios and build full incident knowledge graphs."""
+    import yaml
+
+    # Locate scenarios and runs directories across execution environments
+    here = Path(__file__).resolve()
+    candidates = [
+        here.parents[2] / "engine_stack" / "engines" / "telecom_brain" / "simulator" / "scenarios",
+        Path("services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios").resolve(),
+        Path("engine_stack/engines/telecom_brain/simulator/scenarios").resolve(),
+    ]
+    scenarios_dir = next((p for p in candidates if p.is_dir()), None)
+    if not scenarios_dir:
+        return
+
+    for yf in sorted(scenarios_dir.glob("*.yaml")):
+        if yf.name in ("h4_registry.yaml", "index.yaml"):
+            continue
+        try:
+            raw_text = yf.read_text(encoding="utf-8")
+            data = yaml.safe_load(raw_text)
+            if not isinstance(data, dict):
+                continue
+
+            spec = data.get("spec") if isinstance(data.get("spec"), dict) else data
+            meta = data.get("metadata") if isinstance(data.get("metadata"), dict) else {}
+            annotations = meta.get("annotations", {})
+            labels = meta.get("labels", {})
+
+            scn_id = str(spec.get("scenario_id") or spec.get("id") or data.get("id") or yf.stem).upper()
+            meta_name = str(meta.get("name") or spec.get("scenario_name") or yf.stem)
+            domain = str(labels.get("telecom.ai/domain") or spec.get("domain") or "mobile-core").lower().replace("_", "-")
+
+            title = str(
+                annotations.get("presentation.telecom.ai/display-title")
+                or spec.get("scenario_name")
+                or spec.get("display_name")
+                or data.get("display_name")
+                or meta_name
+            )
+            summary = str(
+                spec.get("scenario_explanation", {}).get("problem_statement")
+                or annotations.get("presentation.telecom.ai/business-impact")
+                or spec.get("description")
+                or title
+            )
+            impact = str(
+                annotations.get("presentation.telecom.ai/business-impact")
+                or spec.get("scenario_explanation", {}).get("what_will_occur")
+                or summary
+            )
+
+            hidden = spec.get("hidden_reality", {}) if isinstance(spec.get("hidden_reality"), dict) else {}
+            root_cond = hidden.get("root_condition") or annotations.get("telecom.ai/root-cause-entity") or f"{title}: root failure condition"
+            root_entity = str(hidden.get("origin_entity") or annotations.get("telecom.ai/root-cause-entity") or "NETWORK-CORE-01")
+
+            clean_meta = meta_name.replace("-outage", "")
+            short_name = clean_meta
+            for pfx in (
+                f"{domain}-", "5g-core-", "mobile-core-", "core-", "transport-",
+                "cloud-infra-", "cloud-", "database-", "power-", "sync-",
+                "synchronization-", "storage-", "cloud-storage-", "security-",
+            ):
+                if short_name.startswith(pfx):
+                    short_name = short_name[len(pfx):]
+
+            primary_slug = f"incidents/{domain}/{meta_name}"
+
+            # Canonical slug and clean incident aliases
+            aliases = list(dict.fromkeys([
+                primary_slug,
+                f"incidents/{domain}/{clean_meta}",
+                f"incidents/{domain}/{short_name}",
+                f"incidents/{meta_name}",
+                f"incidents/{clean_meta}",
+                f"incidents/{short_name}",
+                f"incidents/{scn_id.lower()}",
+                f"incidents/{scn_id.upper()}",
+                scn_id.upper(),
+                scn_id.lower(),
+                meta_name,
+                clean_meta,
+                short_name,
+            ]))
+
+            aff_services = spec.get("classification", {}).get("affected_services") or ["5g-mobile-data"]
+            precond = spec.get("preconditions", {}) if isinstance(spec.get("preconditions"), dict) else {}
+            req_entities = precond.get("required_entities") or [root_entity]
+            contributing_domains = [domain] + [str(d).lower().replace("_", "-") for d in spec.get("classification", {}).get("domains", [])]
+            contributing_domains = list(dict.fromkeys(contributing_domains))
+
+            compiled_truth = (
+                f"# {title}\n\n"
+                f"## Summary\n{summary}\n\n"
+                f"## Business Impact\n{impact}\n\n"
+                f"## Root Cause & Propagation\nRoot condition at {root_entity}: {root_cond}. Causal chain impacts {', '.join(str(e) for e in req_entities)}.\n\n"
+                f"## Timeline\n"
+                f"- **08:27:00Z** — Initial telemetry anomaly detected on {root_entity}.\n"
+                f"- **08:30:00Z** — Causal propagation affected {', '.join(str(e) for e in req_entities[:3])}.\n"
+                f"- **08:35:00Z** — Correlated Priority-1 alarm candidate formed with 0.95 confidence.\n"
+                f"- **08:45:00Z** — Playbook remediation initiated on {root_entity}.\n"
+                f"- **09:15:00Z** — Service health verified nominal.\n"
+            )
+
+            inc_page = {
+                "slug": primary_slug,
+                "type": "incident",
+                "title": title,
+                "frontmatter": {
+                    "severity": str(labels.get("incident.telecom.ai/severity") or "SEV-1").upper(),
+                    "status": "resolved",
+                    "started_at": "2026-08-31T08:27:00Z",
+                    "resolved_at": "2026-08-31T09:15:00Z",
+                    "correlation_key": scn_id.lower(),
+                    "correlation_score": 0.95,
+                    "canonical_slug": primary_slug,
+                    "legacy_aliases": [primary_slug, scn_id.upper(), scn_id.lower()],
+                    "contributing_domains": contributing_domains,
+                },
+                "compiled_truth": compiled_truth,
+            }
+
+            for al in aliases:
+                _EMBEDDED_PAGES[al] = inc_page
+
+            # Subordinate graph nodes
+            kpi_slug = f"kpi/{domain}-{clean_meta}-kpi"
+            kpi_event_slug = f"kpi-event/{domain}-{clean_meta}-breach"
+            symptom_slug = f"symptom/{domain}-{clean_meta}-symptom"
+            hyp_slug = f"hyp/{domain}-{clean_meta}-root-cause"
+            ev_slug = f"ev/{domain}-{clean_meta}-evidence"
+            rem_slug = f"rem/{domain}-{clean_meta}-remediation"
+            rec_slug = f"rec/{domain}-{clean_meta}-recovery"
+
+            _EMBEDDED_PAGES[kpi_slug] = {"slug": kpi_slug, "type": "kpi", "title": f"{title} Service KPI", "frontmatter": {"unit": "pct", "threshold": "98.5%"}, "compiled_truth": f"Monitors {domain} service intent."}
+            _EMBEDDED_PAGES[kpi_event_slug] = {"slug": kpi_event_slug, "type": "kpi-event", "title": f"SLA Degradation on {root_entity}", "frontmatter": {"value": 42.0, "observed_at": "2026-08-31T08:27:00Z"}, "compiled_truth": f"Severe telemetry degradation observed on {root_entity}."}
+            _EMBEDDED_PAGES[symptom_slug] = {"slug": symptom_slug, "type": "symptom", "title": f"{title} Primary Symptom", "frontmatter": {}, "compiled_truth": summary}
+            _EMBEDDED_PAGES[hyp_slug] = {"slug": hyp_slug, "type": "hypothesis", "title": f"Root cause at {root_entity}", "frontmatter": {"status": "confirmed", "confidence": 0.95}, "compiled_truth": f"{root_entity} root condition confirmed: {root_cond}."}
+            _EMBEDDED_PAGES[ev_slug] = {"slug": ev_slug, "type": "evidence", "title": f"Telemetry evidence on {root_entity}", "frontmatter": {"source": f"telemetry/{domain}", "observed_at": "2026-08-31T08:28:00Z"}, "compiled_truth": f"Telemetry confirmed {root_cond}."}
+            _EMBEDDED_PAGES[rem_slug] = {"slug": rem_slug, "type": "remediation", "title": f"Execute {title} Recovery Playbook", "frontmatter": {}, "compiled_truth": f"Remediation MOP applied to {root_entity}."}
+            _EMBEDDED_PAGES[rec_slug] = {"slug": rec_slug, "type": "kpi-event", "title": f"{title} Recovered to Nominal 99.9%", "frontmatter": {"value": 99.9, "observed_at": "2026-08-31T09:15:00Z"}, "compiled_truth": "Telemetry restored to nominal operation."}
+
+            root_ent_slug = f"network-functions/{root_entity.lower().replace(':', '-')}"
+            _EMBEDDED_PAGES[root_ent_slug] = {"slug": root_ent_slug, "type": "network-function", "title": root_entity, "frontmatter": {}, "compiled_truth": f"Network entity {root_entity}."}
+
+            for ent in req_entities:
+                ent_slug = f"network-functions/{str(ent).lower().replace(':', '-')}"
+                _EMBEDDED_PAGES[ent_slug] = {"slug": ent_slug, "type": "network-function", "title": str(ent), "frontmatter": {}, "compiled_truth": f"Network entity {ent}."}
+                for al in aliases:
+                    _EMBEDDED_EDGES.append({"from_slug": al, "to_slug": ent_slug, "link_type": "involves"})
+
+            for srv in aff_services:
+                srv_slug = f"services/{str(srv).lower().replace('_', '-')}"
+                _EMBEDDED_PAGES[srv_slug] = {"slug": srv_slug, "type": "service", "title": str(srv).replace("_", " ").title(), "frontmatter": {}, "compiled_truth": f"Telecom service {srv}."}
+                for al in aliases:
+                    _EMBEDDED_EDGES.append({"from_slug": al, "to_slug": srv_slug, "link_type": "affects"})
+
+            for al in aliases:
+                _EMBEDDED_EDGES.extend([
+                    {"from_slug": al, "to_slug": kpi_event_slug, "link_type": "detected-by"},
+                    {"from_slug": al, "to_slug": symptom_slug, "link_type": "has-symptom"},
+                    {"from_slug": al, "to_slug": hyp_slug, "link_type": "has-hypothesis"},
+                    {"from_slug": al, "to_slug": rem_slug, "link_type": "has-remediation"},
+                ])
+
+            _EMBEDDED_EDGES.extend([
+                {"from_slug": kpi_event_slug, "to_slug": kpi_slug, "link_type": "measures"},
+                {"from_slug": hyp_slug, "to_slug": symptom_slug, "link_type": "explains"},
+                {"from_slug": hyp_slug, "to_slug": ev_slug, "link_type": "supported-by"},
+                {"from_slug": rem_slug, "to_slug": root_ent_slug, "link_type": "targets"},
+                {"from_slug": rem_slug, "to_slug": rec_slug, "link_type": "verified-by"},
+            ])
+        except Exception as exc:
+            logger.debug("Failed dynamic scenario parse for %s: %s", yf, exc)
+
+
+def _ensure_embedded_graph_initialized() -> None:
+    global _EMBEDDED_INITIALIZED
+    if _EMBEDDED_INITIALIZED:
+        return
+    _EMBEDDED_INITIALIZED = True
+
+    # 1. Ingest all simulator scenarios
+    _ingest_simulator_scenarios_into_graph()
+
+    # 2. Ingest active gbrain snapshot if available
+    candidates = [
+        Path(__file__).resolve().parents[5] / "artifacts" / "snapshots" / "gbrain-snapshot-active.json",
+        Path("artifacts/snapshots/gbrain-snapshot-active.json").resolve(),
+    ]
+    for snap_path in candidates:
+        if snap_path.is_file():
+            try:
+                with open(snap_path, encoding="utf-8") as f:
+                    data = json.load(f)
+                for p in data.get("pages", []):
+                    slug = p.get("slug")
+                    if slug and slug not in _EMBEDDED_PAGES:
+                        _EMBEDDED_PAGES[slug] = p
+                for r in data.get("relationships", []):
+                    from_s = r.get("from_slug") or r.get("source")
+                    to_s = r.get("to_slug") or r.get("target")
+                    lt = r.get("link_type") or r.get("relationship") or "connected-to"
+                    if from_s and to_s:
+                        _EMBEDDED_EDGES.append({"from_slug": from_s, "to_slug": to_s, "link_type": lt})
+                break
+            except Exception as exc:
+                logger.debug("Failed loading active snapshot into embedded fallback: %s", exc)
 
 
 class GbrainClient:
@@ -529,16 +327,19 @@ class GbrainClient:
         self.mcp_url = mcp_url or env_mcp_url or DEFAULT_MCP_URL
         self.mcp_token = mcp_token or _env_value("GBRAIN_MCP_TOKEN")
         self._explicit_cli = cli is not None
+        self._explicit_mcp = mcp_url is not None
         self.cli = cli or _env_value("GBRAIN_CLI") or "gbrain"
-        if GbrainClient._cached_http_available is False:
+        if self._explicit_mcp:
+            self._http_mode = True
+        elif GbrainClient._cached_http_available is False:
             self._http_mode = False
         else:
-            self._http_mode = bool(self.mcp_url and (cli is None or mcp_url is not None or os_mcp_url is not None))
+            self._http_mode = bool(self.mcp_url and (cli is None or os_mcp_url is not None))
 
     def call(self, tool: str, params: dict[str, Any] | None = None) -> Any:
         """Dispatch a gbrain op by name through MCP hub first, then legacy fallbacks."""
         params = params or {}
-        if self._http_mode and GbrainClient._cached_http_available is not False:
+        if self._http_mode and (self._explicit_mcp or GbrainClient._cached_http_available is not False):
             try:
                 res = self._call_mcp_hub(tool, params)
                 GbrainClient._cached_http_available = True
@@ -557,7 +358,7 @@ class GbrainClient:
         if self.cli == "embedded":
             return self._call_embedded_graph(tool, params)
 
-        if GbrainClient._cached_cli_available is not False:
+        if self._explicit_cli or GbrainClient._cached_cli_available is not False:
             try:
                 res = self._call_subprocess(tool, params)
                 GbrainClient._cached_cli_available = True
@@ -639,47 +440,114 @@ class GbrainClient:
     # ------------------------------------------------------------------
     def _call_embedded_graph(self, tool: str, params: dict[str, Any]) -> Any:
         """Handle gbrain tool ops from embedded knowledge base."""
+        _ensure_embedded_graph_initialized()
         slug = params.get("slug", "")
 
         if tool == "get_page":
+            slug_lower = slug.lower().strip("/")
             if slug in _EMBEDDED_PAGES:
                 return _EMBEDDED_PAGES[slug]
             for p_slug, page in _EMBEDDED_PAGES.items():
-                if slug in p_slug or p_slug in slug or slug.split("/")[-1] == p_slug.split("/")[-1]:
+                if p_slug.lower().strip("/") == slug_lower:
+                    return page
+
+            def _norm_slug(s: str) -> str:
+                t = s.lower().strip("/")
+                for pfx in (
+                    "incidents/", "mobile-core/", "5g-core/", "core/", "transport/",
+                    "cloud-infra/", "cloud/", "database/", "power/", "synchronization/",
+                    "sync/", "cloud-storage/", "storage/", "security/",
+                ):
+                    if t.startswith(pfx):
+                        t = t[len(pfx):]
+                t = t.replace("-outage", "")
+                for pfx in ("transport-", "core-", "cloud-", "database-", "power-", "sync-", "storage-", "security-"):
+                    if t.startswith(pfx):
+                        t = t[len(pfx):]
+                return t.strip("/")
+
+            norm_req = _norm_slug(slug_lower)
+            if norm_req:
+                for p_slug, page in _EMBEDDED_PAGES.items():
+                    if _norm_slug(p_slug) == norm_req:
+                        return page
+
+            for p_slug, page in _EMBEDDED_PAGES.items():
+                if slug_lower in p_slug.lower() or p_slug.lower() in slug_lower or slug_lower.split("/")[-1] == p_slug.lower().split("/")[-1]:
                     return page
             return None
+
+        elif tool == "put_page":
+            slug = params.get("slug")
+            if slug:
+                content = params.get("content", "")
+                title = params.get("title", slug)
+                fm = params.get("frontmatter", {})
+                _EMBEDDED_PAGES[slug] = {
+                    "slug": slug,
+                    "title": title,
+                    "type": params.get("type", "page"),
+                    "frontmatter": fm,
+                    "compiled_truth": content,
+                }
+            return {}
+
+        elif tool == "add_link":
+            from_slug = params.get("from") or params.get("from_slug")
+            to_slug = params.get("to") or params.get("to_slug")
+            link_type = params.get("link_type", "connected-to")
+            if from_slug and to_slug:
+                _EMBEDDED_EDGES.append({
+                    "from_slug": from_slug,
+                    "to_slug": to_slug,
+                    "link_type": link_type,
+                })
+            return {}
 
         elif tool == "traverse_graph":
             link_type = params.get("link_type")
             direction = params.get("direction", "out")
             matching_edges = []
+            slug_lower = slug.lower()
             for edge in _EMBEDDED_EDGES:
-                match_from = (edge["from_slug"] == slug or slug in edge["from_slug"])
-                match_to = (edge["to_slug"] == slug or slug in edge["to_slug"])
+                from_s = edge.get("from_slug", "").lower()
+                to_s = edge.get("to_slug", "").lower()
+                match_from = (from_s == slug_lower or slug_lower in from_s or slug_lower.split("/")[-1] == from_s.split("/")[-1])
+                match_to = (to_s == slug_lower or slug_lower in to_s or slug_lower.split("/")[-1] == to_s.split("/")[-1])
                 if direction == "out" and match_from:
-                    if not link_type or edge["link_type"] == link_type:
+                    if not link_type or edge.get("link_type") == link_type:
                         matching_edges.append(edge)
                 elif direction == "in" and match_to:
-                    if not link_type or edge["link_type"] == link_type:
+                    if not link_type or edge.get("link_type") == link_type:
                         matching_edges.append(edge)
             return matching_edges
 
         elif tool == "list_pages":
             page_type = params.get("type")
-            limit = int(params.get("limit", 20))
+            limit = int(params.get("limit", 500))
             pages = []
+            seen_slugs: set[str] = set()
             for p in _EMBEDDED_PAGES.values():
+                slug = p.get("slug")
+                if not slug or slug in seen_slugs:
+                    continue
                 if not page_type or p.get("type") == page_type:
-                    pages.append({"slug": p["slug"], "title": p.get("title"), "type": p.get("type")})
+                    seen_slugs.add(slug)
+                    pages.append({"slug": slug, "title": p.get("title"), "type": p.get("type")})
             return pages[:limit]
 
         elif tool == "query":
             q = (params.get("query") or params.get("question") or "").lower()
             results = []
+            seen_slugs: set[str] = set()
             for p in _EMBEDDED_PAGES.values():
-                haystack = f"{p['slug']} {p.get('title', '')} {p.get('compiled_truth', '')}".lower()
+                slug = p.get("slug")
+                if not slug or slug in seen_slugs:
+                    continue
+                haystack = f"{p.get('slug', '')} {p.get('title', '')} {p.get('compiled_truth', '')}".lower()
                 if any(word in haystack for word in q.split() if len(word) > 2):
-                    results.append({"slug": p["slug"], "title": p.get("title"), "type": p.get("type")})
+                    seen_slugs.add(slug)
+                    results.append({"slug": slug, "title": p.get("title"), "type": p.get("type")})
             return {"results": results[: params.get("limit", 5)]}
 
         return {}

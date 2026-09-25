@@ -1,0 +1,87 @@
+{
+  "scenario_id": "SCN-076",
+  "run_id": "RUN-SCN-076-L1-SEED-42076",
+  "title": "Operational Incident SCN-076",
+  "domain": "transport",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:16:02Z",
+  "resolved_at": "2026-09-10T09:32:00Z",
+  "executive_summary": "Autonomous root cause confirmed at IP:VRF:N3-01 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "IP:VRF:N3-01",
+    "condition": "Operational failure on IP:VRF:N3-01",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "IP:VRF:N3-01",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "IP:VRF:N3-01",
+      "role": "ROOT_CAUSE",
+      "status": "VRF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:16:02Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
+    },
+    {
+      "time": "2026-09-10T09:16:47Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T09:17:25Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T09:17:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 60.89percent"
+    },
+    {
+      "time": "2026-09-10T09:32:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 6,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 60.89,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

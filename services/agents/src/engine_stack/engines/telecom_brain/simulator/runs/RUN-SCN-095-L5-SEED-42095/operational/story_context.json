@@ -1,0 +1,108 @@
+{
+  "scenario_id": "SCN-095",
+  "run_id": "RUN-SCN-095-L5-SEED-42095",
+  "title": "Operational Incident SCN-095",
+  "domain": "it_cloud_infra",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:35:04Z",
+  "resolved_at": "2026-09-10T09:51:00Z",
+  "executive_summary": "Autonomous root cause confirmed at INFRA:POWER:A with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "INFRA:POWER:A",
+    "condition": "Operational failure on INFRA:POWER:A",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "INFRA:POWER:A",
+    "INFRA:DC:A",
+    "INFRA:DC:A",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "INFRA:POWER:A",
+      "role": "ROOT_CAUSE",
+      "status": "POWER_FEED_DEGRADED"
+    },
+    {
+      "entity": "INFRA:DC:A",
+      "role": "CAUSAL_RELAY",
+      "status": "DATA_CENTER_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:35:04Z",
+      "event": "POWER_FEED_DEGRADED",
+      "entity": "INFRA:POWER:A",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: POWER_FEED_DEGRADED on INFRA:POWER:A"
+    },
+    {
+      "time": "2026-09-10T09:35:45Z",
+      "event": "DATA_CENTER_DEGRADED",
+      "entity": "INFRA:DC:A",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: DATA_CENTER_DEGRADED on INFRA:DC:A"
+    },
+    {
+      "time": "2026-09-10T09:35:45Z",
+      "event": "DATA_CENTER_DEGRADED",
+      "entity": "INFRA:DC:A",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: DATA_CENTER_DEGRADED on INFRA:DC:A"
+    },
+    {
+      "time": "2026-09-10T09:36:19Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T09:36:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 75.92percent"
+    },
+    {
+      "time": "2026-09-10T09:37:02Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T09:51:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "INFRA:POWER:A",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 8,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 75.92,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

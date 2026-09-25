@@ -61,6 +61,7 @@ export type IncidentQueueItem = {
   services: string[];
   owner?: string | null;
   updated_at: string;
+  aliases?: string[];
 };
 
 async function parseError(res: Response): Promise<string> {
@@ -88,10 +89,19 @@ export async function fetchQnaTelemetry(sessionId: string): Promise<QnaTelemetry
   return data.telemetry;
 }
 
-export async function fetchIncidentQueue(): Promise<IncidentQueueItem[]> {
-  const res = await fetch(`${API_BASE}/api/incidents?limit=50`);
+export async function fetchIncidentQueue(sync = false): Promise<IncidentQueueItem[]> {
+  const url = sync ? `${API_BASE}/api/incidents?sync=true&limit=50` : `${API_BASE}/api/incidents?limit=50`;
+  const res = await fetch(url);
   if (!res.ok) throw new Error(await parseError(res));
-  return res.json();
+  const rawList: IncidentQueueItem[] = await res.json();
+  return rawList.filter((incident) => {
+    // Purge deprecated hex-suffixed slugs
+    if (/[0-9a-f]{16}/i.test(incident.incident_id)) return false;
+    // Accept any completed simulation scenario (e.g. SCN-001..SCN-100 or DEMO-001)
+    const matchScn = incident.incident_id.match(/(?:scn|demo)-\d+/i);
+    const aliasMatch = incident.aliases?.some((a) => /^(?:scn|demo)-\d+$/i.test(a));
+    return Boolean(matchScn || aliasMatch);
+  });
 }
 
 /* ------------------------------------------------------------------ */

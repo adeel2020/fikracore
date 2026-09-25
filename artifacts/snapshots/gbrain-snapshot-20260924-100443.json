@@ -1,0 +1,2907 @@
+{
+  "brain": "telecombrain",
+  "snapshot_version": "v1.0.0-snapshot-20260924-100443",
+  "pages": [
+    {
+      "slug": "REGION-NORTH",
+      "title": "North Region",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.regions",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "region",
+        "entity_id": "REGION-NORTH",
+        "domain": "Cross-Domain Operations"
+      }
+    },
+    {
+      "slug": "REGION-CENTRAL",
+      "title": "Central Region",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.regions",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "region",
+        "entity_id": "REGION-CENTRAL",
+        "domain": "Cross-Domain Operations"
+      }
+    },
+    {
+      "slug": "REGION-SOUTH",
+      "title": "South Region",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.regions",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "region",
+        "entity_id": "REGION-SOUTH",
+        "domain": "Cross-Domain Operations"
+      }
+    },
+    {
+      "slug": "SITE-DC-A",
+      "title": "DC-A",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "data_center",
+        "entity_id": "SITE-DC-A",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-NORTH"
+      }
+    },
+    {
+      "slug": "SITE-DC-B",
+      "title": "DC-B",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "data_center",
+        "entity_id": "SITE-DC-B",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-CENTRAL"
+      }
+    },
+    {
+      "slug": "SITE-POP-21",
+      "title": "POP-21",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "transport_pop",
+        "entity_id": "SITE-POP-21",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-NORTH"
+      }
+    },
+    {
+      "slug": "SITE-POP-07",
+      "title": "POP-07",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "transport_pop",
+        "entity_id": "SITE-POP-07",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-CENTRAL"
+      }
+    },
+    {
+      "slug": "SITE-RAN-101",
+      "title": "RAN Site 101",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "radio_site",
+        "entity_id": "SITE-RAN-101",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-NORTH"
+      }
+    },
+    {
+      "slug": "SITE-GPON-15",
+      "title": "GPON Hub 15",
+      "type": "concept",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.sites",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "fixed_access_hub",
+        "entity_id": "SITE-GPON-15",
+        "domain": "Cross-Domain Operations",
+        "region": "REGION-SOUTH"
+      }
+    },
+    {
+      "slug": "EXT:INTERNET:001",
+      "title": "External Internet",
+      "type": "network-function",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.dependencies",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "internet",
+        "entity_id": "EXT:INTERNET:001",
+        "domain": "Cross-Domain Operations",
+        "raw_domain": "EXTERNAL",
+        "site": "external",
+        "region": "global",
+        "canonical_name": "External Internet"
+      }
+    },
+    {
+      "slug": "EXT:ROAMING:001",
+      "title": "Roaming Partner 01",
+      "type": "network-function",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.dependencies",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "roaming_partner",
+        "entity_id": "EXT:ROAMING:001",
+        "domain": "Cross-Domain Operations",
+        "raw_domain": "EXTERNAL",
+        "site": "external",
+        "region": "global",
+        "canonical_name": "Roaming Partner 01"
+      }
+    },
+    {
+      "slug": "EXT:VAS:001",
+      "title": "Third Party VAS Gateway",
+      "type": "network-function",
+      "domain": "Cross-Domain Operations",
+      "plane": "topology",
+      "sub_cluster": "cross_domain.dependencies",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "third_party_gateway",
+        "entity_id": "EXT:VAS:001",
+        "domain": "Cross-Domain Operations",
+        "raw_domain": "EXTERNAL",
+        "site": "external",
+        "region": "global",
+        "canonical_name": "Third Party VAS Gateway"
+      }
+    },
+    {
+      "slug": "INFRA:DC:A",
+      "title": "DC-A Facility",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "data_center",
+        "entity_id": "INFRA:DC:A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "DC-A Facility"
+      }
+    },
+    {
+      "slug": "INFRA:DC:B",
+      "title": "DC-B Facility",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "data_center",
+        "entity_id": "INFRA:DC:B",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "DC-B Facility"
+      }
+    },
+    {
+      "slug": "INFRA:POWER:A",
+      "title": "DC-A Power Feed A",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "power_feed",
+        "entity_id": "INFRA:POWER:A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "DC-A Power Feed A"
+      }
+    },
+    {
+      "slug": "INFRA:COOL:A",
+      "title": "DC-A Cooling Plant",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "cooling",
+        "entity_id": "INFRA:COOL:A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "DC-A Cooling Plant"
+      }
+    },
+    {
+      "slug": "INFRA:K8S:CORE-A",
+      "title": "Core Kubernetes Cluster A",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "kubernetes_cluster",
+        "entity_id": "INFRA:K8S:CORE-A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Core Kubernetes Cluster A"
+      }
+    },
+    {
+      "slug": "INFRA:NFVI:A",
+      "title": "NFVI Cluster A",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "nfvi_cluster",
+        "entity_id": "INFRA:NFVI:A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "NFVI Cluster A"
+      }
+    },
+    {
+      "slug": "INFRA:DB:SUBS-A",
+      "title": "Subscriber DB Cluster A",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "database_cluster",
+        "entity_id": "INFRA:DB:SUBS-A",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Subscriber DB Cluster A"
+      }
+    },
+    {
+      "slug": "INFRA:DNS:CORE",
+      "title": "Core DNS Cluster",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "dns_cluster",
+        "entity_id": "INFRA:DNS:CORE",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Core DNS Cluster"
+      }
+    },
+    {
+      "slug": "INFRA:NTP:CORE",
+      "title": "Core Timing Cluster",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ntp_ptp_cluster",
+        "entity_id": "INFRA:NTP:CORE",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Core Timing Cluster"
+      }
+    },
+    {
+      "slug": "INFRA:FW:SGI",
+      "title": "SGi Firewall Pair",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "firewall_pair",
+        "entity_id": "INFRA:FW:SGI",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SGi Firewall Pair"
+      }
+    },
+    {
+      "slug": "INFRA:CGNAT:001",
+      "title": "CGNAT-01",
+      "type": "network-function",
+      "domain": "Cloud/NFVI",
+      "plane": "topology",
+      "sub_cluster": "cloud_nfvi.infrastructure",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "cgnat",
+        "entity_id": "INFRA:CGNAT:001",
+        "domain": "Cloud/NFVI",
+        "raw_domain": "IT_CLOUD_INFRA",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "CGNAT-01"
+      }
+    },
+    {
+      "slug": "TX:FIBER:FR-07",
+      "title": "Fiber Route FR-07",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "fiber_route",
+        "entity_id": "TX:FIBER:FR-07",
+        "domain": "Transport",
+        "raw_domain": "TRANSMISSION",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "Fiber Route FR-07",
+        "aliases": [
+          {
+            "source": "TRANSMISSION_NMS",
+            "name": "FR07-NORTH-CENTRAL",
+            "confidence": 0.96
+          }
+        ]
+      }
+    },
+    {
+      "slug": "TX:DWDM:LAMBDA-22",
+      "title": "DWDM Lambda 22",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "dwdm_lambda",
+        "entity_id": "TX:DWDM:LAMBDA-22",
+        "domain": "Transport",
+        "raw_domain": "TRANSMISSION",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "DWDM Lambda 22"
+      }
+    },
+    {
+      "slug": "TX:OTN:TRAIL-22",
+      "title": "OTN Trail 22",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "otn_trail",
+        "entity_id": "TX:OTN:TRAIL-22",
+        "domain": "Transport",
+        "raw_domain": "TRANSMISSION",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "OTN Trail 22"
+      }
+    },
+    {
+      "slug": "TX:MW:BACKHAUL-101",
+      "title": "Microwave Backhaul 101",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "microwave_link",
+        "entity_id": "TX:MW:BACKHAUL-101",
+        "domain": "Transport",
+        "raw_domain": "TRANSMISSION",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "Microwave Backhaul 101"
+      }
+    },
+    {
+      "slug": "IP:P:RTR-07",
+      "title": "P-RTR-07",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "p_router",
+        "entity_id": "IP:P:RTR-07",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-POP-07",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "P-RTR-07"
+      }
+    },
+    {
+      "slug": "IP:PE:RTR-21",
+      "title": "PE-RTR-21",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "pe_router",
+        "entity_id": "IP:PE:RTR-21",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "PE-RTR-21",
+        "aliases": [
+          {
+            "source": "IP_NMS",
+            "name": "PE21",
+            "confidence": 0.98
+          }
+        ]
+      }
+    },
+    {
+      "slug": "IP:SEC:GW-02",
+      "title": "SEC-GW-02",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "security_gateway",
+        "entity_id": "IP:SEC:GW-02",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "SEC-GW-02",
+        "aliases": [
+          {
+            "source": "SECURITY_NMS",
+            "name": "SGW02-SEC",
+            "confidence": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "slug": "IP:VRF:N3-01",
+      "title": "N3-VRF-01",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "vrf",
+        "entity_id": "IP:VRF:N3-01",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "N3-VRF-01"
+      }
+    },
+    {
+      "slug": "IP:VRF:SGI-01",
+      "title": "SGi-VRF-01",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "vrf",
+        "entity_id": "IP:VRF:SGI-01",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SGi-VRF-01"
+      }
+    },
+    {
+      "slug": "IP:RR:001",
+      "title": "Route Reflector 01",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "route_reflector",
+        "entity_id": "IP:RR:001",
+        "domain": "Transport",
+        "raw_domain": "IP_TRANSPORT",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Route Reflector 01"
+      }
+    },
+    {
+      "slug": "MPLS:L3VPN:ENT-001",
+      "title": "Enterprise L3VPN 001",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "l3vpn",
+        "entity_id": "MPLS:L3VPN:ENT-001",
+        "domain": "Transport",
+        "raw_domain": "MPLS_CLOUD",
+        "site": "SITE-POP-21",
+        "region": "REGION-NORTH",
+        "canonical_name": "Enterprise L3VPN 001"
+      }
+    },
+    {
+      "slug": "MPLS:CE:CUST-001",
+      "title": "Enterprise CE 001",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ce_router",
+        "entity_id": "MPLS:CE:CUST-001",
+        "domain": "Transport",
+        "raw_domain": "MPLS_CLOUD",
+        "site": "customer_site",
+        "region": "REGION-NORTH",
+        "canonical_name": "Enterprise CE 001"
+      }
+    },
+    {
+      "slug": "RAN:SITE:101",
+      "title": "RAN Site 101",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ran_site",
+        "entity_id": "RAN:SITE:101",
+        "domain": "RAN",
+        "raw_domain": "RAN",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "RAN Site 101"
+      }
+    },
+    {
+      "slug": "RAN:ENB:101",
+      "title": "eNodeB-101",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "enodeb",
+        "entity_id": "RAN:ENB:101",
+        "domain": "RAN",
+        "raw_domain": "RAN",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "eNodeB-101"
+      }
+    },
+    {
+      "slug": "RAN:GNB:501",
+      "title": "gNodeB-501",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "gnodeb",
+        "entity_id": "RAN:GNB:501",
+        "domain": "RAN",
+        "raw_domain": "RAN",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "gNodeB-501"
+      }
+    },
+    {
+      "slug": "RAN:RNC:031",
+      "title": "RNC-031",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "rnc",
+        "entity_id": "RAN:RNC:031",
+        "domain": "RAN",
+        "raw_domain": "RAN",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "RNC-031"
+      }
+    },
+    {
+      "slug": "RAN:NODEB:03101",
+      "title": "NodeB-03101",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "nodeb",
+        "entity_id": "RAN:NODEB:03101",
+        "domain": "RAN",
+        "raw_domain": "RAN",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "NodeB-03101"
+      }
+    },
+    {
+      "slug": "CS:MSC-S:001",
+      "title": "MSC-S-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "msc_server",
+        "entity_id": "CS:MSC-S:001",
+        "domain": "Mobile Core",
+        "raw_domain": "CS_CORE",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "MSC-S-01"
+      }
+    },
+    {
+      "slug": "CS:MGW:001",
+      "title": "MGW-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "media_gateway",
+        "entity_id": "CS:MGW:001",
+        "domain": "Mobile Core",
+        "raw_domain": "CS_CORE",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "MGW-01"
+      }
+    },
+    {
+      "slug": "CS:HLR:001",
+      "title": "HLR-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "hlr",
+        "entity_id": "CS:HLR:001",
+        "domain": "Mobile Core",
+        "raw_domain": "CS_CORE",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "HLR-01"
+      }
+    },
+    {
+      "slug": "CS:STP:001",
+      "title": "STP-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "stp",
+        "entity_id": "CS:STP:001",
+        "domain": "Mobile Core",
+        "raw_domain": "CS_CORE",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "STP-01"
+      }
+    },
+    {
+      "slug": "PS3G:SGSN:001",
+      "title": "SGSN-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "sgsn",
+        "entity_id": "PS3G:SGSN:001",
+        "domain": "Mobile Core",
+        "raw_domain": "PS_3G",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "SGSN-01"
+      }
+    },
+    {
+      "slug": "PS3G:GGSN:001",
+      "title": "GGSN-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ggsn",
+        "entity_id": "PS3G:GGSN:001",
+        "domain": "Mobile Core",
+        "raw_domain": "PS_3G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "GGSN-01"
+      }
+    },
+    {
+      "slug": "EPC:MME:001",
+      "title": "MME-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "mme",
+        "entity_id": "EPC:MME:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "MME-01"
+      }
+    },
+    {
+      "slug": "EPC:SGW:001",
+      "title": "SGW-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "sgw",
+        "entity_id": "EPC:SGW:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SGW-01"
+      }
+    },
+    {
+      "slug": "EPC:PGW:001",
+      "title": "PGW-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "pgw",
+        "entity_id": "EPC:PGW:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "PGW-01"
+      }
+    },
+    {
+      "slug": "EPC:HSS:001",
+      "title": "HSS-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "hss",
+        "entity_id": "EPC:HSS:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "HSS-01"
+      }
+    },
+    {
+      "slug": "EPC:PCRF:001",
+      "title": "PCRF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "pcrf",
+        "entity_id": "EPC:PCRF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "PCRF-01"
+      }
+    },
+    {
+      "slug": "EPC:DRA:001",
+      "title": "DRA-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "diameter_router",
+        "entity_id": "EPC:DRA:001",
+        "domain": "Mobile Core",
+        "raw_domain": "EPC_4G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "DRA-01"
+      }
+    },
+    {
+      "slug": "NSA:ANCHOR:LTE-001",
+      "title": "NSA LTE Anchor 001",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "lte_anchor",
+        "entity_id": "NSA:ANCHOR:LTE-001",
+        "domain": "RAN",
+        "raw_domain": "NSA_5G",
+        "site": "SITE-RAN-101",
+        "region": "REGION-NORTH",
+        "canonical_name": "NSA LTE Anchor 001"
+      }
+    },
+    {
+      "slug": "NSA:ENDC:001",
+      "title": "EN-DC Controller 001",
+      "type": "network-function",
+      "domain": "RAN",
+      "plane": "topology",
+      "sub_cluster": "ran.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "endc_controller",
+        "entity_id": "NSA:ENDC:001",
+        "domain": "RAN",
+        "raw_domain": "NSA_5G",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "EN-DC Controller 001"
+      }
+    },
+    {
+      "slug": "SA5G:AMF:001",
+      "title": "AMF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "amf",
+        "entity_id": "SA5G:AMF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "AMF-01"
+      }
+    },
+    {
+      "slug": "SA5G:SMF:001",
+      "title": "SMF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "smf",
+        "entity_id": "SA5G:SMF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SMF-01"
+      }
+    },
+    {
+      "slug": "SA5G:UPF:003",
+      "title": "UPF-03",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.user_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "upf",
+        "entity_id": "SA5G:UPF:003",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "UPF-03",
+        "aliases": [
+          {
+            "source": "EMS_VENDOR_B",
+            "name": "UPF_003",
+            "confidence": 0.98
+          },
+          {
+            "source": "KUBERNETES",
+            "name": "upf-prod-03",
+            "confidence": 0.95
+          },
+          {
+            "source": "OSS_INVENTORY",
+            "name": "DC-A-UPF03",
+            "confidence": 0.9
+          },
+          {
+            "source": "LOGGING",
+            "name": "upf03.svc.cluster.local",
+            "confidence": 0.92
+          },
+          {
+            "source": "ITSM",
+            "name": "UPF3",
+            "confidence": 0.86
+          }
+        ]
+      }
+    },
+    {
+      "slug": "SA5G:UDM:001",
+      "title": "UDM-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "udm",
+        "entity_id": "SA5G:UDM:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "UDM-01"
+      }
+    },
+    {
+      "slug": "SA5G:AUSF:001",
+      "title": "AUSF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ausf",
+        "entity_id": "SA5G:AUSF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "AUSF-01"
+      }
+    },
+    {
+      "slug": "SA5G:PCF:001",
+      "title": "PCF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "pcf",
+        "entity_id": "SA5G:PCF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "PCF-01"
+      }
+    },
+    {
+      "slug": "SA5G:NRF:001",
+      "title": "NRF-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "nrf",
+        "entity_id": "SA5G:NRF:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "NRF-01"
+      }
+    },
+    {
+      "slug": "SA5G:SCP:001",
+      "title": "SCP-01",
+      "type": "network-function",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "mobile_core.control_plane",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "scp",
+        "entity_id": "SA5G:SCP:001",
+        "domain": "Mobile Core",
+        "raw_domain": "SA_5G_CORE",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SCP-01"
+      }
+    },
+    {
+      "slug": "IMSM:PCSCF:001",
+      "title": "Mobile P-CSCF-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "p_cscf",
+        "entity_id": "IMSM:PCSCF:001",
+        "domain": "IMS",
+        "raw_domain": "MOBILE_IMS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Mobile P-CSCF-01"
+      }
+    },
+    {
+      "slug": "IMSM:SCSCF:001",
+      "title": "Mobile S-CSCF-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "s_cscf",
+        "entity_id": "IMSM:SCSCF:001",
+        "domain": "IMS",
+        "raw_domain": "MOBILE_IMS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Mobile S-CSCF-01"
+      }
+    },
+    {
+      "slug": "IMSM:TAS:001",
+      "title": "Mobile TAS-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "tas",
+        "entity_id": "IMSM:TAS:001",
+        "domain": "IMS",
+        "raw_domain": "MOBILE_IMS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Mobile TAS-01"
+      }
+    },
+    {
+      "slug": "IMSM:SBC:001",
+      "title": "Mobile SBC-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "sbc",
+        "entity_id": "IMSM:SBC:001",
+        "domain": "IMS",
+        "raw_domain": "MOBILE_IMS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Mobile SBC-01"
+      }
+    },
+    {
+      "slug": "IMSF:PCSCF:001",
+      "title": "Fixed P-CSCF-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "p_cscf",
+        "entity_id": "IMSF:PCSCF:001",
+        "domain": "IMS",
+        "raw_domain": "FIXED_IMS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Fixed P-CSCF-01"
+      }
+    },
+    {
+      "slug": "IMSF:SCSCF:001",
+      "title": "Fixed S-CSCF-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "s_cscf",
+        "entity_id": "IMSF:SCSCF:001",
+        "domain": "IMS",
+        "raw_domain": "FIXED_IMS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Fixed S-CSCF-01"
+      }
+    },
+    {
+      "slug": "IMSF:TAS:001",
+      "title": "Fixed TAS-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "tas",
+        "entity_id": "IMSF:TAS:001",
+        "domain": "IMS",
+        "raw_domain": "FIXED_IMS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Fixed TAS-01"
+      }
+    },
+    {
+      "slug": "IMSF:SBC:001",
+      "title": "Fixed SBC-01",
+      "type": "network-function",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "ims.sip_core",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "sbc",
+        "entity_id": "IMSF:SBC:001",
+        "domain": "IMS",
+        "raw_domain": "FIXED_IMS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Fixed SBC-01"
+      }
+    },
+    {
+      "slug": "VAS:SMSC:001",
+      "title": "SMSC-01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "smsc",
+        "entity_id": "VAS:SMSC:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "VAS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SMSC-01"
+      }
+    },
+    {
+      "slug": "VAS:SMSR:001",
+      "title": "SMS Router-01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "sms_router",
+        "entity_id": "VAS:SMSR:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "VAS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "SMS Router-01"
+      }
+    },
+    {
+      "slug": "VAS:USSD:001",
+      "title": "USSD GW-01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "ussd_gateway",
+        "entity_id": "VAS:USSD:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "VAS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "USSD GW-01"
+      }
+    },
+    {
+      "slug": "VAS:ESME:001",
+      "title": "Enterprise ESME-01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "esme",
+        "entity_id": "VAS:ESME:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "VAS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Enterprise ESME-01"
+      }
+    },
+    {
+      "slug": "CHG:OCS:001",
+      "title": "OCS-01",
+      "type": "network-function",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "ocs.charging_gateways",
+      "tmforum_layer": "CCM",
+      "frontmatter": {
+        "entity_type": "ocs",
+        "entity_id": "CHG:OCS:001",
+        "domain": "OCS",
+        "raw_domain": "CHARGING",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "OCS-01"
+      }
+    },
+    {
+      "slug": "CHG:CHF:001",
+      "title": "Charging Function-01",
+      "type": "network-function",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "ocs.charging_gateways",
+      "tmforum_layer": "CCM",
+      "frontmatter": {
+        "entity_type": "charging_function",
+        "entity_id": "CHG:CHF:001",
+        "domain": "OCS",
+        "raw_domain": "CHARGING",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Charging Function-01"
+      }
+    },
+    {
+      "slug": "IN:A:SCP:001",
+      "title": "IN-A SCP-01",
+      "type": "network-function",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "ocs.charging_gateways",
+      "tmforum_layer": "CCM",
+      "frontmatter": {
+        "entity_type": "in_scp",
+        "entity_id": "IN:A:SCP:001",
+        "domain": "OCS",
+        "raw_domain": "IN_VENDOR_A",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "IN-A SCP-01"
+      }
+    },
+    {
+      "slug": "IN:B:SCP:001",
+      "title": "IN-B SCP-01",
+      "type": "network-function",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "ocs.charging_gateways",
+      "tmforum_layer": "CCM",
+      "frontmatter": {
+        "entity_type": "in_scp",
+        "entity_id": "IN:B:SCP:001",
+        "domain": "OCS",
+        "raw_domain": "IN_VENDOR_B",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "IN-B SCP-01"
+      }
+    },
+    {
+      "slug": "IN:C:SCP:001",
+      "title": "IN-C SCP-01",
+      "type": "network-function",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "ocs.charging_gateways",
+      "tmforum_layer": "CCM",
+      "frontmatter": {
+        "entity_type": "in_scp",
+        "entity_id": "IN:C:SCP:001",
+        "domain": "OCS",
+        "raw_domain": "IN_VENDOR_C",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "IN-C SCP-01"
+      }
+    },
+    {
+      "slug": "CRM:PROFILE:001",
+      "title": "Customer Profile Service",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "customer_profile",
+        "entity_id": "CRM:PROFILE:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "CRM",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Customer Profile Service"
+      }
+    },
+    {
+      "slug": "CRM:TICKET:001",
+      "title": "Customer Ticket Service",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "customer_ticket_service",
+        "entity_id": "CRM:TICKET:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "CRM",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Customer Ticket Service"
+      }
+    },
+    {
+      "slug": "BSS:BILLING:001",
+      "title": "Billing System 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "billing",
+        "entity_id": "BSS:BILLING:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "BSS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Billing System 01"
+      }
+    },
+    {
+      "slug": "BSS:CATALOG:001",
+      "title": "Product Catalog 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "product_catalog",
+        "entity_id": "BSS:CATALOG:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "BSS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Product Catalog 01"
+      }
+    },
+    {
+      "slug": "PROV:ORDER:001",
+      "title": "Order Management 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "order_management",
+        "entity_id": "PROV:ORDER:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "PROVISIONING",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Order Management 01"
+      }
+    },
+    {
+      "slug": "PROV:ENGINE:001",
+      "title": "Provisioning Engine 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "provisioning_engine",
+        "entity_id": "PROV:ENGINE:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "PROVISIONING",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "Provisioning Engine 01"
+      }
+    },
+    {
+      "slug": "OSS:FM:001",
+      "title": "Fault Manager 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "fault_management",
+        "entity_id": "OSS:FM:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "OSS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Fault Manager 01"
+      }
+    },
+    {
+      "slug": "OSS:PM:001",
+      "title": "Performance Manager 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "performance_management",
+        "entity_id": "OSS:PM:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "OSS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Performance Manager 01"
+      }
+    },
+    {
+      "slug": "OSS:INV:001",
+      "title": "Inventory System 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "inventory",
+        "entity_id": "OSS:INV:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "OSS",
+        "site": "SITE-DC-A",
+        "region": "REGION-NORTH",
+        "canonical_name": "Inventory System 01"
+      }
+    },
+    {
+      "slug": "OSS:ITSM:001",
+      "title": "ITSM 01",
+      "type": "network-function",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "oss_bss.systems",
+      "tmforum_layer": "AIOps",
+      "frontmatter": {
+        "entity_type": "itsm",
+        "entity_id": "OSS:ITSM:001",
+        "domain": "OSS/BSS",
+        "raw_domain": "OSS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "ITSM 01"
+      }
+    },
+    {
+      "slug": "GPON:OLT:015",
+      "title": "OLT-015",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "olt",
+        "entity_id": "GPON:OLT:015",
+        "domain": "Transport",
+        "raw_domain": "GPON_FIXED_ACCESS",
+        "site": "SITE-GPON-15",
+        "region": "REGION-SOUTH",
+        "canonical_name": "OLT-015"
+      }
+    },
+    {
+      "slug": "GPON:ONT:015001",
+      "title": "ONT-015001",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "ont",
+        "entity_id": "GPON:ONT:015001",
+        "domain": "Transport",
+        "raw_domain": "GPON_FIXED_ACCESS",
+        "site": "customer_premise",
+        "region": "REGION-SOUTH",
+        "canonical_name": "ONT-015001"
+      }
+    },
+    {
+      "slug": "GPON:BNG:001",
+      "title": "BNG-01",
+      "type": "network-function",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "transport.topology",
+      "tmforum_layer": "RM&O",
+      "frontmatter": {
+        "entity_type": "bng",
+        "entity_id": "GPON:BNG:001",
+        "domain": "Transport",
+        "raw_domain": "GPON_FIXED_ACCESS",
+        "site": "SITE-DC-B",
+        "region": "REGION-CENTRAL",
+        "canonical_name": "BNG-01"
+      }
+    },
+    {
+      "slug": "services/3g_mobile_data",
+      "title": "3G Mobile Data",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/3g_mobile_data",
+        "domain": "Mobile Core",
+        "service_id": "3g_mobile_data",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "roaming"
+        ]
+      }
+    },
+    {
+      "slug": "services/lte_mobile_data",
+      "title": "LTE Mobile Data",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/lte_mobile_data",
+        "domain": "Mobile Core",
+        "service_id": "lte_mobile_data",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "enterprise_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/5g_nsa_mobile_data",
+      "title": "5G NSA Mobile Data",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/5g_nsa_mobile_data",
+        "domain": "Mobile Core",
+        "service_id": "5g_nsa_mobile_data",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/5g_sa_mobile_data",
+      "title": "5G SA Mobile Data",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/5g_sa_mobile_data",
+        "domain": "Mobile Core",
+        "service_id": "5g_sa_mobile_data",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "enterprise_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/3g_voice",
+      "title": "3G Voice",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/3g_voice",
+        "domain": "Mobile Core",
+        "service_id": "3g_voice",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "roaming"
+        ]
+      }
+    },
+    {
+      "slug": "services/volte",
+      "title": "VoLTE",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/volte",
+        "domain": "Mobile Core",
+        "service_id": "volte",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/mobile_ims_voice",
+      "title": "Mobile IMS Voice",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/mobile_ims_voice",
+        "domain": "Mobile Core",
+        "service_id": "mobile_ims_voice",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/fixed_ims_voice",
+      "title": "Fixed IMS Voice",
+      "type": "service",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/fixed_ims_voice",
+        "domain": "IMS",
+        "service_id": "fixed_ims_voice",
+        "regions": [
+          "REGION-SOUTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "fixed_consumer"
+        ]
+      }
+    },
+    {
+      "slug": "services/mo_sms",
+      "title": "Mobile Originated SMS",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/mo_sms",
+        "domain": "OSS/BSS",
+        "service_id": "mo_sms",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/mt_sms",
+      "title": "Mobile Terminated SMS",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/mt_sms",
+        "domain": "OSS/BSS",
+        "service_id": "mt_sms",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/enterprise_sms_esme",
+      "title": "Enterprise SMS via ESME",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/enterprise_sms_esme",
+        "domain": "OSS/BSS",
+        "service_id": "enterprise_sms_esme",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "enterprise"
+        ]
+      }
+    },
+    {
+      "slug": "services/ussd",
+      "title": "USSD",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/ussd",
+        "domain": "OSS/BSS",
+        "service_id": "ussd",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/prepaid_recharge",
+      "title": "Prepaid Recharge",
+      "type": "service",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/prepaid_recharge",
+        "domain": "OCS",
+        "service_id": "prepaid_recharge",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "prepaid"
+        ]
+      }
+    },
+    {
+      "slug": "services/prepaid_balance_inquiry",
+      "title": "Prepaid Balance Inquiry",
+      "type": "service",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/prepaid_balance_inquiry",
+        "domain": "OCS",
+        "service_id": "prepaid_balance_inquiry",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "prepaid"
+        ]
+      }
+    },
+    {
+      "slug": "services/online_charging_data",
+      "title": "Online Charging for Data",
+      "type": "service",
+      "domain": "OCS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/online_charging_data",
+        "domain": "OCS",
+        "service_id": "online_charging_data",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "prepaid",
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/roaming_data",
+      "title": "Roaming Data",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/roaming_data",
+        "domain": "OSS/BSS",
+        "service_id": "roaming_data",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "roaming"
+        ]
+      }
+    },
+    {
+      "slug": "services/roaming_voice",
+      "title": "Roaming Voice",
+      "type": "service",
+      "domain": "IMS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/roaming_voice",
+        "domain": "IMS",
+        "service_id": "roaming_voice",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "roaming"
+        ]
+      }
+    },
+    {
+      "slug": "services/subscriber_provisioning",
+      "title": "Subscriber Provisioning",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/subscriber_provisioning",
+        "domain": "Mobile Core",
+        "service_id": "subscriber_provisioning",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "fixed_consumer"
+        ]
+      }
+    },
+    {
+      "slug": "services/sim_service_activation",
+      "title": "SIM and Service Activation",
+      "type": "service",
+      "domain": "Mobile Core",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/sim_service_activation",
+        "domain": "Mobile Core",
+        "service_id": "sim_service_activation",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile"
+        ]
+      }
+    },
+    {
+      "slug": "services/gpon_broadband",
+      "title": "GPON Broadband",
+      "type": "service",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/gpon_broadband",
+        "domain": "Transport",
+        "service_id": "gpon_broadband",
+        "regions": [
+          "REGION-SOUTH"
+        ],
+        "customer_segments": [
+          "fixed_consumer"
+        ]
+      }
+    },
+    {
+      "slug": "services/fixed_broadband_authentication",
+      "title": "Fixed Broadband Authentication",
+      "type": "service",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/fixed_broadband_authentication",
+        "domain": "Transport",
+        "service_id": "fixed_broadband_authentication",
+        "regions": [
+          "REGION-SOUTH"
+        ],
+        "customer_segments": [
+          "fixed_consumer"
+        ]
+      }
+    },
+    {
+      "slug": "services/enterprise_mpls_vpn",
+      "title": "Enterprise MPLS VPN",
+      "type": "service",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/enterprise_mpls_vpn",
+        "domain": "Transport",
+        "service_id": "enterprise_mpls_vpn",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "enterprise"
+        ]
+      }
+    },
+    {
+      "slug": "services/internet_peering_service",
+      "title": "Internet Peering Service",
+      "type": "service",
+      "domain": "Transport",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/internet_peering_service",
+        "domain": "Transport",
+        "service_id": "internet_peering_service",
+        "regions": [
+          "REGION-NORTH"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "enterprise",
+          "fixed_consumer"
+        ]
+      }
+    },
+    {
+      "slug": "services/vas_short_code_service",
+      "title": "VAS Short-Code Service",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/vas_short_code_service",
+        "domain": "OSS/BSS",
+        "service_id": "vas_short_code_service",
+        "regions": [
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "consumer_mobile",
+          "enterprise"
+        ]
+      }
+    },
+    {
+      "slug": "services/oss_network_management_connectivity",
+      "title": "OSS to Network Management Connectivity",
+      "type": "service",
+      "domain": "OSS/BSS",
+      "plane": "topology",
+      "sub_cluster": "services.cfs",
+      "tmforum_layer": "SM&O",
+      "frontmatter": {
+        "entity_type": "service",
+        "entity_id": "services/oss_network_management_connectivity",
+        "domain": "OSS/BSS",
+        "service_id": "oss_network_management_connectivity",
+        "regions": [
+          "REGION-NORTH",
+          "REGION-CENTRAL"
+        ],
+        "customer_segments": [
+          "internal_noc"
+        ]
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "REL-RAN-GNB-BH",
+      "source": "RAN:GNB:501",
+      "target": "TX:MW:BACKHAUL-101",
+      "link_type": "backhauled-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-RAN-ENB-BH",
+      "source": "RAN:ENB:101",
+      "target": "TX:MW:BACKHAUL-101",
+      "link_type": "backhauled-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-MW-PE21",
+      "source": "TX:MW:BACKHAUL-101",
+      "target": "IP:PE:RTR-21",
+      "link_type": "carried-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-FIBER-DWDM",
+      "source": "TX:DWDM:LAMBDA-22",
+      "target": "TX:FIBER:FR-07",
+      "link_type": "carried-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-OTN-DWDM",
+      "source": "TX:OTN:TRAIL-22",
+      "target": "TX:DWDM:LAMBDA-22",
+      "link_type": "carried-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-MPLS-OTN",
+      "source": "IP:PE:RTR-21",
+      "target": "TX:OTN:TRAIL-22",
+      "link_type": "carried-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PE21-SECGW02",
+      "source": "IP:PE:RTR-21",
+      "target": "IP:SEC:GW-02",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-N3-PE21",
+      "source": "IP:VRF:N3-01",
+      "target": "IP:PE:RTR-21",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-N3-UPF",
+      "source": "SA5G:UPF:003",
+      "target": "IP:VRF:N3-01",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-UPF-SGI",
+      "source": "SA5G:UPF:003",
+      "target": "IP:VRF:SGI-01",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SGI-FW",
+      "source": "IP:VRF:SGI-01",
+      "target": "INFRA:FW:SGI",
+      "link_type": "protected-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-FW-CGNAT",
+      "source": "INFRA:FW:SGI",
+      "target": "INFRA:CGNAT:001",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-CGNAT-INET",
+      "source": "INFRA:CGNAT:001",
+      "target": "EXT:INTERNET:001",
+      "link_type": "peers-with",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-AMF-GNB",
+      "source": "SA5G:AMF:001",
+      "target": "RAN:GNB:501",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SMF-UPF",
+      "source": "SA5G:SMF:001",
+      "target": "SA5G:UPF:003",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-AMF-UDM",
+      "source": "SA5G:AMF:001",
+      "target": "SA5G:UDM:001",
+      "link_type": "authenticates-via",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SMF-PCF",
+      "source": "SA5G:SMF:001",
+      "target": "SA5G:PCF:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-UPF-HOSTED",
+      "source": "SA5G:UPF:003",
+      "target": "INFRA:K8S:CORE-A",
+      "link_type": "hosted-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-LTE-ENB-MME",
+      "source": "RAN:ENB:101",
+      "target": "EPC:MME:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-LTE-ENB-SGW",
+      "source": "RAN:ENB:101",
+      "target": "EPC:SGW:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SGW-PGW",
+      "source": "EPC:SGW:001",
+      "target": "EPC:PGW:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-MME-HSS",
+      "source": "EPC:MME:001",
+      "target": "EPC:HSS:001",
+      "link_type": "authenticates-via",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PGW-PCRF",
+      "source": "EPC:PGW:001",
+      "target": "EPC:PCRF:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PGW-FW",
+      "source": "EPC:PGW:001",
+      "target": "INFRA:FW:SGI",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-NSA-GNB-ENDC",
+      "source": "RAN:GNB:501",
+      "target": "NSA:ENDC:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-NSA-ENDC-ANCHOR",
+      "source": "NSA:ENDC:001",
+      "target": "NSA:ANCHOR:LTE-001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-NSA-ANCHOR-EPC",
+      "source": "NSA:ANCHOR:LTE-001",
+      "target": "EPC:SGW:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-3G-NODEB-RNC",
+      "source": "RAN:NODEB:03101",
+      "target": "RAN:RNC:031",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-RNC-SGSN",
+      "source": "RAN:RNC:031",
+      "target": "PS3G:SGSN:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SGSN-GGSN",
+      "source": "PS3G:SGSN:001",
+      "target": "PS3G:GGSN:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-RNC-MSC",
+      "source": "RAN:RNC:031",
+      "target": "CS:MSC-S:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-MSC-MGW",
+      "source": "CS:MSC-S:001",
+      "target": "CS:MGW:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-VOLTE-PCSCF",
+      "source": "RAN:ENB:101",
+      "target": "IMSM:PCSCF:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-IMS-PCSCF-SCSCF",
+      "source": "IMSM:PCSCF:001",
+      "target": "IMSM:SCSCF:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-IMS-SCSCF-TAS",
+      "source": "IMSM:SCSCF:001",
+      "target": "IMSM:TAS:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-IMS-TAS-SBC",
+      "source": "IMSM:TAS:001",
+      "target": "IMSM:SBC:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-FIXED-ONT-OLT",
+      "source": "GPON:ONT:015001",
+      "target": "GPON:OLT:015",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-FIXED-OLT-BNG",
+      "source": "GPON:OLT:015",
+      "target": "GPON:BNG:001",
+      "link_type": "connected-to",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-BNG-PE",
+      "source": "GPON:BNG:001",
+      "target": "IP:P:RTR-07",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SMS-SMSC-SMSR",
+      "source": "VAS:SMSC:001",
+      "target": "VAS:SMSR:001",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-USSD-IN-A",
+      "source": "VAS:USSD:001",
+      "target": "IN:A:SCP:001",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-OCS-DRA",
+      "source": "CHG:OCS:001",
+      "target": "EPC:DRA:001",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PCF-OCS",
+      "source": "SA5G:PCF:001",
+      "target": "CHG:OCS:001",
+      "link_type": "charges-via",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-CRM-PROFILE-TICKET",
+      "source": "CRM:TICKET:001",
+      "target": "CRM:PROFILE:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-BSS-CRM",
+      "source": "BSS:BILLING:001",
+      "target": "CRM:PROFILE:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-ORDER-CATALOG",
+      "source": "PROV:ORDER:001",
+      "target": "BSS:CATALOG:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PROV-ORDER",
+      "source": "PROV:ENGINE:001",
+      "target": "PROV:ORDER:001",
+      "link_type": "depends-on",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-PROV-HSS",
+      "source": "PROV:ENGINE:001",
+      "target": "EPC:HSS:001",
+      "link_type": "provisioned-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-OSS-FM-MONITORS-UPF",
+      "source": "OSS:FM:001",
+      "target": "SA5G:UPF:003",
+      "link_type": "monitored-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-OSS-PM-MONITORS-PE",
+      "source": "OSS:PM:001",
+      "target": "IP:PE:RTR-21",
+      "link_type": "monitored-by",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-L3VPN-PE",
+      "source": "MPLS:L3VPN:ENT-001",
+      "target": "IP:PE:RTR-21",
+      "link_type": "routes-through",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-001",
+      "source": "RAN:NODEB:03101",
+      "target": "services/3g_mobile_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-002",
+      "source": "RAN:ENB:101",
+      "target": "services/lte_mobile_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-003",
+      "source": "RAN:GNB:501",
+      "target": "services/5g_nsa_mobile_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-004",
+      "source": "RAN:GNB:501",
+      "target": "services/5g_sa_mobile_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-005",
+      "source": "RAN:NODEB:03101",
+      "target": "services/3g_voice",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-006",
+      "source": "RAN:ENB:101",
+      "target": "services/volte",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-007",
+      "source": "RAN:GNB:501",
+      "target": "services/mobile_ims_voice",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-008",
+      "source": "GPON:ONT:015001",
+      "target": "services/fixed_ims_voice",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-009",
+      "source": "RAN:ENB:101",
+      "target": "services/mo_sms",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-010",
+      "source": "VAS:SMSR:001",
+      "target": "services/mt_sms",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-011",
+      "source": "VAS:ESME:001",
+      "target": "services/enterprise_sms_esme",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-012",
+      "source": "RAN:ENB:101",
+      "target": "services/ussd",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-013",
+      "source": "CRM:PROFILE:001",
+      "target": "services/prepaid_recharge",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-014",
+      "source": "VAS:USSD:001",
+      "target": "services/prepaid_balance_inquiry",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-015",
+      "source": "SA5G:UPF:003",
+      "target": "services/online_charging_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-016",
+      "source": "EXT:ROAMING:001",
+      "target": "services/roaming_data",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-017",
+      "source": "EXT:ROAMING:001",
+      "target": "services/roaming_voice",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-018",
+      "source": "CRM:PROFILE:001",
+      "target": "services/subscriber_provisioning",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-019",
+      "source": "BSS:CATALOG:001",
+      "target": "services/sim_service_activation",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-020",
+      "source": "GPON:ONT:015001",
+      "target": "services/gpon_broadband",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-021",
+      "source": "GPON:ONT:015001",
+      "target": "services/fixed_broadband_authentication",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-022",
+      "source": "MPLS:CE:CUST-001",
+      "target": "services/enterprise_mpls_vpn",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-023",
+      "source": "IP:P:RTR-07",
+      "target": "services/internet_peering_service",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-024",
+      "source": "VAS:USSD:001",
+      "target": "services/vas_short_code_service",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    },
+    {
+      "relationship_id": "REL-SVC-SUP-025",
+      "source": "OSS:FM:001",
+      "target": "services/oss_network_management_connectivity",
+      "link_type": "supports-service",
+      "state": "CONFIRMED",
+      "confidence": 1.0,
+      "provenance": "operator-inventory-baseline"
+    }
+  ]
+}

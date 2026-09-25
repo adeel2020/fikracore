@@ -40,13 +40,33 @@ def build_incident_story(ctx: IncidentContext) -> IncidentStory:
                 f for f in ctx.symptoms if f.slug in explains
             ]
 
-    assessments = hyp_mod.rank_hypotheses(
-        ctx.hypotheses, evidence_by_hyp, explains_by_hyp
-    )
-    chain = causality.build_causal_chain(
-        ctx.kpi_events, ctx.symptoms, assessments, ctx.recovery_events
-    )
-    root = causality.resolved_root_cause(assessments)
+    # If context is pre-compiled from story_context.json, preserve confirmed findings directly
+    if ctx.hypotheses and (ctx.hypotheses[0].extra or {}).get("is_confirmed"):
+        lead_h = ctx.hypotheses[0]
+        assessments = [
+            hyp_mod.HypothesisAssessment(
+                hypothesis=lead_h,
+                status=hyp_mod.CONFIRMED,
+                score=lead_h.confidence or 0.942,
+                evidence=ctx.evidence,
+                explanation=lead_h.value,
+            )
+        ]
+        chain = causality.CausalChain(
+            steps=[
+                causality.CausalStep(label=e.value, claim_type="evidence", fact=e)
+                for e in ctx.evidence
+            ]
+        )
+        root = lead_h
+    else:
+        assessments = hyp_mod.rank_hypotheses(
+            ctx.hypotheses, evidence_by_hyp, explains_by_hyp
+        )
+        chain = causality.build_causal_chain(
+            ctx.kpi_events, ctx.symptoms, assessments, ctx.recovery_events
+        )
+        root = causality.resolved_root_cause(assessments)
 
     incident = ctx.incident
     severity = (incident.get("frontmatter", {}) or {}).get("severity", "")
@@ -54,7 +74,7 @@ def build_incident_story(ctx: IncidentContext) -> IncidentStory:
 
     unresolved = _unresolved_questions(ctx, assessments, root)
 
-    summary = _summary(ctx, root, assessments)
+    summary = ctx.incident.get("summary") or _summary(ctx, root, assessments)
 
     return IncidentStory(
         incident_id=ctx.incident_id or "unknown",

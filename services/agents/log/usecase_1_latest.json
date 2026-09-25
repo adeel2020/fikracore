@@ -1,0 +1,29 @@
+{
+  "demo_id": "DEMO-USECASE-1-20260923T130156Z",
+  "run_id": "RUN-SCN-001-L1-SEED-42001",
+  "scenario_id": "SCN-001",
+  "terminal_state": "EXPLAINED",
+  "explanation_coverage": 1.0,
+  "winning_root_cause": {
+    "canonical_entity": "IP:PE:RTR-21",
+    "confidence_score": 0.9098
+  },
+  "diagnostics": {
+    "input_evidence_count": 16,
+    "collapsed_evidence_count": 16,
+    "falsified_hypothesis_count": 0,
+    "repeated_falsified_hypothesis_count": 0,
+    "candidate_relationship_count": 0,
+    "canonical_resolution_failures": [],
+    "topology_gap_detection": false,
+    "evidence_requests_before_terminal": 0,
+    "steps_to_first_useful_hypothesis": 2,
+    "investigation_duration_seconds": 0.01222416601376608,
+    "impacted_service": "5g_sa_mobile_data",
+    "coincidental_evidence": [],
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [],
+    "unexplained_residuals": [],
+    "model_contradictions": []
+  }
+}

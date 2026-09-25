@@ -1,0 +1,69 @@
+{
+  "scenario_id": "SCN-067",
+  "run_id": "RUN-SCN-067-L2-SEED-42067",
+  "title": "Operational Incident SCN-067",
+  "domain": "transport",
+  "severity": "CRITICAL",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T09:07:03Z",
+  "resolved_at": "2026-09-10T09:23:00Z",
+  "executive_summary": "Autonomous root cause confirmed at IP:RR:001 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "IP:RR:001",
+    "condition": "Operational failure on IP:RR:001",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "IP:RR:001",
+    "IP:RR:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "IP:RR:001",
+      "role": "ROOT_CAUSE",
+      "status": "ROUTE_REFLECTOR_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T09:07:03Z",
+      "event": "ROUTE_REFLECTOR_DEGRADED",
+      "entity": "IP:RR:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: ROUTE_REFLECTOR_DEGRADED on IP:RR:001"
+    },
+    {
+      "time": "2026-09-10T09:07:03Z",
+      "event": "ROUTE_REFLECTOR_DEGRADED",
+      "entity": "IP:RR:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: ROUTE_REFLECTOR_DEGRADED on IP:RR:001"
+    },
+    {
+      "time": "2026-09-10T09:08:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "IP:RR:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 66.28percent"
+    },
+    {
+      "time": "2026-09-10T09:23:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "IP:RR:001",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 4,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 66.28,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

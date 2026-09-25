@@ -1,0 +1,134 @@
+{
+  "scenario_id": "SCN-057",
+  "run_id": "RUN-SCN-057-L2-SEED-42057",
+  "title": "Operational Incident SCN-057",
+  "domain": "mobile_ims",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T08:57:04Z",
+  "resolved_at": "2026-09-10T09:13:00Z",
+  "executive_summary": "Autonomous root cause confirmed at IMSM:PCSCF:001 with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "IMSM:PCSCF:001",
+    "condition": "Operational failure on IMSM:PCSCF:001",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "IMSM:PCSCF:001",
+    "RAN:GNB:501",
+    "RAN:GNB:501",
+    "SA5G:AMF:001",
+    "INFRA:K8S:CORE-A",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "IMSM:PCSCF:001",
+      "role": "ROOT_CAUSE",
+      "status": "P_CSCF_DEGRADED"
+    },
+    {
+      "entity": "RAN:GNB:501",
+      "role": "CAUSAL_RELAY",
+      "status": "GNODEB_DEGRADED"
+    },
+    {
+      "entity": "SA5G:AMF:001",
+      "role": "CAUSAL_RELAY",
+      "status": "AMF_DEGRADED"
+    },
+    {
+      "entity": "INFRA:K8S:CORE-A",
+      "role": "CAUSAL_RELAY",
+      "status": "KUBERNETES_CLUSTER_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:57:04Z",
+      "event": "P_CSCF_DEGRADED",
+      "entity": "IMSM:PCSCF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: P_CSCF_DEGRADED on IMSM:PCSCF:001"
+    },
+    {
+      "time": "2026-09-10T08:57:45Z",
+      "event": "GNODEB_DEGRADED",
+      "entity": "RAN:GNB:501",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: GNODEB_DEGRADED on RAN:GNB:501"
+    },
+    {
+      "time": "2026-09-10T08:57:45Z",
+      "event": "GNODEB_DEGRADED",
+      "entity": "RAN:GNB:501",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: GNODEB_DEGRADED on RAN:GNB:501"
+    },
+    {
+      "time": "2026-09-10T08:58:24Z",
+      "event": "AMF_DEGRADED",
+      "entity": "SA5G:AMF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: AMF_DEGRADED on SA5G:AMF:001"
+    },
+    {
+      "time": "2026-09-10T08:58:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Mobile Ims Voice Success Rate degraded to 66.41percent"
+    },
+    {
+      "time": "2026-09-10T08:58:59Z",
+      "event": "KUBERNETES_CLUSTER_DEGRADED",
+      "entity": "INFRA:K8S:CORE-A",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: KUBERNETES_CLUSTER_DEGRADED on INFRA:K8S:CORE-A"
+    },
+    {
+      "time": "2026-09-10T08:59:41Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T09:00:15Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T09:13:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "IMSM:PCSCF:001",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 10,
+    "kpi_breach": {
+      "name": "Mobile Ims Voice Success Rate",
+      "value": 66.41,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

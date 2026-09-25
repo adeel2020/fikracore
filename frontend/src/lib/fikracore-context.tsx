@@ -199,12 +199,12 @@ function deriveCapabilities(entry: {
 export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   {
     id: "SCN-001",
-    display_name: "Transport N3 Degradation Cascades into Mobile Data Failure",
+    display_name: "5G Mobile Data Failure via N3 Transport Degradation",
     description: "Intermittent transport path degradation on PE-RTR-21 N3 backhaul causes UPF reachability starvation and customer ticket surges.",
     stage: "H1",
     concept: "Understand",
     scenario_type: "INCIDENT",
-    aliases: ["TWIN-INC-001", "DEMO-001", "Transport N3 Degradation", "PE-RTR-21 N3 degradation", "H1-INC-001", "SCN-001"],
+    aliases: ["TWIN-INC-001", "DEMO-001", "Transport N3 Degradation", "PE-RTR-21 N3 degradation", "H1-INC-001", "SCN-001", "Transport N3 Degradation Cascades into Mobile Data Failure"],
     tags: ["ip_transport", "sa_5g_core", "crm", "n3_tunnel", "5g"],
     domains: ["IP Transport", "5G SA Core", "CRM"],
     services: ["5G SA Mobile Data (REGION-NORTH)"],

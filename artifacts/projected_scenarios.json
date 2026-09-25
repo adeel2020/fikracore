@@ -1,0 +1,664 @@
+[
+  {
+    "id": "scn-001",
+    "name": "Scenario SCN-001: Transport N3 Degradation Cascades into Mobile Data Failure",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-001)",
+    "description": "Simulated operational run RUN-20260925211130849785 for scenario SCN-001.",
+    "aliases": [
+      "scn-001",
+      "SCN-001",
+      "RUN-20260925211130849785",
+      "run-20260925211130849785"
+    ],
+    "root_cause": "ip:pe:rtr-21",
+    "propagation_path": [
+      "ip:pe:rtr-21",
+      "ip:vrf:n3-01",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "ip:pe:rtr-21": {
+        "severity": "ROOT_CAUSE",
+        "status": "IP:PE:RTR-21 Saturation & Anomaly"
+      },
+      "ip:vrf:n3-01": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-001",
+      "run_id": "RUN-20260925211130849785",
+      "root_cause_candidate": "IP:PE:RTR-21",
+      "root_cause_name": "IP:PE:RTR-21",
+      "causal_path": "ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
+      "causal_confidence": 0.942,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 16,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-002",
+    "name": "Scenario SCN-002: UPF Failure Cascades into Charging and Customer Impact",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-002)",
+    "description": "Simulated operational run RUN-20260924183247927728 for scenario SCN-002.",
+    "aliases": [
+      "scn-002",
+      "SCN-002",
+      "RUN-20260924183247927728",
+      "run-20260924183247927728"
+    ],
+    "root_cause": "SA5G:UPF:003",
+    "propagation_path": [
+      "SA5G:UPF:003",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "SA5G:UPF:003": {
+        "severity": "ROOT_CAUSE",
+        "status": "UPF-03 Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-002",
+      "run_id": "RUN-20260924183247927728",
+      "root_cause_candidate": "UPF-03 Primary Failure",
+      "root_cause_name": "UPF-03 Primary Failure",
+      "causal_path": "SA5G:UPF:003 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 12,
+      "isolated_noise_count": 5,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-003",
+    "name": "Scenario SCN-003: Internal DNS Degradation Cascades Across Core Functions",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-003)",
+    "description": "Simulated operational run RUN-20260924161011194010 for scenario SCN-003.",
+    "aliases": [
+      "scn-003",
+      "SCN-003",
+      "RUN-20260924161011194010",
+      "run-20260924161011194010"
+    ],
+    "root_cause": "INFRA:DNS:CORE",
+    "propagation_path": [
+      "INFRA:DNS:CORE",
+      "infra:dns:core",
+      "sa5g:amf:001",
+      "infra:k8s:core-a",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "infra:dns:core": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:amf:001": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "infra:k8s:core-a": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INFRA:DNS:CORE": {
+        "severity": "ROOT_CAUSE",
+        "status": "Core DNS Cluster Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-003",
+      "run_id": "RUN-20260924161011194010",
+      "root_cause_candidate": "Core DNS Cluster Primary Failure",
+      "root_cause_name": "Core DNS Cluster Primary Failure",
+      "causal_path": "INFRA:DNS:CORE \u2794 infra:dns:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 19,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-004",
+    "name": "Scenario SCN-004: Kubernetes Worker Failure Cascades into Core Degradation",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H4 (Anticipate): Simulated RCA Run (SCN-004)",
+    "description": "Simulated operational run RUN-20260924152006702904 for scenario SCN-004.",
+    "aliases": [
+      "scn-004",
+      "SCN-004",
+      "RUN-20260924152006702904",
+      "run-20260924152006702904"
+    ],
+    "root_cause": "INFRA:K8S:CORE-A",
+    "propagation_path": [
+      "INFRA:K8S:CORE-A",
+      "infra:k8s:core-a",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "CRM:TICKET:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "infra:k8s:core-a": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "crm:ticket:001": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "INFRA:K8S:CORE-A": {
+        "severity": "ROOT_CAUSE",
+        "status": "Core Kubernetes Cluster A Primary Failure Saturation & Anomaly"
+      },
+      "CRM:TICKET:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-004",
+      "run_id": "RUN-20260924152006702904",
+      "root_cause_candidate": "Core Kubernetes Cluster A Primary Failure",
+      "root_cause_name": "Core Kubernetes Cluster A Primary Failure",
+      "causal_path": "INFRA:K8S:CORE-A \u2794 infra:k8s:core-a \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 CRM:TICKET:001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 15,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-005",
+    "name": "Scenario SCN-005: IMS Database Failure Cascades into Voice Degradation",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H4: Simulated RCA Run (SCN-005)",
+    "description": "Simulated operational run RUN-20260924065334702913 for scenario SCN-005.",
+    "aliases": [
+      "scn-005",
+      "SCN-005",
+      "RUN-20260924065334702913"
+    ],
+    "root_cause": "domains/mobile-core/networks/lte/functions/hss-01",
+    "propagation_path": [
+      "domains/mobile-core/networks/lte/functions/hss-01",
+      "domains/mobile-core/networks/ps/functions/pgw-01",
+      "mobile-core/services/lte-attach",
+      "grafana/alerts/grafana-alert-attach-mme-001",
+      "incidents/mobile-core/lte-attach-54db6ef325fbf758",
+      "tickets/mobile-core/tt-984210"
+    ],
+    "affected_nodes": {
+      "domains/mobile-core/networks/lte/functions/hss-01": {
+        "severity": "ROOT_CAUSE",
+        "status": "Subscriber DB Cluster A Primary Failure Saturation & Anomaly"
+      },
+      "domains/mobile-core/networks/ps/functions/pgw-01": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "tickets/mobile-core/tt-984210": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "mobile-core/services/lte-attach": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Service Degraded"
+      },
+      "grafana/alerts/grafana-alert-attach-mme-001": {
+        "severity": "MAJOR",
+        "status": "Telemetry Breach & Metric Anomaly"
+      },
+      "incidents/mobile-core/lte-attach-54db6ef325fbf758": {
+        "severity": "CRITICAL",
+        "status": "Active Inter-Domain Outage"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-005",
+      "run_id": "RUN-20260924065334702913",
+      "root_cause_candidate": "Subscriber DB Cluster A Primary Failure",
+      "root_cause_name": "Subscriber DB Cluster A Primary Failure",
+      "causal_path": "domains/mobile-core/networks/lte/functions/hss-01 \u2794 domains/mobile-core/networks/ps/functions/pgw-01 \u2794 mobile-core/services/lte-attach \u2794 grafana/alerts/grafana-alert-attach-mme-001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 15,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-006",
+    "name": "Scenario SCN-006: Shared Power Failure Hits RAN and Transport Together",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H4 (Anticipate): Simulated RCA Run (SCN-006)",
+    "description": "Simulated operational run RUN-20260924093806920376 for scenario SCN-006.",
+    "aliases": [
+      "scn-006",
+      "SCN-006",
+      "RUN-20260924093806920376",
+      "run-20260924093806920376"
+    ],
+    "root_cause": "INFRA:POWER:A",
+    "propagation_path": [
+      "INFRA:POWER:A",
+      "INFRA:DC:A",
+      "SA5G:UPF:003",
+      "CRM:TICKET:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "INFRA:POWER:A": {
+        "severity": "ROOT_CAUSE",
+        "status": "DC-A Power Feed A Primary Failure Saturation & Anomaly"
+      },
+      "INFRA:DC:A": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "SA5G:UPF:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "CRM:TICKET:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-006",
+      "run_id": "RUN-20260924093806920376",
+      "root_cause_candidate": "DC-A Power Feed A Primary Failure",
+      "root_cause_name": "DC-A Power Feed A Primary Failure",
+      "causal_path": "INFRA:POWER:A \u2794 INFRA:DC:A \u2794 SA5G:UPF:003 \u2794 CRM:TICKET:001 \u2794 INC:DIAGNOSE-001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 16,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "demo-001",
+    "name": "Scenario DEMO-001: Transport-Induced Mobile Data Degradation",
+    "badge": "CRITICAL",
+    "stage": "H4",
+    "concept": "Anticipate",
+    "category": "H4 (Anticipate): Simulated RCA Run (DEMO-001)",
+    "description": "Simulated operational run RUN-20260924151512571934 for scenario DEMO-001.",
+    "aliases": [
+      "demo-001",
+      "DEMO-001",
+      "RUN-20260924151512571934",
+      "run-20260924151512571934"
+    ],
+    "root_cause": "ip:pe:rtr-21",
+    "propagation_path": [
+      "ip:pe:rtr-21",
+      "CRM:TICKET:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "ip:pe:rtr-21": {
+        "severity": "ROOT_CAUSE",
+        "status": "IP:PE:RTR-21 Saturation & Anomaly"
+      },
+      "CRM:TICKET:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "DEMO-001",
+      "run_id": "RUN-20260924151512571934",
+      "root_cause_candidate": "IP:PE:RTR-21",
+      "root_cause_name": "IP:PE:RTR-21",
+      "causal_path": "ip:pe:rtr-21 \u2794 CRM:TICKET:001 \u2794 INC:DIAGNOSE-001",
+      "causal_confidence": 0.942,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 16,
+      "isolated_noise_count": 2,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-007",
+    "name": "Scenario SCN-007: Shared Timing Source Failure Affects RAN and Transport",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-007)",
+    "description": "Simulated operational run RUN-20260924164217585691 for scenario SCN-007.",
+    "aliases": [
+      "scn-007",
+      "SCN-007",
+      "RUN-20260924164217585691",
+      "run-20260924164217585691"
+    ],
+    "root_cause": "IP:PE:RTR-21",
+    "propagation_path": [
+      "IP:PE:RTR-21",
+      "infra:ntp:core",
+      "sa5g:amf:001",
+      "infra:k8s:core-a",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "infra:ntp:core": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:amf:001": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "infra:k8s:core-a": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "IP:PE:RTR-21": {
+        "severity": "ROOT_CAUSE",
+        "status": "Core Timing Cluster Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-007",
+      "run_id": "RUN-20260924164217585691",
+      "root_cause_candidate": "Core Timing Cluster Primary Failure",
+      "root_cause_name": "Core Timing Cluster Primary Failure",
+      "causal_path": "IP:PE:RTR-21 \u2794 infra:ntp:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 19,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-008",
+    "name": "Scenario SCN-008: Shared Storage Failure Impacts Multiple Core CNFs",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-008)",
+    "description": "Simulated operational run RUN-20260924170523418799 for scenario SCN-008.",
+    "aliases": [
+      "scn-008",
+      "SCN-008",
+      "RUN-20260924170523418799",
+      "run-20260924170523418799"
+    ],
+    "root_cause": "INFRA:K8S:CORE-A",
+    "propagation_path": [
+      "INFRA:K8S:CORE-A",
+      "infra:k8s:core-a",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "infra:k8s:core-a": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INFRA:K8S:CORE-A": {
+        "severity": "ROOT_CAUSE",
+        "status": "Core Kubernetes Cluster A Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-008",
+      "run_id": "RUN-20260924170523418799",
+      "root_cause_candidate": "Core Kubernetes Cluster A Primary Failure",
+      "root_cause_name": "Core Kubernetes Cluster A Primary Failure",
+      "causal_path": "INFRA:K8S:CORE-A \u2794 infra:k8s:core-a \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 15,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-009",
+    "name": "Scenario SCN-009: Shared Firewall Cluster Failure Affects Multiple Services",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-009)",
+    "description": "Simulated operational run RUN-20260924180446048619 for scenario SCN-009.",
+    "aliases": [
+      "scn-009",
+      "SCN-009",
+      "RUN-20260924180446048619",
+      "run-20260924180446048619"
+    ],
+    "root_cause": "INFRA:FW:SGI",
+    "propagation_path": [
+      "INFRA:FW:SGI",
+      "infra:fw:sgi",
+      "ip:vrf:sgi-01",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "infra:fw:sgi": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "ip:vrf:sgi-01": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "INFRA:FW:SGI": {
+        "severity": "ROOT_CAUSE",
+        "status": "SGi Firewall Pair Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-009",
+      "run_id": "RUN-20260924180446048619",
+      "root_cause_candidate": "SGi Firewall Pair Primary Failure",
+      "root_cause_name": "SGi Firewall Pair Primary Failure",
+      "causal_path": "INFRA:FW:SGI \u2794 infra:fw:sgi \u2794 ip:vrf:sgi-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 17,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  },
+  {
+    "id": "scn-010",
+    "name": "Scenario SCN-010: Shared Leaf/TOR Dependency Defeats Logical Redundancy",
+    "badge": "CRITICAL",
+    "stage": "H1",
+    "concept": "Diagnose",
+    "category": "H1 (Diagnose): Simulated RCA Run (SCN-010)",
+    "description": "Simulated operational run RUN-20260924182915874014 for scenario SCN-010.",
+    "aliases": [
+      "scn-010",
+      "SCN-010",
+      "RUN-20260924182915874014",
+      "run-20260924182915874014"
+    ],
+    "root_cause": "IP:PE:RTR-21",
+    "propagation_path": [
+      "IP:PE:RTR-21",
+      "ip:pe:rtr-21",
+      "ip:vrf:n3-01",
+      "sa5g:upf:003",
+      "crm:ticket:001",
+      "INC:DIAGNOSE-001"
+    ],
+    "affected_nodes": {
+      "ip:pe:rtr-21": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "ip:vrf:n3-01": {
+        "severity": "MAJOR",
+        "status": "Causal Propagation Intermediary"
+      },
+      "sa5g:upf:003": {
+        "severity": "CRITICAL",
+        "status": "5G Mobile Data Session Drops"
+      },
+      "crm:ticket:001": {
+        "severity": "CRITICAL",
+        "status": "Customer Incident Ticket Surge"
+      },
+      "IP:PE:RTR-21": {
+        "severity": "ROOT_CAUSE",
+        "status": "PE-RTR-21 Primary Failure Saturation & Anomaly"
+      },
+      "INC:DIAGNOSE-001": {
+        "severity": "CRITICAL",
+        "status": "Active Priority-1 Outage Incident"
+      }
+    },
+    "investigation_result": {
+      "scenario_id": "SCN-010",
+      "run_id": "RUN-20260924182915874014",
+      "root_cause_candidate": "PE-RTR-21 Primary Failure",
+      "root_cause_name": "PE-RTR-21 Primary Failure",
+      "causal_path": "IP:PE:RTR-21 \u2794 ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001",
+      "causal_confidence": 94.2,
+      "mttr_baseline": "45m",
+      "mttr_actual": "1m",
+      "operational_evidence_count": 17,
+      "isolated_noise_count": 6,
+      "status": "SIMULATION_RUNNING"
+    }
+  }
+]

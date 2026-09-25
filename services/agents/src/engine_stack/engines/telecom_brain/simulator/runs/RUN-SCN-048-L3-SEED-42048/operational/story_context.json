@@ -1,0 +1,121 @@
+{
+  "scenario_id": "SCN-048",
+  "run_id": "RUN-SCN-048-L3-SEED-42048",
+  "title": "Operational Incident SCN-048",
+  "domain": "it_cloud_infra",
+  "severity": "MAJOR",
+  "status": "resolved",
+  "stage_index": 7,
+  "started_at": "2026-09-10T08:48:04Z",
+  "resolved_at": "2026-09-10T09:04:00Z",
+  "executive_summary": "Autonomous root cause confirmed at INFRA:NTP:CORE with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "root_cause": {
+    "entity": "INFRA:NTP:CORE",
+    "condition": "Operational failure on INFRA:NTP:CORE",
+    "status": "CONFIRMED",
+    "confidence": 0.942
+  },
+  "causal_chain": [
+    "INFRA:NTP:CORE",
+    "SA5G:AMF:001",
+    "SA5G:AMF:001",
+    "INFRA:K8S:CORE-A",
+    "SA5G:UPF:003",
+    "CRM:TICKET:001"
+  ],
+  "blast_radius": [
+    {
+      "entity": "INFRA:NTP:CORE",
+      "role": "ROOT_CAUSE",
+      "status": "NTP_PTP_CLUSTER_DEGRADED"
+    },
+    {
+      "entity": "SA5G:AMF:001",
+      "role": "CAUSAL_RELAY",
+      "status": "AMF_DEGRADED"
+    },
+    {
+      "entity": "INFRA:K8S:CORE-A",
+      "role": "CAUSAL_RELAY",
+      "status": "KUBERNETES_CLUSTER_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
+  "timeline": [
+    {
+      "time": "2026-09-10T08:48:04Z",
+      "event": "NTP_PTP_CLUSTER_DEGRADED",
+      "entity": "INFRA:NTP:CORE",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: NTP_PTP_CLUSTER_DEGRADED on INFRA:NTP:CORE"
+    },
+    {
+      "time": "2026-09-10T08:48:41Z",
+      "event": "AMF_DEGRADED",
+      "entity": "SA5G:AMF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: AMF_DEGRADED on SA5G:AMF:001"
+    },
+    {
+      "time": "2026-09-10T08:48:41Z",
+      "event": "AMF_DEGRADED",
+      "entity": "SA5G:AMF:001",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: AMF_DEGRADED on SA5G:AMF:001"
+    },
+    {
+      "time": "2026-09-10T08:49:20Z",
+      "event": "KUBERNETES_CLUSTER_DEGRADED",
+      "entity": "INFRA:K8S:CORE-A",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: KUBERNETES_CLUSTER_DEGRADED on INFRA:K8S:CORE-A"
+    },
+    {
+      "time": "2026-09-10T08:49:35Z",
+      "event": "KPI_DEGRADATION",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "5G Sa Mobile Data Success Rate degraded to 70.01percent"
+    },
+    {
+      "time": "2026-09-10T08:49:56Z",
+      "event": "UPF_DEGRADED",
+      "entity": "SA5G:UPF:003",
+      "severity": "MAJOR",
+      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
+    },
+    {
+      "time": "2026-09-10T08:50:32Z",
+      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
+      "entity": "CRM:TICKET:001",
+      "severity": "CRITICAL",
+      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T09:04:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "INFRA:NTP:CORE",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
+    }
+  ],
+  "metrics": {
+    "stage_index": 7,
+    "operational_evidence_count": 9,
+    "kpi_breach": {
+      "name": "5G Sa Mobile Data Success Rate",
+      "value": 70.01,
+      "baseline": 98.5
+    },
+    "mttr_actual": "1m"
+  }
+}

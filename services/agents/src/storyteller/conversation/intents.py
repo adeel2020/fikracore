@@ -54,11 +54,27 @@ _KEYWORDS: dict[str, tuple[str, ...]] = {
 }
 
 
+_SLUG_STRIP_RE = re.compile(
+    r"(?:incidents/[A-Za-z0-9_-]+|[A-Za-z0-9_-]+/incidents)/[A-Za-z0-9._\-]+|\b(?:SCN|DEMO|INC|TWIN|H[1-4])[-_]\d+\b",
+    re.IGNORECASE,
+)
+
+
 def classify_intent(message: str) -> str:
     """Determine the intent from free text. ``story`` is the default."""
-    lowered = message.lower()
+    cleaned = _SLUG_STRIP_RE.sub("", message)
+    lowered = cleaned.lower()
+
+    # If the user specifically requested the overall incident story, prioritize "story"
+    # unless an audience-specific qualifier like executive/technical/noc was explicitly requested.
+    if re.search(r"\b(?:incident\s+story|tell\s+(?:the\s+)?story|full\s+story|story)\b", lowered):
+        for spec_intent in ("executive", "noc_brief", "rca_lead_brief", "technical", "short"):
+            if any(re.search(rf"\b{re.escape(kw)}\b", lowered) for kw in _KEYWORDS[spec_intent]):
+                return spec_intent
+        return "story"
+
     for intent, keywords in _KEYWORDS.items():
-        if any(kw in lowered for kw in keywords):
+        if any(re.search(rf"\b{re.escape(kw)}\b", lowered) for kw in keywords):
             return intent
     return "story"
 
