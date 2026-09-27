@@ -1,30 +1,28 @@
 {
   "scenario_id": "SCN-004",
-  "run_id": "RUN-SCN-004-L4-SEED-42004",
-  "title": "Operational Incident SCN-004",
+  "run_id": "RUN-20260926050707966578",
+  "title": "Kubernetes Worker Failure Cascades into Core Degradation",
   "domain": "it_cloud_infra",
   "severity": "MAJOR",
   "status": "resolved",
   "stage_index": 7,
   "started_at": "2026-09-10T08:04:00Z",
   "resolved_at": "2026-09-10T08:20:00Z",
-  "executive_summary": "Autonomous root cause confirmed at INFRA:K8S:CORE-A with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "executive_summary": "Autonomous root cause confirmed at None with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
   "root_cause": {
-    "entity": "INFRA:K8S:CORE-A",
-    "condition": "Operational failure on INFRA:K8S:CORE-A",
+    "entity": null,
+    "condition": null,
     "status": "CONFIRMED",
     "confidence": 0.942
   },
   "causal_chain": [
-    "INFRA:K8S:CORE-A",
-    "SA5G:UPF:003",
-    "SA5G:UPF:003",
-    "CRM:TICKET:001"
+    "{'from': 'INFRA:K8S:CORE-A', 'to': 'SA5G:UPF:003', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-004', 'run_id': 'RUN-20260926050707966578', 'revision': 9, 'sequence': 8}",
+    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-004', 'run_id': 'RUN-20260926050707966578', 'revision': 9, 'sequence': 8}"
   ],
   "blast_radius": [
     {
       "entity": "INFRA:K8S:CORE-A",
-      "role": "ROOT_CAUSE",
+      "role": "CAUSAL_RELAY",
       "status": "KUBERNETES_CLUSTER_DEGRADED"
     },
     {
@@ -91,5 +89,37 @@
       "baseline": 98.5
     },
     "mttr_actual": "1m"
-  }
+  },
+  "flash_narration": {
+    "time": "08:20:00Z",
+    "phase": "Recovery",
+    "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
+    "text": "At 08:20:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+  },
+  "flash_history": [
+    {
+      "time": "08:04:00Z",
+      "phase": "Trigger",
+      "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
+      "text": "At 08:04:00Z (Trigger):\n\ud83c\udf99\ufe0f \"Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.\""
+    },
+    {
+      "time": "08:04:40Z",
+      "phase": "Propagation",
+      "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
+      "text": "At 08:04:40Z (Propagation):\n\ud83c\udf99\ufe0f \"Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.\""
+    },
+    {
+      "time": "08:05:16Z",
+      "phase": "RCA Confirmed",
+      "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
+      "text": "At 08:05:16Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+    },
+    {
+      "time": "08:20:00Z",
+      "phase": "Recovery",
+      "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
+      "text": "At 08:20:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+    }
+  ]
 }
