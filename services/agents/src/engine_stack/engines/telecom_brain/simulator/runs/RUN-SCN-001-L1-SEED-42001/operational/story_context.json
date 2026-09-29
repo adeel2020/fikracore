@@ -1,26 +1,47 @@
 {
   "scenario_id": "SCN-001",
-  "run_id": "RUN-20260925212122350390",
+  "run_id": "RUN-20260928080039990637",
   "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
   "domain": "transport",
   "severity": "MAJOR",
-  "status": "testing",
-  "stage_index": 5,
+  "status": "resolved",
+  "stage_index": 7,
   "started_at": "2026-09-10T08:01:02Z",
-  "resolved_at": null,
-  "executive_summary": "Investigation analysis indicates None as the leading root cause candidate with 85% confidence. Boundary verification underway.",
+  "resolved_at": "2026-09-10T08:17:00Z",
+  "executive_summary": "Autonomous root cause confirmed at None with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
   "root_cause": {
     "entity": null,
-    "condition": "Leading operational anomaly",
-    "status": "LEADING_HYPOTHESIS",
-    "confidence": 0.85
+    "condition": null,
+    "status": "CONFIRMED",
+    "confidence": 0.942
   },
   "causal_chain": [
-    "{'from': 'IP:PE:RTR-21', 'to': 'IP:VRF:N3-01', 'status': 'LEADING', 'relation': 'CAUSES', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}",
-    "{'from': 'IP:VRF:N3-01', 'to': 'SA5G:UPF:003', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}",
-    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260925212122350390', 'revision': 6, 'sequence': 5}"
+    "{'from': 'IP:PE:RTR-21', 'to': 'IP:VRF:N3-01', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}",
+    "{'from': 'IP:VRF:N3-01', 'to': 'SA5G:UPF:003', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}",
+    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}"
   ],
-  "blast_radius": [],
+  "blast_radius": [
+    {
+      "entity": "IP:PE:RTR-21",
+      "role": "CAUSAL_RELAY",
+      "status": "PE_ROUTER_DEGRADED"
+    },
+    {
+      "entity": "IP:VRF:N3-01",
+      "role": "CAUSAL_RELAY",
+      "status": "VRF_DEGRADED"
+    },
+    {
+      "entity": "SA5G:UPF:003",
+      "role": "CAUSAL_RELAY",
+      "status": "UPF_DEGRADED"
+    },
+    {
+      "entity": "CRM:TICKET:001",
+      "role": "CAUSAL_RELAY",
+      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    }
+  ],
   "timeline": [
     {
       "time": "2026-09-10T08:01:02Z",
@@ -56,23 +77,30 @@
       "entity": "CRM:TICKET:001",
       "severity": "CRITICAL",
       "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
+    },
+    {
+      "time": "2026-09-10T08:17:00Z",
+      "event": "RECOVERY_VERIFIED",
+      "entity": "IP:PE:RTR-21",
+      "severity": "CLEARED",
+      "summary": "service KPI improves within modeled recovery window"
     }
   ],
   "metrics": {
-    "stage_index": 5,
+    "stage_index": 7,
     "operational_evidence_count": 7,
     "kpi_breach": {
       "name": "5G Sa Mobile Data Success Rate",
       "value": 66.06,
       "baseline": 98.5
     },
-    "mttr_actual": "in_progress"
+    "mttr_actual": "1m"
   },
   "flash_narration": {
-    "time": "08:02:54Z",
-    "phase": "RCA Confirmed",
-    "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
-    "text": "At 08:02:54Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+    "time": "08:17:00Z",
+    "phase": "Recovery",
+    "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
+    "text": "At 08:17:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
   },
   "flash_history": [
     {
@@ -92,6 +120,12 @@
       "phase": "RCA Confirmed",
       "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
       "text": "At 08:02:54Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+    },
+    {
+      "time": "08:17:00Z",
+      "phase": "Recovery",
+      "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
+      "text": "At 08:17:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
     }
   ]
 }

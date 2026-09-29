@@ -6,12 +6,12 @@
     "stage": "H1",
     "concept": "Diagnose",
     "category": "H1 (Diagnose): Simulated RCA Run (SCN-001)",
-    "description": "Simulated operational run RUN-20260925211130849785 for scenario SCN-001.",
+    "description": "Simulated operational run RUN-20260927162944103548 for scenario SCN-001.",
     "aliases": [
       "scn-001",
       "SCN-001",
-      "RUN-20260925211130849785",
-      "run-20260925211130849785"
+      "RUN-20260927162944103548",
+      "run-20260927162944103548"
     ],
     "root_cause": "ip:pe:rtr-21",
     "propagation_path": [
@@ -45,7 +45,7 @@
     },
     "investigation_result": {
       "scenario_id": "SCN-001",
-      "run_id": "RUN-20260925211130849785",
+      "run_id": "RUN-20260927162944103548",
       "root_cause_candidate": "IP:PE:RTR-21",
       "root_cause_name": "IP:PE:RTR-21",
       "causal_path": "ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
@@ -64,12 +64,12 @@
     "stage": "H1",
     "concept": "Diagnose",
     "category": "H1 (Diagnose): Simulated RCA Run (SCN-002)",
-    "description": "Simulated operational run RUN-20260924183247927728 for scenario SCN-002.",
+    "description": "Simulated operational run RUN-20260928094456208838 for scenario SCN-002.",
     "aliases": [
       "scn-002",
       "SCN-002",
-      "RUN-20260924183247927728",
-      "run-20260924183247927728"
+      "RUN-20260928094456208838",
+      "run-20260928094456208838"
     ],
     "root_cause": "SA5G:UPF:003",
     "propagation_path": [
@@ -98,7 +98,7 @@
     },
     "investigation_result": {
       "scenario_id": "SCN-002",
-      "run_id": "RUN-20260924183247927728",
+      "run_id": "RUN-20260928094456208838",
       "root_cause_candidate": "UPF-03 Primary Failure",
       "root_cause_name": "UPF-03 Primary Failure",
       "causal_path": "SA5G:UPF:003 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",

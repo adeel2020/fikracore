@@ -1,55 +1,26 @@
 {
   "scenario_id": "SCN-007",
-  "run_id": "RUN-SCN-007-L2-SEED-42007",
-  "title": "Operational Incident SCN-007",
+  "run_id": "RUN-20260927174232307979",
+  "title": "Shared Timing Source Failure Affects RAN and Transport",
   "domain": "it_cloud_infra",
   "severity": "MAJOR",
-  "status": "resolved",
-  "stage_index": 7,
+  "status": "testing",
+  "stage_index": 5,
   "started_at": "2026-09-10T08:07:09Z",
-  "resolved_at": "2026-09-10T08:23:00Z",
-  "executive_summary": "Autonomous root cause confirmed at INFRA:NTP:CORE with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
+  "resolved_at": null,
+  "executive_summary": "Investigation analysis indicates None as the leading root cause candidate with 85% confidence. Boundary verification underway.",
   "root_cause": {
-    "entity": "INFRA:NTP:CORE",
-    "condition": "Operational failure on INFRA:NTP:CORE",
-    "status": "CONFIRMED",
-    "confidence": 0.942
+    "entity": null,
+    "condition": "Leading operational anomaly",
+    "status": "LEADING_HYPOTHESIS",
+    "confidence": 0.85
   },
   "causal_chain": [
-    "INFRA:NTP:CORE",
-    "SA5G:AMF:001",
-    "SA5G:AMF:001",
-    "INFRA:K8S:CORE-A",
-    "SA5G:UPF:003",
-    "CRM:TICKET:001"
+    "{'from': 'INFRA:NTP:CORE', 'to': 'SA5G:AMF:001', 'status': 'LEADING', 'relation': 'CAUSES', 'scenario_id': 'SCN-007', 'run_id': 'RUN-20260927174232307979', 'revision': 6, 'sequence': 5}",
+    "{'from': 'SA5G:AMF:001', 'to': 'INFRA:K8S:CORE-A', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-007', 'run_id': 'RUN-20260927174232307979', 'revision': 6, 'sequence': 5}",
+    "{'from': 'INFRA:K8S:CORE-A', 'to': 'SA5G:UPF:003', 'status': 'LEADING', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-007', 'run_id': 'RUN-20260927174232307979', 'revision': 6, 'sequence': 5}"
   ],
-  "blast_radius": [
-    {
-      "entity": "INFRA:NTP:CORE",
-      "role": "ROOT_CAUSE",
-      "status": "NTP_PTP_CLUSTER_DEGRADED"
-    },
-    {
-      "entity": "SA5G:AMF:001",
-      "role": "CAUSAL_RELAY",
-      "status": "AMF_DEGRADED"
-    },
-    {
-      "entity": "INFRA:K8S:CORE-A",
-      "role": "CAUSAL_RELAY",
-      "status": "KUBERNETES_CLUSTER_DEGRADED"
-    },
-    {
-      "entity": "SA5G:UPF:003",
-      "role": "CAUSAL_RELAY",
-      "status": "UPF_DEGRADED"
-    },
-    {
-      "entity": "CRM:TICKET:001",
-      "role": "CAUSAL_RELAY",
-      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
-    }
-  ],
+  "blast_radius": [],
   "timeline": [
     {
       "time": "2026-09-10T08:07:09Z",
@@ -99,23 +70,42 @@
       "entity": "CRM:TICKET:001",
       "severity": "CRITICAL",
       "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
-    },
-    {
-      "time": "2026-09-10T08:23:00Z",
-      "event": "RECOVERY_VERIFIED",
-      "entity": "INFRA:NTP:CORE",
-      "severity": "CLEARED",
-      "summary": "service KPI improves within modeled recovery window"
     }
   ],
   "metrics": {
-    "stage_index": 7,
+    "stage_index": 5,
     "operational_evidence_count": 9,
     "kpi_breach": {
       "name": "5G Sa Mobile Data Success Rate",
       "value": 79.55,
       "baseline": 98.5
     },
-    "mttr_actual": "1m"
-  }
+    "mttr_actual": "in_progress"
+  },
+  "flash_narration": {
+    "time": "08:09:38Z",
+    "phase": "RCA Confirmed",
+    "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
+    "text": "At 08:09:38Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+  },
+  "flash_history": [
+    {
+      "time": "08:07:09Z",
+      "phase": "Trigger",
+      "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
+      "text": "At 08:07:09Z (Trigger):\n\ud83c\udf99\ufe0f \"Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.\""
+    },
+    {
+      "time": "08:07:40Z",
+      "phase": "Propagation",
+      "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
+      "text": "At 08:07:40Z (Propagation):\n\ud83c\udf99\ufe0f \"Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.\""
+    },
+    {
+      "time": "08:09:38Z",
+      "phase": "RCA Confirmed",
+      "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
+      "text": "At 08:09:38Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
+    }
+  ]
 }

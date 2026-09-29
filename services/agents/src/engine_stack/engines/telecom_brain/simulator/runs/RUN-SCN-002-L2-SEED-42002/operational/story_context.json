@@ -1,6 +1,6 @@
 {
   "scenario_id": "SCN-002",
-  "run_id": "RUN-20260925214625254021",
+  "run_id": "RUN-20260928094456208838",
   "title": "UPF Failure Cascades into Charging and Customer Impact",
   "domain": "sa_5g_core",
   "severity": "MAJOR",
@@ -16,7 +16,7 @@
     "confidence": 0.942
   },
   "causal_chain": [
-    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-002', 'run_id': 'RUN-20260925214625254021', 'revision': 9, 'sequence': 8}"
+    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-002', 'run_id': 'RUN-20260928094456208838', 'revision': 9, 'sequence': 8}"
   ],
   "blast_radius": [
     {
