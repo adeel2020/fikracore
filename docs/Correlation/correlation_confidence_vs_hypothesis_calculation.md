@@ -39,10 +39,10 @@ In FikraCore (specifically demonstrated in Scenario **SCN-001**), the apparent n
            └─ Phase 2.4: Service & Blast Radius Correlation (Service Envelope)
  [STAGE 3] HYPOTHESIS GENERATION (Candidates from Correlated Graph)
  [STAGE 4] HYPOTHESIS TESTING (12-Factor Synthesis Core & Stage Progression)
-           ├─ Stage 4: Discrimination (H1 = 61.0%)
-           ├─ Stage 5: Testing (H1 = 68.0%)
-           ├─ Stage 6: Localization (H1 = 74.0%)
-           └─ Stage 7: Confirmed (H1 = 94.2%) ──► CANVAS HYPOTHESIS CARD (94.2%)
+           ├─ Stage 4.1: Discrimination (H1 = 61.0%)
+           ├─ Stage 4.2: Testing (H1 = 68.0%)
+           ├─ Stage 4.3: Localization (H1 = 74.0%)
+           └─ Stage 4.4: Confirmed (H1 = 94.2%) ──► CANVAS HYPOTHESIS CARD (94.2%)
  ─────────────────────────────────────────────────────────────────────────────────
                                       │
                                       ▼ (Post-Pipeline UI Adapter)
