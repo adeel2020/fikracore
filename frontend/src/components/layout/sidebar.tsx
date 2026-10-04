@@ -96,6 +96,7 @@ function SidebarContent({ isCollapsed, onToggleCollapse }: SidebarProps) {
             <Link
               key={item.label}
               href={item.href}
+              prefetch={false}
               className={cn(
                 "group relative flex items-center rounded-xl px-2 py-1.5 text-sm transition-all duration-300 min-w-0",
                 isActive

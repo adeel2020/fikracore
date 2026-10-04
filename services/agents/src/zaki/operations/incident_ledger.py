@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-from ..domain.contracts.incident import IncidentContextContract
-from ..domain.contracts.hypothesis import RankedHypothesisItem
-from ..domain.enums import AuthorityLevel
+from ..contracts.incident import IncidentContextContract
+from ..contracts.hypothesis import RankedHypothesisItem
+from ..enums import AuthorityLevel
 
 
 class IncidentLedger:

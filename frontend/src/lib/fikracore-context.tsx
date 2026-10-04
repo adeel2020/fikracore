@@ -157,6 +157,7 @@ export interface FikraCoreActions {
   stopSimulation: () => Promise<void>;
   replaySimulation: () => Promise<void>;
   executeAction: (actionId: string) => Promise<void>;
+  advanceStage: () => Promise<void>;
   toggleTheme: () => void;
   setTheme: (theme: "dark" | "light") => void;
 }
@@ -199,16 +200,169 @@ function deriveCapabilities(entry: {
 export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
   {
     id: "SCN-001",
-    display_name: "5G Mobile Data Failure via N3 Transport Degradation",
+    display_name: "Transport N3 Degradation Cascades into Mobile Data Failure",
     description: "Intermittent transport path degradation on PE-RTR-21 N3 backhaul causes UPF reachability starvation and customer ticket surges.",
     stage: "H1",
     concept: "Understand",
     scenario_type: "INCIDENT",
-    aliases: ["TWIN-INC-001", "DEMO-001", "Transport N3 Degradation", "PE-RTR-21 N3 degradation", "H1-INC-001", "SCN-001", "Transport N3 Degradation Cascades into Mobile Data Failure"],
+    aliases: ["TWIN-INC-001", "Transport N3 Degradation", "PE-RTR-21 N3 degradation", "H1-INC-001", "SCN-001"],
     tags: ["ip_transport", "sa_5g_core", "crm", "n3_tunnel", "5g"],
     domains: ["IP Transport", "5G SA Core", "CRM"],
     services: ["5G SA Mobile Data (REGION-NORTH)"],
     difficulty: "L1",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-002",
+    display_name: "UPF Failure Cascades into Charging and Customer Impact",
+    description: "User Plane Function degradation propagates to online charging systems and degrades prepaid session state.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-002"],
+    tags: ["sa_5g_core", "charging", "crm"],
+    domains: ["5G SA Core", "Charging", "CRM"],
+    services: ["Online Charging Data"],
+    difficulty: "L2",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-003",
+    display_name: "Internal DNS Degradation Cascades Across Core Functions",
+    description: "DNS resolution latencies impact service discovery between 5G core network functions.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-003"],
+    tags: ["dns", "sa_5g_core"],
+    domains: ["IP Transport", "5G SA Core"],
+    services: ["5G Service Discovery"],
+    difficulty: "L3",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-004",
+    display_name: "Kubernetes Worker Failure Cascades into Core Degradation",
+    description: "Node evictions and worker pod terminations trigger failover storms in cloud-native 5GC.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-004"],
+    tags: ["kubernetes", "cloud_native", "5gc"],
+    domains: ["Cloud / NFVI", "5G SA Core"],
+    services: ["Core CNF Orchestration"],
+    difficulty: "L4",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-005",
+    display_name: "IMS Database Failure Cascades into Voice Degradation",
+    description: "Database locks on subscriber profile repository drop SIP registration and VoLTE call completion.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-005"],
+    tags: ["ims", "volte", "database"],
+    domains: ["IMS / VoLTE", "Subscriber Data"],
+    services: ["VoLTE High Definition Voice"],
+    difficulty: "L5",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-006",
+    display_name: "Shared Power Failure Hits RAN and Transport Together",
+    description: "Dual utility power drop takes down both cell site edge routers and collocated gNodeB radios.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-006"],
+    tags: ["power", "ran", "transport"],
+    domains: ["Facilities", "RAN", "IP Transport"],
+    services: ["Cellular Coverage"],
+    difficulty: "L1",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-007",
+    display_name: "Shared Timing Source Failure Affects RAN and Transport",
+    description: "PTP / SyncE grandmaster clock drift creates phase errors and inter-cell handover collapses.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-007"],
+    tags: ["timing", "synce", "ptp", "ran"],
+    domains: ["Synchronization", "RAN", "IP Transport"],
+    services: ["5G TDD Synchronization"],
+    difficulty: "L2",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-008",
+    display_name: "Shared Storage Failure Impacts Multiple Core CNFs",
+    description: "CSI storage volume detachment locks persistent state across UDR and PCF clusters.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-008"],
+    tags: ["storage", "csi", "cloud_native"],
+    domains: ["Cloud / NFVI", "5G SA Core"],
+    services: ["Subscriber Policy"],
+    difficulty: "L3",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-009",
+    display_name: "Shared Firewall Cluster Failure Affects Multiple Services",
+    description: "Stateful session exhaustion on Gi-LAN security appliances drops corporate APN traffic.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-009"],
+    tags: ["firewall", "security", "gi_lan"],
+    domains: ["Security", "Packet Core"],
+    services: ["Corporate APN"],
+    difficulty: "L4",
+    status: "READY",
+    source: "incident_catalog",
+    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
+    demo_enabled: true,
+  },
+  {
+    id: "SCN-010",
+    display_name: "Shared Leaf/TOR Dependency Defeats Logical Redundancy",
+    description: "Single top-of-rack leaf switch failure disconnects primary and secondary user plane paths.",
+    stage: "H1",
+    concept: "Understand",
+    scenario_type: "INCIDENT",
+    aliases: ["SCN-010"],
+    tags: ["tor", "fabric", "transport"],
+    domains: ["IP Transport", "Cloud / NFVI"],
+    services: ["User Plane Conduits"],
+    difficulty: "L5",
     status: "READY",
     source: "incident_catalog",
     capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
@@ -265,67 +419,16 @@ export const DEFAULT_SCENARIO_REGISTRY: ScenarioRegistryEntry[] = [
     capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
     demo_enabled: true,
   },
-  {
-    id: "TWIN-WIF-002",
-    display_name: "Data Center Gateway Switch Failure",
-    description: "Simulates complete outage of primary DC gateway interconnecting core services.",
-    stage: "H4",
-    concept: "Anticipate",
-    scenario_type: "WHAT_IF",
-    aliases: ["H4-WI-002", "DC gateway outage", "DC-GW failure", "core dc gateway down"],
-    tags: ["core", "dc", "spof"],
-    domains: ["Cloud / NFVI", "Mobile Core"],
-    services: ["Core Infrastructure"],
-    difficulty: "ADVANCED",
-    status: "AVAILABLE",
-    source: "h4-registry",
-    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
-    demo_enabled: false,
-  },
-  {
-    id: "TWIN-WIF-003",
-    display_name: "Packet Gateway User Plane Failure",
-    description: "Simulates user plane packet forwarder collapse affecting mobile internet traffic.",
-    stage: "H4",
-    concept: "Anticipate",
-    scenario_type: "WHAT_IF",
-    aliases: ["H4-WI-003", "PGW-U failure", "UPF outage", "packet core user plane down"],
-    tags: ["packet_core", "5g", "spof"],
-    domains: ["Packet Core", "5G Core"],
-    services: ["5G SA Mobile Data", "VoNR High Definition Voice"],
-    difficulty: "ADVANCED",
-    status: "AVAILABLE",
-    source: "h4-registry",
-    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
-    demo_enabled: false,
-  },
-  {
-    id: "TWIN-WIF-011",
-    display_name: "Dual Router Shared Power Feed Rack Outage",
-    description: "Simulates utility feed failure affecting two routers sharing the same PDU rack.",
-    stage: "H4",
-    concept: "Anticipate",
-    scenario_type: "WHAT_IF",
-    aliases: ["H4-WI-011", "site power feed failure", "shared power loss"],
-    tags: ["common_cause", "power", "shared_dependency"],
-    domains: ["Transport", "Facilities"],
-    services: ["Transmission"],
-    difficulty: "ADVANCED",
-    status: "READY",
-    source: "h4-registry",
-    capabilities: { investigate: true, discover: true, learn: true, predict: true, knowledge: true, lab: true, benchmarks: true },
-    demo_enabled: true,
-  },
 ];
 
-const DEFAULT_SCENARIO_ID = "SCN-001";
+const DEFAULT_SCENARIO_ID = "";
 
 export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
   const [state, setState] = useState<FikraCoreAppState>({
     activeWorkspace: "investigate",
     scenarioRegistry: DEFAULT_SCENARIO_REGISTRY,
     scenarioRegistryLoading: false,
-    scenarioId: DEFAULT_SCENARIO_ID,
+    scenarioId: null,
     runId: null,
     selectedEntityId: null,
     selectedServiceId: null,
@@ -335,7 +438,7 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
     responseLevel: "engineer",
     simulationState: null,
     syncState: "IDLE",
-    connectionState: "CONNECTING",
+    connectionState: "DISCONNECTED",
     lastUpdate: "",
     theme: "dark",
   });
@@ -435,6 +538,23 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
 
   // ─── Scenario switching lifecycle (§8) ──────────────────────────────────────
   const selectScenario = useCallback(async (scenarioId: string) => {
+    if (!scenarioId) {
+      setState((prev) => ({
+        ...prev,
+        scenarioId: null,
+        runId: null,
+        selectedEntityId: null,
+        selectedServiceId: null,
+        selectedHypothesisId: null,
+        selectedGapId: null,
+        selectedEvidenceId: null,
+        simulationState: null,
+        syncState: "IDLE",
+        connectionState: "DISCONNECTED",
+      }));
+      return;
+    }
+
     setState((prev) => ({
       ...prev,
       scenarioId,
@@ -490,6 +610,7 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
   // ─── Simulation controls ──────────────────────────────────────────────────────
   const startSimulation = useCallback(async (scenarioId?: string) => {
     const targetScenario = scenarioId ?? state.scenarioId ?? DEFAULT_SCENARIO_ID;
+    if (!targetScenario) return;
     await simClientRef.current?.startSimulation(targetScenario);
   }, [state.scenarioId]);
 
@@ -511,6 +632,10 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
 
   const executeAction = useCallback(async (actionId: string) => {
     await simClientRef.current?.executeAction(actionId);
+  }, []);
+
+  const advanceStage = useCallback(async () => {
+    await simClientRef.current?.advanceStage();
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -546,6 +671,7 @@ export function FikraCoreProvider({ children }: { children: React.ReactNode }) {
     stopSimulation,
     replaySimulation,
     executeAction,
+    advanceStage,
     toggleTheme,
     setTheme,
   };

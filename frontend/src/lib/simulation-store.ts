@@ -28,6 +28,8 @@ export interface SimulationRunMeta {
   is_replay?: boolean;
   replay_position?: number;
   stage_index?: number;
+  executed_actions?: string[];
+  tested_hypotheses?: string[];
 }
 
 export interface StageExitCondition {
@@ -640,8 +642,11 @@ export class SimulationClient {
   private activeRunId: string | null = null;
   private switchVersion = 0;
   private abortController: AbortController | null = null;
+  private reconnectTimer: ReturnType<typeof setTimeout> | null = null;
   private lastSequence = 0;
   private currentRevision = 0;
+  private autoProgressionTimer: ReturnType<typeof setInterval> | null = null;
+  private isAutoAdvancing = false;
   private zakiUIState: ZakiUIState = {
     mode: "COMPACT",
     selectedContext: null,
@@ -727,13 +732,19 @@ export class SimulationClient {
       if (stateRes.ok) {
         const stateData = await stateRes.json();
         if (version === this.switchVersion) {
-          if (stateData.run && stateData.run.status !== "PAUSED" && stateData.run.status !== "STOPPED") {
-            stateData.run.status = "READY";
-          }
-          if (stateData.status && stateData.status !== "PAUSED" && stateData.status !== "STOPPED") {
-            stateData.status = "READY";
-          }
+          const runStatus = stateData.run?.status || stateData.status;
+          const activeRunId = stateData.run?.run_id || stateData.run_id;
+
           this.applySnapshot(stateData);
+
+          // If there is an active run on the backend, reconnect immediately instead of disconnecting!
+          if (activeRunId && (runStatus === "RUNNING" || runStatus === "PAUSED")) {
+            console.log(`[SimulationStore.loadScenario] Reconnecting to active run ${activeRunId} (${runStatus})`);
+            this.activeRunId = activeRunId;
+            this.connectLiveStream(activeRunId);
+            // Do NOT auto-advance stages on loadScenario. Wait for user to explicitly click Start/Play!
+            return;
+          }
         }
       }
 
@@ -761,6 +772,8 @@ export class SimulationClient {
     this.lastSequence = 0;
     this.currentRevision = 0;
     this.resetScenarioScopedState("LOADING_SNAPSHOT");
+    this.state.run_status = "RUNNING";
+    this.notify();
 
     try {
       this.state.syncState = "LOADING_SNAPSHOT";
@@ -800,87 +813,245 @@ export class SimulationClient {
       this.notify();
 
       this.connectLiveStream(runId);
+      this.startAutoProgression();
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
       console.warn("Manual simulation start failed:", err);
+      this.state.run_status = undefined;
       this.state.connectionState = "DEGRADED";
       this.state.syncState = "ERROR";
       this.notify();
     }
   }
 
+  public startAutoProgression(): void {
+    if (this.autoProgressionTimer) return;
+    console.log("[SimulationStore] 🚀 Starting autonomous stage progression ticker (interval: 2000ms)...");
+
+    const tick = async () => {
+      const runStatus = this.state.run?.status || this.state.run_status;
+      const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+      const curIdx: number = typeof this.state.run?.stage_index === "number"
+        ? this.state.run.stage_index
+        : typeof this.state.storyContext?.stage_index === "number"
+        ? Number(this.state.storyContext.stage_index)
+        : (this.state.stages?.find((s) => s.status === "ACTIVE")?.index ?? 0);
+
+      if (runStatus !== "RUNNING") {
+        return;
+      }
+
+      if (curIdx >= 7) {
+        console.log("[SimulationStore AutoProgression Tick] Terminal stage reached (index >= 7). Stopping auto progression.");
+        this.stopAutoProgression();
+        return;
+      }
+
+      // Check if current stage is blocked or is a human gate stage (Stage 5: Knowledge Gap, Stage 6: HITL Validation)
+      const stageStatus = this.state.stage_status;
+      const blockingReason = this.state.blocking_reason;
+      const isStageBlocked = stageStatus === "BLOCKED" || Boolean(blockingReason);
+      const isKnowledgeGapGate = curIdx === 5 && stageStatus !== "READY_TO_ADVANCE";
+      const isHitlValidationGate = curIdx === 6 && stageStatus !== "READY_TO_ADVANCE";
+
+      if (isStageBlocked || isKnowledgeGapGate || isHitlValidationGate) {
+        console.log(`[SimulationStore AutoProgression Tick] Pausing for Human-In-The-Loop gate at stage ${curIdx} (${this.state.current_stage || "STAGE"}). Waiting for: ${this.state.waiting_for || blockingReason || "Operator action"}`);
+        this.stopAutoProgression();
+        await this.pauseSimulation();
+        return;
+      }
+
+      if (this.isAutoAdvancing) {
+        return;
+      }
+
+      this.isAutoAdvancing = true;
+      try {
+        await this.advanceStage();
+      } catch (err) {
+        console.error("[SimulationStore AutoProgression Tick] Advance failed:", err);
+      } finally {
+        this.isAutoAdvancing = false;
+      }
+    };
+
+    this.autoProgressionTimer = setInterval(tick, 2000);
+  }
+
+  public stopAutoProgression(): void {
+    if (this.autoProgressionTimer) {
+      console.log("[SimulationStore] 🛑 Stopping autonomous stage progression ticker.");
+      clearInterval(this.autoProgressionTimer);
+      this.autoProgressionTimer = null;
+    }
+  }
+
   public async pauseSimulation(): Promise<void> {
-    if (!this.state.run) return;
+    console.log("[SimulationStore.pauseSimulation] Pausing simulation...");
+    this.stopAutoProgression();
+    const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+    if (this.state.run) {
+      this.state.run.status = "PAUSED";
+    }
+    this.state.run_status = "PAUSED";
+    this.notify();
+    if (!runId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${this.state.run.run_id}/pause`, {
+      await fetch(`${API_BASE}/api/v1/fikracore/simulations/${runId}/pause`, {
         method: "POST",
       });
-      if (res.ok) {
-        this.state.run.status = "PAUSED";
-        this.notify();
-      }
     } catch {
-      this.state.run.status = "PAUSED";
-      this.notify();
+      // Retain optimistic paused state
     }
   }
 
   public async resumeSimulation(): Promise<void> {
-    if (!this.state.run) return;
+    console.log("[SimulationStore.resumeSimulation] Resuming simulation...");
+    const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+    if (this.state.run) {
+      this.state.run.status = "RUNNING";
+    }
+    this.state.run_status = "RUNNING";
+    this.startAutoProgression();
+    this.notify();
+    if (!runId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${this.state.run.run_id}/resume`, {
+      await fetch(`${API_BASE}/api/v1/fikracore/simulations/${runId}/resume`, {
         method: "POST",
       });
-      if (res.ok) {
-        this.state.run.status = "RUNNING";
-        this.notify();
-      }
     } catch {
-      this.state.run.status = "RUNNING";
-      this.notify();
+      // Retain optimistic running state
     }
   }
 
   public async stopSimulation(): Promise<void> {
-    if (!this.state.run) return;
+    console.log("[SimulationStore.stopSimulation] Stopping simulation...");
+    this.stopAutoProgression();
+    const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+    if (this.state.run) {
+      this.state.run.status = "STOPPED";
+    }
+    this.state.run_status = "STOPPED";
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+    this.disconnectLiveStream();
+    this.notify();
+    if (!runId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${this.state.run.run_id}/stop`, {
+      await fetch(`${API_BASE}/api/v1/fikracore/simulations/${runId}/stop`, {
         method: "POST",
       });
-      if (res.ok) {
-        this.state.run.status = "STOPPED";
-        this.state.run_status = "STOPPED";
-        this.disconnectLiveStream();
-        this.notify();
-      }
     } catch {
-      this.state.run.status = "STOPPED";
-      this.state.run_status = "STOPPED";
-      this.disconnectLiveStream();
-      this.notify();
+      // Retain optimistic stopped state
     }
   }
 
   public async replaySimulation(): Promise<void> {
-    if (!this.state.run) return;
+    const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+    if (!runId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${this.state.run.run_id}/replay`, {
+      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${runId}/replay`, {
         method: "POST",
       });
       if (res.ok) {
-        const runId = this.state.run.run_id;
         const snapshotRes = await fetch(`${API_BASE}/api/v1/fikracore/runs/${runId}/snapshot`);
         if (snapshotRes.ok) {
           const data = await snapshotRes.json();
           this.applySnapshot(data);
         } else {
-          this.state.run.status = "RUNNING";
-          this.state.run.elapsed_seconds = 0;
+          if (this.state.run) {
+            this.state.run.status = "RUNNING";
+            this.state.run.elapsed_seconds = 0;
+          }
+          this.state.run_status = "RUNNING";
         }
         this.notify();
       }
     } catch (err) {
       console.warn("Replay failed:", err);
+    }
+  }
+
+  public async advanceStage(): Promise<void> {
+    const runId = this.state.run?.run_id || this.activeRunId || this.state.run_id;
+    console.log("[SimulationStore.advanceStage] Invoked with runId:", runId, "state.run:", this.state.run);
+    if (!runId) {
+      console.warn("[SimulationStore.advanceStage] Aborted: No active run ID found!");
+      return;
+    }
+    if (!this.activeRunId && runId) {
+      this.activeRunId = runId;
+    }
+    if (!this.activeScenarioId && this.state.scenario_id) {
+      this.activeScenarioId = this.state.scenario_id;
+    }
+
+    // Optimistically advance local stage index for instant UI feedback
+    const curIdx: number = typeof this.state.run?.stage_index === "number"
+      ? this.state.run.stage_index
+      : typeof this.state.storyContext?.stage_index === "number"
+      ? Number(this.state.storyContext.stage_index)
+      : (this.state.stages?.find((s) => s.status === "ACTIVE")?.index ?? 0);
+
+    // If current stage is BLOCKED, do not optimistically advance or call backend advance
+    if (this.state.stage_status === "BLOCKED") {
+      console.warn(`[SimulationStore.advanceStage] Stage ${curIdx} is BLOCKED: ${this.state.blocking_reason || this.state.waiting_for || "Awaiting required action"}`);
+      this.stopAutoProgression();
+      return;
+    }
+
+    const nextIdx = Math.min(7, curIdx + 1);
+
+    console.log(`[SimulationStore.advanceStage] Optimistic advance: ${curIdx} -> ${nextIdx}`);
+    if (this.state.run) {
+      this.state.run.stage_index = nextIdx;
+    }
+    if (this.state.storyContext) {
+      this.state.storyContext.stage_index = nextIdx;
+    }
+    if (this.state.stages && this.state.stages.length > 0) {
+      this.state.stages = this.state.stages.map((s) => ({
+        ...s,
+        status: s.index === nextIdx ? "ACTIVE" : s.index < nextIdx ? "COMPLETED" : "PENDING",
+      }));
+    }
+    this.notify();
+
+    try {
+      console.log(`[SimulationStore.advanceStage] Calling POST ${API_BASE}/api/v1/fikracore/simulations/${runId}/advance`);
+      const res = await fetch(`${API_BASE}/api/v1/fikracore/simulations/${runId}/advance`, {
+        method: "POST",
+      });
+      console.log(`[SimulationStore.advanceStage] Response status: ${res.status}`);
+      if (res.ok) {
+        const data = await res.json();
+        console.log(`[SimulationStore.advanceStage] Response data:`, data);
+        if (data.status === "BLOCKED") {
+          console.warn(`[SimulationStore.advanceStage] Backend blocked stage advance:`, data.message);
+          this.stopAutoProgression();
+          if (data.snapshot && typeof data.snapshot === "object") {
+            this.applySnapshot(data.snapshot);
+          }
+          return;
+        }
+        if (data.snapshot && typeof data.snapshot === "object") {
+          this.applySnapshot(data.snapshot);
+        } else if (typeof data.stage_index === "number") {
+          if (this.state.run) {
+            this.state.run.stage_index = data.stage_index;
+          }
+          if (this.state.storyContext) {
+            this.state.storyContext.stage_index = data.stage_index;
+          }
+          this.notify();
+        }
+      } else {
+        const errText = await res.text();
+        console.warn(`[SimulationStore.advanceStage] POST advance failed HTTP ${res.status}:`, errText);
+      }
+    } catch (err) {
+      console.error("[SimulationStore.advanceStage] Network or execution error:", err);
     }
   }
 
@@ -903,6 +1074,18 @@ export class SimulationClient {
         this.state.nextBestActions = this.state.nextBestActions.map((act) =>
           act.id === actionId || act.id === completedId ? { ...act, status: "COMPLETED" } : act
         );
+        if (this.state.run) {
+          if (!this.state.run.executed_actions) {
+            this.state.run.executed_actions = [];
+          }
+          if (!this.state.run.executed_actions.includes(completedId)) {
+            this.state.run.executed_actions.push(completedId);
+          }
+          if (["ACT-001", "REMEDIATE-001", "NBA-REMEDIATE"].includes(completedId.toUpperCase())) {
+            this.state.run.status = "COMPLETED";
+            this.state.run.terminal_state = "RESOLVED";
+          }
+        }
         if (result.hypothesis_update) {
           this.state.hypotheses = this.state.hypotheses.map((h) =>
             h.id === result.hypothesis_update.id ? { ...h, confidence: result.hypothesis_update.confidence, tested: true } : h
@@ -910,6 +1093,14 @@ export class SimulationClient {
         }
         this.notify();
         await this.resyncActiveRun();
+
+        // If action unblocked the stage or triggered advancement, resume auto-progression
+        const stageStatus = this.state.stage_status;
+        const curStageIdx = this.state.run?.stage_index ?? 0;
+        if (curStageIdx < 6 && (stageStatus === "READY_TO_ADVANCE" || result.stage_status === "READY_TO_ADVANCE")) {
+          console.log(`[SimulationStore.executeAction] Action ${actionId} unblocked stage gate. Resuming auto-progression...`);
+          await this.resumeSimulation();
+        }
       }
     } catch (err) {
       console.warn("Evidence action failed:", err);
@@ -922,6 +1113,10 @@ export class SimulationClient {
     try {
       this.eventSource = new EventSource(`${API_BASE}/api/v1/fikracore/simulations/${runId}/live`);
       this.eventSource.onopen = () => {
+        if (this.reconnectTimer) {
+          clearTimeout(this.reconnectTimer);
+          this.reconnectTimer = null;
+        }
         this.state.connectionState = "LIVE";
         this.state.syncState = "SYNCED";
         this.notify();
@@ -941,6 +1136,17 @@ export class SimulationClient {
           this.state.connectionState = "DEGRADED";
           this.notify();
         }
+        // Auto-reconnect with snapshot resync after brief backoff
+        if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
+        this.reconnectTimer = setTimeout(() => {
+          if (this.activeRunId && (this.state.connectionState === "DEGRADED" || this.state.connectionState === "DISCONNECTED")) {
+            this.resyncActiveRun().then(() => {
+              if (this.activeRunId) {
+                this.connectLiveStream(this.activeRunId);
+              }
+            });
+          }
+        }, 2500);
       };
     } catch {
       this.state.connectionState = "DISCONNECTED";
@@ -1078,72 +1284,99 @@ export class SimulationClient {
     if (scenarioId) this.activeScenarioId = scenarioId;
     if (runId) this.activeRunId = runId;
 
-    this.state = {
-      scenario_id: scenarioId,
-      run_id: runId,
-      snapshot_version: (data.snapshot_version as number | undefined) || 0,
-      revision: (data.revision as number | undefined) || (data.snapshot_version as number | undefined) || 0,
-      sequence: (data.sequence as number | undefined) || 0,
-      updated_at: data.updated_at as string | undefined,
-      current_stage: data.current_stage as string | undefined,
-      stage_status: data.stage_status as string | undefined,
-      entered_at: data.entered_at as string | undefined,
-      elapsed_ms: data.elapsed_ms as number | undefined,
-      exit_conditions: data.exit_conditions as string[] | undefined,
-      exit_conditions_detail: (data.exit_conditions_detail as StageExitCondition[] | undefined) || [],
-      exit_condition_state: data.exit_condition_state as Record<string, unknown> | undefined,
-      next_stage: data.next_stage as string | null | undefined,
-      blocking_reason: data.blocking_reason as string | null | undefined,
-      waiting_for: (data.waiting_for as string | null | undefined) ?? null,
-      terminal_state: (data.terminal_state as string | null | undefined) ?? (data.run as Record<string, unknown> | undefined)?.terminal_state as string | null | undefined ?? null,
-      is_replay: Boolean(data.is_replay ?? (data.run as Record<string, unknown> | undefined)?.is_replay),
-      replay_position: (data.replay_position as number | undefined) ?? (data.run as Record<string, unknown> | undefined)?.replay_position as number | undefined ?? 0,
-      run_status: (data.status as string | undefined) ?? (data.run as Record<string, unknown> | undefined)?.status as string | undefined ?? undefined,
-      scenario: data.scenario as ScenarioMeta | null | undefined ?? null,
-      run: data.run as SimulationRunMeta | null | undefined ?? null,
-      stages: (data.journey as SimulationStage[] | undefined) ?? (data.stages as SimulationStage[] | undefined) ?? [],
-      events: (data.events as SimulationEvent[] | undefined) ?? (data.raw_events as SimulationEvent[] | undefined) ?? [],
-      rawEvents: (data.raw_events as SimulationEvent[] | undefined) ?? (data.events as SimulationEvent[] | undefined) ?? [],
-      reasoningTrace: (data.reasoning_trace as ReasoningTraceRecord[] | undefined) ?? [],
-      topology: (data.topology as SimulationTopology | null | undefined) ?? null,
-      evidenceClusters: (data.evidence_clusters as EvidenceCluster[] | undefined) ?? [],
-      frontiers: (data.frontiers as UnknownFrontier[] | undefined) ?? [],
-      searchSpace: (data.search_space as SearchSpaceState | null | undefined) ?? null,
-      reasoningFocus: (data.reasoning_focus as ReasoningFocusState | null | undefined) ?? null,
-      reasoningMap: (data.reasoning_map as ReasoningMapState | null | undefined) ?? null,
-      hypotheses: (data.hypotheses as SimulationHypothesis[] | undefined) ?? [],
-      reasoningTasks: (data.reasoning_tasks as ReasoningTask[] | undefined) ?? [],
-      impact: (data.impact as ImpactState | null | undefined) ?? null,
-      knowledgeGaps: (data.knowledge_gaps as KnowledgeGap[] | undefined) ?? [],
-      nextBestActions,
-      learning: (data.learning as LearningState | null | undefined) ?? null,
-      zaki: (data.zaki as ZakiCognitiveState | null | undefined) ?? null,
-      storyContext: (data.story_context as Record<string, unknown> | undefined) ?? null,
-      source_mode: (data.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined) ?? (data.run as Record<string, unknown> | undefined)?.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined ?? this.state.source_mode ?? "SIMULATION",
-      intent_id: (data.intent_id as string | undefined) ?? (data.run as Record<string, unknown> | undefined)?.intent_id as string | undefined ?? this.state.intent_id ?? null,
-      live_intents: this.state.live_intents || [],
-      connectionState: this.state.connectionState,
-      syncState: this.state.syncState,
-      lastUpdate: new Date().toLocaleTimeString(),
-    };
-    this.lastSequence = (data.sequence as number | undefined) || 0;
-    this.currentRevision =
-      (data.revision as number | undefined) ||
-      (data.snapshot_version as number | undefined) ||
-      0;
-    this.notify();
-  }
+      const runMeta = data.run as SimulationRunMeta | null | undefined;
+      const snapshotStages = (data.journey as SimulationStage[] | undefined) ?? (data.stages as SimulationStage[] | undefined) ?? [];
+      const activeStageFromStages = snapshotStages.find((s) => s.status === "ACTIVE")?.index;
+      const resolvedStageIndex = typeof runMeta?.stage_index === "number"
+        ? runMeta.stage_index
+        : typeof (data.story_context as Record<string, unknown> | undefined)?.stage_index === "number"
+        ? Number((data.story_context as Record<string, unknown>).stage_index)
+        : typeof activeStageFromStages === "number"
+        ? activeStageFromStages
+        : 0;
 
-  private notify(): void {
-    this.onStateChange({ ...this.state });
-  }
+      const populatedRun: SimulationRunMeta | null = runMeta
+        ? { ...runMeta, stage_index: resolvedStageIndex }
+        : null;
 
-  public destroy(): void {
-    this.abortController?.abort();
-    this.disconnectLiveStream();
-  }
+      const resolvedStatus = (data.status as string | undefined) ?? runMeta?.status as string | undefined ?? undefined;
+      if (resolvedStatus === "RUNNING") {
+        this.startAutoProgression();
+      } else if (resolvedStatus === "PAUSED" || resolvedStatus === "STOPPED" || resolvedStatus === "COMPLETED") {
+        this.stopAutoProgression();
+      }
+
+      this.state = {
+        scenario_id: scenarioId,
+        run_id: runId,
+        snapshot_version: (data.snapshot_version as number | undefined) || 0,
+        revision: (data.revision as number | undefined) || (data.snapshot_version as number | undefined) || 0,
+        sequence: (data.sequence as number | undefined) || 0,
+        updated_at: data.updated_at as string | undefined,
+        current_stage: data.current_stage as string | undefined,
+        stage_status: data.stage_status as string | undefined,
+        entered_at: data.entered_at as string | undefined,
+        elapsed_ms: data.elapsed_ms as number | undefined,
+        exit_conditions: data.exit_conditions as string[] | undefined,
+        exit_conditions_detail: (data.exit_conditions_detail as StageExitCondition[] | undefined) || [],
+        exit_condition_state: data.exit_condition_state as Record<string, unknown> | undefined,
+        next_stage: data.next_stage as string | null | undefined,
+        blocking_reason: data.blocking_reason as string | null | undefined,
+        waiting_for: (data.waiting_for as string | null | undefined) ?? null,
+        terminal_state: (data.terminal_state as string | null | undefined) ?? (data.run as Record<string, unknown> | undefined)?.terminal_state as string | null | undefined ?? null,
+        is_replay: Boolean(data.is_replay ?? (data.run as Record<string, unknown> | undefined)?.is_replay),
+        replay_position: (data.replay_position as number | undefined) ?? (data.run as Record<string, unknown> | undefined)?.replay_position as number | undefined ?? 0,
+        run_status: resolvedStatus,
+        scenario: data.scenario as ScenarioMeta | null | undefined ?? null,
+        run: populatedRun,
+        stages: snapshotStages,
+        events: (data.events as SimulationEvent[] | undefined) ?? (data.raw_events as SimulationEvent[] | undefined) ?? [],
+        rawEvents: (data.raw_events as SimulationEvent[] | undefined) ?? (data.events as SimulationEvent[] | undefined) ?? [],
+        reasoningTrace: (data.reasoning_trace as ReasoningTraceRecord[] | undefined) ?? [],
+        topology: (data.topology as SimulationTopology | null | undefined) ?? null,
+        evidenceClusters: (data.evidence_clusters as EvidenceCluster[] | undefined) ?? [],
+        frontiers: (data.frontiers as UnknownFrontier[] | undefined) ?? [],
+        searchSpace: (data.search_space as SearchSpaceState | null | undefined) ?? null,
+        reasoningFocus: (data.reasoning_focus as ReasoningFocusState | null | undefined) ?? null,
+        reasoningMap: (data.reasoning_map as ReasoningMapState | null | undefined) ?? null,
+        hypotheses: (data.hypotheses as SimulationHypothesis[] | undefined) ?? [],
+        reasoningTasks: (data.reasoning_tasks as ReasoningTask[] | undefined) ?? [],
+        impact: (data.impact as ImpactState | null | undefined) ?? null,
+        knowledgeGaps: (data.knowledge_gaps as KnowledgeGap[] | undefined) ?? [],
+        nextBestActions,
+        learning: (data.learning as LearningState | null | undefined) ?? null,
+        zaki: (data.zaki as ZakiCognitiveState | null | undefined) ?? null,
+        storyContext: (data.story_context as Record<string, unknown> | undefined) ?? this.state.storyContext ?? null,
+        source_mode: (data.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined) ?? (data.run as Record<string, unknown> | undefined)?.source_mode as "SIMULATION" | "LIVE_INTENT" | undefined ?? this.state.source_mode ?? "SIMULATION",
+        intent_id: (data.intent_id as string | undefined) ?? (data.run as Record<string, unknown> | undefined)?.intent_id as string | undefined ?? this.state.intent_id ?? null,
+        live_intents: this.state.live_intents || [],
+        connectionState: this.state.connectionState,
+        syncState: this.state.syncState,
+        lastUpdate: new Date().toLocaleTimeString(),
+      };
+      this.lastSequence = (data.sequence as number | undefined) || 0;
+      this.currentRevision =
+        (data.revision as number | undefined) ||
+        (data.snapshot_version as number | undefined) ||
+        0;
+      this.notify();
+    }
+  
+    private notify(): void {
+      this.onStateChange({ ...this.state });
+    }
+  
+    public destroy(): void {
+      this.stopAutoProgression();
+      this.abortController?.abort();
+      this.disconnectLiveStream();
+    }
 
   private disconnectLiveStream(): void {
+    if (this.reconnectTimer) {
+      clearTimeout(this.reconnectTimer);
+      this.reconnectTimer = null;
+    }
     if (this.eventSource) {
       this.eventSource.close();
       this.eventSource = null;

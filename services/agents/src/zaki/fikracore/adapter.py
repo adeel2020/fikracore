@@ -21,8 +21,8 @@ from engine_stack.engines.telecom_brain.investigation.knowledge import (
     CanonicalKnowledge,
     InMemoryKnowledgeProvider,
 )
-from ..domain.contracts.hypothesis import RankedHypothesisItem, HypothesisRankingContract, HypothesisRankingMetadata, HypothesisRankingSpec
-from ..domain.contracts.finding import CorrelationFindingContract, CorrelationFindingItem
+from ..contracts.hypothesis import RankedHypothesisItem, HypothesisRankingContract, HypothesisRankingMetadata, HypothesisRankingSpec
+from ..contracts.finding import CorrelationFindingContract, CorrelationFindingItem
 
 
 class FikraCoreAdapter:

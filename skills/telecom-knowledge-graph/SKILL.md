@@ -37,4 +37,4 @@ When this skill is invoked:
    python3 .agents/skills/telecom-knowledge-graph/scripts/build_graph.py --output artifacts/telecom-knowledge-graph.html
    ```
 2. Confirm the extracted entity count, causal link count, and domain count returned in the JSON summary.
-3. Provide the user with the file link to open: [telecom-knowledge-graph.html](file:///Users/adeelarshad/kagent/artifacts/telecom-knowledge-graph.html).
+3. Provide the user with the file link to open: [telecom-knowledge-graph.html](file:///Users/adeelarshad/FikraCore/artifacts/telecom-knowledge-graph.html).

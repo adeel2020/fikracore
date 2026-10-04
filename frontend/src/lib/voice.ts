@@ -7,7 +7,7 @@ import type { MarkPresentation } from "@/lib/mark-presentation";
 const activeUtterances: SpeechSynthesisUtterance[] = [];
 
 export type VoiceState = "idle" | "listening" | "processing" | "speaking";
-export type MarkVoiceTone = "executive" | "calm" | "operator" | "demo";
+export type MarkVoiceTone = "young_male" | "executive" | "calm" | "operator" | "demo";
 export type MarkVoiceMode = "backend" | "browser";
 
 export interface MarkVoiceSettings {
@@ -69,10 +69,11 @@ const VOICE_SETTINGS_KEY = "mark_voice_settings";
 export const MARK_PLAYBACK_RATES = [0.75, 0.9, 1, 1.25, 1.5, 2] as const;
 
 const TONE_PROFILES: Record<MarkVoiceTone, { label: string; rate: number; pitch: number; volume: number }> = {
-  executive: { label: "Executive", rate: 0.86, pitch: 0.92, volume: 1 },
-  calm: { label: "Calm", rate: 0.8, pitch: 0.96, volume: 1 },
-  operator: { label: "Operator", rate: 0.92, pitch: 0.9, volume: 1 },
-  demo: { label: "Demo", rate: 0.84, pitch: 1.02, volume: 1 },
+  young_male: { label: "Young Male (Soft)", rate: 0.98, pitch: 1.08, volume: 0.94 },
+  executive: { label: "Executive", rate: 1.0, pitch: 0.98, volume: 1 },
+  calm: { label: "Calm", rate: 0.88, pitch: 0.96, volume: 1 },
+  operator: { label: "Operator", rate: 1.02, pitch: 0.94, volume: 1 },
+  demo: { label: "Demo", rate: 0.98, pitch: 1.0, volume: 1 },
 };
 
 export const MARK_VOICE_TONES = Object.entries(TONE_PROFILES).map(([id, profile]) => ({
@@ -82,7 +83,7 @@ export const MARK_VOICE_TONES = Object.entries(TONE_PROFILES).map(([id, profile]
 
 export const DEFAULT_VOICE_SETTINGS: MarkVoiceSettings = {
   voiceURI: "auto",
-  tone: "executive",
+  tone: "young_male",
   mode: "backend",
   playbackRate: 1,
   autoCorrect: true,
@@ -198,11 +199,15 @@ export function normalizeTelecomTranscript(rawText: string): string {
 }
 
 function prepareSpeechText(rawText: string): string {
+  if (!rawText || !rawText.trim()) return "";
+
   let text = rawText
     .replace(/```[\s\S]*?```/g, "Code snippet omitted.")
     .replace(/`([^`]+)`/g, "$1")
     .replace(/- From `[^`]+` \/ [^:]+:/g, "")
     .replace(/https?:\/\/\S+/g, "link")
+    // Strip emojis and pictographs so speech engines never pronounce them aloud (e.g. 🎙️ -> "studio mic", ⚠️ -> "warning sign")
+    .replace(/[\u{1F300}-\u{1FAD6}\u{200D}\u{FE0E}\u{FE0F}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F900}-\u{1F9FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]/gu, "")
     // Turn parenthetical notes into natural conversational pauses
     .replace(/\s*\(([^)]+)\)\s*/g, ", $1, ")
     // Turn clause-separating dashes and semicolons into breathing pauses
@@ -218,8 +223,13 @@ function prepareSpeechText(rawText: string): string {
     .replace(/\b(HTTP|status|code|error)\s+([1-5])(\d)(\d)\b/gi, "$1 $2, $3, $4")
     // Format durations (14ms -> 14 milliseconds)
     .replace(/(\d+)\s*ms\b/gi, "$1 milliseconds")
-    // Remove formatting symbols
-    .replace(/[*_#~>\[\]|]/g, " ");
+    // Strip boilerplates and markdown headers
+    .replace(/^Under scenario[^\n.]+\.\s*/gi, "")
+    .replace(/^Terminal state is[^\n.]+\.\s*/gi, "")
+    .replace(/^#{1,6}\s+/gm, "")
+    // Remove formatting symbols, bullets, and quotes
+    .replace(/[*_#~>\[\]|•]/g, " ")
+    .replace(/["“”«»]/g, "");
 
   const pronunciation: [RegExp, string][] = [
     [/\bMARK\b/g, "Mark"],
@@ -256,6 +266,28 @@ function prepareSpeechText(rawText: string): string {
     [/\bPDU\b/g, "P D U"],
     [/\bUE\b/g, "U E"],
     [/\bNOC\b/g, "knock"],
+    // Entity keys & Telecom names to natural spoken form
+    [/\bIP:PE:RTR-21\b/gi, "Provider Edge router 21"],
+    [/\bPE:RTR-21\b/gi, "Provider Edge router 21"],
+    [/\bPE-RTR-21\b/gi, "Provider Edge router 21"],
+    [/\bSA5G:UPF:003\b/gi, "User Plane Function 3"],
+    [/\bUPF-003\b/gi, "User Plane Function 3"],
+    [/\bUPF-03\b/gi, "User Plane Function 3"],
+    [/\bIP:VRF:N3-01\b/gi, "N 3 routing instance"],
+    [/\bVRF-N3-01\b/gi, "N 3 routing instance"],
+    [/\bRAN:eNodeB:101\b/gi, "Radio Network Node 101"],
+    [/\beNodeB:101\b/gi, "Radio Network Node 101"],
+    [/\bbufferOverflowTrap\b/gi, "buffer overflow alert"],
+    [/\bPE_ROUTER_DEGRADED\b/gi, "Provider Edge router degradation"],
+    [/\bVRF_DEGRADED\b/gi, "VRF interface degradation"],
+    [/\bUPF_DEGRADED\b/gi, "User Plane Function degradation"],
+    [/\bRADIO SERVICE LOST\b/gi, "Radio Service Lost"],
+    [/\bPE-RTR-0?(\d+)\b/gi, "Provider Edge router $1"],
+    [/\bUPF-0?(\d+)\b/gi, "U-P-F $1"],
+    [/\bSCN-0?(\d+)\b/gi, "Scenario $1"],
+    [/\bRUN-0?(\d+)\b/gi, "Run $1"],
+    [/\b(\d+(?:\.\d+)?)\s*Gbps\b/gi, "$1 gigabits per second"],
+    [/\b(\d+(?:\.\d+)?)\s*Mbps\b/gi, "$1 megabits per second"],
   ];
 
   for (const [regex, replacement] of pronunciation) {
@@ -263,11 +295,37 @@ function prepareSpeechText(rawText: string): string {
   }
 
   // Clean up punctuation spacing
-  return text
+  text = text
     .replace(/,\s*,+/g, ",")
     .replace(/,\s*\./g, ".")
     .replace(/\s+/g, " ")
     .trim();
+
+  // Enforce conversational brevity: max 2 sentences (~30 words) for natural speech cadence
+  const sentences = text.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g) || [text];
+  if (sentences.length > 2) {
+    let brief = sentences.slice(0, 2).map((s) => s.trim()).join(" ");
+    const words = brief.split(/\s+/);
+    if (words.length > 35) {
+      brief = words.slice(0, 32).join(" ") + "...";
+    }
+    return `${brief}... I've outlined the full operational details on your screen.`;
+  }
+
+  return text;
+}
+
+export interface SpeechQueueItem {
+  id: string;
+  text: string;
+  cleanText: string;
+  chunks: string[];
+  options?: {
+    onStart?: () => void;
+    onEnd?: () => void;
+    onError?: (err: unknown) => void;
+    priority?: "normal" | "interrupt";
+  };
 }
 
 class JarvisVoiceAssistant {
@@ -277,6 +335,9 @@ class JarvisVoiceAssistant {
   private isLiveMode: boolean = false;
   private isSubmitting: boolean = false;
   private isMuted: boolean = false;
+  private speechQueue: SpeechQueueItem[] = [];
+  private currentSpeechItem: SpeechQueueItem | null = null;
+  private isProcessingSpeechQueue: boolean = false;
   private activeRunId: string | null = null;
   private lastSpokenText: string = "";
   private audioCtx: AudioContext | null = null;
@@ -308,12 +369,23 @@ class JarvisVoiceAssistant {
   private speechKeepAliveTimer: ReturnType<typeof setInterval> | null = null;
   private lastTranscriptAt = 0;
   private voiceSettings: MarkVoiceSettings = DEFAULT_VOICE_SETTINGS;
+  private voicesLoadedPromise: Promise<SpeechSynthesisVoice[]> | null = null;
+  private cachedSelectedVoice: SpeechSynthesisVoice | null = null;
 
   constructor() {
     if (typeof window !== "undefined") {
       this.isMuted = false;
       this.voiceSettings = this.loadVoiceSettings();
       this.setupGlobalUnlock();
+      this.ensureVoicesLoaded().then(() => {
+        this.getOrSelectVoice();
+      });
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.addEventListener("voiceschanged", () => {
+          this.cachedSelectedVoice = null;
+          this.getOrSelectVoice();
+        });
+      }
     }
   }
 
@@ -451,6 +523,15 @@ class JarvisVoiceAssistant {
     return this.voiceSettings;
   }
 
+  public getPlaybackRate(): number {
+    return this.voiceSettings.playbackRate || 1.0;
+  }
+
+  public setPlaybackRate(rate: number): void {
+    const clamped = Math.max(0.75, Math.min(1.5, Number(rate) || 1.0));
+    this.setVoiceSettings({ playbackRate: clamped });
+  }
+
   public setVoiceSettings(settings: Partial<MarkVoiceSettings>) {
     this.voiceSettings = {
       ...this.voiceSettings,
@@ -466,6 +547,104 @@ class JarvisVoiceAssistant {
     return window.speechSynthesis.getVoices().filter((voice) => voice.lang.toLowerCase().startsWith("en"));
   }
 
+  public async ensureVoicesLoaded(): Promise<SpeechSynthesisVoice[]> {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+      return [];
+    }
+    const current = window.speechSynthesis.getVoices();
+    if (current.length > 0) {
+      return current;
+    }
+    if (this.voicesLoadedPromise) {
+      return this.voicesLoadedPromise;
+    }
+    this.voicesLoadedPromise = new Promise<SpeechSynthesisVoice[]>((resolve) => {
+      let resolved = false;
+      const onVoices = () => {
+        if (resolved) return;
+        resolved = true;
+        window.speechSynthesis.removeEventListener("voiceschanged", onVoices);
+        this.voicesLoadedPromise = null;
+        resolve(window.speechSynthesis.getVoices());
+      };
+      window.speechSynthesis.addEventListener("voiceschanged", onVoices);
+      setTimeout(() => {
+        if (resolved) return;
+        resolved = true;
+        window.speechSynthesis.removeEventListener("voiceschanged", onVoices);
+        this.voicesLoadedPromise = null;
+        resolve(window.speechSynthesis.getVoices());
+      }, 500);
+    });
+    return this.voicesLoadedPromise;
+  }
+
+  public async getOrSelectVoice(): Promise<SpeechSynthesisVoice | null> {
+    if (this.cachedSelectedVoice) {
+      return this.cachedSelectedVoice;
+    }
+    const voices = await this.ensureVoicesLoaded();
+    if (voices.length === 0) {
+      return null;
+    }
+
+    const savedVoice =
+      this.voiceSettings.voiceURI === "auto"
+        ? null
+        : voices.find((v) => v.voiceURI === this.voiceSettings.voiceURI);
+
+    // Strict list of female names to avoid for Zaki (NOC SME male persona)
+    const isFemale = (name: string) =>
+      /samantha|karen|victoria|moira|tessa|fiona|veena|ava|serena|allison|susan|kathy|vicki|kate|stephanie|olivia|amelia|charlotte|mia|harper|evelyn|abigail|emily|ella|elizabeth|camila|luna|sofia|avery|mila|aria|scarlett|penelope|layla|chloe|victoria|madison|eleanor|grace|nora|riley|zoey|hazel|violet|aurora|savannah|audrey|brooklyn|bella|claire|skylar|lucy|paisley|everly|anna|caroline|nova|genesis|emilia|kennedy|maya|willow|kinsley|naomi|aaliyah|elena|sarah|ariana|gabriella|alice|madelyn|cora|ruby|eva|serenity|autumn|adeline|hailey|gianna|valentina|isla|eliana|quinn|nevaeh|ivy|sadie|piper|lydia|alexa|josephine|emery|julia|delilah|arianna|vivian|kaylee|sophie|brielle|madeline|peyton|rylee|clara|hadley|melanie|mackenzie|reagan|adelyn|aubree|isabelle|ashlyn|annabelle|alivia|alana|mckenna|kylie|jocelyn|reese|eden|bailee|alyssa|norah|leilani|mariana|mary|miriam|ruth/i.test(
+        name
+      );
+
+    const selectedVoice =
+      savedVoice ||
+      // 1. Soft tone young male voices (Evan, Nathan, Oliver, Aaron, Tom, Daniel, Arthur, Alex)
+      voices.find(
+        (v) =>
+          v.lang.startsWith("en") &&
+          (v.name.includes("Evan") ||
+            v.name.includes("Nathan") ||
+            v.name.includes("Oliver") ||
+            v.name.includes("Aaron") ||
+            v.name.includes("Tom") ||
+            v.name.includes("Daniel") ||
+            v.name.includes("Arthur") ||
+            v.name.includes("Alex") ||
+            v.name.includes("David") ||
+            v.name.includes("Guy") ||
+            v.name.includes("Fred") ||
+            /young|soft/i.test(v.name) ||
+            /male/i.test(v.name)) &&
+          !isFemale(v.name)
+      ) ||
+      // 2. English Natural / Neural / Google male voices
+      voices.find(
+        (v) =>
+          v.lang.startsWith("en") &&
+          /natural|neural|google/i.test(v.name) &&
+          !isFemale(v.name)
+      ) ||
+      // 3. English (UK) male fallback
+      voices.find(
+        (v) =>
+          (v.lang.startsWith("en-GB") || v.lang.startsWith("en_GB")) &&
+          !isFemale(v.name)
+      ) ||
+      // 4. Any English voice that is not female
+      voices.find((v) => v.lang.startsWith("en") && !isFemale(v.name)) ||
+      // 5. Any voice not female
+      voices.find((v) => !isFemale(v.name)) ||
+      voices[0];
+
+    if (selectedVoice) {
+      this.cachedSelectedVoice = selectedVoice;
+    }
+    return selectedVoice || null;
+  }
+
   private loadVoiceSettings(): MarkVoiceSettings {
     if (typeof window === "undefined") return DEFAULT_VOICE_SETTINGS;
     try {
@@ -477,14 +656,20 @@ class JarvisVoiceAssistant {
         tone: parsed.tone && parsed.tone in TONE_PROFILES ? parsed.tone : DEFAULT_VOICE_SETTINGS.tone,
         mode: parsed.mode === "browser" || parsed.mode === "backend" ? parsed.mode : DEFAULT_VOICE_SETTINGS.mode,
         playbackRate:
-          typeof parsed.playbackRate === "number" && parsed.playbackRate >= 0.5 && parsed.playbackRate <= 2.5
+          typeof parsed.playbackRate === "number" && parsed.playbackRate >= 0.75 && parsed.playbackRate <= 1.4
             ? parsed.playbackRate
-            : DEFAULT_VOICE_SETTINGS.playbackRate,
+            : 1.0,
         autoCorrect: typeof parsed.autoCorrect === "boolean" ? parsed.autoCorrect : DEFAULT_VOICE_SETTINGS.autoCorrect,
       };
     } catch {
       return DEFAULT_VOICE_SETTINGS;
     }
+  }
+
+  public clearSpeechQueue(): void {
+    this.speechQueue = [];
+    this.currentSpeechItem = null;
+    this.isProcessingSpeechQueue = false;
   }
 
   public stop() {
@@ -496,6 +681,7 @@ class JarvisVoiceAssistant {
       clearInterval(this.speechKeepAliveTimer);
       this.speechKeepAliveTimer = null;
     }
+    this.clearSpeechQueue();
     this.speechChunks = [];
     this.currentChunkIndex = 0;
     this.activeSpokenText = "";
@@ -504,6 +690,7 @@ class JarvisVoiceAssistant {
     }
     activeUtterances.length = 0;
     this.isSpeaking = false;
+    SpeechCompletionBarrier.setSpeaking(false);
     this.stopBackendOutput();
   }
 
@@ -520,9 +707,9 @@ class JarvisVoiceAssistant {
       return;
     }
     this.startBackendLiveMode().catch((err) => {
-      console.warn("[MARK Voice] Backend live voice unavailable, using browser fallback:", err);
+      console.info("[MARK Voice] Backend live voice unavailable, gracefully switching to browser voice engine:", err?.message || err);
       this.stopBackendLiveMode();
-      this.callbacks.onError?.(err);
+      this.voiceSettings.mode = "browser";
       if (this.isLiveMode) {
         this.startListening();
       }
@@ -563,7 +750,7 @@ class JarvisVoiceAssistant {
       this.isBackendLive = false;
       this.stopBackendMic();
       this.stopBackendOutput();
-      if (this.isLiveMode) {
+      if (this.isLiveMode && this.voiceSettings.mode !== "browser") {
         this.callbacks.onStateChange?.("idle");
       }
     };
@@ -571,7 +758,7 @@ class JarvisVoiceAssistant {
     await new Promise<void>((resolve, reject) => {
       const timer = window.setTimeout(() => {
         reject(new Error("backend voice socket connection timed out"));
-      }, 4500);
+      }, 3000);
 
       ws.onopen = () => {
         window.clearTimeout(timer);
@@ -581,12 +768,14 @@ class JarvisVoiceAssistant {
 
       ws.onerror = () => {
         window.clearTimeout(timer);
-        reject(new Error("backend voice socket connection failed"));
+        reject(new Error("backend voice socket connection unavailable"));
       };
     });
 
     ws.onerror = (event) => {
-      this.callbacks.onError?.(event);
+      if (this.voiceSettings.mode !== "browser") {
+        this.callbacks.onError?.(event);
+      }
     };
 
     this.sendBackendJson({ type: "start" });
@@ -1151,8 +1340,8 @@ class JarvisVoiceAssistant {
   }
 
   /**
-   * Speak text aloud using sequential sentence chunking for reliable full playback
-   * of the entire curated response without truncation or Chrome 15s freeze.
+   * Speak text aloud using a non-dropping FIFO speech queue and sequential sentence chunking.
+   * Guarantees zero voice drops when simulation stages or messages advance in rapid succession.
    */
   public speak(
     text: string,
@@ -1160,6 +1349,7 @@ class JarvisVoiceAssistant {
       onStart?: () => void;
       onEnd?: () => void;
       onError?: (err: unknown) => void;
+      priority?: "normal" | "interrupt";
     }
   ): void {
     if (this.isMuted || !text || !text.trim() || typeof window === "undefined" || !("speechSynthesis" in window)) {
@@ -1167,15 +1357,30 @@ class JarvisVoiceAssistant {
       return;
     }
 
-    this.stop();
-    this.prime();
-    this.isSpeaking = true;
-    options?.onStart?.();
-
     const cleanText = prepareSpeechText(text);
-    this.activeSpokenText = cleanText.toLowerCase();
-    this.lastSpokenText = text;
-    this.isPaused = false;
+    if (!cleanText.trim()) {
+      options?.onEnd?.();
+      return;
+    }
+
+    // Explicit user interruption (e.g. barge-in or manual Stop): clear queue & cancel active speech
+    if (options?.priority === "interrupt") {
+      this.clearSpeechQueue();
+      if (typeof window !== "undefined" && "speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      activeUtterances.length = 0;
+      this.isSpeaking = false;
+    }
+
+    // Deduplication check: if identical text is currently playing or queued, avoid stuttering duplicates
+    if (
+      (this.currentSpeechItem && this.currentSpeechItem.cleanText === cleanText) ||
+      this.speechQueue.some((item) => item.cleanText === cleanText)
+    ) {
+      console.log(`[MARK Voice] Deduplicated identical speech request (${cleanText.slice(0, 45)}...)`);
+      return;
+    }
 
     // Chunk strictly by sentence boundary for distinct human cadence
     const rawMatches = cleanText.match(/[^.!?\n]+[.!?\n]+|[^.!?\n]+$/g) || [cleanText];
@@ -1186,14 +1391,63 @@ class JarvisVoiceAssistant {
     }
     if (!chunks.length) chunks.push(cleanText);
 
-    this.speechChunks = chunks;
+    const queueItem: SpeechQueueItem = {
+      id: `speech-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      text,
+      cleanText,
+      chunks,
+      options,
+    };
+
+    // If already speaking or processing queue: queue sequentially without cutting off active speech!
+    if (this.isSpeaking || this.isProcessingSpeechQueue) {
+      console.log(`[MARK Voice Queueing: ${chunks.length} sentence(s) behind active narration, queue size: ${this.speechQueue.length + 1}]`);
+      this.speechQueue.push(queueItem);
+      SpeechCompletionBarrier.setSpeaking(true);
+      return;
+    }
+
+    // Start processing queue
+    this.speechQueue.push(queueItem);
+    this.processSpeechQueue();
+  }
+
+  private processSpeechQueue(): void {
+    if (this.speechQueue.length === 0) {
+      this.currentSpeechItem = null;
+      this.isProcessingSpeechQueue = false;
+      this.isSpeaking = false;
+      SpeechCompletionBarrier.setSpeaking(false);
+      this.activeSpokenText = "";
+      this.speechEndGraceUntil = Date.now() + 450;
+      if (this.speechKeepAliveTimer) {
+        clearInterval(this.speechKeepAliveTimer);
+        this.speechKeepAliveTimer = null;
+      }
+      activeUtterances.length = 0;
+      return;
+    }
+
+    const item = this.speechQueue.shift()!;
+    this.currentSpeechItem = item;
+    this.isProcessingSpeechQueue = true;
+    this.isSpeaking = true;
+    SpeechCompletionBarrier.setSpeaking(true);
+
+    this.prime();
+    item.options?.onStart?.();
+
+    this.activeSpokenText = item.cleanText.toLowerCase();
+    this.lastSpokenText = item.text;
+    this.isPaused = false;
+    this.speechChunks = item.chunks;
     this.currentChunkIndex = 0;
 
-    console.log(`[MARK Voice Speaking: ${chunks.length} sentences with natural pauses, ${cleanText.length} chars]`);
+    console.log(`[MARK Voice Speaking item: ${item.chunks.length} sentences with natural pauses, ${item.cleanText.length} chars]`);
 
-    // Cancel previous and resume
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.resume();
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.resume();
+    }
 
     // Keep-alive timer prevents Chrome from freezing during long responses
     if (this.speechKeepAliveTimer) {
@@ -1204,7 +1458,7 @@ class JarvisVoiceAssistant {
         if (window.speechSynthesis.speaking && !this.isPaused) {
           window.speechSynthesis.pause();
           window.speechSynthesis.resume();
-        } else if (!window.speechSynthesis.speaking) {
+        } else if (!window.speechSynthesis.speaking && !this.isSpeaking) {
           if (this.speechKeepAliveTimer) {
             clearInterval(this.speechKeepAliveTimer);
             this.speechKeepAliveTimer = null;
@@ -1213,20 +1467,16 @@ class JarvisVoiceAssistant {
       }
     }, 8000);
 
-    const playNextChunk = () => {
+    const playNextChunk = async () => {
       if (!this.isSpeaking || this.isPaused) return;
 
       if (this.currentChunkIndex >= this.speechChunks.length) {
-        // Complete speech finished
-        this.isSpeaking = false;
-        this.activeSpokenText = "";
-        this.speechEndGraceUntil = Date.now() + 450;
-        if (this.speechKeepAliveTimer) {
-          clearInterval(this.speechKeepAliveTimer);
-          this.speechKeepAliveTimer = null;
-        }
-        activeUtterances.length = 0;
-        options?.onEnd?.();
+        // Complete current speech item finished
+        item.options?.onEnd?.();
+        // Schedule next queued speech item with natural inter-message breathing pause
+        setTimeout(() => {
+          this.processSpeechQueue();
+        }, 320);
         return;
       }
 
@@ -1245,68 +1495,60 @@ class JarvisVoiceAssistant {
         utterance.volume = tone.volume;
         utterance.lang = "en-US";
 
-        const voices = window.speechSynthesis.getVoices();
-        if (voices.length > 0) {
-          const savedVoice = this.voiceSettings.voiceURI === "auto" ? null : voices.find((v) => v.voiceURI === this.voiceSettings.voiceURI);
-          const selectedVoice =
-            savedVoice ||
-            voices.find((v) => v.lang.startsWith("en") && /premium|enhanced|natural|neural/i.test(v.name)) ||
-            voices.find(
-              (v) =>
-                (v.lang.startsWith("en-GB") || v.lang.startsWith("en_GB")) &&
-                (v.name.includes("Daniel") || v.name.includes("George") || v.name.includes("Oliver") || v.name.includes("Male"))
-            ) ||
-            voices.find((v) => v.name.includes("Daniel") || v.name.includes("Alex") || v.name.includes("Fred")) ||
-            voices.find((v) => v.lang.startsWith("en-US") && (v.name.includes("Natural") || v.name.includes("Google") || v.name.includes("Samantha"))) ||
-            voices.find((v) => v.lang.startsWith("en")) ||
-            voices[0];
-
-          if (selectedVoice) {
-            utterance.voice = selectedVoice;
-          }
+        const selectedVoice = await this.getOrSelectVoice();
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
         }
 
         activeUtterances.push(utterance);
 
-        utterance.onend = () => {
+        let chunkCompleted = false;
+        let chunkTimeout: ReturnType<typeof setTimeout> | null = null;
+
+        const completeChunk = () => {
+          if (chunkCompleted) return;
+          chunkCompleted = true;
+          if (chunkTimeout) {
+            clearTimeout(chunkTimeout);
+            chunkTimeout = null;
+          }
           const idx = activeUtterances.indexOf(utterance);
           if (idx !== -1) activeUtterances.splice(idx, 1);
           this.currentChunkIndex++;
-          // Human-like inter-sentence pause: 380ms for periods, 450ms for questions, 520ms for paragraphs
+          // Human-like inter-sentence pause: 180ms for clauses, 400ms for paragraphs, 250ms for normal sentences
           const isParagraphEnd = chunk.includes("\n") || this.currentChunkIndex % 3 === 0;
           const isClauseBreak = chunk.endsWith(",");
-          const pauseMs = isClauseBreak ? 200 : isParagraphEnd ? 500 : isQuestion ? 420 : 350;
+          const pauseMs = isClauseBreak ? 180 : isParagraphEnd ? 400 : isQuestion ? 320 : 250;
           setTimeout(playNextChunk, pauseMs);
         };
 
+        const wordCount = chunk.split(/\s+/).filter(Boolean).length;
+        const maxSpeechMs = Math.max(2500, Math.ceil((wordCount / 2.0) * 1000) + 1200);
+        chunkTimeout = setTimeout(() => {
+          console.warn(`[MARK Voice] Chunk timeout fallback fired after ${maxSpeechMs}ms for: "${chunk.slice(0, 30)}..."`);
+          completeChunk();
+        }, maxSpeechMs);
+
+        utterance.onend = () => {
+          completeChunk();
+        };
+
         utterance.onerror = (e) => {
-          const idx = activeUtterances.indexOf(utterance);
-          if (idx !== -1) activeUtterances.splice(idx, 1);
           if (e.error === "interrupted" || e.error === "canceled") {
-            this.isSpeaking = false;
-            this.activeSpokenText = "";
-            if (this.speechKeepAliveTimer) {
-              clearInterval(this.speechKeepAliveTimer);
-              this.speechKeepAliveTimer = null;
+            if (!this.isProcessingSpeechQueue) {
+              if (chunkTimeout) clearTimeout(chunkTimeout);
+              return;
             }
-            options?.onEnd?.();
-            return;
           }
           console.warn("[MARK Voice] Speech chunk error:", e);
-          this.currentChunkIndex++;
-          playNextChunk();
+          completeChunk();
         };
 
         window.speechSynthesis.speak(utterance);
       } catch (err) {
         console.error("[MARK Voice] Speak chunk failed:", err);
-        this.isSpeaking = false;
-        this.activeSpokenText = "";
-        if (this.speechKeepAliveTimer) {
-          clearInterval(this.speechKeepAliveTimer);
-          this.speechKeepAliveTimer = null;
-        }
-        options?.onEnd?.();
+        this.currentChunkIndex++;
+        playNextChunk();
       }
     };
 
@@ -1320,4 +1562,58 @@ class JarvisVoiceAssistant {
   }
 }
 
+/**
+ * Stage-Synchronized Speech Completion Barrier (Zero Voice Drop)
+ * Holds simulation stage progression until Zaki finishes narrating the active stage.
+ */
+export class SpeechCompletionBarrier {
+  private static listeners: Array<() => void> = [];
+  private static _isSpeaking: boolean = false;
+
+  public static get isSpeaking(): boolean {
+    return this._isSpeaking;
+  }
+
+  public static setSpeaking(speaking: boolean): void {
+    this._isSpeaking = speaking;
+    if (!speaking) {
+      const callbacks = [...this.listeners];
+      this.listeners = [];
+      callbacks.forEach((cb) => {
+        try {
+          cb();
+        } catch (e) {
+          console.error("[SpeechCompletionBarrier] Callback error:", e);
+        }
+      });
+    }
+  }
+
+  public static async awaitSpeechCompletion(): Promise<void> {
+    if (!this._isSpeaking) {
+      return Promise.resolve();
+    }
+    return new Promise<void>((resolve) => {
+      this.listeners.push(resolve);
+    });
+  }
+
+  public static onSpeechCompleted(callback: () => void): void {
+    if (!this._isSpeaking) {
+      callback();
+    } else {
+      this.listeners.push(callback);
+    }
+  }
+}
+
+export const speechCompletionBarrier = SpeechCompletionBarrier;
+export const awaitSpeechCompletion = (timeoutMs: number = 6000): Promise<void> => {
+  return Promise.race([
+    SpeechCompletionBarrier.awaitSpeechCompletion(),
+    new Promise<void>((resolve) => setTimeout(resolve, timeoutMs)),
+  ]);
+};
+
 export const jarvisVoice = new JarvisVoiceAssistant();
+

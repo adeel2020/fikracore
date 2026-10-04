@@ -82,6 +82,7 @@ class ResolveScenarioRunRequest(BaseModel):
 
 class TriggerActionRequest(BaseModel):
     action_id: str
+    advance: bool = True
 
 
 class CreateOperationalRunRequest(BaseModel):
@@ -667,10 +668,29 @@ def resume_simulation(run_id: str) -> dict[str, Any]:
 @router.post("/simulations/{run_id}/advance")
 def advance_simulation_stage(run_id: str) -> dict[str, Any]:
     """Advance the active simulation to the next stage."""
-    run = simulation_manager.advance_stage(run_id)
+    run = simulation_manager.get_run(run_id)
     if run is None:
         raise HTTPException(status_code=404, detail=f"Simulation run '{run_id}' not found.")
-    return {"status": "SUCCESS", "run_id": run_id, "simulation_status": run.status, "stage_index": run.stage_index}
+    current_state = simulation_manager.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+    if current_state.get("stage_status") == "BLOCKED":
+        return {
+            "status": "BLOCKED",
+            "message": current_state.get("blocking_reason") or "Stage exit gate is blocked pending required actions",
+            "waiting_for": current_state.get("waiting_for"),
+            "run_id": run_id,
+            "simulation_status": run.status,
+            "stage_index": run.stage_index,
+            "snapshot": current_state,
+        }
+    run = simulation_manager.advance_stage(run_id)
+    state = simulation_manager.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+    return {
+        "status": "SUCCESS",
+        "run_id": run_id,
+        "simulation_status": run.status,
+        "stage_index": run.stage_index,
+        "snapshot": state,
+    }
 
 
 @router.post("/simulations/{run_id}/stop")
@@ -767,7 +787,7 @@ async def stream_live_simulation(run_id: str):
 @router.post("/simulations/{run_id}/actions")
 def execute_simulation_action(run_id: str, req: TriggerActionRequest) -> dict[str, Any]:
     """Trigger a next-best-evidence intelligence action."""
-    return simulation_manager.execute_action(run_id, req.action_id)
+    return simulation_manager.execute_action(run_id, req.action_id, advance=req.advance)
 
 
 @router.post("/investigate")
@@ -933,8 +953,17 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
     answer = bridge.answer_query(query_text, zaki_context, ui_context=ui_context)
 
     raw_answer_str = answer.get("response", "") if isinstance(answer, dict) else str(answer)
-    copilot_msg = (answer.get("copilot", {}) if isinstance(answer, dict) else {}).get("message") or raw_answer_str
-    spoken_answer_str = copilot_msg if copilot_msg else raw_answer_str
+    spoken_answer_str = (
+        (answer.get("spoken_response") if isinstance(answer, dict) else None)
+        or ((answer.get("copilot", {}) if isinstance(answer, dict) else {}).get("spoken_message"))
+        or ((answer.get("copilot", {}) if isinstance(answer, dict) else {}).get("message"))
+        or raw_answer_str
+    )
+    try:
+        from zaki.contracts.prosody import ProsodyContract
+        spoken_answer_str = ProsodyContract().curate_speech(spoken_answer_str, query=query_text)
+    except Exception:
+        pass
     grounded_in = answer.get("grounded_in", {}) if isinstance(answer, dict) else {}
     uncertainty = answer.get("uncertainty", []) if isinstance(answer, dict) else []
     suggested_actions = answer.get("suggested_actions", []) if isinstance(answer, dict) else []
@@ -972,6 +1001,31 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         session_id=req.session_id or req.run_id,
         run_id=req.run_id,
     )
+    live_story = ui_context.get("incident_story")
+    if live_story is not None:
+        try:
+            from ..services.narrative import narrative_from_story
+            from ..services.visual_explanation import VisualExplanationService
+
+            live_narrative = narrative_from_story(
+                live_story, intent="executive", written_story=raw_answer_str
+            )
+            live_visual = VisualExplanationService().build(live_narrative)
+            storyteller_payload = {
+                "incident_id": live_story.incident_id,
+                "intent": "executive",
+                "answer": raw_answer_str,
+                "spoken_answer": spoken_answer_str,
+                "story": live_story.to_dict(),
+                "narrative": live_narrative.model_dump(mode="json"),
+                "visual_explanation": live_visual.model_dump(mode="json"),
+                "telemetry_evidence": [],
+            }
+        except Exception:
+            pass
+    elif ui_context.get("derived_intent") == "INCIDENT_BRIEF":
+        # No live operational story → no default/heuristic story or visual either.
+        storyteller_payload = None
     if not storyteller_payload and any(w in query_text.lower() for w in ["story", "storyteller", "narrative", "post-mortem", "curated story"]):
         storyteller_payload = {
             "incident_id": scenario_id,
@@ -1016,6 +1070,8 @@ def zaki_chat(req: ZakiChatRequest) -> dict[str, Any]:
         "step": req.step,
         "query": query_text,
         "answer": raw_answer_str,
+        "spoken_answer": spoken_answer_str,
+        "spoken_response": spoken_answer_str,
         "response": answer,
         "grounded_in": grounded_in,
         "uncertainty": uncertainty,

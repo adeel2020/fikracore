@@ -15,7 +15,7 @@ export interface UseMarkVoiceOptions {
   simulationStatus?: string;
   onResponse?: (answer: string, spokenAnswer?: string, presentation?: MarkPresentation) => void;
   onTranscript?: (transcript: string) => void;
-  onMessageSubmit?: (text: string) => Promise<string | void>;
+  onMessageSubmit?: (text: string) => Promise<string | { text: string; spokenText?: string } | void>;
   onError?: (err: unknown) => void;
 }
 
@@ -29,6 +29,14 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
   const [transcript, setTranscript] = useState<string>("");
   const [lastAnswer, setLastAnswer] = useState<string>("");
   const [lastSpokenAnswer, setLastSpokenAnswer] = useState<string>("");
+  const [playbackRate, setPlaybackRateState] = useState<number>(() => {
+    return jarvisVoice.getPlaybackRate ? jarvisVoice.getPlaybackRate() : 1.0;
+  });
+
+  const setPlaybackRate = useCallback((rate: number) => {
+    jarvisVoice.setPlaybackRate(rate);
+    setPlaybackRateState(rate);
+  }, []);
 
   const optionsRef = useRef(options);
   optionsRef.current = options;
@@ -43,6 +51,7 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
   // Sync initial mute status
   useEffect(() => {
     setIsMuted(jarvisVoice.getIsMuted());
+    setPlaybackRateState(jarvisVoice.getPlaybackRate ? jarvisVoice.getPlaybackRate() : 1.0);
   }, []);
 
   // Poll speaking/listening/paused states
@@ -85,9 +94,16 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
             if (optionsRef.current?.onMessageSubmit) {
               const res = await optionsRef.current.onMessageSubmit(text);
               if (res) {
-                setLastAnswer(res);
-                setLastSpokenAnswer(res);
-                return res;
+                if (typeof res === "string") {
+                  setLastAnswer(res);
+                  setLastSpokenAnswer(res);
+                  return res;
+                } else if (typeof res === "object" && res.text) {
+                  setLastAnswer(res.text);
+                  const spoken = res.spokenText || res.text;
+                  setLastSpokenAnswer(spoken);
+                  return spoken;
+                }
               }
             }
             try {
@@ -101,11 +117,19 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
                 workspace: "investigate",
                 response_level: "engineer",
               };
-              const res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+              let res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),
               });
+              if (res.status === 409) {
+                const livePayload = { ...payload, revision: undefined };
+                res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(livePayload),
+                });
+              }
               if (!res.ok) {
                 const err = `Backend error ${res.status}`;
                 setLastAnswer(err);
@@ -205,6 +229,8 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
     isListening,
     isPaused,
     isMuted,
+    playbackRate,
+    setPlaybackRate,
     transcript,
     lastAnswer,
     lastSpokenAnswer,

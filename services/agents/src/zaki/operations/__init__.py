@@ -3,7 +3,7 @@
 from .task_ledger import TaskLedger, default_task_ledger
 from .incident_ledger import IncidentLedger, default_incident_ledger
 from .handover import HandoverManager, default_handover_manager
-from .delegation import DelegationManager, default_delegation_manager
+from .delegation import DelegationManager, DelegationRequest, default_delegation_manager
 
 __all__ = [
     "TaskLedger",
@@ -13,5 +13,7 @@ __all__ = [
     "HandoverManager",
     "default_handover_manager",
     "DelegationManager",
+    "DelegationRequest",
     "default_delegation_manager",
 ]
+

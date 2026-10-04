@@ -1169,7 +1169,15 @@ function LabWorkspace() {
       </Panel>
       <Panel title="Run Controls" icon={Play}>
         <div className="grid grid-cols-4 gap-2">
-          <button onClick={() => startSimulation(scenarioId ?? "DEMO-001")} className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300">Start</button>
+          <button
+            disabled={!scenarioId}
+            onClick={() => {
+              if (scenarioId) void startSimulation(scenarioId);
+            }}
+            className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            Start
+          </button>
           <button onClick={resumeSimulation} className="rounded-md border border-emerald-500/40 bg-emerald-500/10 p-3 text-xs font-bold text-emerald-300">Resume</button>
           <button onClick={pauseSimulation} className="rounded-md border border-amber-500/40 bg-amber-500/10 p-3 text-xs font-bold text-amber-300">Pause</button>
           <button onClick={replaySimulation} className="rounded-md border border-cyan-500/40 bg-cyan-500/10 p-3 text-xs font-bold text-cyan-300">Replay</button>

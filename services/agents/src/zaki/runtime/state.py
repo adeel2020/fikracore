@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, Optional
-from ..domain.contracts.base import BaseContract
+from ..contracts.base import BaseContract
 
 
 class AuthoritativeRunState(BaseContract):

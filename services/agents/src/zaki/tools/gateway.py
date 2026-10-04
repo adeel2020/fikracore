@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional
-from ..domain.contracts.tool import ToolContract, ToolMetadata, ToolSpec
-from ..domain.enums import AuthorityLevel, ToolInterface, ToolType
+from ..contracts.tool import ToolContract, ToolMetadata, ToolSpec
+from ..enums import AuthorityLevel, ToolInterface, ToolType
 
 
 class ToolGateway:

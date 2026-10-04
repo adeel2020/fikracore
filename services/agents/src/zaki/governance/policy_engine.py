@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, Optional
-from ..domain.enums import AuthorityLevel, PolicyDecisionType
+from ..enums import AuthorityLevel, PolicyDecisionType
 
 
 class PolicyDecision:

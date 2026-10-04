@@ -340,9 +340,10 @@ class RealtimeVoicePipeline:
 
         from ..conversation.intents import render_spoken_answer, curate_spoken_text
         if story is not None:
-            spoken_answer = render_spoken_answer(intent, story)
+            spoken_answer = curate_spoken_text(render_spoken_answer(intent, story), query=transcript)
         else:
-            spoken_answer = getattr(answer, "spoken_reply", None) or curate_spoken_text(answer)
+            raw_spoken = getattr(answer, "spoken_reply", None) or getattr(answer, "spoken_response", None) or answer
+            spoken_answer = curate_spoken_text(raw_spoken, query=transcript)
 
         presentation = getattr(answer, "presentation", {})
         if story is not None:

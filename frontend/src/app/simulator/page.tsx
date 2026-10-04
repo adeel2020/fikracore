@@ -3,13 +3,14 @@ import { redirect } from "next/navigation";
 /**
  * /simulator redirects to /simulator/investigate (default workspace).
  */
-export default function SimulatorPage({
+export default async function SimulatorPage({
   searchParams,
 }: {
-  searchParams?: { scenario?: string; run?: string };
+  searchParams?: Promise<{ scenario?: string; run?: string }>;
 }) {
-  const scenario = searchParams?.scenario || "DEMO-001";
-  const run = searchParams?.run;
+  const resolvedParams = searchParams ? await searchParams : {};
+  const scenario = resolvedParams?.scenario;
+  const run = resolvedParams?.run;
   const qs = [scenario && `scenario=${scenario}`, run && `run=${run}`]
     .filter(Boolean)
     .join("&");

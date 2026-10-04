@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, Optional
-from ..domain.contracts.agent import AgentResultContract, AgentTaskContract
+from ..contracts.agent import AgentResultContract, AgentTaskContract
 from .registry import default_agent_registry
 
 

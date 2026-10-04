@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
-from ..domain.contracts.task_episode import TaskEpisodeContract
+from ..contracts.task_episode import TaskEpisodeContract
 
 
 class EpisodicMemory:

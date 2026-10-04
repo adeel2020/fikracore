@@ -1,8 +1,8 @@
 visible_entities:
-- IP:PE:RTR-21
 - SA5G:UPF:003
-- CRM:TICKET:001
 - IP:VRF:N3-01
+- IP:PE:RTR-21
+- CRM:TICKET:001
 visible_relationships:
 - REL-N3-UPF
 - REL-CRM-IMPACT

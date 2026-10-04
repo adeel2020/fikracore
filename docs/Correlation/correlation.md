@@ -26,11 +26,11 @@ RAW TELEMETRY FLOOD (Uncorrelated Alarms, Metrics, Logs, Tickets)
 │     (Router-21 ──routes-through──► VRF-01 ──connected-to──► UPF-03).       │
 │   • Question answered: "Are these devices physically or logically linked?"  │
 │                                                                             │
-│ PHASE 3: CROSS-DOMAIN PATHWAY CORRELATION (The 9 Reasoning Pathways)        │
+│ PHASE 3: CROSS-DOMAIN PATHWAY CORRELATION (The 10 Reasoning Pathways)       │
 │   • What gets correlated: Disparate domain silos (CRM, Core, IP, OSS).     │
-│   • Mechanism: The 9 Reasoning Pathways. Correlates the CRM ticket to the   │
-│     UPF drop via the "Subscriber Journey" lens, and the BGP flap via the    │
-│     "Control & Signaling" lens.                                             │
+│   • Mechanism: The 10 Reasoning Pathways (Operational Evidence, Service     │
+│     Dependency, Topology & Propagation, Subscriber Journey, Change,         │
+│     Traffic, Control & Signaling, Resilience, Historical, Knowledge Gap).   │
 │   • Question answered: "How do customer complaints relate to transport?"    │
 │                                                                             │
 │ PHASE 4: SERVICE & BLAST RADIUS CORRELATION                                 │
@@ -56,7 +56,7 @@ RAW TELEMETRY FLOOD (Uncorrelated Alarms, Metrics, Logs, Tickets)
   * Connecting impacted nodes to the shared service (Blast Radius)
 
 * **Reasoning** is the act of **evaluating those connections**:
-  * The **9 Reasoning Pathways** evaluate *which types* of connections exist (e.g., *"Is there a change record? No. Is there a subscriber impact? Yes."*).
+  * The **10 Reasoning Pathways** evaluate *which types* of connections exist (e.g., *"Is there a change record? No. Is there a subscriber impact? Yes."*).
   * The **Synthesis Core** tests candidate hypotheses to deduce *which device is the root cause*.
 
 ---
@@ -72,7 +72,7 @@ To make this completely clear and eliminate any confusion, the CLI and plan shou
 ── [STAGE 2] CORRELATION ENGINE (The 4 Correlation Phases) ───────────
    ├─ Step 2.1: Temporal & Identity Correlation (Normalization & Deduplication)
    ├─ Step 2.2: Topological Correlation (Knowledge Graph & Causal DiGraph)
-   ├─ Step 2.3: Cross-Domain Pathway Correlation (The 9 Reasoning Pathways)
+   ├─ Step 2.3: Cross-Domain Pathway Correlation (The 10 Reasoning Pathways)
    └─ Step 2.4: Service & Blast Radius Correlation (Impacted Envelope & Noise Filter)
 
 ── [STAGE 3] HYPOTHESIS GENERATION ───────────────────────────────────
@@ -106,13 +106,13 @@ Here is the cross-check from both the **code execution** and the **architectural
 
 ---
 
-### 1. Codebase Cross-Check ([`investigator.py:L82–L117`](L82-L117))
+### 1. Codebase Cross-Check ([`investigator.py:L67–L85`](file:///Users/adeelarshad/FikraCore/services/agents/src/engine_stack/engines/telecom_brain/investigation/investigator.py#L67-L85) & [`correlation/engine.py`](file:///Users/adeelarshad/FikraCore/services/agents/src/engine_stack/engines/telecom_brain/investigation/correlation/engine.py))
 
 In [`investigator.py`] the exact execution flow is:
 
-1. **Correlation Layer runs first:**
-   * Normalizes and collapses multi-domain telemetry (`L51`).
-   * Traverses knowledge edges and builds the causal `DiGraph` (`L55–L77`).
+1. **Correlation Layer runs first (`CorrelationEngine`):**
+   * Normalizes and collapses multi-domain telemetry (`correlation/temporal_identity.py`).
+   * Traverses knowledge edges and builds the causal `DiGraph` (`correlation/topological.py`).
    * Evaluates the multi-domain **Correlation Funnels** (`L98–L106`).
 2. **Blast Radius is derived from that correlation:**
    * Groups evidence by service and isolates `impacted_service` (`L83–L87`).
@@ -199,31 +199,48 @@ Here is the exact **Synthesized Evidence Vector** extracted from a live run (`RU
 
 ---
 
-### 🔗 2. How Correlation Funnels Map to Vector Dimensions
+### 🔗 2. How the 10 Reasoning Pathways Map to Vector Dimensions & Synthesis Equation
 
-Each funnel computes specific dimensions within this vector:
+The 10 Reasoning Pathways act as the multi-domain analytical spine of the Correlation Engine. Each pathway evaluates a specific operational dimension, populating the 12-dimensional Synthesized Evidence Vector that feeds directly into the Stage 4 Hypothesis Scoring Equation:
 
-| Vector Dimension | Value | Source Correlation Funnel | Computation Logic |
-|---|---|---|---|
-| `temporal_precedence` | `1.00` | **Operational Evidence** / **Control & Signaling** | `1.0` if candidate local alarm timestamp $\le$ all dependent symptom timestamps. |
-| `upstream_position` | `1.00` | **Service Dependency** / Graph Engine | `1.0` if directed topological path exists from candidate to all affected nodes. |
-| `blast_radius_coverage`| `1.00` | **Traffic & Capacity** | Ratio of explained abnormal entities vs. total impacted entities (`5/5 = 100%`). |
-| `service_dependency_relevance`| `1.00` | **Service Dependency** / **Subscriber Journey** | `1.0` if candidate sits on the direct transport conduit of impacted services. |
-| `change_relevance` | `0.00` | **Change & Configuration** | `1.0` if a CR/config diff was logged prior to failure (0.0 if no recent CR). |
-| `independent_telemetry`| `1.00` | **Operational Evidence** | `min(1.0, len(sources)/2)` — `1.0` when confirmed by $\ge 2$ independent systems (e.g., NMS + Syslog). |
-| `historical_support` | `0.00` | **Historical Pattern** | `0.5` if candidate node has validated prior fault signatures in Knowledge Base. |
-| `negative_evidence` | `0.00` | **Resilience & Failover** | Penalty strength (`0.0`–`1.0`) if healthy signals or standby links contradict fault. |
-| `symptom_likelihood_penalty`| `0.00` | **Control & Signaling** | Penalty (`0.20`) if entity only exhibits leaf symptoms (e.g. pure tickets/KPIs). |
-| `knowledge_confidence`| `0.75` | **Knowledge Gap** | Minimum confidence score of graph edges traversed to reach symptoms. |
-| `evidence_freshness` | `0.80` | **Operational Evidence** | Time-decay weighted average freshness across all supporting evidence items. |
-| `source_reliability` | `0.84` | **Operational Evidence** | Average reliability rating of telemetry providers reporting on this candidate. |
+| # | Pathway Name | Analytical Question & Focus | Vector Dimension(s) | Live Value | Equation Weight & Role |
+| :---: | :--- | :--- | :--- | :---: | :--- |
+| **1** | **Operational Evidence** | *Is local telemetry authentic & fresh?* Calculates sensor arrival age, freshness decay, and provider reliability. | `evidence_freshness`<br>`source_reliability`<br>`direct_quality` | `0.80`<br>`0.84`<br>`0.84` | **$+0.03 \times \text{freshness}$**<br>**$+0.02 \times \text{reliability}$**<br>**$+0.15 \times \text{direct}$** |
+| **2** | **Service Dependency** | *Is this element in the transport conduit of the failing service (e.g. 5G Mobile Data)?* | `service_dependency_relevance` | `1.00` | **$+0.05 \times \text{service}$** |
+| **3** | **Topology & Propagation** | *Are downstream alarms topologically connected via causal edge inversion?* Explains blast radius envelope. | `upstream_position`<br>`blast_radius_coverage` | `1.00`<br>`1.00` | **$+0.08 \times \text{upstream}$**<br>**$+0.32 \times \text{coverage}$** *(Dominant positive)* |
+| **4** | **Subscriber Journey** | *Are CRM tickets and user session drops downstream symptoms rather than the root origin?* | `symptom_likelihood_penalty` | `0.00` | **$-0.20 \times \text{symptom}$** *(Penalizes symptom nodes)* |
+| **5** | **Change & Configuration** | *Was a configuration change, maintenance window, or CLI commit logged on this element prior to fault?* | `change_relevance` | `0.00` | **$+0.01 \times \text{changes}$** |
+| **6** | **Traffic & Capacity** | *Did traffic exceed capacity thresholds before drop, indicating buffer congestion vs hard break?* | Corroborates `direct_quality` and `blast_radius_coverage` | Corrob. | Explains traffic drop volume in coverage ($+0.32$) and direct quality ($+0.15$). |
+| **7** | **Control & Signaling** | *Did control signaling (BGP, SCTP, PFCP) fail prior to user plane degradation?* Tracks sequence of flaps. | `temporal_precedence` | `1.00` | **$+0.10 \times \text{temporal}$** |
+| **8** | **Resilience & Failover** | *Did redundant standby paths (1+1, MPLS FRR) fail to engage?* Validates multi-source telemetry independence. | `independent_telemetry` | `1.00` | **$+0.18 \times \text{independence}$** *(Requires $\ge 2$ independent sources)* |
+| **9** | **Historical Pattern** | *Does this failure signature match known Golden Runs or previous incident post-mortems?* | `historical_support` | `0.00` | **$+0.01 \times \text{historical}$** |
+| **10** | **Knowledge Gap** | *Are unobserved topology links or missing sensors preventing proof of innocence or guilt?* | `knowledge_confidence`<br>`negative_evidence` | `0.75`<br>`0.00` | **$+0.05 \times \text{knowledge\_confidence}$**<br>**$-0.45 \times \text{negative}$** *(Falsification penalty)* |
 
 ---
 
 ### 🧮 3. Synthesis Core Equation
 
-Intelligence Synthesis takes this 12-dimensional vector and runs it through the linear scoring function ([`investigator.py:L158-L162`]
+Intelligence Synthesis takes this 12-dimensional vector and runs it through the linear scoring function ([`investigator.py:L179–L184`](file:///Users/adeelarshad/FikraCore/services/agents/src/engine_stack/engines/telecom_brain/investigation/investigator.py#L179-L184)):
 
+$$\begin{aligned}
+\text{Confidence}(H_k) = \; 
+& \underbrace{0.32 \times \text{coverage}}_{\text{P3: Topology}} 
++ \underbrace{0.18 \times \text{independence}}_{\text{P8: Resilience}} 
++ \underbrace{0.15 \times \text{direct}}_{\text{P1: Operational Evidence}} \\
+& + \underbrace{0.10 \times \text{temporal}}_{\text{P7: Control \& Signaling}} 
++ \underbrace{0.08 \times \text{upstream}}_{\text{P3: Topology}} 
++ \underbrace{0.05 \times \text{service}}_{\text{P2: Service Dependency}} \\
+& + \underbrace{0.05 \times \text{knowledge\_confidence}}_{\text{P10: Knowledge Gap}} 
++ \underbrace{0.03 \times \text{freshness}}_{\text{P1: Operational Evidence}} 
++ \underbrace{0.02 \times \text{reliability}}_{\text{P1: Operational Evidence}} \\
+& + \underbrace{0.01 \times \text{changes}}_{\text{P5: Change}} 
++ \underbrace{0.01 \times \text{historical}}_{\text{P9: Historical Pattern}} \\
+& - \underbrace{0.45 \times \text{negative}}_{\text{P10: Falsification Penalty}} 
+- \underbrace{0.20 \times \text{symptom}}_{\text{P4: Subscriber Journey Penalty}} 
+- \underbrace{0.08 \times (|R| - 1)}_{\text{Occam's Razor Penalty}}
+\end{aligned}$$
+
+#### Live Calculation for Candidate `Provider Edge Router-21`:
 $$\begin{aligned}
 \text{Score} = & (0.32 \times 1.00) + (0.18 \times 1.00) + (0.15 \times 0.84) + (0.10 \times 1.00) \\
 & + (0.08 \times 1.00) + (0.05 \times 1.00) + (0.05 \times 0.75) + (0.03 \times 0.80) \\

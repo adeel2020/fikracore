@@ -33,7 +33,7 @@ class PathwaysResult:
     knowledge_gap_count: int
 
 
-# Canonical pathway names (9 funnels)
+# Canonical pathway names (10 funnels)
 PATHWAY_NAMES = [
     "Operational Evidence",
     "Service Dependency",
@@ -60,7 +60,7 @@ def evaluate_pathways(
     impacted: set[str],
     knowledge_failures: set[str],
 ) -> PathwaysResult:
-    """Evaluate 9 multi-domain analytical funnels against operational evidence.
+    """Evaluate 10 multi-domain analytical funnels against operational evidence.
 
     This implements Phase 2.3 of the Correlation Engine:
     - Each funnel evaluates a specific analytical dimension

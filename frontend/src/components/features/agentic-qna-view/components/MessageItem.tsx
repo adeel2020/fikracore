@@ -162,6 +162,68 @@ function parseMermaidSequence(text: string) {
   return { participants, steps };
 }
 
+const isNerToken = (str: string): boolean => {
+  const trimmed = str.trim();
+  return (
+    /^(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+|PE-RTR-\d+|RTR-\d+|INFRA:[A-Z0-9:-]+|CORE-K8S-[A-Z0-9-]+|CORE-KUBERNETES-[A-Z0-9-]+|EVT-[A-Z0-9-]+|SCN-\d+|[A-Z][A-Z0-9]+-(?:[A-Z0-9]+-?)+)$/i.test(trimmed) ||
+    /^(?:INFRA K8S Core-A|User Plane Function-\d+|Customer Ticket-\d+|CORE-KUBERNETES-CLUSTER-A|RTR-\d+)$/i.test(trimmed)
+  );
+};
+
+const renderInlineProse = (text: string, keyPrefix: string): React.ReactNode[] => {
+  if (!text) return [];
+  const cleaned = text.replace(/Network entity\s+([A-Z0-9:-]+)/g, "$1");
+  const tokenRegex = /(──►|→|\*(?:observation)\*|\((?:status:\s*[a-z]+)\)|\b(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+|PE-RTR-\d+|RTR-\d+|INFRA:[A-Z0-9:-]+|CORE-K8S-[A-Z0-9-]+|CORE-KUBERNETES-[A-Z0-9-]+|EVT-[A-Z0-9-]+|SCN-\d+|[A-Z][A-Z0-9]+-(?:[A-Z0-9]+-?)+)\b|[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b)/g;
+
+  const parts = cleaned.split(tokenRegex);
+  return parts.map((part, k) => {
+    if (!part) return null;
+    if (part === "──►" || part === "→") {
+      return (
+        <span key={`${keyPrefix}-arr-${k}`} className="text-cyan-400 font-bold px-1 select-none">
+          {part}
+        </span>
+      );
+    }
+    if (part === "*(observation)*" || part === "(observation)") {
+      return (
+        <span key={`${keyPrefix}-obs-${k}`} className="text-slate-500 text-xs italic font-normal">
+          *(observation)*
+        </span>
+      );
+    }
+    if (/^\(status:\s*[a-z]+\)$/i.test(part)) {
+      return (
+        <span key={`${keyPrefix}-st-${k}`} className="text-slate-400 text-xs italic font-mono">
+          {part}
+        </span>
+      );
+    }
+    if (isNerToken(part)) {
+      return (
+        <span
+          key={`${keyPrefix}-ner-${k}`}
+          className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-fuchsia-400 font-semibold tracking-tight"
+        >
+          {part}
+        </span>
+      );
+    }
+    if (
+      /[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b/i.test(
+        part
+      )
+    ) {
+      return (
+        <span key={`${keyPrefix}-met-${k}`} className="font-mono font-bold text-cyan-400">
+          {part}
+        </span>
+      );
+    }
+    return <span key={`${keyPrefix}-txt-${k}`}>{part}</span>;
+  }).filter(Boolean) as React.ReactNode[];
+};
+
 const renderSegmentsWithLinks = (text: string, keyPrefix: string): React.ReactNode[] => {
   if (!text) return [];
   const linkRegex = /\[(.*?)\]\((.*?)\)/g;
@@ -171,7 +233,7 @@ const renderSegmentsWithLinks = (text: string, keyPrefix: string): React.ReactNo
 
   while ((match = linkRegex.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(text.substring(lastIndex, match.index));
+      parts.push(...renderInlineProse(text.substring(lastIndex, match.index), `${keyPrefix}-pre-${match.index}`));
     }
     const label = match[1];
     const url = match[2];
@@ -200,7 +262,7 @@ const renderSegmentsWithLinks = (text: string, keyPrefix: string): React.ReactNo
   }
 
   if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
+    parts.push(...renderInlineProse(text.substring(lastIndex), `${keyPrefix}-post`));
   }
 
   return parts.length > 0 ? parts : [text];
@@ -211,19 +273,91 @@ const formatText = (text: string): React.ReactNode => {
   const boldParts = text.split(/\*\*(.*?)\*\*/g);
   return boldParts.flatMap((part, i): React.ReactNode[] => {
     if (i % 2 === 1) {
+      const trimmed = part.trim();
+      const isFieldLabel =
+        /^(?:Incident ID|Status|Severity|Impact|Service|Component|Leading hypothesis|Correlation|Causal chain|Supporting evidence|Remediation|Still open|Mitigation strategy|Mandatory Prechecks|Domains|Blast radius):?$/i.test(
+          trimmed
+        ) || trimmed.endsWith(":");
+
+      if (isFieldLabel) {
+        return [
+          <span key={`b-${i}`} className="font-medium text-slate-400 mr-1 select-none">
+            {part}
+          </span>,
+        ];
+      }
+
+      if (isNerToken(trimmed)) {
+        return [
+          <span
+            key={`b-${i}`}
+            className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-fuchsia-400 font-semibold tracking-tight"
+          >
+            {part}
+          </span>,
+        ];
+      }
+
+      if (
+        /[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b/i.test(
+          trimmed
+        )
+      ) {
+        return [
+          <strong key={`b-${i}`} className="font-mono font-bold text-cyan-400">
+            {part}
+          </strong>,
+        ];
+      }
+
+      const isDomain = /transport|core|ran|ims|database|security|cloud|optical|router/i.test(trimmed);
+      if (isDomain) {
+        return [
+          <strong key={`b-${i}`} className="font-semibold text-cyan-300">
+            {part}
+          </strong>,
+        ];
+      }
+
       return [
-        <strong key={`b-${i}`} className="font-bold text-cyan-300">
+        <strong key={`b-${i}`} className="font-semibold text-slate-100">
           {renderSegmentsWithLinks(part, `b-${i}`)}
         </strong>,
       ];
     }
+
     const codeParts = part.split(/`(.*?)`/g);
     return codeParts.flatMap((subPart, j): React.ReactNode[] => {
       if (j % 2 === 1) {
+        const trimmedCode = subPart.trim();
+        if (
+          isNerToken(trimmedCode) ||
+          /^[A-Z0-9]+(?:-[A-Z0-9]+)+$/i.test(trimmedCode) ||
+          /^SCN-\d+$/i.test(trimmedCode)
+        ) {
+          return [
+            <code
+              key={`c-${i}-${j}`}
+              className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-fuchsia-400 font-semibold tracking-tight"
+            >
+              {subPart}
+            </code>,
+          ];
+        }
+        if (/^(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION|\d+(?:\.\d+)?%?)$/i.test(trimmedCode)) {
+          return [
+            <code
+              key={`c-${i}-${j}`}
+              className="inline-flex items-center px-1.5 py-0.5 rounded font-mono text-xs font-bold text-cyan-400 bg-cyan-950/40 border border-cyan-800/40 tracking-tight shadow-sm"
+            >
+              {subPart}
+            </code>,
+          ];
+        }
         return [
           <code
             key={`c-${i}-${j}`}
-            className="px-1.5 py-0.5 rounded bg-black/40 text-pink-400 font-mono text-xs"
+            className="inline-flex items-center px-1.5 py-0.5 rounded [font-family:Consolas,Monaco,'Courier_New',monospace] text-xs text-slate-300 bg-white/5 border border-white/10"
           >
             {subPart}
           </code>,
@@ -667,19 +801,19 @@ const renderMessageContent = (content: string) => {
         const text = match[2];
         if (level === 1)
           elements.push(
-            <h1 key={i} className="text-xl font-bold text-white mt-4 mb-2 first:mt-0">
+            <h1 key={i} className="text-lg font-bold text-white tracking-tight mt-3.5 mb-2 first:mt-0 flex items-center gap-2">
               {formatText(text)}
             </h1>
           );
         else if (level === 2)
           elements.push(
-            <h2 key={i} className="text-lg font-semibold text-white mt-3 mb-2 first:mt-0">
+            <h2 key={i} className="text-base font-semibold text-slate-100 tracking-tight mt-3 mb-1.5 first:mt-0">
               {formatText(text)}
             </h2>
           );
         else
           elements.push(
-            <h3 key={i} className="text-base font-medium text-cyan-400 mt-2 mb-1 first:mt-0">
+            <h3 key={i} className="text-xs font-bold uppercase tracking-wider text-cyan-400 mt-3 mb-1 first:mt-0 flex items-center gap-1.5 select-none">
               {formatText(text)}
             </h3>
           );
@@ -687,8 +821,18 @@ const renderMessageContent = (content: string) => {
       }
     }
 
+    if (trimmed.startsWith(">")) {
+      const bqText = trimmed.replace(/^>\s*/, "");
+      elements.push(
+        <div key={i} className="my-2 px-3 py-1.5 rounded-xl border border-cyan-500/20 bg-slate-950/80 text-xs text-slate-200 flex flex-wrap items-center gap-2 shadow-sm">
+          {formatText(bqText)}
+        </div>
+      );
+      continue;
+    }
+
     if (trimmed === "---") {
-      elements.push(<hr key={i} className="border-t border-white/10 my-4" />);
+      elements.push(<hr key={i} className="border-t border-white/10 my-3.5" />);
       continue;
     }
 
@@ -697,11 +841,11 @@ const renderMessageContent = (content: string) => {
       const num = numMatch[1];
       const text = numMatch[2];
       elements.push(
-        <div key={i} className="flex gap-2.5 items-start my-1.5 text-sm text-neutral-200 pl-2">
+        <div key={i} className="flex gap-2.5 items-start my-1 text-sm text-slate-200 pl-2 leading-relaxed">
           <span className="text-cyan-400 font-mono font-semibold text-xs mt-0.5 shrink-0 px-1.5 py-0.5 rounded bg-cyan-500/10 border border-cyan-500/20">
             {num}
           </span>
-          <div className="flex-1 leading-relaxed">{formatText(text)}</div>
+          <div className="flex-1 font-medium">{formatText(text)}</div>
         </div>
       );
       continue;
@@ -710,8 +854,8 @@ const renderMessageContent = (content: string) => {
     if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
       const text = trimmed.substring(2);
       elements.push(
-        <div key={i} className="flex gap-2 items-start my-1 text-sm text-neutral-300 pl-2">
-          <span className="text-cyan-400 mt-1.5 shrink-0 select-none">•</span>
+        <div key={i} className="flex gap-2 items-start my-1 text-sm font-medium text-slate-200 pl-2 leading-relaxed">
+          <span className="text-cyan-400 mt-0.5 shrink-0 select-none">•</span>
           <span>{formatText(text)}</span>
         </div>
       );
@@ -720,7 +864,7 @@ const renderMessageContent = (content: string) => {
 
     if (trimmed)
       elements.push(
-        <p key={i} className="text-sm text-neutral-300 leading-relaxed my-1">
+        <p key={i} className="text-sm font-medium text-slate-200 leading-relaxed my-1.5">
           {formatText(trimmed)}
         </p>
       );
@@ -740,7 +884,7 @@ const renderStructuredCard = (payload: StructuredAgentResponse | null) => {
   if (!payload) return null;
   return (
     <div className="mt-4 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-4 text-sm text-neutral-200">
-      <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-cyan-300">
+      <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-cyan-400">
         Structured Response
       </div>
       <div className="space-y-3">

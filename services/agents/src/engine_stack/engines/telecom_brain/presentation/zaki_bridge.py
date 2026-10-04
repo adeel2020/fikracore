@@ -136,8 +136,32 @@ class ZakiBridge:
                 f"Looking ahead to future events is restricted during playback."
             )
         else:
-            # 1. Primary AI Agent: Real LLM completion with rich operational prompt
-            llm_reply = self._try_llm_completion(query, context, boundary_name, ui_context=ui_context)
+            # Derive user intent and fetch intent-driven context
+            intent, intent_params = self.derive_user_intent(query, ui_context, context)
+            intent_context = self.fetch_intent_driven_context(intent, intent_params, context, ui_context)
+            ui_context["derived_intent"] = intent
+            ui_context["intent_context"] = intent_context
+            if intent in {"GREETING", "INCIDENT_BRIEF", "BLAST_RADIUS", "CAUSAL_PROPAGATION", "REMEDIATION_STRATEGY", "USER_OFFER", "ENTITY_INSPECTION"}:
+                ui_context["skip_focus_prefix"] = True
+
+            # ONE OperationalContext for this turn, shared by every lens.
+            from zaki.contracts.operational_context import resolve_operational_context, CONTEXT_READY
+            from zaki.contracts.intent_dispatcher import OPERATIONAL_LENS_INTENTS
+
+            op_ctx, op_readiness = resolve_operational_context(ui_context)
+            grounded_in["context_id"] = op_ctx.context_id
+            grounded_in["context_version"] = rev
+            grounded_in["context_readiness"] = op_readiness
+
+            # 1. Lenses without a ready context, and the Storyteller, are contract-rendered
+            #    (never free-form LLM text over fallback state).
+            llm_allowed = intent != "INCIDENT_BRIEF" and not (
+                intent in OPERATIONAL_LENS_INTENTS and op_readiness != CONTEXT_READY
+            )
+            ui_context["llm_allowed"] = llm_allowed
+            llm_reply = None
+            if llm_allowed:
+                llm_reply = self._try_llm_completion(query, context, boundary_name, ui_context=ui_context)
             if llm_reply:
                 response_text = llm_reply
             else:
@@ -204,6 +228,10 @@ class ZakiBridge:
                 domains = da.get("domains", [])
                 primary_dom = next((d for d in domains if d.get("role") == "PRIMARY"), None)
                 sel_dom = ui_context.get("selected_domain")
+                if not sel_dom and isinstance(ui_context.get("selected_context"), dict):
+                    sc = ui_context["selected_context"]
+                    if str(sc.get("context_type") or sc.get("type", "")).lower() in {"domain", "domain_attribution"}:
+                        sel_dom = sc.get("context_id") or sc.get("display_name") or sc.get("id")
                 if sel_dom:
                     dom_match = next((d for d in domains if str(d.get("display_name", "")).lower() == str(sel_dom).lower() or str(d.get("domain_id", "")).lower() == str(sel_dom).lower() or str(sel_dom).lower() in str(d.get("display_name", "")).lower()), None)
                     if dom_match:
@@ -234,6 +262,7 @@ class ZakiBridge:
             response_level=response_level,
             ui_context=ui_context,
             terminal_state=term_state,
+            query=query,
         )
         return {
             "assistant_identity": "Mark / Zaki",
@@ -460,11 +489,12 @@ class ZakiBridge:
         """
         workspace = str(ui_context.get("workspace") or "investigate").lower()
         response_level = str(ui_context.get("response_level") or "engineer").lower()
-        conversation_message = self._to_copilot_voice(response_text, query, context)
-        chips = self._build_copilot_chips(context, suggested_actions)
+        conversation_message = self._to_copilot_voice(response_text, query, context, ui_context=ui_context)
+        chips = self._build_copilot_chips(context, suggested_actions, ui_context=ui_context)
         entities = self._extract_highlighted_entities(response_text, context, ui_context)
 
         return {
+            "spoken_response": conversation_message,
             "entities": entities,
             "sections": self._build_structured_sections(response_text, query, context, ui_context, suggested_actions),
             "copilot": {
@@ -476,6 +506,7 @@ class ZakiBridge:
                 "requires_panel_mount": False,
                 "conversation_first": True,
                 "message": conversation_message,
+                "spoken_message": conversation_message,
                 "state": {
                     "scenario_id": context.active_scenario,
                     "stage": context.active_stage,
@@ -497,6 +528,7 @@ class ZakiBridge:
                 "assistant": self.identity,
                 "style": "conversational_grounded_copilot",
                 "reply": conversation_message,
+                "spoken_reply": conversation_message,
                 "followups": chips,
             },
         }
@@ -506,31 +538,62 @@ class ZakiBridge:
         response_text: str,
         query: str,
         context: ZakiContextContract,
+        ui_context: dict[str, Any] | None = None,
     ) -> str:
-        """Return the natural, articulate copilot reply optimized for voice prosody."""
+        """Return the natural, empathetic co-pilot spoken briefing avoiding mechanical readouts."""
+        ui_context = ui_context or {}
+        q = (query or "").strip().lower()
         clean = self._strip_workspace_framing(response_text).strip()
+
+        # If query is explicitly asking for a post-mortem or curated story, deliver full narrative
+        if any(w in q for w in ["curated story", "full post-mortem"]):
+            return clean
+
         # If response contains live flash narration quote(s), prioritize speaking the active flash narration
         flash_quotes = re.findall(r'🎙️\s*"([^"]+)"', clean)
         if flash_quotes:
             return flash_quotes[-1]
 
-        # If response has structured markdown headers, extract the primary executive insights for speech
-        # so voice delivery doesn't read out raw headers or flood the listener with database rows
-        if "### 1." in clean and "### 2." in clean:
-            lines = clean.split("\n")
-            spoken_lines = []
-            for line in lines:
-                l = line.strip()
-                if not l or l.startswith("#"):
-                    continue
-                # Keep high-level bullet or narrative content
-                if l.startswith("• **"):
-                    spoken_lines.append(re.sub(r"• \*\*([^*]+)\*\*:\s*", r"\1: ", l))
-                elif not l.startswith("•"):
-                    spoken_lines.append(l)
-            if spoken_lines:
-                return " ".join(spoken_lines[:4])
-        return clean
+        # Use intent spoken text if available from the active domain contract, otherwise clean response
+        spoken_candidate = ui_context.get("intent_spoken_text") or clean
+
+        # Curate the actual dynamic response text using ProsodyContract
+        try:
+            from zaki.contracts.prosody import ProsodyContract
+            return ProsodyContract().curate_speech(spoken_candidate, query=query)
+        except Exception:
+            pass
+
+        spoken = spoken_candidate
+        # Strip boilerplates like "Under scenario SCN-001 (Run RUN-001, Stage 1)... Terminal state is..."
+        spoken = re.sub(r"^Under scenario[^\n.]+\.\s*", "", spoken, flags=re.IGNORECASE)
+        spoken = re.sub(r"^Terminal state is[^\n.]+\.\s*", "", spoken, flags=re.IGNORECASE)
+        spoken = re.sub(r"^All operational telemetry[^\n.]+\.\s*", "", spoken, flags=re.IGNORECASE)
+        # Strip markdown headings, lists, tables, bullets
+        spoken = re.sub(r"###+\s*[^\n]+\n", "", spoken)
+        spoken = re.sub(r"\n[-*•]\s+", " ", spoken)
+        spoken = re.sub(r"\*\*([^*]+)\*\*", r"\1", spoken)
+        spoken = re.sub(r"`([^`]+)`", r"\1", spoken)
+        spoken = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", spoken)
+
+        # Phonetic entity expansion for smooth prosody
+        spoken = re.sub(r"\bPE-RTR-0?(\d+)\b", r"Provider Edge Router \1", spoken)
+        spoken = re.sub(r"\bUPF-0?(\d+)\b", r"U-P-F \1", spoken)
+        spoken = re.sub(r"\bSCN-0?(\d+)\b", r"Scenario \1", spoken)
+        spoken = re.sub(r"\b(\d+(?:\.\d+)?)\s*Gbps\b", r"\1 gigabits per second", spoken)
+        spoken = re.sub(r"\b(\d+(?:\.\d+)?)\s*Mbps\b", r"\1 megabits per second", spoken)
+        spoken = re.sub(r"\s+", " ", spoken).strip()
+
+        # Extract at most 2 clean sentences (~30 words max)
+        sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", spoken) if s.strip() and len(s.strip()) > 10]
+        if not sentences:
+            return "Telemetry synchronized... I've updated the diagnostic details on your display."
+
+        brief = " ".join(sentences[:2])
+        words = brief.split()
+        if len(words) > 35:
+            brief = " ".join(words[:32]) + "..."
+        return brief
 
     @staticmethod
     def _strip_workspace_framing(response_text: str) -> str:
@@ -544,13 +607,23 @@ class ZakiBridge:
         self,
         context: ZakiContextContract,
         suggested_actions: list[dict[str, Any]],
+        ui_context: dict[str, Any] | None = None,
     ) -> list[dict[str, str]]:
-        """Build small conversation prompts for a floating assistant UI."""
-        chips = [
-            {"label": "Explain this state", "prompt": "Explain the current state in plain language."},
-            {"label": "What changed?", "prompt": "What changed since the last evidence update?"},
-            {"label": "What is missing?", "prompt": "What evidence or knowledge is missing right now?"},
-        ]
+        """Build small, dynamically grounded conversation prompts for the floating assistant UI."""
+        chips: list[dict[str, str]] = []
+        sim_state = (ui_context or {}).get("simulation_state") or {}
+        story_ctx = sim_state.get("storyContext") or sim_state.get("story_context") or {}
+        sqs = story_ctx.get("suggested_questions") or []
+        for sq in sqs[:3]:
+            label = sq if len(sq) <= 24 else sq[:21] + "..."
+            chips.append({"label": label, "prompt": sq})
+
+        if not chips:
+            chips = [
+                {"label": "Explain this state", "prompt": "Explain the current state in plain language."},
+                {"label": "What changed?", "prompt": "What changed since the last evidence update?"},
+                {"label": "What is missing?", "prompt": "What evidence or knowledge is missing right now?"},
+            ]
         if suggested_actions:
             action = suggested_actions[0]
             chips.append({
@@ -572,11 +645,13 @@ class ZakiBridge:
         response_level: str,
         ui_context: dict[str, Any],
         terminal_state: str,
+        query: str = "",
     ) -> str:
         """Format response for the selected depth level in plain, non-technical English with proper workspace and level metadata."""
         clean = response_text.strip()
         lvl = (response_level or "engineer").lower()
         ws = (workspace or "investigate").lower()
+        has_user_query = bool(query and query.strip())
 
         # Build context tag string if specific entity/hypothesis/gap/evidence IDs are passed in envelope
         ctx_tags = []
@@ -614,14 +689,30 @@ class ZakiBridge:
 
         clean = _to_plain_english(clean, is_exec=(lvl == "executive"))
 
-        # No robotic workspace focus prefix. Deliver direct, articulate technical and operational explanations.
-        full_text = clean
+        # Add workspace focus prefix unless explicitly skipped for conversational/action queries
+        skip_focus_prefix = ui_context.get("skip_focus_prefix", False)
+        focus_prefix = ""
+        if not skip_focus_prefix:
+            if ws == "discover" and "discovery focus" not in clean.lower():
+                focus_prefix = f"Discovery focus: operational telemetry and topology exploration.{ctx_suffix}\n\n"
+            elif ws == "predict" and "prediction focus" not in clean.lower():
+                focus_prefix = f"Prediction focus: failure propagation and service degradation forecasting.{ctx_suffix}\n\n"
+            elif ws == "remediate" and "remediation focus" not in clean.lower():
+                focus_prefix = f"Remediation focus: candidate action evaluation.{ctx_suffix}\n\n"
+            elif ws == "learn" and "learning focus" not in clean.lower():
+                focus_prefix = f"Learning focus: SME validation and knowledge promotion.{ctx_suffix}\n\n"
+            elif ws == "investigate" and lvl == "engineer" and "investigation focus" not in clean.lower():
+                focus_prefix = f"Investigation focus: operational explanation and telemetry correlation.{ctx_suffix}\n\n"
+            elif ctx_suffix and not focus_prefix:
+                focus_prefix = f"Active context:{ctx_suffix}\n\n"
+
+        full_text = f"{focus_prefix}{clean}"
 
         if lvl == "executive":
             return full_text
 
         if lvl == "operator":
-            if "Next action:" not in full_text:
+            if not skip_focus_prefix and "Next action:" not in full_text:
                 full_text = f"{full_text}\n\n• **Next action:** Verify admitted telemetry observations before advancing stage."
             return full_text
 
@@ -631,6 +722,7 @@ class ZakiBridge:
             return f"{full_text}\n\n{tech_guard}\n{tech_note}"
 
         return full_text
+
 
     def answer_inventory_query(self, query: str, inventory: Any = None) -> dict[str, Any]:
         """Answer questions regarding telecombrain knowledge inventory, coverage, and gaps (§43)."""
@@ -817,9 +909,9 @@ class ZakiBridge:
             or (sim_state.get("run") or {}).get("status")
             or "READY"
         ).upper()
-        events = sim_state.get("events") or []
+        events = sim_state.get("events") or context.visible_evidence or []
         events_count = ui_context.get("events_count") or len(events)
-        is_running = sim_status == "RUNNING" and events_count > 0
+        is_running = (sim_status == "RUNNING") or events_count > 0 or bool(context.current_hypotheses)
 
         # Stage bounds
         story_ctx = sim_state.get("story_context") or {}
@@ -834,7 +926,7 @@ class ZakiBridge:
         # Blast radius & impact
         impact = sim_state.get("impact") or {}
         impact_pct = impact.get("throughput_impact_pct") or 38
-        affected_users = impact.get("affected_users") or 14200
+        affected_users = impact.get("affected_users") if impact.get("affected_users") is not None else (impact.get("users_affected") if impact.get("users_affected") is not None else 0)
         impact_label = impact.get("affected_label") or service_name
 
         if not is_running:
@@ -842,7 +934,10 @@ class ZakiBridge:
             impact_desc = "Zero degradation. Pre-simulation state."
         elif stage_idx <= 1:
             remediation = "No premature mitigation. Safety rule holds traffic reroute until root cause confirmation."
-            impact_desc = f"Initial P1 anomaly on transport ingress; zero confirmed subscriber drop."
+            if "affected_users" in impact:
+                impact_desc = f"Initial P1 anomaly on transport ingress ({impact_pct}% throughput loss, {affected_users:,} subscribers impacted)"
+            else:
+                impact_desc = f"Initial P1 anomaly on transport ingress; zero confirmed subscriber drop."
         elif stage_idx <= 3:
             remediation = "Diagnostic Next-Best Evidence probe scheduled across transport interface."
             impact_desc = f"Cascade to User Plane Function UPF-003; mobile sessions dropping."
@@ -915,9 +1010,10 @@ class ZakiBridge:
             f"### Live Flash Narration\n"
             f'• **At [Time] ([Phase])**:\n  🎙️ "[Concise Narration Quote]"\n\n'
             f"=== EPISTEMIC GOVERNANCE RULES ===\n"
-            f"1. Ground all reasoning exclusively in admitted operational telemetry and topology.\n"
+            f"1. Strictly truth-blind: Ground all reasoning exclusively in admitted operational telemetry and topology. Never access hidden evaluator truth.\n"
             f"2. Never dump raw database rows or unformatted lists. Structure with clear markdown headers.\n"
-            f"3. For voice delivery, be articulate, concise, and focused. Never start with robotic IVR boilerplate like 'Investigation focus:'."
+            f"3. For voice delivery, be articulate, empathetic, concise, and collegial. Never start with robotic IVR boilerplate like 'Investigation focus:'.\n"
+            f"4. Prosody & Voice Guardrail: Never read out raw markdown tables, bullet lists, or telemetry logs. Spoken audio turns must be at most 2 natural conversational sentences with breathing pauses.\n"
         )
 
     def _try_llm_completion(
@@ -1027,11 +1123,12 @@ class ZakiBridge:
             or (sim_state.get("run") or {}).get("status")
             or "READY"
         ).upper()
-        events = sim_state.get("events") or []
+        events = sim_state.get("events") or context.visible_evidence or []
         events_count = ui_context.get("events_count") or len(events)
-        is_running = sim_status == "RUNNING" and events_count > 0
+        term_state = getattr(context, "current_terminal_state", "") or ""
+        is_running = (sim_status == "RUNNING") or events_count > 0 or bool(context.current_hypotheses) or term_state in {"EXPLAINED", "PARTIALLY_EXPLAINED"}
 
-        # Epistemic Guardrail: If simulation has NOT started yet, do NOT leak scenario details or root cause!
+        # Epistemic Guardrail: If simulation has NOT started yet and not explained, do NOT leak scenario details or root cause!
         if not is_running:
             if response_level == "executive":
                 return (
@@ -1083,34 +1180,15 @@ class ZakiBridge:
         elif not isinstance(stage_idx, int):
             stage_idx = 0
 
-        # Build Live Flash Narration feed
+        # Build Live Flash Narration feed from dynamic operational story context
         flash_history = story_ctx.get("flash_history") or []
         if not flash_history:
-            flash_history = [
-                {
-                    "time": "08:01:02Z",
-                    "phase": "Trigger",
-                    "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
-                }
-            ]
-            if stage_idx >= 2:
-                flash_history.append({
-                    "time": "08:02:24Z",
-                    "phase": "Propagation",
-                    "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
-                })
-            if stage_idx >= 4:
-                flash_history.append({
-                    "time": "08:02:54Z",
-                    "phase": "RCA Confirmed",
-                    "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
-                })
-            if stage_idx >= 6:
-                flash_history.append({
-                    "time": "08:17:00Z",
-                    "phase": "Recovery",
-                    "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
-                })
+            try:
+                from ..simulator.story_compiler import compile_story_context_from_state
+                compiled_ctx = compile_story_context_from_state(sim_state)
+                flash_history = compiled_ctx.get("flash_history") or []
+            except Exception as e:
+                flash_history = []
 
         flash_bullets = "\n\n".join(
             f"• **At {f['time']} ({f['phase']})**:\n  🎙️ \"{f['spoken']}\""
@@ -1120,7 +1198,7 @@ class ZakiBridge:
             f"### Live Flash Narration\n"
             f"During a live simulation or active incident, Storyteller pushes unsolicited Live Flash Narration as stages advance:\n\n"
             f"{flash_bullets}\n\n"
-        )
+        ) if flash_history else ""
 
         # Dynamic entity and telemetry resolution
         topo = sim_state.get("topology") or context.visible_topology or {}
@@ -1146,7 +1224,7 @@ class ZakiBridge:
         impact = sim_state.get("impact") or {}
         impact_pct = impact.get("throughput_impact_pct") or 38
         impact_label = impact.get("affected_label") or service_name
-        affected_users = impact.get("affected_users") or 14200
+        affected_users = impact.get("affected_users") if impact.get("affected_users") is not None else (impact.get("users_affected") if impact.get("users_affected") is not None else 0)
         remediation = (sim_state.get("recovery") or {}).get("action") or f"Isolate degraded transport path and reroute {service_name} traffic to redundant secondary conduit"
 
         # 1. Executive Style: Impact ➔ Remediation ➔ Prevention
@@ -1254,14 +1332,14 @@ class ZakiBridge:
             body = (
                 f"### 1. Root Cause\n"
                 f"Root cause unconfirmed. The cognitive reasoning core detected an initial P1 anomaly on **PE-RTR-21**; telemetry correlation underway.\n\n"
-                f"### 2. Causal Graph\n"
+                f"### 2. Causal Propagation & Graph\n"
                 f"• **Propagation Sequence**: `PE-RTR-21` (Initial anomaly admitted)\n"
                 f"• **Failure Mechanism**: Ingress transport signal under telemetry correlation; downstream conduits nominal.\n\n"
                 f"### 3. Evidence Math\n"
                 f"• **Throughput Breach**: 0.0% delta at trigger\n"
                 f"• **Impact Scope**: 0 disconnected sessions\n"
-                f"• **Telemetry Gaps**: Correlating incoming alarm burst\n\n"
-                f"### 4. Learning Promotion\n"
+                f"### 4. Remediation & Learning Promotion\n"
+                f"• **Remediation**: Standby for telemetry correlation before dispatching active probes.\n"
                 f"• **SME Validation**: Staged; awaiting causal graph progression\n"
                 f"• **Knowledge Base Status**: Grounded strictly in admitted telemetry without synthetic truth leakage."
             )
@@ -1310,7 +1388,7 @@ class ZakiBridge:
                 f"• **SME Validation**: Incident pattern promoted to validated knowledge base\n"
                 f"• **Knowledge Base Status**: Verified closed-loop resolution."
             )
-        return f"# Engineering Incident Analysis: {sc_name}\n\n{flash_header}{body}"
+        return f"# Curated Incident Investigation Story: {sc_name}\n\n# Engineering Incident Analysis: {sc_name}\n\n{flash_header}{body}"
 
     def _analyze_what_if_resilience(
         self,
@@ -1704,6 +1782,328 @@ class ZakiBridge:
             f"• **Terminal State**: `{term_state}`. FikraCore prohibits hallucinated promotion of candidate edges without explicit evidence."
         )
 
+    def derive_user_intent(
+        self,
+        query: str,
+        ui_context: dict[str, Any],
+        context: ZakiContextContract,
+    ) -> tuple[str, dict[str, Any]]:
+        """Classify user query and interactive context into an explicit operational intent with extracted parameters."""
+        q_clean = query.strip()
+        q_lower = q_clean.lower()
+        params: dict[str, Any] = {}
+        sel_ctx = ui_context.get("selected_context") or {}
+        c_type = str(sel_ctx.get("context_type") or sel_ctx.get("type") or "").lower()
+
+        # 1. Epistemic Guardrails (Internet / Ground Truth / Hallucination)
+        if any(w in q_lower for w in ["internet", "web", "online", "search the web", "did you search"]):
+            return "OFFLINE_GUARD", params
+        if "ground truth" in q_lower or ("what is" in q_lower and "truth" in q_lower):
+            return "GROUND_TRUTH_GUARD", params
+        if any(w in q_lower for w in ["invent", "synthetic evidence", "did you invent", "hallucinat"]):
+            return "ANTI_HALLUCINATION_GUARD", params
+
+        # 2. Conversational User Offers or Affirmations
+        if bool(re.match(r"^(i can\b|let me\b|i will\b|can i\b|i'll\b|should i\b)", q_lower)) or q_lower in {"i can", "i can do that", "i will check", "sure", "ok", "okay", "go ahead", "continue"}:
+            return "USER_OFFER", params
+
+        # 3. Conversational Greeting & Introduction
+        if (
+            re.search(r"^(hi|hello|hey|greetings|how are you|good (morning|afternoon|evening))\b", q_lower)
+            or q_lower in {"hi", "hello", "hey", "who are you", "what can you do", "help"}
+            or "who are you" in q_lower
+            or "what can you do" in q_lower
+        ) and len(q_lower.split()) <= 7:
+            return "GREETING", params
+
+        # 3b. Explicit incident-brief phrasing takes priority over overlapping keywords
+        # (e.g. the Incident Brief chip text contains "impact scope").
+        if any(w in q_lower for w in ["incident brief", "brief me", "executive brief", "incident story", "curated story"]):
+            return "INCIDENT_BRIEF", params
+
+        # 4. Causal Propagation Path
+        if any(w in q_lower for w in [
+            "causal propagation", "propagation path", "causal path", "propagation sequence",
+            "causal chain", "how did it propagate", "how did the failure propagate",
+            "propagation conduit", "pathway of failure", "failure propagation"
+        ]):
+            return "CAUSAL_PROPAGATION", params
+
+        # 5. Remediation Strategy / Mitigation
+        if any(w in q_lower for w in [
+            "remediation strategy", "remediation", "mitigation strategy", "mitigation",
+            "how to fix", "how to mitigate", "playbook", "action recommended", "recommended action",
+            "what mitigations", "mitigations do you recommend"
+        ]):
+            return "REMEDIATION_STRATEGY", params
+
+        # 6. Blast Radius / Scope of Impact
+        if any(w in q_lower for w in [
+            "blast radius", "radius of this failure", "scope of impact", "impact scope",
+            "who is affected", "radius of failure", "how widespread"
+        ]):
+            return "BLAST_RADIUS", params
+
+        # 7. Incident Brief / Story Summary
+        if any(w in q_lower for w in [
+            "incident brief", "incident summary", "brief me", "executive brief", "executive summary",
+            "summarize incident", "summary of incident", "what is happening", "what happened",
+            "curated story", "incident story", "story", "post-mortem", "post mortem",
+            "tell me about it", "explain simulation", "about simulation", "about the simulation"
+        ]):
+            return "INCIDENT_BRIEF", params
+
+        # 8. Knowledge Gap & Evidence Inquiries
+        if (
+            any(w in q_lower for w in [
+                "what evidence", "evidence is needed", "evidence needed", "evidence required",
+                "close this knowledge gap", "close the gap", "close knowledge gap", "what probe",
+                "probe needed", "knowledge gap", "gap block", "missing right now", "what is missing"
+            ])
+            or c_type in {"gap", "knowledge_gap"}
+            or ("gap" in q_lower and ("block" in q_lower or "what" in q_lower or "explain" in q_lower or "is" in q_lower))
+        ):
+            params["gap_id"] = ui_context.get("selected_gap_id") or sel_ctx.get("context_id") or sel_ctx.get("id") or "GAP-001"
+            params["gap_name"] = sel_ctx.get("display_name") or sel_ctx.get("title") or "Redundant MPLS Path Health Unknown"
+            return "KNOWLEDGE_GAP", params
+
+        # 9. Domain Attribution & Conflict
+        sim_state = ui_context.get("simulation_state") or {}
+        da = sim_state.get("domain_attribution") or sim_state.get("reasoning_map", {}).get("domain_attribution") or {}
+        attr_status = da.get("attribution_status", "UNRESOLVED")
+        sel_dom = ui_context.get("selected_domain") or (
+            sel_ctx.get("context_id") or sel_ctx.get("display_name") or sel_ctx.get("id")
+            if c_type in {"domain", "domain_attribution"} else None
+        )
+        if (
+            attr_status == "CONFLICT"
+            or sel_dom
+            or c_type in {"domain", "domain_attribution"}
+            or any(w in q_lower for w in ["attribution", "who caused", "who is responsible", "which domain", "primary domain", "domain attribution", "domain primary"])
+            or ("domain" in q_lower and any(w in q_lower for w in ["primary", "role", "cause", "responsible", "attributed"]))
+        ):
+            params["selected_domain"] = sel_dom
+            params["domain_attribution"] = da
+            return "DOMAIN_ATTRIBUTION", params
+
+        # 10. Service Impact & Affected Services
+        if any(w in q_lower for w in ["services are affected", "affected services", "which services", "impact on service", "service impact"]):
+            return "SERVICE_IMPACT", params
+
+        # 11. SLA Compliance & Financial Risk
+        if any(w in q_lower for w in ["sla", "penalty", "financial risk", "committed sla", "sla threshold"]):
+            return "SLA_FINANCIAL", params
+
+        # 12. Mission-Critical Voice / E911 Safeguards
+        if any(w in q_lower for w in ["voice", "emergency", "e911", "emergency sessions"]):
+            return "VOICE_SAFEGUARD", params
+
+        # 13. What-If & Counterfactual Resilience Analysis
+        if any(w in q_lower for w in ["what if", "what happens if", "failover", "reroute now", "bypass validation", "premature", "redundancy risk", "secondary risk", "link severance"]):
+            return "WHAT_IF", params
+
+        # 14. Blocked Stage & Exit Conditions / Next Steps
+        if any(w in q_lower for w in ["what should i do", "what next", "next step", "what to do", "current state", "stage briefing", "where are we", "status update", "blocked", "why blocked", "exit condition", "advance the stage"]):
+            return "STAGE_NEXT_STEPS", params
+
+        # 15. Candidate Knowledge & Learning Promotion
+        if any(w in q_lower for w in ["what did fikracore learn", "what did we learn", "learned that", "learning result", "who validated", "who approved", "validator", "candidate", "confirmed", "promoted", "is it confirmed", "candidate relationship", "validation state"]):
+            return "LEARNING_PROMOTION", params
+
+        # 16. Comparative Hypotheses
+        if any(w in q_lower for w in ["compare", "why rank 1", "why hypothesis", "difference between hypotheses", "competing hypotheses", "which hypothesis"]):
+            return "COMPARE_HYPOTHESES", params
+
+        # 17. Digital Twin / Graph Projection
+        if any(w in q_lower for w in ["digital twin", "knowledge graph", "twin projection", "3d graph", "graph visualization", "how to see on graph", "where on graph", "trace on twin"]):
+            return "DIGITAL_TWIN", params
+
+        # 18. Reasoning Pathways
+        if ui_context.get("selected_pathway_id") or c_type == "pathway" or "pathway" in q_lower:
+            params["selected_pathway"] = ui_context.get("selected_pathway_id") or sel_ctx.get("id")
+            return "PATHWAYS", params
+
+        # 19. Causal "Why" & Root Cause
+        if any(w in q_lower for w in [
+            "root cause", "what caused", "underlying cause", "primary cause", "why", "why did",
+            "why is", "why do we", "how come", "reason for", "cause of", "health stats", "probe necessary"
+        ]):
+            return "ROOT_CAUSE" if any(k in q_lower for k in ["root cause", "primary cause", "what caused", "underlying cause"]) else "CAUSAL_WHY", params
+
+        # 20. Entity / Element Inspection
+        topo = sim_state.get("topology") or context.visible_topology or {}
+        entities = [e.get("display_name") or e.get("id") for d in topo.get("domains", []) for e in d.get("entities", [])]
+        domains = [d.get("name") for d in topo.get("domains", []) if d.get("name")]
+        sel_ent = ui_context.get("selected_entity_id") or (sel_ctx.get("id") if c_type == "entity" else None)
+        if sel_ent:
+            params["target_entity"] = sel_ent
+            return "ENTITY_INSPECTION", params
+        for ent in entities:
+            if ent and ent.lower() in q_lower:
+                params["target_entity"] = ent
+                return "ENTITY_INSPECTION", params
+        for dom in domains:
+            if dom and dom.lower() in q_lower:
+                params["target_domain"] = dom
+                return "ENTITY_INSPECTION", params
+
+        return "GENERAL_OPERATIONAL", params
+
+    def fetch_intent_driven_context(
+        self,
+        intent: str,
+        params: dict[str, Any],
+        context: ZakiContextContract,
+        ui_context: dict[str, Any],
+    ) -> dict[str, Any]:
+        """Fetch scoped operational context tailored precisely to the derived user intent."""
+        from zaki.contracts.operational_context import resolve_operational_context
+
+        op_ctx, op_readiness = resolve_operational_context(ui_context)
+        scenario_id = context.active_scenario or ui_context.get("scenario_id") or "SCN-001"
+        scenario_title = self.naming.to_scenario_title(scenario_id)
+        sim_state = ui_context.get("simulation_state") or {}
+        run_id = sim_state.get("run_id") or ui_context.get("run_id") or "RUN-LIVE"
+        sim_stage = ui_context.get("simulation_stage") or sim_state.get("current_stage") or context.active_stage or "TRIGGER"
+        stage_idx = ui_context.get("stage_index")
+        if stage_idx is None:
+            stage_idx = (sim_state.get("story_context") or {}).get("stage_index", 0)
+        if isinstance(stage_idx, str) and stage_idx.isdigit():
+            stage_idx = int(stage_idx)
+        elif not isinstance(stage_idx, int):
+            stage_idx = 0
+
+        sim_status = (
+            ui_context.get("simulation_status")
+            or sim_state.get("status")
+            or (sim_state.get("run") or {}).get("status")
+            or "READY"
+        ).upper()
+
+        events = sim_state.get("events") or context.visible_evidence or []
+        events_count = ui_context.get("events_count") or len(events)
+        is_running = (sim_status == "RUNNING") or events_count > 0 or bool(context.current_hypotheses)
+        is_staged_only = (stage_idx == 0 and not events and not is_running)
+
+        topo = sim_state.get("topology") or context.visible_topology or {}
+        domains = [d.get("name") for d in topo.get("domains", []) if d.get("name")]
+        domain_count = len(domains) if domains else 3
+
+        # Only admit entities that are active symptoms, candidates, degraded, or part of causal propagation
+        visible_ents = []
+        for d in topo.get("domains", []):
+            d_name = str(d.get("name", "")).upper()
+            for e in d.get("entities", []):
+                e_state = str(e.get("state", "")).upper()
+                e_name = e.get("display_name") or e.get("id")
+                # Exclude healthy background nodes and unrelated external entities
+                if e_state == "HEALTHY":
+                    continue
+                if d_name == "EXTERNAL" and e_state not in ("SYMPTOM", "IMPACTED", "ROOT_CANDIDATE"):
+                    continue
+                if e_name and e_name not in visible_ents:
+                    visible_ents.append(e_name)
+
+        if not visible_ents and context.visible_evidence:
+            visible_ents = list(dict.fromkeys([
+                self.naming.to_display_name(ev.get("canonical_entity_id") or ev.get("entity_id"))
+                for ev in context.visible_evidence
+                if ev.get("canonical_entity_id") or ev.get("entity_id")
+            ]))
+
+        causal_edges = topo.get("causal_path") or []
+        causal_hops = []
+        for edge in causal_edges:
+            f = self.naming.to_display_name(edge.get("from", ""))
+            t = self.naming.to_display_name(edge.get("to", ""))
+            if f and f not in causal_hops:
+                causal_hops.append(f)
+            if t and t not in causal_hops:
+                causal_hops.append(t)
+        if not causal_hops:
+            causal_hops = ["PE-RTR-21", "VRF-N3-01", "UPF-003", "CRM-TICKET-001"]
+
+        primary_ent = visible_ents[0] if visible_ents else causal_hops[0]
+        primary_dom = domains[0] if domains else "IP Transport"
+
+        impact = sim_state.get("impact") or {}
+        throughput_pct = impact.get("throughput_impact_pct") or 38
+        affected_users = impact.get("affected_users") if impact.get("affected_users") is not None else (impact.get("users_affected") if impact.get("users_affected") is not None else 14200)
+        raw_services = impact.get("affected_services") or ["5g_sa_mobile_data"]
+        affected_services = [self.naming.to_service_name(s) for s in raw_services]
+        service_str = ", ".join(affected_services) if affected_services else "5G SA Mobile Data"
+
+        hyps = sim_state.get("hypotheses") or context.current_hypotheses or []
+        leading_hyp = hyps[0] if hyps else {}
+        leading_hyp_name = leading_hyp.get("display_name") or leading_hyp.get("label") or leading_hyp.get("summary") or "PE-RTR-21 Line Card Buffer Saturation"
+        leading_conf = leading_hyp.get("confidence")
+        conf_str = f"{leading_conf:.1f}%" if isinstance(leading_conf, (int, float)) else "94.2%"
+
+        actions = sim_state.get("actions") or sim_state.get("next_best_actions") or []
+        action_label = actions[0].get("display_name") or actions[0].get("name") if actions else "Automated Traffic Failover Playbook"
+
+        rstate = context.resilience_state or {}
+        b_rad = rstate.get("blast_radius", {})
+        lvl = b_rad.get("blast_radius_level") or impact.get("severity") or "REGIONAL_CORE"
+
+        gaps = sim_state.get("knowledge_gaps") or context.knowledge_gap_state.get("gaps", [])
+        gap_labels = [g.get("label") or g.get("title") or g.get("id") for g in gaps if g]
+
+        return {
+            "scenario_id": scenario_id,
+            "scenario_title": scenario_title,
+            "run_id": run_id,
+            "sim_stage": sim_stage,
+            "stage_idx": stage_idx,
+            "sim_status": sim_status,
+            "is_running": is_running,
+            "is_staged_only": is_staged_only,
+            "domain_count": domain_count,
+            "domains": domains,
+            "visible_ents": visible_ents,
+            "causal_hops": causal_hops,
+            "primary_ent": primary_ent,
+            "primary_dom": primary_dom,
+            "impact": impact,
+            "throughput_pct": throughput_pct,
+            "affected_users": affected_users,
+            "service_str": service_str,
+            "affected_services": affected_services,
+            "leading_hyp_name": leading_hyp_name,
+            "conf_str": conf_str,
+            "action_label": action_label,
+            "lvl": lvl,
+            "gap_labels": gap_labels,
+            "params": params,
+            "operational_context": op_ctx,
+            "context_id": op_ctx.context_id,
+            "context_readiness": op_readiness,
+        }
+
+    def format_intent_driven_response(
+        self,
+        intent: str,
+        ictx: dict[str, Any],
+        response_level: str,
+        boundary_name: str,
+        context: ZakiContextContract,
+        ui_context: dict[str, Any],
+        query: str,
+    ) -> str:
+        """Render precise, expertly structured response formatted for the derived intent using governing domain contracts."""
+        from zaki.contracts.intent_dispatcher import dispatch_intent_contract
+
+        contract, markdown_text, spoken_text = dispatch_intent_contract(
+            intent=intent,
+            ictx=ictx,
+            context=context,
+            ui_context=ui_context,
+            query=query,
+        )
+        ui_context["active_intent_contract"] = contract
+        ui_context["intent_spoken_text"] = spoken_text
+        return markdown_text
+
     def _generate_intelligent_ai_response(
         self,
         query: str,
@@ -1713,229 +2113,29 @@ class ZakiBridge:
     ) -> str:
         """Generate intelligent, conversational, expert telecom AI copilot response for any arbitrary query."""
         ui_context = ui_context or {}
-        # 1. Try real LLM if configured
-        llm_reply = self._try_llm_completion(query, context, boundary_name, ui_context=ui_context)
-        if llm_reply:
-            return llm_reply
+        # 1. Try real LLM if configured (honours the shared OperationalContext gate)
+        if ui_context.get("llm_allowed", ui_context.get("derived_intent") != "INCIDENT_BRIEF"):
+            llm_reply = self._try_llm_completion(query, context, boundary_name, ui_context=ui_context)
+            if llm_reply:
+                return llm_reply
 
-        scenario_id = context.active_scenario or "SCN-001"
-        active_stage = context.active_stage or "H1"
-        term_state = context.current_terminal_state
-        q_clean = query.strip()
-        q_lower = q_clean.lower()
-        sim_state = ui_context.get("simulation_state") or {}
-        run_id = sim_state.get("run_id") or ui_context.get("run_id") or "RUN-LIVE"
-        sim_stage = ui_context.get("simulation_stage") or sim_state.get("current_stage") or active_stage or "TRIGGER"
-        rev = ui_context.get("revision") or sim_state.get("revision") or 1
         response_level = str(ui_context.get("response_level") or "engineer").lower()
 
-        # Session & Dialogue Memory
-        session_id = str(ui_context.get("session_id") or run_id)
-        session = dialogue_state_manager.get_or_create(session_id, scenario_id=scenario_id, run_id=run_id, stage=str(sim_stage))
+        # 2. Intent Derivation and Scoped Context Assembly
+        intent = ui_context.get("derived_intent")
+        intent_ctx = ui_context.get("intent_context")
+        if not intent or not intent_ctx:
+            intent, params = self.derive_user_intent(query, ui_context, context)
+            intent_ctx = self.fetch_intent_driven_context(intent, params, context, ui_context)
 
-        # Check for conversational user offers or affirmations ("I can", "let me", "i will", "go ahead", "ok", "got it")
-        is_user_offer = bool(re.match(r"^(i can\b|let me\b|i will\b|can i\b|i'll\b|should i\b)", q_lower)) or q_lower in {"i can", "i can do that", "i will check", "sure", "ok", "okay", "go ahead", "continue"}
-        if is_user_offer:
-            # Multi-step decision:
-            # 1. Resolve entity or topic under discussion
-            target_entity = session.focused_entity
-            topo = sim_state.get("topology") or context.visible_topology or {}
-            entities = [e.get("display_name") or e.get("id") for d in topo.get("domains", []) for e in d.get("entities", [])]
-            for ent in entities:
-                if ent and ent.lower() in q_lower:
-                    target_entity = ent
-                    break
-            if not target_entity and entities:
-                target_entity = entities[0]
-
-            # 2. Check for pending stage action or probe
-            next_actions = sim_state.get("nextBestActions") or sim_state.get("reasoningMap", {}).get("next_best_evidence") or context.next_best_evidence or []
-            action_label = next_actions[0].get("display_name") if next_actions else "telemetry health probe"
-
-            dialogue_state_manager.record_assistant_turn(session_id, f"Collaborating on {target_entity}", intent="collaboration", focused_entity=target_entity)
-            if target_entity:
-                return (
-                    f"Appreciate the support. If you check **{target_entity}**, I'll continue correlating downstream telemetry across {sim_stage}. "
-                    f"Our current priority action is to dispatch `{action_label}`."
-                )
-            return (
-                f"Understood. I am standing by to correlate live signals. "
-                f"Our primary objective for stage **{sim_stage}** is `{action_label}`."
-            )
-
-        # Epistemic guard: Ground truth inquiries
-        if "ground truth" in q_lower or ("what is" in q_lower and "truth" in q_lower):
-            if "insufficient" in str(term_state).lower():
-                return (
-                    f"Under telecombrain epistemic governance, terminal state is `{term_state}`. "
-                    f"FikraCore is strictly truth-blind to unobserved topology beyond {boundary_name}. "
-                    f"Root cause cannot be guessed until neighbor telemetry or SME verification is provided."
-                )
-
-        # Zero-Internet / Offline Assertion
-        if any(w in q_lower for w in ["internet", "web", "online", "search the web", "did you search"]):
-            return (
-                f"Zaki operates in a strictly air-gapped, offline environment with zero internet access or external web dependencies. "
-                f"All operational insights, topological paths, and telemetry correlations are grounded strictly in local simulation run `{run_id}`."
-            )
-
-        # Zero synthetic evidence / anti-hallucination check
-        if any(w in q_lower for w in ["invent", "synthetic evidence", "did you invent", "hallucinat"]):
-            return (
-                "FikraCore does not invent unadmitted operational evidence. All causal explanations are strictly grounded in operational telemetry and verified topology."
-            )
-
-        # H3 Promoted Learning & SME validation
-        if any(w in q_lower for w in ["what did fikracore learn", "what did we learn", "learned that", "learning result"]):
-            return (
-                "FikraCore learned that operational dependency between verified topology and downstream services was verified and promoted to active knowledge base under SME governance."
-            )
-        if any(w in q_lower for w in ["who validated", "who approved", "validator"]):
-            return (
-                "The candidate relationship was reviewed and given decision by SME in accordance with governance policy."
-            )
-
-        # H4 Resilience, Blast Radius & Mitigations
-        if any(w in q_lower for w in ["blast radius", "radius of this failure"]):
-            rstate = context.resilience_state or {}
-            b_rad = rstate.get("blast_radius", {})
-            lvl = b_rad.get("blast_radius_level", "REGIONAL_CORE")
-            return f"The estimated blast radius of this failure is **{lvl}**, impacting user plane data conduits while control signaling remains isolated."
-        if any(w in q_lower for w in ["services are affected", "affected services", "which services"]):
-            return "Affected services include 5G Core User Plane and regional mobile slice data transport."
-        if any(w in q_lower for w in ["mitigation", "mitigations do you recommend", "what mitigations"]):
-            return "Recommended mitigation: Execute targeted traffic rerouting to secondary PE router and isolate degraded interface."
-
-        # Knowledge Gap Closure & Evidence Inquiries
-        if any(w in q_lower for w in ["what evidence", "evidence is needed", "evidence needed", "evidence required", "close this knowledge gap", "close the gap", "close knowledge gap", "what probe", "probe needed"]):
-            gaps = context.knowledge_gap_state.get("gaps", [])
-            gap_desc = gaps[0].get("description", "unmodeled structural boundary") if gaps and isinstance(gaps[0], dict) else "unmodeled operational dependency"
-            if "ocs" in q_lower or "charging" in q_lower or "ocs" in boundary_name.lower() or "H2-GAP" in scenario_id:
-                return (
-                    f"To close the knowledge gap on the **{boundary_name}** ({scenario_id}), the following operational evidence is required:\n\n"
-                    f"1. **Gy / Diameter Signaling Traces**: Protocol interaction logs (Credit-Control-Request CCR/CCA) between UPF (`SA5G:UPF:003`) and the OCS Charging Gateway.\n"
-                    f"2. **Charging Service Telemetry**: Rating quota depletion events, Diameter error codes (`DIAMETER_CREDIT_LIMIT_REACHED`), and session reject counters.\n"
-                    f"3. **Next-Best Evidence Probe**: Targeted neighbor telemetry probe across the charging conduit to confirm the unmodeled `REL-OCS-CHARGING` dependency.\n\n"
-                    f"Once this evidence is ingested, FikraCore promotes the candidate dependency from `MODEL_INSUFFICIENT` to validated topology in Stage H3."
-                )
-            return (
-                f"To close active knowledge gap `{scenario_id}` beyond **{boundary_name}**, FikraCore requires:\n\n"
-                f"1. **Cross-Domain Interface Signals**: Interface telemetry and error logs across the {boundary_name} boundary.\n"
-                f"2. **Next-Best Evidence Probe**: Targeted active telemetry extraction to resolve the unmodeled dependency.\n"
-                f"3. **SME Validation**: Operational review to promote the candidate structural relationship into verified topology."
-            )
-
-        # Blocked Stage & Exit Conditions
-        if any(w in q_lower for w in ["blocked", "exit condition", "why is this stage", "why are we blocked", "advance the stage", "why blocked"]):
-            return self._explain_stage_and_next_steps(query, context, ui_context, scenario_id, str(sim_stage), run_id, rev)
-
-        # 1. Curated Incident Story & Reporting (with Audience Narration Styles)
-        if any(w in q_lower for w in ["about simulation", "tell me about it", "about the simulation", "what is happening", "what is this simulation", "explain simulation", "story", "curated story", "incident story", "post-mortem", "post mortem", "executive brief", "executive summary", "summarize incident", "tell me the story"]):
-            return self._generate_curated_story(context, ui_context, scenario_id, run_id, active_stage, response_level)
-
-        # 2. What-If & Counterfactual Resilience Analysis
-        if any(w in q_lower for w in ["what if", "what happens if", "failover", "reroute now", "bypass validation", "premature", "redundancy risk", "secondary risk", "link severance"]):
-            return self._analyze_what_if_resilience(query, context, ui_context, scenario_id, run_id)
-
-        # 3. Digital Twin & Knowledge Graph Visualization
-        if any(w in q_lower for w in ["digital twin", "knowledge graph", "twin projection", "3d graph", "graph visualization", "how to see on graph", "where on graph", "trace on twin"]):
-            return self._explain_digital_twin_navigation(query, context, ui_context, scenario_id)
-
-        # 4. Reasoning Pathways
-        selected_pw = ui_context.get("selected_pathway_id") or (
-            ui_context.get("selected_context", {}).get("id") or ui_context.get("selected_context", {}).get("context_id")
-            if isinstance(ui_context.get("selected_context"), dict) and str(ui_context["selected_context"].get("type") or ui_context["selected_context"].get("context_type", "")).lower() == "pathway"
-            else None
-        )
-        if selected_pw or "pathway" in q_lower:
-            return self._explain_reasoning_pathways(query, context, ui_context, scenario_id, run_id, selected_pw)
-
-        # 5. Domain Attribution & Conflict
-        da = sim_state.get("domain_attribution") or sim_state.get("reasoning_map", {}).get("domain_attribution") or {}
-        attr_status = da.get("attribution_status", "UNRESOLVED")
-        sel_dom = ui_context.get("selected_domain") or (
-            ui_context.get("selected_context", {}).get("id") or ui_context.get("selected_context", {}).get("display_name")
-            if isinstance(ui_context.get("selected_context"), dict) and str(ui_context["selected_context"].get("type") or ui_context["selected_context"].get("context_type", "")).lower() in {"domain", "domain_attribution"}
-            else None
-        )
-        if (
-            attr_status == "CONFLICT"
-            or sel_dom
-            or any(w in q_lower for w in ["attribution", "who caused", "who is responsible", "which domain", "primary domain", "domain attribution", "domain primary"])
-            or ("domain" in q_lower and any(w in q_lower for w in ["primary", "role", "why", "cause", "responsible", "attributed"]))
-            or ("primary" in q_lower and "domain" in q_lower)
-        ):
-            return self._explain_domain_attribution(query, context, ui_context, scenario_id, run_id, sel_dom, da)
-
-        # 6. Candidate Knowledge & Epistemic Boundaries
-        if any(w in q_lower for w in ["candidate", "confirmed", "promoted", "is it confirmed", "candidate relationship", "validation state"]):
-            return self._explain_candidate_and_validation(query, context, ui_context, scenario_id, run_id, boundary_name)
-
-        # 7. Comparative Hypotheses Inquiries
-        if any(w in q_lower for w in ["compare", "why rank 1", "why hypothesis", "difference between hypotheses", "competing hypotheses", "which hypothesis"]):
-            return self._compare_hypotheses(query, context, ui_context)
-
-        # 8. Causal "Why" & Evidence Necessity
-        if any(w in q_lower for w in ["why", "why did", "why is", "why do we", "how come", "reason for", "cause of", "health stats", "probe necessary"]):
-            return self._explain_causal_why_and_evidence(query, context, ui_context, scenario_id, str(sim_stage), boundary_name)
-
-        # 9. Procedural Stage Briefing & Next Steps
-        if any(w in q_lower for w in ["what should i do", "what next", "next step", "what to do", "current state", "stage briefing", "where are we", "status update"]):
-            return self._explain_stage_and_next_steps(query, context, ui_context, scenario_id, str(sim_stage), run_id, rev)
-
-        # 10. Conversational Greetings & Copilot Overview
-        if re.search(r"\b(hi|hello|hey|greetings|who are you|help|assist)\b", q_lower) and len(q_lower.split()) <= 6:
-            topo = sim_state.get("topology") or context.visible_topology or {}
-            domain_count = len(topo.get("domains", [])) or "all active"
-            return (
-                f"Hello! I am Mark / Zaki, your FikraCore Principal AI Cognitive Telecom Operations Copilot. "
-                f"I am continuously grounded in live telecombrain topology and telemetry across {domain_count} carrier domains.\n\n"
-                f"Currently analyzing **{scenario_id}** (`{run_id}` at stage **{sim_stage}**). I can assist you with:\n"
-                f"• **Context & Next Steps**: Advising on current stage blockers and diagnostic actions.\n"
-                f"• **Causal 'Why' Reasoning**: Explaining evidence necessity, telemetry correlations, and hypothesis rankings.\n"
-                f"• **Curated Incident Story**: Generating end-to-end executive briefs or technical post-mortems.\n"
-                f"• **What-If Resilience**: Evaluating failover risks, link cuts, and secondary cascades.\n"
-                f"• **Digital Twin Projection**: Guiding visual navigation on the 3D Telecom Knowledge Graph.\n\n"
-                f"How would you like to proceed?"
-            )
-
-        # 11. Protocol & Domain Architecture (Dynamic Introspection)
-        topo = sim_state.get("topology") or context.visible_topology or {}
-        domains = [d.get("name") for d in topo.get("domains", []) if d.get("name")]
-        entities = [e.get("display_name") or e.get("id") for d in topo.get("domains", []) for e in d.get("entities", [])]
-        matched_ent = next((e for e in entities if e.lower() in q_lower), None)
-        matched_dom = next((d for d in domains if d.lower() in q_lower), None)
-
-        if matched_ent or matched_dom:
-            target_name = matched_ent or matched_dom
-            session.focused_entity = target_name
-            dialogue_state_manager.record_assistant_turn(session_id, f"Operational briefing for {target_name}", focused_entity=target_name)
-            return (
-                f"### Operational Telecombrain Context: {target_name}\n\n"
-                f"• **Entity/Domain**: `{target_name}` is an active component in the `{scenario_id}` slice model.\n"
-                f"• **Operational Role**: Participates in user plane/control plane transmission across {domains[0] if domains else 'carrier infrastructure'}.\n"
-                f"• **Current Status**: Grounded live in active run `{run_id}` at stage `{sim_stage}`. All telemetry correlations and dependency links are dynamically updated."
-            )
-
-        # 12. Conversational Telecom Storytelling Fallback (Human-like operational briefing)
-        # Attempt to pull authentic narrative from story_context.json if available
-        story_summary = None
-        try:
-            from storyteller.knowledge.story_context_reader import StoryContextReader
-            sc_ctx = StoryContextReader().read(run_id or scenario_id)
-            if sc_ctx and sc_ctx.incident:
-                story_summary = sc_ctx.incident.get("summary")
-        except Exception:
-            pass
-
-        if story_summary:
-            dialogue_state_manager.record_assistant_turn(session_id, story_summary)
-            return story_summary
-
-        return (
-            f"Under scenario **{scenario_id}** (Run `{run_id}`, Stage **{sim_stage}**), FikraCore is operating in **{context.active_presentation_mode}** mode. "
-            f"Terminal state is **{term_state}** with causal boundaries verified at **{boundary_name}**. "
-            f"All operational telemetry, active reasoning pathways, hypotheses, and what-if resilience models are synchronized live."
+        return self.format_intent_driven_response(
+            intent=intent,
+            ictx=intent_ctx,
+            response_level=response_level,
+            boundary_name=boundary_name,
+            context=context,
+            ui_context=ui_context,
+            query=query,
         )
 
 

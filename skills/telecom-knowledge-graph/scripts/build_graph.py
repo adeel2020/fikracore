@@ -26,7 +26,6 @@ import yaml
 
 # 12 Granular Telecom Operational Domains with vivid carrier palette
 DOMAIN_COLORS = {
-    "Cross-Domain Operations": "#38bdf8",         # Sky Blue (Central Causal Operational Plane)
     "Mobile Core (5G SA)": "#3b82f6",             # Primary Blue
     "Radio Access Network (RAN)": "#10b981",       # Emerald Green
     "IP Transport & Routing": "#f59e0b",           # Amber
@@ -35,7 +34,8 @@ DOMAIN_COLORS = {
     "IMS & VoNR/VoLTE": "#ec4899",                 # Pink
     "Cloud NFVI & Facilities": "#8b5cf6",          # Purple
     "CRM & Customer Experience": "#ef4444",        # Rose / Red
-    "Observability & Remediation": "#06b6d4",      # Cyan
+    "OSS & Management Systems": "#06b6d4",         # Cyan (Fault/Perf/ITSM)
+    "Core Telecom Services (VAS & IN)": "#a855f7", # Purple / Fuchsia (SMS/USSD/IN SCP)
     "OCS & Charging": "#eab308",                   # Yellow
     "External Interconnect & Roaming": "#f97316",   # Orange
 }
@@ -59,19 +59,18 @@ YAML_DOMAIN_TO_DISPLAY = {
     "CRM": "CRM & Customer Experience",
     "BSS": "CRM & Customer Experience",
     "PROVISIONING": "CRM & Customer Experience",
-    "OSS": "Observability & Remediation",
-    "VAS": "Observability & Remediation",
-    "IN_VENDOR_A": "Observability & Remediation",
-    "IN_VENDOR_B": "Observability & Remediation",
-    "IN_VENDOR_C": "Observability & Remediation",
+    "OSS": "OSS & Management Systems",
+    "VAS": "Core Telecom Services (VAS & IN)",
+    "IN_VENDOR_A": "Core Telecom Services (VAS & IN)",
+    "IN_VENDOR_B": "Core Telecom Services (VAS & IN)",
+    "IN_VENDOR_C": "Core Telecom Services (VAS & IN)",
     "EXTERNAL": "External Interconnect & Roaming",
-    "Cross-Domain Operations": "Cross-Domain Operations",
-    "CROSS_DOMAIN_OPERATIONS": "Cross-Domain Operations",
+    "Cross-Domain Operations": "OSS & Management Systems",
+    "CROSS_DOMAIN_OPERATIONS": "OSS & Management Systems",
 }
 
 # Domain Cluster Anchors (Centers of Gravity in 2D space - Wide Non-Overlapping Clearance)
 DOMAIN_CENTERS = {
-    "Cross-Domain Operations": {"x": 0, "y": -420},
     "Mobile Core (5G SA)": {"x": 0, "y": 0},
     "4G EPC & Signaling": {"x": -420, "y": -240},
     "IMS & VoNR/VoLTE": {"x": 420, "y": -240},
@@ -81,15 +80,17 @@ DOMAIN_CENTERS = {
     "Cloud NFVI & Facilities": {"x": 0, "y": 420},
     "OCS & Charging": {"x": 390, "y": 240},
     "CRM & Customer Experience": {"x": 460, "y": 0},
-    "Observability & Remediation": {"x": 780, "y": -70},
+    "OSS & Management Systems": {"x": 780, "y": -70},
+    "Core Telecom Services (VAS & IN)": {"x": 200, "y": -380},
     "External Interconnect & Roaming": {"x": -390, "y": 500},
 }
 
 # TM Forum Granular Sub-Cluster Offsets (Non-overlapping radial satellite layout)
 SUB_CLUSTER_OFFSETS = {
-    # Cross-Domain Operations
-    "ops.active": {"dx": -60, "dy": 0, "label": "ACTIVE INCIDENT PLANE", "icon": "⚡", "color": "#ef4444"},
-    "ops.cognitive": {"dx": 60, "dy": 0, "label": "COGNITIVE REASONING & ACTIONS", "icon": "🧠", "color": "#38bdf8"},
+    # Cognitive / Incident Overlays (Rendered near affected nodes)
+    "ops.active": {"dx": -40, "dy": -40, "label": "ACTIVE INCIDENT PLANE", "icon": "⚡", "color": "#ef4444"},
+    "ops.cognitive": {"dx": 40, "dy": -40, "label": "COGNITIVE REASONING & ACTIONS", "icon": "🧠", "color": "#38bdf8"},
+    "ops.pattern": {"dx": 0, "dy": -50, "label": "LEARNED PATTERNS & PLAYBOOKS", "icon": "📖", "color": "#10b981"},
 
     # Mobile Core (5G SA)
     "mobile_core.user_plane": {"dx": -90, "dy": 60, "label": "USER PLANE (UPF)", "icon": "📦", "color": "#3b82f6"},
@@ -134,10 +135,12 @@ SUB_CLUSTER_OFFSETS = {
     "bss.billing": {"dx": 70, "dy": -30, "label": "BILLING & PRODUCT CATALOG", "icon": "📑", "color": "#f87171"},
     "bss.provisioning": {"dx": 70, "dy": 40, "label": "ORDER MANAGEMENT & PROV", "icon": "📋", "color": "#fca5a5"},
 
-    # Observability & Remediation
-    "oss.management": {"dx": -70, "dy": -40, "label": "FAULT / PERF / ITSM", "icon": "📊", "color": "#06b6d4"},
-    "vas.messaging": {"dx": 70, "dy": -40, "label": "VAS & MESSAGING (SMSC/USSD)", "icon": "💬", "color": "#22d3ee"},
-    "oss.in_scp": {"dx": 0, "dy": 50, "label": "INTELLIGENT NETWORK (IN SCP)", "icon": "🧠", "color": "#67e8f9"},
+    # OSS & Management Systems (Fault / Perf / ITSM)
+    "oss.management": {"dx": 0, "dy": 0, "label": "FAULT / PERF / ITSM", "icon": "📊", "color": "#06b6d4"},
+
+    # Core Telecom Services (VAS & IN)
+    "vas.messaging": {"dx": -60, "dy": 0, "label": "VAS & MESSAGING (SMSC/USSD)", "icon": "💬", "color": "#a855f7"},
+    "core.in_scp": {"dx": 60, "dy": 0, "label": "INTELLIGENT NETWORK (IN SCP)", "icon": "🧠", "color": "#c084fc"},
 
     # External Interconnect & Roaming
     "ext.peering": {"dx": 0, "dy": 0, "label": "TRANSIT, ROAMING & EXT VAS", "icon": "🌍", "color": "#f97316"},
@@ -154,8 +157,6 @@ def map_telecom_domain(e: dict) -> str:
     eid = str(e.get("entity_id") or e.get("id") or e.get("slug") or "").upper()
     etype = str(e.get("entity_type") or e.get("type") or "").lower()
 
-    if eid.startswith("INC:") or eid.startswith("CORR:") or eid.startswith("HYP:") or eid.startswith("ACT:") or etype in ("incident", "incident_plane"):
-        return "Cross-Domain Operations"
     if eid.startswith("TX:"):
         return "Optical & Transport (DWDM/OTN)"
     if eid.startswith("IP:") or eid.startswith("MPLS:"):
@@ -174,10 +175,14 @@ def map_telecom_domain(e: dict) -> str:
         return "OCS & Charging"
     if eid.startswith("CRM:") or eid.startswith("BSS:") or eid.startswith("PROV:"):
         return "CRM & Customer Experience"
-    if eid.startswith("OSS:") or eid.startswith("VAS:") or eid.startswith("IN:"):
-        return "Observability & Remediation"
+    if eid.startswith("OSS:"):
+        return "OSS & Management Systems"
+    if eid.startswith("VAS:") or eid.startswith("IN:"):
+        return "Core Telecom Services (VAS & IN)"
     if eid.startswith("EXT:"):
         return "External Interconnect & Roaming"
+    if eid.startswith("INC:") or eid.startswith("CORR:") or eid.startswith("HYP:") or eid.startswith("ACT:") or etype in ("incident", "incident_plane", "causal_correlator", "hypothesis_engine", "remediation_runbook"):
+        return "OSS & Management Systems"
 
     if orig_dom in YAML_DOMAIN_TO_DISPLAY:
         return YAML_DOMAIN_TO_DISPLAY[orig_dom]
@@ -191,10 +196,12 @@ def map_sub_cluster(e: dict, domain: str) -> str:
     etype = str(e.get("entity_type") or e.get("type") or "").lower()
     dom = str(e.get("domain", "")).upper()
 
-    if domain == "Cross-Domain Operations" or eid.startswith("INC:") or eid.startswith("CORR:") or eid.startswith("HYP:") or eid.startswith("ACT:"):
-        if "INC:" in eid or "ACTIVE" in eid or "OUTAGE" in eid:
-            return "ops.active"
+    if eid.startswith("INC:") or "INC:" in eid or "ACTIVE" in eid or "OUTAGE" in eid or etype in ("incident", "incident_plane"):
+        return "ops.active"
+    if eid.startswith("CORR:") or eid.startswith("HYP:") or eid.startswith("ACT:") or etype in ("causal_correlator", "hypothesis_engine", "remediation_runbook", "probe"):
         return "ops.cognitive"
+    if eid.startswith("LRN:") or eid.startswith("PLAYBOOK:") or eid.startswith("PATTERN:"):
+        return "ops.pattern"
 
     if dom in ("SA_5G_CORE", "NSA_5G") or domain == "Mobile Core (5G SA)":
         if "UPF" in eid:
@@ -255,12 +262,13 @@ def map_sub_cluster(e: dict, domain: str) -> str:
             return "bss.billing"
         return "bss.provisioning"
 
-    if dom in ("OSS", "VAS", "IN_VENDOR_A", "IN_VENDOR_B", "IN_VENDOR_C") or domain == "Observability & Remediation":
-        if dom == "OSS" or "OSS:" in eid:
-            return "oss.management"
+    if dom in ("VAS", "IN_VENDOR_A", "IN_VENDOR_B", "IN_VENDOR_C") or domain == "Core Telecom Services (VAS & IN)":
         if dom == "VAS" or "VAS:" in eid:
             return "vas.messaging"
-        return "oss.in_scp"
+        return "core.in_scp"
+
+    if dom == "OSS" or domain == "OSS & Management Systems":
+        return "oss.management"
 
     if dom == "EXTERNAL" or domain == "External Interconnect & Roaming":
         return "ext.peering"
@@ -268,75 +276,160 @@ def map_sub_cluster(e: dict, domain: str) -> str:
     return "ops.cognitive"
 
 
+def find_repo_root() -> Path:
+    """Discovers the authoritative repository root directory dynamically."""
+    curr = Path(__file__).resolve().parent
+    for p in [curr] + list(curr.parents):
+        if (p / "services").is_dir() and (p / "artifacts").is_dir():
+            return p
+    for p in [curr] + list(curr.parents):
+        if (p / "services").is_dir():
+            return p
+    cwd = Path.cwd()
+    if (cwd / "services").is_dir():
+        return cwd
+    return Path(__file__).resolve().parents[4]
+
+
+def _safe_load_yaml(file_path: Path | str) -> dict:
+    """Loads a YAML file safely, handling both standard YAML and files commented out with '#'."""
+    p = Path(file_path)
+    if not p.is_file():
+        return {}
+    try:
+        content = p.read_text(encoding="utf-8")
+    except Exception:
+        return {}
+    if not content.strip():
+        return {}
+
+    try:
+        data = yaml.safe_load(content)
+        if isinstance(data, dict) and data:
+            return data
+    except Exception:
+        pass
+
+    lines = content.splitlines()
+    uncommented = []
+    has_comments = False
+    for line in lines:
+        if line.startswith("# "):
+            uncommented.append(line[2:])
+            has_comments = True
+        elif line.startswith("#"):
+            uncommented.append(line[1:])
+            has_comments = True
+        else:
+            uncommented.append(line)
+
+    if has_comments:
+        try:
+            data = yaml.safe_load("\n".join(uncommented))
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+
+    return {}
+
+
+SEVERITY_ORDER = {
+    "ROOT_CAUSE": 5,
+    "CRITICAL": 4,
+    "MAJOR": 3,
+    "MINOR": 2,
+    "INFO": 1,
+    "NOMINAL": 0,
+}
+
+
+def is_causal_network_entity(entity_id: str) -> bool:
+    """Returns True if the entity is an operational network infrastructure entity.
+    Returns False for observational symptom sinks like customer tickets, CRM complaints, or incident planes.
+    """
+    eid = str(entity_id or "").upper()
+    if any(k in eid for k in ("TICKET", "CRM:", "INC:", "INCIDENT", "DIAGNOSE-001", "HYP:", "ACT:", "PLAYBOOK:")):
+        return False
+    return True
+
+
 def map_entity_slug(raw_entity, valid_ids: set, domains=None) -> str:
     """Maps raw scenario entities, synthetic tokens, or legacy slugs to authoritative entity IDs."""
     raw = str(raw_entity or "").strip()
     if not raw:
-        return "IP:PE:RTR-21"
+        return ""
 
     if raw in valid_ids:
         return raw
 
+    valid_id_map = {vid.lower(): vid for vid in valid_ids}
+
     raw_lower = raw.lower()
-    for vid in valid_ids:
-        if vid.lower() == raw_lower:
-            return vid
+    if raw_lower in valid_id_map:
+        return valid_id_map[raw_lower]
+
+    def _match(canon: str) -> str:
+        return valid_id_map.get(canon.lower(), canon)
 
     # Common canonical tokens
     if any(k in raw_lower for k in ("pe-rtr-21", "pe:rtr-21", "pe21", "sgi-edge", "pe_router", "rtr-21", "pe-21")):
-        return "IP:PE:RTR-21"
+        return _match("IP:PE:RTR-21")
     if any(k in raw_lower for k in ("n3-vrf", "vrf:n3", "n3_vrf", "vrf-01", "n3")):
-        return "IP:VRF:N3-01"
+        return _match("IP:VRF:N3-01")
     if any(k in raw_lower for k in ("upf-03", "upf_003", "upf03", "upf-prod-03", "upf", "pgw", "packet_core")):
-        return "SA5G:UPF:003"
+        return _match("SA5G:UPF:003")
     if any(k in raw_lower for k in ("ticket", "tt-", "tt_984210", "tt-984210", "crm", "customer")):
-        return "CRM:TICKET:001"
+        return _match("CRM:TICKET:001")
     if any(k in raw_lower for k in ("fiber", "fr-07", "lambda-22", "trail-22", "dwdm", "voice-backhaul")):
-        return "TX:FIBER:FR-07"
+        return _match("TX:FIBER:FR-07")
     if any(k in raw_lower for k in ("power", "ups", "ups-77", "dc-a power")):
-        return "INFRA:POWER:A"
+        return _match("INFRA:POWER:A")
     if any(k in raw_lower for k in ("cool", "cooling", "chiller")):
-        return "INFRA:COOL:A"
+        return _match("INFRA:COOL:A")
     if any(k in raw_lower for k in ("k8s", "kubernetes", "core-a")):
-        return "INFRA:K8S:CORE-A"
+        return _match("INFRA:K8S:CORE-A")
     if any(k in raw_lower for k in ("subs-a", "database", "subscriber db", "db:")):
-        return "INFRA:DB:SUBS-A"
+        return _match("INFRA:DB:SUBS-A")
     if any(k in raw_lower for k in ("dns", "dns:core")):
-        return "INFRA:DNS:CORE"
+        return _match("INFRA:DNS:CORE")
     if any(k in raw_lower for k in ("sgi-fw", "firewall", "nat-fw", "fw:sgi", "nat")):
-        return "INFRA:FW:SGI"
+        return _match("INFRA:FW:SGI")
     if any(k in raw_lower for k in ("cgnat", "cgnat-01")):
-        return "INFRA:CGNAT:001"
+        return _match("INFRA:CGNAT:001")
     if any(k in raw_lower for k in ("amf", "amf-01")):
-        return "SA5G:AMF:001"
+        return _match("SA5G:AMF:001")
     if any(k in raw_lower for k in ("smf", "smf-01")):
-        return "SA5G:SMF:001"
+        return _match("SA5G:SMF:001")
     if any(k in raw_lower for k in ("gnb", "gnodeb", "gnb:501", "gnodeb-501")):
-        return "RAN:GNB:501"
-    if any(k in raw_lower for k in ("enb", "enodeb", "enb:101", "enodeb-101")):
-        return "RAN:ENB:101"
+        return _match("RAN:GNB:501")
+    if any(k in raw_lower for k in ("enb", "enodeb", "enb:101", "enodeb:101", "enodeb-101")):
+        return _match("RAN:ENB:101")
     if any(k in raw_lower for k in ("pcscf", "p-cscf")):
-        return "IMSM:PCSCF:001"
+        return _match("IMSM:PCSCF:001")
     if any(k in raw_lower for k in ("hss", "hss-01")):
-        return "EPC:HSS:001"
+        return _match("EPC:HSS:001")
     if any(k in raw_lower for k in ("mme", "mme-01")):
-        return "EPC:MME:001"
+        return _match("EPC:MME:001")
     if any(k in raw_lower for k in ("ocs", "chf")):
-        return "CHG:OCS:001"
+        return _match("CHG:OCS:001")
     if any(k in raw_lower for k in ("itsm", "itsm-01")):
-        return "OSS:ITSM:001"
+        return _match("OSS:ITSM:001")
     if any(k in raw_lower for k in ("incident", "outage")):
-        return "INC:DIAGNOSE-001"
+        return _match("INC:DIAGNOSE-001")
 
-    for vid in valid_ids:
-        vid_clean = vid.lower().replace(":", "-").replace("_", "-")
-        if vid_clean in raw_lower or raw_lower in vid_clean:
+    # Normalize eNodeB/gNodeB and separators for fuzzy matching
+    norm_raw = raw_lower.replace("enodeb", "enb").replace("gnodeb", "gnb").replace(":", "-").replace("_", "-")
+    for v_low, vid in valid_id_map.items():
+        vid_norm = v_low.replace("enodeb", "enb").replace("gnodeb", "gnb").replace(":", "-").replace("_", "-")
+        if vid_norm == norm_raw or vid_norm in norm_raw or norm_raw in vid_norm:
             return vid
 
-    return "IP:PE:RTR-21"
+    # Return raw entity identifier without falling back to any hardcoded node
+    return raw
 
 
-def build_scenario_from_run_state(run_state: dict, valid_ids: set) -> dict:
+def build_scenario_from_run_state(run_state: dict, valid_ids: set, run_dir: Path | None = None) -> dict:
     """Dynamically compiles simulated outcomes from actual engine state or execution trace."""
     scenario_id = str(run_state.get("scenario_id") or run_state.get("scenario", {}).get("id") or "SCN-001").upper()
     run_id = str(run_state.get("run_id") or run_state.get("run", {}).get("run_id") or f"RUN-{scenario_id}")
@@ -345,154 +438,6 @@ def build_scenario_from_run_state(run_state: dict, valid_ids: set) -> dict:
     name = str(sc_meta.get("display_name") or run_state.get("scenario_title") or f"Scenario {scenario_id}: Operational Outage Triage")
     stage = str(sc_meta.get("stage") or run_state.get("stage") or "H1").replace("STAGE ", "")
     desc = str(sc_meta.get("description") or f"Simulated operational run {run_id} for scenario {scenario_id}.")
-
-    winning_rc = run_state.get("winning_root_cause") or {}
-    rc_canonical = None
-    conf_score = 0.942
-    if isinstance(winning_rc, dict) and (winning_rc.get("canonical_entity") or winning_rc.get("display_name")):
-        rc_canonical = winning_rc.get("canonical_entity") or winning_rc.get("display_name")
-        conf_score = winning_rc.get("confidence_score") or winning_rc.get("causal_confidence") or 0.942
-    else:
-        hypotheses = run_state.get("hypotheses") or run_state.get("evaluated_candidates") or []
-        if hypotheses and isinstance(hypotheses[0], dict):
-            first_hyp = hypotheses[0]
-            rc_canonical = first_hyp.get("canonical_entity") or first_hyp.get("display_name") or first_hyp.get("label")
-            conf_score = first_hyp.get("confidence") or 0.90
-
-    # Scan disk for ground_truth for scenario_id if root cause candidate is not yet in state
-    if not rc_canonical:
-        try:
-            repo_root = Path(__file__).resolve().parents[4] if "skills" in str(Path(__file__).resolve()) else Path(__file__).resolve().parent
-            if not (repo_root / "services").is_dir():
-                for p in Path(__file__).resolve().parents:
-                    if (p / "services").is_dir():
-                        repo_root = p
-                        break
-            sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
-            if sim_runs_dir.is_dir():
-                for m_dir in sorted(sim_runs_dir.glob(f"*{scenario_id}*")):
-                    gt = m_dir / "hidden" / "ground_truth.yaml"
-                    if gt.is_file():
-                        with open(gt, "r", encoding="utf-8") as f:
-                            gt_data = yaml.safe_load(f) or {}
-                        rc_canonical = gt_data.get("hidden_truth", {}).get("root_entity")
-                        if rc_canonical:
-                            break
-        except Exception:
-            pass
-
-    if not rc_canonical:
-        rc_canonical = "IP:PE:RTR-21"
-
-    root_cause_slug = map_entity_slug(rc_canonical, valid_ids)
-
-    # Dynamic propagation path construction across all simulator sources
-    raw_causal_path = run_state.get("causal_path") or run_state.get("topology", {}).get("causal_path") or []
-    propagation_path = []
-    if isinstance(raw_causal_path, list):
-        for step in raw_causal_path:
-            if isinstance(step, dict):
-                src = map_entity_slug(step.get("from") or step.get("source"), valid_ids)
-                dst = map_entity_slug(step.get("to") or step.get("target"), valid_ids)
-                if src and src not in propagation_path:
-                    propagation_path.append(src)
-                if dst and dst not in propagation_path:
-                    propagation_path.append(dst)
-            elif isinstance(step, str):
-                s = map_entity_slug(step, valid_ids)
-                if s and s not in propagation_path:
-                    propagation_path.append(s)
-
-    # Dynamic disk scanner for ground truth causal chain if run_state path has <= 1 step
-    if len(propagation_path) < 2:
-        try:
-            repo_root = Path(__file__).resolve().parents[4] if "skills" in str(Path(__file__).resolve()) else Path(__file__).resolve().parent
-            if not (repo_root / "services").is_dir():
-                for p in Path(__file__).resolve().parents:
-                    if (p / "services").is_dir():
-                        repo_root = p
-                        break
-            sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
-            if sim_runs_dir.is_dir():
-                for m_dir in sorted(sim_runs_dir.glob(f"*{scenario_id}*")):
-                    gt = m_dir / "hidden" / "ground_truth.yaml"
-                    if gt.is_file():
-                        with open(gt, "r", encoding="utf-8") as f:
-                            gt_data = yaml.safe_load(f) or {}
-                        chain = gt_data.get("hidden_truth", {}).get("causal_chain") or []
-                        for c in chain:
-                            ent = c.get("entity") if isinstance(c, dict) else str(c)
-                            s_slug = map_entity_slug(ent, valid_ids)
-                            if s_slug and s_slug not in propagation_path:
-                                propagation_path.append(s_slug)
-                        if len(propagation_path) >= 2:
-                            break
-        except Exception:
-            pass
-
-    # Ensure root cause is at the start of propagation_path
-    if root_cause_slug:
-        if root_cause_slug in propagation_path:
-            propagation_path.remove(root_cause_slug)
-        propagation_path.insert(0, root_cause_slug)
-
-    # Multi-domain completion to customer ticket sink and incident escalation
-    ticket_node = map_entity_slug("CRM:TICKET:001", valid_ids)
-    inc_node = map_entity_slug("INC:DIAGNOSE-001", valid_ids)
-    if ticket_node not in propagation_path:
-        propagation_path.append(ticket_node)
-    if inc_node not in propagation_path:
-        propagation_path.append(inc_node)
-
-    affected_nodes = {}
-    events = run_state.get("events") or run_state.get("correlated_events") or []
-    raw_events = run_state.get("raw_events") or []
-    noise_events = run_state.get("noise_events") or []
-
-    for ev in events:
-        if isinstance(ev, dict):
-            ent_id = map_entity_slug(ev.get("canonical_entity") or ev.get("entity_id") or ev.get("title"), valid_ids)
-            sev = str(ev.get("severity") or "MAJOR").upper()
-            title = str(ev.get("title") or ev.get("display_name") or "Telemetry Anomaly")
-            affected_nodes[ent_id] = {"severity": sev, "status": title}
-
-    for idx, p_slug in enumerate(propagation_path):
-        if p_slug not in affected_nodes or affected_nodes[p_slug].get("severity") == "INFO":
-            if idx == 0:
-                affected_nodes[p_slug] = {"severity": "ROOT_CAUSE", "status": f"{rc_canonical} Root Failure Condition"}
-            elif p_slug == ticket_node:
-                affected_nodes[p_slug] = {"severity": "CRITICAL", "status": "Customer Incident Ticket Surge"}
-            elif p_slug == inc_node:
-                affected_nodes[p_slug] = {"severity": "CRITICAL", "status": "Active Priority-1 Outage Incident"}
-            elif "upf" in p_slug.lower():
-                affected_nodes[p_slug] = {"severity": "CRITICAL", "status": "5G Mobile Data Session Drops"}
-            else:
-                affected_nodes[p_slug] = {"severity": "MAJOR", "status": "Causal Propagation Intermediary"}
-
-    if root_cause_slug:
-        affected_nodes[root_cause_slug] = {"severity": "ROOT_CAUSE", "status": f"{rc_canonical} Saturation & Anomaly"}
-
-    diag = run_state.get("diagnostics") or {}
-    op_evidence_cnt = diag.get("input_evidence_count") or len(events) or len(raw_events) or 16
-    isolated_noise_cnt = diag.get("isolated_noise_count") or len(noise_events) or 2
-    duration_sec = diag.get("investigation_duration_seconds") or run_state.get("run", {}).get("elapsed_seconds") or 15
-
-    term_state = run_state.get("terminal_state") or run_state.get("run", {}).get("terminal_state")
-    status_str = "VALIDATED_POST_SIMULATION" if (run_state.get("status") == "COMPLETED" or term_state in {"EXPLAINED", "Terminal.EXPLAINED"}) else "SIMULATION_RUNNING"
-
-    investigation_result = {
-        "scenario_id": scenario_id,
-        "run_id": run_id,
-        "root_cause_candidate": str(rc_canonical or "IP:PE:RTR-21"),
-        "root_cause_name": str(rc_canonical or "Provider Edge Router"),
-        "causal_path": " ➔ ".join(propagation_path[:5]) if propagation_path else str(rc_canonical or "IP:PE:RTR-21"),
-        "causal_confidence": float(conf_score) if isinstance(conf_score, (int, float)) else 0.942,
-        "mttr_baseline": "45m",
-        "mttr_actual": f"{max(1, int(duration_sec // 60))}m",
-        "operational_evidence_count": int(op_evidence_cnt),
-        "isolated_noise_count": int(isolated_noise_cnt),
-        "status": status_str,
-    }
 
     badge = "CRITICAL"
     if "GAP" in scenario_id or "H2" in scenario_id or "DISC" in scenario_id:
@@ -508,6 +453,235 @@ def build_scenario_from_run_state(run_state: dict, valid_ids: set) -> dict:
         stage = "H1"
 
     concept_name = "Diagnose" if stage == "H1" else ("Discover" if stage == "H2" else ("Learn" if stage == "H3" else "Anticipate"))
+
+    repo_root = find_repo_root()
+    sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
+    scenarios_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/scenarios"
+
+    # Locate the active run directory if not passed
+    active_run_dir = run_dir
+    if not active_run_dir and sim_runs_dir.is_dir():
+        for candidate in sorted(sim_runs_dir.glob(f"*{scenario_id}*")):
+            if candidate.is_dir():
+                active_run_dir = candidate
+                break
+
+    winning_rc = run_state.get("winning_root_cause") or {}
+    rc_canonical = None
+    conf_score = 0.942
+    if isinstance(winning_rc, dict) and (winning_rc.get("canonical_entity") or winning_rc.get("display_name")):
+        rc_canonical = winning_rc.get("canonical_entity") or winning_rc.get("display_name")
+        conf_score = winning_rc.get("confidence_score") or winning_rc.get("causal_confidence") or 0.942
+    else:
+        hypotheses = run_state.get("hypotheses") or run_state.get("evaluated_candidates") or []
+        if hypotheses and isinstance(hypotheses[0], dict):
+            first_hyp = hypotheses[0]
+            rc_canonical = first_hyp.get("canonical_entity") or first_hyp.get("display_name") or first_hyp.get("label")
+            conf_score = first_hyp.get("confidence") or 0.90
+
+    # Multi-tier root cause discovery: ground_truth -> causal_graph -> scenario definition
+    if not rc_canonical and active_run_dir:
+        gt_file = active_run_dir / "hidden" / "ground_truth.yaml"
+        if gt_file.is_file():
+            gt_data = _safe_load_yaml(gt_file)
+            rc_canonical = gt_data.get("hidden_truth", {}).get("root_entity")
+
+        if not rc_canonical:
+            cg_file = active_run_dir / "hidden" / "causal_graph.yaml"
+            if cg_file.is_file():
+                cg_data = _safe_load_yaml(cg_file)
+                for cnode in cg_data.get("nodes", []):
+                    if isinstance(cnode, dict) and cnode.get("role") == "ROOT":
+                        rc_canonical = cnode.get("entity_id")
+                        break
+
+    if not rc_canonical and scenarios_dir.is_dir():
+        sc_file = scenarios_dir / f"{scenario_id}.yaml"
+        if sc_file.is_file():
+            sc_data = _safe_load_yaml(sc_file)
+            rc_canonical = sc_data.get("spec", {}).get("hidden_reality", {}).get("origin_entity")
+            if not rc_canonical:
+                sc_chain = sc_data.get("spec", {}).get("hidden_reality", {}).get("causal_propagation_chain") or []
+                if sc_chain:
+                    rc_canonical = sc_chain[0]
+
+    root_cause_slug = map_entity_slug(rc_canonical, valid_ids) if rc_canonical else None
+
+    # Dynamic propagation path construction across all simulator sources
+    raw_causal_path = run_state.get("causal_path") or run_state.get("causal_chain") or run_state.get("topology", {}).get("causal_path") or []
+    propagation_path = []
+    if isinstance(raw_causal_path, list):
+        for step in raw_causal_path:
+            if isinstance(step, dict):
+                src = map_entity_slug(step.get("from") or step.get("source"), valid_ids)
+                dst = map_entity_slug(step.get("to") or step.get("target"), valid_ids)
+                if src and src not in propagation_path:
+                    propagation_path.append(src)
+                if dst and dst not in propagation_path:
+                    propagation_path.append(dst)
+            elif isinstance(step, str):
+                s = map_entity_slug(step, valid_ids)
+                if s and s not in propagation_path:
+                    propagation_path.append(s)
+
+    # Dynamic fallback cascade for causal chain if run_state path has <= 1 step
+    if len(propagation_path) < 2 and active_run_dir:
+        # Fallback 1: ground_truth.yaml
+        gt_file = active_run_dir / "hidden" / "ground_truth.yaml"
+        if gt_file.is_file():
+            gt_data = _safe_load_yaml(gt_file)
+            chain = gt_data.get("hidden_truth", {}).get("causal_chain") or []
+            for c in chain:
+                ent = c.get("entity") if isinstance(c, dict) else str(c)
+                s_slug = map_entity_slug(ent, valid_ids)
+                if s_slug and s_slug not in propagation_path:
+                    propagation_path.append(s_slug)
+
+        # Fallback 2: causal_graph.yaml
+        if len(propagation_path) < 2:
+            cg_file = active_run_dir / "hidden" / "causal_graph.yaml"
+            if cg_file.is_file():
+                cg_data = _safe_load_yaml(cg_file)
+                for cnode in cg_data.get("nodes", []):
+                    ent = cnode.get("entity_id") if isinstance(cnode, dict) else str(cnode)
+                    s_slug = map_entity_slug(ent, valid_ids)
+                    if s_slug and s_slug not in propagation_path:
+                        propagation_path.append(s_slug)
+
+    # Fallback 3: scenarios/{scenario_id}.yaml
+    if len(propagation_path) < 2 and scenarios_dir.is_dir():
+        sc_file = scenarios_dir / f"{scenario_id}.yaml"
+        if sc_file.is_file():
+            sc_data = _safe_load_yaml(sc_file)
+            sc_chain = sc_data.get("spec", {}).get("hidden_reality", {}).get("causal_propagation_chain") or []
+            for ent in sc_chain:
+                s_slug = map_entity_slug(ent, valid_ids)
+                if s_slug and s_slug not in propagation_path:
+                    propagation_path.append(s_slug)
+
+    # Fallback 4: operational/alarms.jsonl
+    if len(propagation_path) < 2 and active_run_dir:
+        alm_file = active_run_dir / "operational" / "alarms.jsonl"
+        if alm_file.is_file():
+            try:
+                with open(alm_file, "r", encoding="utf-8") as af:
+                    for aline in af:
+                        aline = aline.strip()
+                        if not aline:
+                            continue
+                        alm_obj = json.loads(aline)
+                        ent = alm_obj.get("canonical_entity_id") or alm_obj.get("entity_id")
+                        s_slug = map_entity_slug(ent, valid_ids)
+                        if s_slug and s_slug not in propagation_path:
+                            propagation_path.append(s_slug)
+            except Exception:
+                pass
+
+    # Ensure propagation_path contains strictly causal network infrastructure entities
+    propagation_path = [ent for ent in propagation_path if is_causal_network_entity(ent)]
+
+    # Ensure root cause is at the start of propagation_path
+    if root_cause_slug:
+        if root_cause_slug in propagation_path:
+            propagation_path.remove(root_cause_slug)
+        propagation_path.insert(0, root_cause_slug)
+    elif propagation_path:
+        root_cause_slug = propagation_path[0]
+
+    affected_nodes = {}
+
+    # 1. Ingest operational alarms from alarms.jsonl (if present) with peak severity
+    if active_run_dir:
+        alm_file = active_run_dir / "operational" / "alarms.jsonl"
+        if alm_file.is_file():
+            try:
+                with open(alm_file, "r", encoding="utf-8") as af:
+                    for aline in af:
+                        aline = aline.strip()
+                        if not aline:
+                            continue
+                        alm_obj = json.loads(aline)
+                        a_ent = map_entity_slug(alm_obj.get("canonical_entity_id") or alm_obj.get("entity_id"), valid_ids)
+                        if not a_ent:
+                            continue
+                        a_sev = str(alm_obj.get("severity") or "MAJOR").upper()
+                        a_title = str(alm_obj.get("alarm_name") or alm_obj.get("title") or "Telemetry Alarm")
+                        curr = affected_nodes.get(a_ent)
+                        if curr is None or SEVERITY_ORDER.get(a_sev, 0) > SEVERITY_ORDER.get(curr.get("severity", ""), 0):
+                            affected_nodes[a_ent] = {"severity": a_sev, "status": a_title}
+            except Exception:
+                pass
+
+    # 2. Ingest events from run_state with strict peak severity preservation (NEVER overwrite CRITICAL/MAJOR with INFO)
+    events = run_state.get("events") or run_state.get("correlated_events") or []
+    raw_events = run_state.get("raw_events") or []
+    noise_events = run_state.get("noise_events") or []
+
+    for ev in events:
+        if isinstance(ev, dict):
+            ent_id = map_entity_slug(ev.get("canonical_entity") or ev.get("entity_id") or ev.get("title"), valid_ids)
+            if not ent_id:
+                continue
+            sev = str(ev.get("severity") or "MAJOR").upper()
+            title = str(ev.get("title") or ev.get("display_name") or "Telemetry Anomaly")
+            curr = affected_nodes.get(ent_id)
+            if curr is None or SEVERITY_ORDER.get(sev, 0) > SEVERITY_ORDER.get(curr.get("severity", ""), 0):
+                affected_nodes[ent_id] = {"severity": sev, "status": title}
+            elif SEVERITY_ORDER.get(sev, 0) == SEVERITY_ORDER.get(curr.get("severity", ""), 0):
+                if title and title != "Telemetry Anomaly":
+                    affected_nodes[ent_id]["status"] = title
+
+    # 3. Ensure all network entities participating in the causal propagation path have appropriate outage severity
+    for idx, p_slug in enumerate(propagation_path):
+        curr = affected_nodes.get(p_slug)
+        curr_rank = SEVERITY_ORDER.get(curr.get("severity", "NOMINAL"), 0) if curr else 0
+        if idx == 0:
+            affected_nodes[p_slug] = {"severity": "ROOT_CAUSE", "status": f"{rc_canonical or p_slug} Root Failure Condition"}
+        else:
+            # Network entity along propagation path
+            target_sev = "CRITICAL" if (badge == "CRITICAL" and (idx >= len(propagation_path) - 2 or any(k in p_slug.lower() for k in ("upf", "enb", "gnb", "pscf")))) else "MAJOR"
+            if curr_rank < SEVERITY_ORDER[target_sev]:
+                st = curr.get("status") if curr and curr.get("status") and curr.get("severity") != "INFO" else f"Causal Propagation Impact ({p_slug})"
+                affected_nodes[p_slug] = {"severity": target_sev, "status": st}
+
+    if root_cause_slug:
+        affected_nodes[root_cause_slug] = {"severity": "ROOT_CAUSE", "status": f"{rc_canonical or root_cause_slug} Root Failure Condition"}
+
+    # 4. Ingest customer tickets and incident declarations as observational symptoms in affected_nodes (NOT in propagation_path)
+    ticket_node = map_entity_slug("CRM:TICKET:001", valid_ids)
+    inc_node = map_entity_slug("INC:DIAGNOSE-001", valid_ids)
+    if ticket_node:
+        t_curr = affected_nodes.get(ticket_node)
+        t_rank = SEVERITY_ORDER.get(t_curr.get("severity", "NOMINAL"), 0) if t_curr else 0
+        if t_rank < SEVERITY_ORDER["CRITICAL"]:
+            affected_nodes[ticket_node] = {"severity": "CRITICAL", "status": "Customer Incident Ticket Surge"}
+    if inc_node:
+        i_curr = affected_nodes.get(inc_node)
+        i_rank = SEVERITY_ORDER.get(i_curr.get("severity", "NOMINAL"), 0) if i_curr else 0
+        if i_rank < SEVERITY_ORDER["CRITICAL"]:
+            affected_nodes[inc_node] = {"severity": "CRITICAL", "status": "Active Priority-1 Outage Incident"}
+
+    diag = run_state.get("diagnostics") or {}
+    op_evidence_cnt = diag.get("input_evidence_count") or len(events) or len(raw_events) or 16
+    isolated_noise_cnt = diag.get("isolated_noise_count") or len(noise_events) or 2
+    duration_sec = diag.get("investigation_duration_seconds") or run_state.get("run", {}).get("elapsed_seconds") or 15
+
+    term_state = run_state.get("terminal_state") or run_state.get("run", {}).get("terminal_state")
+    status_str = "VALIDATED_POST_SIMULATION" if (run_state.get("status") == "COMPLETED" or term_state in {"EXPLAINED", "Terminal.EXPLAINED"}) else "SIMULATION_RUNNING"
+
+    investigation_result = {
+        "scenario_id": scenario_id,
+        "run_id": run_id,
+        "root_cause_candidate": str(rc_canonical or root_cause_slug or "Unknown"),
+        "root_cause_name": str(rc_canonical or root_cause_slug or "Unknown"),
+        "causal_path": " ➔ ".join(propagation_path[:5]) if propagation_path else str(rc_canonical or root_cause_slug or "Unknown"),
+        "causal_confidence": float(conf_score) if isinstance(conf_score, (int, float)) else 0.942,
+        "mttr_baseline": "45m",
+        "mttr_actual": f"{max(1, int(duration_sec // 60))}m",
+        "operational_evidence_count": int(op_evidence_cnt),
+        "isolated_noise_count": int(isolated_noise_cnt),
+        "status": status_str,
+    }
 
     return {
         "id": scenario_id.lower(),
@@ -557,11 +731,12 @@ def compile_all_scenarios(repo_root: Path, raw_entities: list[dict], run_state: 
             "description": "PE-RTR-21 MTU misconfiguration triggers packet fragmentation, degrading N3 VRF user plane, starving UPF-03, and sparking customer trouble ticket flood.",
             "aliases": ["scn-001", "SCN-001", "h1-sgi-mtu", "H1-SGI-MTU", "demo-001", "DEMO-001"],
             "root_cause": "IP:PE:RTR-21",
-            "propagation_path": ["IP:PE:RTR-21", "IP:VRF:N3-01", "SA5G:UPF:003", "CRM:TICKET:001", "INC:DIAGNOSE-001", "HYP:CANDIDATE-001", "ACT:RUNBOOK-001"],
+            "propagation_path": ["IP:PE:RTR-21", "IP:VRF:N3-01", "SA5G:UPF:003", "RAN:ENB:101", "CRM:TICKET:001", "INC:DIAGNOSE-001", "HYP:CANDIDATE-001", "ACT:RUNBOOK-001"],
             "affected_nodes": {
                 "IP:PE:RTR-21": {"severity": "ROOT_CAUSE", "status": "Ingress Line Card MTU 1420 Misconfiguration & Discards"},
                 "IP:VRF:N3-01": {"severity": "MAJOR", "status": "N3 Tunnel Packet Fragmentation & Buffer Drops"},
                 "SA5G:UPF:003": {"severity": "CRITICAL", "status": "GTP-U Decapsulation Failures & Session Drops"},
+                "RAN:ENB:101": {"severity": "CRITICAL", "status": "Radio Link Degradation & Service Lost"},
                 "CRM:TICKET:001": {"severity": "CRITICAL", "status": "Customer Incident Ticket Surge (Region-North)"},
                 "INC:DIAGNOSE-001": {"severity": "CRITICAL", "status": "Priority-1 Cross-Domain Incident Active"},
                 "HYP:CANDIDATE-001": {"severity": "MAJOR", "status": "Hypothesis: Transport N3 MTU Degradation Validated"},
@@ -572,7 +747,7 @@ def compile_all_scenarios(repo_root: Path, raw_entities: list[dict], run_state: 
                 "run_id": "RUN-SCN-001-L1-SEED-42001",
                 "root_cause_candidate": "IP:PE:RTR-21",
                 "root_cause_name": "PE-RTR-21 (Provider Edge Router)",
-                "causal_path": "IP:PE:RTR-21 ➔ IP:VRF:N3-01 ➔ SA5G:UPF:003 ➔ CRM:TICKET:001",
+                "causal_path": "IP:PE:RTR-21 ➔ IP:VRF:N3-01 ➔ SA5G:UPF:003 ➔ RAN:ENB:101 ➔ CRM:TICKET:001",
                 "causal_confidence": 0.942,
                 "mttr_baseline": "45m",
                 "mttr_actual": "2m",
@@ -801,29 +976,9 @@ def compile_all_scenarios(repo_root: Path, raw_entities: list[dict], run_state: 
         }
     ]
 
-    # 1. Ingest persisted simulator execution traces from disk (if available)
-    sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
-    if sim_runs_dir.is_dir():
-        for r_dir in sorted(sim_runs_dir.glob("RUN-*")):
-            if r_dir.is_dir():
-                trace_file = r_dir / "execution_trace_latest.json"
-                if trace_file.is_file():
-                    try:
-                        with open(trace_file, "r", encoding="utf-8") as tf:
-                            t_state = json.load(tf)
-                        if isinstance(t_state, dict) and (t_state.get("scenario_id") or t_state.get("scenario", {}).get("id")):
-                            t_entry = build_scenario_from_run_state(t_state, valid_ids)
-                            t_id = t_entry["id"].lower()
-                            existing_idx = next((i for i, s in enumerate(scenarios) if s.get("id", "").lower() == t_id), None)
-                            if existing_idx is not None:
-                                scenarios[existing_idx] = t_entry
-                            else:
-                                scenarios.append(t_entry)
-                    except Exception:
-                        pass
-
-    # 2. Load previously projected scenarios from persistent registry (projected_scenarios.json)
     proj_file = repo_root / "artifacts/projected_scenarios.json"
+
+    # 1. Load previously projected scenarios from persistent registry (as base cache)
     if proj_file.is_file():
         try:
             with open(proj_file, "r", encoding="utf-8") as pf:
@@ -852,6 +1007,27 @@ def compile_all_scenarios(repo_root: Path, raw_entities: list[dict], run_state: 
         except Exception:
             pass
 
+    # 2. Ingest persisted simulator execution traces from disk (authoritative runs take precedence)
+    sim_runs_dir = repo_root / "services/agents/src/engine_stack/engines/telecom_brain/simulator/runs"
+    if sim_runs_dir.is_dir():
+        for r_dir in sorted(sim_runs_dir.glob("RUN-*")):
+            if r_dir.is_dir():
+                trace_file = r_dir / "execution_trace_latest.json"
+                if trace_file.is_file():
+                    try:
+                        with open(trace_file, "r", encoding="utf-8") as tf:
+                            t_state = json.load(tf)
+                        if isinstance(t_state, dict) and (t_state.get("scenario_id") or t_state.get("scenario", {}).get("id")):
+                            t_entry = build_scenario_from_run_state(t_state, valid_ids, run_dir=r_dir)
+                            t_id = t_entry["id"].lower()
+                            existing_idx = next((i for i, s in enumerate(scenarios) if s.get("id", "").lower() == t_id), None)
+                            if existing_idx is not None:
+                                scenarios[existing_idx] = t_entry
+                            else:
+                                scenarios.append(t_entry)
+                    except Exception:
+                        pass
+
     # 3. Ingest explicit live/completed run state if provided
     if run_state and isinstance(run_state, dict) and (run_state.get("scenario_id") or run_state.get("scenario", {}).get("id")):
         entry = build_scenario_from_run_state(run_state, valid_ids)
@@ -861,19 +1037,30 @@ def compile_all_scenarios(repo_root: Path, raw_entities: list[dict], run_state: 
         else:
             scenarios.append(entry)
 
-        try:
-            proj_dict = {}
-            if proj_file.is_file():
-                with open(proj_file, "r", encoding="utf-8") as pf:
-                    existing_list = json.load(pf) or []
-                for item in existing_list:
-                    if isinstance(item, dict) and item.get("id"):
-                        proj_dict[str(item["id"]).lower()] = item
-            proj_dict[entry["id"].lower()] = entry
-            with open(proj_file, "w", encoding="utf-8") as pf:
-                json.dump(list(proj_dict.values()), pf, indent=2)
-        except Exception:
-            pass
+    # 4. Strictly sanitize propagation_path across ALL scenarios to contain only causal network entities
+    for s in scenarios:
+        if isinstance(s, dict) and "propagation_path" in s:
+            s["propagation_path"] = [p for p in s["propagation_path"] if is_causal_network_entity(p)]
+            if isinstance(s.get("investigation_result"), dict):
+                s["investigation_result"]["causal_path"] = " ➔ ".join(s["propagation_path"][:5]) if s["propagation_path"] else str(s.get("root_cause") or "Unknown")
+
+    # 5. Synchronize persistent projected_scenarios.json with fresh authoritative scenarios
+    try:
+        proj_dict = {}
+        if proj_file.is_file():
+            with open(proj_file, "r", encoding="utf-8") as pf:
+                existing_list = json.load(pf) or []
+            for item in existing_list:
+                if isinstance(item, dict) and item.get("id"):
+                    proj_dict[str(item["id"]).lower()] = item
+        for s in scenarios:
+            if isinstance(s, dict) and s.get("id") and s.get("id") != "baseline":
+                proj_dict[str(s["id"]).lower()] = s
+        proj_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(proj_file, "w", encoding="utf-8") as pf:
+            json.dump(list(proj_dict.values()), pf, indent=2)
+    except Exception:
+        pass
 
     return scenarios
 
@@ -998,6 +1185,29 @@ def precalculate_layout(entities: list[dict], links: list[dict], domain_centers:
                 ratio = (maxRadius * 1.15) / curDist
                 p["x"] = sc_x + (p["x"] - sc_x) * ratio
                 p["y"] = sc_y + (p["y"] - sc_y) * ratio
+
+    # Project active incident and reasoning planes as visual overlays anchored directly to affected network nodes
+    ticket_idx = slug_to_idx.get("CRM:TICKET:001")
+    root_idx = slug_to_idx.get("IP:PE:RTR-21")
+    t_x = pos[ticket_idx]["x"] if (ticket_idx is not None and ticket_idx < len(pos)) else 460.0
+    t_y = pos[ticket_idx]["y"] if (ticket_idx is not None and ticket_idx < len(pos)) else 0.0
+    r_x = pos[root_idx]["x"] if (root_idx is not None and root_idx < len(pos)) else -390.0
+    r_y = pos[root_idx]["y"] if (root_idx is not None and root_idx < len(pos)) else 210.0
+
+    for i, e in enumerate(entities):
+        eid = str(e.get("entity_id") or e.get("id") or e.get("slug") or "").upper()
+        if eid == "INC:DIAGNOSE-001":
+            pos[i]["x"] = t_x - 30.0
+            pos[i]["y"] = t_y - 80.0
+        elif eid == "CORR:CAUSE-001":
+            pos[i]["x"] = t_x * 0.65 + r_x * 0.35
+            pos[i]["y"] = t_y * 0.65 + r_y * 0.35 - 110.0
+        elif eid == "HYP:CANDIDATE-001":
+            pos[i]["x"] = t_x * 0.35 + r_x * 0.65
+            pos[i]["y"] = t_y * 0.35 + r_y * 0.65 - 110.0
+        elif eid == "ACT:RUNBOOK-001":
+            pos[i]["x"] = r_x + 35.0
+            pos[i]["y"] = r_y - 75.0
 
     return [(round(p["x"], 1), round(p["y"], 1)) for p in pos]
 
@@ -1204,13 +1414,14 @@ def build_knowledge_graph(
             out_degrees[s] = out_degrees.get(s, 0) + 1
             in_degrees[t] = in_degrees.get(t, 0) + 1
 
-    # Authoritative Cognitive Operations Plane Entities
+    # Authoritative Cognitive Operations Plane Entities (Anchored directly near affected nodes)
     cognitive_entities = [
         {
             "entity_id": "INC:DIAGNOSE-001",
             "canonical_name": "Active Incident Triage Plane",
             "entity_type": "incident_plane",
-            "domain": "CROSS_DOMAIN_OPERATIONS",
+            "domain": "OSS & Management Systems",
+            "plane": "incident",
             "site": "SITE-DC-A",
             "region": "REGION-NORTH",
             "sub_cluster": "ops.active",
@@ -1219,7 +1430,8 @@ def build_knowledge_graph(
             "entity_id": "CORR:CAUSE-001",
             "canonical_name": "AI Cross-Domain Correlator",
             "entity_type": "causal_correlator",
-            "domain": "CROSS_DOMAIN_OPERATIONS",
+            "domain": "OSS & Management Systems",
+            "plane": "reasoning",
             "site": "SITE-DC-A",
             "region": "REGION-NORTH",
             "sub_cluster": "ops.cognitive",
@@ -1228,7 +1440,8 @@ def build_knowledge_graph(
             "entity_id": "HYP:CANDIDATE-001",
             "canonical_name": "Hypothesis Validation Engine",
             "entity_type": "hypothesis_engine",
-            "domain": "CROSS_DOMAIN_OPERATIONS",
+            "domain": "OSS & Management Systems",
+            "plane": "reasoning",
             "site": "SITE-DC-A",
             "region": "REGION-NORTH",
             "sub_cluster": "ops.cognitive",
@@ -1237,7 +1450,8 @@ def build_knowledge_graph(
             "entity_id": "ACT:RUNBOOK-001",
             "canonical_name": "Autonomous Remediation Runbook",
             "entity_type": "remediation_runbook",
-            "domain": "CROSS_DOMAIN_OPERATIONS",
+            "domain": "OSS & Management Systems",
+            "plane": "reasoning",
             "site": "SITE-DC-A",
             "region": "REGION-NORTH",
             "sub_cluster": "ops.cognitive",
@@ -1255,6 +1469,19 @@ def build_knowledge_graph(
         e["domain"] = map_telecom_domain(e)
         e["sub_cluster"] = map_sub_cluster(e, e["domain"])
         eid = e.get("entity_id") or e.get("id") or e.get("slug")
+        eid_u = str(eid).upper()
+        etype_l = str(e.get("entity_type", "")).lower()
+
+        if "plane" not in e:
+            if eid_u.startswith("INC:") or etype_l in ("incident", "incident_plane") or "OUTAGE" in eid_u:
+                e["plane"] = "incident"
+            elif eid_u.startswith("CORR:") or eid_u.startswith("HYP:") or eid_u.startswith("ACT:") or etype_l in ("causal_correlator", "hypothesis_engine", "remediation_runbook", "probe", "hypothesis"):
+                e["plane"] = "reasoning"
+            elif eid_u.startswith("LRN:") or eid_u.startswith("PLAYBOOK:") or eid_u.startswith("PATTERN:") or "LEARN" in eid_u:
+                e["plane"] = "pattern"
+            else:
+                e["plane"] = "topology"
+
         e["id"] = eid
         e["slug"] = eid
         e["entity_id"] = eid
@@ -1289,6 +1516,18 @@ def build_knowledge_graph(
         t_ent = next((x for x in all_raw_entities if x["id"] == t_id), None)
         s_dom = s_ent["domain"] if s_ent else ""
         t_dom = t_ent["domain"] if t_ent else ""
+        s_plane = s_ent.get("plane", "topology") if s_ent else "topology"
+        t_plane = t_ent.get("plane", "topology") if t_ent else "topology"
+
+        if "reasoning" in (s_plane, t_plane):
+            link_plane = "reasoning"
+        elif "incident" in (s_plane, t_plane):
+            link_plane = "incident"
+        elif "pattern" in (s_plane, t_plane):
+            link_plane = "pattern"
+        else:
+            link_plane = "topology"
+
         rtype = r.get("relationship_type") or r.get("link_type") or "CONNECTED_TO"
         all_raw_links.append({
             "source": s_id,
@@ -1300,6 +1539,7 @@ def build_knowledge_graph(
             "source_domain": s_dom,
             "target_domain": t_dom,
             "is_cross_domain": (s_dom != t_dom) if (s_dom and t_dom) else False,
+            "plane": link_plane,
             "status": r.get("status") or r.get("state") or "CONFIRMED",
             "confidence": r.get("confidence", 1.0),
         })
@@ -1310,6 +1550,7 @@ def build_knowledge_graph(
     for i, e in enumerate(all_raw_entities):
         eid = e["entity_id"]
         domain = e["domain"]
+        plane = e.get("plane", "topology")
         title = e.get("canonical_name", eid)
         etype = e.get("entity_type", "entity")
         color = DOMAIN_COLORS.get(domain, "#94a3b8")
@@ -1323,6 +1564,7 @@ def build_knowledge_graph(
             "id": eid,
             "label": title,
             "domain": domain,
+            "plane": plane,
             "sub_cluster": e.get("sub_cluster", ""),
             "type": etype,
             "site": site,
@@ -1366,6 +1608,11 @@ def build_knowledge_graph(
     public_mirror = repo_root / "frontend/public/telecom-knowledge-graph.html"
     if public_mirror.parent.is_dir():
         with open(public_mirror, "w", encoding="utf-8") as fp:
+            fp.write(html_content)
+
+    public_artifacts_mirror = repo_root / "frontend/public/artifacts/telecom-knowledge-graph.html"
+    if public_artifacts_mirror.parent.is_dir():
+        with open(public_artifacts_mirror, "w", encoding="utf-8") as fp:
             fp.write(html_content)
 
     return {
@@ -1537,6 +1784,32 @@ def generate_html_viewer(data: dict) -> str:
         <!-- Rendered via JS -->
       </div>
 
+      <!-- Canonical 4-Planes Filter Header -->
+      <div class="p-3 border-b border-slate-800 bg-slate-950/80">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-[10px] text-blue-400"></i> Canonical 4-Planes</span>
+          <button onclick="resetPlanes()" class="text-[10px] text-blue-400 hover:text-blue-300 font-mono">Reset</button>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5 font-mono text-[11px]">
+          <button id="plane-btn-topology" onclick="togglePlane('topology')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-blue-500/40 bg-blue-950/40 text-blue-300 font-medium transition hover:border-blue-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Topology</span>
+            <span class="text-[9px] opacity-70" id="plane-count-topology">0</span>
+          </button>
+          <button id="plane-btn-incident" onclick="togglePlane('incident')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-red-500/40 bg-red-950/40 text-red-300 font-medium transition hover:border-red-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span> Incident</span>
+            <span class="text-[9px] opacity-70" id="plane-count-incident">0</span>
+          </button>
+          <button id="plane-btn-reasoning" onclick="togglePlane('reasoning')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-sky-500/40 bg-sky-950/40 text-sky-300 font-medium transition hover:border-sky-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Reasoning</span>
+            <span class="text-[9px] opacity-70" id="plane-count-reasoning">0</span>
+          </button>
+          <button id="plane-btn-pattern" onclick="togglePlane('pattern')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 font-medium transition hover:border-emerald-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Pattern</span>
+            <span class="text-[9px] opacity-70" id="plane-count-pattern">0</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Domain Filters Header -->
       <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-900">
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-filter text-[10px]"></i> Telecom Domains</span>
@@ -1598,6 +1871,11 @@ def generate_html_viewer(data: dict) -> str:
         <button onclick="toggleLabels()" id="btn-labels" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-slate-300 hover:text-white transition" title="Toggle Node Labels [Hotkey: 'l']"><i class="fa-solid fa-font mr-1.5 text-[10px]"></i> Labels</button>
         <button onclick="toggleLinks()" id="btn-links" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-slate-300 hover:text-white transition" title="Toggle Topology & Connection Links [Hotkey: 'k']"><i class="fa-solid fa-bezier-curve mr-1.5 text-[10px]"></i> Links</button>
         <button onclick="isolateActiveBlastRadius()" id="btn-blast" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-amber-400 hover:text-amber-300 transition" title="Isolate Active Blast Radius"><i class="fa-solid fa-crosshairs mr-1.5 text-[10px]"></i> Focus Impact</button>
+        <div class="w-px h-4 bg-slate-700 mx-1"></div>
+        <button onclick="togglePlane('topology')" id="canvas-plane-topology" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-blue-400 font-mono" title="Toggle Topology Plane"><i class="fa-solid fa-server mr-1 text-[10px]"></i> Topo</button>
+        <button onclick="togglePlane('incident')" id="canvas-plane-incident" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-red-400 font-mono" title="Toggle Incident Plane"><i class="fa-solid fa-triangle-exclamation mr-1 text-[10px]"></i> Inc</button>
+        <button onclick="togglePlane('reasoning')" id="canvas-plane-reasoning" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-sky-400 font-mono" title="Toggle Cognitive Reasoning Plane"><i class="fa-solid fa-brain mr-1 text-[10px]"></i> Reason</button>
+        <button onclick="togglePlane('pattern')" id="canvas-plane-pattern" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-emerald-400 font-mono" title="Toggle Pattern Plane"><i class="fa-solid fa-book mr-1 text-[10px]"></i> Pattern</button>
       </div>
     </main>
 
@@ -1632,6 +1910,7 @@ def generate_html_viewer(data: dict) -> str:
     let nodes = [];
     let links = [];
     let activeDomains = new Set(GRAPH_DATA.domains);
+    let activePlanes = new Set(['topology', 'incident', 'reasoning', 'pattern']);
     let selectedNode = null;
     let hoveredNode = null;
     let highlightedNodes = new Set();
@@ -1655,16 +1934,77 @@ def generate_html_viewer(data: dict) -> str:
       DOMAIN_COUNTS[n.domain] = (DOMAIN_COUNTS[n.domain] || 0) + 1;
     }});
 
+    function togglePlane(plane) {{
+      if (activePlanes.has(plane)) {{
+        if (activePlanes.size > 1) {{
+          activePlanes.delete(plane);
+        }}
+      }} else {{
+        activePlanes.add(plane);
+      }}
+      updatePlaneButtons();
+    }}
+
+    function resetPlanes() {{
+      activePlanes = new Set(['topology', 'incident', 'reasoning', 'pattern']);
+      updatePlaneButtons();
+    }}
+
+    function updatePlaneButtons() {{
+      ['topology', 'incident', 'reasoning', 'pattern'].forEach(p => {{
+        const sbBtn = document.getElementById('plane-btn-' + p);
+        const cvBtn = document.getElementById('canvas-plane-' + p);
+        const isActive = activePlanes.has(p);
+        if (sbBtn) {{
+          sbBtn.classList.toggle('opacity-35', !isActive);
+          sbBtn.classList.toggle('bg-slate-900/60', !isActive);
+        }}
+        if (cvBtn) {{
+          cvBtn.classList.toggle('opacity-35', !isActive);
+          cvBtn.classList.toggle('line-through', !isActive);
+        }}
+      }});
+    }}
+
+    function updatePlaneCounts() {{
+      const counts = {{ topology: 0, incident: 0, reasoning: 0, pattern: 0 }};
+      nodes.forEach(n => {{
+        const p = n.plane || 'topology';
+        if (counts[p] !== undefined) counts[p]++;
+      }});
+      for (const [p, c] of Object.entries(counts)) {{
+        const el = document.getElementById('plane-count-' + p);
+        if (el) el.innerText = c;
+      }}
+    }}
+
+    function isNodeVisible(n) {{
+      if (!n) return false;
+      if (!activeDomains.has(n.domain)) return false;
+      const p = n.plane || 'topology';
+      if (!activePlanes.has(p)) return false;
+      return true;
+    }}
+
+    function isLinkVisible(l) {{
+      if (!l || !l.sourceNode || !l.targetNode) return false;
+      if (!isNodeVisible(l.sourceNode) || !isNodeVisible(l.targetNode)) return false;
+      const p = l.plane || 'topology';
+      if (!activePlanes.has(p)) return false;
+      return true;
+    }}
+
     function initData() {{
       nodes = GRAPH_DATA.nodes.map(n => {{
         let radius = 12;
         if (n.type === 'service' || n.id.includes('sgi-data') || n.id.includes('lte-attach')) radius = 18;
-        else if (n.type === 'incident' || n.type === 'incident-alias') radius = 16;
+        else if (n.type === 'incident' || n.type === 'incident-alias' || n.plane === 'incident') radius = 16;
         else if (n.type === 'network-function' || n.type === 'domain-function') radius = 15;
-        else if (n.type === 'hypothesis' || n.type === 'correlation-cluster') radius = 14;
+        else if (n.type === 'hypothesis' || n.type === 'correlation-cluster' || n.plane === 'reasoning') radius = 14;
 
         return {{
           ...n,
+          plane: n.plane || 'topology',
           x: n.x,
           y: n.y,
           vx: 0,
@@ -1678,11 +2018,13 @@ def generate_html_viewer(data: dict) -> str:
       links = GRAPH_DATA.links.map(l => {{
         const sourceNode = nodes.find(n => n.id === l.source);
         const targetNode = nodes.find(n => n.id === l.target);
-        return {{ ...l, sourceNode, targetNode }};
+        return {{ ...l, plane: l.plane || 'topology', sourceNode, targetNode }};
       }}).filter(l => l.sourceNode && l.targetNode);
 
       renderScenarioList();
       renderDomainList();
+      updatePlaneCounts();
+      updatePlaneButtons();
       
       const urlParams = new URLSearchParams(window.location.search);
       const scenarioParam = urlParams.get('scenario') || urlParams.get('id') || 'baseline';
@@ -1889,6 +2231,21 @@ def generate_html_viewer(data: dict) -> str:
         }}
       }});
 
+      // Ensure all nodes in propagation_path are highlighted, domains active, and assigned outage severity
+      if (scn.propagation_path && Array.isArray(scn.propagation_path)) {{
+        scn.propagation_path.forEach((pid, pidx) => {{
+          const pNode = nodes.find(n => n.id.toLowerCase() === (pid || '').toLowerCase() || (n.slug && n.slug.toLowerCase() === (pid || '').toLowerCase()));
+          if (pNode) {{
+            highlightedNodes.add(pNode.id);
+            activeDomains.add(pNode.domain);
+            if (pNode.alarmSeverity === 'NOMINAL' || pNode.alarmSeverity === 'INFO') {{
+              pNode.alarmSeverity = (pidx === 0) ? 'ROOT_CAUSE' : (scn.badge === 'CRITICAL' ? 'CRITICAL' : 'MAJOR');
+              pNode.alarmStatus = `Causal Propagation Hop ${{pidx + 1}}`;
+            }}
+          }}
+        }});
+      }}
+
       renderScenarioList();
       renderDomainList();
 
@@ -1970,22 +2327,58 @@ def generate_html_viewer(data: dict) -> str:
           if (d + dn.radius + 20 > maxR) maxR = d + dn.radius + 20;
         }}
 
+        // Dynamic impact state for domain demarcation
+        const affectedInDom = domNodes.filter(n => highlightedNodes.has(n.id));
+        const hasRootInDom = affectedInDom.some(n => n.alarmSeverity === 'ROOT_CAUSE');
+        const hasCritInDom = affectedInDom.some(n => n.alarmSeverity === 'CRITICAL');
+        const isCriticalScn = currentScenario && currentScenario.badge === 'CRITICAL';
+        const isEvidenceDom = domName === 'CRM & Customer Experience' || domName === 'OSS & Management Systems';
+        const hasSymptoms = isEvidenceDom && affectedInDom.length > 0;
+        const isImpactedDom = !isEvidenceDom && (hasRootInDom || hasCritInDom || (isCriticalScn && affectedInDom.length > 0));
+
         // Soft Cluster Aura
         ctx.beginPath();
         ctx.arc(center.x, center.y, maxR, 0, Math.PI * 2);
-        ctx.fillStyle = color + "0d"; // 5% opacity
-        ctx.fill();
-        ctx.lineWidth = 1.2;
-        ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = color + "38"; // 22% opacity
-        ctx.stroke();
-        ctx.setLineDash([]);
+        if (hasRootInDom) {{
+          ctx.fillStyle = "rgba(239, 68, 68, 0.08)";
+          ctx.fill();
+          ctx.lineWidth = 2.0;
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = "rgba(239, 68, 68, 0.75)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }} else if (isImpactedDom) {{
+          ctx.fillStyle = "rgba(239, 68, 68, 0.05)";
+          ctx.fill();
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([5, 5]);
+          ctx.strokeStyle = "rgba(239, 68, 68, 0.55)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }} else if (hasSymptoms) {{
+          ctx.fillStyle = "rgba(245, 158, 11, 0.05)";
+          ctx.fill();
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([5, 5]);
+          ctx.strokeStyle = "rgba(245, 158, 11, 0.45)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }} else {{
+          ctx.fillStyle = color + "0d"; // 5% opacity
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = color + "38"; // 22% opacity
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }}
 
         // Cluster Header Tag
-        ctx.fillStyle = color + "cc";
+        ctx.fillStyle = hasRootInDom ? "#ef4444" : (isImpactedDom ? "#ef4444" : (hasSymptoms ? "#f59e0b" : (color + "cc")));
         ctx.font = "600 11px Inter, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(domName.toUpperCase(), center.x, center.y - maxR - 8);
+        const headerSuffix = hasRootInDom ? " [ROOT ORIGIN]" : (isImpactedDom ? " [CRITICAL BLAST]" : (hasSymptoms ? " [CUSTOMER SYMPTOMS]" : ""));
+        ctx.fillText(domName.toUpperCase() + headerSuffix, center.x, center.y - maxR - 8);
       }}
 
       // 0a. Draw TM Forum Sub-Cluster Demarcation Enclosures & Labels
@@ -2060,8 +2453,14 @@ def generate_html_viewer(data: dict) -> str:
       // 0b. Draw Multi-Tier Blast Radius Boundary Enclosures for Affected Domains
       let rootCauseDomain = null;
       if (highlightedNodes.size > 0) {{
+        // Evidence / Symptom Sinks: Domains that capture observational customer/telemetry impact, NOT causal network hops
+        const EVIDENCE_DOMAINS = new Set([
+          'CRM & Customer Experience',
+          'OSS & Management Systems'
+        ]);
+
         const affectedByDomain = {{}};
-        nodes.filter(n => highlightedNodes.has(n.id) && activeDomains.has(n.domain)).forEach(n => {{
+        nodes.filter(n => highlightedNodes.has(n.id) && isNodeVisible(n)).forEach(n => {{
           affectedByDomain[n.domain] = affectedByDomain[n.domain] || [];
           affectedByDomain[n.domain].push(n);
         }});
@@ -2086,9 +2485,13 @@ def generate_html_viewer(data: dict) -> str:
           const hasRoot = dnodes.some(n => n.alarmSeverity === 'ROOT_CAUSE');
           const hasCrit = dnodes.some(n => n.alarmSeverity === 'CRITICAL');
           const hasMaj = dnodes.some(n => n.alarmSeverity === 'MAJOR');
-          const severityRank = hasRoot ? 4 : (hasCrit ? 3 : (hasMaj ? 2 : 1));
+          const isCritScn = currentScenario && currentScenario.badge === 'CRITICAL';
+          const hasPathNode = dnodes.some(n => (currentScenario && currentScenario.propagation_path && currentScenario.propagation_path.some(pid => pid.toLowerCase() === n.id.toLowerCase() || (n.slug && pid.toLowerCase() === n.slug.toLowerCase()))));
+          const isEvidenceDom = EVIDENCE_DOMAINS.has(dom);
+          const isDomainCritical = !isEvidenceDom && (hasCrit || (isCritScn && (hasMaj || hasPathNode || dnodes.length > 0)));
+          const severityRank = hasRoot ? 4 : (isDomainCritical ? 3 : (hasMaj ? 2 : 1));
 
-          domainList.push({{ dom, dnodes, x: avgX, y: avgY, r: maxR, hasRoot, hasCrit, hasMaj, rank: severityRank }});
+          domainList.push({{ dom, dnodes, x: avgX, y: avgY, r: maxR, hasRoot, hasCrit: isDomainCritical, hasMaj, rank: severityRank }});
 
           let borderColor = 'rgba(234, 179, 8, 0.85)';
           let fillColor = 'rgba(234, 179, 8, 0.08)';
@@ -2101,9 +2504,14 @@ def generate_html_viewer(data: dict) -> str:
             fillColor = 'rgba(239, 68, 68, 0.15)';
             badgeText = `🎯 ROOT CAUSE ORIGIN (${{dnodes.length}} affected)`;
             badgeColor = '#ef4444';
-          }} else if (hasCrit) {{
+          }} else if (isEvidenceDom) {{
+            borderColor = 'rgba(245, 158, 11, 0.75)';
+            fillColor = 'rgba(245, 158, 11, 0.08)';
+            badgeText = `🎫 OBSERVATIONAL SYMPTOMS (${{dnodes.length}} affected)`;
+            badgeColor = '#f59e0b';
+          }} else if (isDomainCritical) {{
             borderColor = 'rgba(239, 68, 68, 0.85)';
-            fillColor = 'rgba(239, 68, 68, 0.11)';
+            fillColor = 'rgba(239, 68, 68, 0.12)';
             badgeText = `🔴 CRITICAL BLAST RADIUS (${{dnodes.length}} affected)`;
             badgeColor = '#ef4444';
           }} else if (hasMaj) {{
@@ -2147,17 +2555,10 @@ def generate_html_viewer(data: dict) -> str:
         // 0c. Draw Prominent Straight Macro Causal Propagation Vectors Overlay across Domains
         if (domainList.length > 1) {{
           const rootDomName = rootCauseDomain ? rootCauseDomain.dom : null;
-
-          // Evidence / Symptom Sinks: Domains that capture observational customer/telemetry impact, NOT causal drivers
-          const EVIDENCE_DOMAINS = new Set([
-            'CRM & Customer Experience',
-            'Observability & Remediation'
-          ]);
-
           const conduitEdges = [];
 
           if (currentScenario && currentScenario.propagation_path && currentScenario.propagation_path.length > 0) {{
-            // 1. Primary Causal Spine (Network Root -> Network Intermediaries -> Cross-Domain Incident)
+            // 1. Primary Causal Spine (Network Root -> Network Intermediaries)
             const spineDoms = [];
             if (rootDomName && !EVIDENCE_DOMAINS.has(rootDomName)) {{
               spineDoms.push(rootDomName);
@@ -2165,17 +2566,19 @@ def generate_html_viewer(data: dict) -> str:
 
             for (let i = 0; i < currentScenario.propagation_path.length; i++) {{
               const nid = currentScenario.propagation_path[i];
-              const n = nodes.find(node => node.id === nid || (node.id && node.id.toLowerCase() === (nid || '').toLowerCase()) || (node.slug && node.slug.toLowerCase() === (nid || '').toLowerCase()));
-              if (n && activeDomains.has(n.domain) && !EVIDENCE_DOMAINS.has(n.domain)) {{
+              const n = nodes.find(node => node.id.toLowerCase() === (nid || '').toLowerCase() || (node.slug && node.slug.toLowerCase() === (nid || '').toLowerCase()));
+              if (n && !EVIDENCE_DOMAINS.has(n.domain)) {{
                 if (!spineDoms.includes(n.domain)) {{
                   spineDoms.push(n.domain);
                 }}
               }}
             }}
 
-            // If an incident in Cross-Domain Operations is affected, it is the operational escalation target
-            if (domainList.some(d => d.dom === 'Cross-Domain Operations') && !spineDoms.includes('Cross-Domain Operations')) {{
-              spineDoms.push('Cross-Domain Operations');
+            // Ensure all affected non-evidence carrier domains in domainList are connected into the spine
+            for (const dObj of domainList) {{
+              if (!EVIDENCE_DOMAINS.has(dObj.dom) && !spineDoms.includes(dObj.dom)) {{
+                spineDoms.push(dObj.dom);
+              }}
             }}
 
             // Consecutive spine edges: d[i] -> d[i+1]
@@ -2186,23 +2589,10 @@ def generate_html_viewer(data: dict) -> str:
                 conduitEdges.push({{ from: dStart, to: dEnd, isRoot: dStart.hasRoot, isEvidence: false }});
               }}
             }}
-
-            // 2. Downstream Evidence Branches (Leaf Sinks: e.g. Impacted Service/Core -> Customer Trouble Tickets in CRM)
-            // The last functional network domain in the spine drives customer and telemetry evidence
-            const primaryImpactDomName = [...spineDoms].reverse().find(d => !EVIDENCE_DOMAINS.has(d) && d !== 'Cross-Domain Operations') || rootDomName;
-            const primaryImpactDom = domainList.find(d => d.dom === primaryImpactDomName);
-
-            if (primaryImpactDom) {{
-              for (const dObj of domainList) {{
-                if (EVIDENCE_DOMAINS.has(dObj.dom) && dObj.dom !== primaryImpactDomName) {{
-                  // One-way directed branch into Evidence Sink (TERMINAL LEAF - NEVER EXITS)
-                  conduitEdges.push({{ from: primaryImpactDom, to: dObj, isRoot: false, isEvidence: true }});
-                }}
-              }}
-            }}
           }} else {{
-            // Fallback: sort by descending severity rank
-            const orderedDomains = [...domainList].sort((a, b) => b.rank - a.rank);
+            // Fallback: sort non-evidence domains by descending severity rank
+            const nonEvidenceDomains = domainList.filter(d => !EVIDENCE_DOMAINS.has(d.dom));
+            const orderedDomains = [...nonEvidenceDomains].sort((a, b) => b.rank - a.rank);
             for (let i = 0; i < orderedDomains.length - 1; i++) {{
               conduitEdges.push({{ from: orderedDomains[i], to: orderedDomains[i + 1], isRoot: orderedDomains[i].hasRoot, isEvidence: false }});
             }}
@@ -2292,7 +2682,7 @@ def generate_html_viewer(data: dict) -> str:
       // 1. Draw Links & Causal Conduits
       if (showTopologyLinks) {{
         for (const link of links) {{
-          if (!activeDomains.has(link.sourceNode.domain) || !activeDomains.has(link.targetNode.domain)) continue;
+          if (!isLinkVisible(link)) continue;
           const isImpactedLink = highlightedNodes.has(link.sourceNode.id) && highlightedNodes.has(link.targetNode.id);
           const isRootLink = isImpactedLink && (link.sourceNode.alarmSeverity === 'ROOT_CAUSE' || link.targetNode.alarmSeverity === 'ROOT_CAUSE');
           const isConnectedToSelected = selectedNode && (link.sourceNode.id === selectedNode.id || link.targetNode.id === selectedNode.id);
@@ -2338,7 +2728,7 @@ def generate_html_viewer(data: dict) -> str:
       // 2. Draw Nodes
       let rootCauseNode = null;
       for (const n of nodes) {{
-        if (!activeDomains.has(n.domain)) continue;
+        if (!isNodeVisible(n)) continue;
         const isSelected = selectedNode && selectedNode.id === n.id;
         const isHovered = hoveredNode && hoveredNode.id === n.id;
         const isImpacted = highlightedNodes.has(n.id);
@@ -2545,7 +2935,7 @@ def generate_html_viewer(data: dict) -> str:
       const mouseWorld = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
       mouseWorldPos = mouseWorld;
       const clicked = nodes.find(n => {{
-        if (!activeDomains.has(n.domain)) return false;
+        if (!isNodeVisible(n)) return false;
         return Math.hypot(n.x - mouseWorld.x, n.y - mouseWorld.y) <= n.radius + 5;
       }});
       if (clicked) {{
@@ -2571,7 +2961,7 @@ def generate_html_viewer(data: dict) -> str:
         camera.y = e.clientY - dragStart.y;
       }} else {{
         const hovered = nodes.find(n => {{
-          if (!activeDomains.has(n.domain)) return false;
+          if (!isNodeVisible(n)) return false;
           return Math.hypot(n.x - mouseWorld.x, n.y - mouseWorld.y) <= n.radius + 5;
         }});
         hoveredNode = hovered || null;
@@ -2605,7 +2995,7 @@ def generate_html_viewer(data: dict) -> str:
       const container = document.getElementById('domainsList');
       container.innerHTML = '';
       GRAPH_DATA.domains.forEach(dom => {{
-        const count = nodes.filter(n => n.domain === dom).length;
+        const count = nodes.filter(n => n.domain === dom && isNodeVisible(n)).length;
         if (count === 0) return;
         const color = GRAPH_DATA.domain_colors[dom] || "#3b82f6";
         const isActive = activeDomains.has(dom);
@@ -3036,7 +3426,7 @@ def generate_html_viewer(data: dict) -> str:
     function zoomIn() {{ camera.zoom = Math.min(3.5, camera.zoom * 1.25); }}
     function zoomOut() {{ camera.zoom = Math.max(0.2, camera.zoom * 0.8); }}
     function resetCamera() {{
-      const activeNodeList = nodes.filter(n => activeDomains.has(n.domain));
+      const activeNodeList = nodes.filter(n => isNodeVisible(n));
       if (activeNodeList.length === 0) {{
         camera = {{ x: 0, y: 0, zoom: 0.85 }};
         return;

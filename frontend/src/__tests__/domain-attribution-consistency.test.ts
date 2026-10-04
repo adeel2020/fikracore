@@ -4,7 +4,7 @@ import {
   getScenarioAttributionProfile,
   OPERATIONAL_DOMAINS_CATALOG,
   renderStyledMessage,
-} from "../app/simulator/investigate/page";
+} from "../app/simulator/investigate/lib";
 
 describe("FikraCore Step 5.2.1 Domain Attribution & Consistency Tests (§22, §23, §27)", () => {
   it("test_all_14_operational_domains_catalog_present", () => {

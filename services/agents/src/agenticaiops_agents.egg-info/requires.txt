@@ -1,5 +1,11 @@
 agenticaiops-shared
 psutil>=7.2.2
+networkx<4,>=3.1
+pyyaml>=6.0.3
+pydantic>=2.7.0
+pydantic-settings>=2.7.0
+httpx>=0.27
+fastapi>=0.115.0
 
 [dev]
 pytest>=8

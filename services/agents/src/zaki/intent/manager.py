@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 from .normalizer import IntentNormalizer
-from ..domain.contracts.intent import OperatorIntentContract
-from ..domain.enums import AuthorityLevel, RiskMode
+from ..contracts.intent import OperatorIntentContract
+from ..enums import AuthorityLevel, RiskMode
 
 
 class IntentManager:

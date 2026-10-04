@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import re
 from typing import Any, Dict, List, Tuple
-from ..domain.contracts.intent import FCAPSClassification, IntentSpec, OperatorIntentContract
-from ..domain.enums import AuthorityLevel, FCAPSCategory, RiskMode
+from ..contracts.intent import FCAPSClassification, IntentSpec, OperatorIntentContract
+from ..enums import AuthorityLevel, FCAPSCategory, RiskMode
 
 
 class IntentNormalizer:

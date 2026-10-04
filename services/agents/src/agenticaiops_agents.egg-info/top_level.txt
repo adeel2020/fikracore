@@ -7,9 +7,11 @@ core
 correlation
 engine_stack
 jarvis
+log
 mcp_hub
 qna
 rag
 secops
 sft
 storyteller
+zaki

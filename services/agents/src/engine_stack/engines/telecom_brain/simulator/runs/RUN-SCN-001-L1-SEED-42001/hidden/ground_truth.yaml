@@ -19,9 +19,9 @@ hidden_truth:
   - entity: SA5G:UPF:003
     role: PROPAGATION_MECHANISM
     state_change: UPF-03 participates in hidden causal propagation
-  - entity: CRM:TICKET:001
+  - entity: RAN:eNodeB:101
     role: SYMPTOM
-    state_change: Customer Ticket Service participates in hidden causal propagation
+    state_change: Radio Network Service participates in hidden causal propagation
   actual_blast_radius:
     services:
     - 5g_sa_mobile_data
@@ -34,3 +34,4 @@ hidden_truth:
   non_causal_context: []
 separation_note: this file is evaluator-only and must never be exposed to operational
   RCA or correlation inputs
+

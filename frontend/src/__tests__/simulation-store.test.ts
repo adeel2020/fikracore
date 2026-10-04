@@ -8,7 +8,7 @@ import {
   buildGapItems,
   resolveConduitTelemetry,
   HypothesisItem,
-} from "../app/simulator/investigate/page";
+} from "../app/simulator/investigate/lib";
 
 describe("FikraCore Step 5 Frontend Store & Visual Activation (§ Acceptance Tests)", () => {
   it("test_scenario_switch_clears_previous_run", () => {

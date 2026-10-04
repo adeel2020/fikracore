@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-from ..domain.contracts.base import BaseContract
+from ..contracts.base import BaseContract
 
 
 class AuditRecord(BaseContract):

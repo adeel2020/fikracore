@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from typing import Dict, List, Optional
-from ..domain.contracts.agent import (
+from ..contracts.agent import (
     AgentLifecycle,
     AgentManifestContract,
     AgentManifestSpec,
     AgentMetadata,
     AgentPolicyProfile,
 )
-from ..domain.enums import AgentLifecycleState, AuthorityLevel
+from ..enums import AgentLifecycleState, AuthorityLevel
 from .capability_registry import default_domain_capability_registry
 
 
@@ -47,7 +47,7 @@ class AgentRegistry:
                 "domain": "PS",
                 "capabilities": ["pdu-session-investigation", "upf-health-analysis", "pfcp-analysis", "ps-change-analysis"],
                 "accepted_intents": ["INVESTIGATE_SERVICE_DEGRADATION", "EXPLAIN_HYPOTHESIS"],
-                "tools": ["metric.query", "log.query", "trace.query", "topology.query"],
+                "tools": ["metric.query", "log.query", "trace.query", "topology.query", "probe.query_upf_drops"],
             },
             {
                 "id": "agent-cs",
@@ -63,7 +63,7 @@ class AgentRegistry:
                 "domain": "RAN",
                 "capabilities": ["cell-degradation-analysis", "gnb-alarms-investigation", "rf-coverage-analysis"],
                 "accepted_intents": ["INVESTIGATE_SERVICE_DEGRADATION"],
-                "tools": ["alarm.query", "kpi.query", "topology.query"],
+                "tools": ["alarm.query", "kpi.query", "topology.query", "probe.query_rrc_success_rate"],
             },
             {
                 "id": "agent-ip-transport",
@@ -71,7 +71,10 @@ class AgentRegistry:
                 "domain": "IP_TRANSPORT",
                 "capabilities": ["router-bgp-investigation", "mpls-lsp-path-analysis", "transport-change-correlation"],
                 "accepted_intents": ["INVESTIGATE_SERVICE_DEGRADATION", "EXPLAIN_HYPOTHESIS", "DISCOVER_KNOWLEDGE_GAPS"],
-                "tools": ["alarm.query", "metric.query", "routing.query", "path.analyze"],
+                "tools": [
+                    "alarm.query", "metric.query", "routing.query", "path.analyze",
+                    "probe.query_crc_counters", "probe.check_bgp_session", "action.drain_traffic_bgp",
+                ],
             },
             {
                 "id": "agent-in-ocs",
@@ -79,7 +82,7 @@ class AgentRegistry:
                 "domain": "IN_OCS",
                 "capabilities": ["diameter-charging-analysis", "balance-quota-investigation"],
                 "accepted_intents": ["INVESTIGATE_SERVICE_DEGRADATION"],
-                "tools": ["kpi.query", "log.query"],
+                "tools": ["kpi.query", "log.query", "probe.test_diameter_gy"],
             },
             {
                 "id": "agent-vas",

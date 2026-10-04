@@ -277,7 +277,7 @@ window.TelecomGraphPhysics = (function () {
       <div class="w-px h-3 bg-slate-800"></div>
       <div class="flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i><span>Coverage: <strong class="text-emerald-300">100.0%</strong></span></div>
       <div class="w-px h-3 bg-slate-800"></div>
-      <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-slate-500"></i><span>Synced: 2026-09-28T09:53:22Z</span></div>
+      <div class="flex items-center gap-2"><i class="fa-solid fa-clock text-slate-500"></i><span>Synced: 2026-10-02T16:14:12Z</span></div>
     </div>
 
     <div class="flex items-center gap-2">
@@ -345,6 +345,32 @@ window.TelecomGraphPhysics = (function () {
         <!-- Rendered via JS -->
       </div>
 
+      <!-- Canonical 4-Planes Filter Header -->
+      <div class="p-3 border-b border-slate-800 bg-slate-950/80">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-layer-group text-[10px] text-blue-400"></i> Canonical 4-Planes</span>
+          <button onclick="resetPlanes()" class="text-[10px] text-blue-400 hover:text-blue-300 font-mono">Reset</button>
+        </div>
+        <div class="grid grid-cols-2 gap-1.5 font-mono text-[11px]">
+          <button id="plane-btn-topology" onclick="togglePlane('topology')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-blue-500/40 bg-blue-950/40 text-blue-300 font-medium transition hover:border-blue-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-blue-400"></span> Topology</span>
+            <span class="text-[9px] opacity-70" id="plane-count-topology">0</span>
+          </button>
+          <button id="plane-btn-incident" onclick="togglePlane('incident')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-red-500/40 bg-red-950/40 text-red-300 font-medium transition hover:border-red-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-400"></span> Incident</span>
+            <span class="text-[9px] opacity-70" id="plane-count-incident">0</span>
+          </button>
+          <button id="plane-btn-reasoning" onclick="togglePlane('reasoning')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-sky-500/40 bg-sky-950/40 text-sky-300 font-medium transition hover:border-sky-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Reasoning</span>
+            <span class="text-[9px] opacity-70" id="plane-count-reasoning">0</span>
+          </button>
+          <button id="plane-btn-pattern" onclick="togglePlane('pattern')" class="flex items-center justify-between px-2 py-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/40 text-emerald-300 font-medium transition hover:border-emerald-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Pattern</span>
+            <span class="text-[9px] opacity-70" id="plane-count-pattern">0</span>
+          </button>
+        </div>
+      </div>
+
       <!-- Domain Filters Header -->
       <div class="p-3 border-b border-slate-800 flex items-center justify-between bg-slate-900">
         <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5"><i class="fa-solid fa-filter text-[10px]"></i> Telecom Domains</span>
@@ -406,6 +432,11 @@ window.TelecomGraphPhysics = (function () {
         <button onclick="toggleLabels()" id="btn-labels" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-slate-300 hover:text-white transition" title="Toggle Node Labels [Hotkey: 'l']"><i class="fa-solid fa-font mr-1.5 text-[10px]"></i> Labels</button>
         <button onclick="toggleLinks()" id="btn-links" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-slate-300 hover:text-white transition" title="Toggle Topology & Connection Links [Hotkey: 'k']"><i class="fa-solid fa-bezier-curve mr-1.5 text-[10px]"></i> Links</button>
         <button onclick="isolateActiveBlastRadius()" id="btn-blast" class="px-2.5 h-8 rounded-lg hover:bg-slate-800 flex items-center justify-center text-xs text-amber-400 hover:text-amber-300 transition" title="Isolate Active Blast Radius"><i class="fa-solid fa-crosshairs mr-1.5 text-[10px]"></i> Focus Impact</button>
+        <div class="w-px h-4 bg-slate-700 mx-1"></div>
+        <button onclick="togglePlane('topology')" id="canvas-plane-topology" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-blue-400 font-mono" title="Toggle Topology Plane"><i class="fa-solid fa-server mr-1 text-[10px]"></i> Topo</button>
+        <button onclick="togglePlane('incident')" id="canvas-plane-incident" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-red-400 font-mono" title="Toggle Incident Plane"><i class="fa-solid fa-triangle-exclamation mr-1 text-[10px]"></i> Inc</button>
+        <button onclick="togglePlane('reasoning')" id="canvas-plane-reasoning" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-sky-400 font-mono" title="Toggle Cognitive Reasoning Plane"><i class="fa-solid fa-brain mr-1 text-[10px]"></i> Reason</button>
+        <button onclick="togglePlane('pattern')" id="canvas-plane-pattern" class="px-2 h-8 rounded-lg hover:bg-slate-800 flex items-center text-xs text-emerald-400 font-mono" title="Toggle Pattern Plane"><i class="fa-solid fa-book mr-1 text-[10px]"></i> Pattern</button>
       </div>
     </main>
 
@@ -438,7 +469,7 @@ window.TelecomGraphPhysics = (function () {
   <script>
     const GRAPH_DATA = {
   "title": "FikraCore Multi-Domain Telecom Knowledge Graph",
-  "timestamp": "2026-09-28T09:53:22.766848+00:00",
+  "timestamp": "2026-10-02T16:14:12.062305+00:00",
   "brain": "telecombrain",
   "knowledge_source": "gbrain Active Snapshot (gbrain-snapshot-active.json)",
   "snapshot_version": "v1.0.0-snapshot-20260924-115608",
@@ -449,6 +480,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "gpon:bng:001",
       "label": "BNG-01",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "access.gpon",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -468,6 +500,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "gpon:ont:015001",
       "label": "ONT-015001",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "access.gpon",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -487,6 +520,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "gpon:olt:015",
       "label": "OLT-015",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "access.gpon",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -505,83 +539,88 @@ window.TelecomGraphPhysics = (function () {
     {
       "id": "oss:itsm:001",
       "label": "ITSM 01",
-      "domain": "Observability & Remediation",
+      "domain": "OSS & Management Systems",
+      "plane": "topology",
       "sub_cluster": "oss.management",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 715.9,
-      "y": -112.2,
+      "x": 785.9,
+      "y": -72.2,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
       "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] ITSM 01 (SITE-DC-A / REGION-NORTH)"
+      "description": "[OSS & Management Systems \u00b7 network-function] ITSM 01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "oss:inv:001",
       "label": "Inventory System 01",
-      "domain": "Observability & Remediation",
+      "domain": "OSS & Management Systems",
+      "plane": "topology",
       "sub_cluster": "oss.management",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 704.1,
-      "y": -107.8,
+      "x": 774.1,
+      "y": -67.8,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
       "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] Inventory System 01 (SITE-DC-A / REGION-NORTH)"
+      "description": "[OSS & Management Systems \u00b7 network-function] Inventory System 01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "oss:pm:001",
       "label": "Performance Manager 01",
-      "domain": "Observability & Remediation",
+      "domain": "OSS & Management Systems",
+      "plane": "topology",
       "sub_cluster": "oss.management",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 707.8,
-      "y": -115.9,
+      "x": 777.8,
+      "y": -75.9,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 1,
       "evidence_count": 1,
       "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] Performance Manager 01 (SITE-DC-A / REGION-NORTH)"
+      "description": "[OSS & Management Systems \u00b7 network-function] Performance Manager 01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "oss:fm:001",
       "label": "Fault Manager 01",
-      "domain": "Observability & Remediation",
+      "domain": "OSS & Management Systems",
+      "plane": "topology",
       "sub_cluster": "oss.management",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 712.2,
-      "y": -104.1,
+      "x": 782.2,
+      "y": -64.1,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 1,
       "evidence_count": 1,
       "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] Fault Manager 01 (SITE-DC-A / REGION-NORTH)"
+      "description": "[OSS & Management Systems \u00b7 network-function] Fault Manager 01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "prov:engine:001",
       "label": "Provisioning Engine 01",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "bss.provisioning",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -601,6 +640,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "prov:order:001",
       "label": "Order Management 01",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "bss.provisioning",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -620,6 +660,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "bss:catalog:001",
       "label": "Product Catalog 01",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "bss.billing",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -639,6 +680,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "bss:billing:001",
       "label": "Billing System 01",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "bss.billing",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -658,6 +700,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "crm:ticket:001",
       "label": "Customer Ticket Service",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "crm.tickets",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -677,6 +720,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "crm:profile:001",
       "label": "Customer Profile Service",
       "domain": "CRM & Customer Experience",
+      "plane": "topology",
       "sub_cluster": "crm.tickets",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -695,64 +739,68 @@ window.TelecomGraphPhysics = (function () {
     {
       "id": "in:c:scp:001",
       "label": "IN-C SCP-01",
-      "domain": "Observability & Remediation",
-      "sub_cluster": "oss.in_scp",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
+      "sub_cluster": "core.in_scp",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 784.8,
-      "y": -17.8,
+      "x": 264.8,
+      "y": -377.8,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] IN-C SCP-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] IN-C SCP-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "in:b:scp:001",
       "label": "IN-B SCP-01",
-      "domain": "Observability & Remediation",
-      "sub_cluster": "oss.in_scp",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
+      "sub_cluster": "core.in_scp",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 775.7,
-      "y": -17.0,
+      "x": 255.7,
+      "y": -377.0,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] IN-B SCP-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] IN-B SCP-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "in:a:scp:001",
       "label": "IN-A SCP-01",
-      "domain": "Observability & Remediation",
-      "sub_cluster": "oss.in_scp",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
+      "sub_cluster": "core.in_scp",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 779.5,
-      "y": -25.2,
+      "x": 259.5,
+      "y": -385.2,
       "knowledge_state": "CONFIRMED",
       "in_degree": 1,
       "out_degree": 0,
       "evidence_count": 1,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] IN-A SCP-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] IN-A SCP-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "chg:chf:001",
       "label": "Charging Function-01",
       "domain": "OCS & Charging",
+      "plane": "topology",
       "sub_cluster": "ocs.charging",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -772,6 +820,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "chg:ocs:001",
       "label": "OCS-01",
       "domain": "OCS & Charging",
+      "plane": "topology",
       "sub_cluster": "ocs.charging",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -790,83 +839,88 @@ window.TelecomGraphPhysics = (function () {
     {
       "id": "vas:esme:001",
       "label": "Enterprise ESME-01",
-      "domain": "Observability & Remediation",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
       "sub_cluster": "vas.messaging",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 856.3,
-      "y": -112.3,
+      "x": 146.3,
+      "y": -382.3,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] Enterprise ESME-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] Enterprise ESME-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "vas:ussd:001",
       "label": "USSD GW-01",
-      "domain": "Observability & Remediation",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
       "sub_cluster": "vas.messaging",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 843.7,
-      "y": -107.7,
+      "x": 133.7,
+      "y": -377.7,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 1,
       "evidence_count": 1,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] USSD GW-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] USSD GW-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "vas:smsr:001",
       "label": "SMS Router-01",
-      "domain": "Observability & Remediation",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
       "sub_cluster": "vas.messaging",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 848.1,
-      "y": -115.1,
+      "x": 138.1,
+      "y": -385.1,
       "knowledge_state": "CONFIRMED",
       "in_degree": 1,
       "out_degree": 0,
       "evidence_count": 1,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] SMS Router-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] SMS Router-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "vas:smsc:001",
       "label": "SMSC-01",
-      "domain": "Observability & Remediation",
+      "domain": "Core Telecom Services (VAS & IN)",
+      "plane": "topology",
       "sub_cluster": "vas.messaging",
       "type": "network-function",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 851.9,
-      "y": -104.9,
+      "x": 141.9,
+      "y": -374.9,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 1,
       "evidence_count": 1,
-      "color": "#06b6d4",
-      "description": "[Observability & Remediation \u00b7 network-function] SMSC-01 (SITE-DC-A / REGION-NORTH)"
+      "color": "#a855f7",
+      "description": "[Core Telecom Services (VAS & IN) \u00b7 network-function] SMSC-01 (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "imsf:sbc:001",
       "label": "Fixed SBC-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.fixed",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -886,6 +940,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsf:tas:001",
       "label": "Fixed TAS-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.fixed",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -905,6 +960,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsf:scscf:001",
       "label": "Fixed S-CSCF-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.fixed",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -924,6 +980,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsf:pcscf:001",
       "label": "Fixed P-CSCF-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.fixed",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -943,6 +1000,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsm:sbc:001",
       "label": "Mobile SBC-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.mobile",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -962,6 +1020,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsm:tas:001",
       "label": "Mobile TAS-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.mobile",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -981,6 +1040,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsm:scscf:001",
       "label": "Mobile S-CSCF-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.mobile",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1000,6 +1060,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "imsm:pcscf:001",
       "label": "Mobile P-CSCF-01",
       "domain": "IMS & VoNR/VoLTE",
+      "plane": "topology",
       "sub_cluster": "ims.mobile",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1019,6 +1080,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:scp:001",
       "label": "SCP-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.service_mesh",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1038,6 +1100,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:nrf:001",
       "label": "NRF-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.service_mesh",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1057,6 +1120,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:pcf:001",
       "label": "PCF-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.subscriber_policy",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1076,6 +1140,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:ausf:001",
       "label": "AUSF-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.subscriber_policy",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1095,6 +1160,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:udm:001",
       "label": "UDM-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.subscriber_policy",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1114,6 +1180,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:upf:003",
       "label": "UPF-03",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.user_plane",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1133,6 +1200,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:smf:001",
       "label": "SMF-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.control_plane",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1152,6 +1220,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "sa5g:amf:001",
       "label": "AMF-01",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.control_plane",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1171,6 +1240,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "nsa:endc:001",
       "label": "EN-DC Controller 001",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.service_mesh",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1190,6 +1260,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "nsa:anchor:lte-001",
       "label": "NSA LTE Anchor 001",
       "domain": "Mobile Core (5G SA)",
+      "plane": "topology",
       "sub_cluster": "mobile_core.service_mesh",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1209,6 +1280,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:dra:001",
       "label": "DRA-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.signaling",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1228,6 +1300,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:pcrf:001",
       "label": "PCRF-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.signaling",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1247,6 +1320,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:hss:001",
       "label": "HSS-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.signaling",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1266,6 +1340,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:pgw:001",
       "label": "PGW-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.core",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1285,6 +1360,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:sgw:001",
       "label": "SGW-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.core",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1304,6 +1380,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "epc:mme:001",
       "label": "MME-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "epc.core",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1323,6 +1400,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ps3g:ggsn:001",
       "label": "GGSN-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.ps3g",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1342,6 +1420,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ps3g:sgsn:001",
       "label": "SGSN-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.ps3g",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1361,6 +1440,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "cs:stp:001",
       "label": "STP-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.cs",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1380,6 +1460,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "cs:hlr:001",
       "label": "HLR-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.cs",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1399,6 +1480,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "cs:mgw:001",
       "label": "MGW-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.cs",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1418,6 +1500,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "cs:msc-s:001",
       "label": "MSC-S-01",
       "domain": "4G EPC & Signaling",
+      "plane": "topology",
       "sub_cluster": "legacy.cs",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1437,6 +1520,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ran:nodeb:03101",
       "label": "NodeB-03101",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "ran.legacy",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1456,6 +1540,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ran:rnc:031",
       "label": "RNC-031",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "ran.legacy",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1475,6 +1560,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ran:gnb:501",
       "label": "gNodeB-501",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "ran.macro",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1494,6 +1580,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ran:enb:101",
       "label": "eNodeB-101",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "ran.macro",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1513,6 +1600,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ran:site:101",
       "label": "RAN Site 101",
       "domain": "Radio Access Network (RAN)",
+      "plane": "topology",
       "sub_cluster": "ran.macro",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1532,6 +1620,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "mpls:ce:cust-001",
       "label": "Enterprise CE 001",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.mpls",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1551,6 +1640,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "mpls:l3vpn:ent-001",
       "label": "Enterprise L3VPN 001",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.mpls",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1570,6 +1660,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:rr:001",
       "label": "Route Reflector 01",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.routers",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1589,6 +1680,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:vrf:sgi-01",
       "label": "SGi-VRF-01",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.vrf_sec",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1608,6 +1700,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:vrf:n3-01",
       "label": "N3-VRF-01",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.vrf_sec",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1627,6 +1720,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:sec:gw-02",
       "label": "SEC-GW-02",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.vrf_sec",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1646,6 +1740,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:pe:rtr-21",
       "label": "PE-RTR-21",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.routers",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1665,6 +1760,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ip:p:rtr-07",
       "label": "P-RTR-07",
       "domain": "IP Transport & Routing",
+      "plane": "topology",
       "sub_cluster": "transport.routers",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1684,6 +1780,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "tx:mw:backhaul-101",
       "label": "Microwave Backhaul 101",
       "domain": "Optical & Transport (DWDM/OTN)",
+      "plane": "topology",
       "sub_cluster": "tx.backhaul",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1703,6 +1800,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "tx:otn:trail-22",
       "label": "OTN Trail 22",
       "domain": "Optical & Transport (DWDM/OTN)",
+      "plane": "topology",
       "sub_cluster": "tx.optical",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1722,6 +1820,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "tx:dwdm:lambda-22",
       "label": "DWDM Lambda 22",
       "domain": "Optical & Transport (DWDM/OTN)",
+      "plane": "topology",
       "sub_cluster": "tx.optical",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1741,6 +1840,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "tx:fiber:fr-07",
       "label": "Fiber Route FR-07",
       "domain": "Optical & Transport (DWDM/OTN)",
+      "plane": "topology",
       "sub_cluster": "tx.optical",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1760,6 +1860,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:cgnat:001",
       "label": "CGNAT-01",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.core_services",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1779,6 +1880,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:fw:sgi",
       "label": "SGi Firewall Pair",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.core_services",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1798,6 +1900,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:ntp:core",
       "label": "Core Timing Cluster",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.core_services",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1817,6 +1920,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:dns:core",
       "label": "Core DNS Cluster",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.core_services",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1836,6 +1940,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:db:subs-a",
       "label": "Subscriber DB Cluster A",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.core_services",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1855,6 +1960,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:nfvi:a",
       "label": "NFVI Cluster A",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.compute",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1874,6 +1980,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:k8s:core-a",
       "label": "Core Kubernetes Cluster A",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.compute",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1893,6 +2000,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:cool:a",
       "label": "DC-A Cooling Plant",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.facilities",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1912,6 +2020,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:power:a",
       "label": "DC-A Power Feed A",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.facilities",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1931,6 +2040,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:dc:b",
       "label": "DC-B Facility",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.facilities",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1950,6 +2060,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "infra:dc:a",
       "label": "DC-A Facility",
       "domain": "Cloud NFVI & Facilities",
+      "plane": "topology",
       "sub_cluster": "infra.facilities",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1969,6 +2080,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ext:vas:001",
       "label": "Third Party VAS Gateway",
       "domain": "External Interconnect & Roaming",
+      "plane": "topology",
       "sub_cluster": "ext.peering",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -1988,6 +2100,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ext:roaming:001",
       "label": "Roaming Partner 01",
       "domain": "External Interconnect & Roaming",
+      "plane": "topology",
       "sub_cluster": "ext.peering",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -2007,6 +2120,7 @@ window.TelecomGraphPhysics = (function () {
       "id": "ext:internet:001",
       "label": "External Internet",
       "domain": "External Interconnect & Roaming",
+      "plane": "topology",
       "sub_cluster": "ext.peering",
       "type": "network-function",
       "site": "SITE-DC-A",
@@ -2025,78 +2139,82 @@ window.TelecomGraphPhysics = (function () {
     {
       "id": "INC:DIAGNOSE-001",
       "label": "Active Incident Triage Plane",
-      "domain": "Cross-Domain Operations",
+      "domain": "OSS & Management Systems",
+      "plane": "incident",
       "sub_cluster": "ops.active",
       "type": "incident_plane",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": -60.0,
-      "y": -420.0,
+      "x": 430.0,
+      "y": -80.0,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#38bdf8",
-      "description": "[Cross-Domain Operations \u00b7 incident_plane] Active Incident Triage Plane (SITE-DC-A / REGION-NORTH)"
+      "color": "#06b6d4",
+      "description": "[OSS & Management Systems \u00b7 incident_plane] Active Incident Triage Plane (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "CORR:CAUSE-001",
       "label": "AI Cross-Domain Correlator",
-      "domain": "Cross-Domain Operations",
+      "domain": "OSS & Management Systems",
+      "plane": "reasoning",
       "sub_cluster": "ops.cognitive",
       "type": "causal_correlator",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 63.6,
-      "y": -416.7,
+      "x": 162.5,
+      "y": -36.5,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#38bdf8",
-      "description": "[Cross-Domain Operations \u00b7 causal_correlator] AI Cross-Domain Correlator (SITE-DC-A / REGION-NORTH)"
+      "color": "#06b6d4",
+      "description": "[OSS & Management Systems \u00b7 causal_correlator] AI Cross-Domain Correlator (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "HYP:CANDIDATE-001",
       "label": "Hypothesis Validation Engine",
-      "domain": "Cross-Domain Operations",
+      "domain": "OSS & Management Systems",
+      "plane": "reasoning",
       "sub_cluster": "ops.cognitive",
       "type": "hypothesis_engine",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 56.8,
-      "y": -418.4,
+      "x": -92.5,
+      "y": 26.5,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#38bdf8",
-      "description": "[Cross-Domain Operations \u00b7 hypothesis_engine] Hypothesis Validation Engine (SITE-DC-A / REGION-NORTH)"
+      "color": "#06b6d4",
+      "description": "[OSS & Management Systems \u00b7 hypothesis_engine] Hypothesis Validation Engine (SITE-DC-A / REGION-NORTH)"
     },
     {
       "id": "ACT:RUNBOOK-001",
       "label": "Autonomous Remediation Runbook",
-      "domain": "Cross-Domain Operations",
+      "domain": "OSS & Management Systems",
+      "plane": "reasoning",
       "sub_cluster": "ops.cognitive",
       "type": "remediation_runbook",
       "site": "SITE-DC-A",
       "region": "REGION-NORTH",
       "vendor": "",
       "failure_domains": [],
-      "x": 59.6,
-      "y": -424.9,
+      "x": -355.0,
+      "y": 135.0,
       "knowledge_state": "CONFIRMED",
       "in_degree": 0,
       "out_degree": 0,
       "evidence_count": 0,
-      "color": "#38bdf8",
-      "description": "[Cross-Domain Operations \u00b7 remediation_runbook] Autonomous Remediation Runbook (SITE-DC-A / REGION-NORTH)"
+      "color": "#06b6d4",
+      "description": "[OSS & Management Systems \u00b7 remediation_runbook] Autonomous Remediation Runbook (SITE-DC-A / REGION-NORTH)"
     }
   ],
   "links": [
@@ -2110,6 +2228,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2123,6 +2242,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Radio Access Network (RAN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2136,6 +2256,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Radio Access Network (RAN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2146,9 +2267,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "ip:pe:rtr-21",
       "link_type": "monitored-by",
       "human_link_type": "monitored by",
-      "source_domain": "Observability & Remediation",
+      "source_domain": "OSS & Management Systems",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2159,9 +2281,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "sa5g:upf:003",
       "link_type": "monitored-by",
       "human_link_type": "monitored by",
-      "source_domain": "Observability & Remediation",
+      "source_domain": "OSS & Management Systems",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2175,6 +2298,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "CRM & Customer Experience",
       "target_domain": "CRM & Customer Experience",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2188,6 +2312,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "CRM & Customer Experience",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2201,6 +2326,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "CRM & Customer Experience",
       "target_domain": "CRM & Customer Experience",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2214,6 +2340,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "CRM & Customer Experience",
       "target_domain": "CRM & Customer Experience",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2227,6 +2354,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "CRM & Customer Experience",
       "target_domain": "CRM & Customer Experience",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2240,6 +2368,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "OCS & Charging",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2250,9 +2379,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "in:a:scp:001",
       "link_type": "routes-through",
       "human_link_type": "routes through",
-      "source_domain": "Observability & Remediation",
-      "target_domain": "Observability & Remediation",
+      "source_domain": "Core Telecom Services (VAS & IN)",
+      "target_domain": "Core Telecom Services (VAS & IN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2263,9 +2393,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "vas:smsr:001",
       "link_type": "routes-through",
       "human_link_type": "routes through",
-      "source_domain": "Observability & Remediation",
-      "target_domain": "Observability & Remediation",
+      "source_domain": "Core Telecom Services (VAS & IN)",
+      "target_domain": "Core Telecom Services (VAS & IN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2279,6 +2410,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IMS & VoNR/VoLTE",
       "target_domain": "IMS & VoNR/VoLTE",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2292,6 +2424,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IMS & VoNR/VoLTE",
       "target_domain": "IMS & VoNR/VoLTE",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2305,6 +2438,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IMS & VoNR/VoLTE",
       "target_domain": "IMS & VoNR/VoLTE",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2318,6 +2452,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "OCS & Charging",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2331,6 +2466,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2344,6 +2480,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2357,6 +2494,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Cloud NFVI & Facilities",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2370,6 +2508,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2383,6 +2522,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2396,6 +2536,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Radio Access Network (RAN)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2409,6 +2550,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2422,6 +2564,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2435,6 +2578,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Mobile Core (5G SA)",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2448,6 +2592,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2461,6 +2606,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "Cloud NFVI & Facilities",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2474,6 +2620,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2487,6 +2634,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2500,6 +2648,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2513,6 +2662,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "4G EPC & Signaling",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2526,6 +2676,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Radio Access Network (RAN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2539,6 +2690,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2552,6 +2704,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2565,6 +2718,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Optical & Transport (DWDM/OTN)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2578,6 +2732,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Mobile Core (5G SA)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2591,6 +2746,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "Optical & Transport (DWDM/OTN)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2604,6 +2760,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2617,6 +2774,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "4G EPC & Signaling",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2630,6 +2788,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Radio Access Network (RAN)",
       "target_domain": "IMS & VoNR/VoLTE",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2643,6 +2802,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IP Transport & Routing",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2656,6 +2816,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IP Transport & Routing",
       "target_domain": "Cloud NFVI & Facilities",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2669,6 +2830,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IP Transport & Routing",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2682,6 +2844,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IP Transport & Routing",
       "target_domain": "Optical & Transport (DWDM/OTN)",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2695,6 +2858,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "IP Transport & Routing",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2708,6 +2872,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Optical & Transport (DWDM/OTN)",
       "target_domain": "IP Transport & Routing",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2721,6 +2886,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Optical & Transport (DWDM/OTN)",
       "target_domain": "Optical & Transport (DWDM/OTN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2734,6 +2900,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Optical & Transport (DWDM/OTN)",
       "target_domain": "Optical & Transport (DWDM/OTN)",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2747,6 +2914,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Cloud NFVI & Facilities",
       "target_domain": "External Interconnect & Roaming",
       "is_cross_domain": true,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2760,6 +2928,7 @@ window.TelecomGraphPhysics = (function () {
       "source_domain": "Cloud NFVI & Facilities",
       "target_domain": "Cloud NFVI & Facilities",
       "is_cross_domain": false,
+      "plane": "topology",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2771,8 +2940,9 @@ window.TelecomGraphPhysics = (function () {
       "link_type": "ESCALATES_TO",
       "human_link_type": "ESCALATES TO",
       "source_domain": "",
-      "target_domain": "Cross-Domain Operations",
+      "target_domain": "OSS & Management Systems",
       "is_cross_domain": false,
+      "plane": "incident",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2783,9 +2953,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "CORR:CAUSE-001",
       "link_type": "CORRELATED_BY",
       "human_link_type": "CORRELATED BY",
-      "source_domain": "Cross-Domain Operations",
-      "target_domain": "Cross-Domain Operations",
+      "source_domain": "OSS & Management Systems",
+      "target_domain": "OSS & Management Systems",
       "is_cross_domain": false,
+      "plane": "reasoning",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2796,9 +2967,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "HYP:CANDIDATE-001",
       "link_type": "EVALUATES",
       "human_link_type": "EVALUATES",
-      "source_domain": "Cross-Domain Operations",
-      "target_domain": "Cross-Domain Operations",
+      "source_domain": "OSS & Management Systems",
+      "target_domain": "OSS & Management Systems",
       "is_cross_domain": false,
+      "plane": "reasoning",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2809,9 +2981,10 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "ACT:RUNBOOK-001",
       "link_type": "TRIGGERS",
       "human_link_type": "TRIGGERS",
-      "source_domain": "Cross-Domain Operations",
-      "target_domain": "Cross-Domain Operations",
+      "source_domain": "OSS & Management Systems",
+      "target_domain": "OSS & Management Systems",
       "is_cross_domain": false,
+      "plane": "reasoning",
       "status": "CONFIRMED",
       "confidence": 1.0
     },
@@ -2822,15 +2995,15 @@ window.TelecomGraphPhysics = (function () {
       "to_slug": "IP:PE:RTR-21",
       "link_type": "REMEDIATES",
       "human_link_type": "REMEDIATES",
-      "source_domain": "Cross-Domain Operations",
+      "source_domain": "OSS & Management Systems",
       "target_domain": "",
       "is_cross_domain": false,
+      "plane": "reasoning",
       "status": "CONFIRMED",
       "confidence": 1.0
     }
   ],
   "domains": [
-    "Cross-Domain Operations",
     "Mobile Core (5G SA)",
     "Radio Access Network (RAN)",
     "IP Transport & Routing",
@@ -2839,12 +3012,12 @@ window.TelecomGraphPhysics = (function () {
     "IMS & VoNR/VoLTE",
     "Cloud NFVI & Facilities",
     "CRM & Customer Experience",
-    "Observability & Remediation",
+    "OSS & Management Systems",
+    "Core Telecom Services (VAS & IN)",
     "OCS & Charging",
     "External Interconnect & Roaming"
   ],
   "domain_colors": {
-    "Cross-Domain Operations": "#38bdf8",
     "Mobile Core (5G SA)": "#3b82f6",
     "Radio Access Network (RAN)": "#10b981",
     "IP Transport & Routing": "#f59e0b",
@@ -2853,15 +3026,12 @@ window.TelecomGraphPhysics = (function () {
     "IMS & VoNR/VoLTE": "#ec4899",
     "Cloud NFVI & Facilities": "#8b5cf6",
     "CRM & Customer Experience": "#ef4444",
-    "Observability & Remediation": "#06b6d4",
+    "OSS & Management Systems": "#06b6d4",
+    "Core Telecom Services (VAS & IN)": "#a855f7",
     "OCS & Charging": "#eab308",
     "External Interconnect & Roaming": "#f97316"
   },
   "domain_centers": {
-    "Cross-Domain Operations": {
-      "x": 0,
-      "y": -420
-    },
     "Mobile Core (5G SA)": {
       "x": 0,
       "y": 0
@@ -2898,9 +3068,13 @@ window.TelecomGraphPhysics = (function () {
       "x": 460,
       "y": 0
     },
-    "Observability & Remediation": {
+    "OSS & Management Systems": {
       "x": 780,
       "y": -70
+    },
+    "Core Telecom Services (VAS & IN)": {
+      "x": 200,
+      "y": -380
     },
     "External Interconnect & Roaming": {
       "x": -390,
@@ -2909,18 +3083,25 @@ window.TelecomGraphPhysics = (function () {
   },
   "sub_cluster_offsets": {
     "ops.active": {
-      "dx": -60,
-      "dy": 0,
+      "dx": -40,
+      "dy": -40,
       "label": "ACTIVE INCIDENT PLANE",
       "icon": "\u26a1",
       "color": "#ef4444"
     },
     "ops.cognitive": {
-      "dx": 60,
-      "dy": 0,
+      "dx": 40,
+      "dy": -40,
       "label": "COGNITIVE REASONING & ACTIONS",
       "icon": "\ud83e\udde0",
       "color": "#38bdf8"
+    },
+    "ops.pattern": {
+      "dx": 0,
+      "dy": -50,
+      "label": "LEARNED PATTERNS & PLAYBOOKS",
+      "icon": "\ud83d\udcd6",
+      "color": "#10b981"
     },
     "mobile_core.user_plane": {
       "dx": -90,
@@ -3098,25 +3279,25 @@ window.TelecomGraphPhysics = (function () {
       "color": "#fca5a5"
     },
     "oss.management": {
-      "dx": -70,
-      "dy": -40,
+      "dx": 0,
+      "dy": 0,
       "label": "FAULT / PERF / ITSM",
       "icon": "\ud83d\udcca",
       "color": "#06b6d4"
     },
     "vas.messaging": {
-      "dx": 70,
-      "dy": -40,
+      "dx": -60,
+      "dy": 0,
       "label": "VAS & MESSAGING (SMSC/USSD)",
       "icon": "\ud83d\udcac",
-      "color": "#22d3ee"
+      "color": "#a855f7"
     },
-    "oss.in_scp": {
-      "dx": 0,
-      "dy": 50,
+    "core.in_scp": {
+      "dx": 60,
+      "dy": 0,
       "label": "INTELLIGENT NETWORK (IN SCP)",
       "icon": "\ud83e\udde0",
-      "color": "#67e8f9"
+      "color": "#c084fc"
     },
     "ext.peering": {
       "dx": 0,
@@ -3153,33 +3334,36 @@ window.TelecomGraphPhysics = (function () {
       "stage": "H1",
       "concept": "Diagnose",
       "category": "H1 (Diagnose): Simulated RCA Run (SCN-001)",
-      "description": "Simulated operational run RUN-20260927162944103548 for scenario SCN-001.",
+      "description": "Simulated operational run RUN-20261002161305449340 for scenario SCN-001.",
       "aliases": [
         "scn-001",
         "SCN-001",
-        "RUN-20260927162944103548",
-        "run-20260927162944103548"
+        "RUN-20261002161305449340",
+        "run-20261002161305449340"
       ],
       "root_cause": "ip:pe:rtr-21",
       "propagation_path": [
         "ip:pe:rtr-21",
         "ip:vrf:n3-01",
         "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
+        "ran:enb:101"
       ],
       "affected_nodes": {
         "ip:pe:rtr-21": {
           "severity": "ROOT_CAUSE",
-          "status": "IP:PE:RTR-21 Saturation & Anomaly"
+          "status": "IP:PE:RTR-21 Root Failure Condition"
         },
         "ip:vrf:n3-01": {
           "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
+          "status": "IP:VRF:N3-01: VRF_DEGRADED"
         },
         "sa5g:upf:003": {
           "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
+        },
+        "ran:enb:101": {
+          "severity": "CRITICAL",
+          "status": "RAN:eNodeB:101: RADIO SERVICE LOST"
         },
         "crm:ticket:001": {
           "severity": "CRITICAL",
@@ -3192,14 +3376,14 @@ window.TelecomGraphPhysics = (function () {
       },
       "investigation_result": {
         "scenario_id": "SCN-001",
-        "run_id": "RUN-20260927162944103548",
+        "run_id": "RUN-20261002161305449340",
         "root_cause_candidate": "IP:PE:RTR-21",
         "root_cause_name": "IP:PE:RTR-21",
-        "causal_path": "ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
+        "causal_path": "ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 ran:enb:101",
         "causal_confidence": 0.942,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
-        "operational_evidence_count": 16,
+        "operational_evidence_count": 15,
         "isolated_noise_count": 6,
         "status": "SIMULATION_RUNNING"
       }
@@ -3211,32 +3395,25 @@ window.TelecomGraphPhysics = (function () {
       "stage": "H1",
       "concept": "Diagnose",
       "category": "H1 (Diagnose): Simulated RCA Run (SCN-002)",
-      "description": "Simulated operational run RUN-20260928094456208838 for scenario SCN-002.",
+      "description": "Simulated operational run RUN-20260929192257302128 for scenario SCN-002.",
       "aliases": [
         "scn-002",
         "SCN-002",
-        "RUN-20260928094456208838",
-        "run-20260928094456208838"
+        "RUN-20260929192257302128",
+        "run-20260929192257302128"
       ],
-      "root_cause": "SA5G:UPF:003",
+      "root_cause": "sa5g:upf:003",
       "propagation_path": [
-        "SA5G:UPF:003",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
         "sa5g:upf:003": {
-          "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
+          "severity": "ROOT_CAUSE",
+          "status": "UPF-03 Primary Failure Root Failure Condition"
         },
         "crm:ticket:001": {
           "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "SA5G:UPF:003": {
-          "severity": "ROOT_CAUSE",
-          "status": "UPF-03 Primary Failure Saturation & Anomaly"
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
         },
         "INC:DIAGNOSE-001": {
           "severity": "CRITICAL",
@@ -3245,10 +3422,10 @@ window.TelecomGraphPhysics = (function () {
       },
       "investigation_result": {
         "scenario_id": "SCN-002",
-        "run_id": "RUN-20260928094456208838",
+        "run_id": "RUN-20260929192257302128",
         "root_cause_candidate": "UPF-03 Primary Failure",
         "root_cause_name": "UPF-03 Primary Failure",
-        "causal_path": "SA5G:UPF:003 \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
+        "causal_path": "sa5g:upf:003",
         "causal_confidence": 94.2,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
@@ -3274,33 +3451,30 @@ window.TelecomGraphPhysics = (function () {
       "root_cause": "infra:dns:core",
       "propagation_path": [
         "infra:dns:core",
-        "infra:dns:core",
         "sa5g:amf:001",
         "infra:k8s:core-a",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
         "infra:dns:core": {
           "severity": "ROOT_CAUSE",
-          "status": "Core DNS Cluster Primary Failure Saturation & Anomaly"
+          "status": "Core DNS Cluster Primary Failure Root Failure Condition"
         },
         "sa5g:amf:001": {
           "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
+          "status": "SA5G:AMF:001: AMF_DEGRADED"
         },
         "infra:k8s:core-a": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
+          "severity": "CRITICAL",
+          "status": "INFRA:K8S:CORE-A: KUBERNETES_CLUSTER_DEGRADED"
         },
         "sa5g:upf:003": {
           "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
         },
         "crm:ticket:001": {
           "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
         },
         "INC:DIAGNOSE-001": {
           "severity": "CRITICAL",
@@ -3312,7 +3486,7 @@ window.TelecomGraphPhysics = (function () {
         "run_id": "RUN-20260924161011194010",
         "root_cause_candidate": "Core DNS Cluster Primary Failure",
         "root_cause_name": "Core DNS Cluster Primary Failure",
-        "causal_path": "INFRA:DNS:CORE \u2794 infra:dns:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
+        "causal_path": "infra:dns:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
         "causal_confidence": 94.2,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
@@ -3327,7 +3501,7 @@ window.TelecomGraphPhysics = (function () {
       "badge": "CRITICAL",
       "stage": "H1",
       "concept": "Diagnose",
-      "category": "H4 (Anticipate): Simulated RCA Run (SCN-004)",
+      "category": "H1 (Diagnose): Simulated RCA Run (SCN-004)",
       "description": "Simulated operational run RUN-20260924152006702904 for scenario SCN-004.",
       "aliases": [
         "scn-004",
@@ -3338,24 +3512,20 @@ window.TelecomGraphPhysics = (function () {
       "root_cause": "infra:k8s:core-a",
       "propagation_path": [
         "infra:k8s:core-a",
-        "infra:k8s:core-a",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
         "infra:k8s:core-a": {
           "severity": "ROOT_CAUSE",
-          "status": "Core Kubernetes Cluster A Primary Failure Saturation & Anomaly"
+          "status": "Core Kubernetes Cluster A Primary Failure Root Failure Condition"
         },
         "sa5g:upf:003": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
+          "severity": "CRITICAL",
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
         },
         "crm:ticket:001": {
           "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
         },
         "INC:DIAGNOSE-001": {
           "severity": "CRITICAL",
@@ -3367,7 +3537,7 @@ window.TelecomGraphPhysics = (function () {
         "run_id": "RUN-20260924152006702904",
         "root_cause_candidate": "Core Kubernetes Cluster A Primary Failure",
         "root_cause_name": "Core Kubernetes Cluster A Primary Failure",
-        "causal_path": "INFRA:K8S:CORE-A \u2794 infra:k8s:core-a \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 CRM:TICKET:001",
+        "causal_path": "infra:k8s:core-a \u2794 sa5g:upf:003",
         "causal_confidence": 94.2,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
@@ -3389,33 +3559,31 @@ window.TelecomGraphPhysics = (function () {
         "SCN-005",
         "RUN-20260924065334702913"
       ],
-      "root_cause": "EPC:HSS:001",
+      "root_cause": "epc:hss:001",
       "propagation_path": [
-        "EPC:HSS:001",
-        "SA5G:UPF:003",
-        "IP:PE:RTR-21",
-        "EPC:MME:001",
-        "INC:DIAGNOSE-001",
-        "CRM:TICKET:001"
+        "epc:hss:001",
+        "sa5g:upf:003",
+        "mobile-core/services/lte-attach",
+        "epc:mme:001"
       ],
       "affected_nodes": {
-        "EPC:HSS:001": {
+        "epc:hss:001": {
           "severity": "ROOT_CAUSE",
           "status": "Subscriber DB Cluster A Primary Failure Saturation & Anomaly"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "MAJOR",
           "status": "Causal Propagation Intermediary"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "CRITICAL",
           "status": "Customer Incident Ticket Surge"
         },
-        "IP:PE:RTR-21": {
+        "mobile-core/services/lte-attach": {
           "severity": "CRITICAL",
           "status": "5G Mobile Data Service Degraded"
         },
-        "EPC:MME:001": {
+        "epc:mme:001": {
           "severity": "MAJOR",
           "status": "Telemetry Breach & Metric Anomaly"
         },
@@ -3429,7 +3597,7 @@ window.TelecomGraphPhysics = (function () {
         "run_id": "RUN-20260924065334702913",
         "root_cause_candidate": "Subscriber DB Cluster A Primary Failure",
         "root_cause_name": "Subscriber DB Cluster A Primary Failure",
-        "causal_path": "domains/mobile-core/networks/lte/functions/hss-01 \u2794 domains/mobile-core/networks/ps/functions/pgw-01 \u2794 mobile-core/services/lte-attach \u2794 grafana/alerts/grafana-alert-attach-mme-001",
+        "causal_path": "epc:hss:001 \u2794 sa5g:upf:003 \u2794 mobile-core/services/lte-attach \u2794 epc:mme:001",
         "causal_confidence": 94.2,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
@@ -3452,43 +3620,41 @@ window.TelecomGraphPhysics = (function () {
         "h2-gap-001",
         "H2-GAP-001"
       ],
-      "root_cause": "TX:FIBER:FR-07",
+      "root_cause": "tx:fiber:fr-07",
       "propagation_path": [
-        "TX:FIBER:FR-07",
-        "TX:DWDM:LAMBDA-22",
-        "TX:OTN:TRAIL-22",
-        "IP:PE:RTR-21",
-        "IP:VRF:N3-01",
-        "SA5G:UPF:003",
-        "CRM:TICKET:001",
-        "INC:DIAGNOSE-001"
+        "tx:fiber:fr-07",
+        "tx:dwdm:lambda-22",
+        "tx:otn:trail-22",
+        "ip:pe:rtr-21",
+        "ip:vrf:n3-01",
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
-        "TX:FIBER:FR-07": {
+        "tx:fiber:fr-07": {
           "severity": "ROOT_CAUSE",
           "status": "Physical Optical Cable Cut / Infinite dB Attenuation"
         },
-        "TX:DWDM:LAMBDA-22": {
+        "tx:dwdm:lambda-22": {
           "severity": "CRITICAL",
           "status": "Optical Power Loss / Transponder Laser Warning"
         },
-        "TX:OTN:TRAIL-22": {
+        "tx:otn:trail-22": {
           "severity": "CRITICAL",
           "status": "OTN AIS Defect & Automatic Protection Switch (APS) Flap"
         },
-        "IP:PE:RTR-21": {
+        "ip:pe:rtr-21": {
           "severity": "MAJOR",
           "status": "Optical Port Flapping & BGP Route Withdrawals"
         },
-        "IP:VRF:N3-01": {
+        "ip:vrf:n3-01": {
           "severity": "MAJOR",
           "status": "N3 Path Latency Spike (12ms -> 180ms)"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "MAJOR",
           "status": "Transport Buffer Discards"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "MAJOR",
           "status": "Enterprise MPLS SLA Breach Tickets"
         },
@@ -3512,33 +3678,31 @@ window.TelecomGraphPhysics = (function () {
         "h2-gap-002",
         "H2-GAP-002"
       ],
-      "root_cause": "INFRA:DNS:CORE",
+      "root_cause": "infra:dns:core",
       "propagation_path": [
-        "INFRA:DNS:CORE",
-        "SA5G:AMF:001",
-        "INFRA:K8S:CORE-A",
-        "SA5G:UPF:003",
-        "CRM:TICKET:001",
-        "INC:DIAGNOSE-001"
+        "infra:dns:core",
+        "sa5g:amf:001",
+        "infra:k8s:core-a",
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
-        "INFRA:DNS:CORE": {
+        "infra:dns:core": {
           "severity": "ROOT_CAUSE",
           "status": "DNS UDP Port 53 Exhaustion & Response Timeouts"
         },
-        "SA5G:AMF:001": {
+        "sa5g:amf:001": {
           "severity": "CRITICAL",
           "status": "NRF FQDN Resolution Failure"
         },
-        "INFRA:K8S:CORE-A": {
+        "infra:k8s:core-a": {
           "severity": "MAJOR",
           "status": "CoreDNS Worker Saturation"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "MAJOR",
           "status": "Session Setup Timeouts"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "CRITICAL",
           "status": "Widespread Internet Access Failure"
         },
@@ -3562,33 +3726,31 @@ window.TelecomGraphPhysics = (function () {
         "h3-lrn-001",
         "H3-LRN-001"
       ],
-      "root_cause": "CHG:OCS:001",
+      "root_cause": "chg:ocs:001",
       "propagation_path": [
-        "CHG:OCS:001",
-        "SA5G:PCF:001",
-        "SA5G:SMF:001",
-        "SA5G:UPF:003",
-        "CRM:TICKET:001",
-        "INC:DIAGNOSE-001"
+        "chg:ocs:001",
+        "sa5g:pcf:001",
+        "sa5g:smf:001",
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
-        "CHG:OCS:001": {
+        "chg:ocs:001": {
           "severity": "ROOT_CAUSE",
           "status": "Gy CCR/CCA Quota Loop & Credit Leak"
         },
-        "SA5G:PCF:001": {
+        "sa5g:pcf:001": {
           "severity": "MAJOR",
           "status": "Dynamic Policy Rule Degradation"
         },
-        "SA5G:SMF:001": {
+        "sa5g:smf:001": {
           "severity": "MAJOR",
           "status": "Session Modification Flooding"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "MAJOR",
           "status": "QoS Throttling Applied Erroneously"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "CRITICAL",
           "status": "Subscriber Billing Discrepancy Claims"
         },
@@ -3612,33 +3774,31 @@ window.TelecomGraphPhysics = (function () {
         "h4-wi-001",
         "H4-WI-001"
       ],
-      "root_cause": "RAN:GNB:501",
+      "root_cause": "ran:gnb:501",
       "propagation_path": [
-        "RAN:GNB:501",
-        "SA5G:AMF:001",
-        "INFRA:K8S:CORE-A",
-        "SA5G:UPF:003",
-        "CRM:TICKET:001",
-        "INC:DIAGNOSE-001"
+        "ran:gnb:501",
+        "sa5g:amf:001",
+        "infra:k8s:core-a",
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
-        "RAN:GNB:501": {
+        "ran:gnb:501": {
           "severity": "ROOT_CAUSE",
           "status": "Radio RRC Connection Overload Storm (>48k UE)"
         },
-        "SA5G:AMF:001": {
+        "sa5g:amf:001": {
           "severity": "CRITICAL",
           "status": "NGAP Ingress Queue Reaching 98% Buffer"
         },
-        "INFRA:K8S:CORE-A": {
+        "infra:k8s:core-a": {
           "severity": "MAJOR",
           "status": "Core Kubernetes Auto-Scaler Triggered"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "MAJOR",
           "status": "User Plane Path Congestion Forecast"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "MINOR",
           "status": "Proactive SLA Alarm - Zero Live Tickets"
         },
@@ -3662,33 +3822,31 @@ window.TelecomGraphPhysics = (function () {
         "h4-wi-002",
         "H4-WI-002"
       ],
-      "root_cause": "INFRA:COOL:A",
+      "root_cause": "infra:cool:a",
       "propagation_path": [
-        "INFRA:COOL:A",
-        "INFRA:NFVI:A",
-        "INFRA:K8S:CORE-A",
-        "SA5G:UPF:003",
-        "CRM:TICKET:001",
-        "INC:DIAGNOSE-001"
+        "infra:cool:a",
+        "infra:nfvi:a",
+        "infra:k8s:core-a",
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
-        "INFRA:COOL:A": {
+        "infra:cool:a": {
           "severity": "ROOT_CAUSE",
           "status": "Chiller Compressor Pressure Drop / Temp Rising"
         },
-        "INFRA:NFVI:A": {
+        "infra:nfvi:a": {
           "severity": "MAJOR",
           "status": "Thermal Exhaust Warning (38\u00b0C -> 44\u00b0C)"
         },
-        "INFRA:K8S:CORE-A": {
+        "infra:k8s:core-a": {
           "severity": "MAJOR",
           "status": "Proactive Workload Migration to DC-B"
         },
-        "SA5G:UPF:003": {
+        "sa5g:upf:003": {
           "severity": "INFO",
           "status": "Standby UPF Instance Preparing Hot-Takeover"
         },
-        "CRM:TICKET:001": {
+        "crm:ticket:001": {
           "severity": "NOMINAL",
           "status": "Zero Impact / Proactive Evacuation Modeled"
         },
@@ -3696,294 +3854,6 @@ window.TelecomGraphPhysics = (function () {
           "severity": "MAJOR",
           "status": "Facility Predictive Health Warning"
         }
-      }
-    },
-    {
-      "id": "demo-001",
-      "name": "Scenario DEMO-001: Transport-Induced Mobile Data Degradation",
-      "badge": "CRITICAL",
-      "stage": "H4",
-      "concept": "Anticipate",
-      "category": "H4 (Anticipate): Simulated RCA Run (DEMO-001)",
-      "description": "Simulated operational run RUN-20260924151512571934 for scenario DEMO-001.",
-      "aliases": [
-        "demo-001",
-        "DEMO-001",
-        "RUN-20260924151512571934",
-        "run-20260924151512571934"
-      ],
-      "root_cause": "ip:pe:rtr-21",
-      "propagation_path": [
-        "ip:pe:rtr-21",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
-      ],
-      "affected_nodes": {
-        "ip:pe:rtr-21": {
-          "severity": "ROOT_CAUSE",
-          "status": "IP:PE:RTR-21 Saturation & Anomaly"
-        },
-        "crm:ticket:001": {
-          "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "INC:DIAGNOSE-001": {
-          "severity": "CRITICAL",
-          "status": "Active Priority-1 Outage Incident"
-        }
-      },
-      "investigation_result": {
-        "scenario_id": "DEMO-001",
-        "run_id": "RUN-20260924151512571934",
-        "root_cause_candidate": "IP:PE:RTR-21",
-        "root_cause_name": "IP:PE:RTR-21",
-        "causal_path": "ip:pe:rtr-21 \u2794 CRM:TICKET:001 \u2794 INC:DIAGNOSE-001",
-        "causal_confidence": 0.942,
-        "mttr_baseline": "45m",
-        "mttr_actual": "1m",
-        "operational_evidence_count": 16,
-        "isolated_noise_count": 2,
-        "status": "SIMULATION_RUNNING"
-      }
-    },
-    {
-      "id": "scn-007",
-      "name": "Scenario SCN-007: Shared Timing Source Failure Affects RAN and Transport",
-      "badge": "CRITICAL",
-      "stage": "H1",
-      "concept": "Diagnose",
-      "category": "H1 (Diagnose): Simulated RCA Run (SCN-007)",
-      "description": "Simulated operational run RUN-20260924164217585691 for scenario SCN-007.",
-      "aliases": [
-        "scn-007",
-        "SCN-007",
-        "RUN-20260924164217585691",
-        "run-20260924164217585691"
-      ],
-      "root_cause": "ip:pe:rtr-21",
-      "propagation_path": [
-        "ip:pe:rtr-21",
-        "infra:ntp:core",
-        "sa5g:amf:001",
-        "infra:k8s:core-a",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
-      ],
-      "affected_nodes": {
-        "infra:ntp:core": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
-        },
-        "sa5g:amf:001": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
-        },
-        "infra:k8s:core-a": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
-        },
-        "sa5g:upf:003": {
-          "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
-        },
-        "crm:ticket:001": {
-          "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "ip:pe:rtr-21": {
-          "severity": "ROOT_CAUSE",
-          "status": "Core Timing Cluster Primary Failure Saturation & Anomaly"
-        },
-        "INC:DIAGNOSE-001": {
-          "severity": "CRITICAL",
-          "status": "Active Priority-1 Outage Incident"
-        }
-      },
-      "investigation_result": {
-        "scenario_id": "SCN-007",
-        "run_id": "RUN-20260924164217585691",
-        "root_cause_candidate": "Core Timing Cluster Primary Failure",
-        "root_cause_name": "Core Timing Cluster Primary Failure",
-        "causal_path": "IP:PE:RTR-21 \u2794 infra:ntp:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
-        "causal_confidence": 94.2,
-        "mttr_baseline": "45m",
-        "mttr_actual": "1m",
-        "operational_evidence_count": 19,
-        "isolated_noise_count": 6,
-        "status": "SIMULATION_RUNNING"
-      }
-    },
-    {
-      "id": "scn-008",
-      "name": "Scenario SCN-008: Shared Storage Failure Impacts Multiple Core CNFs",
-      "badge": "CRITICAL",
-      "stage": "H1",
-      "concept": "Diagnose",
-      "category": "H1 (Diagnose): Simulated RCA Run (SCN-008)",
-      "description": "Simulated operational run RUN-20260924170523418799 for scenario SCN-008.",
-      "aliases": [
-        "scn-008",
-        "SCN-008",
-        "RUN-20260924170523418799",
-        "run-20260924170523418799"
-      ],
-      "root_cause": "infra:k8s:core-a",
-      "propagation_path": [
-        "infra:k8s:core-a",
-        "infra:k8s:core-a",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
-      ],
-      "affected_nodes": {
-        "infra:k8s:core-a": {
-          "severity": "ROOT_CAUSE",
-          "status": "Core Kubernetes Cluster A Primary Failure Saturation & Anomaly"
-        },
-        "sa5g:upf:003": {
-          "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
-        },
-        "crm:ticket:001": {
-          "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "INC:DIAGNOSE-001": {
-          "severity": "CRITICAL",
-          "status": "Active Priority-1 Outage Incident"
-        }
-      },
-      "investigation_result": {
-        "scenario_id": "SCN-008",
-        "run_id": "RUN-20260924170523418799",
-        "root_cause_candidate": "Core Kubernetes Cluster A Primary Failure",
-        "root_cause_name": "Core Kubernetes Cluster A Primary Failure",
-        "causal_path": "INFRA:K8S:CORE-A \u2794 infra:k8s:core-a \u2794 sa5g:upf:003 \u2794 crm:ticket:001 \u2794 INC:DIAGNOSE-001",
-        "causal_confidence": 94.2,
-        "mttr_baseline": "45m",
-        "mttr_actual": "1m",
-        "operational_evidence_count": 15,
-        "isolated_noise_count": 6,
-        "status": "SIMULATION_RUNNING"
-      }
-    },
-    {
-      "id": "scn-009",
-      "name": "Scenario SCN-009: Shared Firewall Cluster Failure Affects Multiple Services",
-      "badge": "CRITICAL",
-      "stage": "H1",
-      "concept": "Diagnose",
-      "category": "H1 (Diagnose): Simulated RCA Run (SCN-009)",
-      "description": "Simulated operational run RUN-20260924180446048619 for scenario SCN-009.",
-      "aliases": [
-        "scn-009",
-        "SCN-009",
-        "RUN-20260924180446048619",
-        "run-20260924180446048619"
-      ],
-      "root_cause": "infra:fw:sgi",
-      "propagation_path": [
-        "infra:fw:sgi",
-        "infra:fw:sgi",
-        "ip:vrf:sgi-01",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
-      ],
-      "affected_nodes": {
-        "infra:fw:sgi": {
-          "severity": "ROOT_CAUSE",
-          "status": "SGi Firewall Pair Primary Failure Saturation & Anomaly"
-        },
-        "ip:vrf:sgi-01": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
-        },
-        "sa5g:upf:003": {
-          "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
-        },
-        "crm:ticket:001": {
-          "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "INC:DIAGNOSE-001": {
-          "severity": "CRITICAL",
-          "status": "Active Priority-1 Outage Incident"
-        }
-      },
-      "investigation_result": {
-        "scenario_id": "SCN-009",
-        "run_id": "RUN-20260924180446048619",
-        "root_cause_candidate": "SGi Firewall Pair Primary Failure",
-        "root_cause_name": "SGi Firewall Pair Primary Failure",
-        "causal_path": "INFRA:FW:SGI \u2794 infra:fw:sgi \u2794 ip:vrf:sgi-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001",
-        "causal_confidence": 94.2,
-        "mttr_baseline": "45m",
-        "mttr_actual": "1m",
-        "operational_evidence_count": 17,
-        "isolated_noise_count": 6,
-        "status": "SIMULATION_RUNNING"
-      }
-    },
-    {
-      "id": "scn-010",
-      "name": "Scenario SCN-010: Shared Leaf/TOR Dependency Defeats Logical Redundancy",
-      "badge": "CRITICAL",
-      "stage": "H1",
-      "concept": "Diagnose",
-      "category": "H1 (Diagnose): Simulated RCA Run (SCN-010)",
-      "description": "Simulated operational run RUN-20260924182915874014 for scenario SCN-010.",
-      "aliases": [
-        "scn-010",
-        "SCN-010",
-        "RUN-20260924182915874014",
-        "run-20260924182915874014"
-      ],
-      "root_cause": "ip:pe:rtr-21",
-      "propagation_path": [
-        "ip:pe:rtr-21",
-        "ip:pe:rtr-21",
-        "ip:vrf:n3-01",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
-      ],
-      "affected_nodes": {
-        "ip:pe:rtr-21": {
-          "severity": "ROOT_CAUSE",
-          "status": "PE-RTR-21 Primary Failure Saturation & Anomaly"
-        },
-        "ip:vrf:n3-01": {
-          "severity": "MAJOR",
-          "status": "Causal Propagation Intermediary"
-        },
-        "sa5g:upf:003": {
-          "severity": "CRITICAL",
-          "status": "5G Mobile Data Session Drops"
-        },
-        "crm:ticket:001": {
-          "severity": "CRITICAL",
-          "status": "Customer Incident Ticket Surge"
-        },
-        "INC:DIAGNOSE-001": {
-          "severity": "CRITICAL",
-          "status": "Active Priority-1 Outage Incident"
-        }
-      },
-      "investigation_result": {
-        "scenario_id": "SCN-010",
-        "run_id": "RUN-20260924182915874014",
-        "root_cause_candidate": "PE-RTR-21 Primary Failure",
-        "root_cause_name": "PE-RTR-21 Primary Failure",
-        "causal_path": "IP:PE:RTR-21 \u2794 ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003 \u2794 crm:ticket:001",
-        "causal_confidence": 94.2,
-        "mttr_baseline": "45m",
-        "mttr_actual": "1m",
-        "operational_evidence_count": 17,
-        "isolated_noise_count": 6,
-        "status": "SIMULATION_RUNNING"
       }
     },
     {
@@ -4004,9 +3874,7 @@ window.TelecomGraphPhysics = (function () {
       "propagation_path": [
         "infra:power:a",
         "infra:dc:a",
-        "sa5g:upf:003",
-        "crm:ticket:001",
-        "INC:DIAGNOSE-001"
+        "sa5g:upf:003"
       ],
       "affected_nodes": {
         "infra:power:a": {
@@ -4035,11 +3903,286 @@ window.TelecomGraphPhysics = (function () {
         "run_id": "RUN-20260924093806920376",
         "root_cause_candidate": "DC-A Power Feed A Primary Failure",
         "root_cause_name": "DC-A Power Feed A Primary Failure",
-        "causal_path": "INFRA:POWER:A \u2794 INFRA:DC:A \u2794 SA5G:UPF:003 \u2794 CRM:TICKET:001 \u2794 INC:DIAGNOSE-001",
+        "causal_path": "infra:power:a \u2794 infra:dc:a \u2794 sa5g:upf:003",
         "causal_confidence": 94.2,
         "mttr_baseline": "45m",
         "mttr_actual": "1m",
         "operational_evidence_count": 16,
+        "isolated_noise_count": 6,
+        "status": "SIMULATION_RUNNING"
+      }
+    },
+    {
+      "id": "demo-001",
+      "name": "Scenario DEMO-001: Transport-Induced Mobile Data Degradation",
+      "badge": "CRITICAL",
+      "stage": "H1",
+      "concept": "Diagnose",
+      "category": "H1 (Diagnose): Simulated RCA Run (DEMO-001)",
+      "description": "Simulated operational run RUN-20260929181046856547 for scenario DEMO-001.",
+      "aliases": [
+        "demo-001",
+        "DEMO-001",
+        "RUN-20260929181046856547",
+        "run-20260929181046856547"
+      ],
+      "root_cause": "ip:pe:rtr-21",
+      "propagation_path": [
+        "ip:pe:rtr-21"
+      ],
+      "affected_nodes": {
+        "ip:pe:rtr-21": {
+          "severity": "ROOT_CAUSE",
+          "status": "IP:PE:RTR-21 Saturation & Anomaly"
+        },
+        "crm:ticket:001": {
+          "severity": "CRITICAL",
+          "status": "Customer Incident Ticket Surge"
+        },
+        "INC:DIAGNOSE-001": {
+          "severity": "CRITICAL",
+          "status": "Active Priority-1 Outage Incident"
+        }
+      },
+      "investigation_result": {
+        "scenario_id": "DEMO-001",
+        "run_id": "RUN-20260929181046856547",
+        "root_cause_candidate": "IP:PE:RTR-21",
+        "root_cause_name": "IP:PE:RTR-21",
+        "causal_path": "ip:pe:rtr-21",
+        "causal_confidence": 0.942,
+        "mttr_baseline": "45m",
+        "mttr_actual": "1m",
+        "operational_evidence_count": 16,
+        "isolated_noise_count": 2,
+        "status": "SIMULATION_RUNNING"
+      }
+    },
+    {
+      "id": "scn-007",
+      "name": "Scenario SCN-007: Shared Timing Source Failure Affects RAN and Transport",
+      "badge": "CRITICAL",
+      "stage": "H1",
+      "concept": "Diagnose",
+      "category": "H1 (Diagnose): Simulated RCA Run (SCN-007)",
+      "description": "Simulated operational run RUN-20260924164217585691 for scenario SCN-007.",
+      "aliases": [
+        "scn-007",
+        "SCN-007",
+        "RUN-20260924164217585691",
+        "run-20260924164217585691"
+      ],
+      "root_cause": "Core Timing Cluster Primary Failure",
+      "propagation_path": [
+        "Core Timing Cluster Primary Failure",
+        "infra:ntp:core",
+        "sa5g:amf:001",
+        "infra:k8s:core-a",
+        "sa5g:upf:003"
+      ],
+      "affected_nodes": {
+        "infra:ntp:core": {
+          "severity": "MAJOR",
+          "status": "INFRA:NTP:CORE: NTP_PTP_CLUSTER_DEGRADED"
+        },
+        "sa5g:amf:001": {
+          "severity": "MAJOR",
+          "status": "SA5G:AMF:001: AMF_DEGRADED"
+        },
+        "infra:k8s:core-a": {
+          "severity": "CRITICAL",
+          "status": "INFRA:K8S:CORE-A: KUBERNETES_CLUSTER_DEGRADED"
+        },
+        "sa5g:upf:003": {
+          "severity": "CRITICAL",
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
+        },
+        "crm:ticket:001": {
+          "severity": "CRITICAL",
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
+        },
+        "Core Timing Cluster Primary Failure": {
+          "severity": "ROOT_CAUSE",
+          "status": "Core Timing Cluster Primary Failure Root Failure Condition"
+        },
+        "INC:DIAGNOSE-001": {
+          "severity": "CRITICAL",
+          "status": "Active Priority-1 Outage Incident"
+        }
+      },
+      "investigation_result": {
+        "scenario_id": "SCN-007",
+        "run_id": "RUN-20260924164217585691",
+        "root_cause_candidate": "Core Timing Cluster Primary Failure",
+        "root_cause_name": "Core Timing Cluster Primary Failure",
+        "causal_path": "Core Timing Cluster Primary Failure \u2794 infra:ntp:core \u2794 sa5g:amf:001 \u2794 infra:k8s:core-a \u2794 sa5g:upf:003",
+        "causal_confidence": 94.2,
+        "mttr_baseline": "45m",
+        "mttr_actual": "1m",
+        "operational_evidence_count": 19,
+        "isolated_noise_count": 6,
+        "status": "SIMULATION_RUNNING"
+      }
+    },
+    {
+      "id": "scn-008",
+      "name": "Scenario SCN-008: Shared Storage Failure Impacts Multiple Core CNFs",
+      "badge": "CRITICAL",
+      "stage": "H1",
+      "concept": "Diagnose",
+      "category": "H1 (Diagnose): Simulated RCA Run (SCN-008)",
+      "description": "Simulated operational run RUN-20260924170523418799 for scenario SCN-008.",
+      "aliases": [
+        "scn-008",
+        "SCN-008",
+        "RUN-20260924170523418799",
+        "run-20260924170523418799"
+      ],
+      "root_cause": "infra:k8s:core-a",
+      "propagation_path": [
+        "infra:k8s:core-a",
+        "sa5g:upf:003"
+      ],
+      "affected_nodes": {
+        "infra:k8s:core-a": {
+          "severity": "ROOT_CAUSE",
+          "status": "Core Kubernetes Cluster A Primary Failure Root Failure Condition"
+        },
+        "sa5g:upf:003": {
+          "severity": "CRITICAL",
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
+        },
+        "crm:ticket:001": {
+          "severity": "CRITICAL",
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
+        },
+        "INC:DIAGNOSE-001": {
+          "severity": "CRITICAL",
+          "status": "Active Priority-1 Outage Incident"
+        }
+      },
+      "investigation_result": {
+        "scenario_id": "SCN-008",
+        "run_id": "RUN-20260924170523418799",
+        "root_cause_candidate": "Core Kubernetes Cluster A Primary Failure",
+        "root_cause_name": "Core Kubernetes Cluster A Primary Failure",
+        "causal_path": "infra:k8s:core-a \u2794 sa5g:upf:003",
+        "causal_confidence": 94.2,
+        "mttr_baseline": "45m",
+        "mttr_actual": "1m",
+        "operational_evidence_count": 15,
+        "isolated_noise_count": 6,
+        "status": "SIMULATION_RUNNING"
+      }
+    },
+    {
+      "id": "scn-009",
+      "name": "Scenario SCN-009: Shared Firewall Cluster Failure Affects Multiple Services",
+      "badge": "CRITICAL",
+      "stage": "H1",
+      "concept": "Diagnose",
+      "category": "H1 (Diagnose): Simulated RCA Run (SCN-009)",
+      "description": "Simulated operational run RUN-20260924180446048619 for scenario SCN-009.",
+      "aliases": [
+        "scn-009",
+        "SCN-009",
+        "RUN-20260924180446048619",
+        "run-20260924180446048619"
+      ],
+      "root_cause": "infra:fw:sgi",
+      "propagation_path": [
+        "infra:fw:sgi",
+        "ip:vrf:sgi-01",
+        "sa5g:upf:003"
+      ],
+      "affected_nodes": {
+        "infra:fw:sgi": {
+          "severity": "ROOT_CAUSE",
+          "status": "SGi Firewall Pair Primary Failure Root Failure Condition"
+        },
+        "ip:vrf:sgi-01": {
+          "severity": "CRITICAL",
+          "status": "IP:VRF:SGI-01: VRF_DEGRADED"
+        },
+        "sa5g:upf:003": {
+          "severity": "CRITICAL",
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
+        },
+        "crm:ticket:001": {
+          "severity": "CRITICAL",
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
+        },
+        "INC:DIAGNOSE-001": {
+          "severity": "CRITICAL",
+          "status": "Active Priority-1 Outage Incident"
+        }
+      },
+      "investigation_result": {
+        "scenario_id": "SCN-009",
+        "run_id": "RUN-20260924180446048619",
+        "root_cause_candidate": "SGi Firewall Pair Primary Failure",
+        "root_cause_name": "SGi Firewall Pair Primary Failure",
+        "causal_path": "infra:fw:sgi \u2794 ip:vrf:sgi-01 \u2794 sa5g:upf:003",
+        "causal_confidence": 94.2,
+        "mttr_baseline": "45m",
+        "mttr_actual": "1m",
+        "operational_evidence_count": 17,
+        "isolated_noise_count": 6,
+        "status": "SIMULATION_RUNNING"
+      }
+    },
+    {
+      "id": "scn-010",
+      "name": "Scenario SCN-010: Shared Leaf/TOR Dependency Defeats Logical Redundancy",
+      "badge": "CRITICAL",
+      "stage": "H1",
+      "concept": "Diagnose",
+      "category": "H1 (Diagnose): Simulated RCA Run (SCN-010)",
+      "description": "Simulated operational run RUN-20260924182915874014 for scenario SCN-010.",
+      "aliases": [
+        "scn-010",
+        "SCN-010",
+        "RUN-20260924182915874014",
+        "run-20260924182915874014"
+      ],
+      "root_cause": "ip:pe:rtr-21",
+      "propagation_path": [
+        "ip:pe:rtr-21",
+        "ip:vrf:n3-01",
+        "sa5g:upf:003"
+      ],
+      "affected_nodes": {
+        "ip:pe:rtr-21": {
+          "severity": "ROOT_CAUSE",
+          "status": "PE-RTR-21 Primary Failure Root Failure Condition"
+        },
+        "ip:vrf:n3-01": {
+          "severity": "CRITICAL",
+          "status": "IP:VRF:N3-01: VRF_DEGRADED"
+        },
+        "sa5g:upf:003": {
+          "severity": "CRITICAL",
+          "status": "SA5G:UPF:003: UPF_DEGRADED"
+        },
+        "crm:ticket:001": {
+          "severity": "CRITICAL",
+          "status": "CRM:TICKET:001: CUSTOMER_TICKET_SERVICE_DEGRADED"
+        },
+        "INC:DIAGNOSE-001": {
+          "severity": "CRITICAL",
+          "status": "Active Priority-1 Outage Incident"
+        }
+      },
+      "investigation_result": {
+        "scenario_id": "SCN-010",
+        "run_id": "RUN-20260924182915874014",
+        "root_cause_candidate": "PE-RTR-21 Primary Failure",
+        "root_cause_name": "PE-RTR-21 Primary Failure",
+        "causal_path": "ip:pe:rtr-21 \u2794 ip:vrf:n3-01 \u2794 sa5g:upf:003",
+        "causal_confidence": 94.2,
+        "mttr_baseline": "45m",
+        "mttr_actual": "1m",
+        "operational_evidence_count": 17,
         "isolated_noise_count": 6,
         "status": "SIMULATION_RUNNING"
       }
@@ -4049,6 +4192,7 @@ window.TelecomGraphPhysics = (function () {
     let nodes = [];
     let links = [];
     let activeDomains = new Set(GRAPH_DATA.domains);
+    let activePlanes = new Set(['topology', 'incident', 'reasoning', 'pattern']);
     let selectedNode = null;
     let hoveredNode = null;
     let highlightedNodes = new Set();
@@ -4072,16 +4216,77 @@ window.TelecomGraphPhysics = (function () {
       DOMAIN_COUNTS[n.domain] = (DOMAIN_COUNTS[n.domain] || 0) + 1;
     });
 
+    function togglePlane(plane) {
+      if (activePlanes.has(plane)) {
+        if (activePlanes.size > 1) {
+          activePlanes.delete(plane);
+        }
+      } else {
+        activePlanes.add(plane);
+      }
+      updatePlaneButtons();
+    }
+
+    function resetPlanes() {
+      activePlanes = new Set(['topology', 'incident', 'reasoning', 'pattern']);
+      updatePlaneButtons();
+    }
+
+    function updatePlaneButtons() {
+      ['topology', 'incident', 'reasoning', 'pattern'].forEach(p => {
+        const sbBtn = document.getElementById('plane-btn-' + p);
+        const cvBtn = document.getElementById('canvas-plane-' + p);
+        const isActive = activePlanes.has(p);
+        if (sbBtn) {
+          sbBtn.classList.toggle('opacity-35', !isActive);
+          sbBtn.classList.toggle('bg-slate-900/60', !isActive);
+        }
+        if (cvBtn) {
+          cvBtn.classList.toggle('opacity-35', !isActive);
+          cvBtn.classList.toggle('line-through', !isActive);
+        }
+      });
+    }
+
+    function updatePlaneCounts() {
+      const counts = { topology: 0, incident: 0, reasoning: 0, pattern: 0 };
+      nodes.forEach(n => {
+        const p = n.plane || 'topology';
+        if (counts[p] !== undefined) counts[p]++;
+      });
+      for (const [p, c] of Object.entries(counts)) {
+        const el = document.getElementById('plane-count-' + p);
+        if (el) el.innerText = c;
+      }
+    }
+
+    function isNodeVisible(n) {
+      if (!n) return false;
+      if (!activeDomains.has(n.domain)) return false;
+      const p = n.plane || 'topology';
+      if (!activePlanes.has(p)) return false;
+      return true;
+    }
+
+    function isLinkVisible(l) {
+      if (!l || !l.sourceNode || !l.targetNode) return false;
+      if (!isNodeVisible(l.sourceNode) || !isNodeVisible(l.targetNode)) return false;
+      const p = l.plane || 'topology';
+      if (!activePlanes.has(p)) return false;
+      return true;
+    }
+
     function initData() {
       nodes = GRAPH_DATA.nodes.map(n => {
         let radius = 12;
         if (n.type === 'service' || n.id.includes('sgi-data') || n.id.includes('lte-attach')) radius = 18;
-        else if (n.type === 'incident' || n.type === 'incident-alias') radius = 16;
+        else if (n.type === 'incident' || n.type === 'incident-alias' || n.plane === 'incident') radius = 16;
         else if (n.type === 'network-function' || n.type === 'domain-function') radius = 15;
-        else if (n.type === 'hypothesis' || n.type === 'correlation-cluster') radius = 14;
+        else if (n.type === 'hypothesis' || n.type === 'correlation-cluster' || n.plane === 'reasoning') radius = 14;
 
         return {
           ...n,
+          plane: n.plane || 'topology',
           x: n.x,
           y: n.y,
           vx: 0,
@@ -4095,11 +4300,13 @@ window.TelecomGraphPhysics = (function () {
       links = GRAPH_DATA.links.map(l => {
         const sourceNode = nodes.find(n => n.id === l.source);
         const targetNode = nodes.find(n => n.id === l.target);
-        return { ...l, sourceNode, targetNode };
+        return { ...l, plane: l.plane || 'topology', sourceNode, targetNode };
       }).filter(l => l.sourceNode && l.targetNode);
 
       renderScenarioList();
       renderDomainList();
+      updatePlaneCounts();
+      updatePlaneButtons();
       
       const urlParams = new URLSearchParams(window.location.search);
       const scenarioParam = urlParams.get('scenario') || urlParams.get('id') || 'baseline';
@@ -4306,6 +4513,21 @@ window.TelecomGraphPhysics = (function () {
         }
       });
 
+      // Ensure all nodes in propagation_path are highlighted, domains active, and assigned outage severity
+      if (scn.propagation_path && Array.isArray(scn.propagation_path)) {
+        scn.propagation_path.forEach((pid, pidx) => {
+          const pNode = nodes.find(n => n.id.toLowerCase() === (pid || '').toLowerCase() || (n.slug && n.slug.toLowerCase() === (pid || '').toLowerCase()));
+          if (pNode) {
+            highlightedNodes.add(pNode.id);
+            activeDomains.add(pNode.domain);
+            if (pNode.alarmSeverity === 'NOMINAL' || pNode.alarmSeverity === 'INFO') {
+              pNode.alarmSeverity = (pidx === 0) ? 'ROOT_CAUSE' : (scn.badge === 'CRITICAL' ? 'CRITICAL' : 'MAJOR');
+              pNode.alarmStatus = `Causal Propagation Hop ${pidx + 1}`;
+            }
+          }
+        });
+      }
+
       renderScenarioList();
       renderDomainList();
 
@@ -4387,22 +4609,58 @@ window.TelecomGraphPhysics = (function () {
           if (d + dn.radius + 20 > maxR) maxR = d + dn.radius + 20;
         }
 
+        // Dynamic impact state for domain demarcation
+        const affectedInDom = domNodes.filter(n => highlightedNodes.has(n.id));
+        const hasRootInDom = affectedInDom.some(n => n.alarmSeverity === 'ROOT_CAUSE');
+        const hasCritInDom = affectedInDom.some(n => n.alarmSeverity === 'CRITICAL');
+        const isCriticalScn = currentScenario && currentScenario.badge === 'CRITICAL';
+        const isEvidenceDom = domName === 'CRM & Customer Experience' || domName === 'OSS & Management Systems';
+        const hasSymptoms = isEvidenceDom && affectedInDom.length > 0;
+        const isImpactedDom = !isEvidenceDom && (hasRootInDom || hasCritInDom || (isCriticalScn && affectedInDom.length > 0));
+
         // Soft Cluster Aura
         ctx.beginPath();
         ctx.arc(center.x, center.y, maxR, 0, Math.PI * 2);
-        ctx.fillStyle = color + "0d"; // 5% opacity
-        ctx.fill();
-        ctx.lineWidth = 1.2;
-        ctx.setLineDash([4, 4]);
-        ctx.strokeStyle = color + "38"; // 22% opacity
-        ctx.stroke();
-        ctx.setLineDash([]);
+        if (hasRootInDom) {
+          ctx.fillStyle = "rgba(239, 68, 68, 0.08)";
+          ctx.fill();
+          ctx.lineWidth = 2.0;
+          ctx.setLineDash([6, 4]);
+          ctx.strokeStyle = "rgba(239, 68, 68, 0.75)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        } else if (isImpactedDom) {
+          ctx.fillStyle = "rgba(239, 68, 68, 0.05)";
+          ctx.fill();
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([5, 5]);
+          ctx.strokeStyle = "rgba(239, 68, 68, 0.55)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        } else if (hasSymptoms) {
+          ctx.fillStyle = "rgba(245, 158, 11, 0.05)";
+          ctx.fill();
+          ctx.lineWidth = 1.6;
+          ctx.setLineDash([5, 5]);
+          ctx.strokeStyle = "rgba(245, 158, 11, 0.45)";
+          ctx.stroke();
+          ctx.setLineDash([]);
+        } else {
+          ctx.fillStyle = color + "0d"; // 5% opacity
+          ctx.fill();
+          ctx.lineWidth = 1.2;
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = color + "38"; // 22% opacity
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
 
         // Cluster Header Tag
-        ctx.fillStyle = color + "cc";
+        ctx.fillStyle = hasRootInDom ? "#ef4444" : (isImpactedDom ? "#ef4444" : (hasSymptoms ? "#f59e0b" : (color + "cc")));
         ctx.font = "600 11px Inter, sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText(domName.toUpperCase(), center.x, center.y - maxR - 8);
+        const headerSuffix = hasRootInDom ? " [ROOT ORIGIN]" : (isImpactedDom ? " [CRITICAL BLAST]" : (hasSymptoms ? " [CUSTOMER SYMPTOMS]" : ""));
+        ctx.fillText(domName.toUpperCase() + headerSuffix, center.x, center.y - maxR - 8);
       }
 
       // 0a. Draw TM Forum Sub-Cluster Demarcation Enclosures & Labels
@@ -4477,8 +4735,14 @@ window.TelecomGraphPhysics = (function () {
       // 0b. Draw Multi-Tier Blast Radius Boundary Enclosures for Affected Domains
       let rootCauseDomain = null;
       if (highlightedNodes.size > 0) {
+        // Evidence / Symptom Sinks: Domains that capture observational customer/telemetry impact, NOT causal network hops
+        const EVIDENCE_DOMAINS = new Set([
+          'CRM & Customer Experience',
+          'OSS & Management Systems'
+        ]);
+
         const affectedByDomain = {};
-        nodes.filter(n => highlightedNodes.has(n.id) && activeDomains.has(n.domain)).forEach(n => {
+        nodes.filter(n => highlightedNodes.has(n.id) && isNodeVisible(n)).forEach(n => {
           affectedByDomain[n.domain] = affectedByDomain[n.domain] || [];
           affectedByDomain[n.domain].push(n);
         });
@@ -4503,9 +4767,13 @@ window.TelecomGraphPhysics = (function () {
           const hasRoot = dnodes.some(n => n.alarmSeverity === 'ROOT_CAUSE');
           const hasCrit = dnodes.some(n => n.alarmSeverity === 'CRITICAL');
           const hasMaj = dnodes.some(n => n.alarmSeverity === 'MAJOR');
-          const severityRank = hasRoot ? 4 : (hasCrit ? 3 : (hasMaj ? 2 : 1));
+          const isCritScn = currentScenario && currentScenario.badge === 'CRITICAL';
+          const hasPathNode = dnodes.some(n => (currentScenario && currentScenario.propagation_path && currentScenario.propagation_path.some(pid => pid.toLowerCase() === n.id.toLowerCase() || (n.slug && pid.toLowerCase() === n.slug.toLowerCase()))));
+          const isEvidenceDom = EVIDENCE_DOMAINS.has(dom);
+          const isDomainCritical = !isEvidenceDom && (hasCrit || (isCritScn && (hasMaj || hasPathNode || dnodes.length > 0)));
+          const severityRank = hasRoot ? 4 : (isDomainCritical ? 3 : (hasMaj ? 2 : 1));
 
-          domainList.push({ dom, dnodes, x: avgX, y: avgY, r: maxR, hasRoot, hasCrit, hasMaj, rank: severityRank });
+          domainList.push({ dom, dnodes, x: avgX, y: avgY, r: maxR, hasRoot, hasCrit: isDomainCritical, hasMaj, rank: severityRank });
 
           let borderColor = 'rgba(234, 179, 8, 0.85)';
           let fillColor = 'rgba(234, 179, 8, 0.08)';
@@ -4518,9 +4786,14 @@ window.TelecomGraphPhysics = (function () {
             fillColor = 'rgba(239, 68, 68, 0.15)';
             badgeText = `🎯 ROOT CAUSE ORIGIN (${dnodes.length} affected)`;
             badgeColor = '#ef4444';
-          } else if (hasCrit) {
+          } else if (isEvidenceDom) {
+            borderColor = 'rgba(245, 158, 11, 0.75)';
+            fillColor = 'rgba(245, 158, 11, 0.08)';
+            badgeText = `🎫 OBSERVATIONAL SYMPTOMS (${dnodes.length} affected)`;
+            badgeColor = '#f59e0b';
+          } else if (isDomainCritical) {
             borderColor = 'rgba(239, 68, 68, 0.85)';
-            fillColor = 'rgba(239, 68, 68, 0.11)';
+            fillColor = 'rgba(239, 68, 68, 0.12)';
             badgeText = `🔴 CRITICAL BLAST RADIUS (${dnodes.length} affected)`;
             badgeColor = '#ef4444';
           } else if (hasMaj) {
@@ -4564,17 +4837,10 @@ window.TelecomGraphPhysics = (function () {
         // 0c. Draw Prominent Straight Macro Causal Propagation Vectors Overlay across Domains
         if (domainList.length > 1) {
           const rootDomName = rootCauseDomain ? rootCauseDomain.dom : null;
-
-          // Evidence / Symptom Sinks: Domains that capture observational customer/telemetry impact, NOT causal drivers
-          const EVIDENCE_DOMAINS = new Set([
-            'CRM & Customer Experience',
-            'Observability & Remediation'
-          ]);
-
           const conduitEdges = [];
 
           if (currentScenario && currentScenario.propagation_path && currentScenario.propagation_path.length > 0) {
-            // 1. Primary Causal Spine (Network Root -> Network Intermediaries -> Cross-Domain Incident)
+            // 1. Primary Causal Spine (Network Root -> Network Intermediaries)
             const spineDoms = [];
             if (rootDomName && !EVIDENCE_DOMAINS.has(rootDomName)) {
               spineDoms.push(rootDomName);
@@ -4582,17 +4848,19 @@ window.TelecomGraphPhysics = (function () {
 
             for (let i = 0; i < currentScenario.propagation_path.length; i++) {
               const nid = currentScenario.propagation_path[i];
-              const n = nodes.find(node => node.id === nid || (node.id && node.id.toLowerCase() === (nid || '').toLowerCase()) || (node.slug && node.slug.toLowerCase() === (nid || '').toLowerCase()));
-              if (n && activeDomains.has(n.domain) && !EVIDENCE_DOMAINS.has(n.domain)) {
+              const n = nodes.find(node => node.id.toLowerCase() === (nid || '').toLowerCase() || (node.slug && node.slug.toLowerCase() === (nid || '').toLowerCase()));
+              if (n && !EVIDENCE_DOMAINS.has(n.domain)) {
                 if (!spineDoms.includes(n.domain)) {
                   spineDoms.push(n.domain);
                 }
               }
             }
 
-            // If an incident in Cross-Domain Operations is affected, it is the operational escalation target
-            if (domainList.some(d => d.dom === 'Cross-Domain Operations') && !spineDoms.includes('Cross-Domain Operations')) {
-              spineDoms.push('Cross-Domain Operations');
+            // Ensure all affected non-evidence carrier domains in domainList are connected into the spine
+            for (const dObj of domainList) {
+              if (!EVIDENCE_DOMAINS.has(dObj.dom) && !spineDoms.includes(dObj.dom)) {
+                spineDoms.push(dObj.dom);
+              }
             }
 
             // Consecutive spine edges: d[i] -> d[i+1]
@@ -4603,23 +4871,10 @@ window.TelecomGraphPhysics = (function () {
                 conduitEdges.push({ from: dStart, to: dEnd, isRoot: dStart.hasRoot, isEvidence: false });
               }
             }
-
-            // 2. Downstream Evidence Branches (Leaf Sinks: e.g. Impacted Service/Core -> Customer Trouble Tickets in CRM)
-            // The last functional network domain in the spine drives customer and telemetry evidence
-            const primaryImpactDomName = [...spineDoms].reverse().find(d => !EVIDENCE_DOMAINS.has(d) && d !== 'Cross-Domain Operations') || rootDomName;
-            const primaryImpactDom = domainList.find(d => d.dom === primaryImpactDomName);
-
-            if (primaryImpactDom) {
-              for (const dObj of domainList) {
-                if (EVIDENCE_DOMAINS.has(dObj.dom) && dObj.dom !== primaryImpactDomName) {
-                  // One-way directed branch into Evidence Sink (TERMINAL LEAF - NEVER EXITS)
-                  conduitEdges.push({ from: primaryImpactDom, to: dObj, isRoot: false, isEvidence: true });
-                }
-              }
-            }
           } else {
-            // Fallback: sort by descending severity rank
-            const orderedDomains = [...domainList].sort((a, b) => b.rank - a.rank);
+            // Fallback: sort non-evidence domains by descending severity rank
+            const nonEvidenceDomains = domainList.filter(d => !EVIDENCE_DOMAINS.has(d.dom));
+            const orderedDomains = [...nonEvidenceDomains].sort((a, b) => b.rank - a.rank);
             for (let i = 0; i < orderedDomains.length - 1; i++) {
               conduitEdges.push({ from: orderedDomains[i], to: orderedDomains[i + 1], isRoot: orderedDomains[i].hasRoot, isEvidence: false });
             }
@@ -4709,7 +4964,7 @@ window.TelecomGraphPhysics = (function () {
       // 1. Draw Links & Causal Conduits
       if (showTopologyLinks) {
         for (const link of links) {
-          if (!activeDomains.has(link.sourceNode.domain) || !activeDomains.has(link.targetNode.domain)) continue;
+          if (!isLinkVisible(link)) continue;
           const isImpactedLink = highlightedNodes.has(link.sourceNode.id) && highlightedNodes.has(link.targetNode.id);
           const isRootLink = isImpactedLink && (link.sourceNode.alarmSeverity === 'ROOT_CAUSE' || link.targetNode.alarmSeverity === 'ROOT_CAUSE');
           const isConnectedToSelected = selectedNode && (link.sourceNode.id === selectedNode.id || link.targetNode.id === selectedNode.id);
@@ -4755,7 +5010,7 @@ window.TelecomGraphPhysics = (function () {
       // 2. Draw Nodes
       let rootCauseNode = null;
       for (const n of nodes) {
-        if (!activeDomains.has(n.domain)) continue;
+        if (!isNodeVisible(n)) continue;
         const isSelected = selectedNode && selectedNode.id === n.id;
         const isHovered = hoveredNode && hoveredNode.id === n.id;
         const isImpacted = highlightedNodes.has(n.id);
@@ -4962,7 +5217,7 @@ window.TelecomGraphPhysics = (function () {
       const mouseWorld = screenToWorld(e.clientX - rect.left, e.clientY - rect.top);
       mouseWorldPos = mouseWorld;
       const clicked = nodes.find(n => {
-        if (!activeDomains.has(n.domain)) return false;
+        if (!isNodeVisible(n)) return false;
         return Math.hypot(n.x - mouseWorld.x, n.y - mouseWorld.y) <= n.radius + 5;
       });
       if (clicked) {
@@ -4988,7 +5243,7 @@ window.TelecomGraphPhysics = (function () {
         camera.y = e.clientY - dragStart.y;
       } else {
         const hovered = nodes.find(n => {
-          if (!activeDomains.has(n.domain)) return false;
+          if (!isNodeVisible(n)) return false;
           return Math.hypot(n.x - mouseWorld.x, n.y - mouseWorld.y) <= n.radius + 5;
         });
         hoveredNode = hovered || null;
@@ -5022,7 +5277,7 @@ window.TelecomGraphPhysics = (function () {
       const container = document.getElementById('domainsList');
       container.innerHTML = '';
       GRAPH_DATA.domains.forEach(dom => {
-        const count = nodes.filter(n => n.domain === dom).length;
+        const count = nodes.filter(n => n.domain === dom && isNodeVisible(n)).length;
         if (count === 0) return;
         const color = GRAPH_DATA.domain_colors[dom] || "#3b82f6";
         const isActive = activeDomains.has(dom);
@@ -5453,7 +5708,7 @@ window.TelecomGraphPhysics = (function () {
     function zoomIn() { camera.zoom = Math.min(3.5, camera.zoom * 1.25); }
     function zoomOut() { camera.zoom = Math.max(0.2, camera.zoom * 0.8); }
     function resetCamera() {
-      const activeNodeList = nodes.filter(n => activeDomains.has(n.domain));
+      const activeNodeList = nodes.filter(n => isNodeVisible(n));
       if (activeNodeList.length === 0) {
         camera = { x: 0, y: 0, zoom: 0.85 };
         return;

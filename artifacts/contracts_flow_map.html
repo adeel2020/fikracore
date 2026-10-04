@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FikraCore & Zaki — Canonical Contract Architecture & Evidence Lifecycle</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    :root {
+      --bg: #070b14;
+      --card-bg: #0f172a;
+      --border: #1e293b;
+    }
+    body {
+      background-color: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .arch-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .arch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.4);
+    }
+    .arch-card.selected {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5), 0 16px 36px -4px rgba(0, 0, 0, 0.8);
+      background-color: #131f37 !important;
+    }
+    .flow-pill {
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col bg-[#070b14] text-slate-100 overflow-hidden select-none">
+
+  <!-- Top Executive Header -->
+  <header class="h-16 border-b border-slate-800/80 bg-[#0c1220] px-8 flex items-center justify-between z-20 shrink-0 shadow-lg">
+    <div class="flex items-center space-x-4">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white font-extrabold text-base shadow-md shadow-cyan-500/20">
+        FC
+      </div>
+      <div>
+        <div class="flex items-center gap-2.5">
+          <h1 class="text-base font-bold text-white tracking-tight">FikraCore & Zaki Canonical Architecture</h1>
+          <span class="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-800/80">Refined Specification</span>
+        </div>
+        <p class="text-xs text-slate-400">3-State Evidence Lifecycle · Pattern Recognition · Index Retrieval · Experience Spine</p>
+      </div>
+    </div>
+
+    <!-- View Mode Switcher -->
+    <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-800">
+      <button id="tab-pipeline" onclick="setMode('pipeline')" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 text-white shadow-sm transition-all">
+        <span>🌊 The Crucial Separation (Telemetry → Knowledge)</span>
+      </button>
+      <button id="tab-evidence" onclick="setMode('evidence')" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all">
+        <span>⚡ 3-Tier Evidence Lifecycle</span>
+      </button>
+      <button id="tab-graph" onclick="setMode('graph')" class="flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all">
+        <span>🕸️ Canonical Graph & Indexes</span>
+      </button>
+    </div>
+
+    <!-- Quick Integrity Indicators -->
+    <div class="flex items-center space-x-4 text-xs">
+      <div class="flex items-center gap-1.5 text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span>No Info/Warn in Incident</span>
+      </div>
+      <div class="h-4 w-px bg-slate-800"></div>
+      <div class="text-slate-400">
+        <span class="text-cyan-400 font-semibold">Spine</span> Governed
+      </div>
+    </div>
+  </header>
+
+  <!-- Content Container -->
+  <div class="flex-1 flex overflow-hidden relative">
+
+    <!-- Primary Canvas / Presentation Area -->
+    <main class="flex-1 h-full overflow-y-auto p-8 relative flex justify-center">
+
+      <!-- =================================================================== -->
+      <!-- VIEW 1: THE CRUCIAL SEPARATION PIPELINE (Clean, Orthogonal Flow)   -->
+      <!-- =================================================================== -->
+      <div id="view-pipeline-container" class="w-full max-w-5xl flex flex-col items-center gap-4 pb-20">
+
+        <!-- Top Banner -->
+        <div class="w-full bg-slate-900/90 border border-slate-800 p-5 rounded-2xl shadow-xl flex items-center justify-between">
+          <div>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-cyan-400">Architectural Boundary Mandate</span>
+            <h2 class="text-lg font-bold text-white mt-0.5">Strict Decoupling: Evidence ≠ Cause | Pattern ≠ Incident</h2>
+            <p class="text-xs text-slate-400 mt-1">
+              Task Episode is the operational spine binding the investigation, but it does <b class="text-slate-200">not sit above Pattern</b> and does <b class="text-slate-200">not swallow raw telemetry</b>.
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <span class="px-3 py-1 rounded-lg bg-slate-950 border border-slate-800 text-xs font-mono text-cyan-300">Deterministic</span>
+          </div>
+        </div>
+
+        <!-- STAGE 1: TELEMETRY & INGESTION -->
+        <div class="w-full grid grid-cols-2 gap-4">
+          
+          <div onclick="inspect('raw_evidence')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-sky-500/80 shadow-md" id="card-raw_evidence">
+            <div class="flex items-center justify-between mb-1">
+              <span class="flow-pill text-sky-400">Tier 1</span>
+              <span class="text-[10px] font-mono text-slate-500">Raw Layer</span>
+            </div>
+            <h3 class="text-xs font-bold text-white">RAW EVIDENCE CONTRACT</h3>
+            <p class="text-[11px] text-sky-300 font-medium mt-0.5">"What did the network emit?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Kafka alarms, metric points, syslog lines, KPI samples, packet traces, and counters. Pure signal, zero interpretation.
+            </p>
+          </div>
+
+          <div onclick="inspect('emerging_evidence')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/80 shadow-md active-node" id="card-emerging_evidence">
+            <div class="flex items-center justify-between mb-1">
+              <span class="flow-pill text-amber-400">Tier 2 · Bridge</span>
+              <span class="text-[10px] font-mono text-amber-500/80 font-bold">INFO / WARN</span>
+            </div>
+            <h3 class="text-xs font-bold text-white">EMERGING EVIDENCE CONTRACT</h3>
+            <p class="text-[11px] text-amber-300 font-medium mt-0.5">"What signals are becoming significant?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Weak correlations, INFO/WARNING sequences, rate deviations. Bridges raw telemetry into operational meaning before an incident exists.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Downward Connector -->
+        <div class="flex flex-col items-center -my-1">
+          <div class="w-0.5 h-4 bg-slate-700"></div>
+          <svg class="w-3.5 h-3.5 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </div>
+
+        <!-- STAGE 2: PATTERN RECOGNITION & OPERATIONAL CONTEXT -->
+        <div class="w-full grid grid-cols-3 gap-4">
+          
+          <div onclick="inspect('pattern_recognition')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/80 shadow-md" id="card-pattern_recognition">
+            <span class="flow-pill text-purple-400 block mb-1">Detection Logic</span>
+            <h3 class="text-xs font-bold text-white">PATTERN RECOGNITION CONTRACT</h3>
+            <p class="text-[11px] text-purple-300 font-medium mt-0.5">"How does FikraCore detect patterns?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Temporal sliding windows, topology scopes, feature extractors, matching pattern IDs, and novelty scoring.
+            </p>
+          </div>
+
+          <div onclick="inspect('pattern')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/80 shadow-md" id="card-pattern">
+            <span class="flow-pill text-purple-400 block mb-1">Reusable Knowledge</span>
+            <h3 class="text-xs font-bold text-white">PATTERN CONTRACT</h3>
+            <p class="text-[11px] text-purple-300 font-medium mt-0.5">"What reusable structure recurred?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              The canonical behavioral signature: symptoms, affected services, cross-incident occurrence records (Episode 101, 204, 387).
+            </p>
+          </div>
+
+          <div onclick="inspect('indexes')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-indigo-500/80 shadow-md" id="card-indexes">
+            <span class="flow-pill text-indigo-400 block mb-1">Fast Graph Retrieval</span>
+            <h3 class="text-xs font-bold text-white">PATTERN & INCIDENT INDEXES</h3>
+            <p class="text-[11px] text-indigo-300 font-medium mt-0.5">"Have we seen this condition before?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Index structures providing sub-millisecond retrieval of similar historical patterns and previous incidents to ground the new task.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Downward Connector -->
+        <div class="flex flex-col items-center -my-1">
+          <div class="w-0.5 h-4 bg-cyan-600"></div>
+          <svg class="w-3.5 h-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </div>
+
+        <!-- STAGE 3: THE OPERATIONAL SPINE (TASK EPISODE) -->
+        <div onclick="inspect('task_episode')" class="arch-card cursor-pointer w-full p-5 rounded-2xl bg-gradient-to-r from-slate-900 via-cyan-950/30 to-slate-900 border-2 border-cyan-500 shadow-xl relative" id="card-task_episode">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[10px] font-black uppercase tracking-widest bg-cyan-600 text-white px-2.5 py-0.5 rounded">Operational Spine</span>
+            <span class="text-xs font-mono text-cyan-300">Temporal & Causal Anchor</span>
+          </div>
+          <h2 class="text-base font-bold text-white">TASK EPISODE CONTRACT</h2>
+          <p class="text-xs text-cyan-300 font-medium mt-0.5">"What are we doing, why, with what context, what happened, and what did we learn?"</p>
+          <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+            Joins the relevant instances of Operational Context, Validated Evidence, Hypotheses, Tools, and Validations around <b>one piece of work being performed</b> over time.
+          </p>
+        </div>
+
+        <!-- Downward Connector -->
+        <div class="flex flex-col items-center -my-1">
+          <div class="w-0.5 h-4 bg-slate-700"></div>
+          <svg class="w-3.5 h-3.5 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </div>
+
+        <!-- STAGE 4: CAUSAL REASONING & VALIDATION -->
+        <div class="w-full grid grid-cols-2 gap-4">
+          
+          <div onclick="inspect('validated_evidence')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/80 shadow-md" id="card-validated_evidence">
+            <div class="flex items-center justify-between mb-1">
+              <span class="flow-pill text-emerald-400">Tier 3 · Proven</span>
+              <span class="text-[10px] font-mono text-emerald-400/80 font-bold">Investigation Ready</span>
+            </div>
+            <h3 class="text-xs font-bold text-white">VALIDATED EVIDENCE CONTRACT</h3>
+            <p class="text-[11px] text-emerald-300 font-medium mt-0.5">"What evidence has been verified against hypotheses?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Checked signals that formally substantiate or contradict hypotheses (e.g. packet drop confirmed on interface; storage latency disqualified).
+            </p>
+          </div>
+
+          <div onclick="inspect('hypothesis')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-purple-500/80 shadow-md" id="card-hypothesis">
+            <span class="flow-pill text-purple-400 block mb-1">Causal Candidate</span>
+            <h3 class="text-xs font-bold text-white">HYPOTHESIS & VALIDATION CONTRACT</h3>
+            <p class="text-[11px] text-purple-300 font-medium mt-0.5">"What is the proven root cause?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Leading vs Competing explanations with evidence accounting. Distinguishes <b>Observed → Correlated → Supported → Confirmed</b>.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Downward Connector -->
+        <div class="flex flex-col items-center -my-1">
+          <div class="w-0.5 h-4 bg-slate-700"></div>
+          <svg class="w-3.5 h-3.5 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M14.707 12.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l2.293-2.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+        </div>
+
+        <!-- STAGE 5: OUTCOME, LEARNING & GRAPH RELATIONSHIPS -->
+        <div class="w-full grid grid-cols-3 gap-4">
+          
+          <div onclick="inspect('outcome')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-teal-500/80 shadow-md" id="card-outcome">
+            <span class="flow-pill text-teal-400 block mb-1">Action & Recovery</span>
+            <h3 class="text-xs font-bold text-white">OUTCOME CONTRACT</h3>
+            <p class="text-[11px] text-teal-300 font-medium mt-0.5">"What happened as a result?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Remediation impact, service KPI restoration, operator validation, and executive storytelling narration.
+            </p>
+          </div>
+
+          <div onclick="inspect('learning')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/80 shadow-md" id="card-learning">
+            <span class="flow-pill text-emerald-400 block mb-1">Experience Synthesis</span>
+            <h3 class="text-xs font-bold text-white">LEARNING & PROMOTION</h3>
+            <p class="text-[11px] text-emerald-300 font-medium mt-0.5">"What becomes reusable truth?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Distills episode into reusable candidate knowledge. Governs controlled promotion into the Canonical Graph.
+            </p>
+          </div>
+
+          <div onclick="inspect('relationship')" class="arch-card cursor-pointer p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/80 shadow-md" id="card-relationship">
+            <span class="flow-pill text-blue-400 block mb-1">Graph Fabric</span>
+            <h3 class="text-xs font-bold text-white">RELATIONSHIP CONTRACT</h3>
+            <p class="text-[11px] text-blue-300 font-medium mt-0.5">"How are entities semantically linked?"</p>
+            <p class="text-[11px] text-slate-400 mt-2 leading-relaxed">
+              Defines valid edge semantics (depends_on, connects_to, supports, observed_in, caused). The graph stores edges; this contract defines their rules.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 2: 3-TIER EVIDENCE LIFECYCLE DEEP DIVE                         -->
+      <!-- =================================================================== -->
+      <div id="view-evidence-container" class="hidden w-full max-w-4xl flex flex-col items-center gap-6 pb-20">
+        
+        <div class="text-center max-w-2xl mb-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-cyan-400">Deep Dive</span>
+          <h2 class="text-xl font-bold text-white mt-1">The 3-Tier Evidence Lifecycle</h2>
+          <p class="text-xs text-slate-400 mt-1">Why raw INFO/WARNING telemetry must never jump directly into an Incident or Hypothesis.</p>
+        </div>
+
+        <!-- Tier 1 -->
+        <div class="w-full p-6 rounded-2xl bg-slate-900 border border-slate-800 shadow-lg">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-sky-950 text-sky-400 border border-sky-800">Tier 1: Raw Evidence</span>
+            <span class="text-xs text-slate-400">Zero Interpretation</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mt-3">What the network emitted directly</h4>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+            Alarms, metric values, logs, traces, event notifications, interface counters. Emitted continuously by OSS, Kafka, and network elements.
+          </p>
+          <div class="mt-3 p-3 rounded-lg bg-slate-950 font-mono text-xs text-slate-400 space-y-1">
+            <div><span class="text-sky-400">INFO:</span> UPF session cleanup task increased interval</div>
+            <div><span class="text-amber-400">WARN:</span> Interface N3 packet retransmission rate = 1.8%</div>
+          </div>
+        </div>
+
+        <div class="w-0.5 h-6 bg-slate-700"></div>
+
+        <!-- Tier 2 -->
+        <div class="w-full p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900 border-2 border-amber-500/80 shadow-xl">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-700">Tier 2: Emerging Evidence (The Bridge)</span>
+            <span class="text-xs text-amber-300 font-semibold">Contextual Significance</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mt-3">Evidence that has acquired operational relevance</h4>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+            Weak correlations, anomaly sequences, spatial relationships, and temporal co-occurrences.
+          </p>
+          <div class="mt-3 p-3.5 rounded-lg bg-slate-950 border border-amber-900/50 text-xs text-slate-300 leading-relaxed">
+            <b class="text-amber-300">FikraCore statement:</b> <i>"This is not yet an incident, but this sequence of INFO + WARNING + metric deviation is becoming operationally significant."</i>
+          </div>
+        </div>
+
+        <div class="w-0.5 h-6 bg-slate-700"></div>
+
+        <!-- Tier 3 -->
+        <div class="w-full p-6 rounded-2xl bg-slate-900 border border-emerald-500/80 shadow-lg">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+            <span class="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-emerald-950 text-emerald-400 border border-emerald-800">Tier 3: Validated Evidence</span>
+            <span class="text-xs text-emerald-400 font-semibold">Causally Grounded</span>
+          </div>
+          <h4 class="text-sm font-bold text-white mt-3">Checked against the operational investigation</h4>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">
+            Evidence that formally substantiates or contradicts a hypothesis, confirms a network condition, or establishes an explicit causal edge.
+          </p>
+          <div class="mt-3 p-3 rounded-lg bg-slate-950 font-mono text-xs text-emerald-300 space-y-1">
+            <div>✔ Supports H1 (N3 Transport Buffer Saturation confirmed via diagnostic probe)</div>
+            <div>✖ Disproves H2 (UPF hardware resource starvation ruled out)</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- VIEW 3: CANONICAL GRAPH, RELATIONSHIPS & INDEXES                    -->
+      <!-- =================================================================== -->
+      <div id="view-graph-container" class="hidden w-full max-w-4xl flex flex-col gap-6 pb-20">
+        
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Canonical Architecture</span>
+            <h2 class="text-lg font-bold text-white mt-0.5">The Canonical Graph & Retrieval Index Fabric</h2>
+            <p class="text-xs text-slate-400 mt-1">One single authoritative graph for Entities, Relationships, Patterns, and Incidents.</p>
+          </div>
+          <span class="text-xs font-mono px-3 py-1 bg-slate-950 text-cyan-300 rounded-lg border border-slate-800">FikraCore Engine</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          
+          <!-- Box 1: The Canonical Graph -->
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-400">Authoritative Store</span>
+              <h3 class="text-sm font-bold text-white mt-1">CANONICAL KNOWLEDGE GRAPH</h3>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                Stores all persistent telecom entities, verified causal patterns, and historical incidents.
+              </p>
+              <div class="mt-4 space-y-2 text-xs text-slate-400 font-mono">
+                <div class="p-2 rounded bg-slate-950 border border-slate-800/80">• Network Entities (UPF, AMF, PE-RTR)</div>
+                <div class="p-2 rounded bg-slate-950 border border-slate-800/80">• Typed Relationships (depends_on, connects_to)</div>
+                <div class="p-2 rounded bg-slate-950 border border-slate-800/80">• Promoted Canonical Patterns</div>
+                <div class="p-2 rounded bg-slate-950 border border-slate-800/80">• Closed Incident Records</div>
+              </div>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+              Governed by <b>RelationshipContract</b>
+            </div>
+          </div>
+
+          <!-- Box 2: Retrieval Indexes -->
+          <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-400">Fast Retrieval Layer</span>
+              <h3 class="text-sm font-bold text-white mt-1">INDEX FABRIC</h3>
+              <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                Indexes sitting underneath the graph providing sub-millisecond retrieval of historical context.
+              </p>
+              <div class="mt-4 space-y-3">
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <div class="text-xs font-bold text-cyan-300 font-mono">Pattern Index</div>
+                  <p class="text-[11px] text-slate-400 mt-0.5">Answers: <i>"Have we seen this symptom sequence before?"</i> Matches symptoms, sequence, topology, time window.</p>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-950 border border-slate-800">
+                  <div class="text-xs font-bold text-cyan-300 font-mono">Incident Index</div>
+                  <p class="text-[11px] text-slate-400 mt-0.5">Answers: <i>"Have we seen this operational condition before?"</i> Matches affected service, domain, root cause, resolution.</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 pt-3 border-t border-slate-800 text-[11px] text-slate-400">
+              Feeds directly into <b>Task Episode</b>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Right Side Inspector Panel -->
+    <aside id="inspector" class="w-96 border-l border-slate-800 bg-[#0c1220] p-6 flex flex-col justify-between overflow-y-auto shrink-0 z-20 shadow-2xl">
+      <div>
+        <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+          <span id="insp-tag" class="text-[10px] font-extrabold uppercase tracking-wider text-amber-400 bg-amber-950 px-2 py-0.5 rounded border border-amber-800/80">Tier 2 Bridge</span>
+          <span id="insp-category" class="text-xs text-slate-400">Evidence Lifecycle</span>
+        </div>
+
+        <div class="mt-4">
+          <h2 id="insp-title" class="text-lg font-black text-white tracking-tight">EMERGING EVIDENCE CONTRACT</h2>
+          <p id="insp-question" class="text-xs font-semibold text-amber-400 mt-0.5">"What signals are becoming significant?"</p>
+          <p id="insp-desc" class="text-xs text-slate-300 mt-2 leading-relaxed">
+            The bridge between raw network telemetry and operational meaning. Captures weak correlations, INFO/WARNING sequences, and rate anomalies before an incident is formally created.
+          </p>
+        </div>
+
+        <!-- Architectural Value Box -->
+        <div class="mt-5 p-3.5 rounded-xl bg-slate-950 border border-slate-800/90">
+          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">Architectural Rule</span>
+          <p id="insp-rule" class="text-xs text-slate-200 leading-relaxed">
+            Never dump INFO/WARNING telemetry directly into Incident or Hypothesis contracts. Filter and correlate them here first.
+          </p>
+        </div>
+
+        <!-- Schema Fields -->
+        <div class="mt-5">
+          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-2">Primary Schema Fields</span>
+          <div id="insp-fields" class="space-y-1.5 text-xs text-slate-300 font-mono">
+            <!-- Dynamic fields -->
+          </div>
+        </div>
+
+        <!-- Architectural Connection -->
+        <div class="mt-5">
+          <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">Architectural Role</span>
+          <p id="insp-role" class="text-xs text-slate-300 bg-slate-900 p-2.5 rounded-lg border border-slate-800 leading-relaxed">
+            Enables FikraCore to detect emerging degradation before service fails.
+          </p>
+        </div>
+      </div>
+
+      <!-- Footer Info -->
+      <div class="pt-4 border-t border-slate-800 mt-6 text-[11px] text-slate-400 flex items-center justify-between">
+        <span>Click any card in diagram to inspect</span>
+        <span class="text-cyan-400 font-medium">FikraCore Canonical</span>
+      </div>
+    </aside>
+
+  </div>
+
+  <script>
+    // Detailed Contract Specification Data
+    const contractDetails = {
+      raw_evidence: {
+        title: "RAW EVIDENCE CONTRACT",
+        category: "Tier 1: Telemetry Ingestion",
+        tag: "Tier 1: Raw",
+        question: "What did the network produce directly?",
+        desc: "Encapsulates unprocessed alarms, metric timeseries, syslog messages, KPI samples, packet traces, and interface counters directly from OSS/Kafka.",
+        rule: "No interpretation. Stores pristine ground truth with source, entity, and timestamp.",
+        fields: [
+          "• evidence_id: str (EVD-RAW-xxx)",
+          "• event_type: alarm | metric | log | trace",
+          "• source_entity: str (e.g. PE-RTR-01)",
+          "• timestamp: datetime (UTC)",
+          "• payload: Dict[str, Any]",
+          "• raw_severity: INFO | WARN | CRITICAL"
+        ],
+        role: "Feeds Tier 2 Emerging Evidence correlation without cluttering active incidents."
+      },
+      emerging_evidence: {
+        title: "EMERGING EVIDENCE CONTRACT",
+        category: "Tier 2: Telemetry Bridge",
+        tag: "Tier 2: Bridge",
+        question: "What signals are becoming significant?",
+        desc: "Evidence that has acquired contextual significance through correlation, sequence matching, or spatial/temporal grouping, but is not yet validated as causal.",
+        rule: "INFO/WARNING telemetry lives here. Protects Incident and Hypothesis contracts from noise.",
+        fields: [
+          "• emerging_id: str (EVD-EMG-xxx)",
+          "• constituent_evidence_ids: List[str]",
+          "• sequence_type: temporal | spatial | cross_domain",
+          "• anomaly_score: float (0.0 - 1.0)",
+          "• correlation_method: windowed_frequency | entropy",
+          "• status: CANDIDATE_SIGNAL"
+        ],
+        role: "The bridge allowing FikraCore to say: 'This is not yet an incident, but these signals are becoming operationally significant.'"
+      },
+      validated_evidence: {
+        title: "VALIDATED EVIDENCE CONTRACT",
+        category: "Tier 3: Operational Truth",
+        tag: "Tier 3: Proven",
+        question: "What evidence has been verified against hypotheses?",
+        desc: "Evidence that has been tested in the crucible of an active investigation. Formally corroborates or disqualifies candidate failure modes.",
+        rule: "Only validated evidence may be cited as justification for remediation actions.",
+        fields: [
+          "• validation_id: str (EVD-VAL-xxx)",
+          "• hypothesis_id: str",
+          "• role: SUPPORTS | CONTRADICTS | CONFIRMS | RULES_OUT",
+          "• confidence_weight: float",
+          "• verified_by: probe_result | operator_check",
+          "• validated_at: datetime (UTC)"
+        ],
+        role: "Directly referenced by the Task Episode to confirm root causes."
+      },
+      pattern_recognition: {
+        title: "PATTERN RECOGNITION CONTRACT",
+        category: "Detection Logic",
+        tag: "Recognition",
+        question: "How does FikraCore detect recurring operational structures?",
+        desc: "Describes the runtime mechanism for identifying patterns across emerging evidence and topology, keeping recognition logic separate from knowledge.",
+        rule: "Topology similarity alone must never imply operational pattern similarity without matching telemetry signals.",
+        fields: [
+          "• recognition_id: str",
+          "• temporal_window: int (seconds)",
+          "• topology_scope: List[str]",
+          "• features: Dict[str, Any]",
+          "• matching_pattern_ids: List[str]",
+          "• novelty_score: float",
+          "• status: MATCHED | NOVEL_CANDIDATE"
+        ],
+        role: "Evaluates emerging evidence streams against the Pattern Index."
+      },
+      pattern: {
+        title: "PATTERN CONTRACT",
+        category: "Reusable Knowledge",
+        tag: "Pattern",
+        question: "What reusable behavior was observed across evidence?",
+        desc: "Represents a reusable operational structure that can exist before an incident is declared and re-appear across multiple historical episodes.",
+        rule: "Patterns are not incidents. A pattern records the behavioral signature, scope, and occurrences across episodes (e.g. Episode 101, 204, 387).",
+        fields: [
+          "• pattern_id: str (PAT-xxx)",
+          "• canonical_name: str",
+          "• signature: { signals, sequence, thresholds }",
+          "• occurrences: { episode_ids, incident_ids }",
+          "• lifecycle: CANDIDATE | VALIDATED | CANONICAL",
+          "• occurrence_count: int (derived)"
+        ],
+        role: "The core unit of learned telecom knowledge in the Canonical Graph."
+      },
+      indexes: {
+        title: "PATTERN & INCIDENT INDEXES",
+        category: "Fast Retrieval",
+        tag: "Graph Indexes",
+        question: "Have we seen something like this before?",
+        desc: "High-performance retrieval index structures sitting underneath the Canonical Graph. Provides immediate matching for incoming emerging evidence.",
+        rule: "Indexes are navigation and retrieval structures only; they do not duplicate contract intelligence.",
+        fields: [
+          "• PatternIndex: signature, sequence, domain, frequency",
+          "• IncidentIndex: symptoms, affected_service, root_cause, resolution",
+          "• Retrieval time: < 2ms",
+          "• Query interface: match_similar(signals, time_window)"
+        ],
+        role: "Feeds historical context directly into the newly spawned Task Episode."
+      },
+      task_episode: {
+        title: "TASK EPISODE CONTRACT",
+        category: "Operational Experience Spine",
+        tag: "Spine Anchor",
+        question: "How do all contracts relate to this particular operational task over time?",
+        desc: "The operational spine that binds the other contracts together around one piece of work being performed. It references relevant contract instances without duplicating their data.",
+        rule: "Task Episode does not sit above Pattern. Pattern does not equal Incident. Task Episode is the temporal join point.",
+        fields: [
+          "• episode_id: str (TE-YYYY-xxxxx)",
+          "• task_type: investigate | remediate | discover",
+          "• initiated_by: operator | automated_trigger",
+          "• operational_context_ref: str",
+          "• evidence_refs: List[str]",
+          "• hypothesis_refs: List[str]",
+          "• action_refs: List[str]",
+          "• outcome_ref: str",
+          "• learning_ref: str"
+        ],
+        role: "The central spine binding one investigation from start to finish."
+      },
+      hypothesis: {
+        title: "HYPOTHESIS & VALIDATION CONTRACT",
+        category: "Causal Reasoning",
+        tag: "Causal RCA",
+        question: "What might explain the degradation?",
+        desc: "Maintains ranked causal explanations with explicit evidence accounting (supporting vs contradicting tallies).",
+        rule: "Leading hypothesis does NOT equal root cause until complete causal chain is validated.",
+        fields: [
+          "• hypothesis_id: str (HYP-xxx)",
+          "• root_entity: str",
+          "• role: LEADING | COMPETING",
+          "• supporting_evidence_count: int",
+          "• contradicting_evidence_count: int",
+          "• missing_evidence_count: int",
+          "• status: SUPPORTED | RULED_OUT | CONFIRMED"
+        ],
+        role: "Evaluated during the Task Episode against incoming Validated Evidence."
+      },
+      outcome: {
+        title: "OUTCOME CONTRACT",
+        category: "Action & Resolution",
+        tag: "Resolution",
+        question: "What happened as a result of actions taken?",
+        desc: "Records the concrete results of remediation playbooks, verified KPI restoration, and executive narrative projections.",
+        rule: "No incident may be closed without verified post-action telemetry restoration.",
+        fields: [
+          "• outcome_id: str",
+          "• task_id: str",
+          "• resolution_status: RESTORED | ROLLED_BACK",
+          "• subscriber_impact_duration: int (seconds)",
+          "• verification_evidence_refs: List[str]"
+        ],
+        role: "Concludes the operational phase of the Task Episode."
+      },
+      learning: {
+        title: "LEARNING & PROMOTION CONTRACT",
+        category: "Knowledge Lifecycle",
+        tag: "Learning Loop",
+        question: "What should become trusted reusable knowledge?",
+        desc: "Captures episode trajectories, synthesizes candidate patterns, and manages promotion from Candidate to Canonical in FikraCore.",
+        rule: "Closing an incident does NOT automatically promote knowledge. Promotion requires verification criteria and human sign-off.",
+        fields: [
+          "• learning_id: str",
+          "• episode_ref: str",
+          "• candidate_pattern_ref: Optional[str]",
+          "• promotion_decision: PROMOTED | REJECTED | PENDING",
+          "• operator_approver_id: Optional[str]"
+        ],
+        role: "Closes the feedback loop, enriching the Canonical Graph for future episodes."
+      },
+      relationship: {
+        title: "RELATIONSHIP CONTRACT",
+        category: "Graph Semantics",
+        tag: "Graph Fabric",
+        question: "What constitutes a valid semantic relationship in the graph?",
+        desc: "Defines the strict schema and validity rules for all edges in the Canonical Graph (e.g. depends_on, connects_to, supports, observed_in, caused).",
+        rule: "The graph stores the edges; the Relationship Contract defines what is architecturally valid.",
+        fields: [
+          "• relationship_id: str",
+          "• subject: { entity_id, entity_type }",
+          "• predicate: depends_on | connects_to | supports | caused",
+          "• object: { entity_id, entity_type }",
+          "• confidence: float (0.0 - 1.0)",
+          "• evidence_refs: List[str]",
+          "• lifecycle: CANDIDATE | VALIDATED | CANONICAL"
+        ],
+        role: "First-class semantic schema governing all graph relationships."
+      }
+    };
+
+    function setMode(mode) {
+      document.getElementById("view-pipeline-container").classList.add("hidden");
+      document.getElementById("view-evidence-container").classList.add("hidden");
+      document.getElementById("view-graph-container").classList.add("hidden");
+
+      document.getElementById("tab-pipeline").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all";
+      document.getElementById("tab-evidence").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all";
+      document.getElementById("tab-graph").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-slate-200 transition-all";
+
+      if (mode === "pipeline") {
+        document.getElementById("view-pipeline-container").classList.remove("hidden");
+        document.getElementById("tab-pipeline").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 text-white shadow-sm transition-all";
+        inspect("emerging_evidence");
+      } else if (mode === "evidence") {
+        document.getElementById("view-evidence-container").classList.remove("hidden");
+        document.getElementById("tab-evidence").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 text-white shadow-sm transition-all";
+        inspect("emerging_evidence");
+      } else {
+        document.getElementById("view-graph-container").classList.remove("hidden");
+        document.getElementById("tab-graph").className = "flex items-center gap-2 px-4 py-1.5 rounded-lg text-xs font-semibold bg-cyan-600 text-white shadow-sm transition-all";
+        inspect("relationship");
+      }
+    }
+
+    function inspect(key) {
+      const data = contractDetails[key];
+      if (!data) return;
+
+      document.getElementById("insp-title").textContent = data.title;
+      document.getElementById("insp-category").textContent = data.category;
+      document.getElementById("insp-tag").textContent = data.tag;
+      document.getElementById("insp-question").textContent = data.question;
+      document.getElementById("insp-desc").textContent = data.desc;
+      document.getElementById("insp-rule").textContent = data.rule;
+      document.getElementById("insp-role").textContent = data.role;
+
+      const fContainer = document.getElementById("insp-fields");
+      fContainer.innerHTML = "";
+      data.fields.forEach(f => {
+        const item = document.createElement("div");
+        item.className = "py-0.5 text-slate-300 font-mono text-[11px]";
+        item.textContent = f;
+        fContainer.appendChild(item);
+      });
+
+      // Highlight selected card
+      document.querySelectorAll(".arch-card").forEach(el => el.classList.remove("selected"));
+      const card = document.getElementById(`card-${key}`);
+      if (card) card.classList.add("selected");
+    }
+
+    // Initialize
+    inspect("emerging_evidence");
+  </script>
+</body>
+</html>

@@ -1,131 +1,246 @@
 {
   "scenario_id": "SCN-001",
-  "run_id": "RUN-20260928080039990637",
+  "run_id": "RUN-20261004070343849370",
   "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
-  "domain": "transport",
+  "domain": "ip_transport",
   "severity": "MAJOR",
-  "status": "resolved",
-  "stage_index": 7,
+  "status": "investigating",
+  "stage_index": 0,
   "started_at": "2026-09-10T08:01:02Z",
-  "resolved_at": "2026-09-10T08:17:00Z",
-  "executive_summary": "Autonomous root cause confirmed at None with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
-  "root_cause": {
-    "entity": null,
-    "condition": null,
-    "status": "CONFIRMED",
-    "confidence": 0.942
-  },
-  "causal_chain": [
-    "{'from': 'IP:PE:RTR-21', 'to': 'IP:VRF:N3-01', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}",
-    "{'from': 'IP:VRF:N3-01', 'to': 'SA5G:UPF:003', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}",
-    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-001', 'run_id': 'RUN-20260928080039990637', 'revision': 9, 'sequence': 8}"
-  ],
-  "blast_radius": [
-    {
-      "entity": "IP:PE:RTR-21",
-      "role": "CAUSAL_RELAY",
-      "status": "PE_ROUTER_DEGRADED"
-    },
-    {
-      "entity": "IP:VRF:N3-01",
-      "role": "CAUSAL_RELAY",
-      "status": "VRF_DEGRADED"
-    },
-    {
-      "entity": "SA5G:UPF:003",
-      "role": "CAUSAL_RELAY",
-      "status": "UPF_DEGRADED"
-    },
-    {
-      "entity": "CRM:TICKET:001",
-      "role": "CAUSAL_RELAY",
-      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
-    }
-  ],
+  "resolved_at": null,
+  "executive_summary": "High-priority anomaly detected on IP Transport. 5g sa mobile data is beginning to degrade on PE21. Autonomous investigation initiated. Autonomous correlation has been initiated.",
+  "root_cause": null,
+  "causal_chain": [],
+  "blast_radius": [],
   "timeline": [
     {
       "time": "2026-09-10T08:01:02Z",
       "event": "PE_ROUTER_DEGRADED",
       "entity": "IP:PE:RTR-21",
       "severity": "MAJOR",
-      "summary": "Operational alarm: PE_ROUTER_DEGRADED on IP:PE:RTR-21"
-    },
-    {
-      "time": "2026-09-10T08:01:43Z",
-      "event": "VRF_DEGRADED",
-      "entity": "IP:VRF:N3-01",
-      "severity": "MAJOR",
-      "summary": "Operational alarm: VRF_DEGRADED on IP:VRF:N3-01"
-    },
-    {
-      "time": "2026-09-10T08:02:24Z",
-      "event": "UPF_DEGRADED",
-      "entity": "SA5G:UPF:003",
-      "severity": "MAJOR",
-      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
-    },
-    {
-      "time": "2026-09-10T08:02:35Z",
-      "event": "KPI_DEGRADATION",
-      "entity": "CRM:TICKET:001",
-      "severity": "CRITICAL",
-      "summary": "5G Sa Mobile Data Success Rate degraded to 66.06percent"
-    },
-    {
-      "time": "2026-09-10T08:02:54Z",
-      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
-      "entity": "CRM:TICKET:001",
-      "severity": "CRITICAL",
-      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
-    },
-    {
-      "time": "2026-09-10T08:17:00Z",
-      "event": "RECOVERY_VERIFIED",
-      "entity": "IP:PE:RTR-21",
-      "severity": "CLEARED",
-      "summary": "service KPI improves within modeled recovery window"
+      "summary": "Initial operational anomaly detected on Provider Edge Router-21"
     }
   ],
   "metrics": {
-    "stage_index": 7,
-    "operational_evidence_count": 7,
+    "stage_index": 0,
+    "operational_evidence_count": 6,
     "kpi_breach": {
       "name": "5G Sa Mobile Data Success Rate",
       "value": 66.06,
       "baseline": 98.5
     },
-    "mttr_actual": "1m"
+    "mttr_actual": "in_progress"
   },
   "flash_narration": {
-    "time": "08:17:00Z",
-    "phase": "Recovery",
-    "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
-    "text": "At 08:17:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+    "time": "08:01:02Z",
+    "phase": "Trigger",
+    "spoken": "Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.",
+    "text": "At 08:01:02Z (Incident Detected):\n\ud83c\udf99\ufe0f \"Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.\"",
+    "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+    "suggested_questions": [
+      "What is our committed SLA threshold for 5G SA mobile data?",
+      "Which customer tiers are traversing PE21?",
+      "Has PE21 undergone recent maintenance?"
+    ]
   },
   "flash_history": [
     {
       "time": "08:01:02Z",
       "phase": "Trigger",
-      "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
-      "text": "At 08:01:02Z (Trigger):\n\ud83c\udf99\ufe0f \"Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.\""
-    },
-    {
-      "time": "08:02:24Z",
-      "phase": "Propagation",
-      "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
-      "text": "At 08:02:24Z (Propagation):\n\ud83c\udf99\ufe0f \"Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.\""
-    },
-    {
-      "time": "08:02:54Z",
-      "phase": "RCA Confirmed",
-      "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
-      "text": "At 08:02:54Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
-    },
-    {
-      "time": "08:17:00Z",
-      "phase": "Recovery",
-      "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
-      "text": "At 08:17:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+      "spoken": "Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.",
+      "text": "At 08:01:02Z (Incident Detected):\n\ud83c\udf99\ufe0f \"Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.\"",
+      "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+      "suggested_questions": [
+        "What is our committed SLA threshold for 5G SA mobile data?",
+        "Which customer tiers are traversing PE21?",
+        "Has PE21 undergone recent maintenance?"
+      ]
     }
-  ]
+  ],
+  "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+  "suggested_questions": [
+    "What is our committed SLA threshold for 5G SA mobile data?",
+    "Which customer tiers are traversing PE21?",
+    "Has PE21 undergone recent maintenance?"
+  ],
+  "noc_activities": [
+    {
+      "id": "act-1",
+      "timestamp": "08:01:02Z",
+      "agent": "IP_TRANSPORT",
+      "domain": "IP Transport",
+      "action": "Pe Router Degraded Ingestion",
+      "detail": "Observed Pe Router Degraded on PE21 (5G SA mobile data)",
+      "status": "OBSERVED"
+    }
+  ],
+  "activity_stream": [
+    {
+      "id": "act-1",
+      "timestamp": "08:01:02Z",
+      "agent": "IP_TRANSPORT",
+      "domain": "IP Transport",
+      "action": "Pe Router Degraded Ingestion",
+      "detail": "Observed Pe Router Degraded on PE21 (5G SA mobile data)",
+      "status": "OBSERVED"
+    }
+  ],
+  "operational_context": {
+    "api_version": "zaki.ai/v1",
+    "kind": "OperationalContext",
+    "context_id": "CTX-1791124045",
+    "scenario_id": "SCN-001",
+    "run_id": "RUN-20261004070343849370",
+    "active_incident_id": "INC-SCN-001",
+    "primary_domain": "IP Transport",
+    "active_domains": [
+      "IP Transport",
+      "5G Core",
+      "Radio Access Network"
+    ],
+    "visible_entities": [
+      "IP:PE:RTR-21",
+      "IP:VRF:N3-01",
+      "SA5G:UPF:003",
+      "RAN:eNodeB:101"
+    ],
+    "visible_topology_subgraph": {},
+    "admitted_evidence_ids": [
+      "ALM-SCN-001-0001",
+      "ALM-SCN-001-0002",
+      "ALM-SCN-001-0003",
+      "ALM-SCN-001-0004"
+    ],
+    "active_knowledge_gaps": [],
+    "active_maintenance_windows": [],
+    "speech_pacing_active": true,
+    "human_sme_role": "Transport Domain SME",
+    "operational_mode": "SIMULATION",
+    "active_incident_ids": [
+      "INC-SCN-001"
+    ],
+    "active_delegations": [
+      {
+        "delegation_id": "DEL-RUN-20261004070343849370-001",
+        "target_domain": "IP_TRANSPORT",
+        "target_entity": "IP:PE:RTR-21",
+        "objective": "Isolate anomaly and execute diagnostics on PE21",
+        "status": "ACTIVE"
+      }
+    ],
+    "pending_approvals": [],
+    "impact_summary": {
+      "affected_nodes": [
+        "IP:PE:RTR-21",
+        "IP:VRF:N3-01",
+        "SA5G:UPF:003",
+        "RAN:eNodeB:101"
+      ],
+      "primary_service": "5G SA mobile data",
+      "severity": "MAJOR",
+      "degraded_kpi": null,
+      "estimated_throughput_loss_gbps": 0.0
+    },
+    "resilience_profiles": [],
+    "created_at": "2026-10-04T14:27:25.615705Z"
+  },
+  "task_episode": {
+    "api_version": "zaki.ai/v1",
+    "kind": "TaskEpisode",
+    "episode_id": "EP-1791124045",
+    "task_id": "TASK-RUN-20261004070343849370",
+    "incident_id": "INC-SCN-001",
+    "operator_intent": "Investigate operational anomaly across IP Transport",
+    "fcaps": {
+      "primary": "Fault",
+      "secondary": [],
+      "domain": "PS",
+      "confidence": 0.9,
+      "clarification_required": false
+    },
+    "domains": [
+      "IP Transport",
+      "5G Core",
+      "Radio Access Network"
+    ],
+    "context": {
+      "scenario_id": "SCN-001",
+      "stage_index": 0
+    },
+    "operational_context_ref": "CTX-1791124045",
+    "behavior_contract_ref": null,
+    "evidence_requested": [],
+    "evidence_observed": [
+      "PE_ROUTER_DEGRADED",
+      "VRF_DEGRADED",
+      "UPF_DEGRADED",
+      "RADIO SERVICE LOST"
+    ],
+    "ranked_hypotheses": [],
+    "discrimination_probes": [],
+    "selected_workflow": null,
+    "playbook_ref": null,
+    "agent_recommendation": null,
+    "human_validations": [],
+    "human_actions": [],
+    "human_corrections": [],
+    "outcome": "SUCCESS",
+    "learned_pattern": null,
+    "promotion_records": [],
+    "finding_refs": [
+      "FND-001"
+    ],
+    "delegated_task_refs": [
+      "DEL-RUN-20261004070343849370-001"
+    ],
+    "runtime_evaluations": [],
+    "stagewise_outcomes": [],
+    "root_cause_analysis": null,
+    "causal_propagation": null,
+    "what_if_analysis": null,
+    "remediation_strategy": null,
+    "provenance": "task_episode_recorder",
+    "created_at": "2026-10-04T14:27:25.615753Z",
+    "closed_at": null
+  },
+  "incident_story": {
+    "api_version": "zaki.ai/v1",
+    "kind": "IncidentStory",
+    "incident_id": "INC-SCN-001",
+    "run_id": "RUN-20261004070343849370",
+    "generated_at": "2026-10-04T14:27:25.615808Z",
+    "presentation_depth": "OPERATOR",
+    "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
+    "summary": "High-priority anomaly detected on IP Transport. 5g sa mobile data is beginning to degrade on PE21. Autonomous investigation initiated. Autonomous correlation has been initiated.",
+    "service_impact": {
+      "domain": "IP Transport",
+      "service": "5G SA mobile data",
+      "impact_level": "MAJOR",
+      "kpi_breach": null
+    },
+    "leading_hypothesis": {},
+    "competing_hypotheses": [],
+    "correlation_narrative": {
+      "primary_entity": "IP:PE:RTR-21",
+      "secondary_entity": "IP:VRF:N3-01",
+      "causal_chain": [],
+      "blast_radius": []
+    },
+    "timeline_statements": [
+      {
+        "statement_id": "STMT-000",
+        "text": "Initial operational anomaly detected on Provider Edge Router-21",
+        "provenance": "OBSERVED",
+        "source_entity": "IP:PE:RTR-21",
+        "domain": "IP Transport",
+        "evidence_ids": [],
+        "confidence": 1.0,
+        "stage": "PE_ROUTER_DEGRADED",
+        "timestamp": "2026-10-04T14:27:25.615799Z"
+      }
+    ],
+    "next_best_action": "automated traffic re-routing playbook",
+    "outcome": "INVESTIGATING",
+    "technical_details": {}
+  }
 }

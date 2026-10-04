@@ -5,14 +5,14 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Union
 
-from ..domain.contracts.agent import AgentTaskContract
-from ..domain.contracts.hypothesis import HypothesisRankingContract
-from ..domain.contracts.incident import IncidentContextContract
-from ..domain.contracts.intent import OperatorIntentContract
-from ..domain.contracts.story import IncidentStoryContract, StoryStatement
-from ..domain.contracts.task import TaskContract
-from ..domain.contracts.task_episode import TaskEpisodeContract
-from ..domain.enums import AuthorityLevel, PresentationDepth, StatementProvenance, TaskStatus
+from ..contracts.agent import AgentTaskContract
+from ..contracts.hypothesis import HypothesisRankingContract
+from ..contracts.incident import IncidentContextContract
+from ..contracts.intent import OperatorIntentContract
+from ..contracts.story import IncidentStoryContract, StoryStatement
+from ..contracts.task import TaskContract
+from ..contracts.task_episode import TaskEpisodeContract
+from ..enums import AuthorityLevel, PresentationDepth, StatementProvenance, TaskStatus
 from ..agents.registry import default_agent_registry
 from ..agents.dispatcher import default_agent_dispatcher
 from ..fikracore.adapter import FikraCoreAdapter, default_fikracore_adapter
@@ -92,9 +92,21 @@ class ZakiOrchestrator:
         )
         self.incident_ledger.attach_task(incident.incident_id, task.task_id)
 
+        # 2b. Initialize Dynamic Operational Spine (TaskEpisodeContract)
+        task_episode = TaskEpisodeContract(
+            task_id=task.task_id,
+            incident_id=incident.incident_id,
+            operator_intent=intent.spec.natural_language,
+            fcaps=intent.spec.fcaps,
+            domains=[],
+            context={"scenario_id": scenario_id},
+            operational_context_ref=f"CTX-{task.task_id}",
+            behavior_contract_ref="BEHAVIOR-NOC-SME-DEFAULT",
+        )
+
         self.audit.log_event(
             "TASK_CREATED",
-            {"task_id": task.task_id, "incident_id": incident.incident_id},
+            {"task_id": task.task_id, "incident_id": incident.incident_id, "episode_id": task_episode.episode_id},
             task_id=task.task_id,
             incident_id=incident.incident_id,
         )
@@ -180,9 +192,18 @@ class ZakiOrchestrator:
             run_id=inv_res.run_id,
         )
 
-        # 6. Update Incident Ledger
+        # 6. Update Incident Ledger & Dynamic Task Episode Spine
         leading_id = hypotheses_contract.spec.leading_hypothesis_id
+        leading_h = hypotheses_contract.spec.hypotheses[0] if hypotheses_contract.spec.hypotheses else None
         domains = list({h.domain for h in hypotheses_contract.spec.hypotheses if h.domain and h.domain != "unknown"})
+        
+        # Dynamically populate Task Episode Spine
+        task_episode.domains = domains
+        task_episode.ranked_hypotheses = [h.model_dump(mode="python") for h in hypotheses_contract.spec.hypotheses]
+        task_episode.evidence_observed = leading_h.supporting_evidence if leading_h else []
+        if leading_h:
+            task_episode.agent_recommendation = f"Address root cause at {leading_h.root_entity}"
+
         self.incident_ledger.update_incident_state(
             incident_id=incident.incident_id,
             current_stage="CONVERGENCE",
@@ -215,6 +236,28 @@ class ZakiOrchestrator:
                 run_id=inv_res.run_id,
             )
 
+        task_episode.human_actions.extend(delegation_results)
+
+        # 7b. Step 3 Active Discrimination Probes (if multiple competing hypotheses)
+        if len(hypotheses_contract.spec.hypotheses) > 1:
+            try:
+                from engine_stack.engines.telecom_brain.capabilities.probe_dispatcher import default_probe_dispatcher
+                discrim_res = default_probe_dispatcher.run_discrimination_cycle(
+                    hypotheses=hypotheses_contract.spec.hypotheses,
+                    max_probes=2,
+                )
+                if discrim_res.get("probes_dispatched"):
+                    task_episode.discrimination_probes.extend(discrim_res["probes_dispatched"])
+                    self.audit.log_event(
+                        "DISCRIMINATION_PROBES_DISPATCHED",
+                        {"count": len(discrim_res["probes_dispatched"])},
+                        task_id=task.task_id,
+                        incident_id=incident.incident_id,
+                        run_id=inv_res.run_id,
+                    )
+            except Exception:
+                pass
+
         # 8. Check for Knowledge Gaps & Next Best Evidence
         gaps_data = self.fikracore.get_knowledge_gaps(inv_res.run_id)
         if gaps_data.get("discovery_mode"):
@@ -237,7 +280,7 @@ class ZakiOrchestrator:
             depth=PresentationDepth.OPERATOR,
         )
 
-        # 10. Record Task Episode for Structured Learning
+        # 10. Record Task Episode for Structured Learning (Finalize Spine)
         from ..learning.episode_recorder import EpisodeRecorder
         episode = EpisodeRecorder.record_episode(
             task=task,
@@ -245,6 +288,7 @@ class ZakiOrchestrator:
             intent=intent,
             hypotheses=hypotheses_contract,
             inv_result=inv_res,
+            existing_episode=task_episode,
         )
 
         self.task_ledger.update_status(task.task_id, TaskStatus.COMPLETED)

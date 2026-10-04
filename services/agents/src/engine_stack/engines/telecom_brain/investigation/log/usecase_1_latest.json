@@ -1,0 +1,87 @@
+{
+  "demo_id": "DEMO-USECASE-1-20260929T201413Z",
+  "run_id": "RUN-SCN-001-L1-SEED-42001",
+  "scenario_id": "SCN-001",
+  "terminal_state": "MODEL_INSUFFICIENT",
+  "explanation_coverage": 0.6,
+  "winning_root_cause": {
+    "canonical_entity": "IP:PE:RTR-21",
+    "confidence_score": 0.794
+  },
+  "diagnostics": {
+    "input_evidence_count": 15,
+    "collapsed_evidence_count": 15,
+    "falsified_hypothesis_count": 0,
+    "repeated_falsified_hypothesis_count": 0,
+    "candidate_relationship_count": 1,
+    "canonical_resolution_failures": [
+      "CRM:TICKET:001"
+    ],
+    "topology_gap_detection": true,
+    "evidence_requests_before_terminal": 2,
+    "steps_to_first_useful_hypothesis": 2,
+    "investigation_duration_seconds": 28.150382355997863,
+    "impacted_service": "5g_sa_mobile_data",
+    "coincidental_evidence": [],
+    "stopping_reason": "Single evidence pass complete; further tests require requested observations",
+    "knowledge_gap_records": [
+      {
+        "gap_id": "KG-001",
+        "gap_type": "MISSING_SERVICE_TO_FUNCTION",
+        "status": "CANDIDATE",
+        "affected_entities": [
+          "SA5G:UPF:003",
+          "CRM:TICKET:001",
+          "RAN:eNodeB:101"
+        ],
+        "suspected_missing_relation": {
+          "from_entity": "SA5G:UPF:003",
+          "relation": "ROUTES_THROUGH",
+          "to_entity": null
+        },
+        "reason": "Degradation propagates beyond known boundary at User Plane Function-03; downstream transport or service dependency missing.",
+        "supporting_evidence": [
+          "KPI-SCN-001-0001",
+          "LOG-SCN-001-0004",
+          "TKT-SCN-001-0001"
+        ],
+        "contradicting_evidence": [],
+        "unexplained_residual": [
+          "RES-001"
+        ],
+        "confidence": 0.7,
+        "required_validation": true,
+        "display_name": "Operational knowledge gap downstream of User Plane Function-03"
+      }
+    ],
+    "unexplained_residuals": [
+      {
+        "residual_id": "RES-001",
+        "evidence_ids": [
+          "KPI-SCN-001-0001",
+          "LOG-SCN-001-0004",
+          "TKT-SCN-001-0001"
+        ],
+        "affected_services": [
+          "5g_sa_mobile_data"
+        ],
+        "known_path_exhausted_at": "SA5G:UPF:003",
+        "severity": 0.85,
+        "structural_suspicion": true
+      }
+    ],
+    "model_contradictions": [
+      {
+        "contradiction_id": "MOD-CONTRA-001",
+        "expected_behavior": "Operational topology predicts degradation contained within reachable subgraph of User Plane Function-03.",
+        "observed_behavior": "Degradation observed across unlinked components (CRM:TICKET:001, RAN:eNodeB:101) without known causal path.",
+        "evidence_ids": [
+          "KPI-SCN-001-0001",
+          "LOG-SCN-001-0004",
+          "TKT-SCN-001-0001"
+        ],
+        "severity": 0.85
+      }
+    ]
+  }
+}

@@ -305,6 +305,79 @@ class PresentationNamingResolver:
             out = re.sub(rf"\b{re.escape(ev_machine)}\b", ev_human, out)
         return out
 
+    def to_service_name(self, service_id: str | None) -> str:
+        """Translate machine service identifier into a human-readable service name."""
+        if not service_id:
+            return "enterprise network services"
+        clean = str(service_id).strip().replace("-", " ").replace("_", " ")
+        parts = clean.split()
+        formatted_parts = []
+        for p in parts:
+            if p.upper() in KNOWN_ACRONYMS:
+                formatted_parts.append(p.upper())
+            elif p.lower() == "sa":
+                formatted_parts.append("SA")
+            elif p.lower() == "5g":
+                formatted_parts.append("5G")
+            elif p.lower() == "4g":
+                formatted_parts.append("4G")
+            else:
+                formatted_parts.append(p.lower())
+        return " ".join(formatted_parts)
+
+    def to_scenario_title(self, scenario_id: str | None) -> str:
+        """Convert scenario ID to human-readable scenario title without the ID prefix."""
+        if not scenario_id:
+            return "Active Operational Incident"
+
+        import re
+
+        cleaned_id = scenario_id.strip()
+
+        # Canonical dictionary of scenario names matching dropdown registry (SCN-001 through SCN-010)
+        catalog = {
+            "SCN-001": "5G Mobile Data Failure via N3 Transport Degradation",
+            "SCN-002": "UPF Failure Cascades into Charging and Customer Impact",
+            "SCN-003": "Internal DNS Degradation Cascades Across Core Functions",
+            "SCN-004": "Kubernetes Worker Failure Cascades into Core Degradation",
+            "SCN-005": "IMS Database Failure Cascades into Voice Degradation",
+            "SCN-006": "Shared Power Failure Hits RAN and Transport Together",
+            "SCN-007": "Shared Timing Source Failure Affects RAN and Transport",
+            "SCN-008": "Shared Storage Failure Impacts Multiple Core CNFs",
+            "SCN-009": "Shared Firewall Cluster Failure Affects Multiple Services",
+            "SCN-010": "Shared Leaf/TOR Dependency Defeats Logical Redundancy",
+        }
+
+        # Check direct lookup by ID (e.g. SCN-001)
+        raw_key = cleaned_id.split("/")[-1].strip().upper()
+        if raw_key in catalog:
+            return catalog[raw_key]
+
+        # Check if cleaned_id contains a known key (e.g. RUN-SCN-001-... or SCN-001)
+        for k, v in catalog.items():
+            if k in raw_key:
+                return v
+
+        # Dynamic lookup in ScenarioCatalog
+        try:
+            from engine_stack.engines.telecom_brain.simulator.scenario_catalog import ScenarioCatalog
+            sc = ScenarioCatalog().get(raw_key)
+            if sc and sc.display_name:
+                title = sc.display_name.strip()
+                title = re.sub(r"^(?:SCN|H\d+[\-_][A-Z]+|RUN|DEMO)[\-_ ]*\d+[\s\·\-_:]+\s*", "", title, flags=re.IGNORECASE)
+                if title:
+                    return title
+        except Exception:
+            pass
+
+        # If scenario_id itself has a format "SCN-001 · Some Title", strip the ID
+        stripped = re.sub(r"^(?:SCN|H\d+[\-_][A-Z]+|RUN|DEMO)[\-_ ]*\d+[\s\·\-_:]+\s*", "", cleaned_id, flags=re.IGNORECASE).strip()
+        if stripped and stripped != cleaned_id:
+            return stripped
+
+        return f"Scenario {scenario_id}"
+
+
 
 # Global singleton instance for presentation layer
 default_naming_resolver = PresentationNamingResolver()

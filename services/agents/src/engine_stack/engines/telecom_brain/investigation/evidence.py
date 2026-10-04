@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from .contracts import Evidence, GeneratedRunInput
+from .contracts import Evidence, GeneratedRunInput, EmergingEvidenceContract, RawEvidenceContract
 
 STREAMS = ("alarms", "logs", "metrics", "kpis", "traces", "changes", "tickets", "recovery")
 FORBIDDEN = {"hidden", "hidden_truth", "ground_truth", "causal_chain", "root_condition",

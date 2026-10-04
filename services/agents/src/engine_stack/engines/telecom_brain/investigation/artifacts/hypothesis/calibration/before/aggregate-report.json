@@ -1,0 +1,54 @@
+{
+  "scope": "Partial benchmark (1 runs)",
+  "total_runs": 1,
+  "metrics": {
+    "root_cause_top_3_accuracy": 1.0,
+    "wrong_hypotheses_correctly_falsified": 0,
+    "avg_evidence_requests_before_terminal": 2.0,
+    "avg_steps_to_first_useful_hypothesis": 2.0,
+    "forced_rca_rate": 0.0,
+    "avg_explanation_provenance_quality": 1.0
+  },
+  "baseline_comparison": {
+    "method_a_name": "earliest severe alarm",
+    "method_b_name": "hypothesis reasoning",
+    "method_a_correct": 1,
+    "method_b_correct": 0
+  },
+  "terminal_state_distribution": {
+    "MODEL_INSUFFICIENT": 1
+  },
+  "per_difficulty": {
+    "L1": {
+      "count": 1,
+      "method_b_correct": 0,
+      "method_a_correct": 1,
+      "avg_coverage": 0.6
+    }
+  },
+  "per_run": [
+    {
+      "run_id": "RUN-SCN-001-L1-SEED-42001",
+      "scenario_id": "SCN-001",
+      "difficulty": "L1",
+      "baseline": "earliest severe alarm",
+      "baseline_root_entities": [
+        "IP:PE:RTR-21"
+      ],
+      "baseline_correct": true,
+      "root_cause_top_3_accuracy": 1,
+      "method_b_correct": false,
+      "wrong_hypotheses_correctly_falsified": 0,
+      "wrong_hypotheses_total": 4,
+      "evidence_requests_before_terminal_decision": 2,
+      "steps_to_first_useful_hypothesis": 2,
+      "time_seconds": 0.010622128000250086,
+      "forced_rca_when_unknown_correct": 0,
+      "explanation_provenance_quality": 1.0,
+      "terminal_state": "MODEL_INSUFFICIENT",
+      "explanation_coverage": 0.6,
+      "unexplained_residual": 3
+    }
+  ],
+  "caveat": "Synthetic benchmark using in-memory operational fixtures; not a production accuracy claim."
+}

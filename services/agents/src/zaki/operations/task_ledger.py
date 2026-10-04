@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
-from ..domain.contracts.task import TaskContract
-from ..domain.enums import TaskPriority, TaskStatus, TaskType
+from ..contracts.task import TaskContract
+from ..enums import TaskPriority, TaskStatus, TaskType
 
 
 class TaskLedger:

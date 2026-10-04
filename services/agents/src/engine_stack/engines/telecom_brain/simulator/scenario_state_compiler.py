@@ -174,6 +174,25 @@ COHORT_HYPOTHESIS_TEMPLATES: list[dict[str, Any]] = [
 ]
 
 
+from .compiler.telemetry_loader import load_operational_telemetry_lifecycle
+from .compiler.reasoning_map_builder import build_reasoning_map
+from .compiler.reasoning_map_builder import build_causal_path
+from .compiler.reasoning_map_builder import build_operational_edges
+from .compiler.reasoning_map_builder import build_hypothesis_paths
+from .compiler.reasoning_map_builder import build_evidence_clusters
+from .compiler.hypothesis_builder import build_hypotheses
+from .compiler.hypothesis_builder import generate_hypothesis_names
+from .compiler.topology_builder import build_topology
+from .compiler.zaki_builder import build_zaki
+from .compiler.stage_watchdog import build_stage_watchdog
+from .compiler.stage_watchdog import disclosure_policy_for_stage
+from .compiler.stage_watchdog import compute_stage_values
+from .compiler.stage_watchdog import build_stages
+from .compiler.stage_watchdog import build_frontiers
+from .compiler.stage_watchdog import build_search_space
+from .compiler.stage_watchdog import build_reasoning_focus
+
+
 class ScenarioStateCompiler:
     """Compiles scenario-specific runtime state from manifests and reference data."""
 
@@ -400,14 +419,7 @@ class ScenarioStateCompiler:
         tested_hypotheses = tested_hypotheses or []
         stage_index = max(0, min(int(stage_index), 7))
         current_stage = self._resolve_stage_name(stage_index)
-        disclosure_policy = self._disclosure_policy_for_stage(current_stage)
-        stage_watchdog = self._build_stage_watchdog(
-            stage_index,
-            started_at,
-            status,
-            executed_actions=executed_actions,
-            tested_hypotheses=tested_hypotheses,
-        )
+        disclosure_policy = disclosure_policy_for_stage(current_stage)
 
         manifest = self.load_scenario_manifest(scenario_id)
         topology_view = self.load_topology_view(scenario_id)
@@ -423,23 +435,35 @@ class ScenarioStateCompiler:
         affected_service = self._derive_affected_service(manifest, failure_domain_tags)
 
         is_confirmed = "NBA-001" in executed_actions
-        stage_vals = self._compute_stage_values(stage_index, is_confirmed)
+        stage_vals = compute_stage_values(stage_index, is_confirmed)
 
         entities = self._build_entities(scenario_id, trigger_entity, topology_view, stage_vals, stage_index)
-        raw_events, events, noise_events = self._load_operational_telemetry_lifecycle(
+        raw_events, events, noise_events = load_operational_telemetry_lifecycle(
             scenario_id, run_id, trigger_entity, trigger_display,
             cohort, affected_service, stage_vals, stage_index, started_at
-        )
+        , _parse_runtime_timestamp=self._parse_runtime_timestamp, _derive_impact_scope=self._derive_impact_scope, _format_natural_evidence_observation=self._format_natural_evidence_observation, _entity_domain=self._entity_domain)
+
+        evidence_count = len(raw_events)
+        stage_watchdog = build_stage_watchdog(
+            stage_index,
+            started_at,
+            status,
+            executed_actions=executed_actions,
+            tested_hypotheses=tested_hypotheses,
+            evidence_count=evidence_count,
+         _resolve_stage_name=self._resolve_stage_name, _parse_runtime_timestamp=self._parse_runtime_timestamp)
+
         reasoning_trace = self._build_reasoning_trace(
             scenario_id, run_id, trigger_display, stage_index, stage_vals, trigger_entity, started_at, stage_watchdog
         )
-        hypotheses = self._build_hypotheses(
+        hypotheses = build_hypotheses(
             scenario_id, run_id, trigger_display, trigger_entity, affected_service, cohort,
-            tested_hypotheses, stage_vals, stage_index, is_confirmed
-        )
-        topology = self._build_topology(
+            tested_hypotheses, stage_vals, stage_index, is_confirmed, evidence_count=evidence_count
+        , _generate_hypothesis_names=generate_hypothesis_names)
+        self._bind_hypothesis_evidence(hypotheses, events, trigger_entity)
+        topology = build_topology(
             entities, trigger_entity, cohort, affected_service, stage_vals, stage_index, scenario_id
-        )
+        , load_scenario_manifest=self.load_scenario_manifest)
         impact = self._build_impact(
             scenario_id, run_id, affected_service, cohort, stage_vals, stage_index
         )
@@ -458,25 +482,25 @@ class ScenarioStateCompiler:
         learning = self._build_learning(
             scenario_id, run_id, trigger_display, stage_vals, stage_index
         ) if stage_index >= 6 else None
-        stages = self._build_stages(stage_index, started_at)
-        zaki = self._build_zaki(
+        stages = build_stages(stage_index, started_at)
+        zaki = build_zaki(
             scenario_id, run_id, trigger_display, stage_vals, stage_index
         )
         path_confidence = stage_vals["confidence"]
-        causal_path = self._build_causal_path(
+        causal_path = build_causal_path(
             trigger_entity, entities, topology, stage_vals, stage_index
         )
-        topology["operational_edges"] = self._build_operational_edges(topology, hypotheses, stage_index)
-        topology["hypothesis_paths"] = self._build_hypothesis_paths(hypotheses)
-        evidence_clusters = self._build_evidence_clusters(raw_events, stage_index)
-        frontiers = self._build_frontiers(
+        topology["operational_edges"] = build_operational_edges(topology, hypotheses, stage_index)
+        topology["hypothesis_paths"] = build_hypothesis_paths(hypotheses)
+        evidence_clusters = build_evidence_clusters(raw_events, stage_index)
+        frontiers = build_frontiers(
             scenario_id, run_id, trigger_entity, trigger_display, knowledge_gaps, hypotheses, stage_index
         )
-        search_space = self._build_search_space(raw_events, evidence_clusters, entities, hypotheses, frontiers)
-        reasoning_focus = self._build_reasoning_focus(
+        search_space = build_search_space(raw_events, evidence_clusters, entities, hypotheses, frontiers)
+        reasoning_focus = build_reasoning_focus(
             trigger_entity, hypotheses, frontiers, current_stage, stage_watchdog, stage_index
         )
-        reasoning_map = self._build_reasoning_map(
+        reasoning_map = build_reasoning_map(
             scenario_id=scenario_id,
             run_id=run_id,
             manifest=manifest,
@@ -494,7 +518,7 @@ class ScenarioStateCompiler:
             stage_watchdog=stage_watchdog,
             is_confirmed=is_confirmed,
             executed_actions=executed_actions,
-        )
+         _derive_domains=self._derive_domains, _entity_domain=self._entity_domain)
 
         state = {
             "scenario_id": scenario_id,
@@ -569,6 +593,50 @@ class ScenarioStateCompiler:
         state["topology"]["path_confidence"] = path_confidence
         return state
 
+    @staticmethod
+    def _bind_hypothesis_evidence(
+        hypotheses: list[dict[str, Any]],
+        events: list[dict[str, Any]],
+        trigger_entity: str,
+    ) -> None:
+        """Bind each ranked hypothesis to evidence that actually exists.
+
+        Hypothesis templates emit placeholder evidence pointers. Any pointer that
+        does not resolve to an admitted event is discarded; ranked hypotheses are
+        then bound to real events whose canonical entity lies on the hypothesis
+        path (or, for the leading hypothesis, the trigger entity). Noise events
+        are never bound. A hypothesis with no matching evidence gets an empty
+        list rather than a fabricated reference.
+        """
+        admitted = [
+            e for e in events
+            if (e.get("event_id") or e.get("evidence_id"))
+            and str(e.get("classification", "")).upper() not in ("NOISE", "HEALTHY_NEGATIVE")
+        ]
+        by_id = {str(e.get("event_id") or e.get("evidence_id")): e for e in admitted}
+
+        def _entity(e: dict[str, Any]) -> str:
+            return str(e.get("canonical_entity") or e.get("entity_id") or "")
+
+        for idx, hyp in enumerate(hypotheses):
+            if not hyp.get("evidence_ids"):
+                continue  # unranked: nothing to bind
+            bound = [eid for eid in hyp["evidence_ids"] if eid in by_id]
+            if not bound:
+                path_entities = set(hyp.get("path_entity_ids") or [])
+                if idx == 0 and trigger_entity:
+                    path_entities.add(trigger_entity)
+                bound = [
+                    eid for eid, e in by_id.items()
+                    if _entity(e) and _entity(e) in path_entities
+                ]
+            # Deduplicate while preserving order
+            bound = list(dict.fromkeys(bound))
+            hyp["evidence_ids"] = bound
+            hyp["evidence_count"] = len(bound)
+            for entry in hyp.get("confidence_history") or []:
+                entry["evidence_ids"] = bound[:2]
+
     def _derive_domains(self, tags: list[str]) -> list[str]:
         """Derive display domain names from scenario tags."""
         domains = []
@@ -625,219 +693,6 @@ class ScenarioStateCompiler:
             7: "ACTION",
         }
         return mapping.get(max(0, min(int(stage_index), 7)), "TRIGGER")
-
-    def _build_stage_watchdog(
-        self,
-        stage_index: int,
-        started_at: str = "",
-        status: str = "RUNNING",
-        executed_actions: Optional[list[str]] = None,
-        tested_hypotheses: Optional[list[str]] = None,
-    ) -> dict[str, Any]:
-        """Expose why the current stage is waiting or ready to move."""
-        executed_actions = executed_actions or []
-        tested_hypotheses = tested_hypotheses or []
-        stage_name = self._resolve_stage_name(stage_index)
-        next_stage = self._resolve_stage_name(stage_index + 1) if stage_index < 7 else None
-        base_dt = self._parse_runtime_timestamp(started_at)
-        entered_at = base_dt + timedelta(seconds=stage_index * 30)
-        now = datetime.now(timezone.utc)
-        elapsed_ms = max(0, int((now - entered_at).total_seconds() * 1000))
-        next_best_evidence_completed = "NBA-001" in executed_actions
-        hypothesis_tested = "HYP-001" in tested_hypotheses
-        conditions = {
-            "TRIGGER": ("valid_observation_count >= 1", {"valid_observation_count": 1}, None),
-            "SIGNAL_FLOOD": ("minimum_evidence_count >= 3", {"minimum_evidence_count": 3}, None),
-            "CORRELATION": ("event_groups_created == true", {"event_groups_created": True}, None),
-            "HYPOTHESIS_GENERATION": ("candidate_explanations >= 1", {"candidate_explanations": 1}, None),
-            "HYPOTHESIS_TESTING": (
-                "leading_candidate_state in terminal_states",
-                {"leading_candidate_state": "NEEDS_MORE_EVIDENCE" if not hypothesis_tested else "SUPPORTED"},
-                None,
-            ),
-            "KNOWLEDGE_GAP_CHECK": (
-                "next_best_evidence_completed == true",
-                {"next_best_evidence_completed": next_best_evidence_completed},
-                None if next_best_evidence_completed else "Required next-best evidence has not completed",
-            ),
-            "LEARNING_VALIDATION": ("validation_started == true", {"validation_started": True}, None),
-            "ACTION": ("recommendation_generated == true", {"recommendation_generated": True}, None),
-        }
-        exit_condition, current_values, blocking_reason = conditions.get(stage_name, conditions["TRIGGER"])
-        waiting_for = None
-        if stage_name == "KNOWLEDGE_GAP_CHECK" and not next_best_evidence_completed:
-            waiting_for = "Backup-path telemetry"
-
-        if status == "PAUSED":
-            stage_status = "PAUSED"
-            blocking_reason = "Simulation is paused"
-        elif blocking_reason:
-            stage_status = "BLOCKED"
-        else:
-            stage_status = "READY_TO_ADVANCE" if next_stage else "COMPLETE"
-
-        is_satisfied = not bool(blocking_reason) and (status != "PAUSED")
-        exit_conditions_detail = [
-            {
-                "condition_id": f"EC-{stage_name[:3]}-01",
-                "display_name": exit_condition,
-                "satisfied": is_satisfied,
-                "expected": "true" if "==" in exit_condition else ">= threshold",
-                "actual": "true" if is_satisfied else "false",
-                "reason": blocking_reason if not is_satisfied else "Condition satisfied",
-            }
-        ]
-        return {
-            "current_stage": stage_name,
-            "stage_status": stage_status,
-            "entered_at": entered_at.isoformat().replace("+00:00", "Z"),
-            "elapsed_ms": elapsed_ms,
-            "exit_conditions": [exit_condition],
-            "exit_conditions_detail": exit_conditions_detail,
-            "exit_condition_state": current_values,
-            "next_stage": next_stage,
-            "blocking_reason": blocking_reason,
-            "waiting_for": waiting_for,
-        }
-
-    def _disclosure_policy_for_stage(self, stage_name: str) -> dict[str, Any]:
-        policy = {
-            "TRIGGER": {
-                "observations": True,
-                "correlations": False,
-                "ranked_hypotheses": False,
-                "root_candidate": False,
-                "confirmed_path": False,
-                "knowledge_gaps": False,
-                "recommendations": False,
-            },
-            "SIGNAL_FLOOD": {
-                "observations": True,
-                "correlations": False,
-                "ranked_hypotheses": False,
-                "root_candidate": False,
-                "confirmed_path": False,
-                "knowledge_gaps": False,
-                "recommendations": False,
-            },
-            "CORRELATION": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": False,
-                "root_candidate": False,
-                "confirmed_path": False,
-                "knowledge_gaps": False,
-                "recommendations": False,
-            },
-            "HYPOTHESIS_GENERATION": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": False,
-                "root_candidate": False,
-                "confirmed_path": False,
-                "knowledge_gaps": False,
-                "recommendations": False,
-            },
-            "HYPOTHESIS_TESTING": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": True,
-                "root_candidate": True,
-                "confirmed_path": False,
-                "knowledge_gaps": False,
-                "recommendations": False,
-            },
-            "KNOWLEDGE_GAP_CHECK": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": True,
-                "root_candidate": True,
-                "confirmed_path": False,
-                "knowledge_gaps": True,
-                "recommendations": False,
-            },
-            "LEARNING_VALIDATION": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": True,
-                "root_candidate": True,
-                "confirmed_path": False,
-                "knowledge_gaps": True,
-                "recommendations": False,
-            },
-            "ACTION": {
-                "observations": True,
-                "correlations": True,
-                "ranked_hypotheses": True,
-                "root_candidate": True,
-                "confirmed_path": True,
-                "knowledge_gaps": True,
-                "recommendations": True,
-            },
-        }
-        values = policy.get(stage_name, policy["TRIGGER"])
-        values["allowed_disclosures"] = [
-            key for key, enabled in values.items() if key != "allowed_disclosures" and enabled
-        ]
-        return values
-
-    def _compute_stage_values(self, stage_index: int, is_confirmed: bool) -> dict[str, Any]:
-        """Compute stage-dependent confidence, phase, and impact values."""
-        if is_confirmed:
-            return {
-                "confidence": 94.2,
-                "delta": "+12%",
-                "lifecycle": "CONFIRMED",
-                "zaki_phase": "RECOMMENDATION_READY",
-                "zaki_thought": "Root cause confirmed. Remediation path identified.",
-                "throughput_pct": -72,
-                "users_affected": 24000,
-                "regions_affected": 3,
-            }
-        elif stage_index >= 3:
-            return {
-                "confidence": 88.5,
-                "delta": "+6%",
-                "lifecycle": "TESTING",
-                "zaki_phase": "REASONING",
-                "zaki_thought": "Testing causal hypothesis against operational evidence.",
-                "throughput_pct": -65,
-                "users_affected": 20000,
-                "regions_affected": 3,
-            }
-        elif stage_index == 2:
-            return {
-                "confidence": 82.0,
-                "delta": "+4%",
-                "lifecycle": "NEEDS_MORE_EVIDENCE",
-                "zaki_phase": "EVIDENCE_NEEDED",
-                "zaki_thought": "Correlating signals across domains. Next-best evidence required.",
-                "throughput_pct": -55,
-                "users_affected": 18000,
-                "regions_affected": 2,
-            }
-        elif stage_index == 1:
-            return {
-                "confidence": 76.5,
-                "delta": "+2%",
-                "lifecycle": "SUPPORTED",
-                "zaki_phase": "REASONING",
-                "zaki_thought": "Telemetry signals ingested. Forming candidate hypotheses.",
-                "throughput_pct": -40,
-                "users_affected": 14000,
-                "regions_affected": 2,
-            }
-        else:
-            return {
-                "confidence": 0.0,
-                "delta": "0%",
-                "lifecycle": "OBSERVING",
-                "zaki_phase": "OBSERVING",
-                "zaki_thought": "Observing the initial incident trigger. No causal or impact claim is justified yet.",
-                "throughput_pct": None,
-                "users_affected": None,
-                "regions_affected": None,
-            }
 
     def _build_entities(
         self,
@@ -898,23 +753,32 @@ class ScenarioStateCompiler:
                         "scenario_id": scenario_id,
                     })
 
-        # Ensure at least 3 entities
+        # Ensure at least 3 entities by adding healthy neighbors from the same domain
         if len(entities) < 3:
-            # Add healthy entities from reference network
-            for eid, ref in list(self._ref_entities.items())[:10]:
-                if eid not in [e["id"] for e in entities] and eid != trigger_entity:
-                    display = ref.get("canonical_name", eid.split(":")[-1])
-                    entities.append({
-                        "id": eid,
-                        "display_name": display,
-                        "subtitle": "Healthy",
-                        "state": "HEALTHY",
-                        "icon": "server",
-                        "domain": ref.get("domain", "UNKNOWN"),
-                        "scenario_id": scenario_id,
-                    })
-                    if len(entities) >= 5:
-                        break
+            trigger_domain = trigger_ref.get("domain", "")
+            # Prefer entities from the same domain or core infrastructure
+            for eid, ref in self._ref_entities.items():
+                if eid in [e["id"] for e in entities] or eid == trigger_entity:
+                    continue
+                ref_domain = ref.get("domain", "")
+                # Never inject EXTERNAL or VAS entities into unrelated incidents
+                if ref_domain in ("EXTERNAL", "VAS") and trigger_domain not in ("EXTERNAL", "VAS"):
+                    continue
+                # If trigger has a domain, prefer entities in that domain or transport/core
+                if trigger_domain and ref_domain != trigger_domain and len(entities) >= 2:
+                    continue
+                display = ref.get("canonical_name", eid.split(":")[-1])
+                entities.append({
+                    "id": eid,
+                    "display_name": display,
+                    "subtitle": "Healthy",
+                    "state": "HEALTHY",
+                    "icon": "server",
+                    "domain": ref_domain or "UNKNOWN",
+                    "scenario_id": scenario_id,
+                })
+                if len(entities) >= 3:
+                    break
 
         return entities
 
@@ -1017,436 +881,6 @@ class ScenarioStateCompiler:
             sig_name = item.get("title") or "Telemetry Signal"
             obs = f"Telemetry signal recorded on {native}."
         return sig_name, obs
-
-    def _load_operational_telemetry_lifecycle(
-        self,
-        scenario_id: str,
-        run_id: str,
-        trigger_entity: str,
-        trigger_display: str,
-        cohort: str,
-        affected_service: str,
-        stage_vals: dict[str, Any],
-        stage_index: int,
-        started_at: str = "",
-    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]]]:
-        clean_id = scenario_id.upper().strip()
-        runs_dir = Path(__file__).parent / "runs"
-        if not runs_dir.exists():
-            return [], [], []
-        matches = list(runs_dir.glob(f"RUN-{clean_id}*"))
-        if not matches:
-            return [], [], []
-        op_dir = matches[0] / "operational"
-        if not op_dir.exists():
-            return [], [], []
-
-        stream_map = [
-            ("alarms.jsonl", "alarm", "ALARM"),
-            ("metrics.jsonl", "metric", "METRIC"),
-            ("kpis.jsonl", "metric", "KPI"),
-            ("logs.jsonl", "log", "LOG"),
-            ("tickets.jsonl", "ticket", "TICKET"),
-            ("traces.jsonl", "trace", "TRACE"),
-            ("recovery.jsonl", "change", "RECOVERY"),
-        ]
-
-        base_dt = self._parse_runtime_timestamp(started_at)
-        raw_events: list[dict[str, Any]] = []
-        correlated_events: list[dict[str, Any]] = []
-        noise_events: list[dict[str, Any]] = []
-
-        # ── 1. Read base operational evidence files ─────────────────────────
-        for fname, cat, badge in stream_map:
-            fpath = op_dir / fname
-            if not fpath.exists():
-                continue
-            for line in fpath.read_text(encoding="utf-8").splitlines():
-                if not line.strip():
-                    continue
-                item = json.loads(line)
-                eid = item.get("event_id") or item.get("evidence_id") or f"EVT-{len(raw_events)}"
-                entity = item.get("canonical_entity_id") or item.get("entity_id") or "UNKNOWN"
-                native = item.get("source_native_entity_name") or item.get("entity_id") or entity
-                alarm = item.get("alarm_name") or ""
-                metric = item.get("metric_name") or item.get("kpi_name") or ""
-                val = item.get("value")
-                base = item.get("baseline_value")
-                sig = alarm or metric or item.get("message") or item.get("trace_type") or "Operational Signal"
-                sev = item.get("severity", "MAJOR" if cat == "alarm" else "INFO").upper()
-
-                t_str = item.get("event_time", "")
-                try:
-                    dt = datetime.fromisoformat(t_str.replace("Z", "+00:00"))
-                    time_fmt = dt.strftime("%H:%M:%S")
-                except Exception:
-                    time_fmt = (base_dt + timedelta(seconds=len(raw_events) * 8)).strftime("%H:%M:%S")
-
-                domain = self._entity_domain(entity) or item.get("domain", "IP_TRANSPORT").replace("_", " ").title()
-
-                # Extract natural observation with description 1st, then further payload
-                sig_name, natural_obs = self._format_natural_evidence_observation(item, cat, native, val, base)
-
-                # ── BUILD INGESTED ITEM (BEFORE: As-is telemetry flood, zero artificial keywords) ──
-                raw_events.append({
-                    "event_id": eid,
-                    "evidence_id": eid,
-                    "time": time_fmt,
-                    "category": cat,
-                    "badge": badge,
-                    "title": sig_name,
-                    "subtitle": f"Source: {item.get('source_system', 'IP_NMS')} · Port: {native}",
-                    "domain": domain,
-                    "entity_id": entity,
-                    "canonical_entity": entity,
-                    "source_native_entity": native,
-                    "source_system": item.get("source_system", "IP_NMS"),
-                    "severity": sev,
-                    "state": "ACTIVE",
-                    "stage": "SIGNAL_FLOOD",
-                    "event_type": "OBSERVATION",
-                    "evidence_type": badge,
-                    "display_name": sig_name,
-                    "event_time": t_str,
-                    "scenario_id": scenario_id,
-                    "run_id": run_id,
-                    "explanation_text": natural_obs,
-                    "observation": natural_obs,
-                    "classification": "EVENT_FLOOD",
-                    "classification_label": "Unprocessed Telemetry",
-                    "deduplication": "Uncollapsed Stream",
-                    "raw_data": item,
-                })
-
-                # ── BUILD CORRELATED ITEM (AFTER: Canonicalized, deduplicated, impact-scoped) ──
-                impact_scope = self._derive_impact_scope(item, cat, entity, domain, metric, alarm, val)
-
-                if metric == "upf_cpu_percent":
-                    classification = "HEALTHY_NEGATIVE"
-                    classification_label = impact_scope
-                    explanation = f"UPF-03 CPU utilization is normal at {val}% (baseline: {base}%). Confirms user plane compute is healthy; disproves internal UPF software crash."
-                    corr_item = {
-                        "event_id": eid,
-                        "evidence_id": eid,
-                        "time": time_fmt,
-                        "category": cat,
-                        "badge": badge,
-                        "title": f"{entity}: {sig_name}",
-                        "subtitle": f"{domain} · {entity}",
-                        "domain": domain,
-                        "entity_id": entity,
-                        "canonical_entity": entity,
-                        "source_native_entity": native,
-                        "source_system": item.get("source_system", "VENDOR_EMS"),
-                        "severity": sev,
-                        "state": "ACTIVE",
-                        "stage": "CORRELATION",
-                        "event_type": "OBSERVATION",
-                        "evidence_type": badge,
-                        "display_name": f"{entity}: {sig_name}",
-                        "event_time": t_str,
-                        "scenario_id": scenario_id,
-                        "run_id": run_id,
-                        "explanation_text": explanation,
-                        "observation": natural_obs,
-                        "impact_scope": impact_scope,
-                        "classification": classification,
-                        "classification_label": impact_scope,
-                        "deduplication": "Canonical Resolved (3GPP R17)",
-                        "raw_data": item,
-                    }
-                    correlated_events.append(corr_item)
-                    noise_events.append({
-                        **corr_item,
-                        "separation_rationale": "Verified healthy negative evidence: Compute utilization nominal (41% < 75%). Serves as mathematical proof disproving local host compute crash hypothesis.",
-                        "correlation_score": 0.88,
-                    })
-                else:
-                    classification = "CORRELATED_ANOMALY"
-                    classification_label = impact_scope
-                    if "PE:RTR-21" in entity or "PE21" in native:
-                        if alarm == "PE_ROUTER_DEGRADED":
-                            explanation = f"Transport line card ingress buffer saturation observed on Provider Edge Router ({native}). BGP session packet drop affecting downstream VRF traffic."
-                        elif metric == "latency_ms":
-                            explanation = f"Transport round-trip latency measured at {val}ms (baseline: {base}ms), exceeding transmission SLA threshold."
-                        elif metric == "timeout_or_loss_rate":
-                            explanation = f"N3 transport packet loss rate measured at {val}% (baseline: {base}%), indicating severe transmission discard."
-                        else:
-                            explanation = f"Provider Edge Router ({native}) experiencing transport-layer procedure degradation."
-                    elif "VRF:N3-01" in entity or "N3-VRF" in native:
-                        explanation = f"Virtual Routing & Forwarding instance ({native}) dropping GTP-U packets due to transport-layer transmission loss."
-                    elif "UPF:003" in entity or "UPF-03" in native:
-                        explanation = f"5G User Plane Function ({native}) reporting PDU session throughput drop caused by N3 transport interface packet starvation."
-                    elif "TICKET:001" in entity or cat == "ticket":
-                        if "Complaint Rate" in metric:
-                            explanation = f"Customer trouble ticket volume escalated to {val}x baseline due to subscriber session dropouts."
-                        elif "Success Rate" in metric:
-                            explanation = f"5G SA Mobile Data session establishment success rate collapsed to {val}% (SLA commit: {base}%)."
-                        else:
-                            explanation = "Enterprise customer care reports multiple corporate customer tickets filed for mobile data outages in Region-North."
-                    elif "probe" in str(item.get("trace_type", "")) or cat == "trace":
-                        explanation = "Synthetic dependency probe confirms sequential packet loss across N3 transport and 5G core user-plane path."
-                    elif cat == "change" or item.get("intervention"):
-                        explanation = f"Automated route optimization and queue buffer flush applied on {native}."
-                    else:
-                        explanation = item.get("message") or f"Operational anomaly recorded on {entity}."
-
-                    correlated_events.append({
-                        "event_id": eid,
-                        "evidence_id": eid,
-                        "time": time_fmt,
-                        "category": cat,
-                        "badge": badge,
-                        "title": f"{entity}: {sig_name}",
-                        "subtitle": f"{domain} · {entity}",
-                        "domain": domain,
-                        "entity_id": entity,
-                        "canonical_entity": entity,
-                        "source_native_entity": native,
-                        "source_system": item.get("source_system", "IP_NMS"),
-                        "severity": sev,
-                        "state": "ACTIVE",
-                        "stage": "CORRELATION",
-                        "event_type": "OBSERVATION",
-                        "evidence_type": badge,
-                        "display_name": f"{entity}: {sig_name}",
-                        "event_time": t_str,
-                        "scenario_id": scenario_id,
-                        "run_id": run_id,
-                        "explanation_text": explanation,
-                        "observation": natural_obs,
-                        "impact_scope": impact_scope,
-                        "classification": classification,
-                        "classification_label": impact_scope,
-                        "deduplication": "Canonical Resolved (3GPP R17)",
-                        "raw_data": item,
-                    })
-
-        # ── 2. Add realistic duplicate SNMP traps to Event Flood (demonstrates deduplication) ──
-        dup_traps = [
-            {
-                "event_id": "ALM-PE21-DUP-01",
-                "time": (base_dt + timedelta(seconds=14)).strftime("%H:%M:%S"),
-                "category": "alarm",
-                "badge": "ALARM",
-                "title": "bufferOverflowTrap (Burst 2/3)",
-                "subtitle": "Source: Cisco NMS · Port: ge-0/0/0/1",
-                "domain": "IP Transport",
-                "source_native_entity": "PE21",
-                "canonical_entity": "IP:PE:RTR-21",
-                "source_system": "IP_NMS",
-                "severity": "MAJOR",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "ALARM",
-                "explanation_text": "SNMP bufferOverflowTrap received on interface ge-0/0/0/1 [OID: 1.3.6.1.4.1.9.9.48.1.1.1 | repeat: 2/3]",
-                "observation": "SNMP bufferOverflowTrap received on interface ge-0/0/0/1 [OID: 1.3.6.1.4.1.9.9.48.1.1.1 | repeat: 2/3]",
-                "classification": "EVENT_FLOOD",
-                "classification_label": "Unprocessed Telemetry",
-                "deduplication": "Collapsed Downstream",
-                "raw_data": {"trap_oid": "1.3.6.1.4.1.9.9.48.1.1.1", "burst_index": 2, "repeat_count": 3},
-            },
-            {
-                "event_id": "ALM-PE21-DUP-02",
-                "time": (base_dt + timedelta(seconds=16)).strftime("%H:%M:%S"),
-                "category": "alarm",
-                "badge": "ALARM",
-                "title": "bufferOverflowTrap (Burst 3/3)",
-                "subtitle": "Source: Cisco NMS · Port: ge-0/0/0/1",
-                "domain": "IP Transport",
-                "source_native_entity": "PE21",
-                "canonical_entity": "IP:PE:RTR-21",
-                "source_system": "IP_NMS",
-                "severity": "MAJOR",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "ALARM",
-                "explanation_text": "SNMP bufferOverflowTrap received on interface ge-0/0/0/1 [OID: 1.3.6.1.4.1.9.9.48.1.1.1 | repeat: 3/3]",
-                "observation": "SNMP bufferOverflowTrap received on interface ge-0/0/0/1 [OID: 1.3.6.1.4.1.9.9.48.1.1.1 | repeat: 3/3]",
-                "classification": "EVENT_FLOOD",
-                "classification_label": "Unprocessed Telemetry",
-                "deduplication": "Collapsed Downstream",
-                "raw_data": {"trap_oid": "1.3.6.1.4.1.9.9.48.1.1.1", "burst_index": 3, "repeat_count": 3},
-            },
-            {
-                "event_id": "ALM-VRF-DUP-01",
-                "time": (base_dt + timedelta(seconds=46)).strftime("%H:%M:%S"),
-                "category": "alarm",
-                "badge": "ALARM",
-                "title": "vrfInterfaceDegraded (Burst 2/2)",
-                "subtitle": "Source: Cisco NMS · Port: vrf-n3",
-                "domain": "IP Transport",
-                "source_native_entity": "N3-VRF-01",
-                "canonical_entity": "IP:VRF:N3-01",
-                "source_system": "IP_NMS",
-                "severity": "MAJOR",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "ALARM",
-                "explanation_text": "SNMP vrfInterfaceDegraded timeout trap received on vrf-n3 [OID: 1.3.6.1.4.1.9.9.117.1.1 | repeat: 2/2]",
-                "observation": "SNMP vrfInterfaceDegraded timeout trap received on vrf-n3 [OID: 1.3.6.1.4.1.9.9.117.1.1 | repeat: 2/2]",
-                "classification": "EVENT_FLOOD",
-                "classification_label": "Unprocessed Telemetry",
-                "deduplication": "Collapsed Downstream",
-                "raw_data": {"trap_oid": "1.3.6.1.4.1.9.9.117.1.1", "burst_index": 2, "repeat_count": 2},
-            },
-        ]
-        raw_events.extend(dup_traps)
-
-        # ── 3. Add realistic coincidental background noise to Event Flood & NOISE LEDGER ──
-        background_noise = [
-            {
-                "event_id": "NOISE-001",
-                "time": (base_dt + timedelta(seconds=10)).strftime("%H:%M:%S"),
-                "category": "metric",
-                "badge": "METRIC",
-                "title": "Periodic PTP/NTP Clock Sync",
-                "subtitle": "Radio Access Network · RAN:GNB-04",
-                "domain": "Radio Access Network",
-                "source_native_entity": "ERICSSON-GNB-04",
-                "canonical_entity": "RAN:GNB-04",
-                "source_system": "RAN_EMS",
-                "severity": "INFO",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "METRIC",
-                "explanation_text": "PTP clock synchronization nominal offset 820ns [status: LOCKED | peer: PTP-MASTER-01]",
-                "observation": "PTP clock synchronization nominal offset 820ns [status: LOCKED | peer: PTP-MASTER-01]",
-                "classification": "COINCIDENTAL_NOISE",
-                "classification_label": "Decoupled Background Noise",
-                "impact_scope": "Decoupled Radio Baseline",
-                "separation_rationale": "Decoupled: Correlation score 0.04 < 0.12 threshold. RAN timing synchronization is topologically independent of N3 user-plane failure.",
-                "correlation_score": 0.04,
-                "deduplication": "Isolated from Anomaly Envelope",
-                "raw_data": {"ptp_offset_ns": 820, "sync_status": "LOCKED", "peer": "PTP-MASTER-01"},
-            },
-            {
-                "event_id": "NOISE-002",
-                "time": (base_dt + timedelta(seconds=22)).strftime("%H:%M:%S"),
-                "category": "log",
-                "badge": "LOG",
-                "title": "BGP Peer Keepalive OK",
-                "subtitle": "IP Transport & Routing · IP:AGG-SW-02",
-                "domain": "IP Transport",
-                "source_native_entity": "JUNIPER-AGG-SW-02",
-                "canonical_entity": "IP:AGG-SW-02",
-                "source_system": "IP_NMS",
-                "severity": "INFO",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "LOG",
-                "explanation_text": "Routine BGP keepalive handshake received on xe-1/0/0 [neighbor: 10.200.0.1 | state: ESTABLISHED | interval: 30s]",
-                "observation": "Routine BGP keepalive handshake received on xe-1/0/0 [neighbor: 10.200.0.1 | state: ESTABLISHED | interval: 30s]",
-                "classification": "COINCIDENTAL_NOISE",
-                "classification_label": "Decoupled Background Noise",
-                "impact_scope": "Decoupled Transport Adjacency",
-                "separation_rationale": "Decoupled: Correlation score 0.02 < 0.12 threshold. Core aggregation routing adjacency unaffected by N3 VRF degradation.",
-                "correlation_score": 0.02,
-                "deduplication": "Isolated from Anomaly Envelope",
-                "raw_data": {"bgp_neighbor": "10.200.0.1", "state": "ESTABLISHED", "keepalive_interval": 30},
-            },
-            {
-                "event_id": "NOISE-003",
-                "time": (base_dt + timedelta(seconds=35)).strftime("%H:%M:%S"),
-                "category": "metric",
-                "badge": "METRIC",
-                "title": "Rack Inlet Temperature (21.4°C)",
-                "subtitle": "Cloud NFVI & Facilities · DC:PDU-08",
-                "domain": "Cloud NFVI & Facilities",
-                "source_native_entity": "DC-FACILITY-PDU-08",
-                "canonical_entity": "DC:PDU-08",
-                "source_system": "FACILITIES_BMS",
-                "severity": "INFO",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "METRIC",
-                "explanation_text": "Facility environmental sensor reading nominal ambient temperature at 21.4°C [sensor: INLET_TEMP_C | threshold: 35.0°C]",
-                "observation": "Facility environmental sensor reading nominal ambient temperature at 21.4°C [sensor: INLET_TEMP_C | threshold: 35.0°C]",
-                "classification": "COINCIDENTAL_NOISE",
-                "classification_label": "Decoupled Background Noise",
-                "impact_scope": "Decoupled Facilities Sensor",
-                "separation_rationale": "Decoupled: Facilities BMS sensor. Non-causal environmental baseline with zero topology coupling.",
-                "correlation_score": 0.00,
-                "deduplication": "Isolated from Anomaly Envelope",
-                "raw_data": {"sensor": "INLET_TEMP_C", "value": 21.4, "threshold_high": 35.0},
-            },
-            {
-                "event_id": "NOISE-004",
-                "time": (base_dt + timedelta(seconds=50)).strftime("%H:%M:%S"),
-                "category": "trace",
-                "badge": "TRACE",
-                "title": "Interface Loopback Ping Test",
-                "subtitle": "IP Transport & Routing · IP:CORE-RTR-05",
-                "domain": "IP Transport",
-                "source_native_entity": "IP-CORE-RTR-05",
-                "canonical_entity": "IP:CORE-RTR-05",
-                "source_system": "OBSERVABILITY",
-                "severity": "INFO",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "TRACE",
-                "explanation_text": "Synthetic monitoring probe pinging backbone loopback IP [target: 10.0.0.5 | loss: 0.0% | rtt: 1.2ms]",
-                "observation": "Synthetic monitoring probe pinging backbone loopback IP [target: 10.0.0.5 | loss: 0.0% | rtt: 1.2ms]",
-                "classification": "COINCIDENTAL_NOISE",
-                "classification_label": "Decoupled Background Noise",
-                "impact_scope": "Decoupled Backbone Health",
-                "separation_rationale": "Decoupled: Synthetic observability probe on core backbone. Normal baseline with 0% loss.",
-                "correlation_score": 0.03,
-                "deduplication": "Isolated from Anomaly Envelope",
-                "raw_data": {"probe_target": "10.0.0.5", "packet_loss_pct": 0.0, "rtt_ms": 1.2},
-            },
-            {
-                "event_id": "NOISE-005",
-                "time": (base_dt + timedelta(seconds=65)).strftime("%H:%M:%S"),
-                "category": "metric",
-                "badge": "METRIC",
-                "title": "Radius Accounting Heartbeat Nominal",
-                "subtitle": "OCS & Charging · OCS:CHARGING-GW-01",
-                "domain": "OCS & Charging",
-                "source_native_entity": "OCS-CHARGING-GW-01",
-                "canonical_entity": "OCS:CHARGING-GW-01",
-                "source_system": "OCS_EMS",
-                "severity": "INFO",
-                "state": "ACTIVE",
-                "stage": "SIGNAL_FLOOD",
-                "event_type": "OBSERVATION",
-                "evidence_type": "METRIC",
-                "explanation_text": "Online Charging System accounting proxy responding nominally [latency: 3.4ms | sessions: 48200 | status: NOMINAL]",
-                "observation": "Online Charging System accounting proxy responding nominally [latency: 3.4ms | sessions: 48200 | status: NOMINAL]",
-                "classification": "COINCIDENTAL_NOISE",
-                "classification_label": "Decoupled Background Noise",
-                "impact_scope": "Decoupled Charging Plane",
-                "separation_rationale": "Decoupled: Rating and charging plane telemetry operating nominally without user-plane dependency.",
-                "correlation_score": 0.01,
-                "deduplication": "Isolated from Anomaly Envelope",
-                "raw_data": {"radius_latency_ms": 3.4, "active_sessions": 48200, "status": "NOMINAL"},
-            },
-        ]
-
-        # Add background noise to Event Flood (representing unseparated network noise)
-        for noise_item in background_noise:
-            raw_events.append({
-                **noise_item,
-                "classification": "EVENT_FLOOD",
-                "classification_label": "Unprocessed Telemetry",
-                "deduplication": "Uncollapsed Stream",
-            })
-
-        # Add noise items to NOISE SEPARATION LEDGER
-        noise_events.extend(background_noise)
-
-        # Sort raw events by time
-        raw_events.sort(key=lambda x: x.get("time", ""))
-
-        return raw_events, correlated_events, noise_events
-
 
     def _build_raw_events(
         self,
@@ -1677,354 +1111,6 @@ class ScenarioStateCompiler:
             })
         return records
 
-    def _build_hypotheses(
-        self,
-        scenario_id: str,
-        run_id: str,
-        trigger_display: str,
-        trigger_entity: str,
-        affected_service: str,
-        cohort: str,
-        tested_hypotheses: list[str],
-        stage_vals: dict[str, Any],
-        stage_index: int,
-        is_confirmed: bool,
-    ) -> list[dict[str, Any]]:
-        """Build scenario-specific hypotheses with stage-aware ranking."""
-        if stage_index < 2:
-            return []
-        hypotheses = []
-        hyp_names = self._generate_hypothesis_names(trigger_display, cohort, scenario_id, affected_service)
-        service_id = affected_service.lower().replace(" ", "-")
-        path_specs = [
-            {
-                "entity_ids": [trigger_entity, service_id, "enterprise-users"],
-                "edge_ids": ["EDGE-HYP-001-0", "EDGE-HYP-001-1"],
-                "role": "CONFIRMED" if is_confirmed else ("LEADING" if stage_index >= 4 else "CANDIDATE"),
-                "last_reason": f"{trigger_display} failure precedes downstream service degradation",
-            },
-            {
-                "entity_ids": [service_id, "enterprise-users"],
-                "edge_ids": ["EDGE-HYP-002-0"],
-                "role": "WEAKENING" if stage_index >= 5 else "CANDIDATE",
-                "last_reason": f"{affected_service} overload explains symptoms but not initial telemetry alarm",
-            },
-            {
-                "entity_ids": ["dns-resolution", service_id],
-                "edge_ids": ["EDGE-HYP-003-0"],
-                "role": "WEAKENING" if stage_index >= 5 else "CANDIDATE",
-                "last_reason": "Cross-domain protocol latency remains unverified by direct alarms",
-            },
-            {
-                "entity_ids": ["ran-access", service_id],
-                "edge_ids": ["EDGE-HYP-004-0"],
-                "role": "REJECTED" if stage_index >= 5 else "CANDIDATE",
-                "last_reason": "Access domain cause conflicts with core/transport temporal order",
-            },
-        ]
-        confidence_by_stage = {
-            3: [None, None, None, None],
-            4: [61.0, 33.0, 18.0, 8.0],
-            5: [68.0, 28.0, 12.0, 4.0],
-            6: [74.0, 22.0, 9.0, 2.0],
-            7: [94.2, 12.0, 4.0, 1.0],
-        }
-        confidences = confidence_by_stage.get(min(stage_index, 7), confidence_by_stage[3])
-        previous_by_stage = {
-            3: [None, None, None, None],
-            4: [47.0, 26.0, 15.0, 10.0],
-            5: [61.0, 33.0, 18.0, 8.0],
-            6: [68.0, 28.0, 12.0, 4.0],
-            7: [74.0, 22.0, 9.0, 2.0],
-        }
-        previous = previous_by_stage.get(min(stage_index, 7), previous_by_stage[3])
-
-        rank_titles = [
-            "Leading Root Cause",
-            "Competing Candidate",
-            "Plausible Candidate",
-            "Rejected Candidate",
-        ]
-
-        for i, tmpl in enumerate(COHORT_HYPOTHESIS_TEMPLATES):
-            hyp_id = f"HYP-{i + 1:03d}"
-            name = hyp_names[i] if i < len(hyp_names) else f"Alternative Cause {i + 1}"
-            tested = hyp_id in tested_hypotheses
-            should_rank = stage_index >= 4
-            confidence = confidences[i] if should_rank else None
-            prior = previous[i] if should_rank else None
-            delta_value = None if confidence is None or prior is None else round(confidence - prior, 1)
-            status = tmpl["status"] if i > 0 else ("LEADING" if should_rank else "CANDIDATE")
-            if should_rank and i == 0 and is_confirmed:
-                status = "LEADING"
-                lifecycle_state = "CONFIRMED"
-                confidence_state = "CONFIRMED"
-            elif should_rank and i == 0 and stage_index >= 5 and not is_confirmed:
-                lifecycle_state = "NEEDS_MORE_EVIDENCE"
-                confidence_state = "ROOT_CANDIDATE"
-            elif should_rank and i == 0:
-                lifecycle_state = "TESTING"
-                confidence_state = "RANKED"
-            elif should_rank and i == 3 and stage_index >= 5:
-                lifecycle_state = "REJECTED"
-                confidence_state = "REJECTED"
-            elif should_rank and i > 0:
-                lifecycle_state = "WEAKENING" if stage_index >= 5 else "TESTING"
-                confidence_state = "RANKED"
-            else:
-                lifecycle_state = "CANDIDATE"
-                confidence_state = "UNRANKED"
-            path_spec = path_specs[i]
-            evidence_ids = [f"EVT-{scenario_id.upper()}-{stage_index}-{idx}" for idx in range(min(max(stage_index, 1), 4))]
-            history = []
-            if should_rank:
-                history.append({
-                    "hypothesis_id": hyp_id,
-                    "previous": prior,
-                    "new": confidence,
-                    "delta": delta_value,
-                    "reason": path_spec["last_reason"],
-                    "evidence_ids": evidence_ids[:2],
-                    "sequence": stage_index * 10 + i,
-                    "timestamp": (datetime.now(timezone.utc) - timedelta(seconds=(4 - i) * 9)).isoformat(),
-                })
-
-            hypotheses.append({
-                "id": hyp_id,
-                "hypothesis_id": hyp_id,
-                "display_id": f"H{i + 1}",
-                "rank_label": f"Rank #{i + 1} · {rank_titles[i]}",
-                "label": name,
-                "rank": tmpl["rank"] if should_rank else None,
-                "display_name": name,
-                "confidence": confidence,
-                "confidence_state": confidence_state,
-                "delta": f"{delta_value:+.1f}%" if delta_value is not None else "Unranked",
-                "last_delta": delta_value,
-                "last_delta_reason": path_spec["last_reason"] if should_rank else "Awaiting enough correlated evidence to rank",
-                "status": status,
-                "lifecycle_state": lifecycle_state,
-                "supports": [s.format(trigger_name=trigger_display) for s in tmpl.get("supports_template", [])],
-                "against": [a.format(trigger_name=trigger_display) for a in tmpl.get("against_template", [])],
-                "missing": [m.format(trigger_name=trigger_display) for m in tmpl.get("missing_template", [])],
-                "support_count": max(0, 4 - i) if should_rank else 0,
-                "contradiction_count": i if should_rank else 0,
-                "missing_evidence_count": len(tmpl.get("missing_template", [])),
-                "evidence_count": len(evidence_ids) if should_rank else 0,
-                "evidence_ids": evidence_ids if should_rank else [],
-                "path_entity_ids": path_spec["entity_ids"],
-                "path_edge_ids": path_spec["edge_ids"],
-                "path_role": path_spec["role"],
-                "frontier_ids": [f"FR-{scenario_id}-001"] if i == 0 and stage_index >= 5 and not is_confirmed else [],
-                "confidence_history": history,
-                "tested": tested,
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-            })
-
-        return hypotheses
-
-    def _generate_hypothesis_names(
-        self,
-        trigger_display: str,
-        cohort: str,
-        scenario_id: str = "",
-        affected_service: str = "",
-    ) -> list[str]:
-        """Generate scenario-specific candidate hypothesis names tailored to the failure mode."""
-        sc_id = (scenario_id or "").upper().strip()
-        sc_service = affected_service or "Data Services"
-
-        # Check for curated scenario-specific hypothesis quadruplets
-        if "SCN-001" in sc_id or "DEMO-001" in sc_id or "TWIN-INC-001" in sc_id:
-            return [
-                "SGi Transport MTU Blackhole & Packet Fragmentation",
-                "PE Router N3 Transport Interface Saturation",
-                "UPF User Plane Session Control Buffer Exhaustion",
-                "DNS Resolution Timeout & Latency Surge",
-            ]
-        elif "H2-GAP-001" in sc_id or "TWIN-GAP-001" in sc_id:
-            return [
-                "Unmodeled OCS Diameter Gy/Ro Charging Gateway Timeout",
-                "PCRF Subscriber Policy Rule Sync Mismatch",
-                "PGW-C Control Plane Queue Saturation",
-                "SGi Interface MTU Mismatch",
-            ]
-        elif "H3-LRN-001" in sc_id or "TWIN-LRN-001" in sc_id:
-            return [
-                "Promoted OCS Charging Path Credit Control Delay",
-                "UPF GTP-U Protocol Tunnel Deterioration",
-                "AMF Subscriber Authentication Failure",
-                "Transport Backbone Core Link Loss",
-            ]
-        elif "H4-WI-001" in sc_id or "TWIN-WIF-001" in sc_id:
-            return [
-                "MPLS Edge Router Shared Power Feed Loss",
-                "Downstream BGP Route Blackholing",
-                "Core IP Transmission Fiber Cut",
-                "RAN Access Transport Link Drop",
-            ]
-        elif "H4-WI-002" in sc_id or "TWIN-WIF-002" in sc_id:
-            return [
-                "Primary Data Center Gateway Spine Switch Fabric Outage",
-                "Virtual Router EVPN VXLAN Overlay Drop",
-                "Core Cloud NFVI Hypervisor Saturation",
-                "IMS SIP Proxy Session Spike",
-            ]
-        elif "H4-WI-003" in sc_id or "TWIN-WIF-003" in sc_id:
-            return [
-                "PGW-U User Plane Forwarding Process Collapse",
-                "N4 Interface PFCP Control Association Loss",
-                "SGi-LAN Firewall Session Exhaustion",
-                "gNodeB RAN User Plane Congestion",
-            ]
-        elif "H4-WI-011" in sc_id or "TWIN-WIF-011" in sc_id:
-            return [
-                "Dual Router Shared Power Feed Rack Outage",
-                "Optical Line Terminal (OLT) Laser Degradation",
-                "Core BGP Peering Memory Leak",
-                "Subscriber AAA Server Timeout",
-            ]
-
-        # Dynamic fallback based on trigger entity & affected service
-        short_name = trigger_display.split("-")[0] if "-" in trigger_display else trigger_display
-        return [
-            f"{trigger_display} Primary Failure",
-            f"Downstream {sc_service} Capacity Overload",
-            "Cross-Domain Interconnect Boundary Protocol Latency",
-            "RAN Radio Access Sector Congestion",
-        ]
-
-    def _build_topology(
-        self,
-        entities: list[dict[str, Any]],
-        trigger_entity: str,
-        cohort: str,
-        affected_service: str,
-        stage_vals: dict[str, Any],
-        stage_index: int,
-        scenario_id: str | None = None,
-    ) -> dict[str, Any]:
-        """Build topology from entities with stage-aware causal-path disclosure."""
-        # Group entities by domain
-        domain_groups: dict[str, list[dict[str, Any]]] = {}
-        for ent in entities:
-            domain = ent.get("domain", "UNKNOWN")
-            if domain not in domain_groups:
-                domain_groups[domain] = []
-            domain_groups[domain].append(ent)
-
-        # Build domain list
-        domain_display_map = {
-            "RAN": ("RAN", "Radio Access Network"),
-            "IP_TRANSPORT": ("TRANSPORT", "IP / Optical"),
-            "TRANSMISSION": ("TRANSPORT", "IP / Optical"),
-            "EPC_4G": ("MOBILE CORE", "EPC / 5GC"),
-            "SA_5G_CORE": ("MOBILE CORE", "5G SA Core"),
-            "CS_CORE": ("MOBILE CORE", "Circuit Core"),
-            "MOBILE_IMS": ("IMS", "Voice / Video"),
-            "FIXED_IMS": ("IMS", "Voice / Video"),
-            "CRM": ("CUSTOMER", "Services"),
-            "BSS": ("OSS / BSS", "Charging / OSS"),
-            "OSS": ("OSS / BSS", "Operations"),
-            "CHARGING": ("OSS / BSS", "Charging / OSS"),
-            "IT_CLOUD_INFRA": ("INFRA", "Cloud Infrastructure"),
-            "EXTERNAL": ("EXTERNAL", "External"),
-        }
-
-        domains = []
-        seen_domain_names = set()
-        for domain_key, domain_entities in domain_groups.items():
-            display_name, subtitle = domain_display_map.get(domain_key, (domain_key, domain_key))
-            if display_name in seen_domain_names:
-                # Merge into existing domain
-                for d in domains:
-                    if d["name"] == display_name:
-                        d["entities"].extend(domain_entities)
-                        break
-                continue
-            seen_domain_names.add(display_name)
-            domains.append({
-                "name": display_name,
-                "subtitle": subtitle,
-                "entities": domain_entities,
-            })
-
-        # Add customer impact domain only after impact has at least been observed.
-        has_customer = any(d["name"] == "CUSTOMER IMPACT" for d in domains)
-        if not has_customer and stage_index >= 1:
-            degradation = stage_vals["throughput_pct"]
-            users_affected = stage_vals["users_affected"]
-            domains.append({
-                "name": "CUSTOMER IMPACT",
-                "subtitle": "Services",
-                "entities": [
-                    {
-                        "id": affected_service.lower().replace(" ", "-"),
-                        "display_name": affected_service,
-                        "subtitle": "Degradation observed" if degradation is None else f"Degraded ({degradation}%)",
-                        "state": "SYMPTOM",
-                        "icon": "users",
-                    },
-                    {
-                        "id": "enterprise-users",
-                        "display_name": "Enterprise Users",
-                        "subtitle": "Scope unknown" if users_affected is None else f"Affected (~{users_affected // 1000}k users)",
-                        "state": "SYMPTOM" if stage_index < 5 else "IMPACTED",
-                        "icon": "users",
-                    },
-                ],
-            })
-
-        causal_path = []
-        manifest = self.load_scenario_manifest(scenario_id) if scenario_id else None
-        chain = manifest.get("causal_chain", []) if manifest else []
-
-        if stage_index >= 2 and len(chain) >= 2:
-            for idx in range(len(chain) - 1):
-                from_id = chain[idx]
-                to_id = chain[idx + 1]
-                causal_path.append({
-                    "from": from_id,
-                    "to": to_id,
-                    "status": "CONFIRMED" if stage_index >= 7 else ("LEADING" if stage_index >= 4 else "CANDIDATE"),
-                    "relation": "PROPAGATES_TO" if idx > 0 else "CAUSES",
-                })
-        elif stage_index >= 4 and len(entities) >= 2:
-            trigger_ent = next((e for e in entities if e["id"] == trigger_entity), None)
-            symptom_ent = next((e for e in entities if e["state"] == "SYMPTOM"), None)
-            if trigger_ent and symptom_ent:
-                causal_path.append({
-                    "from": trigger_ent["id"],
-                    "to": symptom_ent["id"],
-                    "status": "CONFIRMED" if stage_index >= 7 else ("LEADING" if stage_index >= 4 else "CANDIDATE"),
-                    "relation": "CAUSES",
-                })
-
-        if stage_index >= 7 and causal_path:
-            path_parts = []
-            for edge in causal_path:
-                src = next((e["display_name"] for e in entities if e["id"] == edge["from"]), edge["from"])
-                dst = next((e["display_name"] for e in entities if e["id"] == edge["to"]), edge["to"])
-                path_parts.append(f"{src} → {dst}")
-            confirmed_label = "Confirmed Causal Path: " + " → ".join(path_parts)
-        elif stage_index >= 4 and causal_path:
-            path_parts = []
-            for edge in causal_path:
-                src = next((e["display_name"] for e in entities if e["id"] == edge["from"]), edge["from"])
-                dst = next((e["display_name"] for e in entities if e["id"] == edge["to"]), edge["to"])
-                path_parts.append(f"{src} → {dst}")
-            confirmed_label = "Leading Causal Path: " + " → ".join(path_parts)
-        else:
-            confirmed_label = "Awaiting causal path analysis"
-
-        return {
-            "domains": domains,
-            "causal_path": causal_path,
-            "confirmed_path_label": confirmed_label,
-            "path_confidence": stage_vals["confidence"] if causal_path else 0,
-        }
-
     def _build_impact(
         self,
         scenario_id: str,
@@ -2169,6 +1255,8 @@ class ScenarioStateCompiler:
         """Build scenario-specific next-best actions."""
         nba1_completed = "NBA-001" in executed_actions or "nba-1" in executed_actions or "nba-001" in executed_actions
         nba2_completed = "NBA-002" in executed_actions or "nba-2" in executed_actions or "nba-002" in executed_actions
+        hitl_completed = any(act in executed_actions for act in ("HITL-001", "VAL-001", "HITL_VALIDATE", "VAL-APPROVE", "hitl-001", "val-001"))
+        act_completed = any(act in executed_actions for act in ("ACT-001", "REMEDIATE-001", "NBA-REMEDIATE", "act-001"))
         actions = [
             {
                 "id": "NBA-001",
@@ -2177,6 +1265,25 @@ class ScenarioStateCompiler:
                 "status": "COMPLETED" if nba1_completed else "READY",
                 "scenario_id": scenario_id,
                 "run_id": run_id,
+                "action_type": "EVIDENCE",
+            },
+            {
+                "id": "HITL-001",
+                "request_id": "HITL-001",
+                "display_name": "HITL SME Validation & Knowledge Promotion",
+                "status": "COMPLETED" if hitl_completed else ("READY" if nba1_completed else "PENDING"),
+                "scenario_id": scenario_id,
+                "run_id": run_id,
+                "action_type": "VALIDATION",
+            },
+            {
+                "id": "ACT-001",
+                "request_id": "ACT-001",
+                "display_name": f"Execute Remediation: Reroute traffic & isolate {trigger_display}",
+                "status": "COMPLETED" if act_completed else ("READY" if hitl_completed else "PENDING"),
+                "scenario_id": scenario_id,
+                "run_id": run_id,
+                "action_type": "REMEDIATION",
             },
             {
                 "id": "NBA-002",
@@ -2318,772 +1425,6 @@ class ScenarioStateCompiler:
             "enabled": stage_index >= 6,
             "scenario_id": scenario_id,
             "run_id": run_id,
-        }
-
-    def _build_stages(self, stage_index: int, started_at: str = "") -> list[dict[str, Any]]:
-        """Build simulation journey stages from the runtime state machine, not demo constants."""
-        stage_sequence = [
-            {"index": 0, "key": "trigger", "label": "Trigger", "summary": "Incident detected"},
-            {"index": 1, "key": "signals", "label": "SIGNAL_FLOOD", "summary": "Events ingested"},
-            {"index": 2, "key": "correlation", "label": "CORRELATION", "summary": "Linking across domains"},
-            {"index": 3, "key": "hypothesis_generation", "label": "HYPOTHESIS_GENERATION", "summary": "Evaluating root causes"},
-            {"index": 4, "key": "hypothesis_testing", "label": "HYPOTHESIS_TESTING", "summary": "Testing the leading hypothesis"},
-            {"index": 5, "key": "knowledge_gap_check", "label": "KNOWLEDGE_GAP_CHECK", "summary": "Finding missing context"},
-            {"index": 6, "key": "learning_validation", "label": "LEARNING_VALIDATION", "summary": "Validating insights"},
-            {"index": 7, "key": "action", "label": "ACTION", "summary": "Generate next best action"},
-        ]
-
-        for entry in stage_sequence:
-            idx = entry["index"]
-            if idx < stage_index:
-                entry["status"] = "COMPLETED"
-            elif idx == stage_index:
-                entry["status"] = "ACTIVE"
-            else:
-                entry["status"] = "PENDING"
-        return stage_sequence
-
-    def _build_zaki(
-        self,
-        scenario_id: str,
-        run_id: str,
-        trigger_display: str,
-        stage_vals: dict[str, Any],
-        stage_index: int,
-    ) -> dict[str, Any]:
-        """Build Zaki AI cognitive state."""
-        thought = stage_vals["zaki_thought"]
-        if stage_index <= 1:
-            thought = "Only raw observations are available. No causal claim is justified yet."
-        elif stage_index == 2:
-            thought = "Several signals are correlated by timing and dependency. Root cause remains unconfirmed."
-        elif stage_index == 3:
-            thought = "Candidate explanations are being generated without ranking yet."
-        elif stage_index == 4:
-            thought = "A leading hypothesis is ranked and being tested against evidence."
-        elif stage_index == 5:
-            thought = "The unresolved boundary is now explicit. Missing evidence is being isolated."
-        elif stage_index >= 6:
-            thought = "Validated learning is being assessed before final recommendation."
-        return {
-            "phase": stage_vals["zaki_phase"],
-            "thought": thought,
-            "active_focus_entity": trigger_display,
-            "confidence": stage_vals["confidence"],
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-        }
-
-    def _build_reasoning_map(
-        self,
-        scenario_id: str,
-        run_id: str,
-        manifest: Optional[dict[str, Any]],
-        trigger_entity: str,
-        trigger_display: str,
-        affected_service: str,
-        raw_events: list[dict[str, Any]],
-        hypotheses: list[dict[str, Any]],
-        knowledge_gaps: list[dict[str, Any]],
-        next_best_actions: list[dict[str, Any]],
-        learning: Optional[dict[str, Any]],
-        impact: dict[str, Any],
-        stage_index: int,
-        current_stage: str,
-        stage_watchdog: dict[str, Any],
-        is_confirmed: bool,
-        executed_actions: list[str],
-    ) -> dict[str, Any]:
-        """Build the authoritative Neural Reasoning Map contract for Step 5."""
-        source_id = f"SRC-{scenario_id}"
-        primary_hypothesis = hypotheses[0] if hypotheses else None
-        primary_hypothesis_id = primary_hypothesis.get("id") if primary_hypothesis else None
-        primary_gap = knowledge_gaps[0] if knowledge_gaps else None
-        primary_gap_id = primary_gap.get("id") if primary_gap else None
-        primary_action = next_best_actions[0] if next_best_actions else None
-        primary_action_id = primary_action.get("id") if primary_action else None
-        display_domains = self._derive_domains(manifest.get("failure_domain_tags", []) if manifest else [])
-        primary_domain = display_domains[0] if display_domains else self._entity_domain(trigger_entity).replace("_", " ").title()
-        supporting_evidence_ids = [event.get("event_id") for event in raw_events if event.get("event_id")]
-
-        evidence_nodes = [
-            {
-                "id": event.get("event_id"),
-                "evidence_id": event.get("event_id"),
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-                "display_name": event.get("title"),
-                "type": event.get("badge") or event.get("category", "Evidence").upper(),
-                "evidence_type": event.get("evidence_type") or (event.get("badge") or event.get("category", "Evidence")).upper(),
-                "category": event.get("category"),
-                "source_entity": event.get("entity_id"),
-                "domain": event.get("domain"),
-                "timestamp": event.get("time"),
-                "status": "ACTIVE",
-                "state": "ACTIVE",
-                "event_time": event.get("event_time"),
-                "evidence_ids": [event.get("event_id")],
-                "explain": {
-                    "what": event.get("title"),
-                    "why": "Admitted as operational evidence for this run.",
-                    "supports": [event.get("event_id")],
-                    "affects": [primary_hypothesis_id] if primary_hypothesis_id and stage_index >= 3 else [],
-                    "unknown": "Causal role is still being evaluated." if stage_index < 6 else "Validation is assessing the final evidence package.",
-                    "recent": f"Observed at {event.get('time')}",
-                },
-            }
-            for event in raw_events
-            if event.get("event_id")
-        ]
-
-        category_ids = {event.get("category") for event in raw_events}
-        has_change = "change" in category_ids
-        has_metric = "metric" in category_ids
-        has_trace = "trace" in category_ids or "log" in category_ids
-        has_ticket = "ticket" in category_ids
-
-        pathway_specs = [
-            (
-                "PATH-OPERATIONAL-EVIDENCE",
-                "Operational Evidence",
-                "ACTIVE" if raw_events else "DORMANT",
-                "Raw alarms, KPIs and tickets have been admitted.",
-                supporting_evidence_ids[:3],
-                [primary_hypothesis_id] if primary_hypothesis_id else [],
-            ),
-            (
-                "PATH-SERVICE-DEPENDENCY",
-                "Service Dependency",
-                "ACTIVE" if stage_index >= 2 or has_ticket else "DISCOVERED",
-                f"{affected_service} is being mapped to dependent network elements.",
-                supporting_evidence_ids[:2],
-                [primary_hypothesis_id] if primary_hypothesis_id else [],
-            ),
-            (
-                "PATH-TOPOLOGY-PROPAGATION",
-                "Topology & Propagation",
-                "ACTIVE" if stage_index >= 1 else "DISCOVERED",
-                "Failure propagation tracked across physical and logical topological links.",
-                supporting_evidence_ids[:2],
-                [primary_hypothesis_id] if primary_hypothesis_id else [],
-            ),
-            (
-                "PATH-SUBSCRIBER-JOURNEY",
-                "Subscriber Journey",
-                "ACTIVE" if has_ticket else ("DISCOVERED" if stage_index >= 2 else "DORMANT"),
-                "Customer-impact evidence is available for journey correlation.",
-                [event.get("event_id") for event in raw_events if event.get("category") == "ticket"],
-                [],
-            ),
-            (
-                "PATH-CHANGE-CONFIGURATION",
-                "Change & Configuration",
-                "ACTIVE" if has_change else "DORMANT",
-                "A change record is temporally relevant to the investigation." if has_change else "No admitted change evidence is active yet.",
-                [event.get("event_id") for event in raw_events if event.get("category") == "change"],
-                [primary_hypothesis_id] if primary_hypothesis_id and has_change else [],
-            ),
-            (
-                "PATH-TRAFFIC-CAPACITY",
-                "Traffic & Capacity",
-                "ACTIVE" if has_metric or impact.get("impact_state") in {"ESTIMATED", "INFERRED", "CONFIRMED"} else "DISCOVERED",
-                "Traffic degradation evidence is being tested against capacity explanations.",
-                [event.get("event_id") for event in raw_events if event.get("category") == "metric"],
-                [hypotheses[1].get("id")] if len(hypotheses) > 1 else [],
-            ),
-            (
-                "PATH-CONTROL-SIGNALING",
-                "Control & Signaling",
-                "ACTIVE" if has_trace else ("DISCOVERED" if stage_index >= 2 else "DORMANT"),
-                "Trace or log signals can explain control-plane behavior.",
-                [event.get("event_id") for event in raw_events if event.get("category") in {"trace", "log"}],
-                [primary_hypothesis_id] if primary_hypothesis_id and has_trace else [],
-            ),
-            (
-                "PATH-RESILIENCE-FAILOVER",
-                "Resilience & Failover",
-                "ACTIVE" if stage_index >= 2 else "DORMANT",
-                "Backup-path behavior is evaluated during topology correlation.",
-                [],
-                [primary_hypothesis_id] if primary_hypothesis_id and stage_index >= 2 else [],
-            ),
-            (
-                "PATH-HISTORICAL-PATTERN",
-                "Historical Pattern",
-                "ACTIVE" if stage_index >= 2 else "DORMANT",
-                "Similar incidents are matched for precedent during correlation.",
-                [],
-                [primary_hypothesis_id] if primary_hypothesis_id and stage_index >= 2 else [],
-            ),
-            (
-                "PATH-KNOWLEDGE-GAP",
-                "Knowledge Gap",
-                "ACTIVE" if knowledge_gaps else "DORMANT",
-                "Missing evidence is blocking a stronger conclusion." if knowledge_gaps else "No explicit knowledge gap has been raised yet.",
-                [],
-                [primary_hypothesis_id] if primary_hypothesis_id and knowledge_gaps else [],
-            ),
-        ]
-        pathways = [
-            {
-                "id": pathway_id,
-                "pathway_id": pathway_id,
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-                "display_name": display_name,
-                "status": status,
-                "state": status,
-                "activation_reason": reason,
-                "evidence_ids": [evidence_id for evidence_id in evidence_ids if evidence_id],
-                "hypothesis_ids": [hyp_id for hyp_id in hypothesis_ids if hyp_id],
-                "explain": {
-                    "what": f"{display_name} reasoning pathway",
-                    "why": reason,
-                    "supports": [evidence_id for evidence_id in evidence_ids if evidence_id],
-                    "affects": [hyp_id for hyp_id in hypothesis_ids if hyp_id],
-                    "unknown": "Awaiting more evidence." if status in {"DORMANT", "DISCOVERED"} else "Contribution is being evaluated by synthesis.",
-                    "recent": f"Pathway state is {status}.",
-                },
-            }
-            for pathway_id, display_name, status, reason, evidence_ids, hypothesis_ids in pathway_specs
-        ]
-        active_pathways = [path for path in pathways if path["status"] in {"ACTIVE", "RESOLVED", "REJECTED"}]
-
-        map_hypotheses = [
-            {
-                "id": hyp.get("id"),
-                "hypothesis_id": hyp.get("id"),
-                "display_id": hyp.get("display_id") or f"H{index + 1}",
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-                "display_name": hyp.get("display_name"),
-                "status": hyp.get("lifecycle_state") or hyp.get("status"),
-                "state": hyp.get("lifecycle_state") or hyp.get("status"),
-                "confidence": hyp.get("confidence"),
-                "supporting_evidence": hyp.get("evidence_ids", []),
-                "contradicting_evidence": hyp.get("against", []),
-                "contradictions": hyp.get("against", []),
-                "missing_evidence": hyp.get("frontier_ids", []) or ([primary_gap_id] if index == 0 and primary_gap_id else []),
-                "explain": {
-                    "what": f"H{index + 1} - {hyp.get('display_name')}",
-                    "why": hyp.get("last_delta_reason") or "Candidate explanation from backend reasoning.",
-                    "supports": hyp.get("evidence_ids", []),
-                    "affects": [hyp.get("id")],
-                    "unknown": "; ".join(hyp.get("missing", [])[:2]) or "No explicit missing evidence listed.",
-                    "recent": hyp.get("delta", "Unranked"),
-                },
-            }
-            for index, hyp in enumerate(hypotheses)
-            if hyp.get("id")
-        ]
-        gaps = [
-            {
-                "id": gap.get("id"),
-                "gap_id": gap.get("id"),
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-                "display_name": gap.get("label"),
-                "status": "RESOLVED" if primary_action and primary_action.get("status") == "COMPLETED" and index == 0 else "OPEN",
-                "state": "RESOLVED" if primary_action and primary_action.get("status") == "COMPLETED" and index == 0 else (gap.get("state") or "OPEN"),
-                "affected_hypothesis_ids": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                "affected_pathway_ids": ["PATH-KNOWLEDGE-GAP", "PATH-RESILIENCE-FAILOVER"] if index == 0 else ["PATH-KNOWLEDGE-GAP"],
-                "affected_hypotheses": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                "affected_pathways": ["PATH-KNOWLEDGE-GAP", "PATH-RESILIENCE-FAILOVER"] if index == 0 else ["PATH-KNOWLEDGE-GAP"],
-                "required_evidence": primary_action.get("display_name") if index == 0 and primary_action else gap.get("reason"),
-                "next_best_evidence_id": primary_action_id if index == 0 else None,
-                "explain": {
-                    "what": gap.get("label"),
-                    "why": gap.get("reason"),
-                    "supports": [],
-                    "affects": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                    "unknown": primary_action.get("display_name") if index == 0 and primary_action else gap.get("reason"),
-                    "recent": "Evidence request completed." if primary_action and primary_action.get("status") == "COMPLETED" and index == 0 else "Evidence request is pending.",
-                },
-            }
-            for index, gap in enumerate(knowledge_gaps)
-            if gap.get("id")
-        ]
-
-        if stage_index < 3:
-            synthesis_state = "INSUFFICIENT_EVIDENCE"
-            synthesis_summary = "Evidence is being admitted and organized; no candidate explanation is ready."
-        elif stage_index < 5:
-            synthesis_state = "PARTIAL"
-            synthesis_summary = "Candidate explanations exist, but testing and gap resolution are still in progress."
-        elif primary_gap and primary_action and primary_action.get("status") != "COMPLETED":
-            synthesis_state = "MODEL_INSUFFICIENT"
-            synthesis_summary = "The leading explanation is blocked by missing evidence."
-        elif is_confirmed:
-            synthesis_state = "ROOT_CANDIDATE"
-            synthesis_summary = "Evidence, pathway fit, and returned telemetry strongly support the leading candidate."
-        else:
-            synthesis_state = "STRONGLY_SUPPORTED" if stage_index >= 6 else "PARTIAL"
-            synthesis_summary = "The leading candidate is supported, with validation still required."
-
-        synthesis = {
-            "id": "SYNTHESIS-001",
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-            "display_name": "Intelligence Synthesis",
-            "state": synthesis_state,
-            "summary": synthesis_summary,
-            "dimensions": [
-                {"display_name": "Evidence Support", "state": "ACTIVE", "value": len(supporting_evidence_ids)},
-                {"display_name": "Service Dependency Fit", "state": "ACTIVE" if stage_index >= 2 else "PENDING"},
-                {"display_name": "Contradictions", "state": "LOW" if stage_index >= 5 else "UNKNOWN"},
-                {"display_name": "Knowledge Gaps", "state": "OPEN" if gaps and gaps[0]["status"] == "OPEN" else "CLEAR"},
-                {"display_name": "Validation State", "state": "ACCEPTED" if is_confirmed else ("PENDING" if stage_index >= 6 else "NOT_READY")},
-            ],
-            "leading_hypothesis_id": primary_hypothesis_id,
-            "explain": {
-                "what": "Convergence layer for the investigation.",
-                "why": synthesis_summary,
-                "supports": supporting_evidence_ids,
-                "affects": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                "unknown": stage_watchdog.get("blocking_reason") or "Domain attribution waits for validation readiness.",
-                "recent": f"Synthesis state is {synthesis_state}.",
-            },
-        }
-
-        validation = {
-            "id": "VAL-001",
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-            "display_name": (
-                f"{primary_domain} Engineer Confirmed {trigger_display} as Primary Cause"
-                if is_confirmed else f"{primary_domain} Engineer Review Pending"
-            ),
-            "status": "ACCEPTED" if is_confirmed else ("PENDING" if stage_index >= 6 else "NOT_READY"),
-            "state": "ACCEPTED" if is_confirmed else ("PENDING" if stage_index >= 6 else "NOT_STARTED"),
-            "reviewer_role": f"{primary_domain} Engineer",
-            "evidence_package_ids": supporting_evidence_ids,
-            "explain": {
-                "what": "Domain engineer validation state.",
-                "why": "Validation is based on the backend evidence package.",
-                "supports": supporting_evidence_ids,
-                "affects": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                "unknown": "Pending engineer review." if not is_confirmed else "No blocking validation gap remains.",
-                "recent": "Validation accepted." if is_confirmed else "Validation has not accepted the conclusion yet.",
-            },
-        }
-
-        def _to_domain_id(name: str) -> str:
-            n = name.lower()
-            if "transport" in n: return "transport"
-            if "ran" in n: return "ran"
-            if "core" in n: return "mobile_core"
-            if "ims" in n or "voice" in n: return "ims_voice"
-            if "policy" in n or "subscriber" in n: return "policy_subscriber"
-            if "security" in n: return "security"
-            if "cloud" in n or "k8s" in n: return "cloud_k8s"
-            if "roaming" in n: return "roaming"
-            if "charging" in n: return "charging"
-            if "oss" in n or "bss" in n: return "oss_bss"
-            return n.replace(" ", "_")
-
-        rev = stage_index
-        seq = stage_index
-        is_ready = stage_index >= 6
-
-        domain_attribution_domains = []
-        if is_ready:
-            primary_reason = f"Validated reasoning on {trigger_display} identifies {primary_domain} as primary causal failure root."
-            domain_attribution_domains.append({
-                "domain_id": _to_domain_id(primary_domain),
-                "display_name": primary_domain,
-                "role": "PRIMARY",
-                "attribution_basis": "CAUSAL",
-                "confidence": 88 if is_confirmed else 76,
-                "reason": primary_reason,
-                "supporting_hypothesis_ids": [primary_hypothesis_id] if primary_hypothesis_id else ["HYP-001"],
-                "supporting_evidence_ids": supporting_evidence_ids[:4],
-                "supporting_pathway_ids": ["PW-001"],
-                "source_revision": rev,
-            })
-
-        if stage_index >= 2 and affected_service:
-            aff_dom = "RAN" if any(k in affected_service for k in ["Mobile Data", "RAN", "Cell"]) else ("IP Transport" if "Transport" in affected_service else "Mobile Core")
-            if aff_dom != primary_domain:
-                domain_attribution_domains.append({
-                    "domain_id": _to_domain_id(aff_dom),
-                    "display_name": aff_dom,
-                    "role": "AFFECTED",
-                    "attribution_basis": "IMPACT",
-                    "confidence": 45,
-                    "reason": f"Service impact evidence admitted for {affected_service}.",
-                    "supporting_hypothesis_ids": [primary_hypothesis_id] if primary_hypothesis_id else ["HYP-001"],
-                    "supporting_evidence_ids": supporting_evidence_ids[:2],
-                    "supporting_pathway_ids": ["PW-002"],
-                    "source_revision": rev,
-                })
-
-        if len(display_domains) > 1:
-            for domain in display_domains[1:]:
-                if domain != primary_domain and not any(d.get("display_name") == domain for d in domain_attribution_domains):
-                    domain_attribution_domains.append({
-                        "domain_id": _to_domain_id(domain),
-                        "display_name": domain,
-                        "role": "CONTRIBUTING" if is_ready else "INVOLVED",
-                        "attribution_basis": "DEPENDENCY",
-                        "confidence": 62 if is_ready else 30,
-                        "reason": f"Backend reasoning marked {domain} relevant to active failure path.",
-                        "supporting_hypothesis_ids": [primary_hypothesis_id] if primary_hypothesis_id else ["HYP-001"],
-                        "supporting_evidence_ids": supporting_evidence_ids[:2],
-                        "supporting_pathway_ids": [],
-                        "source_revision": rev,
-                    })
-
-        attr_status = "CONSISTENT" if is_ready else ("PARTIAL" if stage_index >= 2 else "UNRESOLVED")
-
-        domain_attribution = {
-            "id": "ATTR-001",
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-            "revision": rev,
-            "sequence": seq,
-            "attribution_status": attr_status,
-            "status": "READY" if is_ready else "PENDING",
-            "primary_domain": primary_domain if is_ready else None,
-            "domains": domain_attribution_domains,
-            "explain": {
-                "what": "Domain responsibility and impact attribution.",
-                "why": "Attribution appears after synthesis and validation readiness.",
-                "supports": supporting_evidence_ids,
-                "affects": [primary_hypothesis_id] if primary_hypothesis_id else [],
-                "unknown": "Final responsibility awaits validation." if stage_index < 6 else "Attribution is ready for review.",
-                "recent": "Primary attribution exposed." if stage_index >= 6 else "Attribution withheld until enough evidence converges.",
-            },
-        }
-
-        learning_node = {
-            "id": "LEARNING-001",
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-            "display_name": "Validated Learning Candidate" if learning and learning.get("enabled") else "No validated learning yet",
-            "status": learning.get("status") if learning else "NOT_READY",
-            "summary": learning.get("summary") if learning else "Learning is gated by validation.",
-            "explain": {
-                "what": "Learning eligibility for future investigations.",
-                "why": "Learning is created only from validated run state.",
-                "supports": supporting_evidence_ids if learning and learning.get("enabled") else [],
-                "affects": [],
-                "unknown": "Validation must complete before promotion." if not (learning and learning.get("enabled")) else "Candidate still requires governance review.",
-                "recent": learning.get("status") if learning else "NOT_READY",
-            },
-        }
-
-        source_node = {
-            "id": source_id,
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-            "display_name": manifest.get("title", scenario_id) if manifest else scenario_id,
-            "mode": "OFFLINE_SIMULATION",
-            "status": "ACTIVE",
-            "context": {
-                "service": affected_service,
-                "trigger_entity": trigger_entity,
-            },
-            "explain": {
-                "what": "Offline simulation source selected for this run.",
-                "why": "The scenario releases deterministic operational evidence without revealing hidden truth.",
-                "supports": [],
-                "affects": supporting_evidence_ids[:1],
-                "unknown": "The source does not determine the root cause.",
-                "recent": f"Current stage is {current_stage}.",
-            },
-        }
-
-        connections: list[dict[str, Any]] = []
-
-        def normalize_relation(relation_type: str) -> str:
-            mapping = {
-                "EMITS_EVIDENCE": "CONTRIBUTES_TO",
-                "AFFECTS_HYPOTHESIS": "SUPPORTS",
-                "FEEDS_SYNTHESIS": "SUPPORTS",
-                "BLOCKS_OR_QUALIFIES": "REQUIRES",
-                "REQUESTS_EVIDENCE": "REQUIRES",
-                "RESOLVES_GAP": "RESOLVES",
-                "REQUIRES_VALIDATION": "REQUIRES",
-                "ENABLES_ATTRIBUTION": "ATTRIBUTES_TO",
-                "ENABLES_LEARNING": "SUPPORTS",
-            }
-            return mapping.get(relation_type, relation_type)
-
-        def normalize_connection_state(state: str) -> str:
-            mapping = {
-                "SUPPORTS": "SUPPORTING",
-                "TESTING": "ACTIVE",
-                "OPEN": "BLOCKED",
-                "PENDING": "BLOCKED",
-                "NOT_READY": "DORMANT",
-                "READY": "ACTIVE",
-                "COMPLETED": "RESOLVED",
-                "ACCEPTED": "CONFIRMED",
-            }
-            return mapping.get(state, state)
-
-        def add_connection(source: str, target: str, relation_type: str, state: str, reason: str, sequence: int) -> None:
-            if not source or not target:
-                return
-            connection_id = f"CONN-{len(connections) + 1:03d}"
-            connections.append({
-                "id": connection_id,
-                "connection_id": connection_id,
-                "scenario_id": scenario_id,
-                "run_id": run_id,
-                "source_id": source,
-                "target_id": target,
-                "relation_type": normalize_relation(relation_type),
-                "state": normalize_connection_state(state),
-                "reason": reason,
-                "sequence": sequence,
-            })
-
-        for event in evidence_nodes:
-            add_connection(source_id, event["id"], "EMITS_EVIDENCE", "ACTIVE", "Simulation emitted admitted operational evidence.", len(connections) + 1)
-            category = event.get("category")
-            target_pathways = ["PATH-OPERATIONAL-EVIDENCE"]
-            if category == "metric":
-                target_pathways.append("PATH-TRAFFIC-CAPACITY")
-            if category in {"trace", "log"}:
-                target_pathways.append("PATH-CONTROL-SIGNALING")
-            if category == "change":
-                target_pathways.append("PATH-CHANGE-CONFIGURATION")
-            if category == "ticket":
-                target_pathways.extend(["PATH-SUBSCRIBER-JOURNEY", "PATH-SERVICE-DEPENDENCY"])
-            for pathway_id in dict.fromkeys(target_pathways):
-                pathway = next((path for path in pathways if path["id"] == pathway_id), None)
-                add_connection(
-                    event["id"],
-                    pathway_id,
-                    "CONTRIBUTES_TO",
-                    pathway.get("status", "DISCOVERED") if pathway else "DISCOVERED",
-                    pathway.get("activation_reason", "Evidence contributes to this reasoning pathway.") if pathway else "Evidence contributes to this reasoning pathway.",
-                    len(connections) + 1,
-                )
-
-        for pathway in active_pathways:
-            target_hypotheses = pathway.get("hypothesis_ids") or ([primary_hypothesis_id] if primary_hypothesis_id and pathway["id"] in {"PATH-OPERATIONAL-EVIDENCE", "PATH-SERVICE-DEPENDENCY"} else [])
-            for hyp_id in target_hypotheses:
-                add_connection(
-                    pathway["id"],
-                    hyp_id,
-                    "AFFECTS_HYPOTHESIS",
-                    pathway["status"],
-                    pathway["activation_reason"],
-                    len(connections) + 1,
-                )
-
-        for hyp in map_hypotheses:
-            state = "REJECTED" if hyp["status"] == "REJECTED" else ("SUPPORTS" if hyp["id"] == primary_hypothesis_id else "TESTING")
-            add_connection(
-                hyp["id"],
-                synthesis["id"],
-                "FEEDS_SYNTHESIS",
-                state,
-                hyp["explain"]["why"],
-                len(connections) + 1,
-            )
-
-        for gap in gaps:
-            add_connection(gap["id"], synthesis["id"], "BLOCKS_OR_QUALIFIES", gap["status"], gap["explain"]["why"], len(connections) + 1)
-            if gap.get("next_best_evidence_id"):
-                add_connection(gap["id"], gap["next_best_evidence_id"], "REQUESTS_EVIDENCE", gap["status"], gap.get("required_evidence") or "Next best evidence required.", len(connections) + 1)
-
-        if primary_action:
-            add_connection(primary_action["id"], "PATH-KNOWLEDGE-GAP", "RESOLVES_GAP", primary_action.get("status", "PENDING"), primary_action.get("display_name"), len(connections) + 1)
-        add_connection(synthesis["id"], validation["id"], "REQUIRES_VALIDATION", validation["status"], validation["display_name"], len(connections) + 1)
-        add_connection(validation["id"], domain_attribution["id"], "ENABLES_ATTRIBUTION", domain_attribution["status"], "Domain attribution follows validation readiness.", len(connections) + 1)
-        add_connection(validation["id"], learning_node["id"], "ENABLES_LEARNING", learning_node["status"], learning_node["summary"], len(connections) + 1)
-
-        return {
-            "contract_version": 2,
-            "run_id": run_id,
-            "scenario_id": scenario_id,
-            "source_mode": "OFFLINE_SIMULATION",
-            "revision": stage_index,
-            "sequence": stage_index,
-            "stage": current_stage,
-            "source": source_node,
-            "evidence": evidence_nodes,
-            "reasoning_pathways": pathways,
-            "connections": connections,
-            "hypotheses": map_hypotheses,
-            "knowledge_gaps": gaps,
-            "next_best_evidence": next_best_actions,
-            "synthesis": synthesis,
-            "validation": validation,
-            "learning": learning_node,
-            "domain_attribution": domain_attribution,
-            "reasoning_focus": {
-                "entity": trigger_display,
-                "pathway": "Knowledge Gap" if knowledge_gaps else "Operational Evidence",
-                "hypothesis": primary_hypothesis.get("display_name") if primary_hypothesis else None,
-                "test": primary_action.get("display_name") if primary_action else None,
-                "reason": stage_watchdog.get("blocking_reason") or synthesis_summary,
-            },
-        }
-
-    def _build_causal_path(
-        self,
-        trigger_entity: str,
-        entities: list[dict[str, Any]],
-        topology: dict[str, Any],
-        stage_vals: dict[str, Any],
-        stage_index: int,
-    ) -> list[dict[str, Any]]:
-        """Build causal path edges."""
-        if stage_index < 2:
-            return []
-        return topology.get("causal_path", [])
-
-    def _build_operational_edges(
-        self,
-        topology: dict[str, Any],
-        hypotheses: list[dict[str, Any]],
-        stage_index: int,
-    ) -> list[dict[str, Any]]:
-        """Build graph edges for the shared investigation topology."""
-        edges: list[dict[str, Any]] = []
-        seen: set[str] = set()
-        for edge in topology.get("causal_path", []):
-            edge_id = f"EDGE-CAUSAL-{edge.get('from')}-{edge.get('to')}"
-            seen.add(edge_id)
-            edges.append({
-                "id": edge_id,
-                "from": edge.get("from"),
-                "to": edge.get("to"),
-                "relation": edge.get("relation", "CAUSES"),
-                "role": edge.get("status", "CANDIDATE"),
-            })
-        for hyp in hypotheses:
-            path_entities = hyp.get("path_entity_ids", [])
-            path_edges = hyp.get("path_edge_ids", [])
-            for idx, edge_id in enumerate(path_edges):
-                if idx + 1 >= len(path_entities) or edge_id in seen:
-                    continue
-                seen.add(edge_id)
-                edges.append({
-                    "id": edge_id,
-                    "from": path_entities[idx],
-                    "to": path_entities[idx + 1],
-                    "relation": "CANDIDATE_CAUSE" if idx == 0 else "IMPACTS",
-                    "role": hyp.get("path_role", "CANDIDATE"),
-                    "hypothesis_id": hyp.get("id"),
-                })
-        if stage_index >= 5:
-            edges.append({
-                "id": "EDGE-FRONTIER-001",
-                "from": hypotheses[0].get("path_entity_ids", [""])[0] if hypotheses else "",
-                "to": "FRONTIER-MISSING-EVIDENCE",
-                "relation": "REQUIRES_EVIDENCE",
-                "role": "UNKNOWN_FRONTIER",
-                "hypothesis_id": "HYP-001",
-            })
-        return [edge for edge in edges if edge.get("from") and edge.get("to")]
-
-    def _build_hypothesis_paths(self, hypotheses: list[dict[str, Any]]) -> list[dict[str, Any]]:
-        return [
-            {
-                "hypothesis_id": hyp.get("id"),
-                "entity_ids": hyp.get("path_entity_ids", []),
-                "edge_ids": hyp.get("path_edge_ids", []),
-                "role": hyp.get("path_role", "CANDIDATE"),
-                "confidence": hyp.get("confidence"),
-            }
-            for hyp in hypotheses
-        ]
-
-    def _build_evidence_clusters(self, events: list[dict[str, Any]], stage_index: int) -> list[dict[str, Any]]:
-        if stage_index < 2:
-            return []
-        event_ids = [event.get("event_id") for event in events if event.get("event_id")]
-        return [{
-            "cluster_id": "EC-001",
-            "label": "Temporal dependency cluster",
-            "event_ids": event_ids,
-            "entity_ids": sorted({event.get("entity_id") for event in events if event.get("entity_id")}),
-            "signal_count": len(event_ids),
-            "noise_count": 0,
-            "confidence": 0.52 if stage_index == 2 else min(0.86, 0.52 + (stage_index - 2) * 0.08),
-        }]
-
-    def _build_frontiers(
-        self,
-        scenario_id: str,
-        run_id: str,
-        trigger_entity: str,
-        trigger_display: str,
-        knowledge_gaps: list[dict[str, Any]],
-        hypotheses: list[dict[str, Any]],
-        stage_index: int,
-    ) -> list[dict[str, Any]]:
-        if stage_index < 5:
-            return []
-        gap = knowledge_gaps[0] if knowledge_gaps else {}
-        return [{
-            "frontier_id": f"FR-{scenario_id}-001",
-            "id": f"FR-{scenario_id}-001",
-            "type": "MISSING_EVIDENCE",
-            "entity_ids": [trigger_entity],
-            "hypothesis_ids": [hypotheses[0]["id"]] if hypotheses else [],
-            "description": gap.get("label") or f"{trigger_display} health metrics required",
-            "severity": "HIGH",
-            "resolvable": True,
-            "required_evidence": gap.get("label") or f"Detailed {trigger_display} health metrics",
-            "scenario_id": scenario_id,
-            "run_id": run_id,
-        }]
-
-    def _build_search_space(
-        self,
-        events: list[dict[str, Any]],
-        evidence_clusters: list[dict[str, Any]],
-        entities: list[dict[str, Any]],
-        hypotheses: list[dict[str, Any]],
-        frontiers: list[dict[str, Any]],
-    ) -> dict[str, Any]:
-        ranked = [h for h in hypotheses if h.get("confidence") is not None]
-        plausible = [h for h in ranked if h.get("status") != "REJECTED" and float(h.get("confidence") or 0) >= 15]
-        root_candidates = [
-            h for h in hypotheses
-            if h.get("confidence_state") in {"ROOT_CANDIDATE", "CONFIRMED"} or h.get("lifecycle_state") == "CONFIRMED"
-        ]
-        return {
-            "events": len(events),
-            "correlated_signals": sum(cluster.get("signal_count", 0) for cluster in evidence_clusters) if evidence_clusters else 0,
-            "relevant_entities": len(entities),
-            "hypotheses": len(hypotheses),
-            "plausible_causes": len(plausible),
-            "root_candidates": len(root_candidates),
-            "open_frontiers": len(frontiers),
-        }
-
-    def _build_reasoning_focus(
-        self,
-        trigger_entity: str,
-        hypotheses: list[dict[str, Any]],
-        frontiers: list[dict[str, Any]],
-        current_stage: str,
-        stage_watchdog: dict[str, Any],
-        stage_index: int,
-    ) -> dict[str, Any]:
-        active_hypothesis = next((h for h in hypotheses if h.get("rank") == 1), hypotheses[0] if hypotheses else {})
-        frontier = frontiers[0] if frontiers else {}
-        if frontier:
-            reason = frontier.get("description", "Resolving current uncertainty frontier")
-        elif active_hypothesis:
-            reason = active_hypothesis.get("last_delta_reason", "Evaluating candidate evidence")
-        else:
-            reason = "Waiting for enough evidence to form competing explanations"
-        return {
-            "entity_id": trigger_entity,
-            "hypothesis_id": active_hypothesis.get("id"),
-            "test_id": "TEST-NBE-001" if stage_index >= 5 else None,
-            "stage": current_stage,
-            "reason": reason,
-            "frontier_id": frontier.get("frontier_id"),
-            "stage_status": stage_watchdog.get("stage_status"),
         }
 
     def _parse_runtime_timestamp(self, started_at: str = "") -> datetime:
@@ -3472,7 +1813,7 @@ class ScenarioStateCompiler:
             })
 
         # Stages
-        stages = self._build_stages(stage_index, started_at)
+        stages = build_stages(stage_index, started_at)
 
         # Reasoning Map
         op_pathway_status = "ACTIVE" if len(admitted_evidence) > 0 else "DISCOVERED"

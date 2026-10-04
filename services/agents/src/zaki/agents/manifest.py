@@ -5,7 +5,7 @@ from __future__ import annotations
 import yaml
 from pathlib import Path
 from typing import Any, Dict, Union
-from ..domain.contracts.agent import AgentManifestContract
+from ..contracts.agent import AgentManifestContract
 
 
 class ManifestLoader:

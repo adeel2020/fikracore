@@ -82,6 +82,7 @@ class IncidentStory:
     """The deterministic incident narrative (structure only)."""
 
     incident_id: str
+    title: str = ""
     summary: str = ""
     severity: str = ""
     status: str = ""
@@ -105,6 +106,7 @@ class IncidentStory:
     def to_dict(self) -> dict[str, Any]:
         return {
             "incident_id": self.incident_id,
+            "title": self.title,
             "summary": self.summary,
             "severity": self.severity,
             "status": self.status,

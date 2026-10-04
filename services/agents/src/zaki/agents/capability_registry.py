@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Dict, List, Optional
-from ..domain.contracts.agent import AgentManifestContract
+from ..contracts.agent import AgentManifestContract
 
 
 class DomainCapabilityRegistry:

@@ -135,9 +135,10 @@ class VerbosePresenter:
     def render_correlation_2_3(self, data: dict) -> None:
         """Render Stage 2.3: Cross-Domain Pathway Correlation."""
         self._write(f"\n{self._box_top('Stage 2.3: CORRELATION ENGINE -- Cross-Domain Pathway Correlation')}")
-        self._write(self._box_row("Evaluated operational telemetry across 9 multi-domain reasoning lenses"))
+        total_funnels = len(data.get("pathways", [])) or 10
+        self._write(self._box_row(f"Evaluated operational telemetry across {total_funnels} multi-domain reasoning lenses"))
         self._write(self._box_row(""))
-        self._write(self._box_row(f"Active Pathways: {data['active_count']} of 9 funnels triggered"))
+        self._write(self._box_row(f"Active Pathways: {data['active_count']} of {total_funnels} funnels triggered"))
         self._write(self._box_row(""))
         for p in data.get("pathways", []):
             icon = self._status_icon(p["active"])

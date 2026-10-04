@@ -21,8 +21,8 @@ from engine_stack.engines.telecom_brain.investigation.evidence import input_from
 from engine_stack.engines.telecom_brain.investigation.knowledge import InMemoryKnowledgeProvider
 
 import zaki
-from zaki.domain.enums import AuthorityLevel, PolicyDecisionType, PresentationDepth, TaskStatus, ValidationDecisionType
-from zaki.domain.contracts import (
+from zaki.enums import AuthorityLevel, PolicyDecisionType, PresentationDepth, TaskStatus, ValidationDecisionType
+from zaki.contracts import (
     AgentManifestContract,
     HandoverRecordContract,
     HumanValidationContract,
@@ -328,7 +328,7 @@ def test_domain_agents_registry_and_dispatch():
     """Verify registered domain agents and task dispatching."""
     from zaki.agents.registry import default_agent_registry
     from zaki.agents.dispatcher import default_agent_dispatcher
-    from zaki.domain.contracts.agent import AgentTaskContract
+    from zaki.contracts.agent import AgentTaskContract
 
     agents = default_agent_registry.list_agents()
     assert len(agents) >= 9  # PS, CS, RAN, IP_TRANSPORT, IN_OCS, VAS, IGW, INFRA, IT

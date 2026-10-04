@@ -1,0 +1,63 @@
+97:interface EvidenceItem {
+108:const EVIDENCE_LIST: EvidenceItem[] = [
+120:interface PathwayItem {
+129:const PATHWAYS_LIST: PathwayItem[] = [
+143:interface Conduit {
+150:const EVIDENCE_TO_PATHWAY_CONDUITS: Conduit[] = [
+190:export interface HypothesisItem {
+202:const HYPOTHESES_LIST: HypothesisItem[] = [
+211:interface HypValidationConduit {
+219:interface ZakiConversationMessage {
+230:type ZakiCopilotResponse = ZakiResponseV2 & {
+238:type ZakiApiSection = ZakiResponseV2["sections"][number];
+239:type ZakiApiSuggestedAction = NonNullable<ZakiResponseV2["suggested_actions"]>[number];
+241:interface ZakiChatApiResponse {
+273:interface ZakiJourneyStage {
+280:interface ZakiJourneyStatus {
+293:type ZakiSelectedContext = StoreZakiSelectedContext & {
+299:type ZakiFocusContext = Pick<ZakiSelectedContext, "context_type" | "context_id" | "display_name"> & {
+305:type ZakiPromptAction = "status" | "explain" | "story";
+307:interface ZakiQuickPrompt {
+315:interface ZakiContextExplanation {
+325:const HYP_TO_VALIDATION_CONDUITS: HypValidationConduit[] = [
+350:export type DomainClassification =
+358:export interface OperationalDomainDef {
+368:export const OPERATIONAL_DOMAINS_CATALOG: OperationalDomainDef[] = [
+386:export const TELECOM_DOMAINS_CATALOG = OPERATIONAL_DOMAINS_CATALOG;
+388:export interface DomainAttributionInfo {
+397:export interface ScenarioAttributionProfile {
+416:export function getScenarioAttributionProfile(
+712:export function buildEvidenceItems(
+847:export function buildPathwayItems(
+935:interface EventStreamItem {
+958:function eventIconForType(type: EventStreamItem["type"]) {
+975:function buildEventStreamItems(
+1107:export interface GapItem {
+1114:const HYPOTHESIS_COLORS = ["#34d399", "#60a5fa", "#22d3ee", "#c084fc"];
+1115:const HYPOTHESIS_PROGRESS = ["bg-emerald-400", "bg-blue-400", "bg-cyan-400", "bg-purple-400"];
+1117:function statusToHypothesisStatus(status?: string, confidence?: number | null, index?: number): HypothesisItem["status"] {
+1135:export function buildHypothesisItems(
+1220:export function buildGapItems(simulationState?: SimulationState | null | Record<string, unknown>): GapItem[] {
+1243:export const SERVICE_IMPACTS = [
+1252:export interface NextBestEvidenceItem {
+1259:export function buildNextBestEvidenceItems(
+1368:const TIMELINE_EVENTS = [
+1376:const PATHWAYS_TO_HYPS: Record<number, number[]> = {
+1388:const HYP_TO_PATHWAYS: Record<number, number[]> = {
+1397:export type TraceTarget =
+1411:export interface DetailedConduitTelemetry {
+1431:export interface DetailedEntityModal {
+1454:export function resolveConduitTelemetry(
+1610:export function resolveEntityModal(
+1825:function ConduitDetailModal({
+2000:function CoreSynthesisDetailModal({
+2182:function NeuralEntityDetailModal({
+2382:function NeuralReasoningCanvas({
+5061:export function renderStyledMessage(text: string, isLight: boolean) {
+6862:function KnowledgeGraphProjectionModal({
+7070:function FlaskConical(props: React.SVGProps<SVGSVGElement>) {
+7080:function MessageSquare(props: React.SVGProps<SVGSVGElement>) {
+7090:interface ExecutiveTelemetryModalProps {
+7101:function ExecutiveTelemetryModal({
+7890:interface EventTelemetryDetailModalProps {
+7896:function EventTelemetryDetailModal({

@@ -56,6 +56,19 @@ const WORKSPACE_TABS: {
   { id: "benchmarks", label: "Benchmarks", icon: BarChart3, route: "/simulator/benchmarks" },
 ];
 
+const SCN_TOP_10_IDS = [
+  "SCN-001",
+  "SCN-002",
+  "SCN-003",
+  "SCN-004",
+  "SCN-005",
+  "SCN-006",
+  "SCN-007",
+  "SCN-008",
+  "SCN-009",
+  "SCN-010",
+];
+
 // ─── Floating Zaki Copilot (used for other workspaces) ────────────────────────
 
 function ZakiCopilot() {
@@ -80,12 +93,7 @@ function ZakiCopilot() {
   const [expanded, setExpanded] = React.useState(false);
   const [query, setQuery] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const [chat, setChat] = React.useState<{ sender: "user" | "zaki"; text: string }[]>([
-    {
-      sender: "zaki",
-      text: "I am Zaki, your AI copilot for network intelligence. I'm grounded in the active scenario and will respond based on your current workspace and selections.",
-    },
-  ]);
+  const [chat, setChat] = React.useState<{ sender: "user" | "zaki"; text: string }[]>([]);
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
   const phase = simulationState?.zaki?.phase || "OBSERVING";
@@ -324,8 +332,11 @@ function JourneyStepper() {
 
   const isRunningOrPaused =
     simulationState?.run?.status === "RUNNING" ||
+    simulationState?.run_status === "RUNNING" ||
     simulationState?.run?.status === "PAUSED" ||
-    simulationState?.run?.status === "COMPLETED";
+    simulationState?.run_status === "PAUSED" ||
+    simulationState?.run?.status === "COMPLETED" ||
+    simulationState?.run_status === "COMPLETED";
 
   const rawStageIndex =
     simulationState?.stages?.find((s) => s.status === "ACTIVE")?.index ??
@@ -501,19 +512,22 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
 
   const displayScenarios = mounted ? scenarioRegistry : DEFAULT_SCENARIO_REGISTRY;
 
-  const activeScenarioEntry =
-    displayScenarios.find((s) => s.id === scenarioId || s.aliases?.includes(scenarioId || "")) ||
-    displayScenarios[0] || {
-      id: "SCN-001",
-      display_name: "SGi Throughput Degradation & MTU Blackhole",
-      description: "Cross-domain transport-induced mobile data degradation cascading from edge router BGP instability into 5G user plane.",
-      stage: "H1",
-      concept: "Understand",
-      domains: ["Transport", "RAN", "Mobile Core"],
-      services: ["5G SA Mobile Data"],
-    };
+  const filteredScenarios = SCN_TOP_10_IDS.map((id) => {
+    return (
+      displayScenarios.find((s) => s.id === id || s.aliases?.includes(id)) || {
+        id,
+        display_name: id,
+        description: "",
+      }
+    );
+  });
+
+  const activeScenarioEntry = scenarioId
+    ? displayScenarios.find((s) => s.id === scenarioId || s.aliases?.includes(scenarioId)) || null
+    : null;
 
   const handleScenarioChange = (newId: string) => {
+    if (!newId) return;
     isInternalChangeRef.current = true;
     selectScenario(newId);
     const params = new URLSearchParams(searchParams.toString());
@@ -521,7 +535,10 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
-  const isRunning = simulationState?.run?.status === "RUNNING";
+  const [isStarting, setIsStarting] = useState(false);
+  const runStatus = simulationState?.run?.status || simulationState?.run_status;
+  const isRunning = runStatus === "RUNNING" || isStarting;
+  const isPaused = runStatus === "PAUSED" && !isStarting;
 
   return (
     <div
@@ -561,7 +578,7 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
             return (
               <Link
                 key={tab.id}
-                href={`${tab.route}?scenario=${scenarioId || "DEMO-001"}`}
+                href={scenarioId ? `${tab.route}?scenario=${scenarioId}` : tab.route}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap",
@@ -682,86 +699,32 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
               >
                 <select
                   suppressHydrationWarning
-                  value={(() => {
-                    const match = displayScenarios.find(
-                      (s) => s.id === scenarioId || s.aliases?.includes(scenarioId || "")
-                    );
-                    return match ? match.id : scenarioId || "SCN-001";
-                  })()}
+                  value={scenarioId || ""}
                   onChange={(e) => handleScenarioChange(e.target.value)}
                   className="bg-transparent text-xs font-bold cursor-pointer focus:outline-none pr-6 appearance-none max-w-[420px] truncate"
                 >
-                  {displayScenarios.length > 0 ? (
-                    <>
-                      <optgroup label="Featured Scenarios (H1–H4 Workspaces)" className="bg-slate-900 text-cyan-300 font-bold">
-                        {displayScenarios
-                          .filter((s) => ["SCN-001", "DEMO-001", "TWIN-INC-001", "H2-GAP-001", "TWIN-GAP-001", "H3-LRN-001", "TWIN-LRN-001", "H4-WI-001", "TWIN-WIF-001"].includes(s.id))
-                          .map((sc) => (
-                            <option
-                              key={`feat-${sc.id}`}
-                              value={sc.id}
-                              className={isLight ? "bg-white text-slate-900 font-bold" : "bg-slate-900 text-cyan-300 font-bold"}
-                            >
-                              [{sc.concept || sc.stage}] {sc.id} · {sc.display_name}
-                            </option>
-                          ))}
-                      </optgroup>
-                      {displayScenarios.some((s) => (s.stage === "H1" || s.concept === "Understand") && !["SCN-001", "DEMO-001", "TWIN-INC-001"].includes(s.id)) && (
-                        <optgroup label="Understand (H1) · Incidents & RCA" className="bg-slate-900 text-slate-300 font-bold">
-                          {displayScenarios
-                            .filter((s) => (s.stage === "H1" || s.concept === "Understand") && !["SCN-001", "DEMO-001", "TWIN-INC-001"].includes(s.id))
-                            .map((sc) => (
-                              <option key={`h1-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                                {sc.id} · {sc.display_name}
-                              </option>
-                            ))}
-                        </optgroup>
-                      )}
-                      {displayScenarios.some((s) => (s.stage === "H2" || s.concept === "Discover") && !["H2-GAP-001", "TWIN-GAP-001"].includes(s.id)) && (
-                        <optgroup label="Discover (H2) · Knowledge Gaps" className="bg-slate-900 text-slate-300 font-bold">
-                          {displayScenarios
-                            .filter((s) => (s.stage === "H2" || s.concept === "Discover") && !["H2-GAP-001", "TWIN-GAP-001"].includes(s.id))
-                            .map((sc) => (
-                              <option key={`h2-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                                {sc.id} · {sc.display_name}
-                              </option>
-                            ))}
-                        </optgroup>
-                      )}
-                      {displayScenarios.some((s) => (s.stage === "H3" || s.concept === "Learn") && !["H3-LRN-001", "TWIN-LRN-001"].includes(s.id)) && (
-                        <optgroup label="Learn (H3) · Learning Units" className="bg-slate-900 text-slate-300 font-bold">
-                          {displayScenarios
-                            .filter((s) => (s.stage === "H3" || s.concept === "Learn") && !["H3-LRN-001", "TWIN-LRN-001"].includes(s.id))
-                            .map((sc) => (
-                              <option key={`h3-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                                {sc.id} · {sc.display_name}
-                              </option>
-                            ))}
-                        </optgroup>
-                      )}
-                      {displayScenarios.some((s) => (s.stage === "H4" || s.concept === "Anticipate") && !["H4-WI-001", "TWIN-WIF-001"].includes(s.id)) && (
-                        <optgroup label="Anticipate (H4) · Resilience & What-If" className="bg-slate-900 text-slate-300 font-bold">
-                          {displayScenarios
-                            .filter((s) => (s.stage === "H4" || s.concept === "Anticipate") && !["H4-WI-001", "TWIN-WIF-001"].includes(s.id))
-                            .map((sc) => (
-                              <option key={`h4-${sc.id}`} value={sc.id} className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                                {sc.id} · {sc.display_name}
-                              </option>
-                            ))}
-                        </optgroup>
-                      )}
-                    </>
-                  ) : (
-                    <option value="SCN-001" className={isLight ? "bg-white text-slate-900" : "bg-slate-900 text-slate-200"}>
-                      SCN-001 · SGi Throughput Degradation & MTU Blackhole
+                  <option
+                    value=""
+                    disabled
+                    className={isLight ? "bg-white text-slate-500 font-normal" : "bg-slate-900 text-slate-400 font-normal"}
+                  >
+                    Select the scenario
+                  </option>
+                  {filteredScenarios.map((sc) => (
+                    <option
+                      key={sc.id}
+                      value={sc.id}
+                      className={isLight ? "bg-white text-slate-900 font-medium" : "bg-slate-900 text-slate-200 font-medium"}
+                    >
+                      {sc.id} · {sc.display_name}
                     </option>
-                  )}
+                  ))}
                 </select>
                 <ChevronDown className="absolute right-2.5 h-3.5 w-3.5 text-cyan-400 pointer-events-none" />
               </div>
             </div>
             <p className={cn("text-[10px] leading-tight mt-0.5", isLight ? "text-slate-600" : "text-slate-400")}>
-              {activeScenarioEntry.description || "Enterprise data degradation across multiple services"}
+              {activeScenarioEntry?.description || "Select a scenario to begin investigation"}
             </p>
           </div>
         </div>
@@ -789,7 +752,7 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
 
         {/* Center: Dynamic Simulation Status Pill */}
         {(() => {
-          const status = simulationState?.run?.status;
+          const status = isStarting ? "RUNNING" : (simulationState?.run?.status || simulationState?.run_status);
           if (status === "RUNNING") {
             return (
               <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold shadow-sm">
@@ -871,18 +834,31 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
           {/* Pause / Play */}
           <button
             type="button"
-            onClick={
-              isRunning
-                ? pauseSimulation
-                : simulationState?.run?.status === "PAUSED"
-                ? resumeSimulation
-                : () => void startSimulation(scenarioId ?? undefined)
-            }
+            disabled={!scenarioId || isStarting}
+            onClick={async () => {
+              if (!scenarioId) return;
+              if (isRunning) {
+                await pauseSimulation();
+              } else if (isPaused) {
+                await resumeSimulation();
+              } else {
+                setIsStarting(true);
+                try {
+                  await startSimulation(scenarioId);
+                } finally {
+                  setIsStarting(false);
+                }
+              }
+            }}
             className={cn(
-              "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-colors shadow-sm border",
-              isLight
-                ? "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300"
-                : "bg-slate-800/90 hover:bg-slate-700 text-slate-200 border-slate-700"
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors shadow-sm border",
+              !scenarioId || isStarting
+                ? isLight
+                  ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed"
+                  : "bg-slate-800/40 text-slate-600 border-slate-700/40 cursor-not-allowed"
+                : isLight
+                ? "bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300 cursor-pointer"
+                : "bg-slate-800/90 hover:bg-slate-700 text-slate-200 border-slate-700 cursor-pointer"
             )}
           >
             {isRunning ? (
@@ -898,12 +874,13 @@ function SimulatorShell({ children }: { children: React.ReactNode }) {
             )}
           </button>
 
-          {/* Stop Button (Disabled when stopped or no run) */}
+          {/* Stop Button (Active whenever simulation is running/paused or active run exists) */}
           {(() => {
+            const hasRun = Boolean(simulationState?.run || simulationState?.run_id);
             const isStopDisabled =
-              !simulationState?.run ||
-              simulationState?.run?.status === "STOPPED" ||
-              simulationState?.run?.status === "COMPLETED";
+              !hasRun ||
+              runStatus === "STOPPED" ||
+              runStatus === "COMPLETED";
 
             return (
               <button

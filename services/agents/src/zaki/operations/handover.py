@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-from ..domain.contracts.handover import HandoverRecordContract
-from ..domain.enums import AuthorityLevel
+from ..contracts.handover import HandoverRecordContract
+from ..enums import AuthorityLevel
 
 
 class HandoverManager:

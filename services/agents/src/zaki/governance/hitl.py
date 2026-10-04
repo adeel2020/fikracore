@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
-from ..domain.contracts.validation import HumanValidationContract, ValidationMetadata, ValidationSpec
-from ..domain.enums import AuthorityLevel, ValidationDecisionType
+from .validation import HumanValidationContract, ValidationMetadata, ValidationSpec
+from ..enums import AuthorityLevel, ValidationDecisionType
 from .audit import default_audit_logger
 
 

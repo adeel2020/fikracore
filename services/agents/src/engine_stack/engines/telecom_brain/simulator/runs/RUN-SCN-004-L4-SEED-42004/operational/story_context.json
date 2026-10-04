@@ -1,125 +1,301 @@
 {
   "scenario_id": "SCN-004",
-  "run_id": "RUN-20260926050707966578",
+  "run_id": "RUN-20261003142545548217",
   "title": "Kubernetes Worker Failure Cascades into Core Degradation",
   "domain": "it_cloud_infra",
   "severity": "MAJOR",
-  "status": "resolved",
-  "stage_index": 7,
+  "status": "investigating",
+  "stage_index": 1,
   "started_at": "2026-09-10T08:04:00Z",
-  "resolved_at": "2026-09-10T08:20:00Z",
-  "executive_summary": "Autonomous root cause confirmed at None with 94% confidence. Remediation playbook dispatched; operational stabilization verified.",
-  "root_cause": {
-    "entity": null,
-    "condition": null,
-    "status": "CONFIRMED",
-    "confidence": 0.942
-  },
-  "causal_chain": [
-    "{'from': 'INFRA:K8S:CORE-A', 'to': 'SA5G:UPF:003', 'status': 'CONFIRMED', 'relation': 'CAUSES', 'scenario_id': 'SCN-004', 'run_id': 'RUN-20260926050707966578', 'revision': 9, 'sequence': 8}",
-    "{'from': 'SA5G:UPF:003', 'to': 'CRM:TICKET:001', 'status': 'CONFIRMED', 'relation': 'PROPAGATES_TO', 'scenario_id': 'SCN-004', 'run_id': 'RUN-20260926050707966578', 'revision': 9, 'sequence': 8}"
-  ],
-  "blast_radius": [
-    {
-      "entity": "INFRA:K8S:CORE-A",
-      "role": "CAUSAL_RELAY",
-      "status": "KUBERNETES_CLUSTER_DEGRADED"
-    },
-    {
-      "entity": "SA5G:UPF:003",
-      "role": "CAUSAL_RELAY",
-      "status": "UPF_DEGRADED"
-    },
-    {
-      "entity": "CRM:TICKET:001",
-      "role": "CAUSAL_RELAY",
-      "status": "CUSTOMER_TICKET_SERVICE_DEGRADED"
-    }
-  ],
+  "resolved_at": null,
+  "executive_summary": "Alarm cascade observed across Cloud Infrastructure and 5G Core. Multiple dependent network functions reporting degraded traffic on UPF-03. Initiating automated cross-domain correlation.",
+  "root_cause": null,
+  "causal_chain": [],
+  "blast_radius": [],
   "timeline": [
     {
       "time": "2026-09-10T08:04:00Z",
       "event": "KUBERNETES_CLUSTER_DEGRADED",
       "entity": "INFRA:K8S:CORE-A",
       "severity": "MAJOR",
-      "summary": "Operational alarm: KUBERNETES_CLUSTER_DEGRADED on INFRA:K8S:CORE-A"
+      "summary": "Signal observed: KUBERNETES_CLUSTER_DEGRADED on INFRA K8S Core-A"
     },
     {
       "time": "2026-09-10T08:04:40Z",
       "event": "UPF_DEGRADED",
       "entity": "SA5G:UPF:003",
       "severity": "MAJOR",
-      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
-    },
-    {
-      "time": "2026-09-10T08:04:40Z",
-      "event": "UPF_DEGRADED",
-      "entity": "SA5G:UPF:003",
-      "severity": "MAJOR",
-      "summary": "Operational alarm: UPF_DEGRADED on SA5G:UPF:003"
-    },
-    {
-      "time": "2026-09-10T08:05:16Z",
-      "event": "CUSTOMER_TICKET_SERVICE_DEGRADED",
-      "entity": "CRM:TICKET:001",
-      "severity": "CRITICAL",
-      "summary": "Operational alarm: CUSTOMER_TICKET_SERVICE_DEGRADED on CRM:TICKET:001"
-    },
-    {
-      "time": "2026-09-10T08:05:35Z",
-      "event": "KPI_DEGRADATION",
-      "entity": "CRM:TICKET:001",
-      "severity": "CRITICAL",
-      "summary": "5G Sa Mobile Data Success Rate degraded to 68.64percent"
-    },
-    {
-      "time": "2026-09-10T08:20:00Z",
-      "event": "RECOVERY_VERIFIED",
-      "entity": "INFRA:K8S:CORE-A",
-      "severity": "CLEARED",
-      "summary": "service KPI improves within modeled recovery window"
+      "summary": "Signal observed: UPF_DEGRADED on User Plane Function-03"
     }
   ],
   "metrics": {
-    "stage_index": 7,
+    "stage_index": 1,
     "operational_evidence_count": 7,
     "kpi_breach": {
       "name": "5G Sa Mobile Data Success Rate",
       "value": 68.64,
       "baseline": 98.5
     },
-    "mttr_actual": "1m"
+    "mttr_actual": "in_progress"
   },
   "flash_narration": {
-    "time": "08:20:00Z",
-    "phase": "Recovery",
-    "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
-    "text": "At 08:20:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+    "time": "08:04:00Z",
+    "phase": "Signal Flood",
+    "spoken": "Secondary alarms detected across 5G Core on UPF-03. Pipeline is actively correlating the alarm storm.",
+    "text": "At 08:04:00Z (Alarm Cascade):\n\ud83c\udf99\ufe0f \"Secondary alarms detected across 5G Core on UPF-03. Pipeline is actively correlating the alarm storm.\"",
+    "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on UPF-03, or monitor downstream buffer queues?",
+    "suggested_questions": [
+      "Are voice and emergency sessions impacted?",
+      "What is the current subscriber drop rate?",
+      "What is the bandwidth utilization on adjacent links?"
+    ]
   },
   "flash_history": [
     {
       "time": "08:04:00Z",
       "phase": "Trigger",
-      "spoken": "Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.",
-      "text": "At 08:04:00Z (Trigger):\n\ud83c\udf99\ufe0f \"Alert: P1 anomaly detected on transport PE-RTR-21. Correlating initial observations.\""
+      "spoken": "Operational anomaly detected on Cloud Infrastructure. Autonomous triage initiated as 5G SA mobile data begins degrading on Core Kubernetes Cluster A.",
+      "text": "At 08:04:00Z (Incident Detected):\n\ud83c\udf99\ufe0f \"Operational anomaly detected on Cloud Infrastructure. Autonomous triage initiated as 5G SA mobile data begins degrading on Core Kubernetes Cluster A.\"",
+      "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+      "suggested_questions": [
+        "What is our committed SLA threshold for 5G SA mobile data?",
+        "Which customer tiers are traversing Core Kubernetes Cluster A?",
+        "Has Core Kubernetes Cluster A undergone recent maintenance?"
+      ]
     },
     {
-      "time": "08:04:40Z",
-      "phase": "Propagation",
-      "spoken": "Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.",
-      "text": "At 08:04:40Z (Propagation):\n\ud83c\udf99\ufe0f \"Update: Degradation has cascaded to User Plane Function 003. Mobile data sessions are dropping.\""
-    },
-    {
-      "time": "08:05:16Z",
-      "phase": "RCA Confirmed",
-      "spoken": "Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.",
-      "text": "At 08:05:16Z (RCA Confirmed):\n\ud83c\udf99\ufe0f \"Root cause confirmed: PE-RTR-21 line card buffer saturation with 94.2% confidence. Playbook remediation dispatched.\""
-    },
-    {
-      "time": "08:20:00Z",
-      "phase": "Recovery",
-      "spoken": "Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.",
-      "text": "At 08:20:00Z (Recovery):\n\ud83c\udf99\ufe0f \"Recovery verified: Traffic re-routed successfully. 5G throughput restored to nominal baseline.\""
+      "time": "08:04:00Z",
+      "phase": "Signal Flood",
+      "spoken": "Secondary alarms detected across 5G Core on UPF-03. Pipeline is actively correlating the alarm storm.",
+      "text": "At 08:04:00Z (Alarm Cascade):\n\ud83c\udf99\ufe0f \"Secondary alarms detected across 5G Core on UPF-03. Pipeline is actively correlating the alarm storm.\"",
+      "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on UPF-03, or monitor downstream buffer queues?",
+      "suggested_questions": [
+        "Are voice and emergency sessions impacted?",
+        "What is the current subscriber drop rate?",
+        "What is the bandwidth utilization on adjacent links?"
+      ]
     }
-  ]
+  ],
+  "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on UPF-03, or monitor downstream buffer queues?",
+  "suggested_questions": [
+    "Are voice and emergency sessions impacted?",
+    "What is the current subscriber drop rate?",
+    "What is the bandwidth utilization on adjacent links?"
+  ],
+  "noc_activities": [
+    {
+      "id": "act-1",
+      "timestamp": "08:04:00Z",
+      "agent": "IT_CLOUD_INFRA",
+      "domain": "Cloud Infrastructure",
+      "action": "Kubernetes Cluster Degraded Ingestion",
+      "detail": "Observed Kubernetes Cluster Degraded on Core Kubernetes Cluster A (5G SA mobile data)",
+      "status": "OBSERVED"
+    },
+    {
+      "id": "act-2",
+      "timestamp": "08:04:40Z",
+      "agent": "SA_5G_CORE",
+      "domain": "5G Core",
+      "action": "Downstream Cascade Tracking",
+      "detail": "Correlated telemetry breach on UPF-03; 5G Sa Mobile Data Success Rate dropping to 68.64percent",
+      "status": "ANALYZING"
+    }
+  ],
+  "activity_stream": [
+    {
+      "id": "act-1",
+      "timestamp": "08:04:00Z",
+      "agent": "IT_CLOUD_INFRA",
+      "domain": "Cloud Infrastructure",
+      "action": "Kubernetes Cluster Degraded Ingestion",
+      "detail": "Observed Kubernetes Cluster Degraded on Core Kubernetes Cluster A (5G SA mobile data)",
+      "status": "OBSERVED"
+    },
+    {
+      "id": "act-2",
+      "timestamp": "08:04:40Z",
+      "agent": "SA_5G_CORE",
+      "domain": "5G Core",
+      "action": "Downstream Cascade Tracking",
+      "detail": "Correlated telemetry breach on UPF-03; 5G Sa Mobile Data Success Rate dropping to 68.64percent",
+      "status": "ANALYZING"
+    }
+  ],
+  "operational_context": {
+    "api_version": "zaki.ai/v1",
+    "kind": "OperationalContext",
+    "context_id": "CTX-1791037549",
+    "scenario_id": "SCN-004",
+    "run_id": "RUN-20261003142545548217",
+    "active_incident_id": "INC-SCN-004",
+    "primary_domain": "Cloud Infrastructure",
+    "active_domains": [
+      "Cloud Infrastructure",
+      "5G Core",
+      "Customer & OSS Operations"
+    ],
+    "visible_entities": [
+      "INFRA:K8S:CORE-A",
+      "SA5G:UPF:003",
+      "CRM:TICKET:001"
+    ],
+    "visible_topology_subgraph": {},
+    "admitted_evidence_ids": [
+      "ALM-SCN-004-0001",
+      "ALM-SCN-004-0002",
+      "ALM-SCN-004-DUP1",
+      "ALM-SCN-004-0003"
+    ],
+    "active_knowledge_gaps": [],
+    "active_maintenance_windows": [],
+    "speech_pacing_active": true,
+    "human_sme_role": "Transport Domain SME",
+    "operational_mode": "SIMULATION",
+    "active_incident_ids": [
+      "INC-SCN-004"
+    ],
+    "active_delegations": [
+      {
+        "delegation_id": "DEL-RUN-20261003142545548217-001",
+        "target_domain": "IT_CLOUD_INFRA",
+        "target_entity": "INFRA:K8S:CORE-A",
+        "objective": "Isolate anomaly and execute diagnostics on Core Kubernetes Cluster A",
+        "status": "ACTIVE"
+      },
+      {
+        "delegation_id": "DEL-RUN-20261003142545548217-002",
+        "target_domain": "SA_5G_CORE",
+        "target_entity": "SA5G:UPF:003",
+        "objective": "Track downstream cascade and verify SLA integrity on UPF-03",
+        "status": "ACTIVE"
+      }
+    ],
+    "pending_approvals": [],
+    "impact_summary": {
+      "affected_nodes": [
+        "INFRA:K8S:CORE-A",
+        "SA5G:UPF:003",
+        "CRM:TICKET:001"
+      ],
+      "primary_service": "5G SA mobile data",
+      "severity": "MAJOR",
+      "degraded_kpi": null,
+      "estimated_throughput_loss_gbps": 0.0
+    },
+    "resilience_profiles": [],
+    "created_at": "2026-10-03T14:25:49.864205Z"
+  },
+  "task_episode": {
+    "api_version": "zaki.ai/v1",
+    "kind": "TaskEpisode",
+    "episode_id": "EP-1791037549",
+    "task_id": "TASK-RUN-20261003142545548217",
+    "incident_id": "INC-SCN-004",
+    "operator_intent": "Investigate operational anomaly across Cloud Infrastructure",
+    "fcaps": {
+      "primary": "Fault",
+      "secondary": [],
+      "domain": "PS",
+      "confidence": 0.9,
+      "clarification_required": false
+    },
+    "domains": [
+      "Cloud Infrastructure",
+      "5G Core",
+      "Customer & OSS Operations"
+    ],
+    "context": {
+      "scenario_id": "SCN-004",
+      "stage_index": 1
+    },
+    "operational_context_ref": "CTX-1791037549",
+    "behavior_contract_ref": null,
+    "evidence_requested": [],
+    "evidence_observed": [
+      "KUBERNETES_CLUSTER_DEGRADED",
+      "UPF_DEGRADED",
+      "UPF_DEGRADED",
+      "CUSTOMER_TICKET_SERVICE_DEGRADED"
+    ],
+    "ranked_hypotheses": [],
+    "discrimination_probes": [],
+    "selected_workflow": null,
+    "playbook_ref": null,
+    "agent_recommendation": null,
+    "human_validations": [],
+    "human_actions": [],
+    "human_corrections": [],
+    "outcome": "SUCCESS",
+    "learned_pattern": null,
+    "promotion_records": [],
+    "finding_refs": [
+      "FND-001",
+      "FND-002"
+    ],
+    "delegated_task_refs": [
+      "DEL-RUN-20261003142545548217-001",
+      "DEL-RUN-20261003142545548217-002"
+    ],
+    "runtime_evaluations": [],
+    "stagewise_outcomes": [],
+    "root_cause_analysis": null,
+    "causal_propagation": null,
+    "what_if_analysis": null,
+    "remediation_strategy": null,
+    "provenance": "task_episode_recorder",
+    "created_at": "2026-10-03T14:25:49.864261Z",
+    "closed_at": null
+  },
+  "incident_story": {
+    "api_version": "zaki.ai/v1",
+    "kind": "IncidentStory",
+    "incident_id": "INC-SCN-004",
+    "run_id": "RUN-20261003142545548217",
+    "generated_at": "2026-10-03T14:25:49.864341Z",
+    "presentation_depth": "OPERATOR",
+    "title": "Kubernetes Worker Failure Cascades into Core Degradation",
+    "summary": "Alarm cascade observed across Cloud Infrastructure and 5G Core. Multiple dependent network functions reporting degraded traffic on UPF-03. Initiating automated cross-domain correlation.",
+    "service_impact": {
+      "domain": "Cloud Infrastructure",
+      "service": "5G SA mobile data",
+      "impact_level": "MAJOR",
+      "kpi_breach": null
+    },
+    "leading_hypothesis": {},
+    "competing_hypotheses": [],
+    "correlation_narrative": {
+      "primary_entity": "INFRA:K8S:CORE-A",
+      "secondary_entity": "SA5G:UPF:003",
+      "causal_chain": [],
+      "blast_radius": []
+    },
+    "timeline_statements": [
+      {
+        "statement_id": "STMT-000",
+        "text": "Signal observed: KUBERNETES_CLUSTER_DEGRADED on INFRA K8S Core-A",
+        "provenance": "OBSERVED",
+        "source_entity": "INFRA:K8S:CORE-A",
+        "domain": "Cloud Infrastructure",
+        "evidence_ids": [],
+        "confidence": 1.0,
+        "stage": "KUBERNETES_CLUSTER_DEGRADED",
+        "timestamp": "2026-10-03T14:25:49.864323Z"
+      },
+      {
+        "statement_id": "STMT-001",
+        "text": "Signal observed: UPF_DEGRADED on User Plane Function-03",
+        "provenance": "OBSERVED",
+        "source_entity": "SA5G:UPF:003",
+        "domain": "Cloud Infrastructure",
+        "evidence_ids": [],
+        "confidence": 1.0,
+        "stage": "UPF_DEGRADED",
+        "timestamp": "2026-10-03T14:25:49.864332Z"
+      }
+    ],
+    "next_best_action": "automated traffic re-routing playbook",
+    "outcome": "INVESTIGATING",
+    "technical_details": {}
+  }
 }

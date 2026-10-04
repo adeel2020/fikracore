@@ -42,6 +42,7 @@ import {
   Server,
   Settings,
   ShieldAlert,
+  ShieldCheck,
   Sparkles,
   Ticket,
   TrendingDown,
@@ -186,7 +187,7 @@ const EVIDENCE_TO_PATHWAY_CONDUITS: Conduit[] = [
 
 // ─── Hypotheses Data ─────────────────────────────────────────────────────────
 
-export interface HypothesisItem {
+interface HypothesisItem {
   id: string;
   code: string;
   name: string;
@@ -228,6 +229,10 @@ interface ZakiConversationMessage {
 
 type ZakiCopilotResponse = ZakiResponseV2 & {
   storyteller?: StorytellerPayload | null;
+  spoken_answer?: string;
+  spoken_response?: string;
+  spoken_message?: string;
+  spoken_reply?: string;
 };
 
 type ZakiApiSection = ZakiResponseV2["sections"][number];
@@ -342,7 +347,7 @@ const HYP_TO_VALIDATION_CONDUITS: HypValidationConduit[] = [
 
 // ─── 14 Operational Telecom Domains & Dynamic Classification Taxonomy ────────
 
-export type DomainClassification =
+type DomainClassification =
   | "PRIMARY"
   | "CONTRIBUTING"
   | "AFFECTED"
@@ -350,7 +355,7 @@ export type DomainClassification =
   | "MONITOR ONLY"
   | "NOT RELEVANT";
 
-export interface OperationalDomainDef {
+interface OperationalDomainDef {
   id: string;
   name: string;
   shortName: string;
@@ -360,7 +365,7 @@ export interface OperationalDomainDef {
   subtext: string;
 }
 
-export const OPERATIONAL_DOMAINS_CATALOG: OperationalDomainDef[] = [
+const OPERATIONAL_DOMAINS_CATALOG: OperationalDomainDef[] = [
   { id: "ran", name: "RAN", shortName: "RAN", category: "Access", icon: Wifi, color: "#f43f5e", subtext: "gNodeB / CU-DU / Fronthaul" },
   { id: "mobile_core", name: "Mobile Core", shortName: "Mobile Core", category: "Core", icon: Server, color: "#a855f7", subtext: "EPC / 5GC / AMF / UPF / SMF" },
   { id: "ims_voice", name: "IMS / VoLTE", shortName: "IMS/VoLTE", category: "Voice", icon: PhoneCall, color: "#14b8a6", subtext: "VoNR / P-CSCF / S-CSCF" },
@@ -378,9 +383,9 @@ export const OPERATIONAL_DOMAINS_CATALOG: OperationalDomainDef[] = [
 ];
 
 // Backwards compatibility alias
-export const TELECOM_DOMAINS_CATALOG = OPERATIONAL_DOMAINS_CATALOG;
+const TELECOM_DOMAINS_CATALOG = OPERATIONAL_DOMAINS_CATALOG;
 
-export interface DomainAttributionInfo {
+interface DomainAttributionInfo {
   classification: DomainClassification;
   weight: number; // 0..100
   detail: string;
@@ -389,7 +394,7 @@ export interface DomainAttributionInfo {
   sourceRevision?: number;
 }
 
-export interface ScenarioAttributionProfile {
+interface ScenarioAttributionProfile {
   primaryDomainId: string;
   primaryDomainName: string;
   primaryAttribution: number;
@@ -408,7 +413,7 @@ export interface ScenarioAttributionProfile {
   sequence?: number;
 }
 
-export function getScenarioAttributionProfile(
+function getScenarioAttributionProfile(
   scenarioId: string | null | undefined,
   registryEntry?: { tags?: string[]; domains?: string[]; description?: string; services?: string[] } | null,
   simulationState?: SimulationState | {
@@ -704,7 +709,7 @@ export function getScenarioAttributionProfile(
   };
 }
 
-export function buildEvidenceItems(
+function buildEvidenceItems(
   simulationState?: SimulationState | null | Record<string, unknown>,
   currentScenarioId?: string | null
 ): EvidenceItem[] {
@@ -839,7 +844,7 @@ export function buildEvidenceItems(
   ];
 }
 
-export function buildPathwayItems(
+function buildPathwayItems(
   simulationState?: {
     scenario_id?: string;
     run?: unknown;
@@ -855,7 +860,8 @@ export function buildPathwayItems(
       }>;
     } | null;
   } | null,
-  currentScenarioId?: string | null
+  currentScenarioId?: string | null,
+  activeStageIndex: number = -1
 ): PathwayItem[] {
   const isStopped =
     simulationState?.run != null &&
@@ -901,7 +907,7 @@ export function buildPathwayItems(
 
     if (backendMatch) {
       const state = String(backendMatch.state || backendMatch.status || "DORMANT").toUpperCase();
-      const active = state === "ACTIVE" || state === "RESOLVED" || state === "SUPPORTING" || state === "CONFIRMED";
+      const active = activeStageIndex >= 2 && (state === "ACTIVE" || state === "RESOLVED" || state === "SUPPORTING" || state === "CONFIRMED");
       const reason = backendMatch.activation_reason || backendMatch.explain?.why || tmpl.defaultReason;
       return {
         id: tmpl.id,
@@ -989,8 +995,9 @@ function buildEventStreamItems(
 
   const isInactive = !stateObj || isStopped || isReady || isScenarioMismatch || hasNoRun || !isRunningOrPaused;
 
-  // 1. Investigation Standby Check: Before starting the investigation, do not leak telemetry
-  if (isInactive || activeStageIndex < 0) {
+  // 1. Investigation Standby & Stage Gating Check:
+  // Signals and alarms MUST ONLY show up starting at Stage 2 (Signal Flood, activeStageIndex >= 1) and never before that!
+  if (isInactive || activeStageIndex < 1) {
     return [];
   }
 
@@ -1097,7 +1104,7 @@ function buildEventStreamItems(
 
 // ─── Knowledge Gaps ──────────────────────────────────────────────────────────
 
-export interface GapItem {
+interface GapItem {
   id: string;
   title: string;
   subtitle: string;
@@ -1125,7 +1132,7 @@ function statusToHypothesisStatus(status?: string, confidence?: number | null, i
   return "COMPETING";
 }
 
-export function buildHypothesisItems(
+function buildHypothesisItems(
   simulationState?: SimulationState | null | Record<string, unknown>,
   currentScenarioId?: string | null
 ): HypothesisItem[] {
@@ -1210,7 +1217,7 @@ export function buildHypothesisItems(
   return mapped;
 }
 
-export function buildGapItems(simulationState?: SimulationState | null | Record<string, unknown>): GapItem[] {
+function buildGapItems(simulationState?: SimulationState | null | Record<string, unknown>): GapItem[] {
   const stateObj = simulationState as Record<string, unknown> | null | undefined;
   const reasoningMap = stateObj?.reasoningMap as Record<string, unknown> | null | undefined;
   const mapGaps = reasoningMap?.knowledge_gaps as Record<string, unknown>[] | undefined;
@@ -1233,7 +1240,7 @@ export function buildGapItems(simulationState?: SimulationState | null | Record<
 
 // ─── Service Impact Items ────────────────────────────────────────────────────
 
-export const SERVICE_IMPACTS = [
+const SERVICE_IMPACTS = [
   { name: "Enterprise APN", impact: "-55%", level: "Severe", color: "text-rose-400", badgeBg: "bg-rose-500/20 text-rose-300 border-rose-500/30" },
   { name: "Internet Services", impact: "-42%", level: "Degraded", color: "text-amber-400", badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/30" },
   { name: "VPN Services", impact: "-38%", level: "Degraded", color: "text-amber-400", badgeBg: "bg-amber-500/20 text-amber-300 border-amber-500/30" },
@@ -1242,14 +1249,14 @@ export const SERVICE_IMPACTS = [
 
 // ─── Next Best Evidence Actions ──────────────────────────────────────────────
 
-export interface NextBestEvidenceItem {
+interface NextBestEvidenceItem {
   id: string;
   label: string;
   status: "Ready" | "Running" | "Pending" | "Completed";
   isReady: boolean;
 }
 
-export function buildNextBestEvidenceItems(
+function buildNextBestEvidenceItems(
   simulationState?: SimulationState | null | Record<string, unknown>,
   scenarioId?: string | null,
   scenarioRegistry?: Array<{ id: string; display_name?: string; services?: string[]; domains?: string[] }>,
@@ -1304,16 +1311,36 @@ export function buildNextBestEvidenceItems(
     currentRun &&
     (currentRun.status === "RUNNING" || currentRun.status === "PAUSED" || currentRun.status === "COMPLETED")
   );
-  const stages = stateObj?.stages as Array<{ status?: string }> | undefined;
-  const stageIndex = stages?.findIndex((s) => s.status === "CURRENT") ?? 0;
-  const isGapStage = isRunningOrExecuted && stageIndex >= 5;
+  const stages = stateObj?.stages as Array<{ status?: string; index?: number }> | undefined;
+  const currentStageIndex = typeof (currentRun as { stage_index?: number })?.stage_index === "number"
+    ? (currentRun as { stage_index: number }).stage_index
+    : (stages?.findIndex((s) => s.status === "ACTIVE" || s.status === "CURRENT") ?? 0);
+  const isGapStage = isRunningOrExecuted && currentStageIndex >= 5;
+  const isValidationStage = isRunningOrExecuted && currentStageIndex >= 6;
+  const isActionStage = isRunningOrExecuted && currentStageIndex >= 7;
+  const executedActions = ((currentRun as { executed_actions?: string[] })?.executed_actions || []) as string[];
+  const nba1Completed = executedActions.includes("NBA-001");
+  const hitlCompleted = executedActions.includes("HITL-001") || (stateObj?.reasoningMap as { validation?: { status?: string } })?.validation?.status === "ACCEPTED";
+  const actCompleted = executedActions.includes("ACT-001") || executedActions.includes("REMEDIATE-001") || currentRun?.terminal_state === "RESOLVED";
 
   return [
     {
       id: "NBA-001",
       label: `Get ${targetEntity} detailed telemetry & health stats`,
-      status: isGapStage ? "Ready" : "Pending",
-      isReady: isGapStage,
+      status: nba1Completed ? "Completed" : (isGapStage ? "Ready" : "Pending"),
+      isReady: isGapStage && !nba1Completed,
+    },
+    {
+      id: "HITL-001",
+      label: "HITL SME Validation & Knowledge Promotion",
+      status: hitlCompleted ? "Completed" : (isValidationStage ? "Ready" : "Pending"),
+      isReady: isValidationStage && !hitlCompleted,
+    },
+    {
+      id: "ACT-001",
+      label: `Execute Remediation: Reroute traffic & isolate ${targetEntity}`,
+      status: actCompleted ? "Completed" : (isActionStage ? "Ready" : "Pending"),
+      isReady: isActionStage && !actCompleted,
     },
     {
       id: "NBA-002",
@@ -1367,7 +1394,7 @@ const HYP_TO_PATHWAYS: Record<number, number[]> = {
 
 // ─── Causal Trace Target & Telemetry Data Structures ─────────────────────────
 
-export type TraceTarget =
+type TraceTarget =
   | { type: "evidence"; idx: number }
   | { type: "pathway"; idx: number }
   | { type: "core" }
@@ -1381,7 +1408,7 @@ export type TraceTarget =
   | { type: "conduit-hyp-val"; conduitIdx: number }
   | null;
 
-export interface DetailedConduitTelemetry {
+interface DetailedConduitTelemetry {
   source: string;
   target: string;
   currentState: string;
@@ -1401,7 +1428,7 @@ export interface DetailedConduitTelemetry {
   };
 }
 
-export interface DetailedEntityModal {
+interface DetailedEntityModal {
   category: string;
   title: string;
   subtitle: string;
@@ -1424,7 +1451,7 @@ export interface DetailedEntityModal {
   };
 }
 
-export function resolveConduitTelemetry(
+function resolveConduitTelemetry(
   target: TraceTarget,
   hypothesesList: HypothesisItem[] = HYPOTHESES_LIST,
   simulationState?: {
@@ -1580,7 +1607,7 @@ export function resolveConduitTelemetry(
   return null;
 }
 
-export function resolveEntityModal(
+function resolveEntityModal(
   target: TraceTarget,
   scenarioId: string | null | undefined,
   profile: ScenarioAttributionProfile,
@@ -2363,8 +2390,10 @@ function NeuralReasoningCanvas({
   onSelectCore?: () => void;
   onSelectDomain?: (domain: (typeof OPERATIONAL_DOMAINS_CATALOG)[number], classification?: DomainClassification) => void;
 }) {
-  const { theme, scenarioId, scenarioRegistry, simulationState } = useFikraCore();
+  const { theme, scenarioId, scenarioRegistry, simulationState, executeAction } = useFikraCore();
   const isLight = theme === "light";
+  const [isExecutingHitl, setIsExecutingHitl] = useState(false);
+  const [isExecutingAct, setIsExecutingAct] = useState(false);
 
   const profile = useMemo(() => {
     const entry = scenarioRegistry.find((s) => s.id === scenarioId);
@@ -2372,7 +2401,11 @@ function NeuralReasoningCanvas({
   }, [scenarioId, scenarioRegistry, simulationState]);
   const hypothesesList = useMemo(() => buildHypothesisItems(simulationState, scenarioId), [simulationState, scenarioId]);
   const evidenceList = useMemo(() => buildEvidenceItems(simulationState, scenarioId), [simulationState, scenarioId]);
-  const pathwaysList = useMemo(() => buildPathwayItems(simulationState, scenarioId), [simulationState, scenarioId]);
+  
+  const rawStageIndex = (simulationState as any)?.storyContext?.stage_index ?? (simulationState as any)?.stage_index ?? -1;
+  const isInactive = !simulationState || ((simulationState as any)?.run?.status === "COMPLETED" && ((simulationState as any)?.run?.resolution_status === "RESOLVED" || (simulationState as any)?.run?.resolution_status === "CLOSED"));
+  const localActiveStageIndex = isInactive ? -1 : (rawStageIndex >= 0 ? rawStageIndex : 0);
+  const pathwaysList = useMemo(() => buildPathwayItems(simulationState, scenarioId, localActiveStageIndex), [simulationState, scenarioId, localActiveStageIndex]);
 
   const [showMatrixModal, setShowMatrixModal] = useState(false);
 
@@ -2633,15 +2666,29 @@ function NeuralReasoningCanvas({
         const idx = evidenceList.findIndex((item) => item.id === `${category}s` || item.name.toLowerCase().startsWith(category));
         if (idx >= 0) evidence.add(idx);
       });
-      map?.reasoning_pathways?.forEach((pathway) => {
-        const state = String(pathway.state || pathway.status || "").toUpperCase();
-        if (!["ACTIVE", "SUPPORTING", "CONFIRMED", "RESOLVED"].includes(state)) return;
-        const idx = pathwaysList.findIndex((item) => item.name === pathway.display_name);
-        if (idx >= 0) {
-          pathways.add(idx);
-          conduitsPCore.add(idx);
-        }
-      });
+      // Stage 2 (Signal Flood): light up cross-conduits from evidence into pathway intakes
+      // BUT do NOT activate pathway badges themselves yet
+      if (localActiveStageIndex >= 1) {
+        EVIDENCE_TO_PATHWAY_CONDUITS.forEach((c, cIdx) => {
+          if (evidence.has(c.fromIdx)) {
+            conduitsEvP.add(cIdx);
+          }
+        });
+      }
+
+      // Stage 3 (Correlation): ignite reasoning pathways AND conduits to reasoning core
+      if (localActiveStageIndex >= 2) {
+        map?.reasoning_pathways?.forEach((pathway) => {
+          const state = String(pathway.state || pathway.status || "").toUpperCase();
+          if (!["ACTIVE", "SUPPORTING", "CONFIRMED", "RESOLVED"].includes(state)) return;
+          const idx = pathwaysList.findIndex((item) => item.name === pathway.display_name);
+          if (idx >= 0) {
+            pathways.add(idx);
+            conduitsPCore.add(idx);
+          }
+        });
+      }
+
       map?.hypotheses?.forEach((hyp, idx) => {
         const state = String(hyp.state || hyp.status || "").toUpperCase();
         const isExcluded = state === "REJECTED" || state === "DISPROVED";
@@ -2650,7 +2697,7 @@ function NeuralReasoningCanvas({
         if ((isCandidate || hasScore) && !isExcluded) {
           hypotheses.add(idx);
           conduitsCoreHyp.add(idx);
-          core = true;
+          if (localActiveStageIndex >= 2) core = true;
         }
       });
       if (hypotheses.size === 0 && (simulationState?.hypotheses?.length ?? 0) > 0) {
@@ -2659,20 +2706,15 @@ function NeuralReasoningCanvas({
           if (state !== "REJECTED" && state !== "DISPROVED") {
             hypotheses.add(idx);
             conduitsCoreHyp.add(idx);
-            core = true;
+            if (localActiveStageIndex >= 2) core = true;
           }
         });
       }
 
-      // Connect active evidence to active pathways
-      EVIDENCE_TO_PATHWAY_CONDUITS.forEach((c, cIdx) => {
-        if (evidence.has(c.fromIdx) && pathways.has(c.toIdx)) {
-          conduitsEvP.add(cIdx);
-        }
-      });
-
-      // Connect pathways to core
-      pathways.forEach((pIdx) => conduitsPCore.add(pIdx));
+      // Connect pathways to core only if Stage 3+
+      if (localActiveStageIndex >= 2) {
+        pathways.forEach((pIdx) => conduitsPCore.add(pIdx));
+      }
 
       // Connect hypotheses to validation and illuminate validation targets
       if (hypotheses.size > 0) {
@@ -4380,6 +4422,152 @@ function NeuralReasoningCanvas({
           </div>
 
           <div className="flex flex-col gap-1.5 flex-1 my-0.5 justify-between">
+            {/* Interactive HITL SME Validation Gate */}
+            {(() => {
+              const curStageIdx = typeof (simulationState?.run as { stage_index?: number })?.stage_index === "number"
+                ? (simulationState?.run as { stage_index: number }).stage_index
+                : (simulationState?.stages?.find((s) => s.status === "ACTIVE")?.index ?? 0);
+              const isValidationStageActive = curStageIdx === 6 || (simulationState?.current_stage && ["validation", "learning_validation"].includes(simulationState.current_stage.toLowerCase()));
+              const runExecutedActions = ((simulationState?.run as { executed_actions?: string[] })?.executed_actions || []) as string[];
+              const isHitlApproved = runExecutedActions.includes("HITL-001") || (simulationState?.reasoningMap as { validation?: { status?: string } })?.validation?.status === "ACCEPTED";
+
+              if (!isValidationStageActive) return null;
+
+              return (
+                <div className={cn(
+                  "p-2 rounded-xl border transition-all shadow-md animate-in fade-in duration-200",
+                  isLight
+                    ? "bg-amber-50/95 border-amber-400 text-amber-950 shadow-amber-200/40"
+                    : "bg-[#0c1a36]/95 border-amber-500/70 text-amber-200 shadow-[0_0_15px_rgba(245,158,11,0.25)]"
+                )}>
+                  <div className="flex items-center justify-between pb-1 border-b border-amber-500/20">
+                    <div className="flex items-center gap-1.5">
+                      <ShieldCheck className="h-3.5 w-3.5 text-amber-400 animate-pulse" />
+                      <span className="text-[9.5px] font-bold uppercase font-mono tracking-wide text-amber-400">
+                        HITL SME Validation Gate
+                      </span>
+                    </div>
+                    <span className={cn(
+                      "px-1.5 py-0.2 rounded text-[7.5px] font-mono font-bold border",
+                      isHitlApproved
+                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                        : "bg-amber-500/20 text-amber-300 border-amber-500/40 animate-pulse"
+                    )}>
+                      {isHitlApproved ? "APPROVED" : "AWAITING HITL"}
+                    </span>
+                  </div>
+                  {!isHitlApproved ? (
+                    <div className="mt-1.5 space-y-1.5">
+                      <p className="text-[8.5px] leading-snug text-slate-300">
+                        Human-in-the-loop validation required. Authorize to confirm root cause & promote lesson.
+                      </p>
+                      <button
+                        type="button"
+                        disabled={isExecutingHitl}
+                        onClick={async () => {
+                          setIsExecutingHitl(true);
+                          try {
+                            await executeAction("HITL-001");
+                          } catch (e) {
+                            console.warn("HITL approval error:", e);
+                          } finally {
+                            setIsExecutingHitl(false);
+                          }
+                        }}
+                        className={cn(
+                          "w-full py-1 px-2 rounded-lg font-mono font-bold text-[9px] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md",
+                          isExecutingHitl
+                            ? "bg-amber-600/50 text-white cursor-wait"
+                            : "bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white hover:shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                        )}
+                      >
+                        <CheckCircle2 className="h-3 w-3" />
+                        <span>{isExecutingHitl ? "Signing Off..." : "Approve HITL Validation (HITL-001)"}</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-1 flex items-center gap-1 text-[8.5px] font-mono text-emerald-400">
+                      <CheckCircle2 className="h-3 w-3" />
+                      <span>SME Validated & Promoted</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
+            {/* Interactive Remediation Playbook Execution Gate (Stage 7 - Action) */}
+            {(() => {
+              const curStageIdx = typeof (simulationState?.run as { stage_index?: number })?.stage_index === "number"
+                ? (simulationState?.run as { stage_index: number }).stage_index
+                : (simulationState?.stages?.find((s) => s.status === "ACTIVE")?.index ?? 0);
+              const isActionStageActive = curStageIdx === 7 || (simulationState?.current_stage && simulationState.current_stage.toLowerCase().includes("action"));
+              const runExecutedActions = ((simulationState?.run as { executed_actions?: string[] })?.executed_actions || []) as string[];
+              const isActExecuted = runExecutedActions.includes("ACT-001") || runExecutedActions.includes("REMEDIATE-001") || simulationState?.run?.terminal_state === "RESOLVED";
+
+              if (!isActionStageActive) return null;
+
+              return (
+                <div className={cn(
+                  "p-2 rounded-xl border transition-all shadow-md animate-in fade-in duration-200",
+                  isLight
+                    ? "bg-purple-50/95 border-purple-400 text-purple-950 shadow-purple-200/40"
+                    : "bg-[#140c2e]/95 border-purple-500/70 text-purple-200 shadow-[0_0_15px_rgba(168,85,247,0.25)]"
+                )}>
+                  <div className="flex items-center justify-between pb-1 border-b border-purple-500/20">
+                    <div className="flex items-center gap-1.5">
+                      <Zap className="h-3.5 w-3.5 text-purple-400 animate-pulse" />
+                      <span className="text-[9.5px] font-bold uppercase font-mono tracking-wide text-purple-400">
+                        Remediation Playbook (NBA)
+                      </span>
+                    </div>
+                    <span className={cn(
+                      "px-1.5 py-0.2 rounded text-[7.5px] font-mono font-bold border",
+                      isActExecuted
+                        ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
+                        : "bg-purple-500/20 text-purple-300 border-purple-500/40 animate-pulse"
+                    )}>
+                      {isActExecuted ? "RESOLVED" : "READY TO EXECUTE"}
+                    </span>
+                  </div>
+                  {!isActExecuted ? (
+                    <div className="mt-1.5 space-y-1.5">
+                      <p className="text-[8.5px] leading-snug text-slate-300">
+                        Remediation playbook ready. Execute recommended action to reroute traffic, isolate root cause, and resolve incident.
+                      </p>
+                      <button
+                        type="button"
+                        disabled={isExecutingAct}
+                        onClick={async () => {
+                          setIsExecutingAct(true);
+                          try {
+                            await executeAction("ACT-001");
+                          } catch (e) {
+                            console.warn("Remediation execution error:", e);
+                          } finally {
+                            setIsExecutingAct(false);
+                          }
+                        }}
+                        className={cn(
+                          "w-full py-1 px-2 rounded-lg font-mono font-bold text-[9px] transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md",
+                          isExecutingAct
+                            ? "bg-purple-600/50 text-white cursor-wait"
+                            : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white hover:shadow-[0_0_10px_rgba(168,85,247,0.5)]"
+                        )}
+                      >
+                        <Zap className="h-3 w-3" />
+                        <span>{isExecutingAct ? "Executing Remediation..." : "Execute Remediation Playbook (ACT-001)"}</span>
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="mt-1 flex items-center gap-1 text-[8.5px] font-mono text-emerald-400">
+                      <CheckCircle2 className="h-3 w-3" />
+                      <span>Incident Remediated & Resolved</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+
             {/* SECTION 1: Root Cause Attribution Card */}
             <div
               onMouseEnter={() => setHoverTarget({ type: "root-cause" })}
@@ -4870,50 +5058,189 @@ function NeuralReasoningCanvas({
   );
 }
 
-export function renderStyledMessage(text: string, isLight: boolean) {
+function renderStyledMessage(text: string, isLight: boolean) {
   if (!text) return null;
+
+  const isNerToken = (str: string): boolean => {
+    const trimmed = str.trim();
+    return (
+      /^(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+|PE-RTR-\d+|RTR-\d+|INFRA:[A-Z0-9:-]+|CORE-K8S-[A-Z0-9-]+|CORE-KUBERNETES-[A-Z0-9-]+|EVT-[A-Z0-9-]+|SCN-\d+|[A-Z][A-Z0-9]+-(?:[A-Z0-9]+-?)+)$/i.test(trimmed) ||
+      /^(?:INFRA K8S Core-A|User Plane Function-\d+|Customer Ticket-\d+|CORE-KUBERNETES-CLUSTER-A|RTR-\d+)$/i.test(trimmed)
+    );
+  };
+
   return (
-    <div className="space-y-1.5 whitespace-pre-wrap">
+    <div className="space-y-1.5 whitespace-pre-wrap font-sans">
       {text.split("\n\n").map((para, pIdx) => {
-        const parts = para.split(/(\*\*[^*]+\*\*|\bH\d+(?:-WI-\d+)?\b|\b(?:GAP|TKT|VAL|SYNTHESIS|ACT)-\d+\b|\b(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+)\b)/g);
+        const parts = para.split(
+          /(\*\*[^*]+\*\*|`[^`]+`|\bH\d+(?:-WI-\d+)?\b|\b(?:GAP|TKT|VAL|SYNTHESIS|ACT)-\d+\b|\b(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+|PE-RTR-\d+|RTR-\d+|INFRA:[A-Z0-9:-]+|CORE-K8S-[A-Z0-9-]+|CORE-KUBERNETES-[A-Z0-9-]+|EVT-[A-Z0-9-]+|SCN-\d+|[A-Z][A-Z0-9]+-(?:[A-Z0-9]+-?)+)\b|──►|→|[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b)/g
+        );
+
         return (
-          <p key={pIdx} className="leading-relaxed">
+          <p
+            key={pIdx}
+            className={
+              isLight
+                ? "font-medium text-slate-800 leading-relaxed text-xs"
+                : "font-medium text-slate-200 leading-relaxed text-xs"
+            }
+          >
             {parts.map((part, idx) => {
+              if (!part) return null;
+
+              if (part === "──►" || part === "→") {
+                return (
+                  <span key={idx} className="text-cyan-400 font-bold px-1 select-none">
+                    {part}
+                  </span>
+                );
+              }
+
               if (part.startsWith("**") && part.endsWith("**")) {
-                const inner = part.slice(2, -2);
-                const isDomainOrEntity = /transport|core|ran|ims|database|security|cloud|optical|router/i.test(inner);
-                const isHypothesisOrCode = /^H\d|GAP-|TKT-|VAL-|ACT-/i.test(inner);
+                const inner = part.slice(2, -2).trim();
+                const isFieldLabel =
+                  /^(?:Incident ID|Status|Severity|Impact|Service|Component|Leading hypothesis|Correlation|Causal chain|Supporting evidence|Remediation|Still open|Mitigation strategy|Mandatory Prechecks|Domains|Blast radius):?$/i.test(
+                    inner
+                  ) || inner.endsWith(":");
+
+                if (isFieldLabel) {
+                  return (
+                    <span
+                      key={idx}
+                      className={
+                        isLight
+                          ? "font-medium text-slate-500 mr-1 select-none"
+                          : "font-medium text-slate-400 mr-1 select-none"
+                      }
+                    >
+                      {inner}
+                    </span>
+                  );
+                }
+
+                if (isNerToken(inner)) {
+                  return (
+                    <span
+                      key={idx}
+                      className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-[11px] font-semibold text-fuchsia-400 tracking-tight"
+                    >
+                      {inner}
+                    </span>
+                  );
+                }
+
+                if (
+                  /[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b/i.test(
+                    inner
+                  )
+                ) {
+                  return (
+                    <strong key={idx} className="font-mono font-bold text-cyan-400">
+                      {inner}
+                    </strong>
+                  );
+                }
+
+                const isDomain = /transport|core|ran|ims|database|security|cloud|optical|router/i.test(inner);
+                if (isDomain) {
+                  return (
+                    <strong
+                      key={idx}
+                      className={isLight ? "text-cyan-700 font-semibold" : "text-cyan-300 font-semibold"}
+                    >
+                      {inner}
+                    </strong>
+                  );
+                }
+
                 return (
                   <strong
                     key={idx}
-                    className={cn(
-                      "font-bold",
-                      isHypothesisOrCode
-                        ? "text-fuchsia-400 font-mono"
-                        : isDomainOrEntity
-                        ? (isLight ? "text-cyan-700 font-semibold" : "text-cyan-300 font-semibold")
-                        : (isLight ? "text-slate-900" : "text-white")
-                    )}
+                    className={isLight ? "text-slate-900 font-semibold" : "text-slate-100 font-semibold"}
                   >
                     {inner}
                   </strong>
                 );
               }
-              if (/^H\d+(?:-WI-\d+)?$/i.test(part) || /^(?:GAP|TKT|VAL|SYNTHESIS|ACT)-\d+$/i.test(part)) {
+
+              if (part.startsWith("`") && part.endsWith("`")) {
+                const codeInner = part.slice(1, -1).trim();
+                if (
+                  isNerToken(codeInner) ||
+                  /^[A-Z0-9]+(?:-[A-Z0-9]+)+$/i.test(codeInner) ||
+                  /^SCN-\d+$/i.test(codeInner)
+                ) {
+                  return (
+                    <code
+                      key={idx}
+                      className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-[11px] font-semibold text-fuchsia-400 tracking-tight"
+                    >
+                      {codeInner}
+                    </code>
+                  );
+                }
+                if (
+                  /^(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION|\d+(?:\.\d+)?%?)$/i.test(
+                    codeInner
+                  )
+                ) {
+                  return (
+                    <code
+                      key={idx}
+                      className="inline-flex items-center px-1.5 py-0.5 rounded font-mono text-[11px] font-bold text-cyan-400 bg-cyan-950/40 border border-cyan-800/40 tracking-tight shadow-sm"
+                    >
+                      {codeInner}
+                    </code>
+                  );
+                }
                 return (
-                  <span key={idx} className="font-mono font-bold text-fuchsia-400 bg-fuchsia-500/10 px-1 py-0.5 rounded text-[11px]">
+                  <code
+                    key={idx}
+                    className="inline-flex items-center px-1.5 py-0.5 rounded [font-family:Consolas,Monaco,'Courier_New',monospace] text-[11px] text-slate-300 bg-white/5 border border-white/10"
+                  >
+                    {codeInner}
+                  </code>
+                );
+              }
+
+              if (
+                /^H\d+(?:-WI-\d+)?$/i.test(part) ||
+                /^(?:GAP|TKT|VAL|SYNTHESIS|ACT)-\d+$/i.test(part)
+              ) {
+                return (
+                  <span
+                    key={idx}
+                    className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-[11px] font-semibold text-fuchsia-400 tracking-tight"
+                  >
                     {part}
                   </span>
                 );
               }
-              if (/^(?:IP:[A-Z0-9:]+|UPF-\d+|GNB-[A-Z0-9-]+|IMS-[A-Z0-9-]+)$/i.test(part)) {
+
+              if (isNerToken(part)) {
                 return (
-                  <span key={idx} className={cn("font-mono font-semibold px-1 py-0.5 rounded text-[11px]", isLight ? "text-cyan-800 bg-cyan-100/60" : "text-cyan-300 bg-cyan-950/60")}>
+                  <span
+                    key={idx}
+                    className="[font-family:Consolas,Monaco,'Courier_New',monospace] text-[11px] font-semibold text-fuchsia-400 tracking-tight"
+                  >
                     {part}
                   </span>
                 );
               }
-              return part;
+
+              if (
+                /[-+]?\d+(?:\.\d+)?%|\b\d{1,3}(?:,\d{3})+\b(?:\s*(?:subscribers|users|sessions|calls))?|\b(?:PAUSED|MAJOR|CRITICAL|ACTIVE|NOMINAL|DIVERGENT|CAUTION)\b/i.test(
+                  part
+                )
+              ) {
+                return (
+                  <span key={idx} className="font-mono font-bold text-cyan-400">
+                    {part}
+                  </span>
+                );
+              }
+
+              return <span key={idx}>{part}</span>;
             })}
           </p>
         );
@@ -4931,6 +5258,7 @@ export default function InvestigatePage() {
     scenarioRegistry,
     simulationState,
     executeAction,
+    advanceStage,
     selectHypothesis,
     selectGap,
     selectedEntityId,
@@ -4986,24 +5314,26 @@ export default function InvestigatePage() {
     simulationState != null && "run" in simulationState && simulationState.run === null;
   const isInactive = !simulationState || isStopped || isReady || isScenarioMismatch || hasNoRun || !isRunningOrPaused;
 
+  const STAGE_NAME_TO_INDEX: Record<string, number> = {
+    trigger: 0,
+    signal_flood: 1,
+    signals: 1,
+    correlation: 2,
+    hypothesis_gen: 3,
+    hypothesis_generation: 3,
+    hypothesis_testing: 4,
+    knowledge_gaps: 5,
+    knowledge_gap_check: 5,
+    validation: 6,
+    learning_validation: 6,
+    action: 7,
+  };
+
   const rawStageIndex =
     simulationState?.stages?.find((s) => s.status === "ACTIVE")?.index ??
     simulationState?.run?.stage_index ??
     (simulationState?.current_stage
-      ? [
-          "trigger",
-          "signal_flood",
-          "signals",
-          "correlation",
-          "hypothesis_gen",
-          "hypothesis_generation",
-          "hypothesis_testing",
-          "knowledge_gaps",
-          "knowledge_gap_check",
-          "validation",
-          "learning_validation",
-          "action",
-        ].indexOf(simulationState.current_stage.toLowerCase())
+      ? (STAGE_NAME_TO_INDEX[simulationState.current_stage.toLowerCase()] ?? -1)
       : -1);
 
   const activeStageIndex = isInactive ? -1 : (rawStageIndex >= 0 ? rawStageIndex : 0);
@@ -5018,13 +5348,39 @@ export default function InvestigatePage() {
     }
   }, [isInactive, activeStageIndex, hasUserToggledStreamMode]);
 
+  useEffect(() => {
+    console.log("[InvestigatePage Lifecycle]", {
+      scenarioId,
+      runId: simulationState?.run?.run_id || simulationState?.run_id,
+      runStatus: simulationState?.run?.status || simulationState?.run_status,
+      currentStage: simulationState?.current_stage,
+      rawStageIndex,
+      activeStageIndex,
+      isInactive,
+      storyContextStage: simulationState?.storyContext?.stage_index,
+      syncState: simulationState?.syncState,
+    });
+  }, [
+    scenarioId,
+    simulationState?.run?.run_id,
+    simulationState?.run_id,
+    simulationState?.run?.status,
+    simulationState?.run_status,
+    simulationState?.current_stage,
+    rawStageIndex,
+    activeStageIndex,
+    isInactive,
+    simulationState?.storyContext?.stage_index,
+    simulationState?.syncState,
+  ]);
+
   const profile = useMemo(() => {
     const entry = scenarioRegistry.find((s) => s.id === scenarioId);
     return getScenarioAttributionProfile(scenarioId, entry, simulationState);
   }, [scenarioId, scenarioRegistry, simulationState]);
 
   const evidenceList = useMemo(() => buildEvidenceItems(simulationState, scenarioId), [simulationState, scenarioId]);
-  const pathwaysList = useMemo(() => buildPathwayItems(simulationState, scenarioId), [simulationState, scenarioId]);
+  const pathwaysList = useMemo(() => buildPathwayItems(simulationState, scenarioId, activeStageIndex), [simulationState, scenarioId, activeStageIndex]);
   
   const rawStreamItems = useMemo(
     () => buildEventStreamItems(simulationState, "BEFORE", scenarioId, activeStageIndex),
@@ -5413,12 +5769,26 @@ export default function InvestigatePage() {
     );
   };
 
+  const extractZakiSpokenReply = (data: ZakiChatApiResponse, fallback: string): string => {
+    return (
+      (data as any).spoken_answer ||
+      (data as any).spoken_response ||
+      data.zaki_v2?.spoken_answer ||
+      (data.response as any)?.spoken_response ||
+      (data.copilot as any)?.spoken_message ||
+      (data.conversation as any)?.spoken_reply ||
+      data.copilot?.message ||
+      data.conversation?.reply ||
+      fallback
+    );
+  };
+
   const buildZakiRequestPayload = (query: string) => ({
     query,
     message: query,
     scenario_id: scenarioId || simulationState?.scenario_id || "SCN-001",
     run_id: simulationState?.run_id,
-    revision: simulationState?.revision ?? simulationState?.snapshot_version ?? 1,
+    revision: simulationState?.revision ?? simulationState?.snapshot_version,
     workspace: "investigate",
     response_level: zakiResponseLevel || responseLevel || "engineer",
     simulation_status: simulationState?.run?.status || simulationState?.run_status || (simulationState?.syncState === "SYNCED" ? "RUNNING" : "READY"),
@@ -5442,7 +5812,10 @@ export default function InvestigatePage() {
 
   const sendZakiMessage = async (text: string) => {
     const query = text.trim();
-    if (!query || isZakiThinking) return;
+    if (!query) return;
+    if (isZakiThinking) {
+      return "Zaki is processing active telemetry. Please retry your question.";
+    }
     const nextMessageId = (prefix: string) => {
       zakiMessageSeq.current += 1;
       return `${prefix}-${zakiMessageSeq.current}`;
@@ -5459,22 +5832,34 @@ export default function InvestigatePage() {
     setIsZakiThinking(true);
 
     try {
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+      let res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(buildZakiRequestPayload(query)),
       });
+      if (res.status === 409) {
+        // Revision was stale: auto-retry with live snapshot (omitting stale revision)
+        const livePayload = { ...buildZakiRequestPayload(query), revision: undefined };
+        res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(livePayload),
+        });
+      }
       if (!res.ok) {
         throw new Error(`Zaki chat failed with ${res.status}`);
       }
       const data = (await res.json()) as ZakiChatApiResponse;
       const reply = extractZakiReply(data);
+      const spokenReply = extractZakiSpokenReply(data, reply);
       const zakiV2: ZakiCopilotResponse = data.zaki_v2 ? {
         ...data.zaki_v2,
         answer: data.zaki_v2.answer || reply,
+        spoken_answer: data.zaki_v2.spoken_answer || spokenReply,
         storyteller: data.zaki_v2.storyteller || null,
       } : {
         answer: reply,
+        spoken_answer: spokenReply,
         sections: data.sections || data.response?.sections || [],
         highlighted_entities: data.highlighted_entities || data.response?.highlighted_entities || [],
         grounded_in: data.grounded_in || data.response?.grounded_in || {
@@ -5494,7 +5879,11 @@ export default function InvestigatePage() {
           zaki_v2: { ...zakiV2, storyteller: null },
         },
       ]);
-      return reply;
+      return {
+        text: reply,
+        spokenText: spokenReply,
+        storyteller: (data.zaki_v2?.storyteller ?? null) as unknown as StorytellerPayload | null,
+      };
     } catch (error) {
       const fallback = error instanceof Error ? error.message : "Zaki could not reach the backend.";
       setZakiMessages((prev) => [
@@ -5530,11 +5919,19 @@ export default function InvestigatePage() {
     setIsZakiThinking(true);
     try {
       const query = `Generate a curated incident story for this simulation run. Selected context: ${zakiSelectedContext?.display_name || scenarioId || "current scenario"}.`;
-      const res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+      let res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(buildZakiRequestPayload(query)),
       });
+      if (res.status === 409) {
+        const livePayload = { ...buildZakiRequestPayload(query), revision: undefined };
+        res = await fetch(`${API_BASE}/api/v1/fikracore/zaki/chat`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(livePayload),
+        });
+      }
       if (!res.ok) {
         throw new Error(`Story request failed with ${res.status}`);
       }
@@ -5685,7 +6082,7 @@ export default function InvestigatePage() {
                 >
                   <span className="text-[7.5px] font-mono uppercase tracking-wider font-semibold opacity-75">BEFORE</span>
                   <span className="text-[9.5px] font-bold font-mono truncate max-w-full">
-                    Event Flood {rawStreamItems.length > 0 ? `(${rawStreamItems.length})` : "(0)"}
+                    {activeStageIndex === 0 ? "Trigger Event" : "Event Flood"} {rawStreamItems.length > 0 ? `(${rawStreamItems.length})` : "(0)"}
                   </span>
                 </button>
 
@@ -5755,6 +6152,21 @@ export default function InvestigatePage() {
                   </p>
                   <p className="text-[9.5px] mt-1 leading-relaxed max-w-[200px]">
                     Scenario selected. Click <span className="font-semibold text-emerald-400">Play</span> above to start live event flood ingestion.
+                  </p>
+                </div>
+              ) : activeStageIndex === 0 ? (
+                <div className={cn(
+                  "h-full flex flex-col items-center justify-center text-center p-4 rounded-xl border border-dashed",
+                  isLight ? "border-amber-300 bg-amber-50/30 text-amber-800" : "border-amber-500/30 bg-amber-950/10 text-amber-300"
+                )}>
+                  <div className="h-8 w-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center mb-2 text-amber-400">
+                    <Radio className="h-4 w-4 animate-pulse" />
+                  </div>
+                  <p className="text-[11px] font-bold font-mono uppercase tracking-wide">
+                    Stage 1: Trigger Phase
+                  </p>
+                  <p className="text-[9.5px] mt-1 leading-relaxed max-w-[220px] text-slate-400">
+                    Trigger condition detected. Multi-domain signal flood and alarm cascade will ingest at Stage 2 (Signal Flood).
                   </p>
                 </div>
               ) : eventStreamMode === "AFTER" && activeStageIndex < 2 ? (
@@ -6215,6 +6627,31 @@ export default function InvestigatePage() {
                 </div>
               </div>
 
+              {activeStageIndex === 5 && simulationState?.stage_status === "BLOCKED" && (
+                <div className="mt-1.5 p-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-[8.5px] font-mono text-amber-300 flex items-center gap-1.5 animate-pulse">
+                  <AlertTriangle className="h-3 w-3 text-amber-400 shrink-0" />
+                  <span>Stage 5 Gate: Execute Next-Best Evidence (NBA-001) to proceed</span>
+                </div>
+              )}
+              {activeStageIndex === 6 && simulationState?.stage_status === "BLOCKED" && (
+                <div className="mt-1.5 p-1.5 rounded-lg bg-amber-500/15 border border-amber-500/40 text-[8.5px] font-mono text-amber-300 flex items-center gap-1.5 animate-pulse">
+                  <ShieldCheck className="h-3 w-3 text-amber-400 shrink-0" />
+                  <span>Stage 6 Gate: Awaiting Human-in-the-Loop SME Validation</span>
+                </div>
+              )}
+              {activeStageIndex === 7 && simulationState?.run?.terminal_state !== "RESOLVED" && !(simulationState?.run as { executed_actions?: string[] })?.executed_actions?.includes("ACT-001") && (
+                <div className="mt-1.5 p-1.5 rounded-lg bg-purple-500/15 border border-purple-500/40 text-[8.5px] font-mono text-purple-300 flex items-center gap-1.5 animate-pulse">
+                  <Zap className="h-3 w-3 text-purple-400 shrink-0" />
+                  <span>Stage 7 Remediation: Execute recommended action playbook (ACT-001)</span>
+                </div>
+              )}
+              {(simulationState?.run?.terminal_state === "RESOLVED" || (simulationState?.run as { executed_actions?: string[] })?.executed_actions?.includes("ACT-001")) && (
+                <div className="mt-1.5 p-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-[8.5px] font-mono text-emerald-300 flex items-center gap-1.5">
+                  <CheckCircle2 className="h-3 w-3 text-emerald-400 shrink-0" />
+                  <span>Incident Resolved: Remediation Playbook executed successfully</span>
+                </div>
+              )}
+
               <div className="space-y-1.5 my-auto text-[10px]">
                 {nextBestActions.map((nbe, idx) => {
                   const isExecuting = executingActionId === nbe.id;
@@ -6407,7 +6844,7 @@ export default function InvestigatePage() {
             <div className={cn("pt-1.5 border-t shrink-0", isLight ? "border-slate-200" : "border-slate-800/80")}>
               <button
                 type="button"
-                onClick={() => router.push(`/simulator/investigate?scenario=${scenarioId || "DEMO-001"}#hypotheses`)}
+                onClick={() => router.push(`/simulator/investigate${scenarioId ? `?scenario=${scenarioId}` : ""}#hypotheses`)}
                 className={cn(
                   "text-[10px] hover:underline flex items-center gap-1 font-semibold cursor-pointer",
                   isLight ? "text-cyan-700 hover:text-cyan-900" : "text-cyan-400"
@@ -6467,6 +6904,25 @@ export default function InvestigatePage() {
                     </span>
                   </div>
                   <p className={cn("text-[9px] leading-tight line-clamp-2", isLight ? "text-slate-500" : "text-slate-400")}>{kg.subtitle}</p>
+                  {activeStageIndex === 5 && simulationState?.stage_status === "BLOCKED" && (
+                    <button
+                      type="button"
+                      disabled={executingActionId === "NBA-001"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleActionClick("NBA-001");
+                      }}
+                      className={cn(
+                        "mt-1.5 w-full py-1 px-2 rounded font-mono font-bold text-[8.5px] flex items-center justify-center gap-1 transition-all",
+                        executingActionId === "NBA-001"
+                          ? "bg-amber-500/40 text-white cursor-wait"
+                          : "bg-blue-600 hover:bg-blue-500 text-white shadow-sm cursor-pointer"
+                      )}
+                    >
+                      <Zap className="h-2.5 w-2.5" />
+                      <span>{executingActionId === "NBA-001" ? "Requesting Evidence..." : "Request Next-Best Evidence (NBA-001)"}</span>
+                    </button>
+                  )}
                 </div>
               ))}
             </div>
@@ -6474,7 +6930,7 @@ export default function InvestigatePage() {
             <div className={cn("pt-1.5 border-t shrink-0", isLight ? "border-slate-200" : "border-slate-800/80")}>
               <button
                 type="button"
-                onClick={() => router.push(`/simulator/discover?scenario=${scenarioId || "DEMO-001"}`)}
+                onClick={() => router.push(`/simulator/discover${scenarioId ? `?scenario=${scenarioId}` : ""}`)}
                 className={cn(
                   "text-[10px] hover:underline flex items-center gap-1 font-semibold cursor-pointer",
                   isLight ? "text-cyan-700 hover:text-cyan-900" : "text-cyan-400"
@@ -6521,15 +6977,26 @@ export default function InvestigatePage() {
       {/* Unified Zaki Voice & Chat Copilot on the Right */}
       <ZakiVoiceFAB
         runId={zakiRunId}
-        scenarioId={scenarioId || simulationState?.scenario_id || "SCN-001"}
+        scenarioId={scenarioId || simulationState?.scenario_id || undefined}
+        stageIndex={activeStageIndex}
         simulationStatus={simulationState?.run?.status || simulationState?.run_status || (simulationState?.syncState === "SYNCED" ? "RUNNING" : "READY")}
         onMessageSubmit={sendZakiMessage}
+        suggestedPrompts={simulationState?.storyContext?.suggested_questions as string[] | undefined}
+        anchorQuestion={simulationState?.storyContext?.anchor_question as string | undefined}
+        simulationState={simulationState}
       />
 
       <ZakiLiveStoryOverlay
         storyContext={simulationState?.storyContext}
         currentStage={simulationState?.current_stage}
-        isRunning={simulationState?.run?.status === "RUNNING"}
+        stageIndex={activeStageIndex}
+        stageStatus={simulationState?.stage_status}
+        isRunning={simulationState?.run?.status === "RUNNING" || simulationState?.run_status === "RUNNING"}
+        terminalState={simulationState?.run?.terminal_state || (simulationState?.storyContext as { terminal_state?: string })?.terminal_state}
+        runStatus={simulationState?.run?.status || simulationState?.run_status}
+        onAdvanceStage={advanceStage}
+        onExecuteAction={handleActionClick}
+        onQuestionClick={sendZakiMessage}
       />
     </div>
   );
@@ -7346,7 +7813,7 @@ function ExecutiveTelemetryModal({
                       <tr>
                         <td colSpan={7} className="p-8 text-center text-slate-400 font-mono text-xs">
                           {rawEvents.length === 0
-                            ? "Investigation standby. Start the simulation to ingest real-time telemetry flood."
+                            ? "Investigation standby. Real-time multi-domain signal flood will ingest at Stage 2 (Signal Flood)."
                             : "No signals match the selected filter criteria."}
                         </td>
                       </tr>

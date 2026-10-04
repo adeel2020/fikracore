@@ -108,7 +108,10 @@ def _hypothesis_evidence(story: IncidentStory, limit: int = 5) -> list[str]:
     evidence: list[str] = []
     for h in story.hypotheses:
         for item in h.evidence:
-            evidence.append(_fmt_fact(item.value))
+            text = _fmt_fact(item.value)
+            if not text or text in evidence:
+                continue
+            evidence.append(text)
             if len(evidence) >= limit:
                 return evidence
     return evidence
@@ -135,26 +138,110 @@ def _clean_timeline(raw_timeline: list) -> list[str]:
     return cleaned
 
 
+def _is_bare_id(text: str) -> bool:
+    """Check if a string is a machine/scenario ID (e.g. SCN-001, Scn 001, H4-WI-001, INC-123) rather than a descriptive incident name."""
+    if not text or not isinstance(text, str):
+        return True
+    s = text.strip()
+    # Matches patterns like SCN-001, Scn 001, SCN001, Scenario SCN-001, H4-WI-001, H2-SCN-001, INC-001, RUN-001
+    if re.match(r"^(?:scenario\s+)?(?:scn|h\d+[\-_ ](?:scn|wi|gap|lu)|run|inc|wi|id)[\-_ ]*\d+$", s, re.IGNORECASE):
+        return True
+    # Matches generic short codes like PE-01, RTR-01, AB-123 (up to 4 letters followed by digits)
+    if re.match(r"^[a-zA-Z]{1,4}[\-_ ]*\d{1,5}$", s):
+        return True
+    return False
+
+
+def _clean_scenario_title(text: str) -> str:
+    """Strip any leading scenario/incident ID prefix (e.g. SCN-001 · , SCN-001: , SCN-001 - )."""
+    if not text or not isinstance(text, str):
+        return ""
+    t = text.strip()
+    return re.sub(r"^(?:SCN|H\d+[\-_][A-Z]+|RUN|DEMO)[\-_ ]*\d+[\s\·\-_:]+\s*", "", t, flags=re.IGNORECASE).strip()
+
+
 def _friendly_incident_title(story: IncidentStory) -> str:
     """Derive a human-friendly, professional incident name without raw slugs, IDs, or file paths."""
-    service = _spoken_service(story) if hasattr(story, "services") else ""
-    raw_id = (story.incident_id or "").split("/")[-1]
+    # Collect finding values to avoid accidentally using root causes / hypotheses as scenario names
+    rc_val = str(getattr(getattr(story, "root_cause", None), "value", "") or "").strip()
+    hyp_vals: set[str] = set()
+    if getattr(story, "hypotheses", None):
+        for h in story.hypotheses:
+            hv = getattr(getattr(h, "hypothesis", None), "value", None)
+            if hv:
+                hyp_vals.add(str(hv).strip())
+
+    def _is_finding(text: str) -> bool:
+        if not text:
+            return True
+        s = text.strip()
+        if rc_val and s.lower() == rc_val.lower():
+            return True
+        if any(s.lower() == hv.lower() for hv in hyp_vals):
+            return True
+        return False
+
+    # 1. Resolve authoritative scenario name from scenario/incident ID via naming resolver & catalog
+    inc_id = getattr(story, "incident_id", None) or ""
+    raw_id = inc_id.split("/")[-1].strip()
+    for lookup_key in (inc_id, raw_id):
+        if not lookup_key:
+            continue
+        try:
+            from engine_stack.engines.telecom_brain.presentation.naming import default_naming_resolver
+            resolved = default_naming_resolver.to_scenario_title(lookup_key)
+            cleaned = _clean_scenario_title(resolved)
+            if cleaned and not _is_bare_id(cleaned) and not cleaned.lower().startswith("scenario ") and not _is_finding(cleaned):
+                return cleaned
+        except Exception:
+            pass
+
+        try:
+            from engine_stack.engines.telecom_brain.simulator.scenario_catalog import ScenarioCatalog
+            sc = ScenarioCatalog().get(lookup_key)
+            if sc and sc.display_name:
+                cleaned = _clean_scenario_title(sc.display_name)
+                if cleaned and not _is_bare_id(cleaned) and not _is_finding(cleaned):
+                    return cleaned
+        except Exception:
+            pass
+
+    # 2. Check metadata fields
+    meta = getattr(story, "correlation_metadata", None) or {}
+    for key in ("scenario_title", "incident_name", "display_name", "title"):
+        val = meta.get(key)
+        if val and isinstance(val, str) and not _is_finding(val):
+            cleaned = _clean_scenario_title(val)
+            if cleaned and not _is_bare_id(cleaned) and not cleaned.lower().startswith("scenario "):
+                return cleaned
+
+    # 3. Check explicit title on the story
+    story_title = getattr(story, "title", None)
+    if story_title and isinstance(story_title, str) and not _is_finding(story_title):
+        cleaned = _clean_scenario_title(story_title)
+        if cleaned and not _is_bare_id(cleaned) and not cleaned.lower().startswith("scenario "):
+            return cleaned
+
+    # 4. Clean slug if it is descriptive (e.g. transport-n3-mobile-data-stall) and not a bare ID
     clean_slug = re.sub(r"-\d{4}-\d{2}-\d{2}$", "", raw_id)
     clean_slug = re.sub(r"-[0-9a-f]{8,}$", "", clean_slug)
-    words = [
-        w.capitalize() if w.lower() not in ("and", "of", "the", "in", "to", "for", "on", "across") else w.lower()
-        for w in clean_slug.replace("-", " ").replace("_", " ").split()
-    ]
-    slug_title = " ".join(words)
-    acronyms = {"Amf": "AMF", "Smf": "SMF", "Upf": "UPF", "Ran": "RAN", "Ue": "UE", "Kpi": "KPI", "Rca": "RCA"}
-    for k, v in acronyms.items():
-        slug_title = re.sub(rf"\b{k}\b", v, slug_title)
+    if clean_slug and not _is_bare_id(clean_slug):
+        words = [
+            w.capitalize() if w.lower() not in ("and", "of", "the", "in", "to", "for", "on", "across") else w.lower()
+            for w in clean_slug.replace("-", " ").replace("_", " ").split()
+        ]
+        slug_title = " ".join(words)
+        acronyms = {"Amf": "AMF", "Smf": "SMF", "Upf": "UPF", "Ran": "RAN", "Ue": "UE", "Kpi": "KPI", "Rca": "RCA", "N3": "N3"}
+        for k, v in acronyms.items():
+            slug_title = re.sub(rf"\b{k}\b", v, slug_title)
+        if slug_title and len(slug_title) > 3 and not _is_bare_id(slug_title) and not _is_finding(slug_title):
+            return slug_title
 
-    if slug_title and len(slug_title) > 3:
-        return slug_title
+    # 5. Fallback based on affected service
+    service = _spoken_service(story) if hasattr(story, "services") else ""
     if service and service != "the affected service":
         return f"{service} Degradation"
-    return "Telecom Incident"
+    return "Operational Telecom Incident"
 
 
 def render_story(story: IncidentStory) -> str:
@@ -164,7 +251,7 @@ def render_story(story: IncidentStory) -> str:
 
     lines = [
         f"# Incident story — {friendly_title}",
-        f"> 🏷️ **Incident ID:** `{story.incident_id}` &nbsp;|&nbsp; ⚡ **Status:** `{status_str}` &nbsp;|&nbsp; 🔴 **Severity:** `{sev_str}`",
+        f"> 🏷️ **Incident ID:** `{story.incident_id}` · ⚡ **Status:** `{status_str}` · 🔴 **Severity:** `{sev_str}`",
         "",
         "### 📋 Executive Summary",
         story.summary or "No summary available.",
@@ -195,9 +282,13 @@ def render_story(story: IncidentStory) -> str:
             lines += [f"- {reason}" for reason in reasons]
     if story.causal_chain and story.causal_chain.steps:
         lines += ["", "### ⛓️ Causal Chain", "**Causal chain:**"]
-        for step in story.causal_chain.steps:
-            fact_desc = f" ──► {step.fact.value}" if step.fact and step.fact.value else ""
-            lines.append(f"- **{step.label}**{fact_desc} *({step.claim_type})*")
+        steps = story.causal_chain.steps
+        for idx, step in enumerate(steps):
+            next_hop = steps[idx + 1].label if idx + 1 < len(steps) else None
+            if next_hop:
+                lines.append(f"- **{step.label}** ──► **{next_hop}** *({step.claim_type})*")
+            elif len(steps) == 1:
+                lines.append(f"- **{step.label}** *(root failure origin)*")
     evidence = _hypothesis_evidence(story)
     if evidence:
         lines += ["", "### 📊 Correlated Evidence", "**Supporting evidence:**"]
@@ -225,7 +316,8 @@ def render_short(story: IncidentStory) -> str:
 
 
 def render_technical(story: IncidentStory) -> str:
-    lines = [f"# Technical brief — {story.incident_id}", ""]
+    friendly_title = _friendly_incident_title(story)
+    lines = [f"# Technical brief — {friendly_title}", ""]
     lines.append("## KPIs")
     for kpi in story.kpis:
         lines.append(f"- {_fmt_fact(kpi.value)} (slug: {_fmt_fact(kpi.slug)})")
@@ -253,8 +345,9 @@ def render_technical(story: IncidentStory) -> str:
 
 
 def render_executive(story: IncidentStory) -> str:
+    friendly_title = _friendly_incident_title(story)
     lines = [
-        f"# Executive summary — {story.incident_id}",
+        f"# Executive summary — {friendly_title}",
         f"**Status:** {story.status or 'unknown'}  **Severity:** {story.severity or 'unknown'}",
         "",
         story.summary or "No summary available.",
@@ -468,60 +561,66 @@ def render_answer(intent: str, story: IncidentStory) -> str:
     return renderer(story)
 
 
-def curate_spoken_text(text: str) -> str:
-    """Transform long or technical answers into concise, high-value spoken summaries.
+def curate_spoken_text(text: str, query: str = "", contract: Any = None) -> str:
+    """Transform long or technical answers into an empathetic, collegial Senior Telecom NOC Lead spoken briefing.
 
-    Strips timestamps, markdown tables, raw bullet lists, and technical syntax,
-    curating a natural conversational takeaway suitable for audio TTS without micro-reading.
+    Governed strictly by ProsodyContract to avoid mechanical readouts of headers, tables,
+    metrics, or logs, delivering natural conversational summaries with breathing pauses.
     """
     if not text or not text.strip():
         return ""
 
-    # 1. Remove markdown code blocks (```...```)
+    if contract is not None and hasattr(contract, "curate_speech"):
+        return contract.curate_speech(text, query=query)
+
+    try:
+        from zaki.contracts.prosody import ProsodyContract
+        return ProsodyContract().curate_speech(text, query=query)
+    except Exception:
+        pass
+
+    q_clean = (query or "").strip().lower()
+
+    # Handle casual greetings and pleasantries
+    if re.search(r"\b(hey|hello|hi|how are you|how're you|how r u|good morning|good afternoon|good evening)\b", q_clean):
+        return "Hello! I'm Zaki, your operations co-pilot. I'm actively tracking network telemetry and ready to assist. How can I help you today?"
+
+    # General Conversational Synthesis: extract primary takeaway and humanize the ACTUAL text
     t = re.sub(r"```[\s\S]*?```", "", text)
-    # 2. Remove markdown tables (|...|)
     t = re.sub(r"\|[^\n]+\|\n?", "", t)
-    # 3. Remove markdown headers, list bullets, and quote prefixes
     t = re.sub(r"^#{1,6}\s+.*$", "", t, flags=re.MULTILINE)
-    t = re.sub(r"^[*-]\s+", "", t, flags=re.MULTILINE)
+    t = re.sub(r"^[*-•]\s+", "", t, flags=re.MULTILINE)
     t = re.sub(r"^\d+\.\s+", "", t, flags=re.MULTILINE)
     t = re.sub(r"^>\s+", "", t, flags=re.MULTILINE)
-    # 4. Remove ISO and clock timestamps (e.g. 2026-09-02T14:22:01.000Z, 14:22:01)
     t = re.sub(r"\b\d{4}-\d{2}-\d{2}[T\s]\d{2}:\d{2}:\d{2}(\.\d+)?Z?\b", "", t)
     t = re.sub(r"\b\d{1,2}:\d{2}(:\d{2})?\s*(AM|PM|am|pm|UTC|GMT|Z)?\b", "", t)
-    # 5. Remove markdown bold/italic formatting (**word**, *word*, `code`)
     t = re.sub(r"\*\*([^*]+)\*\*", r"\1", t)
     t = re.sub(r"\*([^*]+)\*", r"\1", t)
     t = re.sub(r"__([^_]+)__", r"\1", t)
     t = re.sub(r"`([^`]+)`", r"\1", t)
-    # 6. Remove raw incident slugs, docs paths, and hash symbols
+    t = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", t)
     t = re.sub(r"\b(?:observations/|knowledge/|incidents/|mobile-core/incidents/)[\w/.-]+", "", t)
-    t = re.sub(r"\bFrom\s+docs/[^\s:]+(?:\s*/\s*[^:]+)?:\s*", "", t, flags=re.IGNORECASE)
-    t = re.sub(r"\bFrom\s+`?[^`:\n]+`?(?:\s*/\s*[^:]+)?:\s*", "", t, flags=re.IGNORECASE)
     t = re.sub(r"\b(Status|Severity|Correlation|KPIs|Hypotheses|Causal chain|Timeline|Remediation|Recovery):\s*", "", t, flags=re.IGNORECASE)
-    t = re.sub(r"#([a-zA-Z0-9]+)", r"\1", t)
 
-    # 7. Normalize whitespace
+    # Phonetic expansion for smooth cadence
+    t = re.sub(r"\bPE-RTR-0?(\d+)\b", r"Provider Edge Router \1", t)
+    t = re.sub(r"\bUPF-0?(\d+)\b", r"U-P-F \1", t)
+    t = re.sub(r"\bSCN-0?(\d+)\b", r"Scenario \1", t)
+    t = re.sub(r"\b(\d+(?:\.\d+)?)\s*Gbps\b", r"\1 gigabits per second", t)
+    t = re.sub(r"\b(\d+(?:\.\d+)?)\s*Mbps\b", r"\1 megabits per second", t)
     t = re.sub(r"\s+", " ", t).strip()
 
-    # Extract clean sentences (max ~120 words and up to 6 sentences to preserve full storytelling arc)
-    sentences = re.split(r"(?<=[.!?])\s+", t)
-    selected: list[str] = []
-    word_count = 0
-    for s in sentences:
-        s_clean = s.strip()
-        if not s_clean:
-            continue
-        words = s_clean.split()
-        if word_count + len(words) > 120 and selected:
-            break
-        selected.append(s_clean)
-        word_count += len(words)
-        if len(selected) >= 6:
-            break
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", t) if s.strip() and len(s.strip()) > 10]
+    if not sentences:
+        return "Telemetry synchronized... I've updated the diagnostic details on your display."
 
-    spoken = " ".join(selected).strip()
-    return spoken or t[:250]
+    brief = " ".join(sentences[:2])
+    words = brief.split()
+    if len(words) > 35:
+        brief = " ".join(words[:32]) + "..."
+
+    return f"{brief}... I've laid out the complete details on your screen."
+
 
 
 def _spoken_fact(value, fallback: str = "") -> str:

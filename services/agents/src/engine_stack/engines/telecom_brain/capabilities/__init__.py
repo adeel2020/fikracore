@@ -41,7 +41,26 @@ def create_default_registry() -> CapabilityRegistry:
 
 default_capability_registry: CapabilityRegistry = create_default_registry()
 
+from .tool_registry import (
+    ActionSafetyTier,
+    AuthorityLevel,
+    DomainCode,
+    DomainToolDefinition,
+    DomainToolRegistry,
+)
+from .probe_dispatcher import (
+    DiscriminationProbeDispatcher,
+    default_probe_dispatcher,
+)
+
 __all__ = [
+    "ActionSafetyTier",
+    "AuthorityLevel",
+    "DomainCode",
+    "DomainToolDefinition",
+    "DomainToolRegistry",
+    "DiscriminationProbeDispatcher",
+    "default_probe_dispatcher",
     "CapabilityDefinition",
     "CapabilityError",
     "CapabilityExecutionResult",

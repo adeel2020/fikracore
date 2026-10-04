@@ -291,7 +291,10 @@ class SimulationManager:
         run = self.get_run(run_id)
         if not run:
             return run
-        if run.status not in {"RUNNING", "PAUSED"}:
+        if run.status not in {"RUNNING", "PAUSED", "BLOCKED"}:
+            return run
+        state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+        if state.get("stage_status") == "BLOCKED":
             return run
         if run.stage_index < 7:
             run.stage_index += 1
@@ -300,7 +303,12 @@ class SimulationManager:
             self._materialize_story_context(run)
         return run
 
-    def _materialize_story_context(self, run: SimulationRun, is_final: bool = False) -> Optional[dict[str, Any]]:
+    def _materialize_story_context(
+        self,
+        run: SimulationRun,
+        is_final: bool = False,
+        run_state: Optional[dict[str, Any]] = None,
+    ) -> Optional[dict[str, Any]]:
         """Materialize story_context.json progressively into the run's operational/ directory."""
         try:
             from .story_compiler import compile_story_context
@@ -316,7 +324,15 @@ class SimulationManager:
                 return None
 
             stage_idx = 7 if is_final else run.stage_index
-            state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+            state = run_state
+            if state is None:
+                compiler = get_compiler()
+                state = compiler.compile_state(
+                    scenario_id=run.scenario_id,
+                    run_id=run.run_id,
+                    status=run.status,
+                    stage_index=stage_idx,
+                )
             story = compile_story_context(run_dir, stage_index=stage_idx, run_state=state)
             if is_final:
                 story["status"] = "resolved"
@@ -327,18 +343,14 @@ class SimulationManager:
         except Exception:
             return None
 
-    def _resolve_story_context_for_sse(self, run: SimulationRun) -> Optional[dict[str, Any]]:
-        """Fetch or compile story_context for live SSE emission."""
+    def _resolve_story_context_for_sse(
+        self,
+        run: SimulationRun,
+        run_state: Optional[dict[str, Any]] = None,
+    ) -> Optional[dict[str, Any]]:
+        """Fetch or compile story_context dynamically matched to current stage for live SSE emission."""
         try:
-            from pathlib import Path
-            runs_dir = Path(__file__).parent / "runs"
-            clean_id = run.scenario_id.upper().strip()
-            matches = list(runs_dir.glob(f"RUN-{clean_id}*"))
-            run_dir = matches[0] if matches else (runs_dir / run.run_id)
-            story_file = run_dir / "operational" / "story_context.json"
-            if story_file.is_file():
-                return json.loads(story_file.read_text(encoding="utf-8"))
-            return self._materialize_story_context(run)
+            return self._materialize_story_context(run, run_state=run_state)
         except Exception:
             return None
 
@@ -470,6 +482,19 @@ class SimulationManager:
             "nba-6": "NBA-006",
             "nba-06": "NBA-006",
             "nba-006": "NBA-006",
+            "hitl-1": "HITL-001",
+            "hitl-01": "HITL-001",
+            "hitl-001": "HITL-001",
+            "hitl_validate": "HITL-001",
+            "val-1": "HITL-001",
+            "val-01": "HITL-001",
+            "val-001": "HITL-001",
+            "val-approve": "HITL-001",
+            "act-1": "ACT-001",
+            "act-01": "ACT-001",
+            "act-001": "ACT-001",
+            "nba-remediate": "ACT-001",
+            "remediate-001": "ACT-001",
         }
         canonical_id = norm_map.get(action_id.lower().strip(), action_id.strip())
 
@@ -482,7 +507,11 @@ class SimulationManager:
             if item.get("id"):
                 available_actions[item.get("id")] = item
 
-        allowed_defaults = {"NBA-001", "NBA-002", "NBA-003", "NBA-004", "NBA-005", "NBA-006", "NBA-LIVE-001"}
+        allowed_defaults = {
+            "NBA-001", "NBA-002", "NBA-003", "NBA-004", "NBA-005", "NBA-006", "NBA-LIVE-001",
+            "HITL-001", "VAL-001", "HITL_VALIDATE", "VAL-APPROVE",
+            "ACT-001", "REMEDIATE-001", "NBA-REMEDIATE"
+        }
         if action_id not in available_actions and canonical_id not in available_actions and canonical_id not in allowed_defaults:
             return {"status": "ERROR", "message": f"Action {action_id} is not available in the current stage"}
 
@@ -494,6 +523,25 @@ class SimulationManager:
                 "message": "Action was already completed for this run",
             }
 
+        # Declarative Runtime Rule Evaluation for Action Safety (§32)
+        from ..investigation.runtime_rules import GenericRuleEvaluator
+        evaluator = GenericRuleEvaluator()
+        is_hitl_approved = any(h in run.executed_actions for h in {"HITL-001", "VAL-001", "HITL_VALIDATE", "VAL-APPROVE"}) or run.stage_index >= 7
+        is_disruptive = canonical_id in {"ACT-001", "REMEDIATE-001", "NBA-REMEDIATE"}
+        action_payload = {
+            "action_id": canonical_id,
+            "safety_tier": "DISRUPTIVE_ACTIVE_PROBE" if is_disruptive else "READ_ONLY_DIAGNOSTIC",
+            "authority_level": "LEVEL_4_HITL" if is_hitl_approved else "LEVEL_3_PROBE",
+            "target_entity": run.active_entity_id or "NETWORK",
+        }
+        safety_eval = evaluator.evaluate_rule(
+            rule="RULE-SAFETY-001",
+            subject_id=canonical_id,
+            subject_type="AgentActionContract",
+            subject_data=action_payload,
+            episode_id=f"TASK-{run.run_id}",
+        )
+
         run.executed_actions.append(canonical_id)
         if action_id != canonical_id and action_id not in run.executed_actions:
             run.executed_actions.append(action_id)
@@ -503,14 +551,36 @@ class SimulationManager:
         run.sequence += 1
         run.snapshot_version += 1
 
-        # Same-stage retest
-        retested_state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
-        stage_status = retested_state.get("stage_status")
-        # Advance if gate is satisfied and advance is requested
-        if advance and stage_status == "READY_TO_ADVANCE" and run.stage_index < 7:
-            run.stage_index += 1
+        # If this is the terminal remediation action (ACT-001), mark simulation completed & resolved
+
+        if canonical_id in {"ACT-001", "REMEDIATE-001", "NBA-REMEDIATE"}:
+            run.status = "COMPLETED"
+            run.terminal_state = "RESOLVED"
+            self._materialize_story_context(run, is_final=True)
+
+        # Automatic gate resolution progression:
+        # Resolving NBA-001 at stage 5 moves to stage 6 (VALIDATION), which pauses for HITL SME approval.
+        if advance and canonical_id in {"NBA-001", "nba-1", "nba-001"} and run.stage_index == 5:
+            run.stage_index = 6
             run.sequence += 1
             run.snapshot_version += 1
+            self._materialize_story_context(run)
+        # Approving HITL at stage 6 moves to stage 7 (ACTION), displaying remediation playbook (ACT-001).
+        elif advance and canonical_id in {"HITL-001", "VAL-001", "HITL_VALIDATE", "VAL-APPROVE", "hitl-001", "val-001"} and run.stage_index == 6:
+            run.stage_index = 7
+            run.sequence += 1
+            run.snapshot_version += 1
+            self._materialize_story_context(run)
+        else:
+            # Same-stage retest
+            retested_state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
+            stage_status = retested_state.get("stage_status")
+            # Advance if gate is satisfied and advance is requested
+            if advance and stage_status in {"READY_TO_ADVANCE", "COMPLETE"} and run.stage_index < 7:
+                run.stage_index += 1
+                run.sequence += 1
+                run.snapshot_version += 1
+                self._materialize_story_context(run)
 
         final_state = self.get_state(scenario_id=run.scenario_id, run_id=run.run_id)
         return {
@@ -518,8 +588,9 @@ class SimulationManager:
             "action_id": canonical_id,
             "action_status": "COMPLETED",
             "stage_retested": True,
-            "stage_status": stage_status,
+            "stage_status": final_state.get("stage_status"),
             "current_stage": final_state.get("current_stage"),
+            "rule_evaluation": safety_eval.model_dump(mode="json"),
             "new_evidence": {
                 "signal": f"Action {canonical_id} completed for run {run_id}",
                 "verified_at": datetime.now(timezone.utc).isoformat(),
@@ -530,6 +601,7 @@ class SimulationManager:
                 "status": "TESTING_NEW_EVIDENCE",
             },
         }
+
 
     def get_state(self, scenario_id: str = "SCN-001", run_id: Optional[str] = None) -> dict[str, Any]:
         run = self.get_run(run_id) if run_id else self.get_run_for_scenario(scenario_id)
@@ -576,6 +648,7 @@ class SimulationManager:
             state["run"]["terminal_state"] = run.terminal_state
             state["run"]["is_replay"] = run.is_replay
             state["run"]["status"] = run.status
+            state["run"]["stage_index"] = run.stage_index
             state["run"]["source_mode"] = run.source_mode
             state["run"]["intent_id"] = run.intent_id
         self._stamp_runtime_scope(state, run)
@@ -588,6 +661,8 @@ class SimulationManager:
         if run and getattr(run, "state_overrides", None):
             for k, v in run.state_overrides.items():
                 state[k] = v
+
+        state["story_context"] = self._resolve_story_context_for_sse(run, run_state=state)
 
         # Cross-scenario contamination guard (spec §22)
         self._validate_snapshot_identity(state, run)
@@ -733,12 +808,9 @@ class SimulationManager:
                 "knowledge_gaps": state["knowledge_gaps"],
                 "learning": state["learning"],
                 "zaki": state["zaki"],
-                "story_context": self._resolve_story_context_for_sse(run),
+                "story_context": self._resolve_story_context_for_sse(run, run_state=state),
             }
             yield f"data: {json.dumps(event_data)}\n\n"
-            if self._advanced_sequences.get(run.run_id) != run.sequence:
-                self._advanced_sequences[run.run_id] = run.sequence
-                self.advance_stage_if_gate_satisfied(run, state)
             await asyncio.sleep(1.0 / max(run.speed, 0.5))
 
 

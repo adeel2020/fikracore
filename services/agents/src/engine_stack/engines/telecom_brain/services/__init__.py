@@ -23,12 +23,17 @@ from .remediation_advisory import RemediationAdvisoryService
 from .storytelling import StorytellingService
 from .telemetry_evidence import TelemetryEvidenceService
 from .topology import TopologyService
+from .emerging_filter import EmergingEvidenceFilter
+from .gbrain_mcp_client import Gbrain4PlaneMCPClient, default_gbrain_client
 from .visual_explanation import VisualExplanationService
 
 __all__ = [
     "CorrelationService",
     "CustomerTicketJourney",
+    "EmergingEvidenceFilter",
     "FCAPSLearningService",
+    "Gbrain4PlaneMCPClient",
+    "default_gbrain_client",
     "GrafanaEvidenceProvider",
     "HopSLARisk",
     "IncidentRegistryService",

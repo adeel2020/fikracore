@@ -1095,7 +1095,7 @@ def handle_zaki_command(args, parser) -> int:
     from zaki.operations.task_ledger import default_task_ledger
     from zaki.operations.handover import default_handover_manager
     from zaki.governance.hitl import default_hitl_manager
-    from zaki.domain.enums import AuthorityLevel, PresentationDepth, ValidationDecisionType
+    from zaki.enums import AuthorityLevel, PresentationDepth, ValidationDecisionType
 
     action = getattr(args, "zaki_action", None) or "investigate"
 
