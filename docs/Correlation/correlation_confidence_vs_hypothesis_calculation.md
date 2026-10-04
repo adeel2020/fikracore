@@ -90,6 +90,80 @@ The engine generates 4 competing cohort hypotheses representing competing topolo
 4. **$H_4$ (Rejected)**: `RAN Access Network Congestion`
 
 ### Step 3: Multi-Stage Posterior Discrimination Matrix
+Yes. Here is the revised concise documentation with that clarification added.
+
+Yes — a single **Δ Support** column is cleaner and more appropriate for executive documentation. Since H1 is the leading candidate in your example, Δ can represent the **change in the leading hypothesis (H1)** at each stage.
+
+# FikraCore — Hypothesis Process
+
+## Concept
+
+FikraCore evaluates the **top 4 candidate causal-path hypotheses** generated from the Correlated Incident Graph.
+
+Each hypothesis has its own evidence and is scored independently as investigation progresses.
+
+> **Correlation establishes relationships; hypothesis testing determines what best explains them.**
+
+## Stage 3 — Hypothesis Generation
+
+Generate and rank the **top 4 competing hypotheses**.
+
+**Output:** Top-4 Hypothesis Cohort.
+
+## Stage 4 — Hypothesis Testing
+
+### 4.1 — Discrimination
+
+Compare each hypothesis against supporting, contradictory, and missing evidence.
+
+**Output:** Ranked hypotheses and evidence gaps.
+
+### 4.2 — Testing
+
+Apply targeted evidence or diagnostic tests to distinguish competing hypotheses.
+
+**Output:** Updated support scores.
+
+### 4.3 — Localization
+
+Narrow the leading hypothesis:
+
+**Domain → Causal Path → Network Element → Component / Interface**
+
+**Output:** Localized hypothesis and failure boundary.
+
+### 4.4 — Validation / Confirmation
+
+Validate the leading hypothesis against evidence, topology, timing, behavior, and service impact.
+
+**Output:** Validated / Confirmed Hypothesis.
+
+## Multi-Stage Hypothesis Discrimination & Scoring
+
+| Stage              |    H1 |    H2 |    H3 |   H4 | Δ H1 Support |
+| ------------------ | ----: | ----: | ----: | ---: | -----------: |
+| 4.1 Discrimination | 61.0% | 33.0% | 18.0% | 8.0% |     +14.0 pp |
+| 4.2 Testing        | 68.0% | 28.0% | 12.0% | 4.0% |      +7.0 pp |
+| 4.3 Localization   | 74.0% | 22.0% |  9.0% | 2.0% |      +6.0 pp |
+| 4.4 Validation     | 94.2% | 12.0% |  4.0% | 1.0% |     +20.2 pp |
+
+**Δ H1 Support = Current H1 Support − Previous H1 Support**
+
+Scores are **independent Hypothesis Support Scores** and do not need to sum to 100%.
+
+### Score Evolution
+
+Scores are **evidence-driven, not stage-driven**. A hypothesis can increase or decrease at any stage depending on supporting or contradictory evidence.
+
+> **A high support score does not itself confirm a hypothesis; confirmation requires validation gates.**
+
+## Conclusion
+
+**Top 4 Candidates → Discriminate → Test → Localize → Validate**
+
+FikraCore progressively strengthens or weakens competing causal hypotheses based on evidence until the leading hypothesis is sufficiently validated.
+
+
 As the operator steps through investigation stages, new telemetry conduits illuminate, updating the posterior probability distribution across the cohort:
 
 ```python
@@ -111,10 +185,10 @@ previous_by_stage = {
 }
 ```
 
-- **Stage 4 (Discrimination)**: Cross-domain evidence eliminates RAN congestion ($H_4$). Leading cause $H_1$ reaches **61.0%** ($\Delta = +14.0\%$).
-- **Stage 5 (Counterfactual Testing)**: Packet fragmentation probes rule out UPF software bugs ($H_2$). Leading cause $H_1$ reaches **68.0%** ($\Delta = +7.0\%$).
-- **Stage 6 (Root Cause Localization)**: Telemetry isolates buffer drops specifically to `PE-RTR-21` port `HundredGigE0/0/0/1`. Leading cause $H_1$ reaches **74.0%** ($\Delta = +6.0\%$).
-- **Stage 7 (Remediation / Confirmed)**: Mitigation script applies MTU policy and interface buffer shaping. Root cause is confirmed:
+- **Stage 4.1 (Discrimination)**: Cross-domain evidence eliminates RAN congestion ($H_4$). Leading cause $H_1$ reaches **61.0%** ($\Delta = +14.0\%$).
+- **Stage 4.2 (Counterfactual Testing)**: Packet fragmentation probes rule out UPF software bugs ($H_2$). Leading cause $H_1$ reaches **68.0%** ($\Delta = +7.0\%$).
+- **Stage 4.3 (Root Cause Localization)**: Telemetry isolates buffer drops specifically to `PE-RTR-21` port `HundredGigE0/0/0/1`. Leading cause $H_1$ reaches **74.0%** ($\Delta = +6.0\%$).
+- **Stage 4.4 (Remediation / Confirmed)**: Mitigation script applies MTU policy and interface buffer shaping. Root cause is confirmed:
   $$\text{Confidence}(H_1) = \mathbf{94.2\%} \quad (\Delta = +20.2\%)$$
   *(The remaining $5.8\%$ represents irreducible background telemetry noise uncertainty).*
 
