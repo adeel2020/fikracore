@@ -461,7 +461,7 @@ export function buildPathwayItems(
       return { id: tmpl.id, name: backendMatch.display_name, icon: tmpl.icon, color: tmpl.color, active, reason };
     }
 
-    return { id: tmpl.id, name: tmpl.name, icon: tmpl.icon, color: tmpl.color, active: false, reason: "Reasoning pathway is dormant; awaiting backend evidence correlation." };
+    return { id: tmpl.id, name: tmpl.name, icon: tmpl.icon, color: tmpl.color, active: false, reason: "Correlation dimension is dormant; awaiting backend evidence correlation." };
   });
 }
 
@@ -812,7 +812,7 @@ export function resolveConduitTelemetry(
     const backendReason = pw.reason || "Analytical pathway contributing to intelligence synthesis.";
     return {
       source: `Pathway: ${pw.name}`,
-      target: `Reasoning Core (Intake Socket #${target.pathwayIdx + 1})`,
+      target: `Cognitive Engine (Intake Socket #${target.pathwayIdx + 1})`,
       currentState: pw.active ? "SYNTHESIZING (Multi-Domain Convergence)" : "DORMANT",
       whyActive: backendReason,
       backendReason,
@@ -835,10 +835,10 @@ export function resolveConduitTelemetry(
     const hyp = hypothesesList[target.hypIdx] || hypothesesList[0];
     const synthSummary = simulationState?.reasoningMap?.synthesis?.summary || "Bayesian belief evaluation across active pathways.";
     return {
-      source: `Reasoning Core (Output Socket #${target.hypIdx + 1})`,
+      source: `Cognitive Engine (Output Socket #${target.hypIdx + 1})`,
       target: `Hypothesis: ${hyp.code} - ${hyp.name}`,
       currentState: hyp.status === "LEADING" ? "DOMINANT CANDIDATE (Rank 1)" : (hyp.status === "CANDIDATE" ? "CANDIDATE (Unranked)" : "EVALUATED (Alternative)"),
-      whyActive: hyp.confidence === null ? `Reasoning core has not ranked ${hyp.code} yet.` : `Reasoning core posterior probability evaluation scored ${hyp.code} at ${hyp.confidence}%.`,
+      whyActive: hyp.confidence === null ? `Cognitive engine has not ranked ${hyp.code} yet.` : `Cognitive engine posterior probability evaluation scored ${hyp.code} at ${hyp.confidence}%.`,
       backendReason: synthSummary,
       evidence: `Multi-modal telemetry convergence for ${hyp.code}: ${hyp.name}`,
       pathway: "Multi-Domain Causal Convergence",
@@ -960,7 +960,7 @@ export function resolveEntityModal(
       },
       causalFlow: {
         upstream: EVIDENCE_TO_PATHWAY_CONDUITS.filter((c) => c.toIdx === target.idx).map((c) => evidenceList[c.fromIdx]?.name).filter(Boolean),
-        downstream: ["Reasoning Core Central Synthesis", ...(PATHWAYS_TO_HYPS[target.idx] || []).map((h) => hypothesesList[h]?.name).filter(Boolean)],
+        downstream: ["Cognitive Engine Central Synthesis", ...(PATHWAYS_TO_HYPS[target.idx] || []).map((h) => hypothesesList[h]?.name).filter(Boolean)],
       },
     };
   }
@@ -990,7 +990,7 @@ export function resolveEntityModal(
         telemetrySource: `FikraCore Diagnostic Inference Engine (${scenarioId || "SCN-001"})`,
       },
       causalFlow: {
-        upstream: ["Reasoning Core Central Synthesis", ...(HYP_TO_PATHWAYS[target.idx] || []).map((p) => pathwaysList[p]?.name).filter(Boolean)],
+        upstream: ["Cognitive Engine Central Synthesis", ...(HYP_TO_PATHWAYS[target.idx] || []).map((p) => pathwaysList[p]?.name).filter(Boolean)],
         downstream: ["Root Cause Validation Card", `${profile.primaryDomainName} Attribution`, "Service Impact Analysis"],
       },
     };

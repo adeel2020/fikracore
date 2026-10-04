@@ -794,17 +794,21 @@ export function FikraCore3DOrb({
 
         {/* ── 2. FLOATING HUD TYPOGRAPHY (Matches master reference) ── */}
         <div className="relative z-30 flex flex-col items-center justify-center text-center px-1 pointer-events-none select-none">
-          {/* "REASONING" */}
+          {/* "COGNITIVE" */}
           <span
-            className="text-[12px] font-sans font-black tracking-[0.22em] uppercase leading-none transition-colors"
+            className="text-[11px] uppercase leading-none transition-colors"
             style={{
-              color: isLight ? "#0f172a" : "#ffffff",
+              color: isLight ? "#0f172a" : "#f8fbff",
+              fontFamily: '"Segoe UI", "Avenir Next", "Inter", sans-serif',
+              fontWeight: 800,
+              letterSpacing: "0.28em",
               textShadow: isLight
-                ? "0 1px 2px rgba(255,255,255,0.9), 0 0 10px rgba(2,132,199,0.25)"
-                : "0 0 8px rgba(0,240,255,0.9), 0 0 18px rgba(0,240,255,0.6), 0 2px 4px rgba(0,0,0,0.95)",
+                ? "0 1px 2px rgba(255,255,255,0.9), 0 0 12px rgba(2,132,199,0.18)"
+                : "0 0 10px rgba(0,240,255,0.9), 0 0 18px rgba(0,240,255,0.35), 0 2px 4px rgba(0,0,0,0.95)",
+              opacity: 0.96,
             }}
           >
-            REASONING
+            COGNITIVE
           </span>
 
           {/* Glowing Center Horizontal Divider Line with Center Lens Bead */}
@@ -828,17 +832,21 @@ export function FikraCore3DOrb({
             />
           </div>
 
-          {/* "CORE" */}
+          {/* "ENGINE" */}
           <span
-            className="text-[10px] font-sans font-black tracking-[0.32em] uppercase leading-none transition-colors"
+            className="text-[9.5px] uppercase leading-none transition-colors"
             style={{
-              color: isLight ? "#0284c7" : "#00f0ff",
+              color: isLight ? "#0284c7" : "#8fe9ff",
+              fontFamily: '"Segoe UI", "Avenir Next", "Inter", sans-serif',
+              fontWeight: 800,
+              letterSpacing: "0.42em",
               textShadow: isLight
-                ? "0 1px 2px rgba(255,255,255,0.9), 0 0 10px rgba(2,132,199,0.35)"
-                : "0 0 10px rgba(0,240,255,1), 0 0 22px rgba(0,240,255,0.7), 0 2px 4px rgba(0,0,0,0.95)",
+                ? "0 1px 2px rgba(255,255,255,0.9), 0 0 10px rgba(2,132,199,0.25)"
+                : "0 0 12px rgba(0,240,255,0.9), 0 0 20px rgba(0,240,255,0.6), 0 2px 4px rgba(0,0,0,0.95)",
+              opacity: 0.98,
             }}
           >
-            CORE
+            ENGINE
           </span>
 
           {/* Active Reasoning State Badge */}

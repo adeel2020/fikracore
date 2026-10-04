@@ -84,7 +84,7 @@ export function ZakiQuickActions({
         ];
       case "REASONING_CORE":
         return [
-          "How is the reasoning core synthesizing evidence?",
+          "How is the cognitive engine synthesizing evidence?",
           "What is the current epistemic status?",
           "Are all pathways converging?",
         ];

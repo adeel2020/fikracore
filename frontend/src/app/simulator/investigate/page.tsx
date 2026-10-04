@@ -1532,7 +1532,7 @@ function resolveConduitTelemetry(
 
     return {
       source: `Pathway: ${pw.name}`,
-      target: `Reasoning Core (Intake Socket #${target.pathwayIdx + 1})`,
+      target: `Cognitive Engine (Intake Socket #${target.pathwayIdx + 1})`,
       currentState: pw.active ? "SYNTHESIZING (Multi-Domain Convergence)" : "DORMANT",
       whyActive: backendReason,
       backendReason,
@@ -1556,10 +1556,10 @@ function resolveConduitTelemetry(
     const synthSummary = simulationState?.reasoningMap?.synthesis?.summary || "Bayesian belief evaluation across active pathways.";
 
     return {
-      source: `Reasoning Core (Output Socket #${target.hypIdx + 1})`,
+      source: `Cognitive Engine (Output Socket #${target.hypIdx + 1})`,
       target: `Hypothesis: ${hyp.code} - ${hyp.name}`,
       currentState: hyp.status === "LEADING" ? "DOMINANT CANDIDATE (Rank 1)" : (hyp.status === "CANDIDATE" ? "CANDIDATE (Unranked)" : "EVALUATED (Alternative)"),
-      whyActive: hyp.confidence === null ? `Reasoning core has not ranked ${hyp.code} yet.` : `Reasoning core posterior probability evaluation scored ${hyp.code} at ${hyp.confidence}%.`,
+      whyActive: hyp.confidence === null ? `Cognitive engine has not ranked ${hyp.code} yet.` : `Cognitive engine posterior probability evaluation scored ${hyp.code} at ${hyp.confidence}%.`,
       backendReason: synthSummary,
       evidence: `Multi-modal telemetry convergence for ${hyp.code}: ${hyp.name}`,
       pathway: "Multi-Domain Causal Convergence",
@@ -1657,7 +1657,7 @@ function resolveEntityModal(
     const pw = pathwaysList[target.idx] || pathwaysList[0];
     const incomingFeedsCount = EVIDENCE_TO_PATHWAY_CONDUITS.filter((c) => c.toIdx === target.idx).length;
     return {
-      category: "Reasoning Pathway",
+      category: "Correlation Dimension",
       title: pw.name,
       subtitle: pw.active ? "Active Pathway — Correlating Operational Telemetry" : "Dormant Pathway — Monitoring Network Signals",
       canonicalId: `PATHWAY-${pw.id}`,
@@ -1680,7 +1680,7 @@ function resolveEntityModal(
       },
       causalFlow: {
         upstream: EVIDENCE_TO_PATHWAY_CONDUITS.filter((c) => c.toIdx === target.idx).map((c) => evidenceList[c.fromIdx]?.name).filter(Boolean),
-        downstream: ["Reasoning Core Central Synthesis", ...(PATHWAYS_TO_HYPS[target.idx] || []).map((h) => hypothesesList[h]?.name).filter(Boolean)],
+        downstream: ["Cognitive Engine Central Synthesis", ...(PATHWAYS_TO_HYPS[target.idx] || []).map((h) => hypothesesList[h]?.name).filter(Boolean)],
       },
     };
   }
@@ -1710,7 +1710,7 @@ function resolveEntityModal(
         telemetrySource: `FikraCore Diagnostic Inference Engine (${scenarioId || "SCN-001"})`,
       },
       causalFlow: {
-        upstream: ["Reasoning Core Central Synthesis", ...(HYP_TO_PATHWAYS[target.idx] || []).map((p) => pathwaysList[p]?.name).filter(Boolean)],
+        upstream: ["Cognitive Engine Central Synthesis", ...(HYP_TO_PATHWAYS[target.idx] || []).map((p) => pathwaysList[p]?.name).filter(Boolean)],
         downstream: ["Root Cause Validation Card", `${profile.primaryDomainName} Attribution`, "Service Impact Analysis"],
       },
     };
@@ -1907,7 +1907,7 @@ function ConduitDetailModal({
                 <p className={cn("font-medium", isLight ? "text-slate-800" : "text-slate-200")}>{data.evidence}</p>
               </div>
               <div>
-                <p className="text-[9.5px] font-mono text-slate-500">Reasoning Pathway</p>
+                <p className="text-[9.5px] font-mono text-slate-500">Correlation Dimension</p>
                 <p className={cn("font-medium", isLight ? "text-slate-800" : "text-slate-200")}>{data.pathway}</p>
               </div>
             </div>
@@ -1995,7 +1995,7 @@ function ConduitDetailModal({
   );
 }
 
-// ─── Reasoning Core Synthesis Detail Modal ───────────────────────────────────
+// ─── Cognitive Engine Synthesis Detail Modal ───────────────────────────────────
 
 function CoreSynthesisDetailModal({
   isOpen,
@@ -2045,7 +2045,7 @@ function CoreSynthesisDetailModal({
             </span>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-sm font-bold tracking-wide uppercase font-mono">FikraCore Reasoning Core Telemetry</h3>
+                <h3 className="text-sm font-bold tracking-wide uppercase font-mono">FikraCore Cognitive Engine Telemetry</h3>
                 <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold uppercase">
                   ● {synthState}
                 </span>
@@ -4212,7 +4212,7 @@ function NeuralReasoningCanvas({
         <div className="absolute top-0 bottom-3 left-[20.5%] w-[15.5%] flex flex-col justify-between py-1">
           <div className="w-full text-center">
             <p className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isLight ? "text-cyan-700" : "text-sky-300")}>
-              Reasoning Pathways
+              Correlation Dimensions
             </p>
             <p className={cn("text-[8px]", isLight ? "text-slate-500" : "text-slate-400")}>Connecting evidence to insight</p>
           </div>
@@ -4280,7 +4280,7 @@ function NeuralReasoningCanvas({
           </div>
         </div>
 
-        {/* COL 3: INTELLIGENCE SYNTHESIS / REASONING CORE (36.5% to 53.5%, width: 17%, centered at 45%) */}
+        {/* COL 3: INTELLIGENCE SYNTHESIS / COGNITIVE ENGINE (36.5% to 53.5%, width: 17%, centered at 45%) */}
         <div className="absolute top-0 bottom-3 left-[36.5%] w-[17%] flex flex-col items-center justify-center text-center py-1">
           <div className="absolute top-1 text-center w-full">
             <p className={cn("text-[10px] font-mono font-bold uppercase tracking-wider", isLight ? "text-cyan-700" : "text-sky-300")}>
@@ -4291,7 +4291,7 @@ function NeuralReasoningCanvas({
             </p>
           </div>
 
-          {/* Central 3D Glowing Sci-Fi Reasoning Core HUD */}
+          {/* Central 3D Glowing Sci-Fi Cognitive Engine HUD */}
           <div className="my-auto relative flex items-center justify-center">
             <FikraCore3DOrb
               size={116}
@@ -5035,7 +5035,7 @@ function NeuralReasoningCanvas({
         isLight={isLight}
       />
 
-      {/* ── FikraCore Reasoning Core Synthesis Modal ── */}
+      {/* ── FikraCore Cognitive Engine Synthesis Modal ── */}
       <CoreSynthesisDetailModal
         isOpen={showCoreModal}
         onClose={() => setShowCoreModal(false)}
@@ -5536,7 +5536,7 @@ export default function InvestigatePage() {
     focusZakiContext({
       context_type: "REASONING_CORE",
       context_id: "CORE-SYNTHESIS",
-      display_name: "Reasoning Core Central Synthesis",
+      display_name: "Cognitive Engine Central Synthesis",
       metadata: {
         role: "CENTRAL_SYNTHESIS",
       },

@@ -1,14 +1,14 @@
 {
   "scenario_id": "SCN-001",
-  "run_id": "RUN-20261004070343849370",
+  "run_id": "RUN-20261004184054098647",
   "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
   "domain": "ip_transport",
   "severity": "MAJOR",
   "status": "investigating",
-  "stage_index": 0,
+  "stage_index": 1,
   "started_at": "2026-09-10T08:01:02Z",
   "resolved_at": null,
-  "executive_summary": "High-priority anomaly detected on IP Transport. 5g sa mobile data is beginning to degrade on PE21. Autonomous investigation initiated. Autonomous correlation has been initiated.",
+  "executive_summary": "Alarm cascade observed across IP Transport and IP Transport. Multiple dependent network functions reporting degraded traffic on N3-VRF-01. Initiating automated cross-domain correlation.",
   "root_cause": null,
   "causal_chain": [],
   "blast_radius": [],
@@ -18,11 +18,18 @@
       "event": "PE_ROUTER_DEGRADED",
       "entity": "IP:PE:RTR-21",
       "severity": "MAJOR",
-      "summary": "Initial operational anomaly detected on Provider Edge Router-21"
+      "summary": "Signal observed: PE_ROUTER_DEGRADED on Provider Edge Router-21"
+    },
+    {
+      "time": "2026-09-10T08:01:43Z",
+      "event": "VRF_DEGRADED",
+      "entity": "IP:VRF:N3-01",
+      "severity": "MAJOR",
+      "summary": "Signal observed: VRF_DEGRADED on Virtual Routing and Forwarding (N3-01)"
     }
   ],
   "metrics": {
-    "stage_index": 0,
+    "stage_index": 1,
     "operational_evidence_count": 6,
     "kpi_breach": {
       "name": "5G Sa Mobile Data Success Rate",
@@ -33,14 +40,14 @@
   },
   "flash_narration": {
     "time": "08:01:02Z",
-    "phase": "Trigger",
-    "spoken": "Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.",
-    "text": "At 08:01:02Z (Incident Detected):\n\ud83c\udf99\ufe0f \"Operational anomaly detected on IP Transport. Autonomous triage initiated as 5G SA mobile data begins degrading on PE21.\"",
-    "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+    "phase": "Signal Flood",
+    "spoken": "Secondary alarms detected across IP Transport on N3-VRF-01. Pipeline is actively correlating the alarm storm.",
+    "text": "At 08:01:02Z (Alarm Cascade):\n\ud83c\udf99\ufe0f \"Secondary alarms detected across IP Transport on N3-VRF-01. Pipeline is actively correlating the alarm storm.\"",
+    "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on N3-VRF-01, or monitor downstream buffer queues?",
     "suggested_questions": [
-      "What is our committed SLA threshold for 5G SA mobile data?",
-      "Which customer tiers are traversing PE21?",
-      "Has PE21 undergone recent maintenance?"
+      "Are voice and emergency sessions impacted?",
+      "What is the current subscriber drop rate?",
+      "What is the bandwidth utilization on adjacent links?"
     ]
   },
   "flash_history": [
@@ -55,13 +62,25 @@
         "Which customer tiers are traversing PE21?",
         "Has PE21 undergone recent maintenance?"
       ]
+    },
+    {
+      "time": "08:01:02Z",
+      "phase": "Signal Flood",
+      "spoken": "Secondary alarms detected across IP Transport on N3-VRF-01. Pipeline is actively correlating the alarm storm.",
+      "text": "At 08:01:02Z (Alarm Cascade):\n\ud83c\udf99\ufe0f \"Secondary alarms detected across IP Transport on N3-VRF-01. Pipeline is actively correlating the alarm storm.\"",
+      "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on N3-VRF-01, or monitor downstream buffer queues?",
+      "suggested_questions": [
+        "Are voice and emergency sessions impacted?",
+        "What is the current subscriber drop rate?",
+        "What is the bandwidth utilization on adjacent links?"
+      ]
     }
   ],
-  "anchor_question": "Autonomous correlation is underway. Should I alert the on-call regional engineering team, or isolate customer SLA exposure for 5G SA mobile data?",
+  "anchor_question": "Alarm cascade is contained to the data plane. Should we prepare pre-emptive traffic draining on N3-VRF-01, or monitor downstream buffer queues?",
   "suggested_questions": [
-    "What is our committed SLA threshold for 5G SA mobile data?",
-    "Which customer tiers are traversing PE21?",
-    "Has PE21 undergone recent maintenance?"
+    "Are voice and emergency sessions impacted?",
+    "What is the current subscriber drop rate?",
+    "What is the bandwidth utilization on adjacent links?"
   ],
   "noc_activities": [
     {
@@ -72,6 +91,15 @@
       "action": "Pe Router Degraded Ingestion",
       "detail": "Observed Pe Router Degraded on PE21 (5G SA mobile data)",
       "status": "OBSERVED"
+    },
+    {
+      "id": "act-2",
+      "timestamp": "08:02:24Z",
+      "agent": "IP_TRANSPORT",
+      "domain": "IP Transport",
+      "action": "Downstream Cascade Tracking",
+      "detail": "Correlated telemetry breach on N3-VRF-01; 5G Sa Mobile Data Success Rate dropping to 66.06percent",
+      "status": "ANALYZING"
     }
   ],
   "activity_stream": [
@@ -83,14 +111,23 @@
       "action": "Pe Router Degraded Ingestion",
       "detail": "Observed Pe Router Degraded on PE21 (5G SA mobile data)",
       "status": "OBSERVED"
+    },
+    {
+      "id": "act-2",
+      "timestamp": "08:02:24Z",
+      "agent": "IP_TRANSPORT",
+      "domain": "IP Transport",
+      "action": "Downstream Cascade Tracking",
+      "detail": "Correlated telemetry breach on N3-VRF-01; 5G Sa Mobile Data Success Rate dropping to 66.06percent",
+      "status": "ANALYZING"
     }
   ],
   "operational_context": {
     "api_version": "zaki.ai/v1",
     "kind": "OperationalContext",
-    "context_id": "CTX-1791137052",
+    "context_id": "CTX-1791139258",
     "scenario_id": "SCN-001",
-    "run_id": "RUN-20261004070343849370",
+    "run_id": "RUN-20261004184054098647",
     "active_incident_id": "INC-SCN-001",
     "primary_domain": "IP Transport",
     "active_domains": [
@@ -121,10 +158,17 @@
     ],
     "active_delegations": [
       {
-        "delegation_id": "DEL-RUN-20261004070343849370-001",
+        "delegation_id": "DEL-RUN-20261004184054098647-001",
         "target_domain": "IP_TRANSPORT",
         "target_entity": "IP:PE:RTR-21",
         "objective": "Isolate anomaly and execute diagnostics on PE21",
+        "status": "ACTIVE"
+      },
+      {
+        "delegation_id": "DEL-RUN-20261004184054098647-002",
+        "target_domain": "IP_TRANSPORT",
+        "target_entity": "IP:VRF:N3-01",
+        "objective": "Track downstream cascade and verify SLA integrity on N3-VRF-01",
         "status": "ACTIVE"
       }
     ],
@@ -142,13 +186,13 @@
       "estimated_throughput_loss_gbps": 0.0
     },
     "resilience_profiles": [],
-    "created_at": "2026-10-04T18:04:12.872828Z"
+    "created_at": "2026-10-04T18:40:58.188434Z"
   },
   "task_episode": {
     "api_version": "zaki.ai/v1",
     "kind": "TaskEpisode",
-    "episode_id": "EP-1791137052",
-    "task_id": "TASK-RUN-20261004070343849370",
+    "episode_id": "EP-1791139258",
+    "task_id": "TASK-RUN-20261004184054098647",
     "incident_id": "INC-SCN-001",
     "operator_intent": "Investigate operational anomaly across IP Transport",
     "fcaps": {
@@ -165,9 +209,9 @@
     ],
     "context": {
       "scenario_id": "SCN-001",
-      "stage_index": 0
+      "stage_index": 1
     },
-    "operational_context_ref": "CTX-1791137052",
+    "operational_context_ref": "CTX-1791139258",
     "behavior_contract_ref": null,
     "evidence_requested": [],
     "evidence_observed": [
@@ -188,10 +232,12 @@
     "learned_pattern": null,
     "promotion_records": [],
     "finding_refs": [
-      "FND-001"
+      "FND-001",
+      "FND-002"
     ],
     "delegated_task_refs": [
-      "DEL-RUN-20261004070343849370-001"
+      "DEL-RUN-20261004184054098647-001",
+      "DEL-RUN-20261004184054098647-002"
     ],
     "runtime_evaluations": [],
     "stagewise_outcomes": [],
@@ -200,18 +246,18 @@
     "what_if_analysis": null,
     "remediation_strategy": null,
     "provenance": "task_episode_recorder",
-    "created_at": "2026-10-04T18:04:12.872871Z",
+    "created_at": "2026-10-04T18:40:58.188544Z",
     "closed_at": null
   },
   "incident_story": {
     "api_version": "zaki.ai/v1",
     "kind": "IncidentStory",
     "incident_id": "INC-SCN-001",
-    "run_id": "RUN-20261004070343849370",
-    "generated_at": "2026-10-04T18:04:12.872923Z",
+    "run_id": "RUN-20261004184054098647",
+    "generated_at": "2026-10-04T18:40:58.188640Z",
     "presentation_depth": "OPERATOR",
     "title": "Transport N3 Degradation Cascades into Mobile Data Failure",
-    "summary": "High-priority anomaly detected on IP Transport. 5g sa mobile data is beginning to degrade on PE21. Autonomous investigation initiated. Autonomous correlation has been initiated.",
+    "summary": "Alarm cascade observed across IP Transport and IP Transport. Multiple dependent network functions reporting degraded traffic on N3-VRF-01. Initiating automated cross-domain correlation.",
     "service_impact": {
       "domain": "IP Transport",
       "service": "5G SA mobile data",
@@ -229,14 +275,25 @@
     "timeline_statements": [
       {
         "statement_id": "STMT-000",
-        "text": "Initial operational anomaly detected on Provider Edge Router-21",
+        "text": "Signal observed: PE_ROUTER_DEGRADED on Provider Edge Router-21",
         "provenance": "OBSERVED",
         "source_entity": "IP:PE:RTR-21",
         "domain": "IP Transport",
         "evidence_ids": [],
         "confidence": 1.0,
         "stage": "PE_ROUTER_DEGRADED",
-        "timestamp": "2026-10-04T18:04:12.872914Z"
+        "timestamp": "2026-10-04T18:40:58.188619Z"
+      },
+      {
+        "statement_id": "STMT-001",
+        "text": "Signal observed: VRF_DEGRADED on Virtual Routing and Forwarding (N3-01)",
+        "provenance": "OBSERVED",
+        "source_entity": "IP:VRF:N3-01",
+        "domain": "IP Transport",
+        "evidence_ids": [],
+        "confidence": 1.0,
+        "stage": "VRF_DEGRADED",
+        "timestamp": "2026-10-04T18:40:58.188629Z"
       }
     ],
     "next_best_action": "automated traffic re-routing playbook",
