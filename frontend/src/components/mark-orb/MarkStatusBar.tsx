@@ -13,7 +13,7 @@ function labelFor(state: MarkVisualState) {
   if (state === "investigating") return "INVESTIGATING";
   if (state === "waiting_for_approval") return "APPROVAL REQUIRED";
   if (state === "learning") return "LEARNING";
-  return "MARK READY";
+  return "ZAKI READY";
 }
 
 function Waveform({ active, cx, cy, width = 170 }: { active: boolean; cx: number; cy: number; width?: number }) {

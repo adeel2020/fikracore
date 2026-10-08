@@ -56,13 +56,13 @@ _OPERATIONAL_CONTEXT_KEYWORDS = {
 }
 
 # ==========================================
-# MARK CONFIGURATION
+# ZAKI CONFIGURATION
 # ==========================================
 
 @dataclass
 class JARVISConfig:
-    """MARK system configuration & incident manager persona using OpenAI."""
-    name: str = "MARK"
+    """Zaki system configuration & incident manager persona using OpenAI."""
+    name: str = "ZAKI"
     role: str = "Telecom Incident Manager"
     version: str = "3.2.0"
     model: str = os.getenv("OPENAI_MODEL") or getattr(settings, "openai_model", "gpt-4o-mini")
@@ -79,7 +79,7 @@ class JARVISConfig:
 
 
 # ==========================================
-# MARK STATUS & TELEMETRY
+# ZAKI STATUS & TELEMETRY
 # ==========================================
 
 class JARVISStatus(str, Enum):
@@ -106,7 +106,7 @@ class PowerUp(str, Enum):
 
 @dataclass
 class JarvisTelemetry:
-    """Real-time MARK telemetry."""
+    """Real-time Zaki telemetry."""
     status: JARVISStatus = JARVISStatus.OFFLINE
     uptime: float = 0.0
     queries_processed: int = 0
@@ -122,7 +122,7 @@ class JarvisTelemetry:
 
 
 # ==========================================
-# MARK INCIDENT MANAGER CORE ENGINE
+# ZAKI INCIDENT MANAGER CORE ENGINE
 # ==========================================
 
 class JARVIS:
@@ -154,7 +154,7 @@ class JARVIS:
         logger.info(f"[{self.config.name}] Initializing {self.config.role} (Model: {self.config.model})...")
 
     async def initialize(self) -> None:
-        """Initialize all MARK superpowers with OpenAI configuration."""
+        """Initialize all Zaki superpowers with OpenAI configuration."""
         self.status = JARVISStatus.INITIALIZING
         
         try:
@@ -222,7 +222,7 @@ class JARVIS:
         stream: bool = False,
     ) -> str | AsyncIterator[str]:
         """
-        Process operational query with MARK's Incident Manager persona.
+        Process operational query with Zaki's Incident Manager persona.
         """
         start_time = time.time()
         self.status = JARVISStatus.PROCESSING
@@ -238,6 +238,8 @@ class JARVIS:
         effective_context = dict(context) if context else {}
         if not effective_context.get("incident_id") and session.active_incident_id:
             effective_context["incident_id"] = session.active_incident_id
+        if effective_context.get("incident_id"):
+            session.active_incident_id = str(effective_context["incident_id"])
 
         reply: Any = None
         classified: ClassifiedAction | None = None
@@ -261,13 +263,13 @@ class JARVIS:
             if classified.action == UserAction.GREETING:
                 if any(kw in clean_q for kw in ("who are you", "what is your name", "introduce yourself")):
                     reply = self._remember_response(
-                        f"Hello{greeting_name}! I am MARK — your Telecom Incident Manager. "
+                        f"Hello{greeting_name}! I am Zaki — your Telecom Incident Manager. "
                         "I assist with 5G Core, IMS, and transport operations — correlating alarms, diagnosing root causes, "
                         "and driving rapid remediation. How can I assist you with operations today?"
                     )
                 else:
                     reply = self._remember_response(
-                        f"Hello{greeting_name}! I am MARK — your Telecom Incident Manager. "
+                        f"Hello{greeting_name}! I am Zaki — your Telecom Incident Manager. "
                         "Great to connect with you! How are you doing today? How can I assist you with operations?"
                     )
 
@@ -296,7 +298,7 @@ class JARVIS:
 
             # 6. Security validation
             elif self._superpowers.get(PowerUp.SECURITY) and not await self._superpowers[PowerUp.SECURITY].validate_query(query):
-                reply = self._remember_response("Query blocked by MARK security protocols.")
+                reply = self._remember_response("Query blocked by Zaki security protocols.")
 
             # 6. Multimodal Superpowers: Voice & Vision
             elif classified.action == UserAction.VOICE_COMMAND:
@@ -452,7 +454,7 @@ class JARVIS:
             else:
                 telecom_brain = self._superpowers.get(PowerUp.TELECOM_BRAIN)
                 if telecom_brain is None:
-                    reply = self._remember_response("MARK Telecom Brain engine is unavailable.")
+                    reply = self._remember_response("Zaki Telecom Brain engine is unavailable.")
                 else:
                     result = await telecom_brain.process(query, session_id=session_key, context=effective_context)
                     if hasattr(result, "incidents") and result.incidents:
@@ -489,7 +491,7 @@ class JARVIS:
             self.telemetry.error_count += 1
             self.status = JARVISStatus.ERROR
             logger.error(f"[{self.config.name}] Processing error: {e}")
-            error_reply = self._remember_response(f"MARK encountered an operational error: {str(e)}")
+            error_reply = self._remember_response(f"Zaki encountered an operational error: {str(e)}")
             if classified:
                 self.session_store.record_turn(
                     session_key,
@@ -543,7 +545,7 @@ class JARVIS:
 
     def _answer_intents(self) -> str:
         return (
-            "**Operational Service Intents Monitored by MARK:**\n\n"
+            "**Operational Service Intents Monitored by Zaki:**\n\n"
             "I continuously monitor and score **6 operational service intents** across 5G Core, 4G LTE, and IMS domains:\n\n"
             "1. **`ue_registration` (5G UE Registration & Authentication)**\n"
             "   - **Functions**: AMF, AUSF, UDM\n"
@@ -625,7 +627,7 @@ class JARVIS:
             "**Calendar Coordination Proposal:**\n\n"
             "- **Event:** Incident Triage Bridge — `mobile-core/incidents/amf-overload-2026-08-09`\n"
             "- **Time:** Immediate / Active Shift\n"
-            "- **Attendees:** Core Operations Lead, RAN Engineer, Incident Commander (MARK)\n"
+            "- **Attendees:** Core Operations Lead, RAN Engineer, Incident Commander (Zaki)\n"
             "- **Objective:** Review AMF CPU recovery and 5G registration KPI stability.\n\n"
             "*Policy Notice: Calendar modifications require operator approval before dispatching invites.*"
         )
@@ -753,7 +755,7 @@ class JARVIS:
             engine = self._superpowers.get(PowerUp.TELECOM_BRAIN)
             
         if engine is None:
-            return "MARK operational superpower unavailable."
+            return "Zaki operational superpower unavailable."
             
         return await engine.process(query, session_id=session_id, context=context)
 
@@ -763,7 +765,7 @@ class JARVIS:
         session_id: str | None = None,
         context: dict[str, Any] | None = None,
     ) -> AsyncIterator[str]:
-        """Stream MARK incident response."""
+        """Stream Zaki incident response."""
         route = self._route_query(query, context)
         engine = self._superpowers.get(route) or self._superpowers.get(PowerUp.TELECOM_BRAIN)
         if engine and hasattr(engine, 'stream'):
@@ -773,7 +775,7 @@ class JARVIS:
             yield await self.process(query, session_id, context)
 
     def get_status(self) -> dict[str, Any]:
-        """Get MARK status."""
+        """Get Zaki status."""
         registry = self.registry
         return {
             "name": self.config.name,

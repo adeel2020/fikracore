@@ -110,7 +110,7 @@ export function JarvisHeader({
 
   return (
     <header className="grid grid-cols-[auto_1fr_auto] items-center gap-3 w-full h-[60px] select-none">
-      {/* 1. Left Brand Badge - MARK Incident Manager */}
+      {/* 1. Left Brand Badge - Zaki Incident Manager */}
       <div className="jarvis-card flex items-center gap-2.5 px-3 py-1.5 h-full shrink-0">
         <div
           className={`relative w-9 h-9 rounded-full flex items-center justify-center shadow-inner ${
@@ -129,7 +129,7 @@ export function JarvisHeader({
                 isDarkMode ? "text-white drop-shadow-[0_0_10px_rgba(0,229,255,0.4)]" : "text-[#082863]"
               }`}
             >
-              MARK
+              ZAKI
             </h1>
             <span className="font-mono text-[8.5px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-[#00e5ff] border border-cyan-400/35 tracking-wider">
               INCIDENT MGR
@@ -227,7 +227,7 @@ export function JarvisHeader({
             className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
               isDarkMode ? "text-slate-300 hover:text-[#00e5ff] hover:bg-white/5" : "text-slate-700 hover:text-[#0a66ff] hover:bg-blue-50"
             }`}
-            title="3 Active Incidents Managed by MARK"
+            title="3 Active Incidents Managed by Zaki"
           >
             <Bell className="w-4 h-4" strokeWidth={2} />
             <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-black flex items-center justify-center">
@@ -242,8 +242,8 @@ export function JarvisHeader({
           className={`p-1.5 rounded-lg transition-colors cursor-pointer relative ${
             isDarkMode ? "text-slate-300 hover:text-[#00e5ff] hover:bg-white/5" : "text-slate-700 hover:text-[#0a66ff] hover:bg-blue-50"
           }`}
-          title="Open MARK AI Chat & Dialogue"
-          aria-label="Open MARK AI Chat & Dialogue"
+          title="Open Zaki AI Chat & Dialogue"
+          aria-label="Open Zaki AI Chat & Dialogue"
         >
           <MessageSquare className="w-4 h-4" strokeWidth={2} />
           <span className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_6px_#00e5ff] animate-pulse" />

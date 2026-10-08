@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   X,
   ChevronUp,
@@ -110,14 +110,6 @@ export function ZakiLiveStoryOverlay({
       setIsAdvancing(false);
     }
   };
-
-  // Audio and flash notifications are disabled while simulation is running.
-  // Communication is handled exclusively by Zaki in operational context.
-  useEffect(() => {
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-  }, [isRunning, stage]);
 
   // If there's no story context at all, hide
   if (!storyContext && !isRunning) {

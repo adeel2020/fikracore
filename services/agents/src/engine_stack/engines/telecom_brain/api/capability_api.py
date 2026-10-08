@@ -9,11 +9,16 @@ Provides unified REST endpoints for CLI, Simulator UI, Zaki Copilot, and externa
 
 from __future__ import annotations
 
+import io
+import logging
+import os
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Optional, Dict, List, Literal
 from fastapi import APIRouter, HTTPException, Header, Query
-from fastapi.responses import StreamingResponse
+from fastapi.responses import Response, StreamingResponse
 from pydantic import BaseModel, Field
+from agenticaiops_shared.config import settings
 
 from ..capabilities import (
     default_capability_registry,
@@ -30,6 +35,16 @@ from ..simulator.simulation_manager import simulation_manager
 router = APIRouter(prefix="/api/v1/fikracore", tags=["FikraCore Unified Capabilities"])
 
 _ZAKI_CACHE: dict[tuple[Any, ...], dict[str, Any]] = {}
+logger = logging.getLogger(__name__)
+
+
+@lru_cache(maxsize=1)
+def _get_zaki_tts_client():
+    if not settings.openai_api_key:
+        raise RuntimeError("OPENAI_API_KEY is not configured")
+    from openai import OpenAI
+
+    return OpenAI(api_key=settings.openai_api_key, base_url=settings.openai_api_base)
 
 
 class ExecuteCapabilityRequest(BaseModel):
@@ -66,6 +81,10 @@ class ZakiChatRequest(BaseModel):
     simulation_status: str | None = None
     run_status: str | None = None
     selected_context: dict[str, Any] | None = None
+
+
+class ZakiSpeechRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=2000)
 
 
 class CreateSimulationRequest(BaseModel):
@@ -822,6 +841,50 @@ def get_knowledge_inventory() -> dict[str, Any]:
     if not result.success:
         raise HTTPException(status_code=500, detail=result.errors)
     return result.model_dump(mode="json")
+
+
+@router.post("/zaki/speech")
+def zaki_speech(req: ZakiSpeechRequest) -> StreamingResponse:
+    text = req.text.strip()
+    if not text:
+        raise HTTPException(status_code=422, detail="Speech text must not be blank")
+
+    try:
+        speech_stream = _get_zaki_tts_client().audio.speech.with_streaming_response.create(
+            model=os.getenv("ZAKI_TTS_MODEL", "gpt-4o-mini-tts"),
+            voice=os.getenv("ZAKI_TTS_VOICE", "onyx"),
+            input=text,
+            instructions=(
+                "Speak as a calm, confident male network-operations co-pilot. "
+                "Use natural pacing and clear pronunciation for telecom acronyms."
+            ),
+            response_format="pcm",
+        )
+        upstream_response = speech_stream.__enter__()
+    except Exception as exc:  # noqa: BLE001 - browser speech is the client fallback
+        logger.exception("Zaki neural TTS request failed")
+        raise HTTPException(
+            status_code=503,
+            detail="Zaki speech synthesis is unavailable",
+        ) from exc
+
+    def stream_audio():
+        try:
+            yield from upstream_response.iter_bytes(chunk_size=4096)
+        except Exception:
+            logger.exception("Zaki neural TTS stream interrupted")
+            raise
+        finally:
+            speech_stream.__exit__(None, None, None)
+
+    return StreamingResponse(
+        stream_audio(),
+        media_type="audio/pcm",
+        headers={
+            "Cache-Control": "no-store",
+            "X-Audio-Sample-Rate": "24000",
+        },
+    )
 
 
 @router.post("/zaki/chat")

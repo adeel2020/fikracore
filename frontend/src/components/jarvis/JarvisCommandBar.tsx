@@ -43,7 +43,7 @@ export function JarvisCommandBar({
   onVoiceStateChange,
   onVoiceTranscript,
   isLoading = false,
-  statusText = "MARK ready. Realtime voice assistant online.",
+  statusText = "ZAKI ready. Realtime voice assistant online.",
   isSpeaking = false,
 }: JarvisCommandBarProps) {
   const [input, setInput] = useState("");
@@ -57,7 +57,9 @@ export function JarvisCommandBar({
 
   useEffect(() => {
     setIsMuted(jarvisVoice.getIsMuted());
-    setVoiceSettings(jarvisVoice.getVoiceSettings());
+    const backendVoiceSettings = { ...jarvisVoice.getVoiceSettings(), mode: "backend" as const };
+    jarvisVoice.setVoiceSettings(backendVoiceSettings);
+    setVoiceSettings(backendVoiceSettings);
   }, []);
 
   useEffect(() => {
@@ -99,6 +101,9 @@ export function JarvisCommandBar({
       setVoiceState("idle");
       onVoiceStateChange?.("idle");
     } else {
+      const serverVoiceSettings = { ...jarvisVoice.getVoiceSettings(), mode: "backend" as const };
+      jarvisVoice.setVoiceSettings(serverVoiceSettings);
+      setVoiceSettings(serverVoiceSettings);
       setIsLiveMode(true);
       jarvisVoice.startLiveMode({
         onStateChange: (state) => { setVoiceState(state); onVoiceStateChange?.(state); },
@@ -109,15 +114,16 @@ export function JarvisCommandBar({
           return res || "";
         },
         onError: (err) => {
+          setIsLiveMode(false);
           setVoiceState("idle");
           onVoiceStateChange?.("idle");
           const message =
             typeof err === "object" && err !== null && "message" in err
               ? String((err as { message?: unknown }).message || "Live voice error")
               : "Live voice error";
-          onVoiceResponse?.(`MARK live voice error: ${message}`);
+          onVoiceResponse?.(`ZAKI live voice error: ${message}`);
         },
-      });
+      }, { responseSpeechEngine: "neural", allowBrowserFallback: false });
     }
   };
 
@@ -139,7 +145,7 @@ export function JarvisCommandBar({
     setIsMuted(next);
     jarvisVoice.setMuted(next);
     if (!next) {
-      jarvisVoice.speak("MARK voice online.");
+      jarvisVoice.speak("Zaki voice online.", { engine: "neural" });
     }
   };
 
@@ -163,7 +169,7 @@ export function JarvisCommandBar({
                 ? "bg-slate-200 dark:bg-slate-800 text-slate-400 border border-slate-300 dark:border-slate-700"
                 : "bg-blue-50 dark:bg-cyan-950/60 text-[#0a66ff] dark:text-[#00e5ff] border border-blue-200/80 dark:border-cyan-500/40"
             }`}
-            title={isMuted ? "Click to unmute MARK Voice" : "MARK Voice Active (Click to mute)"}
+            title={isMuted ? "Click to unmute Zaki Voice" : "Zaki Voice Active (Click to mute)"}
           >
             {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 animate-pulse" />}
           </button>
@@ -176,11 +182,11 @@ export function JarvisCommandBar({
             placeholder={
               isLiveMode
                 ? voiceState === "listening"
-                  ? "Listening... speak naturally to MARK..."
+                  ? "Listening... speak naturally to Zaki..."
                   : voiceState === "processing"
-                  ? "MARK is analyzing your question..."
-                  : "MARK is speaking response..."
-                : "Ask MARK anything... (e.g. What is the root cause of recent incidents?)"
+                  ? "Zaki is analyzing your question..."
+                  : "Zaki is speaking response..."
+                : "Ask Zaki anything... (e.g. What is the root cause of recent incidents?)"
             }
             className="flex-1 min-w-0 bg-transparent font-mono text-[12px] font-semibold text-slate-100 placeholder:text-slate-500 focus:outline-none px-1.5 tracking-normal"
           />
@@ -253,10 +259,10 @@ export function JarvisCommandBar({
             <span className="truncate text-cyan-200/80">
               {isLiveMode
                 ? voiceState === "listening"
-                  ? "MARK is listening... Speak anytime."
+                  ? "Zaki is listening... Speak anytime."
                 : voiceState === "processing"
-                ? "MARK is analyzing operational telemetry..."
-                : "MARK is speaking..."
+                ? "Zaki is analyzing operational telemetry..."
+                : "Zaki is speaking..."
               : statusText}
             </span>
           </div>

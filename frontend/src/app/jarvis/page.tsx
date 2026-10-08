@@ -29,6 +29,16 @@ import { MarkShaderBackground } from "@/components/mark-orb/MarkShaderBackground
 
 const THEME_STORAGE_KEY = "jarvis_theme";
 const THEME_CHANGE_EVENT = "jarvis-theme-change";
+const JARVIS_SESSION_ID = "mark_incident_session";
+const INCIDENT_ID_PATTERN = /\b(?:[a-z0-9_-]+\/incidents\/[a-z0-9_.-]+|INC[-_][A-Z0-9][A-Z0-9_.-]*)\b/i;
+
+function extractIncidentId(text: string): string | null {
+  return text.match(INCIDENT_ID_PATTERN)?.[0] ?? null;
+}
+
+function isIncidentNarrationRequest(text: string): boolean {
+  return /\b(?:story|narrat(?:e|ion|ive)|tell me what happened|what happened in)\b/i.test(text);
+}
 
 function getStoredThemeSnapshot(): boolean {
   if (typeof window === "undefined") return true;
@@ -78,11 +88,12 @@ function JarvisPageContent() {
   const [lastQuery, setLastQuery] = useState<string | null>(null);
   const [activeReply, setActiveReply] = useState<string | null>(null);
   const [activeSpokenReply, setActiveSpokenReply] = useState<string | null>(null);
+  const [activeIncidentId, setActiveIncidentId] = useState<string | null>(null);
   const [presentation, setPresentation] = useState<MarkPresentation | undefined>();
   const [rtrJourney, setRtrJourney] = useState<RTRJourneyOverlayPresentation | null>(null);
   const [copied, setCopied] = useState(false);
   const [statusText, setStatusText] = useState(
-    "MARK online. Realtime voice assistant directing 5G Core operations."
+    "ZAKI online. Realtime voice assistant directing 5G Core operations."
   );
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [controlPanelOpen, setControlPanelOpen] = useState(false);
@@ -188,22 +199,20 @@ function JarvisPageContent() {
       setIsStreaming(true);
       setActiveReply("");
 
-      // Match words + spaces or newlines
+      // Batch a few tokens per animation frame to avoid a React render per word.
       const tokens = text.match(/\S+\s*|\n+/g) || [text];
       let current = "";
 
-      for (let i = 0; i < tokens.length; i++) {
+      for (let i = 0; i < tokens.length; i += 2) {
         if (streamGenRef.current !== gen) return; // cancelled by new query
-        current += tokens[i];
+        current += tokens[i] + (tokens[i + 1] || "");
         setActiveReply(current);
 
         if (textScrollRef.current) {
           textScrollRef.current.scrollTop = textScrollRef.current.scrollHeight;
         }
 
-        const token = tokens[i];
-        const delay = token.includes("\n") ? 30 : tokens.length > 80 ? 12 : 18;
-        await new Promise((r) => setTimeout(r, delay));
+        await new Promise<void>((resolve) => window.requestAnimationFrame(() => resolve()));
       }
 
       if (streamGenRef.current === gen) {
@@ -216,6 +225,7 @@ function JarvisPageContent() {
 
   const sendingRef = useRef(false);
   const lastSubmissionRef = useRef<{ query: string; time: number }>({ query: "", time: 0 });
+  const pendingNarrationRef = useRef(false);
 
   const toggleTheme = () => {
     const next = !getStoredThemeSnapshot();
@@ -227,17 +237,38 @@ function JarvisPageContent() {
     async (query: string, speakAloud: boolean = true): Promise<string> => {
       const trimmed = query.trim();
       if (!trimmed) return "";
+      const explicitIncidentId = extractIncidentId(trimmed);
+      const incidentId = explicitIncidentId || activeIncidentId;
+      const isWaitingForIncidentId = pendingNarrationRef.current;
+      const asksForStory = isIncidentNarrationRequest(trimmed);
+
+      if ((isWaitingForIncidentId || asksForStory) && !incidentId) {
+        pendingNarrationRef.current = true;
+        const prompt = "Please provide the incident ID you want Zaki to narrate, for example mobile-core/incidents/amf-overload-2026-08-09.";
+        setLastQuery(trimmed);
+        setActiveReply(prompt);
+        setStatusText("ZAKI needs an incident ID to prepare the story.");
+        if (speakAloud && !jarvisVoice.getIsLiveMode()) {
+          jarvisVoice.speak(prompt, { engine: "neural" });
+        }
+        return prompt;
+      }
+
+      const requestMessage = isWaitingForIncidentId && explicitIncidentId
+        ? `Tell me the incident story for ${explicitIncidentId}`
+        : trimmed;
+      pendingNarrationRef.current = false;
 
       const now = Date.now();
       if (sendingRef.current) {
-        console.warn("[MARK] Request already in flight, skipping duplicate submission:", trimmed);
+        console.warn("[ZAKI] Request already in flight, skipping duplicate submission:", trimmed);
         return "";
       }
       if (
         lastSubmissionRef.current.query.toLowerCase() === trimmed.toLowerCase() &&
         now - lastSubmissionRef.current.time < 1500
       ) {
-        console.warn("[MARK] Duplicate request debounced:", trimmed);
+        console.warn("[ZAKI] Duplicate request debounced:", trimmed);
         return "";
       }
 
@@ -257,7 +288,7 @@ function JarvisPageContent() {
       setPresentation(undefined);
       setIsSpeaking(false);
       setLastQuery(trimmed);
-      setStatusText(`MARK analyzing: "${trimmed}"...`);
+      setStatusText(`ZAKI analyzing: "${trimmed}"...`);
       setActiveReply("");
       setManualFlyOverride(null);
 
@@ -268,7 +299,7 @@ function JarvisPageContent() {
         const res = await fetch(`${API_BASE}/api/jarvis/process`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ session_id: "mark_incident_session", message: trimmed }),
+          body: JSON.stringify({ session_id: JARVIS_SESSION_ID, message: requestMessage, incident_id: incidentId || undefined }),
         });
 
         if (!res.ok) {
@@ -277,6 +308,7 @@ function JarvisPageContent() {
         }
 
         const data = await res.json();
+        setActiveIncidentId(data.incident_id || incidentId || null);
         finalReply = data.reply || `Analysis complete for: ${trimmed}`;
         spokenReply = data.spoken_reply || "";
         const pres = { narrative: data.narrative, visual_explanation: data.visual_explanation };
@@ -296,6 +328,7 @@ function JarvisPageContent() {
         // Start voice speech concurrently with text streaming
         if (speakAloud && finalReply && !finalReply.startsWith("Connection error") && !jarvisVoice.getIsLiveMode()) {
           jarvisVoice.speak(spokenReply || finalReply, {
+            engine: "neural",
             onStart: () => {
               setIsSpeaking(true);
               clearVisualTimers();
@@ -315,7 +348,7 @@ function JarvisPageContent() {
 
         // Real-time progressive streaming of reply text
         await streamResponseText(finalReply, () => {
-          setStatusText("MARK response rendered.");
+          setStatusText("ZAKI response rendered.");
           if (!isSpeaking) {
             scheduleVisualDismissal();
           }
@@ -331,12 +364,12 @@ function JarvisPageContent() {
         setIsStreaming(false);
         setActiveReply(finalReply);
         setActiveSpokenReply(spokenReply || null);
-        setStatusText("MARK response rendered.");
+        setStatusText("ZAKI response rendered.");
         setIsLoading(false);
       }
       return jarvisVoice.getIsLiveMode() ? spokenReply || finalReply : finalReply;
     },
-    [clearVisualTimers, scheduleVisualDismissal, streamResponseText, isSpeaking]
+    [activeIncidentId, clearVisualTimers, scheduleVisualDismissal, streamResponseText, isSpeaking]
   );
 
   const handleCopy = () => {
@@ -352,6 +385,7 @@ function JarvisPageContent() {
     setIsVoiceVisualActive(true);
     setIsVisualFading(false);
     jarvisVoice.speak(activeSpokenReply || activeReply, {
+      engine: "neural",
       onStart: () => {
         setIsSpeaking(true);
         clearVisualTimers();
@@ -380,12 +414,12 @@ function JarvisPageContent() {
         setIsVoiceVisualActive(true);
         setIsVisualFading(false);
       }
-      setStatusText("MARK streaming response...");
+      setStatusText("ZAKI streaming response...");
       setIsLoading(false);
 
       // Realtime progressive token streaming for voice responses
       streamResponseText(answer, () => {
-        setStatusText("MARK response rendered.");
+        setStatusText("ZAKI response rendered.");
         if (!isSpeaking) {
           scheduleVisualDismissal();
         }
@@ -493,14 +527,14 @@ function JarvisPageContent() {
         />
       </div>
 
-      {/* 2. Main Stage Area: 100% Full Stage for Mark with Floating Overlay */}
+      {/* 2. Main Stage Area: 100% Full Stage for Zaki with Floating Overlay */}
       <div className="relative z-10 flex-1 min-h-0 flex flex-col w-full h-full items-stretch overflow-hidden">
-        {/* Central Mark HUD Stage (100% width and height, permanently centered) */}
+        {/* Central Zaki HUD Stage (100% width and height, permanently centered) */}
         <div className="flex-1 flex flex-col justify-between items-center h-full min-h-0 relative px-1 sm:px-2 w-full">
           {/* Header Banner Text */}
           <div className="w-full flex items-center justify-center shrink-0 pt-0.5 px-2 select-none">
             <p className="font-mono text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-cyan-400 drop-shadow-[0_0_8px_rgba(0,229,255,0.35)] text-center">
-              MARK TELECOM BRAIN.{" "}
+              ZAKI TELECOM BRAIN.{" "}
               <span className={isDarkMode ? "text-slate-200" : "text-[#082863]"}>
                 INCIDENT OPERATIONS COMMANDER.
               </span>
@@ -509,7 +543,7 @@ function JarvisPageContent() {
 
           {/* Holographic HUD Center Stage */}
           <div className="flex-1 w-full min-h-0 relative flex items-center justify-center">
-            {/* Dedicated full-width/height canvas container for Mark Cognitive World */}
+            {/* Dedicated full-width/height canvas container for Zaki Cognitive World */}
             <div className="w-full h-full relative flex items-center justify-center">
               <MarkCognitiveWorld
                 state={markVisualState}
@@ -523,7 +557,7 @@ function JarvisPageContent() {
               />
             </div>
 
-            {/* 1. Autonomous Floating MARK Dialogue Response Card */}
+            {/* 1. Autonomous Floating Zaki Dialogue Response Card */}
             {activeReply && (
               <div
                 style={{ position: "absolute" }}
@@ -539,7 +573,7 @@ function JarvisPageContent() {
                     </div>
                     <div className="flex items-center gap-1.5">
                       <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                        MARK
+                        ZAKI
                       </span>
                       <span className="font-mono text-[10px] font-medium text-cyan-400 uppercase tracking-wider">
                         • INCIDENT MANAGER
@@ -713,7 +747,7 @@ function JarvisPageContent() {
             )}
           </div>
 
-          {/* MARK Interactive Command Bar with Voice */}
+          {/* Zaki Interactive Command Bar with Voice */}
           <div className="w-full max-w-5xl shrink-0 mt-1 z-20">
             <JarvisCommandBar
               onSendMessage={handleSendMessage}
@@ -727,7 +761,7 @@ function JarvisPageContent() {
           </div>
         </div>
 
-        {/* Floating Minimizable Overlay Panel (Displays OVER the page without affecting Mark fitting) */}
+        {/* Floating Minimizable Overlay Panel (Displays OVER the page without affecting Zaki fitting) */}
         {sidebarOpen ? (
           <aside className="absolute right-2 top-8 bottom-16 z-40 w-[420px] max-w-[92vw] flex flex-col gap-2.5 p-3.5 bg-[#050B14]/95 backdrop-blur-2xl rounded-2xl border border-cyan-500/35 shadow-[-16px_16px_50px_rgba(0,0,0,0.85)] animate-in slide-in-from-right duration-200">
             {/* Overlay Header with minimize button */}

@@ -1,6 +1,6 @@
 {
   "scenario_id": "SCN-002",
-  "run_id": "RUN-20261003183809306785",
+  "run_id": "RUN-20261005103542295250",
   "title": "UPF Failure Cascades into Charging and Customer Impact",
   "domain": "sa_5g_core",
   "severity": "MAJOR",
@@ -125,9 +125,9 @@
   "operational_context": {
     "api_version": "zaki.ai/v1",
     "kind": "OperationalContext",
-    "context_id": "CTX-1791052693",
+    "context_id": "CTX-1791196546",
     "scenario_id": "SCN-002",
-    "run_id": "RUN-20261003183809306785",
+    "run_id": "RUN-20261005103542295250",
     "active_incident_id": "INC-SCN-002",
     "primary_domain": "5G Core",
     "active_domains": [
@@ -154,14 +154,14 @@
     ],
     "active_delegations": [
       {
-        "delegation_id": "DEL-RUN-20261003183809306785-001",
+        "delegation_id": "DEL-RUN-20261005103542295250-001",
         "target_domain": "SA_5G_CORE",
         "target_entity": "SA5G:UPF:003",
         "objective": "Isolate anomaly and execute diagnostics on UPF-03",
         "status": "ACTIVE"
       },
       {
-        "delegation_id": "DEL-RUN-20261003183809306785-002",
+        "delegation_id": "DEL-RUN-20261005103542295250-002",
         "target_domain": "CRM",
         "target_entity": "CRM:TICKET:001",
         "objective": "Track downstream cascade and verify SLA integrity on Customer Ticket Service",
@@ -180,13 +180,13 @@
       "estimated_throughput_loss_gbps": 0.0
     },
     "resilience_profiles": [],
-    "created_at": "2026-10-03T18:38:13.458594Z"
+    "created_at": "2026-10-05T10:35:46.402114Z"
   },
   "task_episode": {
     "api_version": "zaki.ai/v1",
     "kind": "TaskEpisode",
-    "episode_id": "EP-1791052693",
-    "task_id": "TASK-RUN-20261003183809306785",
+    "episode_id": "EP-1791196546",
+    "task_id": "TASK-RUN-20261005103542295250",
     "incident_id": "INC-SCN-002",
     "operator_intent": "Investigate operational anomaly across 5G Core",
     "fcaps": {
@@ -204,7 +204,7 @@
       "scenario_id": "SCN-002",
       "stage_index": 1
     },
-    "operational_context_ref": "CTX-1791052693",
+    "operational_context_ref": "CTX-1791196546",
     "behavior_contract_ref": null,
     "evidence_requested": [],
     "evidence_observed": [
@@ -228,8 +228,8 @@
       "FND-002"
     ],
     "delegated_task_refs": [
-      "DEL-RUN-20261003183809306785-001",
-      "DEL-RUN-20261003183809306785-002"
+      "DEL-RUN-20261005103542295250-001",
+      "DEL-RUN-20261005103542295250-002"
     ],
     "runtime_evaluations": [],
     "stagewise_outcomes": [],
@@ -238,15 +238,15 @@
     "what_if_analysis": null,
     "remediation_strategy": null,
     "provenance": "task_episode_recorder",
-    "created_at": "2026-10-03T18:38:13.458667Z",
+    "created_at": "2026-10-05T10:35:46.402169Z",
     "closed_at": null
   },
   "incident_story": {
     "api_version": "zaki.ai/v1",
     "kind": "IncidentStory",
     "incident_id": "INC-SCN-002",
-    "run_id": "RUN-20261003183809306785",
-    "generated_at": "2026-10-03T18:38:13.458758Z",
+    "run_id": "RUN-20261005103542295250",
+    "generated_at": "2026-10-05T10:35:46.402245Z",
     "presentation_depth": "OPERATOR",
     "title": "UPF Failure Cascades into Charging and Customer Impact",
     "summary": "Alarm cascade observed across 5G Core and Customer & OSS Operations. Multiple dependent network functions reporting degraded traffic on Customer Ticket Service. Initiating automated cross-domain correlation.",
@@ -274,7 +274,7 @@
         "evidence_ids": [],
         "confidence": 1.0,
         "stage": "UPF_DEGRADED",
-        "timestamp": "2026-10-03T18:38:13.458736Z"
+        "timestamp": "2026-10-05T10:35:46.402228Z"
       },
       {
         "statement_id": "STMT-001",
@@ -285,7 +285,7 @@
         "evidence_ids": [],
         "confidence": 1.0,
         "stage": "CUSTOMER_TICKET_SERVICE_DEGRADED",
-        "timestamp": "2026-10-03T18:38:13.458746Z"
+        "timestamp": "2026-10-05T10:35:46.402236Z"
       }
     ],
     "next_best_action": "automated traffic re-routing playbook",

@@ -1,6 +1,6 @@
 {
   "scenario_id": "SCN-003",
-  "run_id": "RUN-20261003143820649169",
+  "run_id": "RUN-20261004184824878763",
   "title": "Internal DNS Degradation Cascades Across Core Functions",
   "domain": "it_cloud_infra",
   "severity": "MAJOR",
@@ -125,9 +125,9 @@
   "operational_context": {
     "api_version": "zaki.ai/v1",
     "kind": "OperationalContext",
-    "context_id": "CTX-1791038304",
+    "context_id": "CTX-1791139708",
     "scenario_id": "SCN-003",
-    "run_id": "RUN-20261003143820649169",
+    "run_id": "RUN-20261004184824878763",
     "active_incident_id": "INC-SCN-003",
     "primary_domain": "Cloud Infrastructure",
     "active_domains": [
@@ -161,14 +161,14 @@
     ],
     "active_delegations": [
       {
-        "delegation_id": "DEL-RUN-20261003143820649169-001",
+        "delegation_id": "DEL-RUN-20261004184824878763-001",
         "target_domain": "IT_CLOUD_INFRA",
         "target_entity": "INFRA:DNS:CORE",
         "objective": "Isolate anomaly and execute diagnostics on Core DNS Cluster",
         "status": "ACTIVE"
       },
       {
-        "delegation_id": "DEL-RUN-20261003143820649169-002",
+        "delegation_id": "DEL-RUN-20261004184824878763-002",
         "target_domain": "SA_5G_CORE",
         "target_entity": "SA5G:AMF:001",
         "objective": "Track downstream cascade and verify SLA integrity on AMF-01",
@@ -190,13 +190,13 @@
       "estimated_throughput_loss_gbps": 0.0
     },
     "resilience_profiles": [],
-    "created_at": "2026-10-03T14:38:24.763314Z"
+    "created_at": "2026-10-04T18:48:28.990082Z"
   },
   "task_episode": {
     "api_version": "zaki.ai/v1",
     "kind": "TaskEpisode",
-    "episode_id": "EP-1791038304",
-    "task_id": "TASK-RUN-20261003143820649169",
+    "episode_id": "EP-1791139708",
+    "task_id": "TASK-RUN-20261004184824878763",
     "incident_id": "INC-SCN-003",
     "operator_intent": "Investigate operational anomaly across Cloud Infrastructure",
     "fcaps": {
@@ -215,7 +215,7 @@
       "scenario_id": "SCN-003",
       "stage_index": 1
     },
-    "operational_context_ref": "CTX-1791038304",
+    "operational_context_ref": "CTX-1791139708",
     "behavior_contract_ref": null,
     "evidence_requested": [],
     "evidence_observed": [
@@ -242,8 +242,8 @@
       "FND-002"
     ],
     "delegated_task_refs": [
-      "DEL-RUN-20261003143820649169-001",
-      "DEL-RUN-20261003143820649169-002"
+      "DEL-RUN-20261004184824878763-001",
+      "DEL-RUN-20261004184824878763-002"
     ],
     "runtime_evaluations": [],
     "stagewise_outcomes": [],
@@ -252,15 +252,15 @@
     "what_if_analysis": null,
     "remediation_strategy": null,
     "provenance": "task_episode_recorder",
-    "created_at": "2026-10-03T14:38:24.763380Z",
+    "created_at": "2026-10-04T18:48:28.990140Z",
     "closed_at": null
   },
   "incident_story": {
     "api_version": "zaki.ai/v1",
     "kind": "IncidentStory",
     "incident_id": "INC-SCN-003",
-    "run_id": "RUN-20261003143820649169",
-    "generated_at": "2026-10-03T14:38:24.763463Z",
+    "run_id": "RUN-20261004184824878763",
+    "generated_at": "2026-10-04T18:48:28.990215Z",
     "presentation_depth": "OPERATOR",
     "title": "Internal DNS Degradation Cascades Across Core Functions",
     "summary": "Alarm cascade observed across Cloud Infrastructure and 5G Core. Multiple dependent network functions reporting degraded traffic on AMF-01. Initiating automated cross-domain correlation.",
@@ -288,7 +288,7 @@
         "evidence_ids": [],
         "confidence": 1.0,
         "stage": "DNS_CLUSTER_DEGRADED",
-        "timestamp": "2026-10-03T14:38:24.763441Z"
+        "timestamp": "2026-10-04T18:48:28.990197Z"
       },
       {
         "statement_id": "STMT-001",
@@ -299,7 +299,7 @@
         "evidence_ids": [],
         "confidence": 1.0,
         "stage": "AMF_DEGRADED",
-        "timestamp": "2026-10-03T14:38:24.763454Z"
+        "timestamp": "2026-10-04T18:48:28.990206Z"
       }
     ],
     "next_best_action": "automated traffic re-routing playbook",

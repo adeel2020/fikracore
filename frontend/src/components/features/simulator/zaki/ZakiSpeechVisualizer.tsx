@@ -170,7 +170,7 @@ export function ZakiSpeechVisualizer({
   };
 
   const handleRepeat = () => {
-    jarvisVoice.repeatLastAnswer();
+    jarvisVoice.repeatLastAnswer("neural");
   };
 
   const handleToggleMute = () => {

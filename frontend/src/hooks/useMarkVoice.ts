@@ -163,7 +163,10 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
             optionsRef.current?.onError?.(err);
           },
         },
-        { runId: optionsRef.current?.runId }
+        {
+          runId: optionsRef.current?.runId,
+          responseSpeechEngine: "neural",
+        }
       );
     }
   }, [isLiveMode]);
@@ -174,6 +177,7 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
     setLastSpokenAnswer(text);
     setIsSpeaking(true);
     jarvisVoice.speak(text, {
+      engine: "neural",
       onStart: () => setIsSpeaking(true),
       onEnd: () => setIsSpeaking(false),
       onError: () => setIsSpeaking(false),
@@ -197,7 +201,7 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
   }, []);
 
   const repeatLast = useCallback(() => {
-    jarvisVoice.repeatLastAnswer();
+    jarvisVoice.repeatLastAnswer("neural");
   }, []);
 
   const toggleMute = useCallback(() => {
@@ -205,7 +209,7 @@ export function useMarkVoice(options?: UseMarkVoiceOptions) {
     setIsMuted(next);
     jarvisVoice.setMuted(next);
     if (!next) {
-      jarvisVoice.speak("Zaki voice online.");
+      jarvisVoice.speak("Zaki voice online.", { engine: "neural" });
     }
   }, [isMuted]);
 

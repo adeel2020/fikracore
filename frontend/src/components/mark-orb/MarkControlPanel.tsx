@@ -57,7 +57,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
                   HUD CONTROL PANEL
                 </h2>
                 <span className="px-1.5 py-0.5 rounded bg-cyan-500/20 border border-cyan-400/40 font-mono text-[9px] font-bold text-[#00e5ff] tracking-wider">
-                  MARK v2.4
+                  ZAKI v2.4
                 </span>
               </div>
               <p className="font-mono text-[10px] text-cyan-400/80 mt-0.5">
@@ -134,7 +134,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <h3 className="font-mono text-xs font-bold text-white uppercase tracking-wider">
-                      Mark UI Font
+                      Zaki UI Font
                     </h3>
                     <p className="font-mono text-[10px] text-slate-400 mt-0.5">
                       Select a HUD font preset or use a locally installed custom font family.
@@ -148,7 +148,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
                   value={settings.fontPreset}
                   onChange={(e) => updateSetting("fontPreset", e.target.value as MarkFontPreset)}
                   className="mt-3 h-9 w-full rounded-lg border border-cyan-500/30 bg-slate-950/70 px-3 font-mono text-xs font-bold uppercase tracking-wider text-cyan-100 outline-none focus:border-cyan-300"
-                  title="Mark UI font preset"
+                  title="Zaki UI font preset"
                 >
                   {Object.entries(MARK_FONT_OPTIONS).map(([key, option]) => (
                     <option key={key} value={key}>
@@ -180,7 +180,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
                       Global Font Size
                     </h3>
                     <p className="font-mono text-[10px] text-slate-400 mt-0.5">
-                      Applies a consistent typography scale across visible and overlay Mark UI.
+                      Applies a consistent typography scale across visible and overlay Zaki UI.
                     </p>
                   </div>
                   <span className="font-mono text-xs font-bold text-[#00e5ff] px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-400/30 shrink-0">
@@ -209,7 +209,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
                 }}
               >
                 <div className="text-sm font-bold uppercase tracking-wider text-white">
-                  MARK TELECOM BRAIN
+                  ZAKI TELECOM BRAIN
                 </div>
                 <div className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-300">
                   Incident Operations Commander
@@ -555,7 +555,7 @@ export function MarkControlPanel({ isOpen, onClose }: MarkControlPanelProps) {
           {activeTab === "state" && (
             <div className="space-y-4">
               <p className="font-mono text-xs text-slate-300">
-                Override MARK&apos;s current cognitive state to test HUD visuals, colors, and wave reactivity:
+                Override Zaki&apos;s current cognitive state to test HUD visuals, colors, and wave reactivity:
               </p>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">

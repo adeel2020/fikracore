@@ -53,7 +53,7 @@ function Clock() {
         </div>
       </div>
       <div>
-        <div style={{ fontSize: 18, fontWeight: 400, color: `${ACCENT}e6`, textTransform: "uppercase" }}>MARK</div>
+        <div style={{ fontSize: 18, fontWeight: 400, color: `${ACCENT}e6`, textTransform: "uppercase" }}>ZAKI</div>
         <div style={{ fontSize: 9.5, letterSpacing: "0.12em", color: "rgba(240,237,232,0.5)", marginTop: 2, textTransform: "uppercase" }}>
           TELECOM BRAIN ONLINE
         </div>
@@ -106,7 +106,7 @@ export function MarkOverviewPanel({ state, trace }: { state: MarkVisualState; tr
         }}
         role="button"
         tabIndex={0}
-        aria-label="Toggle Mark overview panel"
+        aria-label="Toggle Zaki overview panel"
         aria-expanded={open}
         style={{ position: "relative", height: 40, cursor: "pointer", pointerEvents: "auto", userSelect: "none" }}
       >

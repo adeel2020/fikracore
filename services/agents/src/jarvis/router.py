@@ -45,12 +45,14 @@ class JarvisRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=8000)
     session_id: str | None = None
     user_name: str | None = None
+    incident_id: str | None = None
 
 
 class JarvisResponse(BaseModel):
     session_id: str
     reply: str
     spoken_reply: str | None = None
+    incident_id: str | None = None
     narrative: dict | None = None
     visual_explanation: dict | None = None
     telemetry_evidence: list[dict] | None = None
@@ -74,16 +76,23 @@ async def process(req: JarvisRequest) -> JarvisResponse:
     # Guardrails bypassed for general conversation as requested
     try:
         jarvis = await _get_jarvis()
-        if req.user_name:
-            reply = await jarvis.process(req.message, req.session_id, context={"user_name": req.user_name})
-        else:
-            reply = await jarvis.process(req.message, req.session_id)
+        context = {
+            key: value
+            for key, value in {
+                "user_name": req.user_name,
+                "incident_id": req.incident_id,
+            }.items()
+            if value
+        }
+        reply = await jarvis.process(req.message, req.session_id, context=context or None)
+        session = jarvis.session_store.get(req.session_id or "default")
         from storyteller.conversation.intents import curate_spoken_text
         spoken_reply = getattr(reply, "spoken_reply", None) or curate_spoken_text(str(reply))
         return JarvisResponse(
             session_id=req.session_id or "default",
             reply=str(reply),
             spoken_reply=spoken_reply,
+            incident_id=session.active_incident_id if session else req.incident_id,
             **getattr(reply, "presentation", {}),
         )
     except Exception as e:

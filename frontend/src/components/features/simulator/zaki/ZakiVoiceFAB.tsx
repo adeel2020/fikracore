@@ -6,9 +6,6 @@ import {
   MicOff,
   Volume2,
   VolumeX,
-  RotateCcw,
-  Pause,
-  Play,
   Square,
   Sparkles,
   ChevronUp,
@@ -563,7 +560,7 @@ const MessageBubble = React.memo(function MessageBubble({
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  jarvisVoice.speak(msg.spokenText || msg.text);
+                  jarvisVoice.speak(msg.spokenText || msg.text, { engine: "neural" });
                 }}
                 className={cn("flex items-center gap-1 cursor-pointer transition-colors", isWhite ? "text-slate-600 hover:text-cyan-800" : "text-neutral-400 hover:text-cyan-300")}
               >
@@ -635,16 +632,13 @@ interface ZakiPromptComposerProps {
   onSendMessage: (text: string, files?: AttachedFileItem[]) => void;
   isThinking: boolean;
   stop: () => void;
+  voiceTranscript: string | null;
+  onClearVoiceTranscript: () => void;
   isLiveMode: boolean;
   toggleLiveMode: () => void;
   isMuted: boolean;
   isSpeaking: boolean;
   toggleMute: () => void;
-  isPaused: boolean;
-  resume: () => void;
-  pause: () => void;
-  lastSpokenAnswer: string | null;
-  repeatLast: () => void;
   isWhiteSkin: boolean;
   isFullWindow: boolean;
   hasOperationalContext: boolean;
@@ -655,22 +649,20 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
   onSendMessage,
   isThinking,
   stop,
+  voiceTranscript,
+  onClearVoiceTranscript,
   isLiveMode,
   toggleLiveMode,
   isMuted,
   isSpeaking,
   toggleMute,
-  isPaused,
-  resume,
-  pause,
-  lastSpokenAnswer,
-  repeatLast,
   isWhiteSkin,
   isFullWindow,
   hasOperationalContext,
   scenarioId,
 }: ZakiPromptComposerProps) {
   const [inputText, setInputText] = useState("");
+  const visibleInputText = voiceTranscript ?? inputText;
   const [attachedFiles, setAttachedFiles] = useState<AttachedFileItem[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -699,6 +691,7 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
   }, [autocompleteMode, autocompleteQuery]);
 
   const handleInputChange = (value: string) => {
+    onClearVoiceTranscript();
     setInputText(value);
     const lastWord = value.split(/\s+/).pop() || "";
     if (lastWord.startsWith("/")) {
@@ -716,9 +709,10 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
   };
 
   const insertAutocomplete = (token: string) => {
-    const words = inputText.split(/\s+/);
+    const words = visibleInputText.split(/\s+/);
     words.pop();
     const updated = [...words, token, ""].join(" ");
+    onClearVoiceTranscript();
     setInputText(updated);
     setAutocompleteMode(null);
     textareaRef.current?.focus();
@@ -728,7 +722,8 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
     setAutocompleteMode(mode);
     setAutocompleteQuery("");
     setSelectedAutocompleteIndex(0);
-    setInputText((prev) => (prev ? `${prev.trim()} ${mode}` : mode));
+    setInputText(visibleInputText ? `${visibleInputText.trim()} ${mode}` : mode);
+    onClearVoiceTranscript();
     textareaRef.current?.focus();
   };
 
@@ -750,9 +745,10 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
   };
 
   const handleSubmit = () => {
-    const trimmed = inputText.trim();
+    const trimmed = visibleInputText.trim();
     if ((!trimmed && attachedFiles.length === 0) || isThinking) return;
     onSendMessage(trimmed, attachedFiles);
+    onClearVoiceTranscript();
     setInputText("");
     setAttachedFiles([]);
     setAutocompleteMode(null);
@@ -889,7 +885,7 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
           <textarea
             ref={textareaRef}
             rows={3}
-            value={inputText}
+            value={visibleInputText}
             onChange={(e) => handleInputChange(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={
@@ -996,39 +992,12 @@ const ZakiPromptComposer = React.memo(function ZakiPromptComposer({
                 <span>@ Mentions</span>
               </button>
 
-              {/* Voice Status hint & Quick Audio Playback Controls */}
+              {/* Voice status */}
               {isSpeaking && (
                 <div className="flex items-center gap-1 text-cyan-400 ml-1">
                   <Radio className="h-3 w-3 animate-pulse" />
                   <span className="font-mono text-[10px] hidden sm:inline">Soft Voice</span>
-                  <button
-                    type="button"
-                    onClick={isPaused ? resume : pause}
-                    className="p-1 rounded hover:bg-white/10 text-neutral-300 hover:text-white cursor-pointer"
-                    title={isPaused ? "Resume voice" : "Pause voice"}
-                  >
-                    {isPaused ? <Play className="h-2.5 w-2.5" /> : <Pause className="h-2.5 w-2.5" />}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={stop}
-                    className="p-1 rounded hover:bg-white/10 text-neutral-300 hover:text-white cursor-pointer"
-                    title="Stop speaking"
-                  >
-                    <Square className="h-2.5 w-2.5" />
-                  </button>
                 </div>
-              )}
-              {lastSpokenAnswer && !isSpeaking && (
-                <button
-                  type="button"
-                  onClick={repeatLast}
-                  className="flex items-center gap-1 text-[10px] text-neutral-400 hover:text-cyan-300 transition-colors cursor-pointer ml-1"
-                  title="Repeat last response"
-                >
-                  <RotateCcw className="h-2.5 w-2.5" />
-                  <span className="hidden sm:inline">Repeat</span>
-                </button>
               )}
             </div>
 
@@ -1134,6 +1103,7 @@ export function ZakiVoiceFAB({
   const [isThinking, setIsThinking] = useState(false);
   // Default message removed: initialized to empty array
   const [messages, setMessages] = useState<ZakiChatMessage[]>([]);
+  const [voiceTranscript, setVoiceTranscript] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [leftW, setLeftW] = useState(365);
   const [rightW, setRightW] = useState(390);
@@ -1331,20 +1301,18 @@ export function ZakiVoiceFAB({
     isMuted,
     playbackRate,
     setPlaybackRate,
-    transcript,
     lastSpokenAnswer,
     toggleLiveMode,
-    pause,
-    resume,
     stop,
-    repeatLast,
     toggleMute,
   } = useMarkVoice({
     runId,
     scenarioId,
     simulationStatus,
     onMessageSubmit,
+    onTranscript: (text) => setVoiceTranscript(text),
     onResponse: (answer, spoken) => {
+      setVoiceTranscript(null);
       onResponse?.(answer, spoken);
     },
   });
@@ -1444,7 +1412,7 @@ export function ZakiVoiceFAB({
 
       // Auto-narrate response with natural empathetic co-pilot dialogue (NO raw document readout!)
       if (!isMuted && typeof window !== "undefined") {
-        jarvisVoice.speak(spokenText);
+        jarvisVoice.speak(spokenText, { engine: "neural" });
       }
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : "Error contacting Zaki copilot backend.";
@@ -1832,21 +1800,6 @@ export function ZakiVoiceFAB({
             )}
           >
         <div className={cn("space-y-4 w-full", isFullWindow && "max-w-[1560px] mx-auto")}>
-          {/* Live speech transcript banner */}
-          {isListening && transcript && (
-            <div className={cn(
-              "rounded-xl border p-3 animate-pulse",
-              isWhiteSkin
-                ? "border-emerald-500/40 bg-emerald-50 text-slate-800"
-                : "border-emerald-500/30 bg-emerald-950/20 text-neutral-100"
-            )}>
-              <span className={cn("text-[10px] font-mono uppercase block mb-1 font-bold", isWhiteSkin ? "text-emerald-700" : "text-emerald-300")}>
-                🎙️ Listening:
-              </span>
-              <p className="text-xs italic">&ldquo;{transcript}&rdquo;</p>
-            </div>
-          )}
-
           {/* EMPTY STATE (When no messages exist yet) - Inspired by ChatPanel Hero */}
           {messages.length === 0 && !isThinking && (
             <div className="flex flex-col items-center justify-center text-center py-6 px-3">
@@ -2022,16 +1975,13 @@ export function ZakiVoiceFAB({
         onSendMessage={handleSendMessage}
         isThinking={isThinking}
         stop={stop}
+        voiceTranscript={voiceTranscript}
+        onClearVoiceTranscript={() => setVoiceTranscript(null)}
         isLiveMode={isLiveMode}
         toggleLiveMode={toggleLiveMode}
         isMuted={isMuted}
         isSpeaking={isSpeaking}
         toggleMute={toggleMute}
-        isPaused={isPaused}
-        resume={resume}
-        pause={pause}
-        lastSpokenAnswer={lastSpokenAnswer}
-        repeatLast={repeatLast}
         isWhiteSkin={isWhiteSkin}
         isFullWindow={isFullWindow}
         hasOperationalContext={hasOperationalContext}

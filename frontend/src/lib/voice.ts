@@ -1,6 +1,6 @@
 "use client";
 
-import { WS_BASE } from "@/lib/api/config";
+import { API_BASE, WS_BASE } from "@/lib/api/config";
 import type { MarkPresentation } from "@/lib/mark-presentation";
 
 // Global reference array to prevent Chrome garbage-collection bug
@@ -28,7 +28,7 @@ export interface LiveVoiceCallbacks {
 
 interface BrowserSpeechRecognitionResult {
   readonly isFinal: boolean;
-  readonly 0: { readonly transcript: string };
+  readonly 0: { readonly transcript: string; readonly confidence?: number };
 }
 
 interface BrowserSpeechRecognitionEvent {
@@ -232,7 +232,7 @@ function prepareSpeechText(rawText: string): string {
     .replace(/["“”«»]/g, "");
 
   const pronunciation: [RegExp, string][] = [
-    [/\bMARK\b/g, "Mark"],
+    [/\bMARK\b/gi, "Zaki"],
     [/\bAMF\b/g, "A M F"],
     [/\bSMF\b/g, "S M F"],
     [/\bUPF\b/g, "U P F"],
@@ -309,7 +309,7 @@ function prepareSpeechText(rawText: string): string {
     if (words.length > 35) {
       brief = words.slice(0, 32).join(" ") + "...";
     }
-    return `${brief}... I've outlined the full operational details on your screen.`;
+    return brief;
   }
 
   return text;
@@ -325,6 +325,7 @@ export interface SpeechQueueItem {
     onEnd?: () => void;
     onError?: (err: unknown) => void;
     priority?: "normal" | "interrupt";
+    engine?: "browser" | "neural";
   };
 }
 
@@ -335,12 +336,16 @@ class JarvisVoiceAssistant {
   private isLiveMode: boolean = false;
   private isSubmitting: boolean = false;
   private isMuted: boolean = false;
+  private liveResponseSpeechEngine: "browser" | "neural" = "browser";
+  private allowBrowserLiveFallback: boolean = true;
   private speechQueue: SpeechQueueItem[] = [];
   private currentSpeechItem: SpeechQueueItem | null = null;
   private isProcessingSpeechQueue: boolean = false;
   private activeRunId: string | null = null;
   private lastSpokenText: string = "";
   private audioCtx: AudioContext | null = null;
+  private activeNeuralReader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+  private isNeuralTtsPlayback: boolean = false;
   private recognition: BrowserSpeechRecognition | null = null;
   private silenceTimer: ReturnType<typeof setTimeout> | null = null;
   private currentTranscript: string = "";
@@ -360,7 +365,6 @@ class JarvisVoiceAssistant {
   private nextOutputSampleRate: number = 24000;
   private lastBackendAnswer: string = "";
   private activeGeneration = 0;
-  private lastBargeInAt = 0;
   private browserBargeInGraceUntil = 0;
   private speechEndGraceUntil = 0;
   private activeSpokenText = "";
@@ -488,6 +492,13 @@ class JarvisVoiceAssistant {
   }
 
   public pause(): void {
+    if (this.isNeuralTtsPlayback) {
+      if (this.playbackCtx?.state === "running") {
+        void this.playbackCtx.suspend();
+      }
+      this.isPaused = true;
+      return;
+    }
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.pause();
       this.isPaused = true;
@@ -495,15 +506,22 @@ class JarvisVoiceAssistant {
   }
 
   public resume(): void {
+    if (this.isNeuralTtsPlayback) {
+      if (this.playbackCtx?.state === "suspended") {
+        void this.playbackCtx.resume();
+      }
+      this.isPaused = false;
+      return;
+    }
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       window.speechSynthesis.resume();
       this.isPaused = false;
     }
   }
 
-  public repeatLastAnswer(): void {
+  public repeatLastAnswer(engine: "browser" | "neural" = "browser"): void {
     if (this.lastSpokenText) {
-      this.speak(this.lastSpokenText);
+      this.speak(this.lastSpokenText, { engine });
     }
   }
 
@@ -682,6 +700,11 @@ class JarvisVoiceAssistant {
       this.speechKeepAliveTimer = null;
     }
     this.clearSpeechQueue();
+    if (this.activeNeuralReader) {
+      void this.activeNeuralReader.cancel().catch(() => {});
+      this.activeNeuralReader = null;
+    }
+    this.isNeuralTtsPlayback = false;
     this.speechChunks = [];
     this.currentChunkIndex = 0;
     this.activeSpokenText = "";
@@ -694,9 +717,44 @@ class JarvisVoiceAssistant {
     this.stopBackendOutput();
   }
 
-  public startLiveMode(callbacks: LiveVoiceCallbacks, options?: { runId?: string }) {
+  private stopNeuralSpeechForBargeIn(transcript: string): void {
+    if (!this.isNeuralTtsPlayback || !transcript.trim()) return;
+
+    const normalizedTranscript = transcript.toLowerCase().replace(/[^a-z0-9\s]/g, " ").trim();
+    const transcriptWords = normalizedTranscript.split(/\s+/).filter(Boolean);
+    const spokenWords = this.activeSpokenText.split(/\s+/).filter(Boolean);
+    const isLikelyPlaybackEcho =
+      this.activeSpokenText.includes(normalizedTranscript) ||
+      (transcriptWords.length > 0 && transcriptWords.every((word) => spokenWords.includes(word)));
+    if (isLikelyPlaybackEcho) return;
+
+    const reader = this.activeNeuralReader;
+    this.activeNeuralReader = null;
+    this.isNeuralTtsPlayback = false;
+    if (reader) void reader.cancel().catch(() => {});
+
+    this.clearSpeechQueue();
+    this.speechChunks = [];
+    this.currentChunkIndex = 0;
+    this.activeSpokenText = "";
+    this.stopBackendOutput();
+    this.isSpeaking = false;
+    SpeechCompletionBarrier.setSpeaking(false);
+    this.callbacks.onStateChange?.("listening");
+  }
+
+  public startLiveMode(
+    callbacks: LiveVoiceCallbacks,
+    options?: {
+      runId?: string;
+      responseSpeechEngine?: "browser" | "neural";
+      allowBrowserFallback?: boolean;
+    }
+  ) {
     this.callbacks = callbacks;
     this.activeRunId = options?.runId || null;
+    this.liveResponseSpeechEngine = options?.responseSpeechEngine || "browser";
+    this.allowBrowserLiveFallback = options?.allowBrowserFallback !== false;
     this.isLiveMode = true;
     this.isSubmitting = false;
     this.currentTranscript = "";
@@ -709,6 +767,12 @@ class JarvisVoiceAssistant {
     this.startBackendLiveMode().catch((err) => {
       console.info("[MARK Voice] Backend live voice unavailable, gracefully switching to browser voice engine:", err?.message || err);
       this.stopBackendLiveMode();
+      if (options?.allowBrowserFallback === false) {
+        this.isLiveMode = false;
+        this.callbacks.onStateChange?.("idle");
+        this.callbacks.onError?.(err);
+        return;
+      }
       this.voiceSettings.mode = "browser";
       if (this.isLiveMode) {
         this.startListening();
@@ -740,7 +804,6 @@ class JarvisVoiceAssistant {
         : `${Date.now()}`;
     this.wsSessionId = `mark-live-${sessionSuffix}`;
     this.activeGeneration = 0;
-    this.lastBargeInAt = 0;
     const query = this.activeRunId ? `?run_id=${encodeURIComponent(this.activeRunId)}` : "";
     const ws = new WebSocket(`${WS_BASE}/ws/jarvis-voice/${this.wsSessionId}${query}`);
     this.ws = ws;
@@ -827,16 +890,7 @@ class JarvisVoiceAssistant {
       const input = event.inputBuffer.getChannelData(0);
       const pcm = this.downsampleToPcm16(input, event.inputBuffer.sampleRate, 16000);
       if (this.isSpeaking || this.isPlayingBackendAudio) {
-        const level = this.audioLevel(input);
-        const now = Date.now();
-        if (level > 0.018 && now - this.lastBargeInAt > 700) {
-          this.lastBargeInAt = now;
-          this.stopBackendOutput();
-          this.sendBackendJson({ type: "interrupt", reason: "client_barge_in" });
-          this.callbacks.onStateChange?.("listening");
-        } else {
-          return;
-        }
+        if (this.audioLevel(input) < 0.018) return;
       }
       if (pcm.byteLength > 0) {
         this.ws.send(pcm.buffer);
@@ -901,7 +955,7 @@ class JarvisVoiceAssistant {
       }
     }
     if (message.type === "interrupted") {
-      this.stopBackendOutput();
+      this.stop();
       this.lastBackendAnswer = "";
       this.callbacks.onStateChange?.("listening");
       return;
@@ -918,6 +972,9 @@ class JarvisVoiceAssistant {
     if (message.type === "transcript_partial" || message.type === "transcript") {
       const text = normalizeTelecomTranscript(String(message.text || ""));
       if (text) {
+        if (message.type === "transcript_partial") {
+          this.stopNeuralSpeechForBargeIn(text);
+        }
         this.currentTranscript = text;
         this.callbacks.onTranscript?.(text, message.type === "transcript");
       }
@@ -942,7 +999,13 @@ class JarvisVoiceAssistant {
       this.callbacks.onStateChange?.("idle");
       if (message.code === "stt_error" && this.isLiveMode) {
         this.stopBackendLiveMode();
-        this.startListening();
+        if (this.allowBrowserLiveFallback) {
+          this.startListening();
+        } else {
+          this.isLiveMode = false;
+          this.callbacks.onStateChange?.("idle");
+          this.callbacks.onError?.(message);
+        }
         return;
       }
       if (message.code === "tts_error" && this.lastBackendAnswer) {
@@ -1128,6 +1191,7 @@ class JarvisVoiceAssistant {
 
       let fullFinal = "";
       let fullInterim = "";
+      let finalConfidence = 0;
 
       for (let i = 0; i < event.results.length; ++i) {
         const item = event.results[i];
@@ -1135,6 +1199,7 @@ class JarvisVoiceAssistant {
         const transcript = item[0].transcript;
         if (item.isFinal) {
           fullFinal += transcript + " ";
+          finalConfidence = Math.max(finalConfidence, item[0].confidence ?? 1);
         } else {
           fullInterim += transcript;
         }
@@ -1145,6 +1210,7 @@ class JarvisVoiceAssistant {
         ? normalizeTelecomTranscript(rawText)
         : rawText;
       if (!normalizedText) return;
+      const hasFinal = Boolean(fullFinal.trim());
 
       // Handle user interruption / barge-in while Mark is speaking
       if (this.isSpeaking) {
@@ -1159,6 +1225,13 @@ class JarvisVoiceAssistant {
           return;
         }
 
+        if (
+          !this.isBackendLive &&
+          (!hasFinal || (finalConfidence > 0 && finalConfidence < 0.65) || !/\bzaki\b/i.test(fullFinal))
+        ) {
+          return;
+        }
+
         // Genuine user interruption!
         console.log("[MARK Voice] User barge-in detected, interrupting speech:", normalizedText);
         this.stop();
@@ -1168,7 +1241,6 @@ class JarvisVoiceAssistant {
 
       this.currentTranscript = normalizedText;
       this.lastTranscriptAt = now;
-      const hasFinal = Boolean(fullFinal.trim());
       this.callbacks.onTranscript?.(normalizedText, hasFinal);
 
       if (this.silenceTimer) {
@@ -1273,6 +1345,7 @@ class JarvisVoiceAssistant {
 
     this.isSubmitting = true;
     this.currentTranscript = "";
+    this.callbacks.onTranscript?.("", true);
     this.stopListening();
     this.callbacks.onStateChange?.("processing");
     this.playChime(880.0, 0.08); // High acknowledge tone
@@ -1281,6 +1354,7 @@ class JarvisVoiceAssistant {
       const reply = await this.callbacks.onMessageSubmit?.(textToSubmit);
       if (typeof reply === "string" && reply) {
         this.speak(reply, {
+          engine: this.liveResponseSpeechEngine,
           onStart: () => {
             this.isSubmitting = false;
             this.callbacks.onStateChange?.("speaking");
@@ -1350,9 +1424,16 @@ class JarvisVoiceAssistant {
       onEnd?: () => void;
       onError?: (err: unknown) => void;
       priority?: "normal" | "interrupt";
+      engine?: "browser" | "neural";
     }
   ): void {
-    if (this.isMuted || !text || !text.trim() || typeof window === "undefined" || !("speechSynthesis" in window)) {
+    if (
+      this.isMuted ||
+      !text ||
+      !text.trim() ||
+      typeof window === "undefined" ||
+      (!("speechSynthesis" in window) && options?.engine !== "neural")
+    ) {
       options?.onEnd?.();
       return;
     }
@@ -1552,13 +1633,148 @@ class JarvisVoiceAssistant {
       }
     };
 
+    if (item.options?.engine === "neural") {
+      const playNeuralAudio = async () => {
+        let reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
+        let receivedAudio = false;
+        let streamEnded = false;
+        let pendingByte: number | null = null;
+
+        const finishWhenDrained = () => {
+          if (!streamEnded || this.activeSources.length > 0 || this.currentSpeechItem !== item) return;
+          this.isNeuralTtsPlayback = false;
+          this.activeNeuralReader = null;
+          this.isPlayingBackendAudio = false;
+          this.currentChunkIndex = this.speechChunks.length;
+          item.options?.onEnd?.();
+          setTimeout(() => this.processSpeechQueue(), 320);
+        };
+
+        const fallbackToBrowser = (error?: unknown) => {
+          if (this.currentSpeechItem !== item || !this.isProcessingSpeechQueue) return;
+          this.activeNeuralReader = null;
+          this.isNeuralTtsPlayback = false;
+          if (!receivedAudio && "speechSynthesis" in window) {
+            item.options = { ...item.options, engine: "browser" };
+            this.currentChunkIndex = 0;
+            setTimeout(playNextChunk, 40);
+            return;
+          }
+          if (error) item.options?.onError?.(error);
+          streamEnded = true;
+          finishWhenDrained();
+        };
+
+        const schedulePcm = (bytes: Uint8Array) => {
+          const completeByteLength = bytes.byteLength - (bytes.byteLength % 2);
+          if (!completeByteLength) {
+            pendingByte = bytes.byteLength ? bytes[0] : pendingByte;
+            return;
+          }
+
+          const context = this.playbackCtx;
+          if (!context) throw new Error("Web Audio is unavailable for neural speech playback");
+
+          const samples = new Int16Array(bytes.buffer, bytes.byteOffset, completeByteLength / 2);
+          const audioBuffer = context.createBuffer(1, samples.length, 24000);
+          const channel = audioBuffer.getChannelData(0);
+          for (let index = 0; index < samples.length; index++) {
+            channel[index] = samples[index] / 32768;
+          }
+
+          const source = context.createBufferSource();
+          source.buffer = audioBuffer;
+          source.playbackRate.value = this.voiceSettings.playbackRate || 1;
+          source.connect(context.destination);
+          const startsAt = Math.max(context.currentTime, this.nextPlayTime);
+          source.start(startsAt);
+          this.nextPlayTime = startsAt + audioBuffer.duration / source.playbackRate.value;
+          this.activeSources.push(source);
+          this.isPlayingBackendAudio = true;
+          receivedAudio = true;
+          source.onended = () => {
+            const index = this.activeSources.indexOf(source);
+            if (index !== -1) this.activeSources.splice(index, 1);
+            try {
+              source.disconnect();
+            } catch {}
+            finishWhenDrained();
+          };
+        };
+
+        try {
+          const AudioCtx = this.getAudioContextCtor();
+          if (!AudioCtx) throw new Error("Web Audio is unavailable for neural speech playback");
+          this.playbackCtx = this.playbackCtx || this.audioCtx || new AudioCtx();
+          this.isNeuralTtsPlayback = true;
+          if (this.isPaused && this.playbackCtx.state === "running") {
+            await this.playbackCtx.suspend();
+          } else if (!this.isPaused && this.playbackCtx.state === "suspended") {
+            await this.playbackCtx.resume();
+          }
+
+          const response = await fetch(`${API_BASE}/api/v1/fikracore/zaki/speech`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: item.cleanText }),
+          });
+          if (!response.ok) {
+            const details = await response.json().catch(() => null);
+            throw new Error(details?.detail || `Zaki TTS request failed with ${response.status}`);
+          }
+          if (!response.body) throw new Error("Zaki TTS response has no audio stream");
+          if (this.currentSpeechItem !== item || !this.isProcessingSpeechQueue) return;
+
+          reader = response.body.getReader();
+          this.activeNeuralReader = reader;
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (this.currentSpeechItem !== item || !this.isProcessingSpeechQueue) return;
+            if (done) break;
+            if (!value?.byteLength) continue;
+
+            let bytes = value;
+            if (pendingByte !== null) {
+              const combined = new Uint8Array(value.byteLength + 1);
+              combined[0] = pendingByte;
+              combined.set(value, 1);
+              bytes = combined;
+              pendingByte = null;
+            }
+            if (bytes.byteLength % 2) {
+              pendingByte = bytes[bytes.byteLength - 1];
+              bytes = bytes.subarray(0, bytes.byteLength - 1);
+            }
+            schedulePcm(bytes);
+          }
+
+          streamEnded = true;
+          if (!receivedAudio) {
+            fallbackToBrowser(new Error("Zaki TTS stream contained no audio"));
+            return;
+          }
+          finishWhenDrained();
+        } catch (err) {
+          console.warn("[MARK Voice] Neural Zaki speech stream failed:", err);
+          if (reader && this.activeNeuralReader === reader) {
+            void reader.cancel().catch(() => {});
+          }
+          fallbackToBrowser(err);
+        }
+      };
+
+      void playNeuralAudio();
+      return;
+    }
+
     setTimeout(playNextChunk, 40);
   }
 
   public testVoice() {
     this.setMuted(false);
     this.playChime(587.33, 0.15);
-    this.speak("MARK online. Real-time incident operations voice active.");
+    this.speak("Zaki online. Real-time incident operations voice active.", { engine: "neural" });
   }
 }
 
